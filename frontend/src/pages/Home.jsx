@@ -3,6 +3,9 @@ import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
 import Products from '../components/Products';
 import About from '../components/About';
+import MarqueeSection from '../components/MarqueeSection';
+import Services from '../components/Services';
+import Technologies from '../components/Technologies';
 
 const Home = () => {
     return (
@@ -12,6 +15,9 @@ const Home = () => {
                 <Hero />
                 <Products />
                 <About />
+                <MarqueeSection />
+                <Services />
+                <Technologies />
             </main>
         </div>
     );
