@@ -2,6 +2,7 @@ import React from 'react';
 import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
 import Products from '../components/Products';
+import About from '../components/About';
 
 const Home = () => {
     return (
@@ -10,6 +11,7 @@ const Home = () => {
             <main className="flex-1 w-full">
                 <Hero />
                 <Products />
+                <About />
             </main>
         </div>
     );

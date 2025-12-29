@@ -1,5 +1,5 @@
-import React, { useRef } from 'react';
-import { ChevronLeft, ChevronRight, ArrowUpRight } from 'lucide-react';
+import React from 'react';
+import { ArrowUpRight } from 'lucide-react';
 
 const products = [
     {
@@ -14,7 +14,7 @@ const products = [
         title: "FOOD DELIVERY APP",
         description: "Complete white-label solution for food delivery services featuring real-time tracking and vendor portals.",
         features: ["Live Tracking", "Multi-Vendor", "Driver App"],
-        image: "https://images.unsplash.com/photo-1626074169727-4a7b74f3f02e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80"
+        image: "https://images.unsplash.com/photo-1526367790999-0150786686a2?q=80&w=2071&auto=format&fit=crop"
     },
     {
         category: "Enterprise Tools",
@@ -22,83 +22,97 @@ const products = [
         description: "Powerful administrative panels for managing users, content, and system metrics with granular control.",
         features: ["Role Management", "Real-time Metrics", "Custom Reports"],
         image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80"
+    },
+    {
+        category: "AI Integrations",
+        title: "PREDICTIVE ANALYTICS",
+        description: "Harness the power of machine learning to forecast trends and optimize business operations.",
+        features: ["Data Modeling", "Trend Forecasting", "Automated Insights"],
+        image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?q=80&w=2070&auto=format&fit=crop"
     }
 ];
 
 const Products = () => {
-    const scrollRef = useRef(null);
-
-    const scroll = (direction) => {
-        if (scrollRef.current) {
-            const { current } = scrollRef;
-            const scrollAmount = direction === 'left' ? -400 : 400;
-            current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-        }
-    };
-
     return (
-        <div className="w-full bg-[#111] text-white py-20 px-4 md:px-10 overflow-hidden relative">
+        <div className="w-full bg-[#111] text-white py-20 px-4 md:px-0 overflow-hidden">
             <div className="max-w-[1700px] mx-auto">
-                {/* Header */}
-                <div className="flex justify-between items-end mb-16 border-b border-gray-800 pb-8">
-                    <div>
-                        <h2 className="text-sm font-bold text-gray-400 mb-2 uppercase tracking-wide">Our Products</h2>
-                        <h3 className="text-4xl md:text-6xl font-bold tracking-tighter uppercase leading-none">
-                            Digital Solutions
-                        </h3>
-                    </div>
-                    <div className="flex gap-4">
-                        <button onClick={() => scroll('left')} className="p-3 border border-gray-700 rounded-full hover:bg-white hover:text-black transition-colors">
-                            <ChevronLeft size={24} />
-                        </button>
-                        <button onClick={() => scroll('right')} className="p-3 border border-gray-700 rounded-full hover:bg-white hover:text-black transition-colors">
-                            <ChevronRight size={24} />
-                        </button>
-                    </div>
+                <div className="text-center mb-24 px-4">
+                    <h2 className="text-sm font-bold text-gray-400 mb-2 uppercase tracking-wide">Our Products</h2>
+                    <h3 className="text-4xl md:text-6xl font-bold tracking-tighter uppercase leading-none">
+                        Digital Solutions
+                    </h3>
                 </div>
 
-                {/* Horizontal Slider */}
-                <div
-                    ref={scrollRef}
-                    className="flex gap-8 overflow-x-auto pb-8 scrollbar-hide snap-x"
-                    style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-                >
+                <div className="w-full flex flex-col gap-0 border-t border-white/0">
                     {products.map((product, index) => (
-                        <div key={index} className="flex-none w-[85vw] md:w-[60vw] lg:w-[40vw] group snap-center">
-                            {/* Image Section */}
-                            <div className="relative w-full aspect-[4/3] overflow-hidden mb-8 bg-gray-800">
-                                <img
-                                    src={product.image}
-                                    alt={product.title}
-                                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                                />
-                                <div className="absolute top-4 right-4 bg-white text-black p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
-                                    <ArrowUpRight size={20} />
+                        <div key={index} className="grid grid-cols-1 lg:grid-cols-3 w-full group border-b border-white/0 min-h-screen">
+
+                            {/* === COLUMN 1 === */}
+                            <div className={`flex flex-col justify-center p-8 md:p-12 order-2 lg:order-none border-r border-white/0 ${index % 2 !== 0 ? 'lg:invisible lg:pointer-events-none hidden lg:flex' : ''}`}>
+                                {/* Content for EVEN rows (0, 2...) goes here */}
+                                {index % 2 === 0 && (
+                                    <div className="space-y-6 text-left lg:text-right">
+                                        <div className="space-y-2">
+                                            <span className="text-xs font-bold text-red-500 border border-red-500/30 px-2 py-1 rounded inline-block">{product.category}</span>
+                                            <h4 className="text-3xl md:text-5xl font-bold uppercase tracking-tight leading-[0.9]">{product.title}</h4>
+                                        </div>
+                                        <p className="text-gray-400 text-sm leading-relaxed ml-auto max-w-md">
+                                            {product.description}
+                                        </p>
+                                        <ul className="flex flex-wrap gap-4 justify-start lg:justify-end pt-2">
+                                            {product.features.map((feature, i) => (
+                                                <li key={i} className="text-xs font-bold text-gray-500 flex items-center gap-1 uppercase">
+                                                    {feature} <span className="w-1 h-1 bg-red-500 rounded-full"></span>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                        <button className="text-sm font-bold uppercase tracking-wide border-b border-white pb-1 hover:text-red-500 hover:border-red-500 transition-colors inline-flex items-center gap-2">
+                                            View Case Study <ArrowUpRight className="w-4 h-4" />
+                                        </button>
+                                    </div>
+                                )}
+                            </div>
+
+                            {/* === COLUMN 2 (IMAGE CENTER) === */}
+                            <div className="h-[400px] lg:h-auto border-r border-white/0 order-1 lg:order-none flex items-center justify-center p-8">
+                                <div className="relative w-full max-w-[500px] h-[50vh] overflow-hidden group shadow-2xl">
+                                    <img
+                                        src={product.image}
+                                        alt={product.title}
+                                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 filter grayscale-[50%] group-hover:grayscale-0"
+                                    />
+                                    <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
                                 </div>
                             </div>
 
-                            {/* Content Section */}
-                            <div className="space-y-4">
-                                <div className="flex justify-between items-start">
-                                    <h4 className="text-3xl font-bold uppercase tracking-tight">{product.title}</h4>
-                                    <span className="text-xs font-bold border border-white/20 px-2 py-1 rounded">{product.category}</span>
-                                </div>
-                                <p className="text-gray-400 text-sm max-w-md leading-relaxed">
-                                    {product.description}
-                                </p>
-                                <ul className="flex flex-wrap gap-4 pt-2">
-                                    {product.features.map((feature, i) => (
-                                        <li key={i} className="text-xs font-bold text-gray-500 flex items-center gap-1 uppercase">
-                                            <span className="w-1 h-1 bg-red-500 rounded-full"></span> {feature}
-                                        </li>
-                                    ))}
-                                </ul>
+                            {/* === COLUMN 3 === */}
+                            <div className={`flex flex-col justify-center p-8 md:p-12 order-3 lg:order-none ${index % 2 === 0 ? 'lg:invisible lg:pointer-events-none hidden lg:flex' : ''}`}>
+                                {/* Content for ODD rows (1, 3...) goes here */}
+                                {index % 2 !== 0 && (
+                                    <div className="space-y-6 text-left">
+                                        <div className="space-y-2">
+                                            <span className="text-xs font-bold text-red-500 border border-red-500/30 px-2 py-1 rounded inline-block">{product.category}</span>
+                                            <h4 className="text-3xl md:text-5xl font-bold uppercase tracking-tight leading-[0.9]">{product.title}</h4>
+                                        </div>
+                                        <p className="text-gray-400 text-sm leading-relaxed max-w-md">
+                                            {product.description}
+                                        </p>
+                                        <ul className="flex flex-wrap gap-4 pt-2">
+                                            {product.features.map((feature, i) => (
+                                                <li key={i} className="text-xs font-bold text-gray-500 flex items-center gap-1 uppercase">
+                                                    <span className="w-1 h-1 bg-red-500 rounded-full"></span> {feature}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                        <button className="text-sm font-bold uppercase tracking-wide border-b border-white pb-1 hover:text-red-500 hover:border-red-500 transition-colors inline-flex items-center gap-2">
+                                            View Case Study <ArrowUpRight className="w-4 h-4" />
+                                        </button>
+                                    </div>
+                                )}
                             </div>
+
                         </div>
                     ))}
-
-                    {/* spacer for padding right */}
-                    <div className="w-[1px] flex-none"></div>
                 </div>
             </div>
         </div>
