@@ -1,0 +1,274 @@
+# Appzeto – 3D Animated MERN Stack Website
+
+## 1. Project Overview
+
+**Project Name:** Appzeto Official Website
+**Company Type:** Software Development Company
+**Goal:** Build a modern, fully responsive, 3D animated corporate website that showcases Appzeto’s services, products, technologies, projects, partners, and reviews, while generating leads and career applications.
+
+**Primary Objectives:**
+
+* Establish a strong digital brand presence
+* Showcase products, services, and technical expertise
+* Generate leads via Contact & Reviews forms
+* Attract talent via Careers CTA
+
+---
+
+## 2. Tech Stack
+
+### Frontend
+
+* **React.js** (Vite)
+* **Tailwind CSS** (base styling)
+* **UI Libraries (selective use):**
+
+  * shadcn/ui (preferred for consistency)
+  * Material UI / Ant Design (only where required)
+  * Mantine / Chakra UI (optional)
+
+### Animations & UX
+
+* **GSAP** – advanced animations, timelines, scroll triggers
+* **Framer Motion** – component-level animations
+* **Lenis** – smooth scrolling
+* **Three.js / React Three Fiber (optional)** – 3D hero elements
+
+### Backend
+
+* **Node.js + Express.js**
+* **MongoDB** (Mongoose)
+
+### Other
+
+* Responsive design (Mobile-first)
+* SEO-ready structure
+* Optimized images & lazy loading
+
+---
+
+## 3. Information Architecture (Homepage Flow)
+
+1. Hero Section
+2. Products
+3. About Us
+4. Services
+5. Technologies
+6. Projects
+7. Channel Partners
+8. Reviews + Review Form
+9. Footer
+
+---
+
+## 4. Homepage Section-wise Detailed Plan
+
+### 4.1 Hero Section (Above the Fold)
+
+**Purpose:** First impression + Brand positioning
+
+**Content:**
+
+* High-quality 3D/illustrated image or abstract tech visual
+* Company tagline (bold, modern typography)
+* Short description (1–2 lines)
+* CTA Buttons:
+
+  * "Contact Us"
+  * "Careers"
+
+**Design & Animation:**
+
+* GSAP text reveal animation
+* Framer Motion button hover effects
+* Subtle 3D parallax on image
+* Smooth scroll indicator
+
+---
+
+### 4.2 About Us Section
+
+**Purpose:** Build trust & credibility
+
+**Content:**
+
+* Short company intro
+* Established year
+* Mission & vision (brief)
+* 2–3 supporting images
+
+**Animation:**
+
+* Scroll-triggered fade/slide animations
+* Image parallax
+
+---
+
+### 4.3 Products Section
+
+**Purpose:** Monetization & offerings showcase
+
+**Products Examples:**
+
+* E-commerce Platform
+* Food Delivery App (Zomato-like)
+* Admin Dashboards
+* Custom SaaS Modules
+
+**Design:**
+
+* Card-based layout
+* Product image + short description
+* Hover animations (scale, glow)
+
+---
+
+### 4.4 Services Section
+
+**Purpose:** Explain what Appzeto offers
+
+**Services:**
+
+* Web Development
+* Mobile App Development
+* UI/UX Design
+* Backend & API Development
+* Cloud & DevOps
+
+**Design & UX:**
+
+* Icon-based cards
+* Framer Motion stagger animations
+
+---
+
+### 4.5 Technologies Section
+
+**Purpose:** Showcase technical strength
+
+**Technologies:**
+
+* Frontend: React, Tailwind
+* Backend: Node.js, Express
+* Database: MongoDB
+* Tools: Git, Docker, AWS
+
+**Design:**
+
+* Logo grid
+* Subtle hover glow
+
+---
+
+### 4.6 Projects Section
+
+**Purpose:** Proof of work
+
+**Content:**
+
+* Project stats (total projects count)
+* 2–3 featured projects
+* "See More" button
+
+**Design:**
+
+* Card layout with image overlay
+* Hover reveal details
+
+---
+
+### 4.7 Channel Partners Section
+
+**Purpose:** Build authority
+
+**Content:**
+
+* Partner logos
+* Collaboration titles
+
+**Animation:**
+
+* Auto-scrolling carousel
+
+---
+
+### 4.8 Reviews Section + Review Form
+
+**Purpose:** Social proof & engagement
+
+**Content:**
+
+* Client testimonials (cards)
+* Star ratings
+
+**Review Form Fields:**
+
+* Name
+* Email
+* Rating
+* Review Message
+
+**Backend:**
+
+* Store reviews in MongoDB
+* Admin approval (future scope)
+
+---
+
+## 5. Backend Modules (PMR – Product Management Requirements)
+
+### 5.1 Review Management
+
+* POST review API
+* GET approved reviews
+* Validation & sanitization
+
+### 5.2 Contact / Lead Management
+
+* Store inquiries in DB
+* Email notifications (future)
+
+### 5.3 Admin Panel (Phase 2)
+
+* Login authentication
+* Manage reviews, projects, partners
+
+---
+
+## 6. Non-Functional Requirements
+
+* Fully responsive (mobile, tablet, desktop)
+* High performance (Lighthouse > 85)
+* Smooth scrolling & animations
+* SEO optimized meta tags
+* Accessible color contrast
+
+---
+
+## 7. Design Guidelines
+
+* Dark + gradient-based theme
+* Modern fonts (Inter / Poppins)
+* High-quality stock images (Google / Unsplash / Freepik)
+* Consistent spacing & typography
+
+---
+
+## 8. Full Prompt for Vibe Coding / AI Website Builder
+
+**PROMPT:**
+
+> Create a modern, fully responsive, 3D animated software company website named "Appzeto" using MERN stack. Use React with Tailwind CSS for UI, Node.js and MongoDB for backend. Implement smooth scrolling using Lenis, animations using GSAP and Framer Motion, and optional 3D elements using Three.js or React Three Fiber. Design a visually rich homepage with the following sections in order: Hero section with animated text, company image, and CTA buttons (Contact Us, Careers); About Us section with company details and images; Products section showcasing sellable modules like e-commerce and food delivery apps; Services section listing development services; Technologies section displaying tech stack logos; Projects section with project count, featured projects, and See More button; Channel Partners section with partner logos; Reviews section with testimonials and a review submission form connected to MongoDB. Use high-quality typography, buttons, icons, and images. Ensure mobile-first responsiveness, modern UI, dark theme aesthetics, and smooth user experience.
+
+---
+
+## 9. Deliverables
+
+* Fully responsive homepage
+* Clean, scalable codebase
+* Reusable components
+* Animation-ready architecture
+
+---
+
+**End of Document**
