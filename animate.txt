@@ -1,0 +1,149 @@
+import { useEffect, useRef } from "react"
+import gsap from "gsap"
+
+const WillemLoader = () => {
+  const lettersRef = useRef([])
+  const boxRef = useRef(null)
+  const imageRef = useRef(null)
+  const contentRef = useRef(null)
+
+  useEffect(() => {
+    const tl = gsap.timeline({
+      defaults: { ease: "expo.inOut" }
+    })
+
+    tl.to(lettersRef.current, {
+      yPercent: -100,
+      stagger: 0.05,
+      duration: 1.2,
+    })
+
+      .to(boxRef.current, {
+        width: "1em",
+        duration: 1.2,
+      }, "<")
+
+      .to(imageRef.current, {
+        width: "100%",
+        duration: 1.2,
+      }, "<")
+
+      .to(boxRef.current, {
+        width: "110vw",
+        duration: 2,
+      })
+
+      .to(imageRef.current, {
+        width: "100vw",
+        height: "100vh",
+        duration: 2,
+      }, "<")
+
+      .to(contentRef.current, {
+        opacity: 1,
+        duration: 1,
+      }, "-=1")
+  }, [])
+
+  const word = "APPZETO".split("")
+
+  return (
+    <header className="relative h-screen overflow-hidden bg-[#201d1d] text-white">
+      
+      {/* Loader */}
+      <div className="absolute inset-0 flex items-center justify-center">
+        
+        <div
+          ref={boxRef}
+          className="absolute h-[60%] w-0 bg-white"
+        />
+
+        <div
+          ref={imageRef}
+          className="absolute inset-0 w-0 bg-[url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee')] bg-cover bg-center"
+        />
+
+        <h1 className="flex overflow-hidden text-[10vw] leading-[0.9]">
+          {word.map((char, i) => (
+            <span
+              key={i}
+              ref={el => (lettersRef.current[i] = el)}
+              className="inline-block translate-y-full"
+            >
+              {char}
+            </span>
+          ))}
+        </h1>
+      </div>
+
+      {/* Final Content */}
+      <div
+        ref={contentRef}
+        className="relative z-10 flex h-full flex-col justify-between p-8 opacity-0"
+      >
+        <nav className="flex gap-6 text-lg">
+          <a href="#">Home</a>
+          <a href="#">Work</a>
+          <a href="#">About</a>
+        </nav>
+
+        <h2 className="text-4xl font-medium">
+          Premium Hero Reveal
+        </h2>
+      </div>
+    </header>
+  )
+}
+
+export default WillemLoader
+4️⃣ Add Lenis Smooth Scroll (global)
+Create src/SmoothScroll.jsx
+
+jsx
+Copy code
+import { useEffect } from "react"
+import Lenis from "@studio-freight/lenis"
+
+const SmoothScroll = () => {
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.2,
+      smooth: true,
+      smoothTouch: false,
+    })
+
+    function raf(time) {
+      lenis.raf(time)
+      requestAnimationFrame(raf)
+    }
+
+    requestAnimationFrame(raf)
+
+    return () => lenis.destroy()
+  }, [])
+
+  return null
+}
+
+export default SmoothScroll
+5️⃣ Use everything in App.jsx
+jsx
+Copy code
+import WillemLoader from "./WillemLoader"
+import SmoothScroll from "./SmoothScroll"
+
+function App() {
+  return (
+    <>
+      <SmoothScroll />
+      <WillemLoader />
+
+      {/* Dummy content to test scroll */}
+      <section className="h-[200vh] bg-gray-100 text-black p-20">
+        Scroll Content
+      </section>
+    </>
+  )
+}
+
+export default App
