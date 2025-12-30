@@ -11,110 +11,144 @@ const products = [
         title: "E-COMMERCE SUITE",
         description: "A comprehensive solution for scaling online businesses with advanced analytics and inventory management.",
         features: ["Secure Payments", "Inventory Sync", "AI Recommendations"],
-        image: "https://images.unsplash.com/photo-1661956602116-aa6865609028?ixlib=rb-4.0.3&auto=format&fit=crop&w=1064&q=80"
+        image: "https://images.unsplash.com/photo-1661956602116-aa6865609028?ixlib=rb-4.0.3&auto=format&fit=crop&w=1064&q=80",
+        faceClass: "rotate-x-0" // Front
     },
     {
         category: "Mobile Solutions",
         title: "FOOD DELIVERY APP",
         description: "Complete white-label solution for food delivery services featuring real-time tracking and vendor portals.",
         features: ["Live Tracking", "Multi-Vendor", "Driver App"],
-        image: "https://images.unsplash.com/photo-1526367790999-0150786686a2?q=80&w=2071&auto=format&fit=crop"
+        image: "https://images.unsplash.com/photo-1526367790999-0150786686a2?q=80&w=2071&auto=format&fit=crop",
+        faceClass: "rotate-x-90" // Top (Next in tumble sequence)
     },
     {
         category: "Enterprise Tools",
         title: "ADMIN DASHBOARD",
         description: "Powerful administrative panels for managing users, content, and system metrics with granular control.",
         features: ["Role Management", "Real-time Metrics", "Custom Reports"],
-        image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80"
+        image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80",
+        faceClass: "rotate-x-180" // Back
     },
     {
         category: "AI Integrations",
         title: "PREDICTIVE ANALYTICS",
         description: "Harness the power of machine learning to forecast trends and optimize business operations.",
         features: ["Data Modeling", "Trend Forecasting", "Automated Insights"],
-        image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?q=80&w=2070&auto=format&fit=crop"
+        image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?q=80&w=2070&auto=format&fit=crop",
+        faceClass: "rotate-x-270" // Bottom
     }
 ];
 
 const Products = () => {
     const containerRef = useRef(null);
     const headerTitleRef = useRef(null);
-    // Removed imageContainerRef as we don't need to pin it via JS anymore
+    const cubeRef = useRef(null);
+    const textWrapperRef = useRef(null);
 
     useEffect(() => {
-        // 1. Header "Fill" Animation
-        const headerEl = headerTitleRef.current;
-        if (headerEl) {
-            const chars = headerEl.innerText.split('');
-            headerEl.innerHTML = '';
-            chars.forEach((char) => {
-                const span = document.createElement('span');
-                span.innerText = char;
-                span.style.opacity = '0.2';
-                span.style.transition = 'color 0.1s';
-                headerEl.appendChild(span);
+        // 1. Header Animation (Move + Fill) - Preserved
+        const headerContainer = headerTitleRef.current;
+        if (headerContainer) {
+            const line1 = headerContainer.querySelector('.line-1-text');
+            const line2 = headerContainer.querySelector('.line-2-text');
+
+            const splitAndAnimate = (element) => {
+                if (!element) return;
+                const chars = element.innerText.split('');
+                element.innerHTML = '';
+                chars.forEach((char) => {
+                    const span = document.createElement('span');
+                    span.innerText = char;
+                    span.style.opacity = '0.2';
+                    element.appendChild(span);
+                });
+                return element.querySelectorAll('span');
+            };
+
+            const spans1 = splitAndAnimate(line1);
+            const spans2 = splitAndAnimate(line2);
+
+            if (spans1 && spans2) {
+                gsap.to([...spans1, ...spans2], {
+                    opacity: 1,
+                    color: '#ffffff',
+                    stagger: 0.05,
+                    scrollTrigger: {
+                        trigger: headerContainer,
+                        start: "top 80%",
+                        end: "top 20%",
+                        scrub: true,
+                    }
+                });
+            }
+
+            gsap.fromTo(line1, { x: "30%" }, {
+                x: "0%",
+                scrollTrigger: {
+                    trigger: headerContainer,
+                    start: "top 90%",
+                    end: "top 20%",
+                    scrub: 1
+                }
             });
 
-            const spans = headerEl.querySelectorAll('span');
-
-            gsap.to(spans, {
-                opacity: 1,
-                color: '#ffffff',
-                stagger: 0.1,
+            gsap.fromTo(line2, { x: "-30%" }, {
+                x: "0%",
                 scrollTrigger: {
-                    trigger: headerEl,
-                    start: "top 80%",
+                    trigger: headerContainer,
+                    start: "top 90%",
                     end: "top 20%",
-                    scrub: true,
+                    scrub: 1
                 }
             });
         }
 
-        // 2. Project Animations
-        products.forEach((_, i) => {
-            const currentImg = document.getElementById(`prod-img-${i}`);
-            const triggerEl = document.getElementById(`prod-text-${i}`);
+        // 2. 3D Cube Vertical Tumble Logic (High Velocity)
+        if (cubeRef.current && textWrapperRef.current) {
+            // We want to Rotate X (Vertical Tumble)
+            // Normal rotation: 90deg per section.
+            // High Velocity: Add 360deg spin between sections.
+            // Total Rotation = (Sections * 90) + (Sections * 360) 
+            const totalRotation = (products.length - 1) * 90 + (products.length - 1) * 360;
 
-            // Skip animation for the first image OR animate it differently
-            // Here we basically say: default CSS state is hidden for all except 0. 
-            // We'll trust GSAP to handle the states.
-
-            if (currentImg && triggerEl) {
-                // If it's the FIRST image, it should simply be visible from the start
-                if (i === 0) {
-                    gsap.set(currentImg, {
-                        opacity: 1,
-                        clipPath: "circle(150% at 50% 50%)",
-                        rotationY: 0,
-                        zIndex: 1
-                    });
-                } else {
-                    // Subsequent images animate IN from Left with 3D Rotate
-                    gsap.fromTo(currentImg,
-                        {
-                            clipPath: "circle(0% at 0% 50%)", // Start small circle at LEFT edge
-                            rotationY: -90, // Rotate 90deg (facing left)
-                            transformOrigin: "left center", // Pivot from left
-                            opacity: 0,
-                            zIndex: i + 1
-                        },
-                        {
-                            clipPath: "circle(150% at 50% 50%)", // Expand to full
-                            rotationY: 0, // Face front
-                            opacity: 1,
-                            duration: 1.5,
-                            ease: "power2.out",
-                            scrollTrigger: {
-                                trigger: triggerEl,
-                                start: "top center", // When text hits center
-                                end: "bottom center",
-                                scrub: 1,
-                            }
-                        }
-                    );
+            gsap.to(cubeRef.current, {
+                rotationX: totalRotation,
+                ease: "power2.inOut", // Smooth acceleration/deceleration
+                scrollTrigger: {
+                    trigger: textWrapperRef.current,
+                    start: "top center",
+                    end: "bottom bottom",
+                    scrub: 1, // Smooth scrubbing
+                    snap: {
+                        snapTo: 1 / (products.length - 1), // Snap to nearest section (e.g. 0, 0.33, 0.66, 1)
+                        duration: { min: 0.2, max: 0.7 }, // Smooth snap duration
+                        delay: 0.05, // Wait briefly after scroll stops
+                        ease: "power2.out"
+                    }
                 }
-            }
-        });
+            });
+
+            // Mouse Move Interaction (Free Movement - Subtler)
+            const handleMouseMove = (e) => {
+                const { clientX, clientY, currentTarget } = e;
+                const { width, height } = currentTarget.getBoundingClientRect();
+
+                const xPos = (clientX / width) - 0.5;
+                const yPos = (clientY / height) - 0.5;
+
+                // Subtle tilt on top of the heavy spin
+                gsap.to(cubeRef.current, {
+                    rotationY: xPos * 15,
+                    rotationZ: -xPos * 5,
+                    duration: 0.5,
+                    ease: "power2.out"
+                });
+            };
+
+            window.addEventListener('mousemove', handleMouseMove);
+            return () => window.removeEventListener('mousemove', handleMouseMove);
+        }
 
         return () => {
             ScrollTrigger.getAll().forEach(t => t.kill());
@@ -125,59 +159,61 @@ const Products = () => {
     return (
         <div ref={containerRef} className="w-full bg-[#111] text-white relative">
 
-            {/* Top Header Section */}
-            <div className="pt-24 pb-12 px-8 md:px-12 mb-[5vh]">
+            {/* Header */}
+            <div className="pt-24 pb-12 px-8 md:px-12 mb-[5vh] overflow-hidden">
                 <h2 className="text-sm font-bold text-gray-500 mb-4 uppercase tracking-wide">Our Products</h2>
-                <h3
-                    ref={headerTitleRef}
-                    className="text-5xl md:text-8xl font-bold tracking-tighter uppercase leading-none text-gray-700 max-w-4xl"
-                >
-                    Digital Solutions
-                </h3>
+                <div ref={headerTitleRef} className="flex flex-col">
+                    <div className="line-1-wrapper self-start md:self-auto">
+                        <h3 className="line-1-text text-5xl md:text-8xl font-bold tracking-tighter uppercase leading-none text-gray-700">
+                            Digital
+                        </h3>
+                    </div>
+                    <div className="line-2-wrapper self-end md:self-auto">
+                        <h3 className="line-2-text text-5xl md:text-8xl font-bold tracking-tighter uppercase leading-none text-gray-700">
+                            Solutions
+                        </h3>
+                    </div>
+                </div>
             </div>
 
             <div className="relative">
-                {/* --- Sticky Image Overlay (Centered + 3D Perspective) --- */}
-                {/* Added perspective class for 3D effect */}
-                <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden pointer-events-none z-0 perspective-1000">
-                    {products.map((product, i) => (
-                        <div
-                            key={i}
-                            id={`prod-img-${i}`}
-                            // REDUCED SIZE here: w-[60vw] -> [50vw], md:w-[600px] -> [450px]
-                            className="absolute w-[50vw] h-[35vw] md:w-[450px] md:h-[550px] bg-gray-800 rounded-2xl overflow-hidden shadow-2xl backface-hidden"
-                            // For i > 0, we set opacity 0/clipPath via CSS init just in case JS lags, 
-                            // but simpler to let GSAP handle. i=0 is opacity 1 via CSS.
-                            style={{
-                                opacity: i === 0 ? 1 : 0,
-                                visibility: 'visible',
-                                transformStyle: 'preserve-3d' // Ensure child 3D works
-                            }}
-                        >
-                            <img
-                                src={product.image}
-                                alt={product.title}
-                                className="w-full h-full object-cover"
-                            />
-                            <div className="absolute inset-0 bg-black/20"></div>
-                        </div>
-                    ))}
+                {/* --- 3D Cube Sticky Container --- */}
+                <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden pointer-events-none perspective-full z-0">
+
+                    {/* The Rotating Cube - Vertical Tumble Mode */}
+                    <div
+                        ref={cubeRef}
+                        className="relative w-[240px] h-[240px] md:w-[300px] md:h-[300px] preserve-3d transition-transform duration-75"
+                    >
+                        {products.map((product, i) => (
+                            <div
+                                key={i}
+                                className={`absolute inset-0 bg-gray-800 rounded-xl overflow-hidden shadow-2xl backface-hidden border border-white/5 ${product.faceClass}`}
+                            >
+                                <img
+                                    src={product.image}
+                                    alt={product.title}
+                                    className="w-full h-full object-cover opacity-90"
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                                {/* Label Removed */}
+                            </div>
+                        ))}
+                    </div>
                 </div>
 
-                {/* --- Scrollable Product Texts (Overlay on top of sticky) --- */}
-                {/* Negative margin top to pull text up over the sticky area if desired, or just flow naturally */}
-                <div className="relative z-10 w-full px-8 md:px-12 pb-[20vh] mt-[-100vh]">
-                    {/* Add spacer so first text starts late enough if needed, or just padding */}
-                    <div className="h-[20vh]"></div>
+                {/* --- Text Content (Scroll Trigger Source) --- */}
+                <div ref={textWrapperRef} className="relative z-10 w-full px-8 md:px-12 mt-[-100vh] pb-[20vh]">
+
+                    {/* Spacer */}
+                    <div className="h-[40vh]"></div>
 
                     {products.map((product, i) => (
                         <div
                             key={i}
-                            id={`prod-text-${i}`}
-                            // mt-[80vh] ensures large gaps between text blocks for scrolling time
-                            className={`min-h-[80vh] flex flex-col justify-center max-w-lg mb-[10vh] pointer-events-auto ${i % 2 === 0 ? 'mr-auto' : 'ml-auto'}`}
+                            className={`min-h-[100vh] flex flex-col justify-center max-w-lg pointer-events-auto ${i % 2 === 0 ? 'mr-auto' : 'ml-auto'}`}
                         >
-                            <div className="space-y-6 p-8 bg-black/60 backdrop-blur-md rounded-xl border border-white/10 shadow-2xl transform transition-transform duration-500 hover:scale-[1.02]">
+                            <div className="space-y-6 p-8 bg-black/60 backdrop-blur-md rounded-xl border border-white/10 shadow-2xl">
                                 <div className="space-y-2">
                                     <span className="text-xs font-bold text-[#D33C1D] border border-[#D33C1D]/30 px-2 py-1 rounded inline-block">
                                         {product.category}
