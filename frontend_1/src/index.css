@@ -1,1 +1,84 @@
 @import "tailwindcss";
+
+@theme {
+  --color-primary: #00a6a6;
+  --color-secondary: #e8f000;
+  --color-background-light: #f8fafc;
+  --color-background-dark: #0f172a;
+  --color-surface-light: #ffffff;
+  --color-surface-dark: #1e293b;
+
+  --font-display: "Poppins", "sans-serif";
+  --font-body: "Inter", "sans-serif";
+
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+
+  --animate-fade-in-up: fadeInUp 0.8s ease-out forwards;
+  --animate-carousel-cycle: carouselFade 12s infinite;
+
+  @keyframes fadeInUp {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+/* Custom CSS from hero.txt */
+.glass-effect {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.gradient-text {
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  background-image: linear-gradient(to right, #00a6a6, #2563eb);
+}
+
+@keyframes carouselFade {
+  0% {
+    opacity: 0;
+    transform: scale(0.98);
+    z-index: 0;
+  }
+
+  4% {
+    opacity: 1;
+    transform: scale(1);
+    z-index: 10;
+  }
+
+  33.33% {
+    opacity: 1;
+    transform: scale(1);
+    z-index: 10;
+  }
+
+  37.33% {
+    opacity: 0;
+    transform: scale(1.02);
+    z-index: 0;
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(1.02);
+    z-index: 0;
+  }
+}
+
+.delay-4000 {
+  animation-delay: 4s;
+}
+
+.delay-8000 {
+  animation-delay: 8s;
+}
