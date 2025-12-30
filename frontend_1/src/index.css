@@ -15,7 +15,7 @@
   --radius-2xl: 1.5rem;
 
   --animate-fade-in-up: fadeInUp 0.8s ease-out forwards;
-  --animate-carousel-cycle: carouselFade 12s infinite;
+  --animate-carousel-cycle: carouselFade 9s infinite;
 
   @keyframes fadeInUp {
     0% {
@@ -33,11 +33,12 @@
     0% {
       transform: translateX(0);
     }
+
     100% {
       transform: translateX(-50%);
     }
   }
-  
+
   --animate-scroll: scroll 40s linear infinite;
 }
 
@@ -86,10 +87,10 @@
   }
 }
 
-.delay-4000 {
-  animation-delay: 4s;
+.delay-3000 {
+  animation-delay: 3s;
 }
 
-.delay-8000 {
-  animation-delay: 8s;
+.delay-6000 {
+  animation-delay: 6s;
 }

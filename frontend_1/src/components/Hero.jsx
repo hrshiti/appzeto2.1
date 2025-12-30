@@ -85,7 +85,7 @@ const Hero = () => {
                             ))}
                             <div className="pl-4 ml-2 border-l border-gray-200 dark:border-gray-700 h-10 flex items-center">
                                 <a className="bg-primary hover:bg-teal-600 text-white px-6 py-2.5 rounded-full font-semibold transition-all shadow-lg shadow-primary/30" href="#">
-                                    Get Quote
+                                    Let's Chit Chat
                                 </a>
                             </div>
                         </div>
@@ -203,7 +203,7 @@ const Hero = () => {
                                                             <div className="text-[8px] text-primary">Compiling Neural Network...</div>
                                                         </div>
                                                     </div>
-                                                    <div className="absolute inset-0 bg-slate-900 flex flex-col p-6 animate-carousel-cycle delay-8000" style={{ animationFillMode: 'backwards' }}>
+                                                    <div className="absolute inset-0 bg-slate-900 flex flex-col p-6 animate-carousel-cycle delay-6000" style={{ animationFillMode: 'backwards' }}>
                                                         <div className="flex justify-between items-center mb-6 border-b border-gray-700 pb-2">
                                                             <div className="flex items-center space-x-2">
                                                                 <span className="material-icons text-green-500 text-sm">dns</span>
@@ -266,7 +266,7 @@ const Hero = () => {
                                                             <div className="w-full py-2 bg-primary text-white text-[10px] font-bold rounded text-center shadow-lg shadow-primary/20">Start Now</div>
                                                         </div>
                                                     </div>
-                                                    <div className="absolute inset-0 pt-[20%] p-3 bg-[#0d1117] animate-carousel-cycle delay-4000" style={{ animationFillMode: 'backwards' }}>
+                                                    <div className="absolute inset-0 pt-[20%] p-3 bg-[#0d1117] animate-carousel-cycle delay-3000" style={{ animationFillMode: 'backwards' }}>
                                                         <div className="flex items-center justify-between mb-4 border-b border-gray-800 pb-2">
                                                             <div className="text-[8px] text-gray-400 font-mono">mobile_api.py</div>
                                                             <div className="flex space-x-1">
@@ -284,7 +284,7 @@ const Hero = () => {
                                                             <div>{'}'}</div>
                                                         </div>
                                                     </div>
-                                                    <div className="absolute inset-0 pt-[20%] p-3 bg-slate-900 animate-carousel-cycle delay-8000" style={{ animationFillMode: 'backwards' }}>
+                                                    <div className="absolute inset-0 pt-[20%] p-3 bg-slate-900 animate-carousel-cycle delay-6000" style={{ animationFillMode: 'backwards' }}>
                                                         <div className="flex flex-col items-center justify-center h-full space-y-4">
                                                             <div className="relative w-16 h-16 flex items-center justify-center">
                                                                 <div className="absolute inset-0 rounded-full border border-primary/30 animate-ping"></div>
