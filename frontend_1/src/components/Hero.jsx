@@ -1,21 +1,93 @@
 import React from 'react';
+import logo from '../assets/logo.png';
 
 const Hero = () => {
     return (
         <div className="bg-background-light dark:bg-background-dark font-body antialiased transition-colors duration-300 min-h-screen flex flex-col">
-            <nav className="sticky top-0 z-50 w-full glass-effect bg-surface-light/80 dark:bg-surface-dark/80 border-b border-gray-200 dark:border-gray-800">
+            <nav className="sticky top-0 z-50 w-full bg-white dark:bg-surface-dark border-b border-gray-200 dark:border-gray-800">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between items-center h-20">
                         <div className="flex-shrink-0 flex items-center">
-                            <img alt="Appzeto Logo" className="h-10 w-auto" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKtMn7mVnySJk-C2mBRJKUp2-77_lqRQDyt2rCWi-t8BubDO2To6qiCqfOuDya7jGHYoiblKkEDO9QNwCdyxrRv-kaF3X8Hm3sdMmzZOyFi1yWY8nY4UV7WYB637HjcFsbPyG3tZ6WZwOPUi1-vHl_Otwhlt6K9RORWMqpps7beSDco5XGHYUfMebNAZfPSGEBaJU8vftsy12v3_VBS-8ZIn2TzllluTc9BcOdlYRC_p8PZlDixnLR2_jAXDVPy297lIHwA6kYczyN" />
+                            <img alt="Appzeto Logo" className="h-10 w-auto" src={logo} />
                         </div>
-                        <div className="hidden md:flex space-x-8 items-center">
-                            <a className="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary font-medium transition-colors" href="#">Services</a>
-                            <a className="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary font-medium transition-colors" href="#">Technologies</a>
-                            <a className="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary font-medium transition-colors" href="#">About Us</a>
-                            <a className="bg-primary hover:bg-teal-600 text-white px-5 py-2.5 rounded-full font-semibold transition-all shadow-lg shadow-primary/30" href="#">
-                                Get Started
-                            </a>
+                        <div className="hidden md:flex items-center h-full">
+                            {[
+                                {
+                                    title: "Solutions",
+                                    description: "Comprehensive tech solutions for enterprise growth.",
+                                    items: ["Enterprise AI", "Cloud Infrastructure", "Data Analytics", "Cybersecurity", "IoT Ecosystem"]
+                                },
+                                {
+                                    title: "Services",
+                                    description: "End-to-end development and specialized services.",
+                                    items: ["Custom Software", "Mobile Development", "UI/UX Design", "QA & Testing", "DevOps Services"]
+                                },
+                                {
+                                    title: "Portfolio",
+                                    description: "Explore our success stories and impact.",
+                                    items: ["Success Stories", "Case Studies", "Client Testimonials"]
+                                },
+                                {
+                                    title: "Careers",
+                                    description: "Join our team of innovators and creators.",
+                                    items: ["Open Positions", "Life at Appzeto", "Internships"]
+                                },
+                                {
+                                    title: "Contact Us",
+                                    description: "Get in touch with our global team.",
+                                    items: ["Sales Inquiry", "Technical Support", "Office Locations"]
+                                }
+                            ].map((navItem, index) => (
+                                <div key={index} className="group static h-full flex items-center px-4">
+                                    <button className="flex items-center space-x-1 text-gray-600 dark:text-gray-300 group-hover:text-primary dark:group-hover:text-primary font-medium transition-colors focus:outline-none h-full border-b-2 border-transparent group-hover:border-primary">
+                                        <span>{navItem.title}</span>
+                                        <span className="material-icons text-sm transition-transform duration-200 group-hover:-rotate-180">expand_more</span>
+                                    </button>
+                                    <div className="absolute top-20 left-0 w-full bg-white dark:bg-surface-dark border-t border-gray-100 dark:border-gray-800 shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-700 transform origin-top -translate-y-10 group-hover:translate-y-0 z-50">
+                                        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                                            <div className="flex">
+                                                <div className="w-1/4 pr-8 border-r border-gray-100 dark:border-gray-800 transform opacity-0 translate-x-[-10px] group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 ease-out delay-100">
+                                                    <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">{navItem.title}</h3>
+                                                    <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
+                                                        {navItem.description}
+                                                    </p>
+                                                    <a href="#" className="inline-flex items-center mt-4 text-sm font-semibold text-primary hover:text-teal-600">
+                                                        View Overview <span className="material-icons text-sm ml-1">arrow_forward</span>
+                                                    </a>
+                                                </div>
+                                                <div className="w-3/4 pl-8">
+                                                    <div className="grid grid-cols-3 gap-y-4 gap-x-8">
+                                                        {navItem.items.map((subItem, subIndex) => (
+                                                            <a
+                                                                key={subIndex}
+                                                                href="#"
+                                                                className="group/item mobile:block p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+                                                            >
+                                                                <div
+                                                                    className="flex items-start space-x-3 transform opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-out"
+                                                                    style={{ transitionDelay: `${subIndex * 150 + 300}ms` }}
+                                                                >
+                                                                    <div className="flex-shrink-0">
+                                                                        <span className="material-icons text-gray-400 group-hover/item:text-primary transition-colors">chevron_right</span>
+                                                                    </div>
+                                                                    <div>
+                                                                        <p className="text-sm font-semibold text-gray-900 dark:text-gray-100 group-hover/item:text-primary transition-colors">{subItem}</p>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        ))}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                            <div className="pl-4 ml-2 border-l border-gray-200 dark:border-gray-700 h-10 flex items-center">
+                                <a className="bg-primary hover:bg-teal-600 text-white px-6 py-2.5 rounded-full font-semibold transition-all shadow-lg shadow-primary/30" href="#">
+                                    Get Quote
+                                </a>
+                            </div>
                         </div>
                         <div className="md:hidden flex items-center">
                             <button className="text-gray-600 dark:text-gray-300 hover:text-primary focus:outline-none">
@@ -25,10 +97,10 @@ const Hero = () => {
                     </div>
                 </div>
             </nav>
-            <main className="flex-grow flex items-center relative overflow-hidden">
+            <main className="flex-grow flex relative overflow-hidden">
                 <div className="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-primary/10 rounded-full blur-3xl dark:bg-primary/20"></div>
                 <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 bg-secondary/20 rounded-full blur-3xl dark:bg-secondary/10"></div>
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32 w-full relative z-10">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-2 pb-10 lg:pt-6 lg:pb-20 w-full relative z-10">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
                         <div className="space-y-8 animate-fade-in-up">
                             <div className="inline-flex items-center space-x-2 bg-teal-50 dark:bg-teal-900/30 border border-teal-100 dark:border-teal-800 rounded-full px-4 py-1.5">
@@ -84,39 +156,34 @@ const Hero = () => {
                                                     <div className="ml-4 h-1.5 w-1/3 bg-slate-700 rounded-full opacity-50"></div>
                                                 </div>
                                                 <div className="relative w-full h-[92%]">
-                                                    <div className="absolute inset-0 bg-slate-50 dark:bg-slate-900 flex animate-carousel-cycle" style={{ animationFillMode: 'backwards' }}>
-                                                        <div className="w-[18%] bg-white dark:bg-slate-800 h-full border-r border-gray-200 dark:border-gray-700 p-2 flex flex-col gap-2">
-                                                            <div className="h-6 w-6 bg-primary/20 rounded mb-2 mx-auto"></div>
-                                                            <div className="h-1.5 w-full bg-gray-100 dark:bg-gray-700 rounded"></div>
-                                                            <div className="h-1.5 w-3/4 bg-gray-100 dark:bg-gray-700 rounded mx-auto"></div>
-                                                            <div className="h-1.5 w-full bg-gray-100 dark:bg-gray-700 rounded"></div>
+                                                    <div className="absolute inset-0 bg-slate-900 flex flex-col animate-carousel-cycle" style={{ animationFillMode: 'backwards' }}>
+                                                        <div className="w-full h-8 border-b border-gray-800 flex items-center px-4 space-x-2 bg-slate-900 z-20">
+                                                            <div className="w-2 h-2 rounded-full bg-red-500"></div>
+                                                            <div className="w-2 h-2 rounded-full bg-yellow-500"></div>
+                                                            <div className="w-2 h-2 rounded-full bg-green-500"></div>
+                                                            <div className="flex-1 text-[8px] text-center text-gray-500 font-mono">appzeto.com</div>
                                                         </div>
-                                                        <div className="flex-1 p-4 flex flex-col gap-3">
-                                                            <div className="flex justify-between items-center mb-1">
-                                                                <div className="h-4 w-24 bg-gray-200 dark:bg-gray-700 rounded"></div>
-                                                                <div className="h-6 w-6 rounded-full bg-gray-200 dark:bg-gray-700"></div>
-                                                            </div>
-                                                            <div className="grid grid-cols-3 gap-3">
-                                                                <div className="bg-white dark:bg-slate-800 p-2 rounded shadow-sm border border-gray-100 dark:border-gray-700 h-16">
-                                                                    <div className="h-1.5 w-12 bg-primary/40 rounded mb-2"></div>
-                                                                    <div className="h-4 w-16 bg-gray-800 dark:bg-gray-200 rounded"></div>
-                                                                </div>
-                                                                <div className="bg-white dark:bg-slate-800 p-2 rounded shadow-sm border border-gray-100 dark:border-gray-700 h-16">
-                                                                    <div className="h-1.5 w-12 bg-secondary/60 rounded mb-2"></div>
-                                                                    <div className="h-4 w-10 bg-gray-800 dark:bg-gray-200 rounded"></div>
-                                                                </div>
-                                                                <div className="bg-white dark:bg-slate-800 p-2 rounded shadow-sm border border-gray-100 dark:border-gray-700 h-16">
-                                                                    <div className="h-1.5 w-12 bg-blue-400 rounded mb-2"></div>
-                                                                    <div className="h-4 w-14 bg-gray-800 dark:bg-gray-200 rounded"></div>
+                                                        <div className="flex-1 flex flex-col items-center justify-center p-6 space-y-4 bg-gradient-to-br from-slate-900 to-slate-800 relative overflow-hidden">
+                                                            <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_30%_20%,_rgba(0,166,166,0.1),_transparent)]"></div>
+                                                            <div className="w-full flex justify-between items-center mb-2 px-2 opacity-50">
+                                                                <div className="w-12 h-2 bg-gray-700 rounded"></div>
+                                                                <div className="flex space-x-2">
+                                                                    <div className="w-6 h-1.5 bg-gray-700 rounded"></div>
+                                                                    <div className="w-6 h-1.5 bg-gray-700 rounded"></div>
                                                                 </div>
                                                             </div>
-                                                            <div className="flex-1 bg-white dark:bg-slate-800 rounded shadow-sm border border-gray-100 dark:border-gray-700 p-3 flex items-end gap-2 relative overflow-hidden">
-                                                                <div className="absolute inset-0 bg-gradient-to-t from-primary/5 to-transparent"></div>
-                                                                <div className="w-full h-1/3 bg-primary/20 rounded-t"></div>
-                                                                <div className="w-full h-2/3 bg-primary/40 rounded-t"></div>
-                                                                <div className="w-full h-1/2 bg-primary/60 rounded-t"></div>
-                                                                <div className="w-full h-3/4 bg-primary rounded-t"></div>
+                                                            <div className="text-center space-y-2 z-10">
+                                                                <div className="inline-block px-2 py-0.5 rounded-full bg-primary/10 border border-primary/20 text-[6px] text-primary tracking-widest">v2.0 RELEASE</div>
+                                                                <div className="text-2xl font-bold text-white tracking-tight">Deploy Faster</div>
+                                                                <div className="h-1 w-24 mx-auto bg-gradient-to-r from-transparent via-primary to-transparent"></div>
+                                                                <div className="text-[8px] text-gray-400 max-w-[120px] mx-auto leading-tight">Scale your applications with our cloud infrastructure.</div>
+                                                                <div className="flex justify-center space-x-2 pt-1">
+                                                                    <div className="px-3 py-1 bg-primary text-white text-[6px] rounded font-bold shadow-lg shadow-primary/20">Get Started</div>
+                                                                    <div className="px-3 py-1 bg-gray-800 text-gray-300 border border-gray-700 text-[6px] rounded">Documentation</div>
+                                                                </div>
                                                             </div>
+                                                            <div className="absolute bottom-4 left-4 w-12 h-12 bg-gray-800 rounded-lg border border-gray-700 opacity-60 skew-y-6"></div>
+                                                            <div className="absolute top-12 right-6 w-10 h-10 bg-gray-800 rounded-lg border border-gray-700 opacity-60 -skew-y-12"></div>
                                                         </div>
                                                     </div>
                                                     <div className="absolute inset-0 bg-[#0d1117] flex flex-col p-4 animate-carousel-cycle delay-4000" style={{ animationFillMode: 'backwards' }}>
@@ -136,20 +203,41 @@ const Hero = () => {
                                                             <div className="text-[8px] text-primary">Compiling Neural Network...</div>
                                                         </div>
                                                     </div>
-                                                    <div className="absolute inset-0 bg-white dark:bg-slate-900 animate-carousel-cycle delay-8000" style={{ animationFillMode: 'backwards' }}>
-                                                        <div className="h-[40%] bg-slate-100 dark:bg-slate-800 flex items-center justify-center relative overflow-hidden">
-                                                            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary/20 via-transparent to-transparent"></div>
-                                                            <span className="material-icons text-4xl text-gray-400 dark:text-gray-600">shopping_bag</span>
-                                                        </div>
-                                                        <div className="p-4">
-                                                            <div className="h-3 w-1/2 bg-gray-800 dark:bg-gray-200 rounded mb-2"></div>
-                                                            <div className="h-2 w-1/3 bg-primary rounded mb-4"></div>
-                                                            <div className="flex gap-2 mb-3">
-                                                                <div className="h-8 w-8 rounded bg-gray-100 dark:bg-gray-800"></div>
-                                                                <div className="h-8 w-8 rounded bg-gray-100 dark:bg-gray-800"></div>
-                                                                <div className="h-8 w-8 rounded bg-gray-100 dark:bg-gray-800"></div>
+                                                    <div className="absolute inset-0 bg-slate-900 flex flex-col p-6 animate-carousel-cycle delay-8000" style={{ animationFillMode: 'backwards' }}>
+                                                        <div className="flex justify-between items-center mb-6 border-b border-gray-700 pb-2">
+                                                            <div className="flex items-center space-x-2">
+                                                                <span className="material-icons text-green-500 text-sm">dns</span>
+                                                                <span className="text-xs font-mono text-gray-300">SYSTEM_MONITOR</span>
                                                             </div>
-                                                            <div className="h-8 w-full bg-secondary text-gray-900 font-bold text-[10px] flex items-center justify-center rounded uppercase tracking-wider">Add to Cart</div>
+                                                            <div className="flex space-x-1">
+                                                                <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></div>
+                                                                <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse delay-75"></div>
+                                                            </div>
+                                                        </div>
+                                                        <div className="space-y-5">
+                                                            <div>
+                                                                <div className="flex justify-between text-[10px] text-blue-400 font-mono mb-1">
+                                                                    <span>CPU_USAGE</span>
+                                                                    <span>87%</span>
+                                                                </div>
+                                                                <div className="h-1.5 bg-gray-800 rounded-full overflow-hidden">
+                                                                    <div className="h-full bg-gradient-to-r from-blue-500 to-cyan-500 w-[87%] shadow-[0_0_10px_rgba(59,130,246,0.5)]"></div>
+                                                                </div>
+                                                            </div>
+                                                            <div>
+                                                                <div className="flex justify-between text-[10px] text-purple-400 font-mono mb-1">
+                                                                    <span>MEMORY_ALLOC</span>
+                                                                    <span>64%</span>
+                                                                </div>
+                                                                <div className="h-1.5 bg-gray-800 rounded-full overflow-hidden">
+                                                                    <div className="h-full bg-gradient-to-r from-purple-500 to-pink-500 w-[64%] shadow-[0_0_10px_rgba(168,85,247,0.5)]"></div>
+                                                                </div>
+                                                            </div>
+                                                            <div className="p-3 bg-black/40 rounded border border-gray-800 font-mono text-[8px] text-green-400 leading-relaxed overflow-hidden">
+                                                                <p className="truncate">> init_sequence_start</p>
+                                                                <p className="truncate">> loading_modules... <span className="text-white">DONE</span></p>
+                                                                <p>> <span className="animate-pulse">_</span></p>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -164,52 +252,55 @@ const Hero = () => {
                                             <div className="bg-white dark:bg-slate-900 rounded-[1.2rem] sm:rounded-[1.7rem] overflow-hidden aspect-[9/19] relative">
                                                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-[5%] bg-black rounded-b-lg z-20"></div>
                                                 <div className="relative w-full h-full pt-[15%]">
-                                                    <div className="absolute inset-0 pt-[20%] p-3 bg-white dark:bg-slate-900 animate-carousel-cycle" style={{ animationFillMode: 'backwards' }}>
-                                                        <div className="flex justify-between items-center mb-4">
-                                                            <div className="h-6 w-6 rounded bg-gray-100 dark:bg-gray-800"></div>
-                                                            <div className="h-6 w-6 rounded-full bg-primary/20"></div>
-                                                        </div>
-                                                        <div className="bg-primary/10 rounded-xl p-3 mb-4">
-                                                            <div className="text-[8px] text-gray-500 dark:text-gray-400">Balance</div>
-                                                            <div className="text-sm font-bold text-primary">$12,450</div>
-                                                        </div>
-                                                        <div className="space-y-2">
-                                                            <div className="h-8 bg-gray-50 dark:bg-gray-800 rounded flex items-center px-2">
-                                                                <div className="w-4 h-4 rounded-full bg-secondary/50 mr-2"></div>
-                                                                <div className="h-2 w-10 bg-gray-200 dark:bg-gray-700 rounded"></div>
+                                                    <div className="absolute inset-0 pt-[20%] p-3 bg-slate-900 animate-carousel-cycle" style={{ animationFillMode: 'backwards' }}>
+                                                        <div className="w-full flex justify-between items-center mb-6">
+                                                            <div className="w-6 h-6 rounded bg-primary/20 flex items-center justify-center">
+                                                                <div className="w-3 h-3 bg-primary rounded-sm"></div>
                                                             </div>
-                                                            <div className="h-8 bg-gray-50 dark:bg-gray-800 rounded flex items-center px-2">
-                                                                <div className="w-4 h-4 rounded-full bg-blue-400/50 mr-2"></div>
-                                                                <div className="h-2 w-12 bg-gray-200 dark:bg-gray-700 rounded"></div>
-                                                            </div>
+                                                            <div className="w-4 h-4 rounded-full bg-gray-700"></div>
+                                                        </div>
+                                                        <div className="space-y-3">
+                                                            <div className="text-xl font-bold text-white leading-none">Fast.<br />Secure.<br />Scalable.</div>
+                                                            <div className="h-1 w-12 bg-secondary rounded"></div>
+                                                            <div className="text-[8px] text-gray-400">Monitor your infrastructure in real-time.</div>
+                                                            <div className="w-full py-2 bg-primary text-white text-[10px] font-bold rounded text-center shadow-lg shadow-primary/20">Start Now</div>
                                                         </div>
                                                     </div>
-                                                    <div className="absolute inset-0 pt-[30%] p-4 bg-primary flex flex-col items-center animate-carousel-cycle delay-4000" style={{ animationFillMode: 'backwards' }}>
-                                                        <div className="w-10 h-10 rounded-xl bg-white mb-4 flex items-center justify-center shadow-lg">
-                                                            <span className="material-icons text-primary text-lg">lock</span>
+                                                    <div className="absolute inset-0 pt-[20%] p-3 bg-[#0d1117] animate-carousel-cycle delay-4000" style={{ animationFillMode: 'backwards' }}>
+                                                        <div className="flex items-center justify-between mb-4 border-b border-gray-800 pb-2">
+                                                            <div className="text-[8px] text-gray-400 font-mono">mobile_api.py</div>
+                                                            <div className="flex space-x-1">
+                                                                <div className="w-1.5 h-1.5 rounded-full bg-red-500"></div>
+                                                                <div className="w-1.5 h-1.5 rounded-full bg-yellow-500"></div>
+                                                            </div>
                                                         </div>
-                                                        <div className="w-full h-8 bg-white/20 rounded mb-2"></div>
-                                                        <div className="w-full h-8 bg-white/20 rounded mb-4"></div>
-                                                        <div className="w-full h-8 bg-secondary rounded shadow-lg flex items-center justify-center">
-                                                            <div className="w-10 h-1.5 bg-gray-900/50 rounded-sm"></div>
+                                                        <div className="font-mono text-[8px] space-y-2 opacity-90">
+                                                            <div><span className="text-purple-400">const</span> <span className="text-blue-400">App</span> = () => {'{'}</div>
+                                                            <div className="pl-2"><span className="text-purple-400">return</span> (</div>
+                                                            <div className="pl-4 text-green-400">{'<View style={s.c}>'}</div>
+                                                            <div className="pl-6 text-green-400">{'<Text>Ready</Text>'}</div>
+                                                            <div className="pl-4 text-green-400">{'</View>'}</div>
+                                                            <div className="pl-2">);</div>
+                                                            <div>{'}'}</div>
                                                         </div>
                                                     </div>
-                                                    <div className="absolute inset-0 pt-[20%] bg-slate-50 dark:bg-slate-900 animate-carousel-cycle delay-8000" style={{ animationFillMode: 'backwards' }}>
-                                                        <div className="p-3 border-b border-gray-200 dark:border-gray-800 bg-white dark:bg-slate-800 flex gap-2">
-                                                            <div className="w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-700"></div>
-                                                            <div className="flex-1 space-y-1 py-1">
-                                                                <div className="w-16 h-1.5 bg-gray-200 dark:bg-gray-700 rounded"></div>
-                                                                <div className="w-10 h-1.5 bg-gray-100 dark:bg-gray-800 rounded"></div>
+                                                    <div className="absolute inset-0 pt-[20%] p-3 bg-slate-900 animate-carousel-cycle delay-8000" style={{ animationFillMode: 'backwards' }}>
+                                                        <div className="flex flex-col items-center justify-center h-full space-y-4">
+                                                            <div className="relative w-16 h-16 flex items-center justify-center">
+                                                                <div className="absolute inset-0 rounded-full border border-primary/30 animate-ping"></div>
+                                                                <div className="relative z-10 bg-gray-800 p-3 rounded-full border border-gray-700">
+                                                                    <span className="material-icons text-primary text-xl">shield</span>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div className="h-24 bg-gray-200 dark:bg-gray-800 relative">
-                                                            <div className="absolute inset-0 flex items-center justify-center text-gray-300 dark:text-gray-600">
-                                                                <span className="material-icons text-2xl">image</span>
+                                                            <div className="w-full bg-gray-800 rounded-lg p-3 border border-gray-700">
+                                                                <div className="flex justify-between items-center mb-1">
+                                                                    <span className="text-[8px] text-gray-400">Threat Level</span>
+                                                                    <span className="text-[8px] text-green-400 font-bold">LOW</span>
+                                                                </div>
+                                                                <div className="h-1.5 w-full bg-gray-700 rounded-full overflow-hidden">
+                                                                    <div className="h-full w-[10%] bg-green-500"></div>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div className="p-3 flex gap-2">
-                                                            <span className="material-icons text-xs text-red-400">favorite</span>
-                                                            <span className="material-icons text-xs text-gray-400">chat_bubble</span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -247,34 +338,44 @@ const Hero = () => {
                     <span className="material-icons text-gray-400 dark:text-gray-600">keyboard_arrow_down</span>
                 </div>
             </main>
-            <section className="border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-surface-dark">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-                        <div className="flex items-center space-x-3 group cursor-pointer">
-                            <div className="p-2 bg-gray-100 dark:bg-gray-800 rounded-lg group-hover:bg-primary/10 transition-colors">
-                                <span className="material-icons text-gray-500 dark:text-gray-400 group-hover:text-primary transition-colors">web</span>
+            <section className="border-t border-gray-200 dark:border-gray-800 bg-primary/5 dark:bg-primary/10 overflow-hidden py-2">
+                <div className="flex animate-scroll whitespace-nowrap group">
+                    {[
+                        { icon: 'web', label: 'Web Dev' },
+                        { icon: 'smartphone', label: 'App Dev' },
+                        { icon: 'psychology', label: 'AI Solutions' },
+                        { icon: 'cloud', label: 'Cloud Ops' },
+                        { icon: 'security', label: 'Cybersecurity' },
+                        { icon: 'bar_chart', label: 'Data Analytics' },
+                        { icon: 'brush', label: 'UI/UX Design' },
+                        { icon: 'settings', label: 'DevOps' },
+                        { icon: 'link', label: 'Blockchain' },
+                    ].map((item, index) => (
+                        <div key={index} className="flex items-center space-x-2 mx-6 cursor-pointer hover:scale-105 transition-transform">
+                            <div className="p-1.5 bg-gray-100 dark:bg-gray-800 rounded-lg">
+                                <span className="material-icons text-gray-500 dark:text-gray-400 text-base">{item.icon}</span>
                             </div>
-                            <span className="font-semibold text-gray-700 dark:text-gray-300 group-hover:text-primary transition-colors">Web Dev</span>
+                            <span className="font-semibold text-sm text-gray-700 dark:text-gray-300">{item.label}</span>
                         </div>
-                        <div className="flex items-center space-x-3 group cursor-pointer">
-                            <div className="p-2 bg-gray-100 dark:bg-gray-800 rounded-lg group-hover:bg-primary/10 transition-colors">
-                                <span className="material-icons text-gray-500 dark:text-gray-400 group-hover:text-primary transition-colors">smartphone</span>
+                    ))}
+                    {[
+                        { icon: 'web', label: 'Web Dev' },
+                        { icon: 'smartphone', label: 'App Dev' },
+                        { icon: 'psychology', label: 'AI Solutions' },
+                        { icon: 'cloud', label: 'Cloud Ops' },
+                        { icon: 'security', label: 'Cybersecurity' },
+                        { icon: 'bar_chart', label: 'Data Analytics' },
+                        { icon: 'brush', label: 'UI/UX Design' },
+                        { icon: 'settings', label: 'DevOps' },
+                        { icon: 'link', label: 'Blockchain' },
+                    ].map((item, index) => (
+                        <div key={`duplicate-${index}`} className="flex items-center space-x-2 mx-6 cursor-pointer hover:scale-105 transition-transform">
+                            <div className="p-1.5 bg-gray-100 dark:bg-gray-800 rounded-lg">
+                                <span className="material-icons text-gray-500 dark:text-gray-400 text-base">{item.icon}</span>
                             </div>
-                            <span className="font-semibold text-gray-700 dark:text-gray-300 group-hover:text-primary transition-colors">App Dev</span>
+                            <span className="font-semibold text-sm text-gray-700 dark:text-gray-300">{item.label}</span>
                         </div>
-                        <div className="flex items-center space-x-3 group cursor-pointer">
-                            <div className="p-2 bg-gray-100 dark:bg-gray-800 rounded-lg group-hover:bg-primary/10 transition-colors">
-                                <span className="material-icons text-gray-500 dark:text-gray-400 group-hover:text-primary transition-colors">psychology</span>
-                            </div>
-                            <span className="font-semibold text-gray-700 dark:text-gray-300 group-hover:text-primary transition-colors">AI Solutions</span>
-                        </div>
-                        <div className="flex items-center space-x-3 group cursor-pointer">
-                            <div className="p-2 bg-gray-100 dark:bg-gray-800 rounded-lg group-hover:bg-primary/10 transition-colors">
-                                <span className="material-icons text-gray-500 dark:text-gray-400 group-hover:text-primary transition-colors">cloud</span>
-                            </div>
-                            <span className="font-semibold text-gray-700 dark:text-gray-300 group-hover:text-primary transition-colors">Cloud Ops</span>
-                        </div>
-                    </div>
+                    ))}
                 </div>
             </section>
         </div>
