@@ -338,7 +338,7 @@ const Hero = () => {
                     <span className="material-icons text-gray-400 dark:text-gray-600">keyboard_arrow_down</span>
                 </div>
             </main>
-            <section className="border-t border-gray-200 dark:border-gray-800 bg-primary/5 dark:bg-primary/10 overflow-hidden py-8">
+            <section className="border-t border-gray-200 dark:border-gray-800 bg-primary/5 dark:bg-primary/10 overflow-hidden py-2">
                 <div className="flex animate-scroll whitespace-nowrap group">
                     {[
                         { icon: 'web', label: 'Web Dev' },
@@ -351,11 +351,11 @@ const Hero = () => {
                         { icon: 'settings', label: 'DevOps' },
                         { icon: 'link', label: 'Blockchain' },
                     ].map((item, index) => (
-                        <div key={index} className="flex items-center space-x-3 mx-12 cursor-pointer hover:scale-105 transition-transform">
-                            <div className="p-3 bg-gray-100 dark:bg-gray-800 rounded-lg">
-                                <span className="material-icons text-gray-500 dark:text-gray-400 text-xl">{item.icon}</span>
+                        <div key={index} className="flex items-center space-x-2 mx-6 cursor-pointer hover:scale-105 transition-transform">
+                            <div className="p-1.5 bg-gray-100 dark:bg-gray-800 rounded-lg">
+                                <span className="material-icons text-gray-500 dark:text-gray-400 text-base">{item.icon}</span>
                             </div>
-                            <span className="font-semibold text-lg text-gray-700 dark:text-gray-300">{item.label}</span>
+                            <span className="font-semibold text-sm text-gray-700 dark:text-gray-300">{item.label}</span>
                         </div>
                     ))}
                     {[
@@ -369,11 +369,11 @@ const Hero = () => {
                         { icon: 'settings', label: 'DevOps' },
                         { icon: 'link', label: 'Blockchain' },
                     ].map((item, index) => (
-                        <div key={`duplicate-${index}`} className="flex items-center space-x-3 mx-12 cursor-pointer hover:scale-105 transition-transform">
-                            <div className="p-3 bg-gray-100 dark:bg-gray-800 rounded-lg">
-                                <span className="material-icons text-gray-500 dark:text-gray-400 text-xl">{item.icon}</span>
+                        <div key={`duplicate-${index}`} className="flex items-center space-x-2 mx-6 cursor-pointer hover:scale-105 transition-transform">
+                            <div className="p-1.5 bg-gray-100 dark:bg-gray-800 rounded-lg">
+                                <span className="material-icons text-gray-500 dark:text-gray-400 text-base">{item.icon}</span>
                             </div>
-                            <span className="font-semibold text-lg text-gray-700 dark:text-gray-300">{item.label}</span>
+                            <span className="font-semibold text-sm text-gray-700 dark:text-gray-300">{item.label}</span>
                         </div>
                     ))}
                 </div>
