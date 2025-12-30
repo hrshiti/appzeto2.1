@@ -1,10 +1,8 @@
 import React from 'react';
 
 const About = () => {
-    console.log("ABOUT COMPONENT RENDERING...");
     return (
-        <div data-debug="about-root" className="relative z-30 w-full bg-[#f6f8f8] dark:bg-[#10221f] text-[#111817] transition-colors duration-200">
-            <div style={{ padding: '20px', background: 'red', color: 'white', zIndex: 9999, position: 'relative' }}>DEBUG: ABOUT SECTION IS HERE</div>
+        <div className="relative z-30 w-full bg-[#f6f8f8] dark:bg-[#10221f] text-[#111817] transition-colors duration-200">
             <div className="flex-1">
                 {/* Vision Section */}
                 <section className="relative w-full py-20 lg:py-32 px-4 md:px-10 overflow-hidden bg-[#ffffff] dark:bg-[#1A2E2B]">

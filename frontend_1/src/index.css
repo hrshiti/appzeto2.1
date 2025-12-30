@@ -1,18 +1,14 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #00a6a6;
-  --color-secondary: #e8f000;
-  --color-background-light: #f8fafc;
-  --color-background-dark: #0f172a;
-  --color-surface-light: #ffffff;
-  --color-surface-dark: #1e293b;
+  --color-primary: #13ecc8;
+  --color-background-light: #f6f8f8;
+  --color-background-dark: #10221f;
+  --color-card-light: #ffffff;
+  --color-card-dark: #162e2a;
 
-  --font-display: "Poppins", "sans-serif";
+  --font-display: "Inter", "sans-serif";
   --font-body: "Inter", "sans-serif";
-
-  --radius-xl: 1rem;
-  --radius-2xl: 1.5rem;
 
   --animate-fade-in-up: fadeInUp 0.8s ease-out forwards;
   --animate-carousel-cycle: carouselFade 9s infinite;

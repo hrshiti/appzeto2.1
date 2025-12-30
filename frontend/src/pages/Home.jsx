@@ -6,6 +6,7 @@ import About from '../components/About';
 import MarqueeSection from '../components/MarqueeSection';
 import Services from '../components/Services';
 import Technologies from '../components/Technologies';
+import Vision from '../components/Vision';
 
 const Home = () => {
     return (
