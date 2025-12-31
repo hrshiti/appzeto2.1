@@ -11,146 +11,227 @@ const Career = () => {
 
     const positions = [
         {
-            title: "Frontend Developer",
-            type: "Full Time",
-            description: "We are looking for a skilled Frontend Developer to build high-quality, responsive user interfaces using React and TailwindCSS.",
-            location: "Remote",
-            salary: "$80k-100k",
-            id: 1
+            id: 1,
+            role: "Frontend Developer",
+            department: "Engineering",
+            tags: ["React", "TailwindCSS", "TypeScript"],
+            description: "We are looking for a skilled Frontend Developer to build high-quality, responsive user interfaces. You will work closely with our design team to translate Figma designs into pixel-perfect code.",
+            image: "https://images.unsplash.com/photo-1587620962725-abab7fe55159?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
         },
         {
-            title: "Backend Engineer",
-            type: "Full Time",
-            description: "Join our backend team to design and scale robust APIs and services using Node.js and Python. Experience with cloud infrastructure is a plus.",
-            location: "London, UK",
-            salary: "$90k-120k",
-            id: 2
+            id: 2,
+            role: "Backend Engineer",
+            department: "Engineering",
+            tags: ["Node.js", "Python", "AWS"],
+            description: "Join our backend team to design and scale robust APIs and services. You'll deal with high-concurrency systems and help optimize our cloud infrastructure.",
+            image: "https://images.unsplash.com/photo-1605379399642-870262d3d051?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
         },
         {
-            title: "UI/UX Designer",
-            type: "Remote",
-            description: "Create intuitive and visually stunning user experiences. You will collaborate closely with product managers and developers.",
-            location: "Remote",
-            salary: "$70k-90k",
-            id: 3
+            id: 3,
+            role: "UI/UX Designer",
+            department: "Design",
+            tags: ["Figma", "Prototyping", "User Research"],
+            description: "Create intuitive and visually stunning user experiences. You will collaborate closely with product managers to define the user journey and visual language.",
+            image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
         },
         {
-            title: "DevOps Engineer",
-            type: "Full Time",
-            description: "Maintain and improve our CI/CD pipelines and cloud infrastructure. Ensure reliability and scalability of our services.",
-            location: "New York, USA",
-            salary: "$100k-130k",
-            id: 4
-        },
-        {
-            title: "Product Manager",
-            type: "Full Time",
-            description: "Lead the product vision and strategy. Work with cross-functional teams to deliver value to our customers.",
-            location: "Remote",
-            salary: "$95k-115k",
-            id: 5
-        },
-        {
-            title: "Mobile Developer",
-            type: "Remote",
-            description: "Build native and cross-platform mobile applications for iOS and Android using React Native or Flutter.",
-            location: "San Francisco, CA",
-            salary: "$90k-110k",
-            id: 6
+            id: 4,
+            role: "DevOps Engineer",
+            department: "Operations",
+            tags: ["Docker", "Kubernetes", "CI/CD"],
+            description: "Maintain and improve our CI/CD pipelines and cloud infrastructure. You will ensure the reliability, security, and scalability of our services.",
+            image: "https://images.unsplash.com/photo-1667372393119-c81c0cda0c18?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
         }
     ];
 
-    const trustLogos = [
-        "https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg",
-        "https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg",
-        "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg",
-        "https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg",
-        "https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg",
+    const stats = [
+        { label: "Projects Completed", value: "850+" },
+        { label: "Years of Experience", value: "18+" },
+        { label: "Happy Customers", value: "500+" },
     ];
 
     return (
-        <div className="bg-white min-h-screen font-display">
+        <div className="bg-black min-h-screen font-sans text-white overflow-x-hidden selection:bg-[#B9FD02] selection:text-black">
             <Navbar />
 
-            {/* Header Section */}
-            <div className="bg-[#0c0c0c] text-white py-24 text-center">
-                <h1 className="text-5xl md:text-6xl font-bold mb-4">Career</h1>
-                <div className="flex justify-center items-center space-x-2 text-sm md:text-base text-gray-400">
-                    <Link to="/" className="hover:text-white transition-colors">Home</Link>
-                    <span>&gt;</span>
-                    <span className="text-purple-500 font-medium">Career</span>
-                </div>
-            </div>
+            {/* --- HERO SECTION --- */}
+            <div className="relative pt-16 pb-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
 
-            {/* Team Section */}
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-                <div className="flex flex-col md:flex-row justify-between items-start mb-12">
-                    <h2 className="text-3xl md:text-4xl font-bold text-gray-900 leading-tight max-w-md">
-                        Meet the team work behind our success
-                    </h2>
-                    <p className="mt-4 md:mt-0 max-w-lg text-gray-600 leading-relaxed">
-                        Our team consists of a group of talents. We solve customer problems with sincerity. All of our team members are very intelligent and skilled.
-                    </p>
-                </div>
+                    {/* Left Column: Text Content */}
+                    <div className="lg:col-span-7 space-y-8 z-10">
+                        <div className="flex items-center space-x-3 mb-6">
+                            <span className="w-8 h-[2px] bg-white"></span>
+                            <span className="text-sm uppercase tracking-wider font-medium text-gray-300">Award Winning Digital Agency</span>
+                        </div>
 
-                <div className="relative w-full h-[400px] md:h-[500px] rounded-2xl overflow-hidden shadow-2xl">
-                    <img
-                        src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80"
-                        alt="Team Working"
-                        className="w-full h-full object-cover"
-                    />
-                </div>
-            </div>
+                        <h1 className="text-5xl md:text-7xl font-bold leading-tight">
+                            Where Innovation Meets <span className="text-[#B9FD02]">Career Excellence</span>
+                        </h1>
 
-            {/* Open Positions Section */}
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 pb-24">
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 text-center mb-16">
-                    Currently open positions
-                </h2>
+                        <div className="flex flex-wrap gap-3">
+                            {["Software Development", "Product Design", "Digital Marketing", "Cloud Solutions"].map((item, idx) => (
+                                <span key={idx} className="px-4 py-2 rounded-full border border-gray-700 text-sm md:text-base text-gray-300 hover:border-[#B9FD02] hover:text-[#B9FD02] transition-colors cursor-default">
+                                    {item}
+                                </span>
+                            ))}
+                        </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    {positions.map((position) => (
-                        <div key={position.id} className="bg-white border border-gray-100 rounded-xl p-8 hover:shadow-xl transition-all duration-300 group cursor-pointer">
-                            <div className="flex justify-between items-start mb-4">
-                                <div>
-                                    <h3 className="text-xl font-bold text-gray-900 group-hover:text-primary transition-colors">{position.title}</h3>
-                                    <span className="text-sm font-medium text-gray-500 mt-1 block">{position.type}</span>
-                                </div>
-                                <div className="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-colors">
-                                    <span className="material-icons text-sm transform -rotate-45 group-hover:rotate-0 transition-transform duration-300">arrow_forward</span>
+                        {/* Main Image Area with Overlay */}
+                        <div className="relative mt-12 group">
+                            <div className="relative rounded-[2.5rem] overflow-hidden aspect-[16/9] border border-gray-800">
+                                <img
+                                    src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80"
+                                    alt="Team Application"
+                                    className="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-700"
+                                />
+                                {/* Overlay review card */}
+                                <div className="absolute bottom-6 left-6 bg-[#B9FD02] text-black px-6 py-3 rounded-full flex items-center gap-4 shadow-xl z-20">
+                                    <div className="flex -space-x-3">
+                                        {[1, 2, 3].map(i => (
+                                            <div key={i} className="w-8 h-8 rounded-full bg-gray-200 border-2 border-[#B9FD02]"></div>
+                                        ))}
+                                        <div className="w-8 h-8 rounded-full bg-black text-white flex items-center justify-center text-xs border-2 border-[#B9FD02]">+</div>
+                                    </div>
+                                    <div>
+                                        <div className="font-bold text-sm">4.9 Star</div>
+                                        <div className="text-xs opacity-80">Employee Reviews</div>
+                                    </div>
                                 </div>
                             </div>
 
-                            <p className="text-gray-600 text-sm leading-relaxed mb-6 h-10 line-clamp-2">
-                                {position.description}
-                            </p>
+                            {/* Decorative Star elements */}
+                            <div className="absolute -top-6 -left-8 text-[#B9FD02] animate-bounce duration-1000">
+                                <svg width="50" height="50" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z" /></svg>
+                            </div>
+                        </div>
 
-                            <div className="flex items-center space-x-6 text-sm font-medium text-gray-800">
-                                <div className="flex items-center space-x-2">
-                                    <span className="material-icons text-gray-400 text-lg">location_on</span>
-                                    <span>{position.location}</span>
+                        <div className="text-gray-400 max-w-xl text-lg leading-relaxed">
+                            Join a team that pushes boundaries. We are looking for passionate individuals ready to make an impact in the digital world.
+                        </div>
+                    </div>
+
+                    {/* Right Column: Stats & Badge */}
+                    <div className="lg:col-span-5 relative mt-12 lg:mt-0 flex flex-col items-end">
+
+                        {/* Spinning Badge */}
+                        <div className="mb-12 relative group">
+                            <div className="relative w-32 h-32 md:w-40 md:h-40 flex items-center justify-center bg-black rounded-full border border-gray-800 group-hover:border-[#B9FD02] transition-colors">
+                                <svg className="absolute inset-0 w-full h-full animate-[spin_10s_linear_infinite] text-white group-hover:text-[#B9FD02]" viewBox="0 0 100 100">
+                                    <defs>
+                                        <path id="circle" d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" />
+                                    </defs>
+                                    <text fontSize="11" fill="currentColor">
+                                        <textPath xlinkHref="#circle" letterSpacing="2">
+                                            JOIN OUR TEAM •  BUILD THE FUTURE •
+                                        </textPath>
+                                    </text>
+                                </svg>
+                                <div className="w-20 h-20 bg-[#B9FD02] rounded-full flex items-center justify-center">
+                                    <span className="material-icons text-4xl text-black transform -rotate-45">arrow_forward</span>
                                 </div>
-                                <div className="flex items-center space-x-2">
-                                    <span className="material-icons text-gray-400 text-lg">attach_money</span>
-                                    <span>{position.salary}</span>
+                            </div>
+                        </div>
+
+                        {/* Green Stats Card */}
+                        <div className="bg-[#B9FD02] rounded-[2rem] p-8 md:p-10 w-full max-w-sm text-black">
+                            <div className="space-y-8">
+                                {stats.map((stat, idx) => (
+                                    <div key={idx} className="border-b border-black/10 last:border-0 pb-6 last:pb-0">
+                                        <div className="text-4xl font-bold mb-1">{stat.value}</div>
+                                        <div className="text-sm font-medium opacity-80">{stat.label}</div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {/* --- SCROLLING TICKER --- */}
+            <div className="bg-[#B9FD02] py-4 overflow-hidden -rotate-1 transform origin-left md:origin-center scale-105 border-y-4 border-black">
+                <div className="whitespace-nowrap flex animate-[scroll_20s_linear_infinite]">
+                    {[1, 2, 3, 4, 5, 6].map((_, i) => (
+                        <div key={i} className="flex items-center mx-4 text-black font-bold text-xl md:text-2xl uppercase tracking-wider">
+                            <span>Development</span>
+                            <span className="mx-6 text-3xl h-full flex items-center justify-center">✷</span>
+                            <span>Design</span>
+                            <span className="mx-6 text-3xl">✷</span>
+                            <span>Marketing</span>
+                            <span className="mx-6 text-3xl">✷</span>
+                            <span>Strategy</span>
+                            <span className="mx-6 text-3xl">✷</span>
+                        </div>
+                    ))}
+                </div>
+            </div>
+
+            {/* --- OPEN POSITIONS LIST --- */}
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
+
+                <div className="flex flex-col md:flex-row justify-between items-end mb-20 border-l-4 border-[#B9FD02] pl-6">
+                    <div>
+                        <div className="text-[#B9FD02] font-medium mb-2 uppercase tracking-wide">Open Positions</div>
+                        <h2 className="text-4xl md:text-6xl font-bold">Discover Our<br />Career Opportunities</h2>
+                    </div>
+                    <p className="max-w-md text-gray-400 mt-6 md:mt-0 text-right md:text-left">
+                        We define our success by the success of our people. Join us and help create digital solutions that matter.
+                    </p>
+                </div>
+
+                <div className="flex flex-col space-y-6">
+                    {positions.map((job, index) => (
+                        <div key={job.id} className="group relative bg-[#0a0a0a] rounded-3xl p-8 transition-all duration-500 hover:bg-[#111] border border-gray-900 overflow-hidden">
+                            <div className="relative z-10 flex flex-col lg:flex-row gap-8 lg:items-center">
+
+                                {/* Index Number */}
+                                <div className="text-2xl font-mono text-gray-600 font-bold">
+                                    0{index + 1}.
                                 </div>
+
+                                {/* Title & Tags */}
+                                <div className="flex-1">
+                                    <h3 className="text-2xl md:text-3xl font-bold text-white mb-4 group-hover:text-[#B9FD02] transition-colors">
+                                        {job.role}
+                                    </h3>
+                                    <div className="flex flex-wrap gap-2">
+                                        {job.tags.map((tag, i) => (
+                                            <span key={i} className="px-3 py-1 rounded-md bg-white text-black text-xs font-bold uppercase">
+                                                {tag}
+                                            </span>
+                                        ))}
+                                    </div>
+                                    <p className="mt-6 text-gray-400 leading-relaxed max-w-2xl">
+                                        {job.description}
+                                    </p>
+                                </div>
+
+                                {/* Action Area */}
+                                <div className="flex items-center gap-4 lg:self-center self-start mt-4 lg:mt-0">
+                                    <button className="bg-[#B9FD02] hover:bg-white text-black font-bold py-3 px-8 rounded-full transition-all duration-300">
+                                        Apply Now
+                                    </button>
+                                    <div className="w-12 h-12 rounded-full border border-gray-700 flex items-center justify-center group-hover:bg-white group-hover:text-black transition-all">
+                                        <span className="material-icons transform -rotate-45 group-hover:rotate-0 transition-transform">arrow_forward</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Hover Image Reveal */}
+                            <div className="absolute top-1/2 right-1/4 transform -translate-y-1/2 translate-x-12 opacity-0 group-hover:opacity-20 lg:group-hover:opacity-100 lg:group-hover:translate-x-0 transition-all duration-700 pointer-events-none w-64 h-40 hidden lg:block rounded-xl overflow-hidden shadow-2xl border-2 border-[#B9FD02] grayscale group-hover:grayscale-0">
+                                <img src={job.image} alt={job.role} className="w-full h-full object-cover" />
                             </div>
                         </div>
                     ))}
                 </div>
             </div>
 
-            {/* Trusted By Section */}
-            <div className="bg-gray-50 py-12 border-t border-gray-100">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                    <p className="text-gray-500 font-medium mb-8">Trusted by 1600+ of the world's most popular companies</p>
-                    <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
-                        {trustLogos.map((logo, index) => (
-                            <img key={index} src={logo} alt="Company Logo" className="h-8 md:h-10 w-auto object-contain" />
-                        ))}
-                    </div>
-                </div>
-            </div>
+            <style>{`
+                @keyframes scroll {
+                    0% { transform: translateX(0); }
+                    100% { transform: translateX(-50%); }
+                }
+            `}</style>
         </div>
     );
 };
