@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TechNova IT - Services</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13ecc8",
+                        "primary-dark": "#0ebca0",
+                        "background-light": "#f6f8f8",
+                        "background-dark": "#10221f",
+                        "surface-light": "#ffffff",
+                        "surface-dark": "#162e2a",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.375rem", "lg": "0.5rem", "xl": "1rem", "2xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .service-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+        .service-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px -10px rgba(19, 236, 200, 0.15);
+            border-color: #13ecc8;
+        }
+        .arrow-icon {
+            transition: transform 0.3s ease;
+        }
+        .service-card:hover .arrow-icon {
+            transform: translateX(4px);
+        }
+        
+        /* Subtle grid background pattern */
+        .bg-grid-pattern {
+            background-image: linear-gradient(to right, rgba(0,0,0,0.05) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(0,0,0,0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+        .dark .bg-grid-pattern {
+            background-image: linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display transition-colors duration-300">
+<!-- Header -->
+<header class="sticky top-0 z-50 w-full border-b border-gray-200 dark:border-white/10 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md">
+<div class="flex h-16 items-center justify-between px-6 lg:px-20 max-w-7xl mx-auto">
+<div class="flex items-center gap-3">
+<div class="text-primary size-8">
+<svg class="w-full h-full" fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M39.475 21.6262C40.358 21.4363 40.6863 21.5589 40.7581 21.5934C40.7876 21.655 40.8547 21.857 40.8082 22.3336C40.7408 23.0255 40.4502 24.0046 39.8572 25.2301C38.6799 27.6631 36.5085 30.6631 33.5858 33.5858C30.6631 36.5085 27.6632 38.6799 25.2301 39.8572C24.0046 40.4502 23.0255 40.7407 22.3336 40.8082C21.8571 40.8547 21.6551 40.7875 21.5934 40.7581C21.5589 40.6863 21.4363 40.358 21.6262 39.475C21.8562 38.4054 22.4689 36.9657 23.5038 35.2817C24.7575 33.2417 26.5497 30.9744 28.7621 28.762C30.9744 26.5497 33.2417 24.7574 35.2817 23.5037C36.9657 22.4689 38.4054 21.8562 39.475 21.6262ZM4.41189 29.2403L18.7597 43.5881C19.8813 44.7097 21.4027 44.9179 22.7217 44.7893C24.0585 44.659 25.5148 44.1631 26.9723 43.4579C29.9052 42.0387 33.2618 39.5667 36.4142 36.4142C39.5667 33.2618 42.0387 29.9052 43.4579 26.9723C44.1631 25.5148 44.659 24.0585 44.7893 22.7217C44.9179 21.4027 44.7097 19.8813 43.5881 18.7597L29.2403 4.41187C27.8527 3.02428 25.8765 3.02573 24.2861 3.36776C22.6081 3.72863 20.7334 4.58419 18.8396 5.74801C16.4978 7.18716 13.9881 9.18353 11.5858 11.5858C9.18354 13.988 7.18717 16.4978 5.74802 18.8396C4.58421 20.7334 3.72865 22.6081 3.36778 24.2861C3.02574 25.8765 3.02429 27.8527 4.41189 29.2403Z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+<h2 class="text-slate-900 dark:text-white text-lg font-bold tracking-tight">TechNova IT</h2>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary text-sm font-medium transition-colors" href="#">Home</a>
+<a class="text-slate-900 dark:text-white text-sm font-semibold" href="#">Services</a>
+<a class="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary text-sm font-medium transition-colors" href="#">Case Studies</a>
+<a class="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary text-sm font-medium transition-colors" href="#">About Us</a>
+</nav>
+<button class="bg-primary hover:bg-primary-dark text-slate-900 px-5 py-2 rounded-lg text-sm font-bold transition-all transform hover:scale-105 shadow-lg shadow-primary/20">
+                Get Started
+            </button>
+</div>
+</header>
+<main class="relative w-full overflow-hidden">
+<!-- Abstract Background blobs -->
+<div class="absolute top-0 left-0 w-full h-[800px] overflow-hidden -z-10 pointer-events-none">
+<div class="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] bg-primary/10 rounded-full blur-[100px] mix-blend-multiply dark:mix-blend-normal"></div>
+<div class="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-blue-400/10 rounded-full blur-[100px] mix-blend-multiply dark:mix-blend-normal"></div>
+</div>
+<div class="max-w-7xl mx-auto px-6 lg:px-20 py-16 lg:py-24">
+<!-- Section Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
+<div class="max-w-2xl">
+<span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block">Our Expertise</span>
+<h1 class="text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white leading-tight tracking-tight mb-4">
+                        Empowering Business with <br class="hidden md:block"/> <span class="relative inline-block">Next-Gen Tech<span class="absolute bottom-1 left-0 w-full h-3 bg-primary/30 -z-10 skew-x-12"></span></span>
+</h1>
+<p class="text-lg text-slate-600 dark:text-slate-400 leading-relaxed max-w-xl">
+                        From intelligent AI algorithms to scalable SaaS platforms, we build the digital infrastructure that propels your future forward.
+                    </p>
+</div>
+<div class="hidden md:block pb-2">
+<button class="flex items-center gap-2 text-slate-900 dark:text-white font-semibold group">
+                        View Full Portfolio
+                        <span class="material-symbols-outlined text-primary group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Main Feature Card (Spans 2 columns on large screens) -->
+<div class="service-card group relative col-span-1 md:col-span-2 lg:col-span-2 rounded-2xl bg-white dark:bg-surface-dark border border-gray-100 dark:border-white/5 p-8 overflow-hidden h-full flex flex-col justify-between min-h-[320px]">
+<div class="absolute right-0 top-0 h-full w-1/2 bg-gradient-to-l from-primary/5 to-transparent pointer-events-none"></div>
+<div class="relative z-10 flex flex-col items-start gap-4">
+<div class="size-14 rounded-xl bg-primary/10 flex items-center justify-center text-primary mb-2">
+<span class="material-symbols-outlined text-[32px]">psychology</span>
+</div>
+<h3 class="text-2xl font-bold text-slate-900 dark:text-white">AI &amp; Machine Learning</h3>
+<p class="text-slate-600 dark:text-slate-400 leading-relaxed max-w-md">
+                            Unlock the power of your data with custom predictive analytics and neural networks. We build intelligent systems that learn, adapt, and drive decision-making automation for your enterprise.
+                        </p>
+<div class="flex flex-wrap gap-2 mt-4">
+<span class="px-3 py-1 bg-gray-100 dark:bg-white/5 rounded-full text-xs font-medium text-slate-600 dark:text-slate-300 border border-gray-200 dark:border-white/10">NLP</span>
+<span class="px-3 py-1 bg-gray-100 dark:bg-white/5 rounded-full text-xs font-medium text-slate-600 dark:text-slate-300 border border-gray-200 dark:border-white/10">Computer Vision</span>
+<span class="px-3 py-1 bg-gray-100 dark:bg-white/5 rounded-full text-xs font-medium text-slate-600 dark:text-slate-300 border border-gray-200 dark:border-white/10">Predictive Modeling</span>
+</div>
+</div>
+<a class="relative z-10 mt-8 inline-flex items-center text-sm font-bold text-slate-900 dark:text-white hover:text-primary transition-colors" href="#">
+                        Learn more <span class="material-symbols-outlined ml-1 text-sm arrow-icon">arrow_forward</span>
+</a>
+<!-- Decorative graphic -->
+<div class="absolute -bottom-10 -right-10 w-64 h-64 bg-gradient-to-br from-primary/20 to-blue-500/10 rounded-full blur-3xl"></div>
+</div>
+<!-- Web Development Card -->
+<div class="service-card group relative col-span-1 rounded-2xl bg-white dark:bg-surface-dark border border-gray-100 dark:border-white/5 p-8 flex flex-col justify-between h-full min-h-[320px]">
+<div>
+<div class="size-12 rounded-lg bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center text-blue-600 dark:text-blue-400 mb-6">
+<span class="material-symbols-outlined">code</span>
+</div>
+<h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">Web Development</h3>
+<p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                            Responsive, high-performance web applications built on modern stacks like React, Next.js, and Node.js.
+                        </p>
+</div>
+<a class="mt-6 inline-flex items-center text-sm font-bold text-slate-900 dark:text-white hover:text-primary transition-colors" href="#">
+                        Explore Web Services <span class="material-symbols-outlined ml-1 text-sm arrow-icon">arrow_forward</span>
+</a>
+</div>
+<!-- Mobile App Development Card -->
+<div class="service-card group relative col-span-1 rounded-2xl bg-white dark:bg-surface-dark border border-gray-100 dark:border-white/5 p-8 flex flex-col justify-between h-full min-h-[280px]">
+<div>
+<div class="size-12 rounded-lg bg-purple-50 dark:bg-purple-900/20 flex items-center justify-center text-purple-600 dark:text-purple-400 mb-6">
+<span class="material-symbols-outlined">smartphone</span>
+</div>
+<h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">Mobile App Dev</h3>
+<p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                            Native (iOS/Android) and cross-platform solutions (Flutter/React Native) that deliver seamless user experiences.
+                        </p>
+</div>
+<a class="mt-6 inline-flex items-center text-sm font-bold text-slate-900 dark:text-white hover:text-primary transition-colors" href="#">
+                        View Mobile Solutions <span class="material-symbols-outlined ml-1 text-sm arrow-icon">arrow_forward</span>
+</a>
+</div>
+<!-- SaaS Solutions Card -->
+<div class="service-card group relative col-span-1 rounded-2xl bg-white dark:bg-surface-dark border border-gray-100 dark:border-white/5 p-8 flex flex-col justify-between h-full min-h-[280px]">
+<div>
+<div class="size-12 rounded-lg bg-teal-50 dark:bg-teal-900/20 flex items-center justify-center text-teal-600 dark:text-teal-400 mb-6">
+<span class="material-symbols-outlined">cloud_upload</span>
+</div>
+<h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">SaaS Solutions</h3>
+<p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                            Scalable, multi-tenant cloud architectures designed for growth, security, and high availability.
+                        </p>
+</div>
+<a class="mt-6 inline-flex items-center text-sm font-bold text-slate-900 dark:text-white hover:text-primary transition-colors" href="#">
+                        Build your SaaS <span class="material-symbols-outlined ml-1 text-sm arrow-icon">arrow_forward</span>
+</a>
+</div>
+<!-- Cloud Infrastructure Card (Spans vertical on large screens if we wanted, but keeping uniform for now) -->
+<div class="service-card group relative col-span-1 rounded-2xl bg-white dark:bg-surface-dark border border-gray-100 dark:border-white/5 p-8 flex flex-col justify-between h-full min-h-[280px]">
+<div>
+<div class="size-12 rounded-lg bg-orange-50 dark:bg-orange-900/20 flex items-center justify-center text-orange-600 dark:text-orange-400 mb-6">
+<span class="material-symbols-outlined">dns</span>
+</div>
+<h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">Cloud Infrastructure</h3>
+<p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                            Expert AWS/Azure management, DevOps implementation, and serverless deployment strategies.
+                        </p>
+</div>
+<a class="mt-6 inline-flex items-center text-sm font-bold text-slate-900 dark:text-white hover:text-primary transition-colors" href="#">
+                        Optimize Cloud <span class="material-symbols-outlined ml-1 text-sm arrow-icon">arrow_forward</span>
+</a>
+</div>
+<!-- UI/UX Design Card (Spans across bottom if odd number, or fills gap) -->
+<div class="service-card group relative col-span-1 md:col-span-2 lg:col-span-1 rounded-2xl bg-white dark:bg-surface-dark border border-gray-100 dark:border-white/5 p-8 flex flex-col justify-between h-full min-h-[280px]">
+<div>
+<div class="size-12 rounded-lg bg-pink-50 dark:bg-pink-900/20 flex items-center justify-center text-pink-600 dark:text-pink-400 mb-6">
+<span class="material-symbols-outlined">brush</span>
+</div>
+<h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">UI/UX Design</h3>
+<p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                            User-centric interfaces that blend aesthetics with functionality to drive engagement and conversion.
+                        </p>
+</div>
+<a class="mt-6 inline-flex items-center text-sm font-bold text-slate-900 dark:text-white hover:text-primary transition-colors" href="#">
+                        See Designs <span class="material-symbols-outlined ml-1 text-sm arrow-icon">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Bottom CTA Banner -->
+<div class="mt-16 relative w-full rounded-2xl bg-gradient-to-r from-slate-900 to-slate-800 dark:from-surface-dark dark:to-black overflow-hidden px-8 py-12 md:px-16 md:py-16 text-center md:text-left flex flex-col md:flex-row items-center justify-between gap-8 shadow-2xl">
+<!-- Decorative pattern -->
+<div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] bg-repeat" data-alt="Subtle geometric cube pattern background texture"></div>
+<div class="absolute top-0 right-0 w-64 h-full bg-primary/10 blur-3xl -skew-x-12 translate-x-10"></div>
+<div class="relative z-10 max-w-2xl">
+<h2 class="text-3xl font-bold text-white mb-4">Ready to transform your digital presence?</h2>
+<p class="text-slate-300 text-lg">Let's discuss how our technology solutions can solve your specific business challenges today.</p>
+</div>
+<div class="relative z-10 shrink-0">
+<button class="bg-primary hover:bg-white hover:text-slate-900 text-slate-900 px-8 py-4 rounded-xl text-base font-bold transition-all shadow-lg shadow-primary/25">
+                        Get a Free Consultation
+                    </button>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-white dark:bg-background-dark border-t border-gray-100 dark:border-white/5 pt-16 pb-8">
+<div class="max-w-7xl mx-auto px-6 lg:px-20">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+<div class="col-span-1 md:col-span-1">
+<div class="flex items-center gap-2 mb-6">
+<div class="text-primary size-6">
+<svg class="w-full h-full" fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M39.475 21.6262C40.358 21.4363 40.6863 21.5589 40.7581 21.5934C40.7876 21.655 40.8547 21.857 40.8082 22.3336C40.7408 23.0255 40.4502 24.0046 39.8572 25.2301C38.6799 27.6631 36.5085 30.6631 33.5858 33.5858C30.6631 36.5085 27.6632 38.6799 25.2301 39.8572C24.0046 40.4502 23.0255 40.7407 22.3336 40.8082C21.8571 40.8547 21.6551 40.7875 21.5934 40.7581C21.5589 40.6863 21.4363 40.358 21.6262 39.475C21.8562 38.4054 22.4689 36.9657 23.5038 35.2817C24.7575 33.2417 26.5497 30.9744 28.7621 28.762C30.9744 26.5497 33.2417 24.7574 35.2817 23.5037C36.9657 22.4689 38.4054 21.8562 39.475 21.6262ZM4.41189 29.2403L18.7597 43.5881C19.8813 44.7097 21.4027 44.9179 22.7217 44.7893C24.0585 44.659 25.5148 44.1631 26.9723 43.4579C29.9052 42.0387 33.2618 39.5667 36.4142 36.4142C39.5667 33.2618 42.0387 29.9052 43.4579 26.9723C44.1631 25.5148 44.659 24.0585 44.7893 22.7217C44.9179 21.4027 44.7097 19.8813 43.5881 18.7597L29.2403 4.41187C27.8527 3.02428 25.8765 3.02573 24.2861 3.36776C22.6081 3.72863 20.7334 4.58419 18.8396 5.74801C16.4978 7.18716 13.9881 9.18353 11.5858 11.5858C9.18354 13.988 7.18717 16.4978 5.74802 18.8396C4.58421 20.7334 3.72865 22.6081 3.36778 24.2861C3.02574 25.8765 3.02429 27.8527 4.41189 29.2403Z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+<span class="text-xl font-bold text-slate-900 dark:text-white">TechNova IT</span>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed mb-6">
+                        Building the future of digital infrastructure with cutting-edge technology and human-centric design.
+                    </p>
+<div class="flex gap-4">
+<a class="text-slate-400 hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">public</span></a> <!-- placeholder for social -->
+<a class="text-slate-400 hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">alternate_email</span></a>
+<a class="text-slate-400 hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">rss_feed</span></a>
+</div>
+</div>
+<div>
+<h4 class="text-sm font-bold uppercase tracking-wider text-slate-900 dark:text-white mb-6">Company</h4>
+<ul class="flex flex-col gap-3">
+<li><a class="text-slate-500 dark:text-slate-400 hover:text-primary dark:hover:text-primary text-sm transition-colors" href="#">About Us</a></li>
+<li><a class="text-slate-500 dark:text-slate-400 hover:text-primary dark:hover:text-primary text-sm transition-colors" href="#">Careers</a></li>
+<li><a class="text-slate-500 dark:text-slate-400 hover:text-primary dark:hover:text-primary text-sm transition-colors" href="#">Blog</a></li>
+<li><a class="text-slate-500 dark:text-slate-400 hover:text-primary dark:hover:text-primary text-sm transition-colors" href="#">Contact</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-sm font-bold uppercase tracking-wider text-slate-900 dark:text-white mb-6">Services</h4>
+<ul class="flex flex-col gap-3">
+<li><a class="text-slate-500 dark:text-slate-400 hover:text-primary dark:hover:text-primary text-sm transition-colors" href="#">AI &amp; ML</a></li>
+<li><a class="text-slate-500 dark:text-slate-400 hover:text-primary dark:hover:text-primary text-sm transition-colors" href="#">Web Development</a></li>
+<li><a class="text-slate-500 dark:text-slate-400 hover:text-primary dark:hover:text-primary text-sm transition-colors" href="#">Mobile Apps</a></li>
+<li><a class="text-slate-500 dark:text-slate-400 hover:text-primary dark:hover:text-primary text-sm transition-colors" href="#">Cloud Services</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-sm font-bold uppercase tracking-wider text-slate-900 dark:text-white mb-6">Legal</h4>
+<ul class="flex flex-col gap-3">
+<li><a class="text-slate-500 dark:text-slate-400 hover:text-primary dark:hover:text-primary text-sm transition-colors" href="#">Privacy Policy</a></li>
+<li><a class="text-slate-500 dark:text-slate-400 hover:text-primary dark:hover:text-primary text-sm transition-colors" href="#">Terms of Service</a></li>
+<li><a class="text-slate-500 dark:text-slate-400 hover:text-primary dark:hover:text-primary text-sm transition-colors" href="#">Cookie Policy</a></li>
+</ul>
+</div>
+</div>
+<div class="border-t border-gray-100 dark:border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="text-slate-500 dark:text-slate-500 text-sm">© 2024 TechNova IT Services. All rights reserved.</p>
+<div class="flex items-center gap-2 text-sm text-slate-500">
+<span>Designed with</span>
+<span class="material-symbols-outlined text-red-400 text-sm">favorite</span>
+<span>for the future.</span>
+</div>
+</div>
+</div>
+</footer>
+</body></html>
