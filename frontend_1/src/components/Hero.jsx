@@ -13,29 +13,29 @@ const Hero = () => {
                         <div className="hidden md:flex items-center h-full">
                             {[
                                 {
-                                    title: "Solutions",
-                                    description: "Comprehensive tech solutions for enterprise growth.",
-                                    items: ["Enterprise AI", "Cloud Infrastructure", "Data Analytics", "Cybersecurity", "IoT Ecosystem"]
-                                },
-                                {
                                     title: "Services",
-                                    description: "End-to-end development and specialized services.",
-                                    items: ["Custom Software", "Mobile Development", "UI/UX Design", "QA & Testing", "DevOps Services"]
+                                    description: "End-to-end development tailored to your needs.",
+                                    items: ["Custom Software", "Mobile App Development", "Web Development", "UI/UX Design", "QA & Testing", "DevOps Services", "Cloud Computing"]
                                 },
                                 {
-                                    title: "Portfolio",
-                                    description: "Explore our success stories and impact.",
-                                    items: ["Success Stories", "Case Studies", "Client Testimonials"]
+                                    title: "Solutions",
+                                    description: "Technology-driven solutions for growth.",
+                                    items: ["Enterprise AI", "Data Analytics", "IoT Ecosystem", "Cybersecurity", "CRM & ERP", "Digital Transformation"]
                                 },
                                 {
-                                    title: "Careers",
-                                    description: "Join our team of innovators and creators.",
-                                    items: ["Open Positions", "Life at Appzeto", "Internships"]
+                                    title: "Industries",
+                                    description: "Specialized expertise for every sector.",
+                                    items: ["Healthcare", "Fintech", "E-commerce & Retail", "Education", "Real Estate", "Logistics", "Travel"]
                                 },
                                 {
-                                    title: "Contact Us",
-                                    description: "Get in touch with our global team.",
-                                    items: ["Sales Inquiry", "Technical Support", "Office Locations"]
+                                    title: "Resources",
+                                    description: "Insights, trends, and knowledge hub.",
+                                    items: ["Blog", "Case Studies", "Whitepapers", "Webinars", "API Docs", "Community"]
+                                },
+                                {
+                                    title: "Company",
+                                    description: "Who we are and our vision.",
+                                    items: ["About Us", "Our Story", "Careers", "Leadership", "Awards", "Partners", "Contact Us"]
                                 }
                             ].map((navItem, index) => (
                                 <div key={index} className="group static h-full flex items-center px-4">
@@ -122,7 +122,7 @@ const Hero = () => {
                                 We transform businesses with cutting-edge <span className="font-semibold text-gray-800 dark:text-gray-100">Web Development</span>, immersive <span className="font-semibold text-gray-800 dark:text-gray-100">Mobile Apps</span>, and intelligent <span className="font-semibold text-gray-800 dark:text-gray-100">AI &amp; ML</span> solutions.
                             </p>
                             <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                                <a className="inline-flex justify-center items-center px-8 py-4 bg-primary text-white font-bold rounded-xl shadow-lg shadow-teal-500/30 hover:bg-teal-600 hover:shadow-teal-500/50 transform hover:-translate-y-1 transition-all duration-300 text-lg group" href="#">
+                                <a className="inline-flex justify-center items-center px-8 py-4 bg-[#F1FC88] text-gray-900 font-bold rounded-xl shadow-lg shadow-[#F0FF35]/20 hover:bg-[#EAF576] transform hover:-translate-y-1 transition-all duration-300 text-lg group" href="#">
                                     Explore Services
                                     <span className="material-icons ml-2 group-hover:translate-x-1 transition-transform">arrow_forward</span>
                                 </a>
