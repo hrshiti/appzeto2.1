@@ -33,7 +33,7 @@ const Hero = () => {
                                 We transform businesses with cutting-edge <span className="font-semibold text-gray-800 dark:text-gray-100">Web Development</span>, immersive <span className="font-semibold text-gray-800 dark:text-gray-100">Mobile Apps</span>, and intelligent <span className="font-semibold text-gray-800 dark:text-gray-100">AI &amp; ML</span> solutions.
                             </p>
                             <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                                <a className="inline-flex justify-center items-center px-8 py-4 bg-primary text-white font-bold rounded-xl shadow-lg shadow-teal-500/30 hover:bg-teal-600 hover:shadow-teal-500/50 transform hover:-translate-y-1 transition-all duration-300 text-lg group" href="#">
+                                <a className="inline-flex justify-center items-center px-8 py-4 bg-[#F1FC88] text-gray-900 font-bold rounded-xl shadow-lg shadow-[#F0FF35]/20 hover:bg-[#EAF576] transform hover:-translate-y-1 transition-all duration-300 text-lg group" href="#">
                                     Explore Services
                                     <span className="material-icons ml-2 group-hover:translate-x-1 transition-transform">arrow_forward</span>
                                 </a>

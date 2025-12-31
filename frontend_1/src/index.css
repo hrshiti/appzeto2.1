@@ -16,7 +16,7 @@
   @keyframes fadeInUp {
     0% {
       opacity: 0;
-      transform: translateY(20px);
+      transform: translateY(50px);
     }
 
     100% {
@@ -36,6 +36,66 @@
   }
 
   --animate-scroll: scroll 40s linear infinite;
+  --animate-slide-in-right: slideInRight 3.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  --animate-slide-in-left: slideInLeft 3.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  --animate-text-fill: textFill 4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+
+  @keyframes slideInRight {
+    0% {
+      opacity: 0;
+      transform: translateX(100px);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slideInLeft {
+    0% {
+      opacity: 0;
+      transform: translateX(-100px);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes textFill {
+    0% {
+      background-size: 0% 100%;
+    }
+
+    100% {
+      background-size: 100% 100%;
+    }
+  }
+
+  @keyframes scrollVertical {
+    0% {
+      transform: translateY(0);
+    }
+
+    100% {
+      transform: translateY(-50%);
+    }
+  }
+
+  @keyframes scrollVerticalReverse {
+    0% {
+      transform: translateY(-50%);
+    }
+
+    100% {
+      transform: translateY(0);
+    }
+  }
+
+  --animate-scroll-vertical: scrollVertical 20s linear infinite;
+  --animate-scroll-vertical-reverse: scrollVerticalReverse 20s linear infinite;
 }
 
 /* Custom CSS from hero.txt */
