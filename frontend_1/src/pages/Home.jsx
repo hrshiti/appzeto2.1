@@ -3,6 +3,7 @@ import Hero from '../components/Hero';
 import Projects from '../components/Projects';
 import About from '../components/About';
 import Services from '../components/Services';
+import Reviews from '../components/Reviews';
 import ContactUs from '../components/ContactUs';
 import WhyChooseUs from '../components/WhyChooseUs';
 import Footer from '../components/Footer';
@@ -17,6 +18,7 @@ const Home = () => {
             <About />
             <Services />
             <WhyChooseUs />
+            <Reviews />
             <ContactUs />
             <Footer />
         </ScrollWrapper>

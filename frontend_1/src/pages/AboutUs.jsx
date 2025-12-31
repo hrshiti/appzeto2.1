@@ -1,7 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../assets/logo.png'; // Assuming logo exists here based on Hero.jsx
+import logo from '../assets/logo.png';
 import Navbar from '../components/Navbar';
+import AboutSections from '../components/AboutSections';
+import ceoImage from '../assets/ceo.jpeg';
 
 const AboutUs = () => {
     return (
@@ -57,7 +59,7 @@ const AboutUs = () => {
                     <div className="relative">
                         <div className="aspect-[3/4] bg-gray-200 rounded-lg overflow-hidden relative group">
                             <img
-                                src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1974&auto=format&fit=crop"
+                                src={ceoImage}
                                 alt="CEO"
                                 className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
                             />
@@ -161,6 +163,9 @@ const AboutUs = () => {
                     </div>
                 </div>
             </section>
+
+            {/* New Middle Section */}
+            <AboutSections />
 
             {/* Meet Our Team */}
             <section className="py-24 px-4 bg-white">
