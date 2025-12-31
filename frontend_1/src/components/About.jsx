@@ -125,15 +125,15 @@ const About = () => {
 
                             {/* Right Content */}
                             <div className={`relative z-10 w-full flex flex-col gap-5 transition-all duration-1000 transform ${isInView ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'}`}>
-                                <div className="flex flex-col gap-2">
-                                    <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#05A4A7]/10 border border-[#05A4A7]/20 w-fit">
-                                        <span className="flex h-2.5 w-2.5 rounded-full bg-[#05A4A7] animate-pulse"></span>
-                                        <span className="text-sm font-extrabold uppercase tracking-widest text-[#0d9488] dark:text-[#05A4A7]">Who We Are</span>
+                                <div className="flex flex-col gap-6">
+                                    <div className="mb-4">
+                                        <h1 className="text-4xl md:text-5xl font-black tracking-tight text-slate-900 dark:text-white uppercase">
+                                            Who We Are
+                                        </h1>
                                     </div>
-                                    <h1 className="text-4xl lg:text-5xl font-black leading-[1.1] tracking-tight text-[#111817] dark:text-white">
-                                        Engineering the <br className="hidden lg:block" />
-                                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#05A4A7] to-emerald-400">Digital Future.</span>
-                                    </h1>
+                                    <h2 className="text-xl md:text-3xl font-bold text-[#05A4A7] leading-tight">
+                                        Engineering the Digital Future.
+                                    </h2>
                                     <p ref={paragraphRef} className="text-lg lg:text-xl text-[#618983] dark:text-gray-400 leading-relaxed max-w-lg min-h-[5rem]">
                                         {getSlice(0)}
                                         <span className="text-[#111817] dark:text-white font-semibold">{getSlice(1)}</span>
@@ -184,8 +184,14 @@ const About = () => {
                 {/* Values Section */}
                 <section ref={valuesRef} className="w-full bg-[#f6f8f8] dark:bg-[#012829] py-12 lg:py-16 px-6 md:px-12 lg:px-16">
                     <div className="max-w-[1280px] mx-auto flex flex-col gap-12">
-                        <div className={`text-center max-w-2xl mx-auto transition-all duration-1000 ${areValuesInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-                            <h2 className="text-3xl font-black mb-4 text-[#111817] dark:text-white">Driven by Values</h2>
+                        <div className={`text-center max-w-4xl mx-auto transition-all duration-1000 ${areValuesInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'} mb-10`}>
+                            {/* Static Header Label */}
+                            <div className="mb-4">
+                                <h1 className="text-4xl md:text-5xl font-black tracking-tight text-slate-900 dark:text-white uppercase">
+                                    Our Principles
+                                </h1>
+                            </div>
+                            <h3 className="text-xl md:text-3xl font-bold text-[#05A4A7] mb-4">Driven by Values</h3>
                             <p className="text-[#618983] dark:text-gray-400">Our culture is built on a foundation of relentless innovation and unwavering integrity.</p>
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

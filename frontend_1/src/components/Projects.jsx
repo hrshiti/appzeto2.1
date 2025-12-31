@@ -548,8 +548,10 @@ const Projects = () => {
                     {/* Left: Text Content - Vertically Centered */}
                     <div className="w-full lg:w-1/2 flex flex-col justify-center h-full gap-6 order-2 lg:order-1 relative z-20 items-start text-left">
                         {/* Static Header Label */}
-                        <div className="text-primary font-bold text-sm uppercase tracking-widest opacity-80">
-                            Featured Projects
+                        <div className="mb-4">
+                            <h1 className="text-4xl md:text-5xl font-black tracking-tight text-white uppercase">
+                                Featured Projects
+                            </h1>
                         </div>
 
                         {/* Dynamic Content with Staggered Animation */}
@@ -565,11 +567,10 @@ const Projects = () => {
 
                             {/* Title: Slide In from RIGHT + Color Fill Effect */}
                             {/* We use bg-gradient-to-r from-white to-white (solid fill) but start with width 0 and animate text-fill */}
-                            <h2 className="text-6xl md:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white to-white bg-no-repeat leading-[0.95] tracking-tight opacity-0 animate-slide-in-right"
+                            <h2 className="text-xl md:text-3xl font-bold text-primary leading-tight tracking-tight opacity-0 animate-slide-in-right"
                                 style={{
                                     animationDelay: '100ms',
-                                    animationFillMode: 'forwards',
-                                    animationName: 'slideInRight, textFill' // Run both animations
+                                    animationFillMode: 'forwards'
                                 }}>
                                 {projects[activeProject].title}
                             </h2>

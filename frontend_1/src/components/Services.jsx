@@ -10,16 +10,20 @@ const Services = () => {
                     <div className="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] bg-[#13ecc8]/10 rounded-full blur-[100px] mix-blend-multiply dark:mix-blend-normal"></div>
                     <div className="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-blue-400/10 rounded-full blur-[100px] mix-blend-multiply dark:mix-blend-normal"></div>
                 </div>
-                <div className="w-full bg-[#F1FC88]/80 dark:bg-[#F1FC88]/20 py-8 lg:py-12">
+                <div className="w-full py-8 lg:py-12">
                     <div className="max-w-[1280px] mx-auto px-6 md:px-12 lg:px-16">
                         {/* Section Header */}
-                        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
-                            <div className="max-w-2xl">
-                                <span className="text-[#05A4A7] font-bold tracking-wider uppercase text-xs mb-2 block">Our Expertise</span>
-                                <h1 className="text-3xl md:text-5xl font-extrabold text-slate-900 dark:text-white leading-tight tracking-tight mb-3">
-                                    Empowering Business with <br className="hidden md:block" /> <span className="relative inline-block">Next-Gen Tech<span className="absolute bottom-1 left-0 w-full h-2 bg-[#13ecc8]/30 -z-10 skew-x-12"></span></span>
-                                </h1>
-                                <p className="text-base text-slate-700 dark:text-slate-300 leading-relaxed max-w-xl">
+                        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
+                            <div className="max-w-4xl">
+                                <div className="mb-4">
+                                    <h1 className="text-4xl md:text-5xl font-black tracking-tight text-slate-900 dark:text-white uppercase">
+                                        Our Expertise
+                                    </h1>
+                                </div>
+                                <h2 className="text-xl md:text-3xl font-bold text-[#05A4A7] leading-tight mb-4">
+                                    Empowering Business with Next-Gen Tech
+                                </h2>
+                                <p className="text-lg text-slate-700 dark:text-slate-300 leading-relaxed max-w-2xl">
                                     From intelligent AI algorithms to scalable SaaS platforms, we build the digital infrastructure that propels your future forward.
                                 </p>
                             </div>
@@ -29,7 +33,7 @@ const Services = () => {
                         <div className="grid grid-cols-1 lg:grid-cols-5 w-full h-auto lg:h-[380px] gap-6 lg:gap-0">
 
                             {/* Service 01: AI & ML - Blue */}
-                            <div className="group relative bg-[#4361ee]/10 hover:bg-[#4361ee] p-7 flex flex-col justify-between overflow-hidden transition-all duration-500 hover:z-10 hover:shadow-2xl h-full rounded-2xl lg:rounded-none lg:first:rounded-l-3xl border border-[#4361ee]/20 lg:border-none">
+                            <div className="group relative bg-[#4361ee]/60 hover:bg-[#4361ee] p-7 flex flex-col justify-between overflow-hidden transition-all duration-500 hover:z-10 hover:shadow-2xl h-full rounded-2xl lg:rounded-none lg:first:rounded-l-3xl border border-[#4361ee]/20 lg:border-none">
                                 <div className="relative z-10 flex flex-col gap-5">
                                     <div className="size-12 rounded-xl bg-[#4361ee]/20 group-hover:bg-white/20 backdrop-blur-sm flex items-center justify-center text-[#4361ee] group-hover:text-white border border-[#4361ee]/30 group-hover:border-white/30 shadow-sm transition-all duration-500">
                                         <span className="material-symbols-outlined text-[26px]">psychology</span>
@@ -50,7 +54,7 @@ const Services = () => {
                             </div>
 
                             {/* Service 02: Web Development - Emerald */}
-                            <div className="group relative bg-[#10b981]/10 hover:bg-[#10b981] p-7 flex flex-col justify-between overflow-hidden transition-all duration-500 hover:z-10 hover:shadow-2xl h-full rounded-2xl lg:rounded-none border border-[#10b981]/20 lg:border-none">
+                            <div className="group relative bg-[#10b981]/60 hover:bg-[#10b981] p-7 flex flex-col justify-between overflow-hidden transition-all duration-500 hover:z-10 hover:shadow-2xl h-full rounded-2xl lg:rounded-none border border-[#10b981]/20 lg:border-none">
                                 <div className="relative z-10 flex flex-col gap-5">
                                     <div className="size-12 rounded-xl bg-[#10b981]/20 group-hover:bg-white/20 backdrop-blur-sm flex items-center justify-center text-[#10b981] group-hover:text-white border border-[#10b981]/30 group-hover:border-white/30 shadow-sm transition-all duration-500">
                                         <span className="material-symbols-outlined text-[26px]">code</span>
@@ -71,7 +75,7 @@ const Services = () => {
                             </div>
 
                             {/* Service 03: Mobile App Dev - Rose/Red */}
-                            <div className="group relative bg-[#f43f5e]/10 hover:bg-[#f43f5e] p-7 flex flex-col justify-between overflow-hidden transition-all duration-500 hover:z-10 hover:shadow-2xl h-full rounded-2xl lg:rounded-none border border-[#f43f5e]/20 lg:border-none">
+                            <div className="group relative bg-[#f43f5e]/60 hover:bg-[#f43f5e] p-7 flex flex-col justify-between overflow-hidden transition-all duration-500 hover:z-10 hover:shadow-2xl h-full rounded-2xl lg:rounded-none border border-[#f43f5e]/20 lg:border-none">
                                 <div className="relative z-10 flex flex-col gap-5">
                                     <div className="size-12 rounded-xl bg-[#f43f5e]/20 group-hover:bg-white/20 backdrop-blur-sm flex items-center justify-center text-[#f43f5e] group-hover:text-white border border-[#f43f5e]/30 group-hover:border-white/30 shadow-sm transition-all duration-500">
                                         <span className="material-symbols-outlined text-[26px]">smartphone</span>
@@ -92,7 +96,7 @@ const Services = () => {
                             </div>
 
                             {/* Service 04: Cloud Solutions - Amber/Orange */}
-                            <div className="group relative bg-[#f59e0b]/10 hover:bg-[#f59e0b] p-7 flex flex-col justify-between overflow-hidden transition-all duration-500 hover:z-10 hover:shadow-2xl h-full rounded-2xl lg:rounded-none border border-[#f59e0b]/20 lg:border-none">
+                            <div className="group relative bg-[#f59e0b]/60 hover:bg-[#f59e0b] p-7 flex flex-col justify-between overflow-hidden transition-all duration-500 hover:z-10 hover:shadow-2xl h-full rounded-2xl lg:rounded-none border border-[#f59e0b]/20 lg:border-none">
                                 <div className="relative z-10 flex flex-col gap-5">
                                     <div className="size-12 rounded-xl bg-[#f59e0b]/20 group-hover:bg-white/20 backdrop-blur-sm flex items-center justify-center text-[#f59e0b] group-hover:text-white border border-[#f59e0b]/30 group-hover:border-white/30 shadow-sm transition-all duration-500">
                                         <span className="material-symbols-outlined text-[26px]">cloud</span>
@@ -113,7 +117,7 @@ const Services = () => {
                             </div>
 
                             {/* Service 05: UI/UX Design - Purple */}
-                            <div className="group relative bg-[#8b5cf6]/10 hover:bg-[#8b5cf6] p-7 flex flex-col justify-between overflow-hidden transition-all duration-500 hover:z-10 hover:shadow-2xl h-full rounded-2xl lg:rounded-none lg:last:rounded-r-3xl border border-[#8b5cf6]/20 lg:border-none">
+                            <div className="group relative bg-[#8b5cf6]/60 hover:bg-[#8b5cf6] p-7 flex flex-col justify-between overflow-hidden transition-all duration-500 hover:z-10 hover:shadow-2xl h-full rounded-2xl lg:rounded-none lg:last:rounded-r-3xl border border-[#8b5cf6]/20 lg:border-none">
                                 <div className="relative z-10 flex flex-col gap-5">
                                     <div className="size-12 rounded-xl bg-[#8b5cf6]/20 group-hover:bg-white/20 backdrop-blur-sm flex items-center justify-center text-[#8b5cf6] group-hover:text-white border border-[#8b5cf6]/30 group-hover:border-white/30 shadow-sm transition-all duration-500">
                                         <span className="material-symbols-outlined text-[26px]">brush</span>
@@ -137,10 +141,14 @@ const Services = () => {
                 </div>
 
                 {/* Why Choose Us Section */}
-                <div className="w-full">
-                    <div className="max-w-[1280px] mx-auto px-6 md:px-12 lg:px-16 mt-16 mb-8 text-center">
-                        <span className="text-[#05A4A7] font-bold tracking-wider uppercase text-xs mb-3 block">Why Choose Us</span>
-                        <h2 className="text-2xl md:text-5xl font-black text-gray-900 dark:text-white mb-10">Driven by Results, <br />Powered by Innovation</h2>
+                <div className="w-full mt-24">
+                    <div className="max-w-[1280px] mx-auto px-6 md:px-12 lg:px-16 mb-12 flex flex-col items-center text-center">
+                        <div className="mb-4">
+                            <h2 className="text-4xl md:text-5xl font-black tracking-tight text-slate-900 dark:text-white uppercase">
+                                Why Choose Us
+                            </h2>
+                        </div>
+                        <h3 className="text-xl md:text-3xl font-bold text-[#05A4A7] mb-6">Driven by Results, Powered by Innovation</h3>
 
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center md:text-left">
                             <div className="flex flex-col items-center md:items-start group">
