@@ -76,7 +76,7 @@ const Projects = () => {
                                 </div>
                             </div>
                             <div className="p-6 flex flex-col flex-1 gap-3">
-                                <h3 class="text-xl font-bold text-gray-900 dark:text-white group-hover:text-primary transition-colors">Appzeto Food</h3>
+                                <h3 className="text-xl font-bold text-gray-900 dark:text-white group-hover:text-primary transition-colors">Appzeto Food</h3>
                                 <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed flex-1">
                                     Vibrant food delivery platform connecting users with local culinary favorites, featuring live order status and smart recommendations.
                                 </p>
