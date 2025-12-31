@@ -1,11 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { motion } from 'framer-motion';
 
 const About = () => {
     const [charIndex, setCharIndex] = useState(0);
     const [isInView, setIsInView] = useState(false);
-    const [areValuesInView, setAreValuesInView] = useState(false);
     const paragraphRef = useRef(null);
-    const valuesRef = useRef(null);
 
     const textSegments = [
         "We don't just write code; we build the digital infrastructure that powers industry leaders. From ",
@@ -24,16 +23,6 @@ const About = () => {
         }, { threshold: 0.3 }); // Trigger when 30% visible
 
         if (paragraphRef.current) observer.observe(paragraphRef.current);
-        return () => observer.disconnect();
-    }, []);
-
-    // Observer for Values Section
-    useEffect(() => {
-        const observer = new IntersectionObserver(([entry]) => {
-            setAreValuesInView(entry.isIntersecting);
-        }, { threshold: 0.2 });
-
-        if (valuesRef.current) observer.observe(valuesRef.current);
         return () => observer.disconnect();
     }, []);
 
@@ -86,8 +75,13 @@ const About = () => {
                     <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-[#EAB308]/5 rounded-full blur-[80px] translate-y-1/3 -translate-x-1/3 pointer-events-none"></div>
                     <div className="max-w-[1280px] mx-auto w-full">
                         <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center h-full">
-                            {/* Left Image - Slide in from Left */}
-                            <div className={`relative z-10 w-full transition-all duration-1000 delay-300 transform ${isInView ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-20'}`}>
+                            <motion.div
+                                initial={{ opacity: 0, y: 50 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.8, delay: 0.3 }}
+                                className="relative z-10 w-full"
+                            >
                                 <div className="absolute -top-12 -left-12 w-32 h-32 border-[3px] border-[#EAB308]/20 rounded-full"></div>
                                 <div className="absolute -bottom-8 -right-8 w-64 h-64 bg-[#ffffff] dark:bg-[#023638] rounded-full mix-blend-multiply filter blur-3xl opacity-50 dark:opacity-20"></div>
                                 <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-gray-100 dark:border-gray-700 group w-full">
@@ -121,13 +115,19 @@ const About = () => {
                                         <span className="material-symbols-outlined">cloud</span>
                                     </div>
                                 </div>
-                            </div>
+                            </motion.div>
 
                             {/* Right Content */}
-                            <div className={`relative z-10 w-full flex flex-col gap-5 transition-all duration-1000 transform ${isInView ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'}`}>
+                            <motion.div
+                                initial={{ opacity: 0, y: 50 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.8 }}
+                                className="relative z-10 w-full flex flex-col gap-5"
+                            >
                                 <div className="flex flex-col gap-6">
                                     <div className="mb-4">
-                                        <h1 className="text-4xl md:text-5xl font-black tracking-tight text-slate-900 dark:text-white uppercase">
+                                        <h1 className="text-3xl md:text-4xl font-black tracking-tight text-slate-900 dark:text-white uppercase">
                                             Who We Are
                                         </h1>
                                     </div>
@@ -176,71 +176,11 @@ const About = () => {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                {/* Values Section */}
-                <section ref={valuesRef} className="w-full bg-[#f6f8f8] dark:bg-[#012829] py-12 lg:py-16 px-6 md:px-12 lg:px-16">
-                    <div className="max-w-[1280px] mx-auto flex flex-col gap-12">
-                        <div className={`text-center max-w-4xl mx-auto transition-all duration-1000 ${areValuesInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'} mb-10`}>
-                            {/* Static Header Label */}
-                            <div className="mb-4">
-                                <h1 className="text-4xl md:text-5xl font-black tracking-tight text-slate-900 dark:text-white uppercase">
-                                    Our Principles
-                                </h1>
-                            </div>
-                            <h3 className="text-xl md:text-3xl font-bold text-[#05A4A7] mb-4">Driven by Values</h3>
-                            <p className="text-[#618983] dark:text-gray-400">Our culture is built on a foundation of relentless innovation and unwavering integrity.</p>
-                        </div>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                            {[
-                                { title: "Innovation First", icon: "lightbulb", desc: "We don't just follow trends; we set them. Our labs are constantly exploring the bleeding edge of AI and ML to give our clients a competitive advantage." },
-                                { title: "Unwavering Reliability", icon: "verified_user", desc: "In the digital world, downtime is not an option. We build robust, scalable architectures designed to withstand high loads and security threats." },
-                                { title: "True Partnership", icon: "handshake", desc: "We build with you, not just for you. We see ourselves as an extension of your team, dedicated to your long-term success and growth." }
-                            ].map((value, i) => (
-                                <div key={i} className={`bg-[#023638] dark:bg-[#023638] p-8 rounded-xl shadow-lg border border-[#05A4A7]/20 hover:border-[#05A4A7] hover:shadow-[#05A4A7]/20 transition-all duration-1000 hover:-translate-y-1 ${areValuesInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'}`} style={{ transitionDelay: `${i * 200}ms` }}>
-                                    <div className="size-12 rounded-lg bg-[#ffffff]/10 flex items-center justify-center mb-6 text-[#05A4A7]">
-                                        <span className="material-symbols-outlined">{value.icon}</span>
-                                    </div>
-                                    <h3 className="text-xl font-bold mb-3 text-white">{value.title}</h3>
-                                    <p className="text-gray-300 leading-relaxed">
-                                        {value.desc}
-                                    </p>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </section>
-
-
-
-
-
-                {/* CTA Section */}
-                <section className="w-full bg-[#023638] py-20 px-6 md:px-12 lg:px-16 relative overflow-hidden">
-                    <div className="absolute top-0 right-0 w-64 h-64 bg-[#05A4A7]/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
-                    <div className="absolute bottom-0 left-0 w-64 h-64 bg-[#EAB308]/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2 pointer-events-none"></div>
-
-                    <div className="max-w-4xl mx-auto text-center relative z-10">
-                        <h2 className="text-3xl md:text-4xl font-black text-white mb-6">Ready to transform your business?</h2>
-                        <p className="text-lg text-gray-300 mb-8 max-w-xl mx-auto">
-                            Let's discuss how our expert team can help you achieve your digital goals with custom AI and web solutions.
-                        </p>
-                        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                            <button className="flex min-w-[160px] cursor-pointer items-center justify-center rounded-lg h-12 px-6 bg-[#05A4A7] hover:bg-[#05A4A7]/90 transition-colors text-[#111817] text-base font-bold shadow-lg shadow-[#05A4A7]/20">
-                                Start a Project
-                            </button>
-                            <button className="flex min-w-[160px] cursor-pointer items-center justify-center rounded-lg h-12 px-6 bg-[#F1FC88] hover:bg-[#EAF576] transition-colors text-gray-900 text-base font-bold shadow-lg shadow-[#F0FF35]/20">
-                                View Case Studies
-                            </button>
+                            </motion.div>
                         </div>
                     </div>
                 </section>
             </div>
-
-
         </div>
     );
 };

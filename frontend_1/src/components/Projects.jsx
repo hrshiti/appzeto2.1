@@ -1,5 +1,10 @@
 
 import React, { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 // --- Mock UI Components for "Homepages" ---
 
@@ -10,16 +15,10 @@ const TaxiAppUI = () => (
             <div className="bg-white/90 p-2 rounded-full shadow-md pointer-events-auto"><span className="material-symbols-outlined text-gray-800">menu</span></div>
             <div className="bg-white/90 px-4 py-2 rounded-full shadow-md font-bold text-gray-800 text-sm pointer-events-auto">Offline</div>
         </div>
-
-        {/* Scrollable Bottom Sheet Container */}
         <div className="mt-auto bg-white rounded-t-3xl shadow-2xl z-10 relative h-[60%] flex flex-col">
             <div className="w-12 h-1 bg-gray-300 rounded-full mx-auto mt-4 mb-2 flex-shrink-0"></div>
-
-            {/* Scrollable Content Area */}
             <div className="flex-1 overflow-y-auto px-6 pb-20 no-scrollbar">
                 <h3 className="text-xl font-bold text-gray-800 mb-4 sticky top-0 bg-white py-2">Where to?</h3>
-
-                {/* Recent Locations */}
                 <div className="flex flex-col gap-3 mb-6">
                     <div className="flex items-center gap-4 p-3 bg-gray-50 rounded-xl border border-gray-100 hover:bg-gray-100 transition-colors">
                         <div className="p-2 bg-gray-200 rounded-full"><span className="material-symbols-outlined text-gray-600">work</span></div>
@@ -35,15 +34,7 @@ const TaxiAppUI = () => (
                             <p className="text-gray-500 text-xs">102, Green Valley</p>
                         </div>
                     </div>
-                    <div className="flex items-center gap-4 p-3 bg-gray-50 rounded-xl border border-gray-100 hover:bg-gray-100 transition-colors">
-                        <div className="p-2 bg-gray-200 rounded-full"><span className="material-symbols-outlined text-gray-600">history</span></div>
-                        <div>
-                            <p className="font-bold text-gray-800 text-sm">Gym</p>
-                            <p className="text-gray-500 text-xs">FitPro Center, Main Rd</p>
-                        </div>
-                    </div>
                 </div>
-
                 <h3 className="text-lg font-bold text-gray-800 mb-3 sticky top-10 bg-white py-2 z-10">Ride Options</h3>
                 <div className="h-[200px] overflow-hidden relative">
                     <div className="animate-scroll-vertical">
@@ -53,12 +44,7 @@ const TaxiAppUI = () => (
                             { type: 'Electric', price: '$14.20', time: '4 min', icon: 'electric_car' },
                             { type: 'Van', price: '$32.00', time: '8 min', icon: 'airport_shuttle' },
                             { type: 'Bike', price: '$8.50', time: '2 min', icon: 'two_wheeler' },
-                            // Duplicated for seamless loop
                             { type: 'Economy', price: '$12.50', time: '3 min', icon: 'local_taxi' },
-                            { type: 'Premium', price: '$24.00', time: '5 min', icon: 'directions_car' },
-                            { type: 'Electric', price: '$14.20', time: '4 min', icon: 'electric_car' },
-                            { type: 'Van', price: '$32.00', time: '8 min', icon: 'airport_shuttle' },
-                            { type: 'Bike', price: '$8.50', time: '2 min', icon: 'two_wheeler' },
                         ].map((ride, i) => (
                             <div key={i} className="flex items-center justify-between p-3 rounded-xl border border-gray-100 hover:border-primary/50 cursor-pointer mb-3">
                                 <div className="flex items-center gap-4">
@@ -93,62 +79,28 @@ const FoodAppUI = () => (
         </div>
         <div className="flex-1 overflow-hidden px-6 pb-20 relative">
             <div className="animate-scroll-vertical">
-                {/* Content Block */}
                 <div className="pb-8">
                     <div className="flex gap-4 overflow-x-auto no-scrollbar pb-4">
                         {['Pizza', 'Burger', 'Asian', 'Vegan'].map((cat, i) => (
-                            <div key={i} className="flex flex-col items-center gap-2 min-w-[70px]">
-                                <div className={`w-16 h-16 rounded-full flex items-center justify-center ${i === 0 ? 'bg-[#05A4A7] text-white' : 'bg-gray-100 text-gray-600'}`}>
-                                    <span className="material-symbols-outlined">{cat === 'Pizza' ? 'local_pizza' : cat === 'Burger' ? 'lunch_dining' : 'ramen_dining'}</span>
-                                </div>
-                                <span className="text-xs font-bold text-gray-700">{cat}</span>
-                            </div>
+                            <div key={i} className="px-4 py-2 bg-gray-100 rounded-full text-xs font-bold text-gray-600 whitespace-nowrap">{cat}</div>
                         ))}
                     </div>
-                    <h3 className="font-black text-gray-800 text-lg mt-4 mb-3">Featured</h3>
-                    <div className="flex flex-col gap-4">
-                        {[1, 2, 3, 4].map((i) => (
-                            <div key={i} className="w-full rounded-2xl overflow-hidden shadow-sm border border-gray-100 shrink-0">
-                                <div className="h-32 bg-gray-200 bg-cover bg-center" style={{ backgroundImage: i % 2 === 0 ? 'url("https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?q=80&w=500&auto=format&fit=crop")' : 'url("https://images.unsplash.com/photo-1561758033-d8f3c665b156?q=80&w=500&auto=format&fit=crop")' }}></div>
-                                <div className="p-3">
-                                    <div className="flex justify-between items-start">
-                                        <div>
-                                            <h4 className="font-bold text-gray-800">{i % 2 === 0 ? 'Italian Delight' : 'Burger King'}</h4>
-                                            <p className="text-xs text-gray-500">{i % 2 === 0 ? 'Italian • Pasta' : 'American • Burgers'} • $$</p>
-                                        </div>
-                                        <div className="bg-green-100 text-green-700 px-2 py-1 rounded-lg text-xs font-bold">4.{8 - (i % 3)}</div>
+                    <h3 className="text-lg font-black text-gray-800 mt-6 mb-4">Popular near you</h3>
+                    <div className="flex flex-col gap-6">
+                        {[
+                            { name: 'Pizza Hub', rating: '4.8', time: '20-30 min', img: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=1000&auto=format&fit=crop' },
+                            { name: 'Burger King', rating: '4.5', time: '15-25 min', img: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=1000&auto=format&fit=crop' },
+                        ].map((shop, i) => (
+                            <div key={i} className="flex flex-col gap-2">
+                                <div className="w-full aspect-video rounded-2xl bg-gray-200 overflow-hidden relative">
+                                    <img src={shop.img} alt={shop.name} className="w-full h-full object-cover" />
+                                    <div className="absolute top-3 right-3 bg-white px-2 py-1 rounded-lg text-[10px] font-black shadow-sm">
+                                        ★ {shop.rating}
                                     </div>
                                 </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-
-                {/* DUPLICATE Content Block */}
-                <div className="pb-8">
-                    <div className="flex gap-4 overflow-x-auto no-scrollbar pb-4">
-                        {['Pizza', 'Burger', 'Asian', 'Vegan'].map((cat, i) => (
-                            <div key={i} className="flex flex-col items-center gap-2 min-w-[70px]">
-                                <div className={`w-16 h-16 rounded-full flex items-center justify-center ${i === 0 ? 'bg-[#05A4A7] text-white' : 'bg-gray-100 text-gray-600'}`}>
-                                    <span className="material-symbols-outlined">{cat === 'Pizza' ? 'local_pizza' : cat === 'Burger' ? 'lunch_dining' : 'ramen_dining'}</span>
-                                </div>
-                                <span className="text-xs font-bold text-gray-700">{cat}</span>
-                            </div>
-                        ))}
-                    </div>
-                    <h3 className="font-black text-gray-800 text-lg mt-4 mb-3">Featured</h3>
-                    <div className="flex flex-col gap-4">
-                        {[1, 2, 3, 4].map((i) => (
-                            <div key={i} className="w-full rounded-2xl overflow-hidden shadow-sm border border-gray-100 shrink-0">
-                                <div className="h-32 bg-gray-200 bg-cover bg-center" style={{ backgroundImage: i % 2 === 0 ? 'url("https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?q=80&w=500&auto=format&fit=crop")' : 'url("https://images.unsplash.com/photo-1561758033-d8f3c665b156?q=80&w=500&auto=format&fit=crop")' }}></div>
-                                <div className="p-3">
-                                    <div className="flex justify-between items-start">
-                                        <div>
-                                            <h4 className="font-bold text-gray-800">{i % 2 === 0 ? 'Italian Delight' : 'Burger King'}</h4>
-                                            <p className="text-xs text-gray-500">{i % 2 === 0 ? 'Italian • Pasta' : 'American • Burgers'} • $$</p>
-                                        </div>
-                                        <div className="bg-green-100 text-green-700 px-2 py-1 rounded-lg text-xs font-bold">4.{8 - (i % 3)}</div>
-                                    </div>
+                                <div className="flex justify-between items-center">
+                                    <span className="font-bold text-gray-800">{shop.name}</span>
+                                    <span className="text-[10px] text-gray-500 font-bold">{shop.time}</span>
                                 </div>
                             </div>
                         ))}
@@ -159,131 +111,113 @@ const FoodAppUI = () => (
     </div>
 );
 
-const ShopAppUI = () => (
-    <div className="w-full h-full bg-gray-50 flex flex-col font-sans">
-        <div className="px-6 pt-12 pb-4 bg-white flex justify-between items-center z-10">
-            <span className="material-symbols-outlined text-gray-800">menu</span>
-            <span className="font-black text-xl text-gray-900">SHOP.</span>
-            <span className="material-symbols-outlined text-gray-800">shopping_bag</span>
+const EdTechUI = () => (
+    <div className="w-full h-full bg-[#f8fafc] flex flex-col font-sans overflow-hidden">
+        <div className="p-6 pt-12 flex justify-between items-center bg-white shadow-sm z-20">
+            <div>
+                <h3 className="text-lg font-black text-gray-900">Hello, Alex!</h3>
+                <p className="text-xs text-gray-500 font-bold">What will you learn today?</p>
+            </div>
+            <div className="w-10 h-10 bg-indigo-100 rounded-full flex items-center justify-center text-indigo-600">
+                <span className="material-symbols-outlined">person</span>
+            </div>
         </div>
-        <div className="flex-1 overflow-hidden pb-20 no-scrollbar relative">
-            <div className="pb-8">
-                <div className="relative w-full h-64 bg-gray-900 flex items-center justify-center text-center p-6 mb-6">
-                    <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=500&auto=format&fit=crop" className="absolute inset-0 w-full h-full object-cover opacity-60" alt="" />
-                    <div className="relative z-10 text-white">
-                        <p className="text-xs font-bold uppercase tracking-widest mb-2">New Season</p>
-                        <h2 className="text-3xl font-black mb-4">Summer <br />Collection</h2>
-                        <button className="px-6 py-2 bg-white text-black font-bold text-sm">Shop Now</button>
-                    </div>
-                </div>
-                <div className="px-6">
-                    <div className="flex justify-between items-end mb-4">
-                        <h3 className="font-bold text-xl text-gray-900">Popular</h3>
-                        <span className="text-xs text-gray-500 font-bold">See All</span>
-                    </div>
-
-                    {/* Two Column Grid with ALTERNATING SCROLL DIRECTION */}
-                    <div className="flex gap-4 h-[400px] overflow-hidden">
-                        {/* Column 1: Scrolls UP (Standard) */}
-                        <div className="flex-1 overflow-hidden relative">
-                            <div className="animate-scroll-vertical flex flex-col gap-4">
-                                {[1, 3, 5, 7, 1, 3, 5, 7].map((i, idx) => (
-                                    <div key={idx} className="flex flex-col gap-2 bg-white p-2 rounded-xl shadow-sm border border-gray-100">
-                                        <div className="aspect-[3/4] bg-gray-200 rounded-lg overflow-hidden relative group">
-                                            <img src={`https://images.unsplash.com/photo-${i % 4 === 0 ? '1515886657613-9f3515b0c78f' : i % 4 === 1 ? '1529139574466-a30232743491' : i % 4 === 2 ? '1503342217505-b0215e948416' : '1542291026-7eec264c27ff'}?q=80&w=300&auto=format&fit=crop`} className="w-full h-full object-cover" alt="" />
-                                        </div>
-                                        <div>
-                                            <p className="font-bold text-gray-800 text-sm">$129.00</p>
-                                            <p className="text-xs text-gray-500">Urban Jacket</p>
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
+        <div className="flex-1 overflow-hidden px-6 pb-20">
+            <div className="animate-scroll-vertical-reverse">
+                <div className="py-6 space-y-6">
+                    <div className="bg-indigo-600 p-6 rounded-[2.5rem] text-white overflow-hidden relative group">
+                        <div className="relative z-10">
+                            <h4 className="text-xl font-black mb-2">60% OFF</h4>
+                            <p className="text-xs font-bold text-indigo-100 mb-4">On all certification courses this month.</p>
+                            <button className="px-4 py-2 bg-white text-indigo-600 rounded-full text-[10px] font-black uppercase tracking-wider">Join Now</button>
                         </div>
-
-                        {/* Column 2: Scrolls DOWN (Reverse) */}
-                        <div className="flex-1 overflow-hidden relative">
-                            <div className="animate-scroll-vertical-reverse flex flex-col gap-4">
-                                {[2, 4, 6, 8, 2, 4, 6, 8].map((i, idx) => (
-                                    <div key={idx} className="flex flex-col gap-2 bg-white p-2 rounded-xl shadow-sm border border-gray-100">
-                                        <div className="aspect-[3/4] bg-gray-200 rounded-lg overflow-hidden relative group">
-                                            <img src={`https://images.unsplash.com/photo-${i % 4 === 0 ? '1515886657613-9f3515b0c78f' : i % 4 === 1 ? '1529139574466-a30232743491' : i % 4 === 2 ? '1503342217505-b0215e948416' : '1542291026-7eec264c27ff'}?q=80&w=300&auto=format&fit=crop`} className="w-full h-full object-cover" alt="" />
-                                        </div>
-                                        <div>
-                                            <p className="font-bold text-gray-800 text-sm">$89.00</p>
-                                            <p className="text-xs text-gray-500">Casual Tee</p>
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
+                        <span className="material-symbols-outlined absolute -right-4 -bottom-4 text-9xl text-white/10 rotate-12 group-hover:scale-110 transition-transform">school</span>
                     </div>
-
+                    <div className="flex justify-between items-center">
+                        <h4 className="font-black text-gray-900">Featured Courses</h4>
+                        <span className="text-xs text-indigo-600 font-bold">See all</span>
+                    </div>
+                    <div className="space-y-4">
+                        {[
+                            { name: 'UI/UX Masterclass', tutor: 'John Doe', price: '$49', bg: 'bg-rose-50', icon: 'brush', iconCol: 'text-rose-500' },
+                            { name: 'Python for Data', tutor: 'Sarah Jay', price: '$29', bg: 'bg-emerald-50', icon: 'data_object', iconCol: 'text-emerald-500' },
+                        ].map((course, i) => (
+                            <div key={i} className={`flex items-center gap-4 p-4 rounded-3xl ${course.bg} border border-white`}>
+                                <div className={`w-12 h-12 rounded-2xl bg-white flex items-center justify-center ${course.iconCol} shadow-sm font-black`}>
+                                    <span className="material-symbols-outlined">{course.icon}</span>
+                                </div>
+                                <div className="flex-1">
+                                    <p className="font-bold text-gray-900 text-sm">{course.name}</p>
+                                    <p className="text-[10px] text-gray-500 font-bold">{course.tutor}</p>
+                                </div>
+                                <span className="font-black text-gray-900">{course.price}</span>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 );
 
-const HealthAppUI = () => (
-    <div className="w-full h-full bg-[#f8fcfc] flex flex-col font-sans">
-        <div className="px-6 pt-12 pb-6 bg-white rounded-b-3xl shadow-sm z-10">
-            <div className="flex justify-between items-center mb-6">
-                <div>
-                    <p className="text-gray-400 text-xs font-bold uppercase">Hello,</p>
-                    <p className="text-2xl font-black text-gray-800">Sarah Jones</p>
-                </div>
-                <div className="w-10 h-10 bg-gray-200 rounded-full overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=200&auto=format&fit=crop" className="w-full h-full object-cover" alt="" />
-                </div>
+const FinanceAppUI = () => (
+    <div className="w-full h-full bg-[#0a0a0a] flex flex-col font-sans text-white overflow-hidden">
+        <div className="p-6 pt-12 flex justify-between items-center z-20 bg-[#0a0a0a]">
+            <div>
+                <p className="text-[10px] text-gray-500 font-black uppercase tracking-[.2em]">Total Balance</p>
+                <h3 className="text-3xl font-black mt-1">$42,560.00</h3>
             </div>
-            <div className="bg-[#05A4A7] rounded-2xl p-4 text-white shadow-lg shadow-teal-200">
-                <div className="flex justify-between items-start mb-2">
-                    <p className="text-xs font-medium opacity-80">Next Appointment</p>
-                    <span className="material-symbols-outlined text-white">more_horiz</span>
-                </div>
-                <h3 className="font-bold text-lg mb-1">Dr. Michael Smith</h3>
-                <p className="text-sm opacity-90 mb-3">Cardiologist • City Hospital</p>
-                <div className="flex gap-4">
-                    <div className="bg-white/20 px-3 py-1 rounded-lg text-xs font-medium flex items-center gap-1"><span className="material-symbols-outlined text-xs">event</span> Mon, 12 Oct</div>
-                    <div className="bg-white/20 px-3 py-1 rounded-lg text-xs font-medium flex items-center gap-1"><span className="material-symbols-outlined text-xs">schedule</span> 09:30 AM</div>
+            <div className="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center border border-white/10">
+                <span className="material-symbols-outlined text-sm">notifications</span>
+            </div>
+        </div>
+        <div className="flex-1 overflow-hidden px-6 pb-20">
+            <div className="animate-scroll-vertical">
+                <div className="py-6 space-y-6">
+                    <div className="flex gap-4 overflow-x-auto no-scrollbar">
+                        <div className="min-w-[70%] aspect-[1.6/1] bg-gradient-to-br from-indigo-600 to-purple-700 rounded-[2.5rem] p-6 flex flex-col justify-between shadow-2xl relative overflow-hidden group">
+                            <div className="relative z-10 flex justify-between items-start">
+                                <span className="material-symbols-outlined text-3xl">contactless</span>
+                                <span className="font-black italic text-xl">VISA</span>
+                            </div>
+                            <div className="relative z-10">
+                                <p className="text-xs font-bold opacity-60">Card Number</p>
+                                <p className="text-lg font-black tracking-widest mt-1">**** **** **** 4290</p>
+                            </div>
+                            <div className="absolute -right-10 -bottom-10 w-40 h-40 bg-white/10 rounded-full group-hover:scale-125 transition-transform"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div className="p-6 flex-1 overflow-y-auto">
-            <h3 className="font-bold text-gray-800 mb-4">Categories</h3>
-            <div className="grid grid-cols-3 gap-y-6 gap-x-4 mb-8">
-                {['Doctor', 'Medicine', 'Reports', 'Hospital', 'Ambulance', 'More'].map((item, i) => (
-                    <div key={i} className="flex flex-col items-center gap-2">
-                        <div className={`w-14 h-14 rounded-2xl flex items-center justify-center shadow-sm ${i === 0 ? 'bg-blue-100 text-blue-600' : i === 1 ? 'bg-red-100 text-red-600' : 'bg-white text-gray-500'}`}>
-                            <span className="material-symbols-outlined">{item === 'Doctor' ? 'stethoscope' : item === 'Medicine' ? 'pill' : item === 'Reports' ? 'description' : item === 'Hospital' ? 'local_hospital' : item === 'Ambulance' ? 'ambulance' : 'grid_view'}</span>
-                        </div>
-                        <p className="text-xs font-bold text-gray-600">{item}</p>
-                    </div>
-                ))}
-            </div>
+    </div>
+);
 
-            <div className="flex justify-between items-center mb-4">
-                <h3 className="font-bold text-gray-800">Top Doctors</h3>
-                <span className="text-xs text-[#05A4A7] font-bold">See All</span>
+const AIAppUI = () => (
+    <div className="w-full h-full bg-[#050505] flex flex-col font-sans text-white overflow-hidden p-6 pt-12">
+        <div className="flex flex-col items-center justify-center flex-1 space-y-8">
+            <div className="relative group">
+                <div className="absolute inset-0 bg-primary/20 rounded-full blur-[50px] animate-pulse"></div>
+                <div className="w-32 h-32 rounded-full border border-primary/30 flex items-center justify-center relative bg-black z-10 transition-transform duration-500 group-hover:scale-110">
+                    <span className="material-symbols-outlined text-5xl text-primary animate-bounce">mic</span>
+                </div>
             </div>
-            <div className="h-[400px] overflow-hidden relative">
-                <div className="animate-scroll-vertical flex flex-col gap-4">
-                    {[1, 2, 3, 4, 1, 2, 3, 4].map((i, idx) => ( // Duplicated
-                        <div key={idx} className="flex gap-4 p-3 bg-white rounded-xl shadow-sm border border-gray-100 shrink-0">
-                            <div className="w-16 h-16 rounded-lg bg-gray-200 overflow-hidden">
-                                <img src={`https://randomuser.me/api/portraits/med/men/${i + 10}.jpg`} className="w-full h-full object-cover" alt="" />
-                            </div>
-                            <div>
-                                <h4 className="font-bold text-gray-800 text-sm">Dr. Robert Fox</h4>
-                                <p className="text-xs text-gray-500 mb-1">Neurologist • St. Mary</p>
-                                <div className="flex items-center gap-1">
-                                    <span className="material-symbols-outlined text-xs text-yellow-400">star</span>
-                                    <span className="text-xs font-bold text-gray-700">4.9</span>
-                                    <span className="text-xs text-gray-400">(120 Reviews)</span>
-                                </div>
-                            </div>
-                        </div>
+            <div className="text-center space-y-2">
+                <h3 className="text-2xl font-black tracking-tight">How can I help you?</h3>
+                <p className="text-xs text-gray-500 font-bold italic">Listening for "Hey Appzeto..."</p>
+            </div>
+            <div className="w-full h-32 overflow-hidden relative">
+                <div className="flex items-center justify-center gap-1 h-full">
+                    {[...Array(20)].map((_, i) => (
+                        <div
+                            key={i}
+                            className="w-1 bg-primary rounded-full animate-pulse"
+                            style={{
+                                height: `${20 + Math.random() * 60}%`,
+                                animationDelay: `${i * 0.1}s`,
+                                opacity: 0.3 + Math.random() * 0.7
+                            }}
+                        ></div>
                     ))}
                 </div>
             </div>
@@ -291,372 +225,243 @@ const HealthAppUI = () => (
     </div>
 );
 
-const CRMAppUI = () => (
-    <div className="w-full h-full bg-[#1e1e2e] flex flex-col font-sans text-white">
-        <div className="p-6 pt-12 flex justify-between items-center">
-            <span className="material-symbols-outlined text-gray-400">menu</span>
-            <span className="font-bold text-lg">Dashboard</span>
-            <span className="material-symbols-outlined text-gray-400">notifications</span>
-        </div>
-        <div className="px-6 pb-6">
-            <div className="bg-gradient-to-br from-indigo-500 to-purple-600 rounded-3xl p-6 shadow-xl relative overflow-hidden">
-                <div className="relative z-10">
-                    <p className="text-white/70 text-sm font-medium">Total Revenue</p>
-                    <h2 className="text-3xl font-black mt-1">$48,294.00</h2>
-                    <div className="flex items-center gap-1 mt-2 text-green-300 text-sm font-bold">
-                        <span className="material-symbols-outlined text-sm">trending_up</span> +12.5%
-                    </div>
-                </div>
-                <div className="absolute right-0 bottom-0 opacity-20"><span className="material-symbols-outlined text-9xl">bar_chart</span></div>
-            </div>
-        </div>
-        <div className="flex-1 bg-white rounded-t-3xl p-6 text-gray-900 overflow-hidden relative">
-            <div className="animate-scroll-vertical">
-                {/* Content Block */}
-                <div className="pb-8">
-                    <h3 className="font-bold text-lg mb-4">Analytics</h3>
-                    <div className="flex items-end justify-between h-32 gap-3 mb-8 px-2 border-b border-gray-100 pb-4">
-                        {[40, 70, 50, 90, 60, 80, 55].map((h, i) => (
-                            <div key={i} className="w-full bg-indigo-500 rounded-t-lg relative group transition-all hover:bg-indigo-600" style={{ height: `${h}%` }}>
-                            </div>
-                        ))}
-                    </div>
-                    <div className="flex flex-col gap-4 mb-6">
-                        <div className="flex items-center gap-4">
-                            <div className="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center text-orange-600 font-bold">A</div>
-                            <div className="flex-1">
-                                <p className="font-bold text-sm">Active Users</p>
-                                <div className="w-full h-2 bg-gray-100 rounded-full mt-1 overflow-hidden">
-                                    <div className="w-[70%] h-full bg-orange-500 rounded-full"></div>
-                                </div>
-                            </div>
-                            <span className="font-bold text-sm">70%</span>
-                        </div>
-                        <div className="flex items-center gap-4">
-                            <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-bold">N</div>
-                            <div className="flex-1">
-                                <p className="font-bold text-sm">New Sales</p>
-                                <div className="w-full h-2 bg-gray-100 rounded-full mt-1 overflow-hidden">
-                                    <div className="w-[45%] h-full bg-blue-500 rounded-full"></div>
-                                </div>
-                            </div>
-                            <span className="font-bold text-sm">45%</span>
-                        </div>
-                    </div>
-
-                    <h3 className="font-bold text-lg mb-4">Recent Transactions</h3>
-                    <div className="flex flex-col gap-3">
-                        {[1, 2, 3, 4, 5].map((i) => (
-                            <div key={i} className="flex justify-between items-center p-3 bg-gray-50 rounded-xl border border-gray-100">
-                                <div className="flex items-center gap-3">
-                                    <div className="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center text-purple-600">
-                                        <span className="material-symbols-outlined text-sm">shopping_cart</span>
-                                    </div>
-                                    <div>
-                                        <p className="font-bold text-gray-800 text-sm">Order #{20230 + i}</p>
-                                        <p className="text-xs text-gray-500">2 min ago</p>
-                                    </div>
-                                </div>
-                                <span className="font-bold text-gray-900 text-sm">+$12{i}.00</span>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-
-                {/* DUPLICATED Content Block */}
-                <div className="pb-8">
-                    <h3 className="font-bold text-lg mb-4">Analytics</h3>
-                    <div className="flex items-end justify-between h-32 gap-3 mb-8 px-2 border-b border-gray-100 pb-4">
-                        {[40, 70, 50, 90, 60, 80, 55].map((h, i) => (
-                            <div key={i} className="w-full bg-indigo-500 rounded-t-lg relative group transition-all hover:bg-indigo-600" style={{ height: `${h}%` }}>
-                            </div>
-                        ))}
-                    </div>
-                    <div className="flex flex-col gap-4 mb-6">
-                        <div className="flex items-center gap-4">
-                            <div className="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center text-orange-600 font-bold">A</div>
-                            <div className="flex-1">
-                                <p className="font-bold text-sm">Active Users</p>
-                                <div className="w-full h-2 bg-gray-100 rounded-full mt-1 overflow-hidden">
-                                    <div className="w-[70%] h-full bg-orange-500 rounded-full"></div>
-                                </div>
-                            </div>
-                            <span className="font-bold text-sm">70%</span>
-                        </div>
-                        <div className="flex items-center gap-4">
-                            <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-bold">N</div>
-                            <div className="flex-1">
-                                <p className="font-bold text-sm">New Sales</p>
-                                <div className="w-full h-2 bg-gray-100 rounded-full mt-1 overflow-hidden">
-                                    <div className="w-[45%] h-full bg-blue-500 rounded-full"></div>
-                                </div>
-                            </div>
-                            <span className="font-bold text-sm">45%</span>
-                        </div>
-                    </div>
-
-                    <h3 className="font-bold text-lg mb-4">Recent Transactions</h3>
-                    <div className="flex flex-col gap-3">
-                        {[1, 2, 3, 4, 5].map((i) => (
-                            <div key={i} className="flex justify-between items-center p-3 bg-gray-50 rounded-xl border border-gray-100">
-                                <div className="flex items-center gap-3">
-                                    <div className="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center text-purple-600">
-                                        <span className="material-symbols-outlined text-sm">shopping_cart</span>
-                                    </div>
-                                    <div>
-                                        <p className="font-bold text-gray-800 text-sm">Order #{20230 + i}</p>
-                                        <p className="text-xs text-gray-500">2 min ago</p>
-                                    </div>
-                                </div>
-                                <span className="font-bold text-gray-900 text-sm">+$12{i}.00</span>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-);
-
-// --- Main Projects Component ---
+// --- Main Components ---
 
 const projects = [
     {
-        title: "Appzeto Taxi",
-        tags: ["Mobile App", "Flutter"],
-        description: "A seamless ride-booking experience featuring real-time driver tracking, secure in-app payments, and an intuitive user interface.",
-        UI: TaxiAppUI
+        title: "Appzeto Go • Logistics Reimagined",
+        description: "A complete mobility solution with real-time tracking, multi-modal transport, and peak-hour load balancing.",
+        tags: ["React Native", "Google Maps SDK", "Node.js"],
+        UI: TaxiAppUI,
+        bgColor: "#00F2FE", // Electric Cyan
+        textColor: "#082F30",
+        btnColor: "#082F30",
+        btnText: "#00F2FE"
     },
     {
-        title: "Appzeto Food",
-        tags: ["React Native", "Redux"],
-        description: "Vibrant food delivery platform connecting users with local culinary favorites, featuring live order status and smart recommendations.",
-        UI: FoodAppUI
+        title: "Appzeto Food • Next-Gen Gastronomy",
+        description: "Intelligent food discovery app using predictive analytics to suggest meals based on dietary habits and history.",
+        tags: ["Flutter", "TensorFlow", "PostgreSQL"],
+        UI: FoodAppUI,
+        bgColor: "#FF0844", // Vivid Rose
+        textColor: "#300811",
+        btnColor: "#300811",
+        btnText: "#FF0844"
     },
     {
-        title: "Appzeto Shop",
-        tags: ["Next.js", "Stripe"],
-        description: "A highly scalable e-commerce dashboard designed for high-volume sales, inventory management, and customer analytics.",
-        UI: ShopAppUI
+        title: "Appzeto Learn • Personalized Education",
+        description: "Gamified learning platform with AI tutors and dynamic curriculum adjustment for every student.",
+        tags: ["Next.js", "Python AI", "AWS Lambda"],
+        UI: EdTechUI,
+        bgColor: "#7028FF", // Deep Violet
+        textColor: "#FFFFFF",
+        btnColor: "#FFFFFF",
+        btnText: "#7028FF"
     },
     {
-        title: "Appzeto Health",
-        tags: ["Angular", "HIPAA Compliant"],
-        description: "Comprehensive patient management system streamlining appointments, records, and telemedicine consultations securely.",
-        UI: HealthAppUI
+        title: "Appzeto Pay • Unified Digital Assets",
+        description: "Ultra-secure wealth management app with biometric multi-sig, instant FX, and portfolio tracking.",
+        tags: ["Swift", "Cardano", "Rust"],
+        UI: FinanceAppUI,
+        bgColor: "#FF7F00", // Vibrant Orange
+        textColor: "#3D1F00",
+        btnColor: "#3D1F00",
+        btnText: "#FF7F00"
     },
     {
-        title: "Appzeto CRM",
-        tags: ["Vue.js", "Analytics"],
-        description: "Powerful customer relationship management tool with advanced data visualization and predictive sales analytics.",
-        UI: CRMAppUI
+        title: "Appzeto Voice • Intelligent Assistant",
+        description: "Voice-first AI that integrates with your entire workspace to automate repetitive tasks via natural language.",
+        tags: ["PyTorch", "gRPC", "Edge Computing"],
+        UI: AIAppUI,
+        bgColor: "#F9D423", // Sun Yellow
+        textColor: "#302800",
+        btnColor: "#302800",
+        btnText: "#F9D423"
     }
 ];
 
 const Projects = () => {
     const [activeProject, setActiveProject] = useState(0);
     const containerRef = useRef(null);
-    const isScrolling = useRef(false);
 
     useEffect(() => {
-        const handleWheel = (e) => {
-            if (isScrolling.current) return;
+        const ctx = gsap.context(() => {
+            ScrollTrigger.create({
+                trigger: containerRef.current,
+                start: "top top",
+                end: `+=${projects.length * 80}%`, // Reduced scroll distance for faster feel
+                pin: true,
+                scrub: 0.5, // Faster catch-up for smoother feel
+                onUpdate: (self) => {
+                    const progress = self.progress;
+                    const totalProjects = projects.length;
+                    let newIndex = Math.floor(progress * totalProjects);
+                    if (newIndex >= totalProjects) newIndex = totalProjects - 1;
 
-            // Check if we are inside the section visually
-            const rect = containerRef.current.getBoundingClientRect();
-
-            // "Screen puri aa jaaye": Check if section is fully visible
-            // If top is positive but small (e.g., 0 to 50px), it means we are JUST arriving. 
-            // If top is negative, we have scrolled past it.
-
-            // 1. DOCKING LOGIC: If we are close to alignment, snap to it first.
-            const isAlmostAligned = Math.abs(rect.top) < 30; // Within 30px of top
-            const isFullyVisible = rect.top >= -5 && rect.bottom <= window.innerHeight + 5;
-
-            // If we are scrolling DOWN and section is visible but not perfectly docked yet?
-            // Actually, natural scroll handles arrival. We need to TRAP when it arrives.
-
-            if (!isAlmostAligned) return; // Allow natural scroll until we hit the header
-
-            // Logic to move between projects - STANDARD DIRECTION
-            if (e.deltaY > 0) {
-                // Scrolling DOWN
-                if (activeProject < projects.length - 1) {
-                    // We have slides left. LOCK THE SCREEN.
-                    e.preventDefault();
-
-                    // Force precise alignment if not already 0 to ensure "Sticky" feel
-                    if (Math.abs(rect.top) > 2) {
-                        window.scrollTo({
-                            top: window.scrollY + rect.top,
-                            behavior: 'instant'
-                        });
+                    if (newIndex !== activeProject) {
+                        setActiveProject(newIndex);
                     }
+                },
+            });
+        });
 
-                    if (!isScrolling.current) {
-                        isScrolling.current = true;
-                        setActiveProject(prev => prev + 1);
-                        setTimeout(() => isScrolling.current = false, 700);
-                    }
-                }
-                // Else: User is at Last Project -> Release Lock (Allow default scroll)
-            } else {
-                // Scrolling UP
-                if (activeProject > 0) {
-                    // We have slides before. LOCK THE SCREEN.
-                    e.preventDefault();
-
-                    // Force precise alignment
-                    if (Math.abs(rect.top) > 2) {
-                        window.scrollTo({
-                            top: window.scrollY + rect.top,
-                            behavior: 'instant'
-                        });
-                    }
-
-                    if (!isScrolling.current) {
-                        isScrolling.current = true;
-                        setActiveProject(prev => prev - 1);
-                        setTimeout(() => isScrolling.current = false, 700);
-                    }
-                }
-                // Else: User is at First Project -> Release Lock (Allow default scroll UP)
-            }
-        };
-
-        const container = containerRef.current;
-        if (container) {
-            container.addEventListener('wheel', handleWheel, { passive: false });
-        }
         return () => {
-            if (container) {
-                container.removeEventListener('wheel', handleWheel);
-            }
+            ctx.revert();
+            ScrollTrigger.getAll().forEach(t => t.kill());
         };
-    }, [activeProject]);
+    }, []);
 
     return (
-        <div className="bg-[#012829] dark:bg-background-dark text-white font-display overflow-x-hidden antialiased">
+        <motion.div
+            ref={containerRef}
+            animate={{ backgroundColor: projects[activeProject].bgColor }}
+            transition={{ duration: 0.8, ease: "easeInOut" }}
+            className="w-full font-display overflow-hidden antialiased"
+        >
 
-            {/* Full Screen Section: Exactly 100vh Height */}
-            <div ref={containerRef} className="relative w-full h-screen flex flex-col items-center justify-center overflow-hidden">
+            {/* The actual visible content section */}
+            <div className="relative w-full h-screen flex flex-col items-center justify-center">
 
-                {/* Increased Gap: gap-12 lg:gap-24 for separation */}
-                {/* Increased Gap: gap-12 lg:gap-24 for separation */}
-                <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-16 h-full py-4">
+                <div className="w-full max-w-7xl mx-auto px-6 sm:px-8 flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-20 h-full py-4 relative z-10">
 
-                    {/* Left: Text Content - Vertically Centered */}
-                    <div className="w-full lg:w-1/2 flex flex-col justify-center h-full gap-6 order-2 lg:order-1 relative z-20 items-start text-left">
+                    {/* Left: Text Content */}
+                    <div className="w-full lg:w-1/2 flex flex-col justify-center h-full gap-8 order-2 lg:order-1 relative z-20 items-start text-left">
                         {/* Static Header Label */}
-                        <div className="mb-4">
-                            <h1 className="text-4xl md:text-5xl font-black tracking-tight text-white uppercase">
-                                Featured Projects
-                            </h1>
+                        <div className="mb-2">
+                            <motion.h1
+                                animate={{ color: projects[activeProject].textColor }}
+                                className="text-sm md:text-base font-black tracking-[0.3em] uppercase opacity-60"
+                            >
+                                Case Studies
+                            </motion.h1>
                         </div>
 
-                        {/* Dynamic Content with Staggered Animation */}
-                        <div key={activeProject} className="flex flex-col gap-6 items-start">
-                            {/* Tags: Slide In from LEFT */}
-                            <div className="flex flex-wrap gap-2 opacity-0 animate-slide-in-left justify-start" style={{ animationDelay: '0ms' }}>
-                                {projects[activeProject].tags.map((tag, i) => (
-                                    <span key={i} className="px-4 py-1.5 bg-primary/10 rounded-full text-primary text-sm md:text-base font-bold border border-primary/20">
-                                        {tag}
-                                    </span>
-                                ))}
-                            </div>
+                        {/* Dynamic Content */}
+                        <div className="relative w-full min-h-[350px] flex items-center">
+                            <AnimatePresence mode="wait">
+                                <motion.div
+                                    key={activeProject}
+                                    initial={{ opacity: 0, y: 30 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    exit={{ opacity: 0, y: -30 }}
+                                    transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                                    className="flex flex-col gap-6 items-start absolute inset-0 py-4"
+                                >
+                                    {/* Tags */}
+                                    <div className="flex flex-wrap gap-2 justify-start">
+                                        {projects[activeProject].tags.map((tag, i) => (
+                                            <span key={i} className="px-3 py-1 bg-black/5 rounded-full text-black/60 text-xs md:text-sm font-bold border border-black/10">
+                                                {tag}
+                                            </span>
+                                        ))}
+                                    </div>
 
-                            {/* Title: Slide In from RIGHT + Color Fill Effect */}
-                            {/* We use bg-gradient-to-r from-white to-white (solid fill) but start with width 0 and animate text-fill */}
-                            <h2 className="text-xl md:text-3xl font-bold text-primary leading-tight tracking-tight opacity-0 animate-slide-in-right"
-                                style={{
-                                    animationDelay: '100ms',
-                                    animationFillMode: 'forwards'
-                                }}>
-                                {projects[activeProject].title}
-                            </h2>
+                                    {/* Title */}
+                                    <motion.h2
+                                        animate={{ color: projects[activeProject].textColor }}
+                                        className="text-3xl md:text-5xl lg:text-6xl font-black leading-[1.1] tracking-tighter"
+                                    >
+                                        {projects[activeProject].title.split(' • ')[0]}<br />
+                                        <span className="opacity-70">{projects[activeProject].title.split(' • ')[1]}</span>
+                                    </motion.h2>
 
-                            {/* Description: Slide In from LEFT (as requested "jo paragraph hai wh left se aaye") */}
-                            <p className="text-2xl md:text-3xl text-gray-300 leading-relaxed max-w-2xl font-light opacity-0 animate-slide-in-left text-left" style={{ animationDelay: '200ms' }}>
-                                {projects[activeProject].description}
-                            </p>
+                                    {/* Description */}
+                                    <motion.p
+                                        animate={{ color: projects[activeProject].textColor }}
+                                        className="text-base md:text-lg opacity-80 leading-relaxed max-w-xl font-medium text-left"
+                                    >
+                                        {projects[activeProject].description}
+                                    </motion.p>
 
-                            <div className="opacity-0 animate-fade-in-up" style={{ animationDelay: '300ms' }}>
-                                <button className="flex items-center gap-3 px-8 py-4 bg-[#F1FC88] text-gray-900 rounded-xl font-bold text-lg hover:bg-[#EAF576] transform hover:-translate-y-1 transition-all duration-300 group w-fit shadow-lg shadow-[#F0FF35]/20 mt-4">
-                                    View Case Study
-                                    <span className="material-symbols-outlined text-2xl transition-transform group-hover:translate-x-1">arrow_forward</span>
-                                </button>
-                            </div>
+                                    <div className="pt-6">
+                                        <motion.button
+                                            animate={{
+                                                backgroundColor: projects[activeProject].btnColor,
+                                                color: projects[activeProject].btnText
+                                            }}
+                                            className="flex items-center gap-3 px-10 py-4 rounded-full font-black text-lg hover:scale-105 transform transition-all duration-300 group shadow-2xl"
+                                        >
+                                            Checkout Case Study
+                                            <span className="material-symbols-outlined text-2xl transition-transform group-hover:translate-x-1">north_east</span>
+                                        </motion.button>
+                                    </div>
+                                </motion.div>
+                            </AnimatePresence>
                         </div>
 
-                        {/* Progress Indicators - Height and Width Adjusted for better visibility */}
-                        <div className="flex gap-3 mt-8">
+                        {/* Progress Indicators */}
+                        <div className="flex items-center gap-4 mt-12 relative z-30">
                             {projects.map((_, idx) => (
-                                <button
+                                <motion.button
                                     key={idx}
-                                    onClick={() => setActiveProject(idx)}
-                                    // Height increased to h-4 (approx 16px) for visibility
-                                    // Default width increased slightly to w-6
-                                    className={`h-4 rounded-full transition-all duration-500 ease-out cursor-pointer hover:bg-primary/50 ${idx === activeProject ? 'w-24 bg-primary shadow-[0_0_15px_#05A4A7]' : 'w-6 bg-gray-700/50'}`}
+                                    animate={{ backgroundColor: idx === activeProject ? projects[activeProject].textColor : projects[activeProject].textColor + '20' }}
+                                    className={`h-1.5 rounded-full transition-all duration-500 ease-out ${idx === activeProject ? 'w-12' : 'w-2'}`}
                                 />
                             ))}
                         </div>
                     </div>
 
-                    {/* Right: Sticky Phone - Maximized Height within Viewport */}
-                    {/* Centered Alignment: justify-center instead of justify-end */}
+                    {/* Right: Phone Display */}
                     <div className="w-full lg:w-1/2 flex justify-center items-center h-full order-1 lg:order-2 py-[2vh] lg:py-[5vh]">
-                        {/* Phone Dimensions preserved, position slightly adjusted by flex */}
-                        {/* ANIMATED PHONE CONTAINER: Added key and animation class */}
-                        {/* Added stopPropagation to allow scrolling INSIDE the phone without switching projects */}
-                        <div
-                            key={activeProject}
-                            onWheel={(e) => e.stopPropagation()}
-                            className="relative h-[85vh] w-auto aspect-[1/2] max-h-[900px] border-[1vh] border-gray-900 rounded-[4vh] overflow-hidden bg-black shadow-2xl ring-1 ring-white/10 z-10 transform transition-transform duration-500 animate-slide-in-right"
-                        >
+                        <div className="relative h-[75vh] w-auto aspect-[1/2] max-h-[800px] border-[10px] border-[#111] rounded-[3rem] overflow-hidden bg-black shadow-[0_50px_100px_-20px_rgba(0,0,0,0.3)] ring-1 ring-white/10 z-10 transition-transform duration-1000">
+
                             {/* Phone Notch */}
-                            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[25%] h-[3.5%] bg-black rounded-b-[2vh] z-40 flex items-center justify-center gap-2">
-                                <div className="w-[40%] h-[20%] bg-gray-900/50 rounded-full"></div>
-                            </div>
+                            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[30%] h-[4%] bg-[#111] rounded-b-[1.5rem] z-40"></div>
 
-                            {/* Inner Screen */}
-                            <div className="relative w-full h-full bg-[#10221f]">
-                                {projects.map((project, index) => {
-                                    const UIComponent = project.UI;
-                                    // Only render the active project to avoid stacking and let parent animation handle entry
-                                    if (activeProject !== index) return null;
-
-                                    return (
-                                        <div
-                                            key={index}
-                                            className="absolute inset-0 w-full h-full"
-                                        >
-                                            {/* STATUS BAR MOCK */}
-                                            <div className="absolute top-0 w-full px-[5%] py-[3%] flex justify-between items-center z-50 text-[1.2vh] font-bold pointer-events-none mix-blend-difference text-white">
-                                                <span>9:41</span>
-                                                <div className="flex gap-1">
-                                                    <span className="material-symbols-outlined text-[1.4vh]">signal_cellular_alt</span>
-                                                    <span className="material-symbols-outlined text-[1.4vh]">wifi</span>
-                                                    <span className="material-symbols-outlined text-[1.4vh]">battery_full</span>
-                                                </div>
+                            {/* Inner Screen Content */}
+                            <div className="relative w-full h-full bg-[#f8fafc]">
+                                <AnimatePresence mode="wait">
+                                    <motion.div
+                                        key={activeProject}
+                                        initial={{ opacity: 0, scale: 0.98 }}
+                                        animate={{ opacity: 1, scale: 1 }}
+                                        exit={{ opacity: 0, scale: 1.02 }}
+                                        transition={{ duration: 0.6, ease: "circOut" }}
+                                        className="absolute inset-0 w-full h-full"
+                                    >
+                                        {/* Status Bar */}
+                                        <div className="absolute top-0 w-full px-[8%] py-[4%] flex justify-between items-center z-50 text-[10px] font-bold pointer-events-none mix-blend-difference text-white">
+                                            <span>9:41</span>
+                                            <div className="flex gap-1.5">
+                                                <span className="material-symbols-outlined text-[12px]">signal_cellular_alt</span>
+                                                <span className="material-symbols-outlined text-[12px]">wifi</span>
+                                                <span className="material-symbols-outlined text-[12px]">battery_full</span>
                                             </div>
-
-                                            <UIComponent />
-
                                         </div>
-                                    );
-                                })}
+
+                                        {/* Dynamic UI Component */}
+                                        {React.createElement(projects[activeProject].UI)}
+
+                                    </motion.div>
+                                </AnimatePresence>
                             </div>
                         </div>
 
                         {/* Decorative Background Elements */}
-                        <div className="absolute top-1/2 right-0 w-[90vh] h-[90vh] bg-primary/10 rounded-full blur-[100px] -translate-y-1/2 pointer-events-none z-0 mix-blend-screen"></div>
+                        <div className="absolute top-1/2 right-1/4 w-[60vh] h-[60vh] bg-white/20 rounded-full blur-[120px] -translate-y-1/2 pointer-events-none z-0 mix-blend-overlay animate-pulse"></div>
                     </div>
-
                 </div>
 
+                {/* Vertical Step Numbers - Refined Color */}
+                <div className="absolute right-12 bottom-12 hidden xl:flex flex-col items-end gap-1 z-0">
+                    {projects.map((_, idx) => (
+                        <div key={idx} className="flex items-center gap-4">
+                            <motion.span
+                                animate={{ color: projects[activeProject].textColor }}
+                                className={`text-xs font-black tracking-widest transition-all duration-500 ${idx === activeProject ? 'opacity-100' : 'opacity-10'}`}
+                            >
+                                0{idx + 1}
+                            </motion.span>
+                            <motion.div
+                                animate={{ backgroundColor: projects[activeProject].textColor }}
+                                className={`h-[1px] transition-all duration-500 ${idx === activeProject ? 'w-8 opacity-100' : 'w-4 opacity-10'}`}
+                            ></motion.div>
+                        </div>
+                    ))}
+                </div>
             </div>
 
-        </div>
+        </motion.div>
     );
 };
 
