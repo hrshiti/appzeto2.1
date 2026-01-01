@@ -1,18 +1,39 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 
 const Reviews = () => {
+    const slideUp = {
+        initial: { opacity: 0, y: 50 },
+        whileInView: { opacity: 1, y: 0 },
+        viewport: { once: false, amount: 0.05 },
+        transition: { duration: 1, ease: [0.22, 1, 0.36, 1] }
+    };
+
+    const slideUpDelayed = (delay) => ({
+        ...slideUp,
+        transition: { ...slideUp.transition, delay }
+    });
+
     return (
         <section className="bg-[#cdbdae] py-24 font-serif overflow-hidden">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="text-center mb-12">
+                <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: false }}
+                    className="text-center mb-12"
+                >
                     <p className="text-white/80 font-medium tracking-widest uppercase mb-2">Testimonials</p>
                     <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">What Our Clients Say</h2>
-                </div>
+                </motion.div>
 
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-6 auto-rows-min">
 
-                    {/* 1. Victoria Linton (Top Left) */}
-                    <div className="md:col-span-4 bg-white rounded-[2rem] p-6 relative shadow-lg">
+                    {/* 1. Victoria Linton (Left) */}
+                    <motion.div
+                        {...slideUpDelayed(0.1)}
+                        className="md:col-span-4 bg-white rounded-[2rem] p-6 relative shadow-lg"
+                    >
                         <div className="flex items-center space-x-4 mb-3">
                             <img
                                 src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80"
@@ -30,10 +51,13 @@ const Reviews = () => {
                             Praesent urna neque viverra justo ultrices dui. Est lorem ipsum dolor sit amet consectetur adipiscing. Vitae nunc sed velit dignissim. In hendrerit gravida.
                         </p>
                         <span className="absolute top-4 right-6 text-gray-300 text-5xl font-serif">”</span>
-                    </div>
+                    </motion.div>
 
-                    {/* 2. Center Large Card (Middle - Spans tall) */}
-                    <div className="md:col-span-4 md:row-span-2 bg-white rounded-[2.5rem] p-8 text-center flex flex-col items-center justify-center shadow-xl relative mt-8 md:mt-0">
+                    {/* 2. Center Large Card (Center) */}
+                    <motion.div
+                        {...slideUp}
+                        className="md:col-span-4 md:row-span-2 bg-white rounded-[2.5rem] p-8 text-center flex flex-col items-center justify-center shadow-xl relative mt-8 md:mt-0"
+                    >
                         <div className="absolute -top-10">
                             <div className="w-20 h-20 rounded-full p-1 bg-[#cdbdae]">
                                 <img
@@ -51,10 +75,13 @@ const Reviews = () => {
                             "A scelerisque purus semper eget duis at tellus. Amet cursus sit amet dictum sit justo. Varius sit amet."
                         </p>
                         <div className="font-handwriting text-3xl text-gray-400 rotate-[-5deg]">Fanny Dean</div>
-                    </div>
+                    </motion.div>
 
-                    {/* 3. Client Review (Top Right) */}
-                    <div className="md:col-span-4 bg-white rounded-3xl p-6 shadow-lg">
+                    {/* 3. Client Review (Right) */}
+                    <motion.div
+                        {...slideUpDelayed(0.15)}
+                        className="md:col-span-4 bg-white rounded-3xl p-6 shadow-lg"
+                    >
                         <div className="flex justify-between items-start mb-2">
                             <h3 className="font-bold text-gray-900 font-serif">Client Review</h3>
                             <span className="text-xs text-gray-400">@ArtfulWootton</span>
@@ -70,10 +97,13 @@ const Reviews = () => {
                                 <span>↗</span>
                             </div>
                         </div>
-                    </div>
+                    </motion.div>
 
-                    {/* 4. Dimitri Woodhouse (Middle Left - Wide) */}
-                    <div className="md:col-span-4 bg-white rounded-full p-2 pr-8 shadow-lg flex items-center mt-4">
+                    {/* 4. Dimitri Woodhouse (Left) */}
+                    <motion.div
+                        {...slideUpDelayed(0.2)}
+                        className="md:col-span-4 bg-white rounded-full p-2 pr-8 shadow-lg flex items-center mt-4"
+                    >
                         <div className="flex-1 pl-8 py-2">
                             <p className="text-gray-500 text-xs italic mb-1">
                                 "Mauris in aliquam se fringilla morbi tincidunt augue amet dui massa"
@@ -93,12 +123,13 @@ const Reviews = () => {
                             alt="Dmitri"
                             className="w-16 h-16 rounded-full object-cover border-4 border-[#cdbdae]"
                         />
-                    </div>
+                    </motion.div>
 
-
-
-                    {/* 5. Nelly Vane (Middle Right - Pill) */}
-                    <div className="md:col-span-4 bg-white rounded-full p-2 pl-2 shadow-lg flex items-center relative mt-4">
+                    {/* 5. Nelly Vane (Right) */}
+                    <motion.div
+                        {...slideUpDelayed(0.25)}
+                        className="md:col-span-4 bg-white rounded-full p-2 pl-2 shadow-lg flex items-center relative mt-4"
+                    >
                         <img
                             src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80"
                             alt="Nelly"
@@ -116,10 +147,13 @@ const Reviews = () => {
                         <div className="absolute -top-2 -right-2 bg-[#9D8F8F] w-10 h-10 rounded-full flex items-center justify-center text-white border-4 border-[#cdbdae]">
                             <span className="material-icons text-sm">thumb_up</span>
                         </div>
-                    </div>
+                    </motion.div>
 
-                    {/* 6. Top-notch (Bottom Left) */}
-                    <div className="md:col-span-3 bg-white rounded-3xl p-6 shadow-lg flex flex-col justify-between mt-4">
+                    {/* 6. Top-notch (Left) */}
+                    <motion.div
+                        {...slideUpDelayed(0.3)}
+                        className="md:col-span-3 bg-white rounded-3xl p-6 shadow-lg flex flex-col justify-between mt-4"
+                    >
                         <div className="text-center">
                             <h3 className="font-serif font-bold text-xl text-gray-900 mb-2">Top-notch!</h3>
                             <p className="text-gray-500 text-xs mb-4">
@@ -140,10 +174,13 @@ const Reviews = () => {
                                 <div className="text-[10px] text-gray-400">@yoursocialmedia</div>
                             </div>
                         </div>
-                    </div>
+                    </motion.div>
 
-                    {/* 7. Testimonial (Bottom Center-Left) */}
-                    <div className="md:col-span-3 bg-white rounded-3xl p-6 shadow-lg flex flex-col relative mt-4">
+                    {/* 7. Testimonial (Center-Left) */}
+                    <motion.div
+                        {...slideUpDelayed(0.35)}
+                        className="md:col-span-3 bg-white rounded-3xl p-6 shadow-lg flex flex-col relative mt-4"
+                    >
                         <div className="flex items-start space-x-3 mb-4">
                             <div className="bg-[#cdbdae] p-1 rounded-full">
                                 <img
@@ -163,13 +200,14 @@ const Reviews = () => {
                             <span className="text-gray-400 font-bold text-xs">@CatherineDoe</span>
                             <div className="flex justify-end text-[#cdbdae] text-lg mt-1">★★★★★</div>
                         </div>
-                        {/* Speech bubble tail mockup */}
                         <div className="absolute -bottom-2 left-8 w-6 h-6 bg-white transform rotate-45"></div>
-                    </div>
+                    </motion.div>
 
-
-                    {/* 8. Recommended (Bottom Center-Right) */}
-                    <div className="md:col-span-3 bg-white rounded-3xl p-4 shadow-lg text-center mt-4">
+                    {/* 8. Recommended (Center-Right) */}
+                    <motion.div
+                        {...slideUpDelayed(0.4)}
+                        className="md:col-span-3 bg-white rounded-3xl p-4 shadow-lg text-center mt-4"
+                    >
                         <div className="relative mb-3">
                             <img
                                 src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80"
@@ -185,10 +223,13 @@ const Reviews = () => {
                             {'★★★★★'.split('').map((c, i) => <span key={i}>{c}</span>)}
                         </div>
                         <p className="text-[10px] text-gray-400 italic">"Habitant morbi tristique et netus blandit molestie."</p>
-                    </div>
+                    </motion.div>
 
-                    {/* 9. Bubble Quote (Bottom Right) */}
-                    <div className="md:col-span-3 flex flex-col justify-end mt-4">
+                    {/* 9. Bubble Quote (Right) */}
+                    <motion.div
+                        {...slideUpDelayed(0.45)}
+                        className="md:col-span-3 flex flex-col justify-end mt-4"
+                    >
                         <div className="bg-white p-6 rounded-t-3xl rounded-br-3xl rounded-bl-none shadow-lg relative mb-4">
                             <p className="text-xs text-gray-500 italic">
                                 "Vestibulum mattis enim aulit tortor se ullamcorper morbi pretium"
@@ -204,11 +245,10 @@ const Reviews = () => {
                                 className="w-10 h-10 rounded-full border-2 border-white shadow-md relative z-10"
                             />
                         </div>
-                    </div>
+                    </motion.div>
 
                 </div>
             </div>
-            {/* Handwriting font injection */}
             <style>{`
                 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
                 .font-serif { font-family: 'Playfair Display', serif; }

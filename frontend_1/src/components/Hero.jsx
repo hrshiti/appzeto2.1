@@ -1,7 +1,6 @@
 import React from 'react';
-import logo from '../assets/logo.png';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
-
+import { motion } from 'framer-motion';
 import Navbar from './Navbar';
 
 const Hero = () => {
@@ -13,7 +12,13 @@ const Hero = () => {
                 <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 bg-secondary/20 rounded-full blur-3xl dark:bg-secondary/10"></div>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-2 pb-10 lg:pt-6 lg:pb-20 w-full relative z-10">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-                        <div className="space-y-8 animate-fade-in-up">
+                        <motion.div
+                            initial={{ x: -70, opacity: 0 }}
+                            whileInView={{ x: 0, opacity: 1 }}
+                            viewport={{ once: false, amount: 0.2 }}
+                            transition={{ duration: 1.8, ease: [0.22, 1, 0.36, 1] }}
+                            className="space-y-8"
+                        >
                             <div className="inline-flex items-center space-x-2 bg-teal-50 dark:bg-teal-900/30 border border-teal-100 dark:border-teal-800 rounded-full px-4 py-1.5">
                                 <span className="flex h-2 w-2 relative">
                                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
@@ -21,6 +26,7 @@ const Hero = () => {
                                 </span>
                                 <span className="text-sm font-semibold text-primary tracking-wide uppercase">Reflect Technology</span>
                             </div>
+
                             <h1 className="text-5xl lg:text-6xl font-display font-extrabold text-gray-900 dark:text-white leading-tight">
                                 Building the <span className="text-primary relative inline-block">
                                     Future
@@ -29,9 +35,11 @@ const Hero = () => {
                                     </svg>
                                 </span> of Digital Innovation
                             </h1>
+
                             <p className="text-lg lg:text-xl text-gray-600 dark:text-gray-300 max-w-lg leading-relaxed">
                                 We transform businesses with cutting-edge <span className="font-semibold text-gray-800 dark:text-gray-100">Web Development</span>, immersive <span className="font-semibold text-gray-800 dark:text-gray-100">Mobile Apps</span>, and intelligent <span className="font-semibold text-gray-800 dark:text-gray-100">AI &amp; ML</span> solutions.
                             </p>
+
                             <div className="flex flex-col sm:flex-row gap-4 pt-4">
                                 <a className="inline-flex justify-center items-center px-8 py-4 bg-[#F1FC88] text-gray-900 font-bold rounded-xl shadow-lg shadow-[#F0FF35]/20 hover:bg-[#EAF576] transform hover:-translate-y-1 transition-all duration-300 text-lg group" href="#">
                                     Explore Services
@@ -42,6 +50,7 @@ const Hero = () => {
                                     Watch Demo
                                 </a>
                             </div>
+
                             <div className="pt-8 flex items-center space-x-6 text-gray-500 dark:text-gray-400 text-sm font-medium">
                                 <div className="flex items-center">
                                     <span className="material-icons text-primary mr-2 text-lg">verified</span>
@@ -52,7 +61,7 @@ const Hero = () => {
                                     Agile Delivery
                                 </div>
                             </div>
-                        </div>
+                        </motion.div>
                         <div className="relative lg:h-full flex items-center justify-center">
                             <div className="relative w-full aspect-square max-w-2xl mx-auto flex items-center justify-center transform scale-125">
                                 <DotLottieReact
@@ -69,7 +78,7 @@ const Hero = () => {
                     <span className="material-icons text-gray-400 dark:text-gray-600">keyboard_arrow_down</span>
                 </div>
             </main>
-            <section className="border-t border-gray-200 dark:border-gray-800 bg-primary/5 dark:bg-primary/10 overflow-hidden py-2">
+            <section className="border-y border-gray-200 dark:border-gray-800 bg-primary/5 dark:bg-primary/10 overflow-hidden py-4">
                 <div className="flex animate-scroll whitespace-nowrap group">
                     {[
                         { icon: 'web', label: 'Web Dev' },
@@ -82,11 +91,11 @@ const Hero = () => {
                         { icon: 'settings', label: 'DevOps' },
                         { icon: 'link', label: 'Blockchain' },
                     ].map((item, index) => (
-                        <div key={index} className="flex items-center space-x-2 mx-6 cursor-pointer hover:scale-105 transition-transform">
-                            <div className="p-1.5 bg-gray-100 dark:bg-gray-800 rounded-lg">
-                                <span className="material-icons text-gray-500 dark:text-gray-400 text-base">{item.icon}</span>
+                        <div key={index} className="flex items-center space-x-3 mx-8 cursor-pointer hover:scale-110 transition-transform">
+                            <div className="p-2.5 bg-gray-100 dark:bg-gray-800 rounded-xl">
+                                <span className="material-icons text-gray-500 dark:text-gray-400 text-lg">{item.icon}</span>
                             </div>
-                            <span className="font-semibold text-sm text-gray-700 dark:text-gray-300">{item.label}</span>
+                            <span className="font-bold text-base text-gray-700 dark:text-gray-300">{item.label}</span>
                         </div>
                     ))}
                     {[
@@ -100,11 +109,11 @@ const Hero = () => {
                         { icon: 'settings', label: 'DevOps' },
                         { icon: 'link', label: 'Blockchain' },
                     ].map((item, index) => (
-                        <div key={`duplicate-${index}`} className="flex items-center space-x-2 mx-6 cursor-pointer hover:scale-105 transition-transform">
-                            <div className="p-1.5 bg-gray-100 dark:bg-gray-800 rounded-lg">
-                                <span className="material-icons text-gray-500 dark:text-gray-400 text-base">{item.icon}</span>
+                        <div key={`duplicate-${index}`} className="flex items-center space-x-3 mx-8 cursor-pointer hover:scale-110 transition-transform">
+                            <div className="p-2.5 bg-gray-100 dark:bg-gray-800 rounded-xl">
+                                <span className="material-icons text-gray-500 dark:text-gray-400 text-lg">{item.icon}</span>
                             </div>
-                            <span className="font-semibold text-sm text-gray-700 dark:text-gray-300">{item.label}</span>
+                            <span className="font-bold text-base text-gray-700 dark:text-gray-300">{item.label}</span>
                         </div>
                     ))}
                 </div>

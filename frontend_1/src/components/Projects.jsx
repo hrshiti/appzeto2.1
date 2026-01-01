@@ -289,9 +289,9 @@ const Projects = () => {
             ScrollTrigger.create({
                 trigger: containerRef.current,
                 start: "top top",
-                end: `+=${projects.length * 80}%`, // Reduced scroll distance for faster feel
+                end: `+=${projects.length * 80}%`,
                 pin: true,
-                scrub: 0.5, // Faster catch-up for smoother feel
+                scrub: 1.5, // Even slower, lazier catch-up for maximum premium feel
                 onUpdate: (self) => {
                     const progress = self.progress;
                     const totalProjects = projects.length;
@@ -315,18 +315,12 @@ const Projects = () => {
         <motion.div
             ref={containerRef}
             animate={{ backgroundColor: projects[activeProject].bgColor }}
-            transition={{ duration: 0.8, ease: "easeInOut" }}
+            transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
             className="w-full font-display overflow-hidden antialiased"
         >
-
-            {/* The actual visible content section */}
             <div className="relative w-full h-screen flex flex-col items-center justify-center">
-
                 <div className="w-full max-w-7xl mx-auto px-6 sm:px-8 flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-20 h-full py-4 relative z-10">
-
-                    {/* Left: Text Content */}
                     <div className="w-full lg:w-1/2 flex flex-col justify-center h-full gap-8 order-2 lg:order-1 relative z-20 items-start text-left">
-                        {/* Static Header Label */}
                         <div className="mb-2">
                             <motion.h1
                                 animate={{ color: projects[activeProject].textColor }}
@@ -336,18 +330,16 @@ const Projects = () => {
                             </motion.h1>
                         </div>
 
-                        {/* Dynamic Content */}
-                        <div className="relative w-full min-h-[350px] flex items-center">
-                            <AnimatePresence mode="wait">
+                        <div className="relative w-full min-h-[400px] flex items-center mb-8">
+                            <AnimatePresence>
                                 <motion.div
                                     key={activeProject}
-                                    initial={{ opacity: 0, y: 30 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    exit={{ opacity: 0, y: -30 }}
-                                    transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                                    className="flex flex-col gap-6 items-start absolute inset-0 py-4"
+                                    initial={{ opacity: 0, x: -200 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    exit={{ opacity: 0, x: 200 }}
+                                    transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
+                                    className="flex flex-col gap-6 items-start absolute inset-0 py-4 text-left"
                                 >
-                                    {/* Tags */}
                                     <div className="flex flex-wrap gap-2 justify-start">
                                         {projects[activeProject].tags.map((tag, i) => (
                                             <span key={i} className="px-3 py-1 bg-black/5 rounded-full text-black/60 text-xs md:text-sm font-bold border border-black/10">
@@ -355,8 +347,6 @@ const Projects = () => {
                                             </span>
                                         ))}
                                     </div>
-
-                                    {/* Title */}
                                     <motion.h2
                                         animate={{ color: projects[activeProject].textColor }}
                                         className="text-3xl md:text-5xl lg:text-6xl font-black leading-[1.1] tracking-tighter"
@@ -364,22 +354,19 @@ const Projects = () => {
                                         {projects[activeProject].title.split(' • ')[0]}<br />
                                         <span className="opacity-70">{projects[activeProject].title.split(' • ')[1]}</span>
                                     </motion.h2>
-
-                                    {/* Description */}
                                     <motion.p
                                         animate={{ color: projects[activeProject].textColor }}
-                                        className="text-base md:text-lg opacity-80 leading-relaxed max-w-xl font-medium text-left"
+                                        className="text-base md:text-lg opacity-80 leading-relaxed max-w-xl font-medium"
                                     >
                                         {projects[activeProject].description}
                                     </motion.p>
-
                                     <div className="pt-6">
                                         <motion.button
                                             animate={{
                                                 backgroundColor: projects[activeProject].btnColor,
                                                 color: projects[activeProject].btnText
                                             }}
-                                            className="flex items-center gap-3 px-10 py-4 rounded-full font-black text-lg hover:scale-105 transform transition-all duration-300 group shadow-2xl"
+                                            className="flex items-center gap-3 px-10 py-4 rounded-full font-black text-lg shadow-2xl transition-all duration-300 group"
                                         >
                                             Checkout Case Study
                                             <span className="material-symbols-outlined text-2xl transition-transform group-hover:translate-x-1">north_east</span>
@@ -389,8 +376,7 @@ const Projects = () => {
                             </AnimatePresence>
                         </div>
 
-                        {/* Progress Indicators */}
-                        <div className="flex items-center gap-4 mt-12 relative z-30">
+                        <div className="flex items-center gap-4 relative z-30">
                             {projects.map((_, idx) => (
                                 <motion.button
                                     key={idx}
@@ -401,25 +387,19 @@ const Projects = () => {
                         </div>
                     </div>
 
-                    {/* Right: Phone Display */}
                     <div className="w-full lg:w-1/2 flex justify-center items-center h-full order-1 lg:order-2 py-[2vh] lg:py-[5vh]">
                         <div className="relative h-[75vh] w-auto aspect-[1/2] max-h-[800px] border-[10px] border-[#111] rounded-[3rem] overflow-hidden bg-black shadow-[0_50px_100px_-20px_rgba(0,0,0,0.3)] ring-1 ring-white/10 z-10 transition-transform duration-1000">
-
-                            {/* Phone Notch */}
                             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[30%] h-[4%] bg-[#111] rounded-b-[1.5rem] z-40"></div>
-
-                            {/* Inner Screen Content */}
                             <div className="relative w-full h-full bg-[#f8fafc]">
-                                <AnimatePresence mode="wait">
+                                <AnimatePresence>
                                     <motion.div
                                         key={activeProject}
-                                        initial={{ opacity: 0, scale: 0.98 }}
+                                        initial={{ opacity: 0, scale: 0.94 }}
                                         animate={{ opacity: 1, scale: 1 }}
-                                        exit={{ opacity: 0, scale: 1.02 }}
-                                        transition={{ duration: 0.6, ease: "circOut" }}
+                                        exit={{ opacity: 0, scale: 1.06 }}
+                                        transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
                                         className="absolute inset-0 w-full h-full"
                                     >
-                                        {/* Status Bar */}
                                         <div className="absolute top-0 w-full px-[8%] py-[4%] flex justify-between items-center z-50 text-[10px] font-bold pointer-events-none mix-blend-difference text-white">
                                             <span>9:41</span>
                                             <div className="flex gap-1.5">
@@ -428,21 +408,15 @@ const Projects = () => {
                                                 <span className="material-symbols-outlined text-[12px]">battery_full</span>
                                             </div>
                                         </div>
-
-                                        {/* Dynamic UI Component */}
                                         {React.createElement(projects[activeProject].UI)}
-
                                     </motion.div>
                                 </AnimatePresence>
                             </div>
                         </div>
-
-                        {/* Decorative Background Elements */}
                         <div className="absolute top-1/2 right-1/4 w-[60vh] h-[60vh] bg-white/20 rounded-full blur-[120px] -translate-y-1/2 pointer-events-none z-0 mix-blend-overlay animate-pulse"></div>
                     </div>
                 </div>
 
-                {/* Vertical Step Numbers - Refined Color */}
                 <div className="absolute right-12 bottom-12 hidden xl:flex flex-col items-end gap-1 z-0">
                     {projects.map((_, idx) => (
                         <div key={idx} className="flex items-center gap-4">
@@ -460,7 +434,6 @@ const Projects = () => {
                     ))}
                 </div>
             </div>
-
         </motion.div>
     );
 };

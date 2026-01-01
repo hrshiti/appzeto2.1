@@ -7,20 +7,41 @@ import Reviews from '../components/Reviews';
 import ContactUs from '../components/ContactUs';
 import WhyChooseUs from '../components/WhyChooseUs';
 import Footer from '../components/Footer';
-
 import ScrollWrapper from '../components/ScrollWrapper';
+import ScrollReveal from '../components/ScrollReveal';
 
 const Home = () => {
     return (
         <ScrollWrapper>
             <Hero />
-            <Projects />
-            <About />
-            <Services />
-            <WhyChooseUs />
-            <Reviews />
-            <ContactUs />
-            <Footer />
+
+            <ScrollReveal>
+                <Projects />
+            </ScrollReveal>
+
+            <ScrollReveal>
+                <About />
+            </ScrollReveal>
+
+            <ScrollReveal>
+                <Services />
+            </ScrollReveal>
+
+            <ScrollReveal>
+                <WhyChooseUs />
+            </ScrollReveal>
+
+            <ScrollReveal>
+                <Reviews />
+            </ScrollReveal>
+
+            <ScrollReveal>
+                <ContactUs />
+            </ScrollReveal>
+
+            <ScrollReveal>
+                <Footer />
+            </ScrollReveal>
         </ScrollWrapper>
     );
 };
