@@ -9,6 +9,10 @@ import WhyChooseUs from '../components/WhyChooseUs';
 import Footer from '../components/Footer';
 import ScrollWrapper from '../components/ScrollWrapper';
 import ScrollReveal from '../components/ScrollReveal';
+import Process from '../components/Process';
+import Stats from '../components/Stats';
+
+import ProjectShowcase from '../components/ProjectShowcase';
 
 const Home = () => {
     return (
@@ -28,6 +32,18 @@ const Home = () => {
             </ScrollReveal>
 
             <ScrollReveal>
+                <ProjectShowcase />
+            </ScrollReveal>
+
+            <ScrollReveal>
+                <Process />
+            </ScrollReveal>
+
+            <ScrollReveal>
+                <Stats />
+            </ScrollReveal>
+
+            <ScrollReveal>
                 <WhyChooseUs />
             </ScrollReveal>
 
@@ -36,7 +52,7 @@ const Home = () => {
             </ScrollReveal>
 
             <ScrollReveal>
-                <ContactUs />
+                <ContactUs isHomePage={true} />
             </ScrollReveal>
 
             <ScrollReveal>

@@ -76,10 +76,10 @@ const About = () => {
                     <div className="max-w-[1280px] mx-auto w-full">
                         <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center h-full">
                             <motion.div
-                                initial={{ opacity: 0, y: 50 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.8, delay: 0.3 }}
+                                initial={{ opacity: 0, x: -100 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                viewport={{ once: false }}
+                                transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
                                 className="relative z-10 w-full"
                             >
                                 <div className="absolute -top-12 -left-12 w-32 h-32 border-[3px] border-[#EAB308]/20 rounded-full"></div>
@@ -119,10 +119,10 @@ const About = () => {
 
                             {/* Right Content */}
                             <motion.div
-                                initial={{ opacity: 0, y: 50 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.8 }}
+                                initial={{ opacity: 0, x: 100 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                viewport={{ once: false }}
+                                transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
                                 className="relative z-10 w-full flex flex-col gap-5"
                             >
                                 <div className="flex flex-col gap-6">

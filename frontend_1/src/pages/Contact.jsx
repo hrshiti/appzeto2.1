@@ -1,13 +1,21 @@
-import React from 'react';
 import Navbar from '../components/Navbar';
 import ContactUs from '../components/ContactUs';
+import Footer from '../components/Footer';
+import ScrollReveal from '../components/ScrollReveal';
+import ScrollWrapper from '../components/ScrollWrapper';
 
 const Contact = () => {
     return (
-        <div>
+        <ScrollWrapper>
             <Navbar />
-            <ContactUs />
-        </div>
+            <ScrollReveal>
+                <ContactUs />
+            </ScrollReveal>
+
+            <ScrollReveal>
+                <Footer />
+            </ScrollReveal>
+        </ScrollWrapper>
     );
 };
 

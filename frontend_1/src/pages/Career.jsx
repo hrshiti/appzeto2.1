@@ -1,10 +1,13 @@
+import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import React, { useEffect } from 'react';
 import Navbar from '../components/Navbar';
-import { Link } from 'react-router-dom';
+import ContactUs from '../components/ContactUs';
+import Footer from '../components/Footer';
+import ScrollReveal from '../components/ScrollReveal';
+import ScrollWrapper from '../components/ScrollWrapper';
 
 const Career = () => {
-
-    // Scroll to top on mount
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
@@ -12,227 +15,349 @@ const Career = () => {
     const positions = [
         {
             id: 1,
-            role: "Frontend Developer",
+            role: "Frontend Dev",
             department: "Engineering",
-            tags: ["React", "TailwindCSS", "TypeScript"],
-            description: "We are looking for a skilled Frontend Developer to build high-quality, responsive user interfaces. You will work closely with our design team to translate Figma designs into pixel-perfect code.",
-            image: "https://images.unsplash.com/photo-1587620962725-abab7fe55159?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+            type: "Full-time",
+            location: "Remote",
+            description: "Crafting pixel-perfect React interfaces."
         },
         {
             id: 2,
-            role: "Backend Engineer",
+            role: "Backend Dev",
             department: "Engineering",
-            tags: ["Node.js", "Python", "AWS"],
-            description: "Join our backend team to design and scale robust APIs and services. You'll deal with high-concurrency systems and help optimize our cloud infrastructure.",
-            image: "https://images.unsplash.com/photo-1605379399642-870262d3d051?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+            type: "Full-time",
+            location: "Remote",
+            description: "Building scalable Node.js architectures."
         },
         {
             id: 3,
             role: "UI/UX Designer",
-            department: "Design",
-            tags: ["Figma", "Prototyping", "User Research"],
-            description: "Create intuitive and visually stunning user experiences. You will collaborate closely with product managers to define the user journey and visual language.",
-            image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+            department: "Product",
+            type: "Full-time",
+            location: "On-site",
+            description: "Designing the next-gen user journeys."
         },
         {
             id: 4,
-            role: "DevOps Engineer",
-            department: "Operations",
-            tags: ["Docker", "Kubernetes", "CI/CD"],
-            description: "Maintain and improve our CI/CD pipelines and cloud infrastructure. You will ensure the reliability, security, and scalability of our services.",
-            image: "https://images.unsplash.com/photo-1667372393119-c81c0cda0c18?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+            role: "SEO Expert",
+            department: "Marketing",
+            type: "Full-time",
+            location: "On-site",
+            description: "Optimizing visibility and conversion."
         }
     ];
 
-    const stats = [
-        { label: "Projects Completed", value: "850+" },
-        { label: "Years of Experience", value: "18+" },
-        { label: "Happy Customers", value: "500+" },
+    const internships = [
+        {
+            id: "i1",
+            role: "Graphic Design Intern",
+            duration: "3 - 6 Months",
+            type: "Paid",
+            description: "Work on real-world brand identities and digital marketing assets.",
+            icon: "palette"
+        },
+        {
+            id: "i2",
+            role: "Full Stack Web Intern",
+            duration: "6 Months",
+            type: "Paid",
+            description: "Learn and build with the MERN stack with expert mentorship.",
+            icon: "code"
+        },
+        {
+            id: "i3",
+            role: "Content Intern",
+            duration: "3 Months",
+            type: "Paid",
+            description: "Create engaging content for social media and blogs.",
+            icon: "edit"
+        }
+    ];
+
+    const cultureItems = [
+        {
+            id: 1,
+            title: "Team Work",
+            img: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1000&auto=format&fit=crop",
+            rotation: -4,
+            yOffset: 0,
+        },
+        {
+            id: 2,
+            title: "Office Vibe",
+            img: "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1000&auto=format&fit=crop",
+            rotation: 3,
+            yOffset: 60,
+        },
+        {
+            id: 3,
+            title: "Design Fun",
+            img: "https://images.unsplash.com/photo-1561070791-2526d30994b5?q=80&w=1000&auto=format&fit=crop",
+            rotation: -2,
+            yOffset: -20,
+        },
+        {
+            id: 4,
+            title: "Coffee Break",
+            img: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=1000&auto=format&fit=crop",
+            rotation: 5,
+            yOffset: 80,
+        },
+        {
+            id: 5,
+            title: "Brainstorming",
+            img: "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1000&auto=format&fit=crop",
+            rotation: -3,
+            yOffset: 30,
+        },
+        {
+            id: 6,
+            title: "Happy Minds",
+            img: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1000&auto=format&fit=crop",
+            rotation: 4,
+            yOffset: -10,
+        },
+        {
+            id: 7,
+            title: "Success",
+            img: "https://images.unsplash.com/photo-1528605248644-14dd04022da1?q=80&w=1000&auto=format&fit=crop",
+            rotation: -5,
+            yOffset: 70,
+        },
+        {
+            id: 8,
+            title: "Modern Tech",
+            img: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=1000&auto=format&fit=crop",
+            rotation: 2,
+            yOffset: -30,
+        }
     ];
 
     return (
-        <div className="bg-black min-h-screen font-sans text-white overflow-x-hidden selection:bg-[#B9FD02] selection:text-black">
-            <Navbar />
+        <ScrollWrapper>
+            <div className="bg-[#f8f9fa] min-h-screen font-sans text-slate-900 overflow-x-hidden selection:bg-primary selection:text-white">
+                <Navbar />
 
-            {/* --- HERO SECTION --- */}
-            <div className="relative pt-16 pb-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+                {/* --- HERO SECTION --- */}
+                <div className="relative pt-16 pb-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto overflow-visible">
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                        <div className="lg:col-span-7 space-y-8 z-10">
+                            <motion.div
+                                initial={{ x: -50, opacity: 0 }}
+                                animate={{ x: 0, opacity: 1 }}
+                                className="inline-flex items-center space-x-3 bg-white px-4 py-2 rounded-full border-2 border-slate-900 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
+                            >
+                                <span className="w-3 h-3 bg-primary rounded-full animate-pulse"></span>
+                                <span className="text-xs uppercase tracking-widest font-black text-slate-900">WE'RE HIRING!</span>
+                            </motion.div>
 
-                    {/* Left Column: Text Content */}
-                    <div className="lg:col-span-7 space-y-8 z-10">
-                        <div className="flex items-center space-x-3 mb-6">
-                            <span className="w-8 h-[2px] bg-white"></span>
-                            <span className="text-sm uppercase tracking-wider font-medium text-gray-300">Award Winning Digital Agency</span>
+                            <h1 className="text-6xl md:text-8xl font-black leading-[0.9] text-slate-900 tracking-tighter">
+                                JOIN THE <br />
+                                <span className="text-primary italic outline-text">REVOLUTION.</span>
+                            </h1>
+
+                            <div className="flex flex-wrap gap-4">
+                                {["Brilliant Minds", "Fast Paced", "Big Impact"].map((item, idx) => (
+                                    <motion.span
+                                        key={idx}
+                                        whileHover={{ scale: 1.1, rotate: idx % 2 === 0 ? 5 : -5 }}
+                                        className="px-6 py-3 rounded-2xl border-2 border-slate-900 bg-white text-sm font-black text-slate-900 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:bg-primary hover:text-white transition-all cursor-pointer"
+                                    >
+                                        {item}
+                                    </motion.span>
+                                ))}
+                            </div>
+
+                            <p className="text-slate-600 max-w-lg text-xl font-medium leading-relaxed">
+                                Stop working for machines. Start building for humans. Appzeto is looking for the bold, the curious, and the slightly obsessed.
+                            </p>
                         </div>
 
-                        <h1 className="text-5xl md:text-7xl font-bold leading-tight">
-                            Where Innovation Meets <span className="text-[#B9FD02]">Career Excellence</span>
-                        </h1>
-
-                        <div className="flex flex-wrap gap-3">
-                            {["Software Development", "Product Design", "Digital Marketing", "Cloud Solutions"].map((item, idx) => (
-                                <span key={idx} className="px-4 py-2 rounded-full border border-gray-700 text-sm md:text-base text-gray-300 hover:border-[#B9FD02] hover:text-[#B9FD02] transition-colors cursor-default">
-                                    {item}
-                                </span>
-                            ))}
-                        </div>
-
-                        {/* Main Image Area with Overlay */}
-                        <div className="relative mt-12 group">
-                            <div className="relative rounded-[2.5rem] overflow-hidden aspect-[16/9] border border-gray-800">
+                        <div className="lg:col-span-5 relative">
+                            <motion.div
+                                initial={{ scale: 0.8, opacity: 0 }}
+                                animate={{ scale: 1, opacity: 1 }}
+                                className="relative aspect-square bg-primary rounded-[3rem] border-[4px] border-slate-900 shadow-[15px_15px_0px_0px_rgba(0,0,0,1)] rotate-3 overflow-hidden"
+                            >
                                 <img
-                                    src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80"
-                                    alt="Team Application"
-                                    className="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-700"
+                                    src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=2340&auto=format&fit=crop"
+                                    alt="Team"
+                                    className="w-full h-full object-cover grayscale mix-blend-overlay hover:grayscale-0 transition-all duration-700"
                                 />
-                                {/* Overlay review card */}
-                                <div className="absolute bottom-6 left-6 bg-[#B9FD02] text-black px-6 py-3 rounded-full flex items-center gap-4 shadow-xl z-20">
-                                    <div className="flex -space-x-3">
-                                        {[1, 2, 3].map(i => (
-                                            <div key={i} className="w-8 h-8 rounded-full bg-gray-200 border-2 border-[#B9FD02]"></div>
-                                        ))}
-                                        <div className="w-8 h-8 rounded-full bg-black text-white flex items-center justify-center text-xs border-2 border-[#B9FD02]">+</div>
-                                    </div>
-                                    <div>
-                                        <div className="font-bold text-sm">4.9 Star</div>
-                                        <div className="text-xs opacity-80">Employee Reviews</div>
-                                    </div>
+                                <div className="absolute inset-0 flex items-center justify-center p-10 text-center">
+                                    <h2 className="text-4xl md:text-5xl font-black text-white leading-tight drop-shadow-2xl">
+                                        NOT JUST A JOB, <br /> A LEGACY.
+                                    </h2>
                                 </div>
-                            </div>
-
-                            {/* Decorative Star elements */}
-                            <div className="absolute -top-6 -left-8 text-[#B9FD02] animate-bounce duration-1000">
-                                <svg width="50" height="50" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z" /></svg>
-                            </div>
-                        </div>
-
-                        <div className="text-gray-400 max-w-xl text-lg leading-relaxed">
-                            Join a team that pushes boundaries. We are looking for passionate individuals ready to make an impact in the digital world.
+                            </motion.div>
                         </div>
                     </div>
+                </div>
 
-                    {/* Right Column: Stats & Badge */}
-                    <div className="lg:col-span-5 relative mt-12 lg:mt-0 flex flex-col items-end">
-
-                        {/* Spinning Badge */}
-                        <div className="mb-12 relative group">
-                            <div className="relative w-32 h-32 md:w-40 md:h-40 flex items-center justify-center bg-black rounded-full border border-gray-800 group-hover:border-[#B9FD02] transition-colors">
-                                <svg className="absolute inset-0 w-full h-full animate-[spin_10s_linear_infinite] text-white group-hover:text-[#B9FD02]" viewBox="0 0 100 100">
-                                    <defs>
-                                        <path id="circle" d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" />
-                                    </defs>
-                                    <text fontSize="11" fill="currentColor">
-                                        <textPath xlinkHref="#circle" letterSpacing="2">
-                                            JOIN OUR TEAM •  BUILD THE FUTURE •
-                                        </textPath>
-                                    </text>
-                                </svg>
-                                <div className="w-20 h-20 bg-[#B9FD02] rounded-full flex items-center justify-center">
-                                    <span className="material-icons text-4xl text-black transform -rotate-45">arrow_forward</span>
-                                </div>
+                {/* --- FUNKY MARQUEE --- */}
+                <div className="bg-slate-950 py-1.5 overflow-hidden -rotate-2 transform scale-105 border-y-[3px] border-primary z-10 relative shadow-2xl">
+                    <div className="whitespace-nowrap flex animate-[scroll_15s_linear_infinite]">
+                        {[1, 2, 3, 4].map((_, i) => (
+                            <div key={i} className="flex items-center mx-10 text-white font-bold text-lg md:text-xl uppercase tracking-tighter italic">
+                                <span className="text-primary">NO BORING MEETINGS</span>
+                                <span className="mx-6 opacity-30 text-sm">✷</span>
+                                <span>UNLIMITED COFFEE</span>
+                                <span className="mx-6 opacity-30 text-sm">✷</span>
+                                <span className="text-primary">BIG DREAMS</span>
+                                <span className="mx-6 opacity-30 text-sm">✷</span>
                             </div>
+                        ))}
+                    </div>
+                </div>
+
+                {/* --- OPEN POSITIONS (MODERN MINIMAL LIST - FITS IN 100VH) --- */}
+                <div id="positions" className="lg:h-screen max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 bg-white shadow-sm mt-0 border-b border-slate-100 flex flex-col justify-center overflow-hidden">
+                    <div className="flex flex-col md:flex-row justify-between items-end mb-12 px-4">
+                        <div className="text-left">
+                            <p className="text-primary font-bold uppercase tracking-widest text-[10px] mb-2 text-slate-400">Join the squad</p>
+                            <h2 className="text-3xl md:text-5xl font-bold text-slate-900 tracking-tighter uppercase">Wanna Join Us?</h2>
+                        </div>
+                        <p className="text-slate-400 text-xs max-w-xs mt-4 md:mt-0 italic">Always on the lookout for ambitious talent ready to disrupt.</p>
+                    </div>
+
+                    <div className="flex flex-col border-t border-slate-100/50">
+                        {positions.map((job) => (
+                            <motion.div
+                                key={job.id}
+                                whileHover={{ backgroundColor: "rgba(241, 252, 136, 0.2)" }}
+                                className="flex flex-col md:flex-row items-center justify-between py-6 px-6 border-b border-slate-100/50 group transition-all duration-300 cursor-pointer"
+                            >
+                                <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-12 flex-1">
+                                    <span className="text-[10px] font-black uppercase tracking-widest text-slate-300 w-24">{job.department}</span>
+                                    <div className="flex flex-col">
+                                        <h3 className="text-xl font-bold text-slate-900 group-hover:text-primary transition-colors uppercase tracking-tight">{job.role}</h3>
+                                        <p className="text-slate-500 text-xs mt-0.5">{job.description}</p>
+                                    </div>
+                                </div>
+
+                                <div className="flex items-center gap-8 mt-6 md:mt-0">
+                                    <div className="hidden lg:flex items-center gap-6 text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                                        <span className="flex items-center gap-1.5"><span className="material-icons text-sm opacity-50">schedule</span> {job.type}</span>
+                                        <span className="flex items-center gap-1.5"><span className="material-icons text-sm opacity-50">location_on</span> {job.location}</span>
+                                    </div>
+                                    <button className="bg-slate-950 text-white px-6 py-2.5 rounded-full font-bold text-[10px] uppercase tracking-widest hover:bg-[#F1FC88] hover:text-slate-900 transition-all flex items-center gap-2">
+                                        Apply <span className="material-icons text-sm">north_east</span>
+                                    </button>
+                                </div>
+                            </motion.div>
+                        ))}
+                    </div>
+                </div>
+
+                {/* --- INTERNSHIP --- */}
+                <div id="internship" className="bg-primary py-10 mt-0 border-t-[6px] border-slate-900">
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+                        <div className="absolute top-0 right-10 rotate-12 opacity-10 pointer-events-none text-[#F1FC88]">
+                            <span className="material-icons text-[250px]">school</span>
                         </div>
 
-                        {/* Green Stats Card */}
-                        <div className="bg-[#B9FD02] rounded-[2rem] p-8 md:p-10 w-full max-w-sm text-black">
-                            <div className="space-y-8">
-                                {stats.map((stat, idx) => (
-                                    <div key={idx} className="border-b border-black/10 last:border-0 pb-6 last:pb-0">
-                                        <div className="text-4xl font-bold mb-1">{stat.value}</div>
-                                        <div className="text-sm font-medium opacity-80">{stat.label}</div>
+                        <div className="relative z-10 flex flex-col gap-12">
+                            <div className="flex flex-col md:flex-row justify-between items-end gap-8">
+                                <div className="text-left">
+                                    <h2 className="text-4xl md:text-5xl font-black text-white mb-4 leading-[0.8] uppercase tracking-tighter">
+                                        START AS <br />
+                                        <span className="text-slate-900 underline decoration-slate-900 underline-offset-8">A ROOKIE.</span>
+                                    </h2>
+                                    <p className="text-white font-bold text-lg opacity-90 italic uppercase">
+                                        Internships with serious impact and zero coffee runs.
+                                    </p>
+                                </div>
+                                <button className="px-8 py-3 bg-[#F1FC88] text-slate-900 font-bold rounded-2xl uppercase tracking-widest text-xs hover:bg-white transition-all border-4 border-slate-900 shadow-[6px_6px_0px_0px_rgba(0,0,0,0.2)]">
+                                    Grab Your Spot
+                                </button>
+                            </div>
+
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                {internships.map((intern) => (
+                                    <div key={intern.id} className="bg-white p-6 rounded-[2rem] border-4 border-slate-900 shadow-[8px_8px_0px_0px_rgba(15,23,42,1)] hover:-translate-y-1 transition-transform">
+                                        <h4 className="text-lg md:text-xl font-bold text-slate-900 mb-1">{intern.role}</h4>
+                                        <div className="text-primary font-black text-[10px] uppercase tracking-widest mb-4">{intern.duration} • {intern.type}</div>
+                                        <p className="text-slate-600 font-normal text-sm line-clamp-2">{intern.description}</p>
                                     </div>
                                 ))}
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            {/* --- SCROLLING TICKER --- */}
-            <div className="bg-[#B9FD02] py-4 overflow-hidden -rotate-1 transform origin-left md:origin-center scale-105 border-y-4 border-black">
-                <div className="whitespace-nowrap flex animate-[scroll_20s_linear_infinite]">
-                    {[1, 2, 3, 4, 5, 6].map((_, i) => (
-                        <div key={i} className="flex items-center mx-4 text-black font-bold text-xl md:text-2xl uppercase tracking-wider">
-                            <span>Development</span>
-                            <span className="mx-6 text-3xl h-full flex items-center justify-center">✷</span>
-                            <span>Design</span>
-                            <span className="mx-6 text-3xl">✷</span>
-                            <span>Marketing</span>
-                            <span className="mx-6 text-3xl">✷</span>
-                            <span>Strategy</span>
-                            <span className="mx-6 text-3xl">✷</span>
-                        </div>
-                    ))}
-                </div>
-            </div>
-
-            {/* --- OPEN POSITIONS LIST --- */}
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
-
-                <div className="flex flex-col md:flex-row justify-between items-end mb-20 border-l-4 border-[#B9FD02] pl-6">
-                    <div>
-                        <div className="text-[#B9FD02] font-medium mb-2 uppercase tracking-wide">Open Positions</div>
-                        <h2 className="text-4xl md:text-6xl font-bold">Discover Our<br />Career Opportunities</h2>
+                {/* --- SCATTERED LIFE AT APPZETO --- */}
+                <div id="culture" className="h-screen max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-center relative overflow-hidden bg-[#f8f9fa]">
+                    <div className="flex flex-col items-center mb-12">
+                        <h2 className="text-2xl md:text-3xl font-bold text-slate-900 text-center uppercase tracking-tighter">
+                            LIFE AT <span className="bg-[#F1FC88] text-slate-900 px-4 py-1 rounded-lg inline-block -rotate-2 scale-90">APPZETO</span>
+                        </h2>
                     </div>
-                    <p className="max-w-md text-gray-400 mt-6 md:mt-0 text-right md:text-left">
-                        We define our success by the success of our people. Join us and help create digital solutions that matter.
-                    </p>
+
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-y-12 gap-x-6 relative">
+                        {cultureItems.map((item, idx) => (
+                            <motion.div
+                                key={item.id}
+                                initial={{ opacity: 0, scale: 0.8 }}
+                                whileInView={{ opacity: 1, scale: 0.9, y: item.yOffset / 2 }}
+                                viewport={{ once: true }}
+                                style={{ rotate: item.rotation }}
+                                transition={{ duration: 0.8, ease: "circOut", delay: idx * 0.05 }}
+                                whileHover={{ scale: 1, rotate: 0, zIndex: 10 }}
+                                className="relative group flex justify-center"
+                            >
+                                <div className="bg-white p-2 pb-6 shadow-lg border border-slate-100 w-32 md:w-48 lg:w-56">
+                                    <div className="h-24 md:h-32 lg:h-40 w-full overflow-hidden mb-2">
+                                        <img
+                                            src={item.img}
+                                            className="w-full h-full object-cover grayscale-[0.2] group-hover:grayscale-0 transition-all duration-700"
+                                            alt={item.title}
+                                        />
+                                    </div>
+                                    <div className="text-center">
+                                        <h3 className="text-[8px] md:text-[10px] font-bold text-slate-400 uppercase tracking-widest">{item.title}</h3>
+                                    </div>
+                                </div>
+                                <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-12 h-4 bg-[#F1FC88]/60 backdrop-blur-sm -rotate-2 group-hover:bg-[#F1FC88] transition-colors z-20" />
+                            </motion.div>
+                        ))}
+                    </div>
                 </div>
 
-                <div className="flex flex-col space-y-6">
-                    {positions.map((job, index) => (
-                        <div key={job.id} className="group relative bg-[#0a0a0a] rounded-3xl p-8 transition-all duration-500 hover:bg-[#111] border border-gray-900 overflow-hidden">
-                            <div className="relative z-10 flex flex-col lg:flex-row gap-8 lg:items-center">
-
-                                {/* Index Number */}
-                                <div className="text-2xl font-mono text-gray-600 font-bold">
-                                    0{index + 1}.
-                                </div>
-
-                                {/* Title & Tags */}
-                                <div className="flex-1">
-                                    <h3 className="text-2xl md:text-3xl font-bold text-white mb-4 group-hover:text-[#B9FD02] transition-colors">
-                                        {job.role}
-                                    </h3>
-                                    <div className="flex flex-wrap gap-2">
-                                        {job.tags.map((tag, i) => (
-                                            <span key={i} className="px-3 py-1 rounded-md bg-white text-black text-xs font-bold uppercase">
-                                                {tag}
-                                            </span>
-                                        ))}
-                                    </div>
-                                    <p className="mt-6 text-gray-400 leading-relaxed max-w-2xl">
-                                        {job.description}
-                                    </p>
-                                </div>
-
-                                {/* Action Area */}
-                                <div className="flex items-center gap-4 lg:self-center self-start mt-4 lg:mt-0">
-                                    <button className="bg-[#B9FD02] hover:bg-white text-black font-bold py-3 px-8 rounded-full transition-all duration-300">
-                                        Apply Now
-                                    </button>
-                                    <div className="w-12 h-12 rounded-full border border-gray-700 flex items-center justify-center group-hover:bg-white group-hover:text-black transition-all">
-                                        <span className="material-icons transform -rotate-45 group-hover:rotate-0 transition-transform">arrow_forward</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* Hover Image Reveal */}
-                            <div className="absolute top-1/2 right-1/4 transform -translate-y-1/2 translate-x-12 opacity-0 group-hover:opacity-20 lg:group-hover:opacity-100 lg:group-hover:translate-x-0 transition-all duration-700 pointer-events-none w-64 h-40 hidden lg:block rounded-xl overflow-hidden shadow-2xl border-2 border-[#B9FD02] grayscale group-hover:grayscale-0">
-                                <img src={job.image} alt={job.role} className="w-full h-full object-cover" />
-                            </div>
-                        </div>
-                    ))}
+                {/* --- CHIT CHAT CALL TO ACTION --- */}
+                <div className="bg-[#F1FC88] py-20 border-y-[6px] border-slate-950">
+                    <div className="max-w-4xl mx-auto px-4 text-center">
+                        <h2 className="text-4xl md:text-6xl font-black text-slate-900 mb-8 uppercase tracking-tighter italic">
+                            Still Confused? <br /> Let's Chit Chat!
+                        </h2>
+                        <p className="text-slate-800 text-xl font-bold mb-10 opacity-70">
+                            Not sure which role fits you best? Our team is happy to help you find your path.
+                        </p>
+                        <Link to="/chit-chat" className="bg-slate-950 text-white px-12 py-5 rounded-full font-black uppercase tracking-widest hover:scale-110 transition-transform shadow-2xl flex items-center gap-3 mx-auto max-w-fit">
+                            Ping Us Now <span className="material-icons">chat</span>
+                        </Link>
+                    </div>
                 </div>
             </div>
+
+            <ScrollReveal>
+                <ContactUs isHomePage={true} />
+            </ScrollReveal>
+
+            <ScrollReveal>
+                <Footer />
+            </ScrollReveal>
 
             <style>{`
                 @keyframes scroll {
                     0% { transform: translateX(0); }
                     100% { transform: translateX(-50%); }
                 }
+                .outline-text {
+                    -webkit-text-stroke: 2px #0f172a;
+                    color: transparent;
+                }
             `}</style>
-        </div>
+        </ScrollWrapper>
     );
 };
 

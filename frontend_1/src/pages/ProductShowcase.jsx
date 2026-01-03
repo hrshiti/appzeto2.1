@@ -3,6 +3,11 @@ import Lenis from 'lenis';
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import Navbar from '../components/Navbar';
+import ContactUs from '../components/ContactUs';
+import Footer from '../components/Footer';
+import ScrollReveal from '../components/ScrollReveal';
+import ScrollWrapper from '../components/ScrollWrapper';
 
 import heroImage from '../assets/appzeto-food-hero.jpg';
 import floatingImage1 from '../assets/appzeto-food-1.jpg';
@@ -22,29 +27,8 @@ const ProductShowcase = () => {
     const images = [heroImage, carouselImage1, carouselImage2, carouselImage3];
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-    // Smooth Scroll Setup
     useEffect(() => {
-        const lenis = new Lenis({
-            duration: 1.2,
-            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-            direction: 'vertical',
-            gestureDirection: 'vertical',
-            smooth: true,
-            mouseMultiplier: 1,
-            smoothTouch: false,
-            touchMultiplier: 2,
-        });
-
-        function raf(time) {
-            lenis.raf(time);
-            requestAnimationFrame(raf);
-        }
-
-        requestAnimationFrame(raf);
-
-        return () => {
-            lenis.destroy();
-        };
+        window.scrollTo(0, 0);
     }, []);
 
     // Carousel Interval
@@ -57,219 +41,230 @@ const ProductShowcase = () => {
     }, [images.length]);
 
     return (
-        <div className="min-h-screen w-full bg-white relative overflow-hidden font-sans selection:bg-[#EF7F1A] selection:text-white">
-            <div className="max-w-[1400px] mx-auto min-h-screen px-4 md:px-10 lg:px-20 py-20 lg:py-0 flex flex-col lg:flex-row items-center relative z-10">
+        <ScrollWrapper>
+            <Navbar />
+            <div className="min-h-screen w-full bg-white relative overflow-hidden font-sans selection:bg-[#EF7F1A] selection:text-white">
+                <div className="max-w-[1400px] mx-auto min-h-screen px-4 md:px-10 lg:px-20 py-20 lg:py-0 flex flex-col lg:flex-row items-center relative z-10">
 
-                {/* Left Content */}
-                <div className="w-full lg:w-1/2 flex flex-col gap-8 md:gap-10 pt-10 lg:pt-0 z-20">
-                    <motion.div
-                        initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8 }}
-                        transition={{ duration: 0.8 }}
-                        viewport={{ once: false }}
-                        className="flex flex-col gap-4"
-                    >
-                        <div className="flex items-center gap-2 mb-2">
-                            <span className="text-[#EF7F1A] font-bold tracking-wider text-sm uppercase">Appzeto Food</span>
-                        </div>
-                        <h1 className="text-4xl md:text-5xl lg:text-[3.5rem] font-bold leading-[1.1] text-gray-900 tracking-tight">
-                            Multi Restaurant <br />
-                            <span className="text-[#EF7F1A]">Food Ordering &</span> <br />
-                            <span className="text-[#EF7F1A]">Delivery</span> Solution
-                        </h1>
-                        <p className="text-lg text-gray-600 leading-relaxed max-w-xl">
-                            Build your very own multi-restaurant online food ordering & delivery business with Appzeto's complete source code & post-purchase services. Experience seamless ordering, real-time tracking, and powerful admin controls.
-                        </p>
-                    </motion.div>
-
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8, delay: 0.2 }}
-                        transition={{ duration: 0.8, delay: 0.2 }}
-                        viewport={{ once: false }}
-                        className="flex flex-wrap items-center gap-4"
-                    >
-                        <button className="h-14 px-8 rounded-full bg-gradient-to-r from-[#EF7F1A] to-[#F59E0B] text-white font-bold text-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 flex items-center gap-2">
-                            Buy Now
-                            <span className="material-symbols-outlined font-bold">arrow_forward</span>
-                        </button>
-                        <button className="h-14 px-8 rounded-full bg-white border-2 border-gray-200 text-gray-700 font-bold text-lg hover:border-[#EF7F1A] hover:text-[#EF7F1A] transition-all duration-300 flex items-center gap-2">
-                            View Demo
-                            <span className="material-symbols-outlined">play_arrow</span>
-                        </button>
-                    </motion.div>
-
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        whileInView={{ opacity: 1 }}
-                        transition={{ duration: 0.8, delay: 0.4 }}
-                        transition={{ duration: 0.8, delay: 0.4 }}
-                        viewport={{ once: false }}
-                        className="flex items-center gap-4 mt-4 opacity-80"
-                    >
-                        <div className="flex -space-x-3">
-                            <div className="w-10 h-10 rounded-full bg-gray-200 border-2 border-white"></div>
-                            <div className="w-10 h-10 rounded-full bg-gray-300 border-2 border-white"></div>
-                            <div className="w-10 h-10 rounded-full bg-gray-400 border-2 border-white"></div>
-                        </div>
-                        <p className="text-sm text-gray-500 font-medium">Trusted by 500+ Businesses</p>
-                    </motion.div>
-                </div>
-
-                {/* Right Content / Hero Graphics */}
-                <div className="w-full lg:w-1/2 relative mt-16 lg:mt-0 lg:h-screen flex items-center justify-center">
-                    {/* Orange Blob Background */}
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[140%] bg-[#EF7F1A] rounded-[40%] rotate-12 lg:translate-x-[20%] opacity-100 z-0"></div>
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[160%] h-[160%] bg-[#EF7F1A]/10 rounded-[45%] -rotate-6 lg:translate-x-[20%] z-[-1]"></div>
-
-                    {/* Phone Container */}
-                    <div className="relative z-10 w-[280px] md:w-[320px] lg:w-[360px] mx-auto transform rotate-[-5deg] hover:rotate-0 transition-transform duration-700 ease-out">
-                        {/* Phone Frame Mockup */}
-                        <div className="relative bg-black rounded-[3rem] p-3 shadow-2xl border-4 border-gray-900">
-                            <div className="relative rounded-[2.5rem] overflow-hidden bg-white aspect-[9/19.5]">
-                                {/* Carousel Images */}
-                                {images.map((img, index) => (
-                                    <img
-                                        key={index}
-                                        src={img}
-                                        alt={`Appzeto Food App Screen ${index + 1}`}
-                                        className={`w-full h-full object-cover absolute top-0 left-0 transition-opacity duration-1000 ease-in-out ${index === currentImageIndex ? 'opacity-100' : 'opacity-0'
-                                            }`}
-                                    />
-                                ))}
-                                {/* Top Notch */}
-                                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-40 h-7 bg-black rounded-b-2xl z-20"></div>
-                            </div>
-                        </div>
-
-                        {/* Floating Elements with Entrance Animation */}
+                    {/* Left Content */}
+                    <div className="w-full lg:w-1/2 flex flex-col gap-8 md:gap-10 pt-10 lg:pt-0 z-20">
                         <motion.div
-                            initial={{ x: -100, opacity: 0 }}
-                            whileInView={{ x: 0, opacity: 1 }}
-                            transition={{ duration: 0.8, delay: 0.5 }}
-                            className="absolute top-[20%] -left-[20%] md:-left-[40%] bg-white p-3 md:p-4 rounded-xl shadow-xl z-20 max-w-[160px]"
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.8 }}
+                            transition={{ duration: 0.8 }}
+                            viewport={{ once: false }}
+                            className="flex flex-col gap-4"
                         >
-                            <div className="flex gap-3 items-center">
-                                <img src={floatingImage1} className="w-12 h-12 rounded-lg object-cover" alt="Food" />
-                                <div>
-                                    <p className="text-xs font-bold text-gray-800">Tasty Pasta</p>
-                                    <div className="flex text-[#EF7F1A] text-[10px]">★★★★★</div>
-                                    <p className="text-[10px] font-bold mt-1">$12.99</p>
-                                </div>
+                            <div className="flex items-center gap-2 mb-2">
+                                <span className="text-[#EF7F1A] font-bold tracking-wider text-sm uppercase">Appzeto Food</span>
                             </div>
+                            <h1 className="text-4xl md:text-5xl lg:text-[3.5rem] font-bold leading-[1.1] text-gray-900 tracking-tight">
+                                Multi Restaurant <br />
+                                <span className="text-[#EF7F1A]">Food Ordering &</span> <br />
+                                <span className="text-[#EF7F1A]">Delivery</span> Solution
+                            </h1>
+                            <p className="text-lg text-gray-600 leading-relaxed max-w-xl">
+                                Build your very own multi-restaurant online food ordering & delivery business with Appzeto's complete source code & post-purchase services. Experience seamless ordering, real-time tracking, and powerful admin controls.
+                            </p>
                         </motion.div>
 
                         <motion.div
-                            initial={{ x: 100, opacity: 0 }}
-                            whileInView={{ x: 0, opacity: 1 }}
-                            transition={{ duration: 0.8, delay: 0.7 }}
-                            className="absolute bottom-[20%] -right-[15%] md:-right-[30%] bg-white p-3 md:p-4 rounded-xl shadow-xl z-20"
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.8, delay: 0.2 }}
+                            transition={{ duration: 0.8, delay: 0.2 }}
+                            viewport={{ once: false }}
+                            className="flex flex-wrap items-center gap-4"
                         >
-                            <div className="flex items-center gap-3">
-                                <div className="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center text-red-500">
-                                    <span className="material-symbols-outlined">location_on</span>
-                                </div>
-                                <div>
-                                    <p className="text-xs font-bold text-gray-800">Tracking Order</p>
-                                    <p className="text-[10px] text-gray-500">10 mins away</p>
-                                </div>
-                            </div>
+                            <button className="h-14 px-8 rounded-full bg-gradient-to-r from-[#EF7F1A] to-[#F59E0B] text-white font-bold text-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 flex items-center gap-2">
+                                Buy Now
+                                <span className="material-symbols-outlined font-bold">arrow_forward</span>
+                            </button>
+                            <button className="h-14 px-8 rounded-full bg-white border-2 border-gray-200 text-gray-700 font-bold text-lg hover:border-[#EF7F1A] hover:text-[#EF7F1A] transition-all duration-300 flex items-center gap-2">
+                                View Demo
+                                <span className="material-symbols-outlined">play_arrow</span>
+                            </button>
                         </motion.div>
 
-                        <div className="absolute top-[50%] -right-[25px] flex flex-col gap-4">
-                            <div className="w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center text-[#EF7F1A] cursor-pointer hover:scale-110 transition-transform">
-                                <span className="material-symbols-outlined">notifications</span>
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            whileInView={{ opacity: 1 }}
+                            transition={{ duration: 0.8, delay: 0.4 }}
+                            transition={{ duration: 0.8, delay: 0.4 }}
+                            viewport={{ once: false }}
+                            className="flex items-center gap-4 mt-4 opacity-80"
+                        >
+                            <div className="flex -space-x-3">
+                                <div className="w-10 h-10 rounded-full bg-gray-200 border-2 border-white"></div>
+                                <div className="w-10 h-10 rounded-full bg-gray-300 border-2 border-white"></div>
+                                <div className="w-10 h-10 rounded-full bg-gray-400 border-2 border-white"></div>
                             </div>
-                            <div className="w-12 h-12 bg-[#25D366] rounded-full shadow-lg flex items-center justify-center text-white cursor-pointer hover:scale-110 transition-transform">
-                                <span className="material-symbols-outlined">chat</span>
+                            <p className="text-sm text-gray-500 font-medium">Trusted by 500+ Businesses</p>
+                        </motion.div>
+                    </div>
+
+                    {/* Right Content / Hero Graphics */}
+                    <div className="w-full lg:w-1/2 relative mt-16 lg:mt-0 lg:h-screen flex items-center justify-center">
+                        {/* Orange Blob Background */}
+                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[140%] bg-[#EF7F1A] rounded-[40%] rotate-12 lg:translate-x-[20%] opacity-100 z-0"></div>
+                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[160%] h-[160%] bg-[#EF7F1A]/10 rounded-[45%] -rotate-6 lg:translate-x-[20%] z-[-1]"></div>
+
+                        {/* Phone Container */}
+                        <div className="relative z-10 w-[280px] md:w-[320px] lg:w-[360px] mx-auto transform rotate-[-5deg] hover:rotate-0 transition-transform duration-700 ease-out">
+                            {/* Phone Frame Mockup */}
+                            <div className="relative bg-black rounded-[3rem] p-3 shadow-2xl border-4 border-gray-900">
+                                <div className="relative rounded-[2.5rem] overflow-hidden bg-white aspect-[9/19.5]">
+                                    {/* Carousel Images */}
+                                    {images.map((img, index) => (
+                                        <img
+                                            key={index}
+                                            src={img}
+                                            alt={`Appzeto Food App Screen ${index + 1}`}
+                                            className={`w-full h-full object-cover absolute top-0 left-0 transition-opacity duration-1000 ease-in-out ${index === currentImageIndex ? 'opacity-100' : 'opacity-0'
+                                                }`}
+                                        />
+                                    ))}
+                                    {/* Top Notch */}
+                                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-40 h-7 bg-black rounded-b-2xl z-20"></div>
+                                </div>
+                            </div>
+
+                            {/* Floating Elements with Entrance Animation */}
+                            <motion.div
+                                initial={{ x: -100, opacity: 0 }}
+                                whileInView={{ x: 0, opacity: 1 }}
+                                transition={{ duration: 0.8, delay: 0.5 }}
+                                className="absolute top-[20%] -left-[20%] md:-left-[40%] bg-white p-3 md:p-4 rounded-xl shadow-xl z-20 max-w-[160px]"
+                            >
+                                <div className="flex gap-3 items-center">
+                                    <img src={floatingImage1} className="w-12 h-12 rounded-lg object-cover" alt="Food" />
+                                    <div>
+                                        <p className="text-xs font-bold text-gray-800">Tasty Pasta</p>
+                                        <div className="flex text-[#EF7F1A] text-[10px]">★★★★★</div>
+                                        <p className="text-[10px] font-bold mt-1">$12.99</p>
+                                    </div>
+                                </div>
+                            </motion.div>
+
+                            <motion.div
+                                initial={{ x: 100, opacity: 0 }}
+                                whileInView={{ x: 0, opacity: 1 }}
+                                transition={{ duration: 0.8, delay: 0.7 }}
+                                className="absolute bottom-[20%] -right-[15%] md:-right-[30%] bg-white p-3 md:p-4 rounded-xl shadow-xl z-20"
+                            >
+                                <div className="flex items-center gap-3">
+                                    <div className="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center text-red-500">
+                                        <span className="material-symbols-outlined">location_on</span>
+                                    </div>
+                                    <div>
+                                        <p className="text-xs font-bold text-gray-800">Tracking Order</p>
+                                        <p className="text-[10px] text-gray-500">10 mins away</p>
+                                    </div>
+                                </div>
+                            </motion.div>
+
+                            <div className="absolute top-[50%] -right-[25px] flex flex-col gap-4">
+                                <div className="w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center text-[#EF7F1A] cursor-pointer hover:scale-110 transition-transform">
+                                    <span className="material-symbols-outlined">notifications</span>
+                                </div>
+                                <div className="w-12 h-12 bg-[#25D366] rounded-full shadow-lg flex items-center justify-center text-white cursor-pointer hover:scale-110 transition-transform">
+                                    <span className="material-symbols-outlined">chat</span>
+                                </div>
                             </div>
                         </div>
                     </div>
+
                 </div>
 
+                {/* What Comes With Section */}
+                <div className="min-h-screen w-full py-20 bg-gray-50 relative z-20 overflow-hidden flex flex-col justify-center">
+                    <div className="max-w-[1400px] mx-auto px-4 md:px-10 text-center mb-10 lg:mb-16">
+                        <motion.h2
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.6 }}
+                            transition={{ duration: 0.6 }}
+                            viewport={{ once: false }}
+                            className="text-3xl md:text-5xl font-black text-gray-900 mb-6"
+                        >
+                            What Comes with <span className="text-[#EF7F1A]">Appzeto Food?</span>
+                        </motion.h2>
+                        <motion.p
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.6, delay: 0.2 }}
+                            transition={{ duration: 0.6, delay: 0.2 }}
+                            viewport={{ once: false }}
+                            className="text-lg text-gray-500 max-w-3xl mx-auto leading-relaxed"
+                        >
+                            A complete ecosystem designed to automate your delivery business. From ordering to delivery, we have covered every touchpoint with premium interfaces.
+                        </motion.p>
+                    </div>
+
+                    {/* Device Cluster Container - Reference Image Layout */}
+                    <div className="relative w-full max-w-[1200px] mx-auto h-[450px] md:h-[550px] flex justify-center items-center scale-[0.6] sm:scale-[0.75] md:scale-100 origin-top mt-10">
+
+                        {/* 1. Websites (Monitor - Back Center) */}
+                        <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ duration: 0.6 }} className="absolute top-[40px] left-1/2 -translate-x-1/2 w-[360px] z-10 group">
+                            <FeatureLabel title="Websites" subtitle="Responsive Web App" icon="language" position="top" offset="-top-24" />
+                            <MockupFrame type="monitor" images={images} duration={2500} />
+                        </motion.div>
+
+                        {/* 2. Admin Panel (Laptop - Front Left) */}
+                        <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.6, delay: 0.2 }} className="absolute bottom-[80px] left-[calc(50%-340px)] w-[280px] z-20 group">
+                            <FeatureLabel title="Admin Panel" subtitle="Full Business Control" icon="admin_panel_settings" position="top" offset="-top-20 -left-10" />
+                            <MockupFrame type="laptop" images={images} duration={2200} imageIndexOffset={1} />
+                        </motion.div>
+
+                        {/* 3. Restaurant Panel (Laptop - Front Right) */}
+                        <motion.div initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.6, delay: 0.2 }} className="absolute bottom-[80px] right-[calc(50%-340px)] w-[280px] z-20 group">
+                            <FeatureLabel title="Restaurant Panel" subtitle="Manage Orders & Menu" icon="storefront" position="top" offset="-top-20 -right-10" />
+                            <MockupFrame type="laptop" images={images} duration={2800} imageIndexOffset={2} />
+                        </motion.div>
+
+                        {/* 4. Delivery App (Phone - Far Left) */}
+                        <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.6, delay: 0.3 }} className="absolute bottom-[60px] left-[calc(50%-450px)] w-[80px] z-30 group">
+                            <FeatureLabel title="Delivery App" subtitle="Real-time Tracking" icon="local_shipping" position="bottom" offset="-bottom-24" />
+                            <MockupFrame type="phone" images={images} duration={1800} imageIndexOffset={3} />
+                        </motion.div>
+
+                        {/* 5. Restaurant App (Phone - Far Right) */}
+                        <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.6, delay: 0.3 }} className="absolute bottom-[60px] right-[calc(50%-450px)] w-[80px] z-30 group">
+                            <FeatureLabel title="Restaurant App" subtitle="Kitchen Dashboard" icon="restaurant" position="bottom" offset="-bottom-24" />
+                            <MockupFrame type="phone" images={images} duration={2100} imageIndexOffset={2} />
+                        </motion.div>
+
+                        {/* 6. Customer App (Phone - Front Center) */}
+                        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.4 }} className="absolute -bottom-[20px] left-1/2 -translate-x-1/2 w-[90px] z-40 group">
+                            <FeatureLabel title="Customer App" subtitle="Seamless Ordering" icon="smartphone" position="bottom" offset="-bottom-24" />
+                            <MockupFrame type="phone" images={images} duration={1500} imageIndexOffset={0} />
+                        </motion.div>
+
+                    </div>
+                </div>
+
+                {/* How It Works Section */}
+                <HowItWorks />
+
+                {/* Revenue Model Section */}
+                <RevenueModel />
+
+                {/* Modern Interactive Features Section */}
+                <ModernInteractiveFeatures />
+
+                {/* Background decorative elements */}
+                <motion.div style={{ y: yText }} className="absolute top-10 left-10 text-gray-200 text-9xl font-black opacity-10 select-none z-0">FOOD</motion.div>
             </div>
 
-            {/* What Comes With Section */}
-            <div className="min-h-screen w-full py-20 bg-gray-50 relative z-20 overflow-hidden flex flex-col justify-center">
-                <div className="max-w-[1400px] mx-auto px-4 md:px-10 text-center mb-10 lg:mb-16">
-                    <motion.h2
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6 }}
-                        transition={{ duration: 0.6 }}
-                        viewport={{ once: false }}
-                        className="text-3xl md:text-5xl font-black text-gray-900 mb-6"
-                    >
-                        What Comes with <span className="text-[#EF7F1A]">Appzeto Food?</span>
-                    </motion.h2>
-                    <motion.p
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6, delay: 0.2 }}
-                        transition={{ duration: 0.6, delay: 0.2 }}
-                        viewport={{ once: false }}
-                        className="text-lg text-gray-500 max-w-3xl mx-auto leading-relaxed"
-                    >
-                        A complete ecosystem designed to automate your delivery business. From ordering to delivery, we have covered every touchpoint with premium interfaces.
-                    </motion.p>
-                </div>
+            <ScrollReveal>
+                <ContactUs isHomePage={true} />
+            </ScrollReveal>
 
-                {/* Device Cluster Container - Reference Image Layout */}
-                <div className="relative w-full max-w-[1200px] mx-auto h-[450px] md:h-[550px] flex justify-center items-center scale-[0.6] sm:scale-[0.75] md:scale-100 origin-top mt-10">
-
-                    {/* 1. Websites (Monitor - Back Center) */}
-                    <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ duration: 0.6 }} className="absolute top-[40px] left-1/2 -translate-x-1/2 w-[360px] z-10 group">
-                        <FeatureLabel title="Websites" subtitle="Responsive Web App" icon="language" position="top" offset="-top-24" />
-                        <MockupFrame type="monitor" images={images} duration={2500} />
-                    </motion.div>
-
-                    {/* 2. Admin Panel (Laptop - Front Left) */}
-                    <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.6, delay: 0.2 }} className="absolute bottom-[80px] left-[calc(50%-340px)] w-[280px] z-20 group">
-                        <FeatureLabel title="Admin Panel" subtitle="Full Business Control" icon="admin_panel_settings" position="top" offset="-top-20 -left-10" />
-                        <MockupFrame type="laptop" images={images} duration={2200} imageIndexOffset={1} />
-                    </motion.div>
-
-                    {/* 3. Restaurant Panel (Laptop - Front Right) */}
-                    <motion.div initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.6, delay: 0.2 }} className="absolute bottom-[80px] right-[calc(50%-340px)] w-[280px] z-20 group">
-                        <FeatureLabel title="Restaurant Panel" subtitle="Manage Orders & Menu" icon="storefront" position="top" offset="-top-20 -right-10" />
-                        <MockupFrame type="laptop" images={images} duration={2800} imageIndexOffset={2} />
-                    </motion.div>
-
-                    {/* 4. Delivery App (Phone - Far Left) */}
-                    <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.6, delay: 0.3 }} className="absolute bottom-[60px] left-[calc(50%-450px)] w-[80px] z-30 group">
-                        <FeatureLabel title="Delivery App" subtitle="Real-time Tracking" icon="local_shipping" position="bottom" offset="-bottom-24" />
-                        <MockupFrame type="phone" images={images} duration={1800} imageIndexOffset={3} />
-                    </motion.div>
-
-                    {/* 5. Restaurant App (Phone - Far Right) */}
-                    <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.6, delay: 0.3 }} className="absolute bottom-[60px] right-[calc(50%-450px)] w-[80px] z-30 group">
-                        <FeatureLabel title="Restaurant App" subtitle="Kitchen Dashboard" icon="restaurant" position="bottom" offset="-bottom-24" />
-                        <MockupFrame type="phone" images={images} duration={2100} imageIndexOffset={2} />
-                    </motion.div>
-
-                    {/* 6. Customer App (Phone - Front Center) */}
-                    <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.4 }} className="absolute -bottom-[20px] left-1/2 -translate-x-1/2 w-[90px] z-40 group">
-                        <FeatureLabel title="Customer App" subtitle="Seamless Ordering" icon="smartphone" position="bottom" offset="-bottom-24" />
-                        <MockupFrame type="phone" images={images} duration={1500} imageIndexOffset={0} />
-                    </motion.div>
-
-                </div>
-            </div>
-
-            {/* How It Works Section */}
-            <HowItWorks />
-
-            {/* Revenue Model Section */}
-            <RevenueModel />
-
-            {/* Modern Interactive Features Section */}
-            <ModernInteractiveFeatures />
-
-            {/* Background decorative elements */}
-            <motion.div style={{ y: yText }} className="absolute top-10 left-10 text-gray-200 text-9xl font-black opacity-10 select-none z-0">FOOD</motion.div>
-        </div>
+            <ScrollReveal>
+                <Footer />
+            </ScrollReveal>
+        </ScrollWrapper>
     );
 };
 

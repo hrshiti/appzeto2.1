@@ -2,16 +2,30 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 const Reviews = () => {
-    const slideUp = {
-        initial: { opacity: 0, y: 50 },
-        whileInView: { opacity: 1, y: 0 },
-        viewport: { once: false, amount: 0.05 },
-        transition: { duration: 1, ease: [0.22, 1, 0.36, 1] }
+    const slideInLeft = {
+        initial: { opacity: 0, x: -100 },
+        whileInView: { opacity: 1, x: 0 },
+        viewport: { once: false, amount: 0.1 },
+        transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] }
     };
 
-    const slideUpDelayed = (delay) => ({
-        ...slideUp,
-        transition: { ...slideUp.transition, delay }
+    const slideInRight = {
+        initial: { opacity: 0, x: 100 },
+        whileInView: { opacity: 1, x: 0 },
+        viewport: { once: false, amount: 0.1 },
+        transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] }
+    };
+
+    const slideInUp = {
+        initial: { opacity: 0, y: 80 },
+        whileInView: { opacity: 1, y: 0 },
+        viewport: { once: false, amount: 0.1 },
+        transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] }
+    };
+
+    const delayed = (variant, delay) => ({
+        ...variant,
+        transition: { ...variant.transition, delay }
     });
 
     return (
@@ -31,7 +45,7 @@ const Reviews = () => {
 
                     {/* 1. Victoria Linton (Left) */}
                     <motion.div
-                        {...slideUpDelayed(0.1)}
+                        {...delayed(slideInLeft, 0.1)}
                         className="md:col-span-4 bg-white rounded-[2rem] p-6 relative shadow-lg"
                     >
                         <div className="flex items-center space-x-4 mb-3">
@@ -55,7 +69,7 @@ const Reviews = () => {
 
                     {/* 2. Center Large Card (Center) */}
                     <motion.div
-                        {...slideUp}
+                        {...slideInUp}
                         className="md:col-span-4 md:row-span-2 bg-white rounded-[2.5rem] p-8 text-center flex flex-col items-center justify-center shadow-xl relative mt-8 md:mt-0"
                     >
                         <div className="absolute -top-10">
@@ -79,7 +93,7 @@ const Reviews = () => {
 
                     {/* 3. Client Review (Right) */}
                     <motion.div
-                        {...slideUpDelayed(0.15)}
+                        {...delayed(slideInRight, 0.1)}
                         className="md:col-span-4 bg-white rounded-3xl p-6 shadow-lg"
                     >
                         <div className="flex justify-between items-start mb-2">
@@ -101,7 +115,7 @@ const Reviews = () => {
 
                     {/* 4. Dimitri Woodhouse (Left) */}
                     <motion.div
-                        {...slideUpDelayed(0.2)}
+                        {...delayed(slideInLeft, 0.2)}
                         className="md:col-span-4 bg-white rounded-full p-2 pr-8 shadow-lg flex items-center mt-4"
                     >
                         <div className="flex-1 pl-8 py-2">
@@ -127,7 +141,7 @@ const Reviews = () => {
 
                     {/* 5. Nelly Vane (Right) */}
                     <motion.div
-                        {...slideUpDelayed(0.25)}
+                        {...delayed(slideInRight, 0.2)}
                         className="md:col-span-4 bg-white rounded-full p-2 pl-2 shadow-lg flex items-center relative mt-4"
                     >
                         <img
@@ -151,7 +165,7 @@ const Reviews = () => {
 
                     {/* 6. Top-notch (Left) */}
                     <motion.div
-                        {...slideUpDelayed(0.3)}
+                        {...delayed(slideInLeft, 0.3)}
                         className="md:col-span-3 bg-white rounded-3xl p-6 shadow-lg flex flex-col justify-between mt-4"
                     >
                         <div className="text-center">
@@ -178,7 +192,7 @@ const Reviews = () => {
 
                     {/* 7. Testimonial (Center-Left) */}
                     <motion.div
-                        {...slideUpDelayed(0.35)}
+                        {...delayed(slideInLeft, 0.35)}
                         className="md:col-span-3 bg-white rounded-3xl p-6 shadow-lg flex flex-col relative mt-4"
                     >
                         <div className="flex items-start space-x-3 mb-4">
@@ -205,7 +219,7 @@ const Reviews = () => {
 
                     {/* 8. Recommended (Center-Right) */}
                     <motion.div
-                        {...slideUpDelayed(0.4)}
+                        {...delayed(slideInRight, 0.35)}
                         className="md:col-span-3 bg-white rounded-3xl p-4 shadow-lg text-center mt-4"
                     >
                         <div className="relative mb-3">
@@ -227,7 +241,7 @@ const Reviews = () => {
 
                     {/* 9. Bubble Quote (Right) */}
                     <motion.div
-                        {...slideUpDelayed(0.45)}
+                        {...delayed(slideInRight, 0.4)}
                         className="md:col-span-3 flex flex-col justify-end mt-4"
                     >
                         <div className="bg-white p-6 rounded-t-3xl rounded-br-3xl rounded-bl-none shadow-lg relative mb-4">

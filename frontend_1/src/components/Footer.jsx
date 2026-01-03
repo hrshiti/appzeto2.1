@@ -1,4 +1,5 @@
 import React from 'react';
+import logo from '../assets/logo.png';
 
 const Footer = () => {
     return (
@@ -7,8 +8,7 @@ const Footer = () => {
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
                     <div className="col-span-1 md:col-span-1">
                         <div className="flex items-center gap-2 mb-6">
-                            <span className="material-symbols-outlined text-3xl text-[#05A4A7]">terminal</span>
-                            <span className="font-black text-2xl tracking-tighter uppercase">Appzeto</span>
+                            <img src={logo} alt="Appzeto Logo" className="h-10 w-auto" />
                         </div>
                         <p className="text-gray-400 text-sm leading-relaxed mb-8 max-w-xs">
                             Architecting the digital frontier. We build robust, scalable infrastructure for the next generation of innovators.
