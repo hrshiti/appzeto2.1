@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -111,46 +112,36 @@ const FoodAppUI = () => (
     </div>
 );
 
-const EdTechUI = () => (
-    <div className="w-full h-full bg-[#f8fafc] flex flex-col font-sans overflow-hidden">
-        <div className="p-6 pt-12 flex justify-between items-center bg-white shadow-sm z-20">
-            <div>
-                <h3 className="text-lg font-black text-gray-900">Hello, Alex!</h3>
-                <p className="text-xs text-gray-500 font-bold">What will you learn today?</p>
-            </div>
-            <div className="w-10 h-10 bg-indigo-100 rounded-full flex items-center justify-center text-indigo-600">
-                <span className="material-symbols-outlined">person</span>
-            </div>
+const EcommerceUI = () => (
+    <div className="w-full h-full bg-white flex flex-col font-sans overflow-hidden">
+        <div className="p-6 pt-12 flex justify-between items-center bg-white z-20 sticky top-0">
+            <span className="material-symbols-outlined text-gray-800">menu</span>
+            <h3 className="text-lg font-black text-gray-900 tracking-tighter">SHOP</h3>
+            <span className="material-symbols-outlined text-gray-800">shopping_bag</span>
         </div>
         <div className="flex-1 overflow-hidden px-6 pb-20">
-            <div className="animate-scroll-vertical-reverse">
-                <div className="py-6 space-y-6">
-                    <div className="bg-indigo-600 p-6 rounded-[2.5rem] text-white overflow-hidden relative group">
-                        <div className="relative z-10">
-                            <h4 className="text-xl font-black mb-2">60% OFF</h4>
-                            <p className="text-xs font-bold text-indigo-100 mb-4">On all certification courses this month.</p>
-                            <button className="px-4 py-2 bg-white text-indigo-600 rounded-full text-[10px] font-black uppercase tracking-wider">Join Now</button>
+            <div className="animate-scroll-vertical">
+                <div className="py-2 space-y-6">
+                    <div className="relative aspect-[4/3] bg-gray-100 rounded-[2rem] overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1000&auto=format&fit=crop" className="w-full h-full object-cover" alt="Product" />
+                        <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur px-4 py-2 rounded-xl">
+                            <p className="font-bold text-xs">Elegant Watch</p>
+                            <p className="font-black text-sm">$129.00</p>
                         </div>
-                        <span className="material-symbols-outlined absolute -right-4 -bottom-4 text-9xl text-white/10 rotate-12 group-hover:scale-110 transition-transform">school</span>
                     </div>
-                    <div className="flex justify-between items-center">
-                        <h4 className="font-black text-gray-900">Featured Courses</h4>
-                        <span className="text-xs text-indigo-600 font-bold">See all</span>
-                    </div>
-                    <div className="space-y-4">
+                    <div className="grid grid-cols-2 gap-4">
                         {[
-                            { name: 'UI/UX Masterclass', tutor: 'John Doe', price: '$49', bg: 'bg-rose-50', icon: 'brush', iconCol: 'text-rose-500' },
-                            { name: 'Python for Data', tutor: 'Sarah Jay', price: '$29', bg: 'bg-emerald-50', icon: 'data_object', iconCol: 'text-emerald-500' },
-                        ].map((course, i) => (
-                            <div key={i} className={`flex items-center gap-4 p-4 rounded-3xl ${course.bg} border border-white`}>
-                                <div className={`w-12 h-12 rounded-2xl bg-white flex items-center justify-center ${course.iconCol} shadow-sm font-black`}>
-                                    <span className="material-symbols-outlined">{course.icon}</span>
+                            { name: 'Nike Air', price: '$99', img: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=1000&auto=format&fit=crop' },
+                            { name: 'Headphones', price: '$199', img: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=1000&auto=format&fit=crop' }
+                        ].map((item, i) => (
+                            <div key={i} className="space-y-2">
+                                <div className="aspect-square bg-gray-100 rounded-[1.5rem] overflow-hidden">
+                                    <img src={item.img} className="w-full h-full object-cover" alt={item.name} />
                                 </div>
-                                <div className="flex-1">
-                                    <p className="font-bold text-gray-900 text-sm">{course.name}</p>
-                                    <p className="text-[10px] text-gray-500 font-bold">{course.tutor}</p>
+                                <div>
+                                    <p className="font-bold text-xs text-gray-800">{item.name}</p>
+                                    <p className="font-black text-xs text-gray-500">{item.price}</p>
                                 </div>
-                                <span className="font-black text-gray-900">{course.price}</span>
                             </div>
                         ))}
                     </div>
@@ -160,64 +151,47 @@ const EdTechUI = () => (
     </div>
 );
 
-const FinanceAppUI = () => (
-    <div className="w-full h-full bg-[#0a0a0a] flex flex-col font-sans text-white overflow-hidden">
-        <div className="p-6 pt-12 flex justify-between items-center z-20 bg-[#0a0a0a]">
+const HospitalUI = () => (
+    <div className="w-full h-full bg-[#f0f9ff] flex flex-col font-sans overflow-hidden">
+        <div className="p-6 pt-12 flex justify-between items-center bg-[#f0f9ff] z-20">
             <div>
-                <p className="text-[10px] text-gray-500 font-black uppercase tracking-[.2em]">Total Balance</p>
-                <h3 className="text-3xl font-black mt-1">$42,560.00</h3>
+                <p className="text-xs text-blue-500 font-bold uppercase">Good Morning</p>
+                <h3 className="text-xl font-black text-gray-900">Dr. Sarah</h3>
             </div>
-            <div className="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center border border-white/10">
-                <span className="material-symbols-outlined text-sm">notifications</span>
+            <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center text-blue-500 shadow-sm">
+                <span className="material-symbols-outlined">calendar_month</span>
             </div>
         </div>
         <div className="flex-1 overflow-hidden px-6 pb-20">
             <div className="animate-scroll-vertical">
-                <div className="py-6 space-y-6">
-                    <div className="flex gap-4 overflow-x-auto no-scrollbar">
-                        <div className="min-w-[70%] aspect-[1.6/1] bg-gradient-to-br from-indigo-600 to-purple-700 rounded-[2.5rem] p-6 flex flex-col justify-between shadow-2xl relative overflow-hidden group">
-                            <div className="relative z-10 flex justify-between items-start">
-                                <span className="material-symbols-outlined text-3xl">contactless</span>
-                                <span className="font-black italic text-xl">VISA</span>
-                            </div>
-                            <div className="relative z-10">
-                                <p className="text-xs font-bold opacity-60">Card Number</p>
-                                <p className="text-lg font-black tracking-widest mt-1">**** **** **** 4290</p>
-                            </div>
-                            <div className="absolute -right-10 -bottom-10 w-40 h-40 bg-white/10 rounded-full group-hover:scale-125 transition-transform"></div>
+                <div className="py-2 space-y-4">
+                    <div className="bg-blue-600 text-white p-5 rounded-[2rem] flex justify-between items-center">
+                        <div>
+                            <p className="text-blue-100 text-xs font-bold mb-1">Appointments</p>
+                            <h4 className="text-2xl font-black">12</h4>
+                            <p className="text-[10px] text-blue-200 mt-1">4 Pending</p>
                         </div>
+                        <span className="material-symbols-outlined text-4xl opacity-50">groups</span>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-);
-
-const AIAppUI = () => (
-    <div className="w-full h-full bg-[#050505] flex flex-col font-sans text-white overflow-hidden p-6 pt-12">
-        <div className="flex flex-col items-center justify-center flex-1 space-y-8">
-            <div className="relative group">
-                <div className="absolute inset-0 bg-primary/20 rounded-full blur-[50px] animate-pulse"></div>
-                <div className="w-32 h-32 rounded-full border border-primary/30 flex items-center justify-center relative bg-black z-10 transition-transform duration-500 group-hover:scale-110">
-                    <span className="material-symbols-outlined text-5xl text-primary animate-bounce">mic</span>
-                </div>
-            </div>
-            <div className="text-center space-y-2">
-                <h3 className="text-2xl font-black tracking-tight">How can I help you?</h3>
-                <p className="text-xs text-gray-500 font-bold italic">Listening for "Hey Appzeto..."</p>
-            </div>
-            <div className="w-full h-32 overflow-hidden relative">
-                <div className="flex items-center justify-center gap-1 h-full">
-                    {[...Array(20)].map((_, i) => (
-                        <div
-                            key={i}
-                            className="w-1 bg-primary rounded-full animate-pulse"
-                            style={{
-                                height: `${20 + Math.random() * 60}%`,
-                                animationDelay: `${i * 0.1}s`,
-                                opacity: 0.3 + Math.random() * 0.7
-                            }}
-                        ></div>
+                    <h4 className="font-black text-gray-900 mt-4">Upcoming Patients</h4>
+                    {[
+                        { name: 'Alex M.', time: '10:00 AM', type: 'Checkup', bg: 'bg-white' },
+                        { name: 'Sam K.', time: '11:30 AM', type: 'Surgery', bg: 'bg-white' },
+                        { name: 'John D.', time: '02:00 PM', type: 'Consultation', bg: 'bg-white' },
+                        { name: 'Alex M.', time: '10:00 AM', type: 'Checkup', bg: 'bg-white' },
+                    ].map((p, i) => (
+                        <div key={i} className={`p-4 rounded-2xl ${p.bg} flex items-center justify-between shadow-sm`}>
+                            <div className="flex items-center gap-3">
+                                <div className="w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-xs">
+                                    {p.name.charAt(0)}
+                                </div>
+                                <div>
+                                    <p className="font-bold text-gray-800 text-sm">{p.name}</p>
+                                    <p className="text-[10px] text-gray-500 font-medium">{p.type}</p>
+                                </div>
+                            </div>
+                            <span className="text-xs font-black text-gray-900 bg-gray-50 px-2 py-1 rounded-lg">{p.time}</span>
+                        </div>
                     ))}
                 </div>
             </div>
@@ -229,16 +203,6 @@ const AIAppUI = () => (
 
 const projects = [
     {
-        title: "Appzeto Go • Logistics Reimagined",
-        description: "A complete mobility solution with real-time tracking, multi-modal transport, and peak-hour load balancing.",
-        tags: ["React Native", "Google Maps SDK", "Node.js"],
-        UI: TaxiAppUI,
-        bgColor: "#00F2FE", // Electric Cyan
-        textColor: "#082F30",
-        btnColor: "#082F30",
-        btnText: "#00F2FE"
-    },
-    {
         title: "Appzeto Food • Next-Gen Gastronomy",
         description: "Intelligent food discovery app using predictive analytics to suggest meals based on dietary habits and history.",
         tags: ["Flutter", "TensorFlow", "PostgreSQL"],
@@ -246,43 +210,48 @@ const projects = [
         bgColor: "#FF0844", // Vivid Rose
         textColor: "#300811",
         btnColor: "#300811",
-        btnText: "#FF0844"
+        btnText: "#FF0844",
+        link: "/appzeto-food"
     },
     {
-        title: "Appzeto Learn • Personalized Education",
-        description: "Gamified learning platform with AI tutors and dynamic curriculum adjustment for every student.",
-        tags: ["Next.js", "Python AI", "AWS Lambda"],
-        UI: EdTechUI,
-        bgColor: "#7028FF", // Deep Violet
+        title: "Appzeto Shop • Future of Commerce",
+        description: "Immersive e-commerce experience with AR try-ons, AI styling assistants, and seamless one-tap checkout.",
+        tags: ["React Native", "ARKit", "Stripe"],
+        UI: EcommerceUI,
+        bgColor: "#4F46E5", // Indigo
         textColor: "#FFFFFF",
         btnColor: "#FFFFFF",
-        btnText: "#7028FF"
+        btnText: "#4F46E5",
+        link: "/appzeto-ecommerce"
     },
     {
-        title: "Appzeto Pay • Unified Digital Assets",
-        description: "Ultra-secure wealth management app with biometric multi-sig, instant FX, and portfolio tracking.",
-        tags: ["Swift", "Cardano", "Rust"],
-        UI: FinanceAppUI,
-        bgColor: "#FF7F00", // Vibrant Orange
-        textColor: "#3D1F00",
-        btnColor: "#3D1F00",
-        btnText: "#FF7F00"
+        title: "Appzeto Care • Smart Healthcare",
+        description: "Comprehensive hospital management ecosystem for doctors, patients, and administrators with real-time monitoring.",
+        tags: ["Next.js", "FHIR", "WebRTC"],
+        UI: HospitalUI,
+        bgColor: "#0EA5E9", // Sky Blue
+        textColor: "#082F49",
+        btnColor: "#082F49",
+        btnText: "#0EA5E9",
+        link: "/appzeto-hospital"
     },
     {
-        title: "Appzeto Voice • Intelligent Assistant",
-        description: "Voice-first AI that integrates with your entire workspace to automate repetitive tasks via natural language.",
-        tags: ["PyTorch", "gRPC", "Edge Computing"],
-        UI: AIAppUI,
-        bgColor: "#F9D423", // Sun Yellow
-        textColor: "#302800",
-        btnColor: "#302800",
-        btnText: "#F9D423"
+        title: "Appzeto Go • Logistics Reimagined",
+        description: "A complete mobility solution with real-time tracking, multi-modal transport, and peak-hour load balancing.",
+        tags: ["React Native", "Google Maps SDK", "Node.js"],
+        UI: TaxiAppUI,
+        bgColor: "#00F2FE", // Electric Cyan
+        textColor: "#082F30",
+        btnColor: "#082F30",
+        btnText: "#00F2FE",
+        link: "/appzeto-taxi"
     }
 ];
 
 const Projects = () => {
     const [activeProject, setActiveProject] = useState(0);
     const containerRef = useRef(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const ctx = gsap.context(() => {
@@ -334,9 +303,9 @@ const Projects = () => {
                             <AnimatePresence>
                                 <motion.div
                                     key={activeProject}
-                                    initial={{ opacity: 0, x: -200 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    exit={{ opacity: 0, x: 200 }}
+                                    initial={{ opacity: 0, x: -200, pointerEvents: 'none', zIndex: 0 }}
+                                    animate={{ opacity: 1, x: 0, pointerEvents: 'auto', zIndex: 10 }}
+                                    exit={{ opacity: 0, x: 200, pointerEvents: 'none', zIndex: 0 }}
                                     transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
                                     className="flex flex-col gap-6 items-start absolute inset-0 py-4 text-left"
                                 >
@@ -362,6 +331,7 @@ const Projects = () => {
                                     </motion.p>
                                     <div className="pt-6">
                                         <motion.button
+                                            onClick={() => navigate(projects[activeProject].link)}
                                             animate={{
                                                 backgroundColor: projects[activeProject].btnColor,
                                                 color: projects[activeProject].btnText

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 
 import aiImg from '../assets/ai_ml_service_preview_1767285486518.png';
 import webImg from '../assets/web_dev_service_preview_1767285503403.png';
@@ -18,13 +19,15 @@ const services = [
         id: "02",
         title: "Web Development",
         features: ["Full-stack Apps", "E-commerce Solutions", "SaaS Platforms", "Performance Optimization", "SEO Strategy"],
-        image: webImg
+        image: webImg,
+        lottie: "https://lottie.host/4a539b75-197e-4054-94c3-636c84c1f24d/qK7XU7u7u7.lottie"
     },
     {
         id: "03",
         title: "Mobile App Development",
         features: ["iOS & Android", "React Native", "Flutter Apps", "Cross-platform", "Real-time Sync"],
-        image: mobileImg
+        image: mobileImg,
+        lottie: "https://lottie.host/6ad307d8-18e0-405c-9d6e-9ca28841b9d4/f3iV3Gv4Gv.lottie"
     },
     {
         id: "04",
@@ -36,7 +39,8 @@ const services = [
         id: "05",
         title: "UI/UX Design",
         features: ["Visual Identity", "Wireframing", "Prototyping", "User Research", "Interaction Design"],
-        image: uiuxImg
+        image: uiuxImg,
+        lottie: "https://lottie.host/8b7d995c-3f41-477d-810a-ade6a41f6e2b/lU7fM7fM7f.lottie"
     },
 ];
 
@@ -126,11 +130,20 @@ const Services = () => {
                                                     }}
                                                     className="w-full lg:w-[480px] aspect-[16/10] rounded-2xl overflow-hidden shadow-[0_30px_70px_rgba(0,0,0,0.6)] border border-white/5 relative group/img"
                                                 >
-                                                    <img
-                                                        src={service.image}
-                                                        alt={service.title}
-                                                        className="w-full h-full object-cover transition-transform duration-[3000ms] ease-out group-hover/img:scale-110"
-                                                    />
+                                                    {service.lottie ? (
+                                                        <DotLottieReact
+                                                            src={service.lottie}
+                                                            loop
+                                                            autoplay
+                                                            className="w-full h-full object-contain p-10"
+                                                        />
+                                                    ) : (
+                                                        <img
+                                                            src={service.image}
+                                                            alt={service.title}
+                                                            className="w-full h-full object-cover transition-transform duration-[3000ms] ease-out group-hover/img:scale-110"
+                                                        />
+                                                    )}
                                                     <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
                                                 </motion.div>
 

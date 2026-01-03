@@ -333,6 +333,29 @@ const HowItWorks = () => {
                         <motion.path d="M 275 360 L 280 350 L 285 360" fill="none" stroke="#EF7F1A" strokeWidth="2" initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ delay: 2.2 }} />
                     </svg>
 
+                    {/* Continuously Moving Bike */}
+                    <div className="absolute inset-0 z-0 pointer-events-none overflow-visible">
+                        <div
+                            style={{
+                                width: '40px',
+                                height: '40px',
+                                position: 'absolute',
+                                offsetPath: "path('M 280 200 C 280 100, 400 50, 600 50 L 850 50 L 850 150 L 850 350 L 850 450 L 600 450 L 500 450 L 350 450 L 280 450 L 280 350 L 280 200 Z')",
+                                offsetRotate: 'auto',
+                                animation: 'bikeLoop 10s linear infinite',
+                            }}
+                            className="text-[#EF7F1A]"
+                        >
+                            <span className="material-symbols-outlined text-3xl transform -scale-x-100">two_wheeler</span>
+                        </div>
+                        <style>{`
+                            @keyframes bikeLoop {
+                                0% { offset-distance: 0%; }
+                                100% { offset-distance: 100%; }
+                            }
+                        `}</style>
+                    </div>
+
                     {/* 1. Customer Places Order */}
                     <div className="absolute top-[200px] left-[50px] w-[250px] flex flex-col items-end text-right z-10">
                         <motion.div initial={{ opacity: 0, x: -20 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ delay: 0.2 }}>
