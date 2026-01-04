@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-import Lenis from 'lenis';
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -44,27 +43,26 @@ const ProductShowcase = () => {
         <ScrollWrapper>
             <Navbar />
             <div className="min-h-screen w-full bg-white relative overflow-hidden font-sans selection:bg-[#EF7F1A] selection:text-white">
-                <div className="max-w-[1400px] mx-auto min-h-screen px-4 md:px-10 lg:px-20 py-20 lg:py-0 flex flex-col lg:flex-row items-center relative z-10">
+                <div className="max-w-[1400px] mx-auto min-h-screen px-4 md:px-10 lg:px-20 py-12 md:py-20 lg:py-0 flex flex-col lg:flex-row items-center relative z-10">
 
                     {/* Left Content */}
-                    <div className="w-full lg:w-1/2 flex flex-col gap-8 md:gap-10 pt-10 lg:pt-0 z-20">
+                    <div className="w-full lg:w-1/2 flex flex-col gap-6 md:gap-10 pt-4 md:pt-10 lg:pt-0 z-20">
                         <motion.div
                             initial={{ opacity: 0, y: 30 }}
                             whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.8 }}
                             transition={{ duration: 0.8 }}
                             viewport={{ once: false }}
                             className="flex flex-col gap-4"
                         >
                             <div className="flex items-center gap-2 mb-2">
-                                <span className="text-[#EF7F1A] font-bold tracking-wider text-sm uppercase">Appzeto Food</span>
+                                <span className="text-[#EF7F1A] font-bold tracking-wider text-xs md:text-sm uppercase">Appzeto Food</span>
                             </div>
-                            <h1 className="text-4xl md:text-5xl lg:text-[3.5rem] font-bold leading-[1.1] text-gray-900 tracking-tight">
+                            <h1 className="text-3xl md:text-5xl lg:text-[3.5rem] font-bold leading-[1.1] text-gray-900 tracking-tight">
                                 Multi Restaurant <br />
                                 <span className="text-[#EF7F1A]">Food Ordering &</span> <br />
                                 <span className="text-[#EF7F1A]">Delivery</span> Solution
                             </h1>
-                            <p className="text-lg text-gray-600 leading-relaxed max-w-xl">
+                            <p className="text-base md:text-lg text-gray-600 leading-relaxed max-w-xl">
                                 Build your very own multi-restaurant online food ordering & delivery business with Appzeto's complete source code & post-purchase services. Experience seamless ordering, real-time tracking, and powerful admin controls.
                             </p>
                         </motion.div>
@@ -73,17 +71,16 @@ const ProductShowcase = () => {
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8, delay: 0.2 }}
-                            transition={{ duration: 0.8, delay: 0.2 }}
                             viewport={{ once: false }}
                             className="flex flex-wrap items-center gap-4"
                         >
-                            <button className="h-14 px-8 rounded-full bg-gradient-to-r from-[#EF7F1A] to-[#F59E0B] text-white font-bold text-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 flex items-center gap-2">
+                            <button className="h-12 md:h-14 px-6 md:px-8 rounded-full bg-gradient-to-r from-[#EF7F1A] to-[#F59E0B] text-white font-bold text-base md:text-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 flex items-center gap-2">
                                 Buy Now
-                                <span className="material-symbols-outlined font-bold">arrow_forward</span>
+                                <span className="material-symbols-outlined font-bold text-sm md:text-base">arrow_forward</span>
                             </button>
-                            <button className="h-14 px-8 rounded-full bg-white border-2 border-gray-200 text-gray-700 font-bold text-lg hover:border-[#EF7F1A] hover:text-[#EF7F1A] transition-all duration-300 flex items-center gap-2">
+                            <button className="h-12 md:h-14 px-6 md:px-8 rounded-full bg-white border-2 border-gray-200 text-gray-700 font-bold text-base md:text-lg hover:border-[#EF7F1A] hover:text-[#EF7F1A] transition-all duration-300 flex items-center gap-2">
                                 View Demo
-                                <span className="material-symbols-outlined">play_arrow</span>
+                                <span className="material-symbols-outlined text-sm md:text-base">play_arrow</span>
                             </button>
                         </motion.div>
 
@@ -91,30 +88,29 @@ const ProductShowcase = () => {
                             initial={{ opacity: 0 }}
                             whileInView={{ opacity: 1 }}
                             transition={{ duration: 0.8, delay: 0.4 }}
-                            transition={{ duration: 0.8, delay: 0.4 }}
                             viewport={{ once: false }}
-                            className="flex items-center gap-4 mt-4 opacity-80"
+                            className="flex items-center gap-4 mt-2 md:mt-4 opacity-80"
                         >
                             <div className="flex -space-x-3">
-                                <div className="w-10 h-10 rounded-full bg-gray-200 border-2 border-white"></div>
-                                <div className="w-10 h-10 rounded-full bg-gray-300 border-2 border-white"></div>
-                                <div className="w-10 h-10 rounded-full bg-gray-400 border-2 border-white"></div>
+                                <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-gray-200 border-2 border-white"></div>
+                                <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-gray-300 border-2 border-white"></div>
+                                <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-gray-400 border-2 border-white"></div>
                             </div>
-                            <p className="text-sm text-gray-500 font-medium">Trusted by 500+ Businesses</p>
+                            <p className="text-xs md:text-sm text-gray-500 font-medium">Trusted by 500+ Businesses</p>
                         </motion.div>
                     </div>
 
                     {/* Right Content / Hero Graphics */}
-                    <div className="w-full lg:w-1/2 relative mt-16 lg:mt-0 lg:h-screen flex items-center justify-center">
+                    <div className="w-full lg:w-1/2 relative mt-16 lg:mt-0 h-[50vh] lg:h-screen flex items-center justify-center">
                         {/* Orange Blob Background */}
                         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[140%] bg-[#EF7F1A] rounded-[40%] rotate-12 lg:translate-x-[20%] opacity-100 z-0"></div>
                         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[160%] h-[160%] bg-[#EF7F1A]/10 rounded-[45%] -rotate-6 lg:translate-x-[20%] z-[-1]"></div>
 
                         {/* Phone Container */}
-                        <div className="relative z-10 w-[280px] md:w-[320px] lg:w-[360px] mx-auto transform rotate-[-5deg] hover:rotate-0 transition-transform duration-700 ease-out">
+                        <div className="relative z-10 w-[200px] md:w-[320px] lg:w-[360px] mx-auto transform rotate-[-5deg] hover:rotate-0 transition-transform duration-700 ease-out">
                             {/* Phone Frame Mockup */}
-                            <div className="relative bg-black rounded-[3rem] p-3 shadow-2xl border-4 border-gray-900">
-                                <div className="relative rounded-[2.5rem] overflow-hidden bg-white aspect-[9/19.5]">
+                            <div className="relative bg-black rounded-[2rem] md:rounded-[3rem] p-2 md:p-3 shadow-2xl border-4 border-gray-900">
+                                <div className="relative rounded-[1.5rem] md:rounded-[2.5rem] overflow-hidden bg-white aspect-[9/19.5]">
                                     {/* Carousel Images */}
                                     {images.map((img, index) => (
                                         <img
@@ -126,7 +122,7 @@ const ProductShowcase = () => {
                                         />
                                     ))}
                                     {/* Top Notch */}
-                                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-40 h-7 bg-black rounded-b-2xl z-20"></div>
+                                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 md:w-40 h-5 md:h-7 bg-black rounded-b-xl md:rounded-b-2xl z-20"></div>
                                 </div>
                             </div>
 
@@ -135,14 +131,14 @@ const ProductShowcase = () => {
                                 initial={{ x: -100, opacity: 0 }}
                                 whileInView={{ x: 0, opacity: 1 }}
                                 transition={{ duration: 0.8, delay: 0.5 }}
-                                className="absolute top-[20%] -left-[20%] md:-left-[40%] bg-white p-3 md:p-4 rounded-xl shadow-xl z-20 max-w-[160px]"
+                                className="absolute top-[20%] -left-[20%] md:-left-[40%] bg-white p-2 md:p-4 rounded-xl shadow-xl z-20 max-w-[120px] md:max-w-[160px]"
                             >
-                                <div className="flex gap-3 items-center">
-                                    <img src={floatingImage1} className="w-12 h-12 rounded-lg object-cover" alt="Food" />
+                                <div className="flex gap-2 md:gap-3 items-center">
+                                    <img src={floatingImage1} className="w-8 h-8 md:w-12 md:h-12 rounded-lg object-cover" alt="Food" />
                                     <div>
-                                        <p className="text-xs font-bold text-gray-800">Tasty Pasta</p>
-                                        <div className="flex text-[#EF7F1A] text-[10px]">★★★★★</div>
-                                        <p className="text-[10px] font-bold mt-1">$12.99</p>
+                                        <p className="text-[10px] md:text-xs font-bold text-gray-800">Tasty Pasta</p>
+                                        <div className="flex text-[#EF7F1A] text-[8px] md:text-[10px]">★★★★★</div>
+                                        <p className="text-[8px] md:text-[10px] font-bold mt-1">$12.99</p>
                                     </div>
                                 </div>
                             </motion.div>
@@ -151,42 +147,32 @@ const ProductShowcase = () => {
                                 initial={{ x: 100, opacity: 0 }}
                                 whileInView={{ x: 0, opacity: 1 }}
                                 transition={{ duration: 0.8, delay: 0.7 }}
-                                className="absolute bottom-[20%] -right-[15%] md:-right-[30%] bg-white p-3 md:p-4 rounded-xl shadow-xl z-20"
+                                className="absolute bottom-[20%] -right-[15%] md:-right-[30%] bg-white p-2 md:p-4 rounded-xl shadow-xl z-20"
                             >
-                                <div className="flex items-center gap-3">
-                                    <div className="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center text-red-500">
-                                        <span className="material-symbols-outlined">location_on</span>
+                                <div className="flex items-center gap-2 md:gap-3">
+                                    <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-red-100 flex items-center justify-center text-red-500">
+                                        <span className="material-symbols-outlined text-sm md:text-base">location_on</span>
                                     </div>
                                     <div>
-                                        <p className="text-xs font-bold text-gray-800">Tracking Order</p>
-                                        <p className="text-[10px] text-gray-500">10 mins away</p>
+                                        <p className="text-[10px] md:text-xs font-bold text-gray-800">Tracking Order</p>
+                                        <p className="text-[8px] md:text-[10px] text-gray-500">10 mins away</p>
                                     </div>
                                 </div>
                             </motion.div>
-
-                            <div className="absolute top-[50%] -right-[25px] flex flex-col gap-4">
-                                <div className="w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center text-[#EF7F1A] cursor-pointer hover:scale-110 transition-transform">
-                                    <span className="material-symbols-outlined">notifications</span>
-                                </div>
-                                <div className="w-12 h-12 bg-[#25D366] rounded-full shadow-lg flex items-center justify-center text-white cursor-pointer hover:scale-110 transition-transform">
-                                    <span className="material-symbols-outlined">chat</span>
-                                </div>
-                            </div>
                         </div>
                     </div>
 
                 </div>
 
                 {/* What Comes With Section */}
-                <div className="min-h-screen w-full py-20 bg-gray-50 relative z-20 overflow-hidden flex flex-col justify-center">
+                <div className="min-h-screen w-full py-12 md:py-20 bg-gray-50 relative z-20 overflow-hidden flex flex-col justify-center">
                     <div className="max-w-[1400px] mx-auto px-4 md:px-10 text-center mb-10 lg:mb-16">
                         <motion.h2
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.6 }}
-                            transition={{ duration: 0.6 }}
                             viewport={{ once: false }}
-                            className="text-3xl md:text-5xl font-black text-gray-900 mb-6"
+                            className="text-2xl md:text-5xl font-black text-gray-900 mb-4 md:mb-6"
                         >
                             What Comes with <span className="text-[#EF7F1A]">Appzeto Food?</span>
                         </motion.h2>
@@ -194,16 +180,15 @@ const ProductShowcase = () => {
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.6, delay: 0.2 }}
-                            transition={{ duration: 0.6, delay: 0.2 }}
                             viewport={{ once: false }}
-                            className="text-lg text-gray-500 max-w-3xl mx-auto leading-relaxed"
+                            className="text-sm md:text-lg text-gray-500 max-w-3xl mx-auto leading-relaxed"
                         >
                             A complete ecosystem designed to automate your delivery business. From ordering to delivery, we have covered every touchpoint with premium interfaces.
                         </motion.p>
                     </div>
 
                     {/* Device Cluster Container - Reference Image Layout */}
-                    <div className="relative w-full max-w-[1200px] mx-auto h-[450px] md:h-[550px] flex justify-center items-center scale-[0.6] sm:scale-[0.75] md:scale-100 origin-top mt-10">
+                    <div className="relative w-full max-w-[1200px] mx-auto h-[350px] md:h-[550px] flex justify-center items-center scale-[0.45] xs:scale-[0.6] md:scale-100 origin-top mt-10">
 
                         {/* 1. Websites (Monitor - Back Center) */}
                         <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ duration: 0.6 }} className="absolute top-[40px] left-1/2 -translate-x-1/2 w-[360px] z-10 group">
@@ -254,7 +239,7 @@ const ProductShowcase = () => {
                 <ModernInteractiveFeatures />
 
                 {/* Background decorative elements */}
-                <motion.div style={{ y: yText }} className="absolute top-10 left-10 text-gray-200 text-9xl font-black opacity-10 select-none z-0">FOOD</motion.div>
+                <motion.div style={{ y: yText }} className="absolute top-10 left-10 text-gray-200 text-6xl md:text-9xl font-black opacity-10 select-none z-0">FOOD</motion.div>
             </div>
 
             <ScrollReveal>
@@ -275,21 +260,21 @@ const HowItWorks = () => {
     const inView = useInView(containerRef, { once: false, margin: "-100px" });
 
     return (
-        <div ref={containerRef} className="w-full pt-20 pb-12 bg-white relative z-20 overflow-hidden">
+        <div ref={containerRef} className="w-full pt-12 md:pt-20 pb-12 bg-white relative z-20 overflow-hidden">
             <div className="max-w-[1200px] mx-auto px-4 md:px-10">
                 {/* Header */}
-                <div className="text-center mb-16">
+                <div className="text-center mb-10 md:mb-16">
                     <motion.h2
                         initial={{ opacity: 0, y: 20 }}
                         animate={inView ? { opacity: 1, y: 0 } : {}}
                         transition={{ duration: 0.6 }}
-                        className="text-3xl md:text-5xl font-black text-gray-900 mb-6"
+                        className="text-2xl md:text-5xl font-black text-gray-900 mb-6"
                     >
                         How Does <span className="text-[#EF7F1A]">Appzeto Food</span> Work?
                     </motion.h2>
 
                     {/* Tabs */}
-                    <div className="flex justify-center gap-4 mt-8">
+                    <div className="flex flex-col md:flex-row justify-center gap-4 mt-8">
                         <button
                             onClick={() => setActiveTab('restaurant')}
                             className={`px-8 py-3 rounded-full font-bold text-sm transition-all duration-300 ${activeTab === 'restaurant'
@@ -470,7 +455,7 @@ const RevenueModel = () => {
 
             <div className="max-w-[1200px] mx-auto px-4 md:px-10 relative z-10">
                 {/* Header */}
-                <div className="text-center mb-20">
+                <div className="text-center mb-10 md:mb-20">
                     <motion.div
                         initial={{ opacity: 0, y: -20 }}
                         animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -485,7 +470,7 @@ const RevenueModel = () => {
                         initial={{ opacity: 0, y: 20 }}
                         animate={inView ? { opacity: 1, y: 0 } : {}}
                         transition={{ duration: 0.6, delay: 0.1 }}
-                        className="text-3xl md:text-5xl font-black text-gray-900 mb-6"
+                        className="text-2xl md:text-5xl font-black text-gray-900 mb-6"
                     >
                         The Smartest Ways to Make <span className="text-[#EF7F1A]">Money</span> <br /> with Appzeto Food
                     </motion.h2>
@@ -493,29 +478,29 @@ const RevenueModel = () => {
                         initial={{ opacity: 0, y: 20 }}
                         animate={inView ? { opacity: 1, y: 0 } : {}}
                         transition={{ duration: 0.6, delay: 0.2 }}
-                        className="text-lg text-gray-500 max-w-3xl mx-auto"
+                        className="text-sm md:text-lg text-gray-500 max-w-3xl mx-auto"
                     >
                         With Appzeto Food, you get to run your multi restaurant business seamlessly along with making money as you scale with smart revenue streams.
                     </motion.p>
                 </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 items-center">
                     {/* Left Column: Revenue Streams */}
-                    <div className="space-y-12">
+                    <div className="space-y-8 md:space-y-12">
                         {/* Stream 1 */}
                         <motion.div initial={{ x: -30, opacity: 0 }} animate={inView ? { x: 0, opacity: 1 } : {}} transition={{ delay: 0.3 }} className="group">
                             <div className="flex items-start gap-6">
-                                <div className="w-16 h-16 rounded-2xl bg-pink-50 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-300">
-                                    <span className="material-symbols-outlined text-3xl text-pink-500">payments</span>
+                                <div className="w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-pink-50 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-300">
+                                    <span className="material-symbols-outlined text-2xl md:text-3xl text-pink-500">payments</span>
                                 </div>
                                 <div>
-                                    <h3 className="text-2xl font-bold text-gray-900 mb-3">Commission-based Earning</h3>
+                                    <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-3">Commission-based Earning</h3>
                                     <ul className="space-y-3">
-                                        <li className="flex items-center gap-3 text-gray-600">
+                                        <li className="flex items-center gap-3 text-gray-600 text-sm md:text-base">
                                             <div className="w-1.5 h-1.5 rounded-full bg-[#EF7F1A]"></div>
                                             Order-wise (Restaurant-wise) Commission
                                         </li>
-                                        <li className="flex items-center gap-3 text-gray-600">
+                                        <li className="flex items-center gap-3 text-gray-600 text-sm md:text-base">
                                             <div className="w-1.5 h-1.5 rounded-full bg-[#EF7F1A]"></div>
                                             Commission In Delivery Charge
                                         </li>
@@ -527,17 +512,17 @@ const RevenueModel = () => {
                         {/* Stream 2 */}
                         <motion.div initial={{ x: -30, opacity: 0 }} animate={inView ? { x: 0, opacity: 1 } : {}} transition={{ delay: 0.4 }} className="group">
                             <div className="flex items-start gap-6">
-                                <div className="w-16 h-16 rounded-2xl bg-purple-50 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-300">
-                                    <span className="material-symbols-outlined text-3xl text-purple-500">inventory_2</span>
+                                <div className="w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-purple-50 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-300">
+                                    <span className="material-symbols-outlined text-2xl md:text-3xl text-purple-500">inventory_2</span>
                                 </div>
                                 <div>
-                                    <h3 className="text-2xl font-bold text-gray-900 mb-3">Subscription-based Earning</h3>
+                                    <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-3">Subscription-based Earning</h3>
                                     <ul className="space-y-3">
-                                        <li className="flex items-center gap-3 text-gray-600">
+                                        <li className="flex items-center gap-3 text-gray-600 text-sm md:text-base">
                                             <div className="w-1.5 h-1.5 rounded-full bg-[#EF7F1A]"></div>
                                             Restaurant Subscription Plans
                                         </li>
-                                        <li className="flex items-center gap-3 text-gray-600">
+                                        <li className="flex items-center gap-3 text-gray-600 text-sm md:text-base">
                                             <div className="w-1.5 h-1.5 rounded-full bg-[#EF7F1A]"></div>
                                             Delivery Man Subscription Plans
                                         </li>
@@ -552,13 +537,13 @@ const RevenueModel = () => {
                         initial={{ scale: 0.8, opacity: 0 }}
                         animate={inView ? { scale: 1, opacity: 1 } : {}}
                         transition={{ delay: 0.5, type: "spring" }}
-                        className="relative h-[500px] w-full flex items-center justify-center p-10"
+                        className="relative h-[300px] md:h-[500px] w-full flex items-center justify-center p-4 md:p-10"
                     >
                         {/* Background Blobs */}
-                        <div className="absolute inset-0 bg-white rounded-[50px] shadow-2xl skew-y-3 opacity-40 z-0"></div>
+                        <div className="absolute inset-0 bg-white rounded-[30px] md:rounded-[50px] shadow-2xl skew-y-3 opacity-40 z-0"></div>
 
                         {/* Central Character */}
-                        <div className="relative z-20 flex flex-col items-center">
+                        <div className="relative z-20 flex flex-col items-center transform scale-75 md:scale-100">
                             {/* CSS Person Construction */}
                             <div className="w-20 h-20 bg-[#EF7F1A] rounded-full mb-2 shadow-lg"></div> {/* Head */}
                             <div className="w-32 h-40 bg-gray-800 rounded-3xl mx-auto shadow-xl relative overflow-hidden"> {/* Body */}
@@ -571,28 +556,28 @@ const RevenueModel = () => {
                         </div>
 
                         {/* Floating Elements */}
-                        <motion.div animate={{ y: [0, -20, 0] }} transition={{ repeat: Infinity, duration: 4 }} className="absolute top-10 right-10 bg-white p-4 rounded-xl shadow-lg z-30">
+                        <motion.div animate={{ y: [0, -20, 0] }} transition={{ repeat: Infinity, duration: 4 }} className="absolute top-2 md:top-10 right-2 md:right-10 bg-white p-2 md:p-4 rounded-xl shadow-lg z-30">
                             <div className="flex gap-2 mb-2">
                                 <div className="w-8 h-2 bg-yellow-400 rounded-full"></div>
                                 <div className="w-4 h-2 bg-gray-200 rounded-full"></div>
                             </div>
-                            <div className="w-16 h-16 bg-gray-50 rounded-lg"></div>
+                            <div className="w-8 h-8 md:w-16 md:h-16 bg-gray-50 rounded-lg"></div>
                         </motion.div>
 
-                        <motion.div animate={{ y: [0, 20, 0] }} transition={{ repeat: Infinity, duration: 5 }} className="absolute bottom-20 left-10 bg-white p-4 rounded-xl shadow-lg z-30 flex gap-3 items-center">
-                            <div className="w-12 h-12 bg-[#EF7F1A] rounded-full flex items-center justify-center text-white font-bold text-xl">$</div>
+                        <motion.div animate={{ y: [0, 20, 0] }} transition={{ repeat: Infinity, duration: 5 }} className="absolute bottom-10 md:bottom-20 left-2 md:left-10 bg-white p-2 md:p-4 rounded-xl shadow-lg z-30 flex gap-3 items-center">
+                            <div className="w-8 h-8 md:w-12 md:h-12 bg-[#EF7F1A] rounded-full flex items-center justify-center text-white font-bold text-baes md:text-xl">$</div>
                             <div>
-                                <div className="w-20 h-3 bg-gray-200 rounded-full mb-2"></div>
-                                <div className="w-12 h-2 bg-gray-100 rounded-full"></div>
+                                <div className="w-14 md:w-20 h-2 md:h-3 bg-gray-200 rounded-full mb-2"></div>
+                                <div className="w-8 md:w-12 h-1.5 md:h-2 bg-gray-100 rounded-full"></div>
                             </div>
                         </motion.div>
 
-                        <div className="absolute bottom-10 right-32 text-8xl text-yellow-400 z-30 drop-shadow-lg">
+                        <div className="absolute bottom-4 md:bottom-10 right-10 md:right-32 text-6xl md:text-8xl text-yellow-400 z-30 drop-shadow-lg">
                             💰
                         </div>
 
-                        <motion.div animate={{ x: [0, 10, 0] }} transition={{ repeat: Infinity, duration: 3.5 }} className="absolute top-32 left-20 bg-white/80 backdrop-blur p-3 rounded-lg shadow-sm border border-orange-100 z-10">
-                            <span className="material-symbols-outlined text-4xl text-[#EF7F1A]">storefront</span>
+                        <motion.div animate={{ x: [0, 10, 0] }} transition={{ repeat: Infinity, duration: 3.5 }} className="absolute top-20 md:top-32 left-4 md:left-20 bg-white/80 backdrop-blur p-2 md:p-3 rounded-lg shadow-sm border border-orange-100 z-10">
+                            <span className="material-symbols-outlined text-2xl md:text-4xl text-[#EF7F1A]">storefront</span>
                         </motion.div>
                     </motion.div>
                 </div>
@@ -661,13 +646,13 @@ const FeatureLabel = ({ title, subtitle, icon, position, offset }) => {
 };
 
 const LabelCard = ({ icon, title, subtitle }) => (
-    <div className="bg-white/90 backdrop-blur-md border border-white/50 px-4 py-2.5 rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.06)] flex items-center gap-3 min-w-[180px] transform transition-transform duration-300 hover:scale-105">
-        <div className="w-10 h-10 rounded-lg bg-[#EF7F1A]/10 flex items-center justify-center text-[#EF7F1A]">
-            <span className="material-symbols-outlined text-xl">{icon}</span>
+    <div className="bg-white/90 backdrop-blur-md border border-white/50 px-4 py-2.5 rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.06)] flex items-center gap-3 min-w-[150px] md:min-w-[180px] transform transition-transform duration-300 hover:scale-105">
+        <div className="w-8 h-8 md:w-10 md:h-10 rounded-lg bg-[#EF7F1A]/10 flex items-center justify-center text-[#EF7F1A]">
+            <span className="material-symbols-outlined text-lg md:text-xl">{icon}</span>
         </div>
         <div className="text-left">
-            <p className="text-gray-900 font-bold text-sm leading-tight">{title}</p>
-            <p className="text-gray-500 text-[10px] uppercase tracking-wide font-medium mt-0.5">{subtitle}</p>
+            <p className="text-gray-900 font-bold text-xs md:text-sm leading-tight">{title}</p>
+            <p className="text-gray-500 text-[8px] md:text-[10px] uppercase tracking-wide font-medium mt-0.5">{subtitle}</p>
         </div>
     </div>
 );
@@ -775,8 +760,6 @@ const MockupFrame = ({ type, images, duration, imageIndexOffset = 0 }) => {
     return null;
 };
 
-// ... (previous code)
-
 const ModernInteractiveFeatures = () => {
     const scrollRef = useRef(null);
     const containerRef = useRef(null);
@@ -833,15 +816,15 @@ const ModernInteractiveFeatures = () => {
     ];
 
     return (
-        <div ref={containerRef} className="w-full py-24 bg-white relative">
+        <div ref={containerRef} className="w-full py-12 md:py-24 bg-white relative">
             <div className="max-w-[1400px] mx-auto px-4 md:px-10">
                 {/* Header */}
-                <div className="text-center mb-16">
+                <div className="text-center mb-10 md:mb-16">
                     <motion.h2
                         initial={{ opacity: 0, y: 30 }}
                         animate={inView ? { opacity: 1, y: 0 } : {}}
                         transition={{ duration: 0.6 }}
-                        className="text-3xl md:text-5xl font-black text-gray-900 mb-6"
+                        className="text-2xl md:text-5xl font-black text-gray-900 mb-6"
                     >
                         From Search to MUST: Modern & Interactive <span className="text-[#EF7F1A]">Appzeto Food</span>
                     </motion.h2>
@@ -849,7 +832,7 @@ const ModernInteractiveFeatures = () => {
                         initial={{ opacity: 0, y: 30 }}
                         animate={inView ? { opacity: 1, y: 0 } : {}}
                         transition={{ duration: 0.6, delay: 0.2 }}
-                        className="text-lg text-gray-500 max-w-3xl mx-auto"
+                        className="text-sm md:text-lg text-gray-500 max-w-3xl mx-auto"
                     >
                         Enjoy unlimited intuitive features in Appzeto Food Multi Restaurant Delivery Software you've been looking for.
                     </motion.p>
@@ -863,7 +846,7 @@ const ModernInteractiveFeatures = () => {
                         animate={inView ? { opacity: 1, x: 0 } : {}}
                         transition={{ delay: 0.4 }}
                         onClick={() => scroll('left')}
-                        className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-12 z-10 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center text-gray-400 hover:text-[#EF7F1A] hover:scale-110 transition-all"
+                        className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 md:-translate-x-12 z-10 w-8 h-8 md:w-12 md:h-12 bg-white rounded-full shadow-lg flex items-center justify-center text-gray-400 hover:text-[#EF7F1A] hover:scale-110 transition-all hidden md:flex"
                     >
                         <span className="material-symbols-outlined">arrow_back</span>
                     </motion.button>
@@ -874,7 +857,7 @@ const ModernInteractiveFeatures = () => {
                         animate={inView ? { opacity: 1, x: 0 } : {}}
                         transition={{ delay: 0.4 }}
                         onClick={() => scroll('right')}
-                        className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-12 z-10 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center text-gray-400 hover:text-[#EF7F1A] hover:scale-110 transition-all"
+                        className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 md:translate-x-12 z-10 w-8 h-8 md:w-12 md:h-12 bg-white rounded-full shadow-lg flex items-center justify-center text-gray-400 hover:text-[#EF7F1A] hover:scale-110 transition-all hidden md:flex"
                     >
                         <span className="material-symbols-outlined">arrow_forward</span>
                     </motion.button>
@@ -882,7 +865,7 @@ const ModernInteractiveFeatures = () => {
                     {/* Scrollable Area */}
                     <div
                         ref={scrollRef}
-                        className="flex overflow-x-auto gap-8 pb-10 px-4 hide-scrollbar snap-x snap-mandatory"
+                        className="flex overflow-x-auto gap-4 md:gap-8 pb-10 px-4 hide-scrollbar snap-x snap-mandatory"
                         style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
                     >
                         {features.map((feature, index) => (
@@ -891,13 +874,13 @@ const ModernInteractiveFeatures = () => {
                                 initial={{ opacity: 0, y: 50, scale: 0.9 }}
                                 animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
                                 transition={{ duration: 0.5, delay: 0.2 + (index * 0.1) }}
-                                className={`min-w-[280px] md:min-w-[320px] h-[380px] ${feature.bg} rounded-[32px] p-8 flex flex-col items-center justify-center text-center snap-center hover:-translate-y-2 transition-transform duration-300`}
+                                className={`min-w-[260px] md:min-w-[320px] h-[340px] md:h-[380px] ${feature.bg} rounded-[32px] p-6 md:p-8 flex flex-col items-center justify-center text-center snap-center hover:-translate-y-2 transition-transform duration-300`}
                             >
-                                <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center mb-6 shadow-sm">
-                                    <span className={`material-symbols-outlined text-4xl ${feature.iconColor}`}>{feature.icon}</span>
+                                <div className="w-16 h-16 md:w-20 md:h-20 bg-white rounded-full flex items-center justify-center mb-6 shadow-sm">
+                                    <span className={`material-symbols-outlined text-3xl md:text-4xl ${feature.iconColor}`}>{feature.icon}</span>
                                 </div>
-                                <h3 className="text-xl font-bold text-gray-900 mb-4">{feature.title}</h3>
-                                <p className="text-gray-600 leading-relaxed text-sm">{feature.desc}</p>
+                                <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-4">{feature.title}</h3>
+                                <p className="text-gray-600 leading-relaxed text-xs md:text-sm">{feature.desc}</p>
                             </motion.div>
                         ))}
                     </div>
@@ -908,9 +891,9 @@ const ModernInteractiveFeatures = () => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={inView ? { opacity: 1, y: 0 } : {}}
                     transition={{ delay: 0.8 }}
-                    className="flex justify-center mt-10"
+                    className="flex justify-center mt-6 md:mt-10"
                 >
-                    <button className="bg-gradient-to-r from-[#EF7F1A] to-[#F59E0B] text-white px-10 py-4 rounded-full font-bold shadow-lg hover:shadow-xl hover:scale-105 transition-all flex items-center gap-2">
+                    <button className="bg-gradient-to-r from-[#EF7F1A] to-[#F59E0B] text-white px-8 md:px-10 py-3 md:py-4 rounded-full font-bold shadow-lg hover:shadow-xl hover:scale-105 transition-all flex items-center gap-2 text-sm md:text-base">
                         More Features
                         <span className="material-symbols-outlined text-sm">arrow_forward</span>
                     </button>

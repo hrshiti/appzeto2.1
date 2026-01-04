@@ -70,6 +70,20 @@ const serviceData = {
         icon: "brush",
         content: "From social media graphics to print material, we provide high-quality graphic design services that align with your brand identity and communicate your message effectively.",
         features: ["Visual Communication", "Brand Assets", "Creative Illustrations", "Marketing Collateral"]
+    },
+    "ai-machine-learning": {
+        title: "AI & Machine Learning",
+        desc: "Empowering businesses with intelligent automation and predictive insights.",
+        icon: "smart_toy",
+        content: "We build advanced AI solutions that transform data into actionable intelligence. From recommendation engines to natural language processing and computer vision, we help you stay ahead of the curve.",
+        features: ["Predictive Analytics", "Natural Language Processing", "Computer Vision", "Automated Workflows"]
+    },
+    "devops-cloud": {
+        title: "DevOps & Cloud Solutions",
+        desc: "Accelerating delivery with robust, scalable, and secure cloud infrastructure.",
+        icon: "cloud_sync",
+        content: "Our DevOps engineers streamline your development lifecycle with automated CI/CD pipelines and managed cloud infrastructure. We ensure high availability, security, and scalability on AWS, Azure, or GCP.",
+        features: ["CI/CD Pipelines", "Docker & Kubernetes", "Cloud Migration", "Infrastructure as Code"]
     }
 };
 
@@ -86,9 +100,9 @@ const ServiceDetail = () => {
             <ScrollWrapper>
                 <Navbar />
                 <div className="min-h-[70vh] flex flex-col items-center justify-center text-center px-4">
-                    <h1 className="text-6xl font-black text-slate-200 uppercase italic mb-4">404</h1>
-                    <h2 className="text-2xl font-bold text-slate-800 uppercase italic">Service Not Found</h2>
-                    <Link to="/services" className="mt-8 px-8 py-4 bg-primary text-white rounded-full font-bold uppercase text-xs tracking-widest hover:scale-105 transition-all">
+                    <h1 className="text-4xl md:text-6xl font-black text-slate-200 uppercase italic mb-2 md:mb-4">404</h1>
+                    <h2 className="text-xl md:text-2xl font-bold text-slate-800 uppercase italic">Service Not Found</h2>
+                    <Link to="/services" className="mt-6 md:mt-8 px-6 md:px-8 py-3 md:py-4 bg-primary text-white rounded-full font-bold uppercase text-xs tracking-widest hover:scale-105 transition-all">
                         Back to Services
                     </Link>
                 </div>
@@ -103,7 +117,7 @@ const ServiceDetail = () => {
                 <Navbar />
 
                 {/* --- HERO SECTION --- */}
-                <section className="relative h-[50vh] flex items-center justify-center overflow-hidden">
+                <section className="relative h-[30vh] md:h-[50vh] flex items-center justify-center overflow-hidden">
                     <div className="absolute inset-0">
                         <img
                             src="https://images.unsplash.com/photo-1497215728101-856f4ea42174?q=80&w=2340&auto=format&fit=crop"
@@ -117,15 +131,15 @@ const ServiceDetail = () => {
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
-                            className="w-16 h-16 bg-primary/20 backdrop-blur-md rounded-2xl flex items-center justify-center mx-auto mb-6 border border-white/20"
+                            className="w-12 h-12 md:w-16 md:h-16 bg-primary/20 backdrop-blur-md rounded-xl md:rounded-2xl flex items-center justify-center mx-auto mb-4 md:mb-6 border border-white/20"
                         >
-                            <span className="material-icons text-3xl text-primary">{service.icon}</span>
+                            <span className="material-icons text-2xl md:text-3xl text-primary">{service.icon}</span>
                         </motion.div>
                         <motion.h1
                             initial={{ opacity: 0, scale: 0.9 }}
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ duration: 0.8 }}
-                            className="text-4xl md:text-6xl font-black uppercase tracking-tight italic"
+                            className="text-3xl md:text-4xl lg:text-6xl font-black uppercase tracking-tight italic"
                         >
                             {service.title}
                         </motion.h1>
@@ -133,7 +147,7 @@ const ServiceDetail = () => {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.4 }}
-                            className="flex items-center justify-center gap-3 mt-6 text-[10px] font-bold uppercase tracking-[0.3em] text-white/80"
+                            className="flex items-center justify-center gap-2 md:gap-3 mt-4 md:mt-6 text-[9px] md:text-[10px] font-bold uppercase tracking-[0.2em] md:tracking-[0.3em] text-white/80"
                         >
                             <Link to="/" className="hover:text-primary transition-colors">Home</Link>
                             <span className="text-primary">&gt;</span>
@@ -145,26 +159,26 @@ const ServiceDetail = () => {
                 </section>
 
                 {/* --- CONTENT SECTION --- */}
-                <section className="py-24 px-10 lg:px-24 max-w-[1700px] mx-auto">
-                    <div className="grid grid-cols-1 lg:grid-cols-[1fr_0.4fr] gap-20">
+                <section className="py-12 md:py-24 px-6 md:px-10 lg:px-24 max-w-[1700px] mx-auto">
+                    <div className="grid grid-cols-1 lg:grid-cols-[1fr_0.4fr] gap-12 md:gap-20">
                         {/* Left Side: Main Content */}
-                        <div className="space-y-12">
+                        <div className="space-y-8 md:space-y-12">
                             <motion.div
                                 initial={{ opacity: 0, x: -30 }}
                                 whileInView={{ opacity: 1, x: 0 }}
                                 viewport={{ once: true }}
                             >
-                                <p className="text-primary font-black uppercase tracking-[0.4em] text-xs mb-4">Service Overview</p>
-                                <h2 className="text-4xl md:text-5xl font-black text-slate-800 tracking-tighter uppercase italic leading-tight mb-8">
+                                <p className="text-primary font-black uppercase tracking-[0.3em] md:tracking-[0.4em] text-[10px] md:text-xs mb-2 md:mb-4">Service Overview</p>
+                                <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-slate-800 tracking-tighter uppercase italic leading-tight mb-4 md:mb-8">
                                     Why Choose Our <br />
                                     <span className="text-primary italic">{service.title}?</span>
                                 </h2>
-                                <p className="text-lg text-slate-600 leading-relaxed italic border-l-4 border-primary/20 pl-8">
+                                <p className="text-sm md:text-lg text-slate-600 leading-relaxed italic border-l-4 border-primary/20 pl-4 md:pl-8">
                                     {service.content}
                                 </p>
                             </motion.div>
 
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-8">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 pt-4 md:pt-8">
                                 {service.features.map((feature, i) => (
                                     <motion.div
                                         key={i}
@@ -172,41 +186,41 @@ const ServiceDetail = () => {
                                         whileInView={{ opacity: 1, y: 0 }}
                                         viewport={{ once: true }}
                                         transition={{ delay: i * 0.1 }}
-                                        className="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm flex items-center gap-6 group hover:border-primary/30 transition-all"
+                                        className="bg-white p-4 md:p-8 rounded-2xl md:rounded-3xl border border-slate-100 shadow-sm flex items-center gap-4 md:gap-6 group hover:border-primary/30 transition-all"
                                     >
-                                        <div className="w-12 h-12 rounded-full bg-primary/5 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all">
-                                            <span className="material-icons text-xl">done</span>
+                                        <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-primary/5 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all">
+                                            <span className="material-icons text-lg md:text-xl">done</span>
                                         </div>
-                                        <span className="text-lg font-bold text-slate-800 uppercase italic tracking-tight">{feature}</span>
+                                        <span className="text-base md:text-lg font-bold text-slate-800 uppercase italic tracking-tight">{feature}</span>
                                     </motion.div>
                                 ))}
                             </div>
                         </div>
 
                         {/* Right Side: Sidebar/CTA */}
-                        <div className="space-y-8">
-                            <div className="bg-[#0f172a] p-10 rounded-[2.5rem] text-white relative overflow-hidden group shadow-2xl">
+                        <div className="space-y-6 md:space-y-8">
+                            <div className="bg-[#0f172a] p-6 md:p-10 rounded-[1.5rem] md:rounded-[2.5rem] text-white relative overflow-hidden group shadow-2xl">
                                 <div className="absolute top-0 right-0 w-32 h-32 bg-primary/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-                                <h3 className="text-2xl font-black uppercase italic tracking-tight mb-6">Need Custom Solution?</h3>
-                                <p className="text-slate-400 text-sm leading-relaxed mb-8 italic">
+                                <h3 className="text-xl md:text-2xl font-black uppercase italic tracking-tight mb-4 md:mb-6">Need Custom Solution?</h3>
+                                <p className="text-slate-400 text-xs md:text-sm leading-relaxed mb-6 md:mb-8 italic">
                                     Let's discuss your project and build something legendary together.
                                 </p>
-                                <Link to="/contact" className="w-full bg-white text-[#0f172a] py-4 rounded-2xl font-bold uppercase text-[10px] tracking-[0.2em] flex items-center justify-center gap-4 hover:bg-primary hover:text-white transition-all">
-                                    Contact Us <span className="material-icons text-lg">near_me</span>
+                                <Link to="/contact" className="w-full bg-white text-[#0f172a] py-3 md:py-4 rounded-xl md:rounded-2xl font-bold uppercase text-[9px] md:text-[10px] tracking-[0.2em] flex items-center justify-center gap-4 hover:bg-primary hover:text-white transition-all">
+                                    Contact Us <span className="material-icons text-base md:text-lg">near_me</span>
                                 </Link>
                             </div>
 
-                            <div className="bg-white p-10 rounded-[2.5rem] border border-slate-100 shadow-sm">
-                                <h3 className="text-xl font-bold text-slate-900 uppercase italic tracking-tight mb-8">Related Services</h3>
-                                <div className="space-y-4">
+                            <div className="bg-white p-6 md:p-10 rounded-[1.5rem] md:rounded-[2.5rem] border border-slate-100 shadow-sm">
+                                <h3 className="text-lg md:text-xl font-bold text-slate-900 uppercase italic tracking-tight mb-6 md:mb-8">Related Services</h3>
+                                <div className="space-y-3 md:space-y-4">
                                     {Object.entries(serviceData).filter(([key]) => key !== slug).slice(0, 4).map(([key, data]) => (
                                         <Link
                                             key={key}
                                             to={`/services/${key}`}
-                                            className="flex items-center justify-between p-4 rounded-2xl hover:bg-slate-50 border border-transparent hover:border-slate-100 transition-all group"
+                                            className="flex items-center justify-between p-3 md:p-4 rounded-xl md:rounded-2xl hover:bg-slate-50 border border-transparent hover:border-slate-100 transition-all group"
                                         >
-                                            <span className="text-sm font-bold text-slate-600 group-hover:text-primary transition-colors italic uppercase">{data.title}</span>
-                                            <span className="material-icons text-slate-300 group-hover:text-primary transition-all text-sm">east</span>
+                                            <span className="text-xs md:text-sm font-bold text-slate-600 group-hover:text-primary transition-colors italic uppercase">{data.title}</span>
+                                            <span className="material-icons text-slate-300 group-hover:text-primary transition-all text-xs md:text-sm">east</span>
                                         </Link>
                                     ))}
                                 </div>

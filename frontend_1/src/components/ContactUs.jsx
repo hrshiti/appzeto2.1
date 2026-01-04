@@ -33,10 +33,10 @@ const FAQItem = ({ question, answer, isOpen, toggle }) => {
         <div className="border-b border-slate-100 group">
             <button
                 onClick={toggle}
-                className="w-full text-left py-3 md:py-4 transition-all duration-300 flex justify-between items-center group"
+                className="w-full text-left py-2 md:py-4 transition-all duration-300 flex justify-between items-center group"
             >
                 <span className="text-sm md:text-base font-bold text-slate-800 leading-tight group-hover:text-primary transition-colors uppercase tracking-tighter">{question}</span>
-                <div className={`w-6 h-6 rounded-full flex items-center justify-center transition-all duration-300 ${isOpen ? 'bg-primary rotate-45' : 'bg-slate-100'}`}>
+                <div className={`w-5 h-5 md:w-6 md:h-6 rounded-full flex items-center justify-center transition-all duration-300 ${isOpen ? 'bg-primary rotate-45' : 'bg-slate-100'}`}>
                     <span className={`material-icons text-[10px] ${isOpen ? 'text-white' : 'text-slate-400'}`}>add</span>
                 </div>
             </button>
@@ -49,7 +49,7 @@ const FAQItem = ({ question, answer, isOpen, toggle }) => {
                         transition={{ duration: 0.3, ease: "easeInOut" }}
                         className="overflow-hidden"
                     >
-                        <div className="px-6 py-3 text-[10px] md:text-xs text-slate-500 leading-relaxed italic border-l-2 border-primary/20 ml-4 mt-1">
+                        <div className="px-4 md:px-6 py-2 md:py-3 text-[10px] md:text-xs text-slate-500 leading-relaxed italic border-l-2 border-primary/20 ml-3 md:ml-4 mt-1">
                             {answer}
                         </div>
                     </motion.div>
@@ -79,7 +79,7 @@ const ContactUs = ({ isHomePage = false }) => {
         <section className={`bg-white font-sans overflow-x-hidden pt-0`}>
             {!isHomePage && (
                 <>
-                    <div className="relative h-[85vh] flex items-center justify-center overflow-hidden">
+                    <div className="relative h-[50vh] md:h-[85vh] flex items-center justify-center overflow-hidden">
                         <div className="absolute inset-0">
                             <img
                                 src="https://images.unsplash.com/photo-1497215728101-856f4ea42174?q=80&w=2340&auto=format&fit=crop"
@@ -93,7 +93,7 @@ const ContactUs = ({ isHomePage = false }) => {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: false }}
                             transition={{ duration: 1 }}
-                            className="relative text-center z-10 px-4 -mt-32 lg:-mt-40"
+                            className="relative text-center z-10 px-4 -mt-20 md:-mt-32 lg:-mt-40"
                         >
                             <h1 className="text-4xl md:text-5xl font-black text-white uppercase tracking-tighter italic drop-shadow-2xl">
                                 Contact <span className="text-primary italic">Us</span>
@@ -104,14 +104,14 @@ const ContactUs = ({ isHomePage = false }) => {
                         </motion.div>
                     </div>
 
-                    <div className="max-w-[1300px] mx-auto px-10 lg:px-24 relative -mt-48 md:-mt-56 z-20">
+                    <div className="max-w-[1300px] mx-auto px-6 md:px-10 lg:px-24 relative -mt-32 md:-mt-48 lg:-mt-56 z-20">
                         {/* --- TOP INQUIRY CARDS (Scroll Animation) --- */}
                         <motion.div
                             initial={{ opacity: 0, y: 100 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: false, margin: "-100px" }}
                             transition={{ duration: 0.8, ease: "easeOut" }}
-                            className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20"
+                            className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8 mb-10 md:mb-20 bg-white md:bg-transparent rounded-2xl md:rounded-none shadow-xl md:shadow-none p-4 md:p-0"
                         >
                             {[
                                 { id: "sales", icon: "payments", title: "Sales Inquiry", desc: "Enterprise solutions & tailored pricing." },
@@ -121,13 +121,13 @@ const ContactUs = ({ isHomePage = false }) => {
                                 <div
                                     key={card.id}
                                     id={card.id}
-                                    className="p-4 border-l border-slate-100 transition-all group"
+                                    className="p-4 border-b md:border-b-0 md:border-l border-slate-100 transition-all group last:border-0 md:last:border-l"
                                 >
-                                    <div className="w-12 h-12 bg-slate-50 rounded-xl flex items-center justify-center mb-6 group-hover:bg-primary transition-all duration-500">
-                                        <span className="material-icons text-slate-400 group-hover:text-white text-xl">{card.icon}</span>
+                                    <div className="w-10 h-10 md:w-12 md:h-12 bg-slate-50 rounded-xl flex items-center justify-center mb-4 md:mb-6 group-hover:bg-primary transition-all duration-500">
+                                        <span className="material-icons text-slate-400 group-hover:text-white text-lg md:text-xl">{card.icon}</span>
                                     </div>
-                                    <h3 className="text-xl font-bold text-slate-900 mb-2 uppercase tracking-tighter group-hover:text-primary transition-colors">{card.title}</h3>
-                                    <p className="text-slate-500 text-xs leading-relaxed mb-6 font-medium italic">{card.desc}</p>
+                                    <h3 className="text-lg md:text-xl font-bold text-slate-900 mb-2 uppercase tracking-tighter group-hover:text-primary transition-colors">{card.title}</h3>
+                                    <p className="text-slate-500 text-xs leading-relaxed mb-4 md:mb-6 font-medium italic">{card.desc}</p>
                                     <div className="flex items-center gap-3 text-primary group-hover:gap-5 transition-all cursor-pointer">
                                         <span className="text-[9px] font-black uppercase tracking-[0.3em]">Discuss Project</span>
                                         <span className="material-icons text-[12px]">east</span>
@@ -145,12 +145,12 @@ const ContactUs = ({ isHomePage = false }) => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: false, margin: "-100px" }}
                 transition={{ duration: 1, ease: "easeOut" }}
-                className={`bg-[#062929] w-full ${isHomePage ? 'h-screen min-h-[700px]' : 'min-h-[70vh]'} flex items-center relative py-12 lg:py-16`}
+                className={`bg-[#062929] w-full ${isHomePage ? 'min-h-[60vh] md:min-h-screen py-10 md:py-16' : 'min-h-[50vh] md:min-h-[70vh] py-8 md:py-12'} flex items-center relative lg:py-16`}
             >
-                <div className="max-w-[1700px] mx-auto px-10 lg:px-24 w-full">
-                    <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr_1.2fr] gap-12 lg:gap-20 items-center">
-                        {/* Left: Map */}
-                        <div className="h-[400px] lg:h-[500px] overflow-hidden relative grayscale invert brightness-[0.4] opacity-30 rounded-[2rem]">
+                <div className="max-w-[1700px] mx-auto px-4 sm:px-10 lg:px-24 w-full">
+                    <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr_1.2fr] gap-8 md:gap-12 lg:gap-20 items-center">
+                        {/* Left: Map - HIDDEN ON MOBILE */}
+                        <div className="hidden lg:block h-[250px] md:h-[400px] lg:h-[500px] overflow-hidden relative rounded-2xl md:rounded-[2rem] border-4 border-white/30 shadow-2xl bg-white">
                             <iframe
                                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d193595.25280821814!2d-74.119763973046!3d40.69740344223377!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2sin!4v1703951567403!5m2!1sen!2sin"
                                 width="100%"
@@ -162,21 +162,21 @@ const ContactUs = ({ isHomePage = false }) => {
                         </div>
 
                         {/* Middle: Meet Us */}
-                        <div className="flex flex-col justify-center py-8">
-                            <h2 className="text-4xl font-semibold text-white mb-12 tracking-tighter uppercase">Meet Us</h2>
-                            <div className="space-y-12">
+                        <div className="flex flex-col justify-center py-2 md:py-8">
+                            <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-white mb-6 md:mb-12 tracking-tighter uppercase">Meet Us</h2>
+                            <div className="space-y-6 md:space-y-12">
                                 {[
                                     { icon: "call", label: "Phone", info: "+465 723 723 566" },
                                     { icon: "alternate_email", label: "Email", info: "contact@appzeto.com" },
-                                    { icon: "location_on", label: "Address", info: "1784 Griffin Street, Alabama, USA" }
+                                    { icon: "location_on", label: "Address", info: "1784 Griffin Street, AL, USA" }
                                 ].map((item, i) => (
-                                    <div key={i} className="flex items-center gap-8 group">
-                                        <div className="w-14 h-14 rounded-full border border-white/5 flex items-center justify-center flex-shrink-0 group-hover:border-primary/40 transition-all duration-500">
-                                            <span className="material-icons text-slate-500 text-2xl group-hover:text-primary transition-all">{item.icon}</span>
+                                    <div key={i} className="flex items-center gap-4 md:gap-8 group">
+                                        <div className="w-10 h-10 md:w-14 md:h-14 rounded-full border border-white/5 flex items-center justify-center flex-shrink-0 group-hover:border-primary/40 transition-all duration-500">
+                                            <span className="material-icons text-slate-500 text-lg md:text-2xl group-hover:text-primary transition-all">{item.icon}</span>
                                         </div>
-                                        <div className="flex flex-col gap-1.5">
-                                            <span className="text-[10px] uppercase font-bold tracking-[0.25em] text-slate-500">{item.label}</span>
-                                            <span className="text-lg font-medium text-slate-200 group-hover:text-white transition-colors">{item.info}</span>
+                                        <div className="flex flex-col gap-0.5 md:gap-1">
+                                            <span className="text-[8px] md:text-[10px] uppercase font-bold tracking-[0.25em] text-slate-500">{item.label}</span>
+                                            <span className="text-sm md:text-lg font-medium text-slate-200 group-hover:text-white transition-colors">{item.info}</span>
                                         </div>
                                     </div>
                                 ))}
@@ -184,31 +184,31 @@ const ContactUs = ({ isHomePage = false }) => {
                         </div>
 
                         {/* Right: Contact Form */}
-                        <div className="flex flex-col justify-center">
-                            <h2 className="text-4xl font-semibold text-white mb-10 tracking-tighter uppercase">Message</h2>
-                            <form className="space-y-10">
-                                <div className="space-y-4">
-                                    <label className="text-[10px] font-black uppercase text-slate-400 tracking-widest ml-1">Full Name</label>
+                        <div className="flex flex-col justify-center mt-4 md:mt-0">
+                            <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-white mb-6 md:mb-10 tracking-tighter uppercase">Message</h2>
+                            <form className="space-y-4 md:space-y-10">
+                                <div className="space-y-1.5 md:space-y-4">
+                                    <label className="text-[9px] md:text-[10px] font-black uppercase text-slate-400 tracking-widest ml-1">Full Name</label>
                                     <input
                                         type="text"
                                         placeholder="Your Name"
-                                        className="w-full p-6 rounded-2xl bg-white/5 border border-white/5 text-white outline-none focus:border-primary/50 transition-all text-sm font-medium placeholder:text-slate-600 shadow-inner"
+                                        className="w-full p-3 md:p-6 rounded-lg md:rounded-2xl bg-white/5 border border-white/5 text-white outline-none focus:border-primary/50 transition-all text-xs md:text-sm font-medium placeholder:text-slate-600 shadow-inner"
                                     />
                                 </div>
-                                <div className="space-y-4">
-                                    <label className="text-[10px] font-black uppercase text-slate-400 tracking-widest ml-1">Message</label>
+                                <div className="space-y-1.5 md:space-y-4">
+                                    <label className="text-[9px] md:text-[10px] font-black uppercase text-slate-400 tracking-widest ml-1">Message</label>
                                     <textarea
                                         placeholder="How can we help?"
-                                        rows="4"
-                                        className="w-full p-6 rounded-2xl bg-white/5 border border-white/5 text-white outline-none focus:border-primary/50 transition-all text-sm font-medium placeholder:text-slate-600 resize-none shadow-inner"
+                                        rows="3"
+                                        className="w-full p-3 md:p-6 rounded-lg md:rounded-2xl bg-white/5 border border-white/5 text-white outline-none focus:border-primary/50 transition-all text-xs md:text-sm font-medium placeholder:text-slate-600 resize-none shadow-inner"
                                     ></textarea>
                                 </div>
                                 <motion.button
                                     whileHover={{ scale: 1.02, y: -2 }}
                                     whileTap={{ scale: 0.98 }}
-                                    className="w-full py-5 bg-white text-[#062929] rounded-[1.5rem] font-bold uppercase tracking-[0.25em] text-[10px] flex items-center justify-center gap-5 mt-6 border border-white/5 shadow-2xl hover:bg-primary transition-all duration-500"
+                                    className="w-full py-3 md:py-5 bg-white text-[#062929] rounded-lg md:rounded-[1.5rem] font-bold uppercase tracking-[0.2em] md:tracking-[0.25em] text-[9px] md:text-[10px] flex items-center justify-center gap-3 md:gap-5 mt-4 md:mt-6 border border-white/5 shadow-2xl hover:bg-primary transition-all duration-500"
                                 >
-                                    SEND INQUIRY <span className="material-icons text-xl">near_me</span>
+                                    SEND INQUIRY <span className="material-icons text-sm md:text-xl">near_me</span>
                                 </motion.button>
                             </form>
                         </div>
@@ -216,7 +216,7 @@ const ContactUs = ({ isHomePage = false }) => {
                 </div>
             </motion.div>
 
-            <div className={`max-w-[1700px] mx-auto px-10 lg:px-24 ${isHomePage ? 'h-screen flex flex-col justify-center py-10 overflow-hidden' : 'py-20'}`}>
+            <div className={`max-w-[1700px] mx-auto px-4 sm:px-10 lg:px-24 ${isHomePage ? 'min-h-[50vh] flex flex-col justify-center py-8 md:py-10 overflow-hidden' : 'py-10 md:py-20'}`}>
                 {/* --- VISIT OFFICES (Scroll Animation) --- */}
                 {!isHomePage && (
                     <motion.div
@@ -225,15 +225,15 @@ const ContactUs = ({ isHomePage = false }) => {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: false, margin: "-100px" }}
                         transition={{ duration: 0.8, ease: "easeOut" }}
-                        className="pt-20 pb-0 mb-8"
+                        className="pt-8 md:pt-20 pb-0 mb-8"
                     >
-                        <div className="flex flex-col lg:flex-row gap-20 items-start">
+                        <div className="flex flex-col lg:flex-row gap-10 md:gap-20 items-start">
                             <div className="lg:w-1/3">
-                                <p className="text-primary font-black tracking-[0.3em] uppercase text-[10px] mb-4">Our Presence</p>
-                                <h2 className="text-5xl font-semibold text-slate-900 uppercase tracking-tighter leading-tight">
+                                <p className="text-primary font-black tracking-[0.3em] uppercase text-[10px] mb-2 md:mb-4">Our Presence</p>
+                                <h2 className="text-3xl md:text-5xl font-semibold text-slate-900 uppercase tracking-tighter leading-tight">
                                     Visit Our <br /> <span className="text-primary italic">Offices</span>
                                 </h2>
-                                <p className="text-slate-400 text-sm mt-8 leading-relaxed italic max-w-xs">
+                                <p className="text-slate-400 text-xs md:text-sm mt-4 md:mt-8 leading-relaxed italic max-w-xs">
                                     Stop by our innovation hubs to meet the team and discuss your next big idea.
                                 </p>
                             </div>
@@ -245,20 +245,20 @@ const ContactUs = ({ isHomePage = false }) => {
                                 ].map((office, i) => (
                                     <motion.div
                                         key={i}
-                                        className="py-12 border-b border-slate-100 flex flex-col md:flex-row md:items-center justify-between gap-8 group"
+                                        className="py-6 md:py-12 border-b border-slate-100 flex flex-col md:flex-row md:items-center justify-between gap-4 md:gap-8 group"
                                     >
-                                        <div className="flex items-center gap-8">
-                                            <div className="w-16 h-16 rounded-2xl bg-slate-50 flex items-center justify-center flex-shrink-0 border border-slate-100 transition-all duration-500 group-hover:bg-primary">
-                                                <span className="material-icons text-slate-400 group-hover:text-white text-2xl transition-all">{office.icon}</span>
+                                        <div className="flex items-center gap-4 md:gap-8">
+                                            <div className="w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-slate-50 flex items-center justify-center flex-shrink-0 border border-slate-100 transition-all duration-500 group-hover:bg-primary">
+                                                <span className="material-icons text-slate-400 group-hover:text-white text-xl md:text-2xl transition-all">{office.icon}</span>
                                             </div>
                                             <div>
-                                                <h3 className="text-2xl font-bold text-slate-900 tracking-tighter uppercase group-hover:text-primary transition-colors">{office.title}</h3>
-                                                <p className="text-slate-500 text-sm mt-2 max-w-md font-medium italic">{office.addr}</p>
+                                                <h3 className="text-lg md:text-2xl font-bold text-slate-900 tracking-tighter uppercase group-hover:text-primary transition-colors">{office.title}</h3>
+                                                <p className="text-slate-500 text-xs md:text-sm mt-1 md:mt-2 max-w-md font-medium italic">{office.addr}</p>
                                             </div>
                                         </div>
-                                        <div className="flex items-center gap-4 px-6 py-2.5 rounded-full border border-slate-100 bg-white flex-shrink-0 self-start md:self-center group-hover:border-primary/30 transition-all">
-                                            <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                                            <span className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">{office.time}</span>
+                                        <div className="flex items-center gap-3 md:gap-4 px-4 md:px-6 py-2 md:py-2.5 rounded-full border border-slate-100 bg-white flex-shrink-0 self-start md:self-center group-hover:border-primary/30 transition-all">
+                                            <div className="w-1.5 h-1.5 md:w-2 md:h-2 bg-green-500 rounded-full animate-pulse"></div>
+                                            <span className="text-[9px] md:text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">{office.time}</span>
                                         </div>
                                     </motion.div>
                                 ))}
@@ -273,16 +273,16 @@ const ContactUs = ({ isHomePage = false }) => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: false, margin: "-100px" }}
                     transition={{ duration: 0.8, ease: "easeOut" }}
-                    className={`grid grid-cols-1 ${isHomePage ? 'lg:grid-cols-1' : 'lg:grid-cols-2'} gap-12 items-center ${isHomePage ? 'pt-0' : 'pt-10'}`}
+                    className={`grid grid-cols-1 ${isHomePage ? 'lg:grid-cols-1' : 'lg:grid-cols-2'} gap-8 md:gap-12 items-center ${isHomePage ? 'pt-0' : 'pt-6 md:pt-10'}`}
                 >
                     <div className={`w-full ${isHomePage ? 'max-w-3xl mx-auto text-center' : ''}`}>
                         <div className="mb-6">
                             <p className="text-primary font-black tracking-[0.3em] uppercase text-[9px] mb-2">Support & Help</p>
-                            <h2 className="text-3xl font-semibold text-slate-900 leading-[1.1] uppercase tracking-tighter">
+                            <h2 className="text-2xl md:text-3xl font-semibold text-slate-900 leading-[1.1] uppercase tracking-tighter">
                                 Frequently <br /> <span className="text-primary italic">Asked</span>
                             </h2>
                         </div>
-                        <div className="space-y-4">
+                        <div className="space-y-2 md:space-y-4">
                             {faqData.map((faq, index) => (
                                 <FAQItem
                                     key={index}

@@ -12,25 +12,29 @@ import Login from './pages/Login'
 import TaxiProductShowcase from './pages/TaxiProductShowcase'
 import EcommerceProductShowcase from './pages/EcommerceProductShowcase'
 import HospitalProductShowcase from './pages/HospitalProductShowcase'
+import CustomCursor from './components/CustomCursor'
 import './App.css'
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/about" element={<AboutUs />} />
-      <Route path="/services" element={<Services />} />
-      <Route path="/services/:slug" element={<ServiceDetail />} />
-      <Route path="/blogs" element={<Blogs />} />
-      <Route path="/career" element={<Career />} />
-      <Route path="/contact" element={<Contact />} />
-      <Route path="/chit-chat" element={<ChitChat />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/appzeto-food" element={<ProductShowcase />} />
-      <Route path="/appzeto-taxi" element={<TaxiProductShowcase />} />
-      <Route path="/appzeto-ecommerce" element={<EcommerceProductShowcase />} />
-      <Route path="/appzeto-hospital" element={<HospitalProductShowcase />} />
-    </Routes>
+    <>
+      <CustomCursor />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<AboutUs />} />
+        <Route path="/services" element={<Services />} />
+        <Route path="/services/:slug" element={<ServiceDetail />} />
+        <Route path="/blogs" element={<Blogs />} />
+        <Route path="/career" element={<Career />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/chit-chat" element={<ChitChat />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/appzeto-food" element={<ProductShowcase />} />
+        <Route path="/appzeto-taxi" element={<TaxiProductShowcase />} />
+        <Route path="/appzeto-ecommerce" element={<EcommerceProductShowcase />} />
+        <Route path="/appzeto-hospital" element={<HospitalProductShowcase />} />
+      </Routes>
+    </>
   )
 }
 

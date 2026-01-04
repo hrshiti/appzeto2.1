@@ -19,9 +19,6 @@ const Home = () => {
         <ScrollWrapper>
             <Hero />
 
-            <ScrollReveal>
-                <Projects />
-            </ScrollReveal>
 
             <ScrollReveal>
                 <About />
@@ -49,6 +46,10 @@ const Home = () => {
 
             <ScrollReveal>
                 <Reviews />
+            </ScrollReveal>
+
+            <ScrollReveal>
+                <Projects />
             </ScrollReveal>
 
             <ScrollReveal>

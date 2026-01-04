@@ -58,20 +58,22 @@ const Blogs = () => {
         const sections = gsap.utils.toArray('.blog-section');
 
         sections.forEach((section, i) => {
-            gsap.fromTo(section.querySelector('.content-box'),
-                { opacity: 0, x: i % 2 === 0 ? 100 : -100 },
-                {
-                    opacity: 1,
-                    x: 0,
-                    duration: 1.5,
-                    ease: "power4.out",
-                    scrollTrigger: {
-                        trigger: section,
-                        start: "top 70%",
-                        toggleActions: "play none none reverse"
+            if (window.innerWidth >= 768) { // Only animate sideways on desktop
+                gsap.fromTo(section.querySelector('.content-box'),
+                    { opacity: 0, x: i % 2 === 0 ? 100 : -100 },
+                    {
+                        opacity: 1,
+                        x: 0,
+                        duration: 1.5,
+                        ease: "power4.out",
+                        scrollTrigger: {
+                            trigger: section,
+                            start: "top 70%",
+                            toggleActions: "play none none reverse"
+                        }
                     }
-                }
-            );
+                );
+            }
         });
     }, []);
 
@@ -81,7 +83,7 @@ const Blogs = () => {
                 <Navbar />
 
                 {/* --- HERO SECTION --- */}
-                <section className="h-screen flex items-center justify-center relative overflow-hidden bg-white">
+                <section className="h-[60vh] md:h-screen flex items-center justify-center relative overflow-hidden bg-white">
                     <div className="absolute inset-0 z-0">
                         <img
                             src={groupImg}
@@ -90,12 +92,12 @@ const Blogs = () => {
                         />
                         <div className="absolute inset-0 bg-black/40" />
                     </div>
-                    <div className="relative z-10 text-center px-6 w-full max-w-[1700px] mx-auto -mt-24">
+                    <div className="relative z-10 text-center px-4 w-full max-w-[1700px] mx-auto md:-mt-24">
                         <motion.h1
                             initial={{ opacity: 0, scale: 0.8 }}
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ duration: 1 }}
-                            className="text-5xl md:text-8xl font-black text-primary uppercase italic tracking-tighter"
+                            className="text-4xl md:text-8xl font-black text-primary uppercase italic tracking-tighter"
                         >
                             Appzeto <span className="font-black italic">Stories</span>
                         </motion.h1>
@@ -103,7 +105,7 @@ const Blogs = () => {
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.5 }}
-                            className="text-slate-200 text-[10px] md:text-xs font-bold uppercase tracking-[0.5em] mt-8 max-w-3xl mx-auto"
+                            className="text-slate-200 text-[10px] md:text-xs font-bold uppercase tracking-[0.5em] mt-4 md:mt-8 max-w-3xl mx-auto"
                         >
                             Chapter by chapter, we are building the future.
                         </motion.p>
@@ -116,32 +118,32 @@ const Blogs = () => {
                 {/* --- BLOG SECTIONS (SIDE BY SIDE) --- */}
                 <div ref={containerRef} className="space-y-0">
                     {blogPosts.map((post, i) => (
-                        <section key={post.id} className="blog-section relative h-[70vh] flex items-center overflow-hidden border-b border-slate-100 bg-white">
-                            <div className={`flex w-full h-full items-center ${i % 2 === 0 ? 'flex-row' : 'flex-row-reverse'}`}>
+                        <section key={post.id} className="blog-section relative h-auto md:h-[70vh] flex items-center overflow-hidden border-b border-slate-100 bg-white">
+                            <div className={`flex w-full h-full flex-col ${i % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
                                 {/* --- IMAGE SIDE --- */}
-                                <div className="w-1/2 h-full overflow-hidden relative image-container">
+                                <div className="w-full md:w-1/2 h-64 md:h-full overflow-hidden relative image-container">
                                     <img src={post.image} className="w-full h-full object-cover transition-transform duration-700" alt={post.title} />
                                 </div>
 
                                 {/* --- CONTENT SIDE --- */}
-                                <div className="w-1/2 px-12 lg:px-24">
-                                    <div className="content-box max-w-2xl mx-auto">
-                                        <div className="flex items-center gap-4 mb-6">
-                                            <span className="px-5 py-1.5 bg-primary/5 border border-primary/20 rounded-full text-primary text-[10px] font-black uppercase tracking-widest">{post.category}</span>
-                                            <span className="text-slate-400 text-[10px] font-bold uppercase tracking-widest">{post.date}</span>
+                                <div className="w-full md:w-1/2 px-4 py-8 md:px-12 lg:px-24 flex items-center">
+                                    <div className="content-box max-w-2xl mx-auto w-full">
+                                        <div className="flex items-center gap-4 mb-4 md:mb-6">
+                                            <span className="px-3 py-1 md:px-5 md:py-1.5 bg-primary/5 border border-primary/20 rounded-full text-primary text-[9px] md:text-[10px] font-black uppercase tracking-widest">{post.category}</span>
+                                            <span className="text-slate-400 text-[9px] md:text-[10px] font-bold uppercase tracking-widest">{post.date}</span>
                                         </div>
-                                        <h2 className="text-4xl md:text-6xl font-black text-slate-800 uppercase italic tracking-tight mb-8 leading-tight">
+                                        <h2 className="text-2xl md:text-6xl font-black text-slate-800 uppercase italic tracking-tight mb-4 md:mb-8 leading-tight">
                                             {post.title}
                                         </h2>
-                                        <p className="text-slate-500 text-base lg:text-lg leading-relaxed mb-12 italic border-l-4 border-primary/20 pl-8">
+                                        <p className="text-slate-500 text-xs md:text-base lg:text-lg leading-relaxed mb-6 md:mb-12 italic border-l-4 border-primary/20 pl-4 md:pl-8">
                                             {post.description}
                                         </p>
 
-                                        <div className="grid grid-cols-3 gap-8">
+                                        <div className="grid grid-cols-3 gap-4 md:gap-8">
                                             {Object.entries(post.stats).map(([key, value]) => (
                                                 <div key={key}>
-                                                    <div className="text-3xl font-black text-primary uppercase italic">{value}</div>
-                                                    <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">{key}</div>
+                                                    <div className="text-xl md:text-3xl font-black text-primary uppercase italic">{value}</div>
+                                                    <div className="text-[9px] md:text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">{key}</div>
                                                 </div>
                                             ))}
                                         </div>
@@ -153,31 +155,31 @@ const Blogs = () => {
                 </div>
 
                 {/* --- ACHIEVEMENTS SECTION --- */}
-                <section className="h-screen flex flex-col justify-center px-10 lg:px-24 max-w-[1700px] mx-auto relative overflow-hidden">
+                <section className="h-auto md:h-screen flex flex-col justify-center px-4 md:px-10 lg:px-24 max-w-[1700px] mx-auto relative overflow-hidden py-12 md:py-0">
                     <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[150px] pointer-events-none" />
 
                     <div className="text-center mb-8">
                         <p className="text-primary font-black uppercase tracking-[0.4em] text-[10px] mb-4">Milestones</p>
-                        <h2 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tighter uppercase italic leading-tight">
+                        <h2 className="text-2xl md:text-5xl font-black text-slate-900 tracking-tighter uppercase italic leading-tight">
                             Awards & <span className="text-primary italic">Achievements</span>
                         </h2>
                     </div>
 
-                    <div className="flex flex-col md:flex-row items-start gap-10">
+                    <div className="flex flex-col md:flex-row items-start gap-6 md:gap-10">
                         {/* Image 1 - Large & Main */}
-                        <div className="flex-[1.2] w-full h-[400px] relative rounded-[3rem] overflow-hidden group shadow-2xl">
+                        <div className="flex-[1.2] w-full h-[250px] md:h-[400px] relative rounded-[2rem] md:rounded-[3rem] overflow-hidden group shadow-2xl">
                             <img src={achImg1} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000" alt="Awards 1" />
                             <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all" />
                         </div>
 
                         {/* Image 2 - Medium & Staggered Down */}
-                        <div className="flex-1 w-full h-[300px] md:mt-24 relative rounded-[3rem] overflow-hidden group shadow-2xl">
+                        <div className="flex-1 w-full h-[200px] md:h-[300px] md:mt-24 relative rounded-[2rem] md:rounded-[3rem] overflow-hidden group shadow-2xl">
                             <img src={achImg2} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000" alt="Awards 2" />
                             <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all" />
                         </div>
 
                         {/* Image 3 - Small & Staggered Mid */}
-                        <div className="flex-1 w-full h-[340px] md:mt-8 relative rounded-[3rem] overflow-hidden group shadow-2xl">
+                        <div className="flex-1 w-full h-[220px] md:h-[340px] md:mt-8 relative rounded-[2rem] md:rounded-[3rem] overflow-hidden group shadow-2xl">
                             <img src={achImg3} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000" alt="Awards 3" />
                             <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all" />
                         </div>

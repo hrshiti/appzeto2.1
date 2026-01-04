@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const AboutSections = () => {
     return (
@@ -78,9 +79,9 @@ const AboutSections = () => {
                             <p className="text-sm text-gray-500 text-center max-w-xs leading-relaxed">
                                 Our team consists of industry veterans and coding prodigies dedicated to clean, efficient, and maintainable code.
                             </p>
-                            <div className="mt-4 flex items-center text-gray-900 font-bold text-sm cursor-pointer hover:underline">
-                                <span className="mr-1">↗</span> Visit site
-                            </div>
+                            <Link to="/" className="mt-4 flex items-center text-gray-900 font-bold text-sm cursor-pointer hover:underline">
+                                <span className="mr-1">↗</span> Visit Home
+                            </Link>
                         </div>
 
                         {/* Feature 2 */}

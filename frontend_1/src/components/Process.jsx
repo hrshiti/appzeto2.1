@@ -82,7 +82,7 @@ const Process = () => {
     }, []);
 
     return (
-        <section ref={containerRef} className="bg-white min-h-screen py-20 relative overflow-hidden flex flex-col justify-center" style={{ fontFamily: "'Playfair Display', serif" }}>
+        <section ref={containerRef} className="bg-white min-h-screen py-12 md:py-20 relative overflow-hidden flex flex-col justify-center" style={{ fontFamily: "'Playfair Display', serif" }}>
             {/* Background Decorations */}
             <div className="absolute top-0 left-0 w-full h-full pointer-events-none opacity-5">
                 <div className="absolute top-20 left-10 w-64 h-64 bg-[#cdbdae] rounded-full blur-[100px]" />
@@ -95,33 +95,33 @@ const Process = () => {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: false }}
                     transition={{ duration: 1, ease: "easeOut" }}
-                    className="text-left mb-16"
+                    className="text-left mb-10 md:mb-16"
                 >
-                    <p className="text-[#cdbdae] font-medium tracking-widest uppercase mb-2">Workflow</p>
-                    <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-4 tracking-tight">How We Bring Your Ideas To Life</h2>
-                    <div className="w-24 h-1 bg-[#cdbdae] rounded-full" />
+                    <p className="text-[#cdbdae] font-medium tracking-widest uppercase mb-2 text-xs md:text-base">Workflow</p>
+                    <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-gray-900 mb-4 tracking-tight">How We Bring Your Ideas To Life</h2>
+                    <div className="w-16 md:w-24 h-1 bg-[#cdbdae] rounded-full" />
                 </motion.div>
 
                 <div className="relative">
                     {/* GSAP Managed Vertical Connector Line */}
-                    <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-[2px] bg-gray-100 -translate-x-1/2 hidden md:block" />
+                    <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-[2px] bg-gray-100 -translate-x-1/2 hidden md:block" />
                     <div
                         ref={lineRef}
-                        className="absolute left-8 md:left-1/2 top-0 bottom-0 w-[2px] bg-[#cdbdae] -translate-x-1/2 hidden md:block origin-top scale-y-0"
+                        className="absolute left-6 md:left-1/2 top-0 bottom-0 w-[2px] bg-[#cdbdae] -translate-x-1/2 hidden md:block origin-top scale-y-0"
                     />
 
                     {/* GSAP Managed Mobile Connector Line */}
-                    <div className="absolute left-8 top-0 bottom-0 w-[2px] bg-gray-100 md:hidden" />
+                    <div className="absolute left-6 top-0 bottom-0 w-[2px] bg-gray-100 md:hidden" />
                     <div
                         ref={mobileLineRef}
-                        className="absolute left-8 top-0 bottom-0 w-[2px] bg-[#cdbdae] md:hidden origin-top scale-y-0"
+                        className="absolute left-6 top-0 bottom-0 w-[2px] bg-[#cdbdae] md:hidden origin-top scale-y-0"
                     />
 
-                    <div className="space-y-12 md:space-y-0">
+                    <div className="space-y-8 md:space-y-0">
                         {steps.map((step, index) => {
                             const isOdd = index % 2 !== 0;
                             return (
-                                <div key={index} className="relative flex items-center md:h-32 mb-8 md:mb-0">
+                                <div key={index} className="relative flex items-center md:h-32">
                                     <div className="flex w-full items-center">
                                         {/* Left Side Content (Framer Motion) */}
                                         <div className={`hidden md:flex w-1/2 justify-end pr-16 ${isOdd ? 'invisible order-1' : 'order-1'}`}>
@@ -152,14 +152,14 @@ const Process = () => {
                                                 whileInView={{ opacity: 1, scale: 1 }}
                                                 viewport={{ once: false }}
                                                 transition={{ delay: 0.4 }}
-                                                className="absolute -top-1 -right-1 w-6 h-6 bg-gray-900 text-white text-[10px] flex items-center justify-center rounded-full font-sans font-bold shadow-md"
+                                                className="absolute -top-1 -right-1 w-5 h-5 md:w-6 md:h-6 bg-gray-900 text-white text-[9px] md:text-[10px] flex items-center justify-center rounded-full font-sans font-bold shadow-md"
                                             >
                                                 0{index + 1}
                                             </motion.div>
                                         </div>
 
                                         {/* Right Side Content (Framer Motion) */}
-                                        <div className={`w-full md:w-1/2 pl-12 md:pl-16 ${!isOdd ? 'md:invisible order-3' : 'order-3'}`}>
+                                        <div className={`w-full md:w-1/2 pl-6 md:pl-16 ${!isOdd ? 'md:invisible order-3' : 'order-3'}`}>
                                             <motion.div
                                                 initial={{ opacity: 0, x: 60, filter: "blur(10px)" }}
                                                 whileInView={{ opacity: 1, x: 0, filter: "blur(0px)" }}
@@ -167,8 +167,8 @@ const Process = () => {
                                                 transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
                                                 className="text-left max-w-sm"
                                             >
-                                                <h3 className="text-xl font-bold text-gray-900 mb-1">{step.title}</h3>
-                                                <p className="text-gray-500 text-sm font-sans leading-relaxed">{step.description}</p>
+                                                <h3 className="text-base sm:text-lg md:text-xl font-bold text-gray-900 mb-0 md:mb-1">{step.title}</h3>
+                                                <p className="hidden sm:block text-gray-500 text-xs md:text-sm font-sans leading-relaxed">{step.description}</p>
                                             </motion.div>
                                         </div>
                                     </div>

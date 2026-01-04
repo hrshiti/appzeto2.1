@@ -1,204 +1,166 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+import { Link } from 'react-router-dom';
 
-import aiImg from '../assets/ai_ml_service_preview_1767285486518.png';
-import webImg from '../assets/web_dev_service_preview_1767285503403.png';
-import mobileImg from '../assets/mobile_apps_service_preview_1767285521524.png';
-import cloudImg from '../assets/cloud_computing_service_preview_1767285540190.png';
-import uiuxImg from '../assets/ui_ux_design_service_preview_1767285557945.png';
+// ... (imports remain same)
 
 const services = [
     {
         id: "01",
-        title: "AI & Machine Learning",
-        features: ["Predictive Analytics", "Deep Learning", "Neural Networks", "NLP", "Machine Vision"],
-        image: aiImg
+        title: "Web Development",
+        description: "High-performance websites and web applications built with modern technologies like React, Next.js, and Node.js. We ensure scalability, speed, and SEO optimization.",
+        icon: "language",
+        image: webImg,
+        slug: "website"
     },
     {
         id: "02",
-        title: "Web Development",
-        features: ["Full-stack Apps", "E-commerce Solutions", "SaaS Platforms", "Performance Optimization", "SEO Strategy"],
-        image: webImg,
-        lottie: "https://lottie.host/4a539b75-197e-4054-94c3-636c84c1f24d/qK7XU7u7u7.lottie"
+        title: "Mobile App Development",
+        description: "Native and cross-platform mobile apps for iOS and Android. We create seamless user experiences using Flutter, React Native, and Swift/Kotlin.",
+        icon: "smartphone",
+        image: mobileImg,
+        slug: "mobile-application"
     },
     {
         id: "03",
-        title: "Mobile App Development",
-        features: ["iOS & Android", "React Native", "Flutter Apps", "Cross-platform", "Real-time Sync"],
-        image: mobileImg,
-        lottie: "https://lottie.host/6ad307d8-18e0-405c-9d6e-9ca28841b9d4/f3iV3Gv4Gv.lottie"
+        title: "AI & Machine Learning",
+        description: "Intelligent automation and data-driven solutions. From chatbots to predictive analytics, we help you leverage the power of AI to grow your business.",
+        icon: "smart_toy",
+        image: aiImg,
+        slug: "ai-machine-learning"
     },
     {
         id: "04",
-        title: "Cloud Computing",
-        features: ["Cloud Architecture", "Serverless Apps", "DevOps & CI/CD", "Cybersecurity", "Microservices"],
-        image: cloudImg
-    },
-    {
-        id: "05",
-        title: "UI/UX Design",
-        features: ["Visual Identity", "Wireframing", "Prototyping", "User Research", "Interaction Design"],
-        image: uiuxImg,
-        lottie: "https://lottie.host/8b7d995c-3f41-477d-810a-ade6a41f6e2b/lU7fM7fM7f.lottie"
-    },
+        title: "DevOps & Cloud",
+        description: "Streamline your deployment pipeline and ensure high availability. We specialize in AWS, Azure, Docker, and Kubernetes for robust infrastructure.",
+        icon: "cloud_sync",
+        image: cloudImg,
+        slug: "devops-cloud"
+    }
 ];
 
-const Services = () => {
-    const [hoveredIndex, setHoveredIndex] = useState(null);
+const ServiceItem = ({ service, index, activeIndex, setActiveIndex }) => {
+    const isActive = activeIndex === index;
 
     return (
-        <section className="bg-[#012829] text-white px-6 md:px-12 lg:px-24 font-sans overflow-hidden min-h-screen py-24">
-            <div className="max-w-7xl mx-auto w-full relative z-10">
-                {/* Header Section */}
-                <div className="flex justify-between items-baseline mb-16 border-b border-white/10 pb-8">
-                    <motion.div
-                        initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.8 }}
-                    >
-                        <h1 className="text-3xl md:text-4xl font-black tracking-tight text-white uppercase mb-2">
-                            Services
-                        </h1>
-                        <div className="h-1 w-12 bg-primary rounded-full"></div>
-                    </motion.div>
-
-                    <motion.div
-                        initial={{ opacity: 0, x: 50 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.8, delay: 0.2 }}
-                        className="hidden md:flex items-center gap-3 text-primary/80"
-                    >
-                        <span className="w-2.5 h-2.5 bg-primary rounded-full animate-pulse shadow-[0_0_15px_rgba(5,164,167,0.5)]"></span>
-                        <span className="text-sm font-bold uppercase tracking-widest">
-                            {services.length} Specialized Areas
+        <Link to={`/services/${service.slug}`} className="block w-full">
+            <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className={`group border-b border-white/10 cursor-pointer transition-colors duration-500 ${isActive ? 'bg-white/5' : 'hover:bg-white/5'}`}
+                onMouseEnter={() => setActiveIndex(index)}
+            >
+                <div className="py-4 md:py-10 px-2 md:px-6 flex flex-row md:items-center justify-between gap-4 md:gap-8 items-center">
+                    {/* ID & Title */}
+                    <div className="flex items-center gap-3 md:gap-8 flex-1 relative z-10">
+                        <span className={`text-base md:text-xl font-mono ${isActive ? 'text-[#05A4A7]' : 'text-gray-600'} transition-colors duration-300`}>
+                            {service.id}
                         </span>
-                    </motion.div>
+                        <h3 className={`text-lg md:text-3xl font-bold uppercase tracking-tight ${isActive ? 'text-white' : 'text-gray-400'} group-hover:text-white transition-colors duration-300 line-clamp-1`}>
+                            {service.title}
+                        </h3>
+                    </div>
+
+                    {/* Arrow Icon */}
+                    <div className={`w-8 h-8 md:w-12 md:h-12 rounded-full border border-white/20 flex items-center justify-center transition-all duration-300 shrink-0 ${isActive ? 'bg-[#05A4A7] border-[#05A4A7] rotate-[-45deg]' : 'group-hover:border-white'}`}>
+                        <span className={`material-symbols-outlined text-base md:text-xl ${isActive ? 'text-white' : 'text-gray-400 group-hover:text-white'}`}>
+                            arrow_forward
+                        </span>
+                    </div>
                 </div>
 
-                {/* Services List */}
-                <div className="flex flex-col">
-                    {services.map((service, index) => (
-                        <div
-                            key={service.id}
-                            onMouseEnter={() => setHoveredIndex(index)}
-                            onMouseLeave={() => setHoveredIndex(null)}
-                            className="group relative border-b border-white/10 last:border-0"
+                {/* Accordion Content */}
+                <AnimatePresence>
+                    {isActive && (
+                        <motion.div
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: "auto", opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            transition={{ duration: 0.4, ease: "easeInOut" }}
+                            className="overflow-hidden"
                         >
-                            <div className="py-4 md:py-6 flex flex-col items-start transition-all duration-500">
-                                <div className="w-full flex items-center justify-between cursor-pointer">
-                                    <div className="flex items-center gap-8 md:gap-16">
-                                        <span className={`text-xs md:text-sm font-medium transition-colors duration-500 font-mono ${hoveredIndex === index ? 'text-primary' : 'text-white/30'}`}>
-                                            ({service.id})
-                                        </span>
-                                        <h3 className={`text-xl md:text-2xl font-semibold tracking-tight transition-all duration-500 ${hoveredIndex === index ? 'text-primary' : 'text-white/80 group-hover:text-white'}`}>
-                                            {service.title}
-                                        </h3>
-                                    </div>
-
-                                    <div className={`size-10 md:size-12 rounded-full border border-white/20 flex items-center justify-center transition-all duration-500 ease-out ${hoveredIndex === index ? 'bg-primary border-primary scale-110' : 'group-hover:bg-white group-hover:text-black group-hover:border-white'}`}>
-                                        <span className={`material-symbols-outlined text-xl transition-transform duration-500 ${hoveredIndex === index ? 'rotate-45 text-black' : 'rotate-[-45deg]'}`}>
-                                            arrow_upward
-                                        </span>
-                                    </div>
-                                </div>
-
-                                {/* Expanded Content */}
-                                <AnimatePresence>
-                                    {hoveredIndex === index && (
-                                        <motion.div
-                                            initial={{ height: 0, opacity: 0 }}
-                                            animate={{ height: "auto", opacity: 1 }}
-                                            exit={{ height: 0, opacity: 0 }}
-                                            transition={{
-                                                duration: 1.5,
-                                                ease: [0.22, 1, 0.36, 1]
-                                            }}
-                                            className="overflow-hidden w-full origin-top"
-                                        >
-                                            <div className="pt-10 pb-12 flex flex-col lg:flex-row items-center gap-12 lg:gap-24">
-                                                {/* Image Container with Slower Sliding Animation */}
-                                                <motion.div
-                                                    initial={{ scale: 0.9, opacity: 0, x: -30 }}
-                                                    animate={{ scale: 1, opacity: 1, x: 0 }}
-                                                    transition={{
-                                                        duration: 1.2,
-                                                        ease: [0.22, 1, 0.36, 1],
-                                                        delay: 0.2
-                                                    }}
-                                                    className="w-full lg:w-[480px] aspect-[16/10] rounded-2xl overflow-hidden shadow-[0_30px_70px_rgba(0,0,0,0.6)] border border-white/5 relative group/img"
-                                                >
-                                                    {service.lottie ? (
-                                                        <DotLottieReact
-                                                            src={service.lottie}
-                                                            loop
-                                                            autoplay
-                                                            className="w-full h-full object-contain p-10"
-                                                        />
-                                                    ) : (
-                                                        <img
-                                                            src={service.image}
-                                                            alt={service.title}
-                                                            className="w-full h-full object-cover transition-transform duration-[3000ms] ease-out group-hover/img:scale-110"
-                                                        />
-                                                    )}
-                                                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
-                                                </motion.div>
-
-                                                {/* Features List with Slower Staggered Reveal */}
-                                                <div className="flex-1 w-full lg:w-auto">
-                                                    <motion.h4
-                                                        initial={{ opacity: 0, y: 15 }}
-                                                        animate={{ opacity: 0.7, y: 0 }}
-                                                        transition={{ duration: 1, delay: 0.4 }}
-                                                        className="text-[11px] font-bold uppercase tracking-[0.5em] mb-8 text-white/90"
-                                                    >
-                                                        Technical Expertise
-                                                    </motion.h4>
-                                                    <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-x-12 gap-y-5">
-                                                        {service.features.map((feature, fIdx) => (
-                                                            <motion.li
-                                                                key={feature}
-                                                                initial={{ x: 30, opacity: 0 }}
-                                                                animate={{ x: 0, opacity: 1 }}
-                                                                transition={{
-                                                                    duration: 0.8,
-                                                                    delay: 0.6 + (fIdx * 0.15),
-                                                                    ease: [0.22, 1, 0.36, 1]
-                                                                }}
-                                                                className="flex items-center gap-5 text-white/80 hover:text-primary transition-colors duration-500 group/item"
-                                                            >
-                                                                <div className="size-7 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center group-hover/item:bg-primary group-hover/item:border-primary transition-all duration-500">
-                                                                    <span className="material-symbols-outlined text-primary text-[14px] group-hover/item:text-black font-bold">done</span>
-                                                                </div>
-                                                                <span className="font-medium text-base tracking-normal group-hover/item:translate-x-2 transition-transform duration-500">
-                                                                    {feature}
-                                                                </span>
-                                                            </motion.li>
-                                                        ))}
-                                                    </ul>
-
-                                                    <motion.div
-                                                        initial={{ opacity: 0, y: 25 }}
-                                                        animate={{ opacity: 1, y: 0 }}
-                                                        transition={{ delay: 1.2, duration: 0.8 }}
-                                                    >
-                                                        <motion.button
-                                                            whileHover={{ scale: 1.05, backgroundColor: "#05A4A7", color: "white" }}
-                                                            whileTap={{ scale: 0.95 }}
-                                                            className="mt-12 bg-white text-black px-12 py-3.5 rounded-full font-bold text-xs shadow-2xl uppercase tracking-[0.2em]"
-                                                        >
-                                                            Discover More
-                                                        </motion.button>
-                                                    </motion.div>
-                                                </div>
-                                            </div>
-                                        </motion.div>
-                                    )}
-                                </AnimatePresence>
+                            <div className="pb-4 px-2 pl-8 max-w-4xl">
+                                <p className="text-gray-400 text-xs leading-relaxed font-light">
+                                    {service.description}
+                                </p>
                             </div>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
+            </motion.div>
+        </Link>
+    );
+};
+
+const Services = () => {
+    const [activeIndex, setActiveIndex] = useState(null);
+
+    return (
+        <section className="bg-[#0b0c10] py-16 md:py-32 relative overflow-hidden font-sans">
+            {/* Ambient Background */}
+            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#05A4A7]/5 rounded-full blur-[120px] pointer-events-none" />
+            <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#05A4A7]/5 rounded-full blur-[120px] pointer-events-none" />
+
+            <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-12 relative z-10">
+                {/* Heading */}
+                <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 md:mb-20 gap-4 md:gap-6">
+                    <div>
+                        <motion.span
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            className="block text-[#05A4A7] font-bold tracking-[0.2em] uppercase text-xs md:text-sm mb-2 md:mb-4"
+                        >
+                            Our Expertise
+                        </motion.span>
+                        <motion.h2
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.1 }}
+                            className="text-3xl md:text-6xl font-black text-white uppercase tracking-tighter"
+                        >
+                            Solutions We <br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-[#05A4A7] to-emerald-400">Deliver</span>
+                        </motion.h2>
+                    </div>
+                    <motion.p
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.2 }}
+                        className="hidden sm:block text-gray-400 text-sm md:text-base max-w-md leading-relaxed"
+                    >
+                        We combine strategy, design, and technology to build digital products that drive growth and efficiency.
+                    </motion.p>
+                </div>
+
+                {/* Services List - Full Width */}
+                <div className="border-t border-white/10 relative" onMouseLeave={() => setActiveIndex(null)} data-cursor-text="View Detail">
+                    {services.map((service, index) => (
+                        <div key={index} className="relative">
+                            <ServiceItem
+                                service={service}
+                                index={index}
+                                activeIndex={activeIndex}
+                                setActiveIndex={setActiveIndex}
+                            />
+                            {/* Floating Image Overlay - Only visible on Desktop Hover */}
+                            <AnimatePresence>
+                                {activeIndex === index && (
+                                    <motion.div
+                                        initial={{ opacity: 0, scale: 0.8, x: 20 }}
+                                        animate={{ opacity: 1, scale: 1, x: 0 }}
+                                        exit={{ opacity: 0, scale: 0.8, x: 10 }}
+                                        transition={{ duration: 0.3, ease: "easeOut" }}
+                                        className="hidden lg:block absolute right-48 top-1/2 -translate-y-1/2 w-96 h-56 rounded-xl overflow-hidden shadow-2xl border border-white/20 z-20 pointer-events-none"
+                                        style={{ boxShadow: '0 0 30px rgba(0,0,0,0.5)' }}
+                                    >
+                                        <div className="absolute inset-0 bg-black/20 z-10"></div>
+                                        <img
+                                            src={service.image}
+                                            alt={service.title}
+                                            className="w-full h-full object-cover"
+                                        />
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
                         </div>
                     ))}
                 </div>

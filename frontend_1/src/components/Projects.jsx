@@ -1,6 +1,5 @@
-
 import React, { useState, useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -249,162 +248,210 @@ const projects = [
 ];
 
 const Projects = () => {
-    const [activeProject, setActiveProject] = useState(0);
-    const containerRef = useRef(null);
+    const sectionRef = useRef(null);
+    const triggerRef = useRef(null);
     const navigate = useNavigate();
+    const [activeProject, setActiveProject] = useState(0);
 
-    useEffect(() => {
+    React.useLayoutEffect(() => {
         const ctx = gsap.context(() => {
-            ScrollTrigger.create({
-                trigger: containerRef.current,
-                start: "top top",
-                end: `+=${projects.length * 80}%`,
-                pin: true,
-                scrub: 1.5, // Even slower, lazier catch-up for maximum premium feel
-                onUpdate: (self) => {
-                    const progress = self.progress;
-                    const totalProjects = projects.length;
-                    let newIndex = Math.floor(progress * totalProjects);
-                    if (newIndex >= totalProjects) newIndex = totalProjects - 1;
+            const mm = gsap.matchMedia();
 
-                    if (newIndex !== activeProject) {
-                        setActiveProject(newIndex);
+            mm.add("(min-width: 768px)", () => {
+                const scrollDistance = window.innerWidth * (projects.length - 1);
+
+                gsap.to(sectionRef.current, {
+                    xPercent: -100 * (projects.length - 1) / projects.length,
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: triggerRef.current,
+                        pin: true,
+                        scrub: 1,
+                        snap: {
+                            snapTo: 1 / (projects.length - 1),
+                            duration: { min: 0.1, max: 0.2 },
+                            delay: 0,
+                            ease: "power1.inOut"
+                        },
+                        end: () => `+=${scrollDistance}`,
+                        onUpdate: (self) => {
+                            const progress = self.progress;
+                            const total = projects.length;
+                            const idx = Math.round(progress * (total - 1));
+                            setActiveProject(idx);
+                        }
                     }
-                },
+                });
             });
         });
 
-        return () => {
-            ctx.revert();
-            ScrollTrigger.getAll().forEach(t => t.kill());
-        };
+        return () => ctx.revert();
     }, []);
 
-    return (
-        <motion.div
-            ref={containerRef}
-            animate={{ backgroundColor: projects[activeProject].bgColor }}
-            transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
-            className="w-full font-display overflow-hidden antialiased"
-        >
-            <div className="relative w-full h-screen flex flex-col items-center justify-center">
-                <div className="w-full max-w-7xl mx-auto px-6 sm:px-8 flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-20 h-full py-4 relative z-10">
-                    <div className="w-full lg:w-1/2 flex flex-col justify-center h-full gap-8 order-2 lg:order-1 relative z-20 items-start text-left">
-                        <div className="mb-2">
-                            <motion.h1
-                                animate={{ color: projects[activeProject].textColor }}
-                                className="text-sm md:text-base font-black tracking-[0.3em] uppercase opacity-60"
-                            >
-                                Case Studies
-                            </motion.h1>
-                        </div>
+    // Animation Variants
+    const textVariants = {
+        hidden: { opacity: 0, x: -50 },
+        visible: { opacity: 1, x: 0, transition: { duration: 0.8, ease: "easeOut" } }
+    };
 
-                        <div className="relative w-full min-h-[400px] flex items-center mb-8">
-                            <AnimatePresence>
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.1,
+                delayChildren: 0.2
+            }
+        }
+    };
+
+    const phoneVariants = {
+        hidden: { opacity: 0, scale: 0.8, rotateY: -15 },
+        visible: {
+            opacity: 1,
+            scale: 1,
+            rotateY: 0,
+            transition: { duration: 0.8, ease: "backOut" }
+        }
+    };
+
+    return (
+        <div className="relative w-full">
+            {/* --- Desktop View (Pinned Scroll) --- */}
+            <div ref={triggerRef} className="hidden md:block overflow-hidden bg-white">
+                <div
+                    ref={sectionRef}
+                    className="flex h-screen w-[400vw] relative"
+                >
+                    {projects.map((project, index) => (
+                        <div
+                            key={index}
+                            className="w-screen h-screen flex flex-col md:flex-row items-center justify-center p-4 md:p-10 relative overflow-hidden"
+                            style={{ backgroundColor: project.bgColor }}
+                            data-cursor-text={index === 0 ? "Food" : index === 1 ? "Store" : index === 2 ? "Medical" : "Transport"}
+                        >
+                            {/* Background Decor */}
+                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120vh] h-[120vh] bg-white/10 rounded-full blur-[100px] pointer-events-none" />
+
+                            {/* Content Container */}
+                            <div className="max-w-7xl w-full mx-auto flex flex-col md:flex-row items-center gap-6 md:gap-20 z-10 h-full justify-center pt-10 md:pt-0">
+
+                                {/* Text Content */}
                                 <motion.div
-                                    key={activeProject}
-                                    initial={{ opacity: 0, x: -200, pointerEvents: 'none', zIndex: 0 }}
-                                    animate={{ opacity: 1, x: 0, pointerEvents: 'auto', zIndex: 10 }}
-                                    exit={{ opacity: 0, x: 200, pointerEvents: 'none', zIndex: 0 }}
-                                    transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
-                                    className="flex flex-col gap-6 items-start absolute inset-0 py-4 text-left"
+                                    initial="hidden"
+                                    animate={activeProject === index ? "visible" : "hidden"}
+                                    variants={containerVariants}
+                                    className="w-full md:w-1/2 text-left space-y-4 md:space-y-8 flex flex-col justify-center"
                                 >
-                                    <div className="flex flex-wrap gap-2 justify-start">
-                                        {projects[activeProject].tags.map((tag, i) => (
-                                            <span key={i} className="px-3 py-1 bg-black/5 rounded-full text-black/60 text-xs md:text-sm font-bold border border-black/10">
+                                    <div className="flex flex-wrap gap-2">
+                                        {project.tags.map((tag, i) => (
+                                            <span key={i} className="px-2 py-1 md:px-3 md:py-1 bg-black/10 backdrop-blur-sm rounded-full text-[10px] md:text-xs font-bold border border-white/10" style={{ color: project.textColor }}>
                                                 {tag}
                                             </span>
                                         ))}
                                     </div>
-                                    <motion.h2
-                                        animate={{ color: projects[activeProject].textColor }}
-                                        className="text-3xl md:text-5xl lg:text-6xl font-black leading-[1.1] tracking-tighter"
-                                    >
-                                        {projects[activeProject].title.split(' • ')[0]}<br />
-                                        <span className="opacity-70">{projects[activeProject].title.split(' • ')[1]}</span>
+
+                                    <motion.h2 variants={textVariants} className="text-2xl sm:text-4xl md:text-6xl lg:text-7xl font-black leading-tight tracking-tight mt-2 md:mt-0" style={{ color: project.textColor }}>
+                                        {project.title.split("•")[0]}
+                                        <span className="block text-lg md:text-3xl opacity-80 font-bold mt-1 md:mt-2">{project.title.split("•")[1]}</span>
                                     </motion.h2>
-                                    <motion.p
-                                        animate={{ color: projects[activeProject].textColor }}
-                                        className="text-base md:text-lg opacity-80 leading-relaxed max-w-xl font-medium"
-                                    >
-                                        {projects[activeProject].description}
+
+                                    <motion.p variants={textVariants} className="text-sm sm:text-base md:text-xl font-medium opacity-90 max-w-xl leading-relaxed hidden sm:block" style={{ color: project.textColor }}>
+                                        {project.description}
                                     </motion.p>
-                                    <div className="pt-6">
-                                        <motion.button
-                                            onClick={() => navigate(projects[activeProject].link)}
-                                            animate={{
-                                                backgroundColor: projects[activeProject].btnColor,
-                                                color: projects[activeProject].btnText
-                                            }}
-                                            className="flex items-center gap-3 px-10 py-4 rounded-full font-black text-lg shadow-2xl transition-all duration-300 group"
+
+                                    <Link to={project.link}>
+                                        <motion.div
+                                            variants={textVariants}
+                                            whileHover={{ scale: 1.05 }}
+                                            whileTap={{ scale: 0.95 }}
+                                            className="px-5 py-2 md:px-8 md:py-4 rounded-full font-bold shadow-lg flex items-center gap-2 group transition-all text-sm md:text-base w-fit cursor-pointer"
+                                            style={{ backgroundColor: project.btnColor, color: project.btnText }}
                                         >
-                                            Checkout Case Study
-                                            <span className="material-symbols-outlined text-2xl transition-transform group-hover:translate-x-1">north_east</span>
-                                        </motion.button>
-                                    </div>
+                                            View Case Study
+                                            <span className="material-symbols-outlined text-sm md:text-base group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                                        </motion.div>
+                                    </Link>
                                 </motion.div>
-                            </AnimatePresence>
-                        </div>
 
-                        <div className="flex items-center gap-4 relative z-30">
-                            {projects.map((_, idx) => (
-                                <motion.button
-                                    key={idx}
-                                    animate={{ backgroundColor: idx === activeProject ? projects[activeProject].textColor : projects[activeProject].textColor + '20' }}
-                                    className={`h-1.5 rounded-full transition-all duration-500 ease-out ${idx === activeProject ? 'w-12' : 'w-2'}`}
-                                />
-                            ))}
-                        </div>
-                    </div>
-
-                    <div className="w-full lg:w-1/2 flex justify-center items-center h-full order-1 lg:order-2 py-[2vh] lg:py-[5vh]">
-                        <div className="relative h-[75vh] w-auto aspect-[1/2] max-h-[800px] border-[10px] border-[#111] rounded-[3rem] overflow-hidden bg-black shadow-[0_50px_100px_-20px_rgba(0,0,0,0.3)] ring-1 ring-white/10 z-10 transition-transform duration-1000">
-                            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[30%] h-[4%] bg-[#111] rounded-b-[1.5rem] z-40"></div>
-                            <div className="relative w-full h-full bg-[#f8fafc]">
-                                <AnimatePresence>
+                                {/* Phone UI Mockup */}
+                                <div className="w-full md:w-1/2 flex justify-center perspective-1000 mt-4 md:mt-0">
                                     <motion.div
-                                        key={activeProject}
-                                        initial={{ opacity: 0, scale: 0.94 }}
-                                        animate={{ opacity: 1, scale: 1 }}
-                                        exit={{ opacity: 0, scale: 1.06 }}
-                                        transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-                                        className="absolute inset-0 w-full h-full"
+                                        initial="hidden"
+                                        animate={activeProject === index ? "visible" : "hidden"}
+                                        variants={phoneVariants}
+                                        className="relative w-[220px] sm:w-[260px] md:w-[320px] aspect-[9/19] bg-black rounded-[2rem] md:rounded-[3rem] p-2 md:p-3 shadow-2xl border-[6px] md:border-[8px] border-black ring-1 ring-white/20"
                                     >
-                                        <div className="absolute top-0 w-full px-[8%] py-[4%] flex justify-between items-center z-50 text-[10px] font-bold pointer-events-none mix-blend-difference text-white">
-                                            <span>9:41</span>
-                                            <div className="flex gap-1.5">
-                                                <span className="material-symbols-outlined text-[12px]">signal_cellular_alt</span>
-                                                <span className="material-symbols-outlined text-[12px]">wifi</span>
-                                                <span className="material-symbols-outlined text-[12px]">battery_full</span>
-                                            </div>
+                                        <div className="w-full h-full bg-white rounded-[1.5rem] md:rounded-[2.5rem] overflow-hidden relative">
+                                            {React.createElement(project.UI)}
+                                            <div className="absolute top-2 left-1/2 -translate-x-1/2 w-16 md:w-24 h-4 md:h-6 bg-black rounded-full z-50 pointer-events-none" />
                                         </div>
-                                        {React.createElement(projects[activeProject].UI)}
+                                        <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent pointer-events-none rounded-[2rem] md:rounded-[3rem]" />
                                     </motion.div>
-                                </AnimatePresence>
+                                </div>
                             </div>
-                        </div>
-                        <div className="absolute top-1/2 right-1/4 w-[60vh] h-[60vh] bg-white/20 rounded-full blur-[120px] -translate-y-1/2 pointer-events-none z-0 mix-blend-overlay animate-pulse"></div>
-                    </div>
-                </div>
 
-                <div className="absolute right-12 bottom-12 hidden xl:flex flex-col items-end gap-1 z-0">
-                    {projects.map((_, idx) => (
-                        <div key={idx} className="flex items-center gap-4">
-                            <motion.span
-                                animate={{ color: projects[activeProject].textColor }}
-                                className={`text-xs font-black tracking-widest transition-all duration-500 ${idx === activeProject ? 'opacity-100' : 'opacity-10'}`}
-                            >
-                                0{idx + 1}
-                            </motion.span>
-                            <motion.div
-                                animate={{ backgroundColor: projects[activeProject].textColor }}
-                                className={`h-[1px] transition-all duration-500 ${idx === activeProject ? 'w-8 opacity-100' : 'w-4 opacity-10'}`}
-                            ></motion.div>
+                            {/* Page Number Indicator */}
+                            <div className="absolute bottom-4 right-4 md:bottom-8 md:right-8 text-6xl md:text-9xl font-black opacity-10 select-none pointer-events-none" style={{ color: project.textColor }}>
+                                0{index + 1}
+                            </div>
                         </div>
                     ))}
                 </div>
             </div>
-        </motion.div>
+
+            {/* --- Mobile View (Vertical Card Stack) --- */}
+            <div className="block md:hidden pb-10">
+                {projects.map((project, index) => (
+                    <div key={index} className="w-full relative overflow-hidden py-10 px-4" style={{ backgroundColor: project.bgColor }}>
+                        {/* Background Decor */}
+                        <div className="absolute top-0 right-0 w-[80vw] h-[80vw] bg-white/10 rounded-full blur-[80px] pointer-events-none" />
+
+                        <div className="flex flex-col gap-6">
+                            <div className="space-y-3">
+                                <div className="flex flex-wrap gap-2">
+                                    {project.tags.map((tag, i) => (
+                                        <span key={i} className="px-2 py-1 bg-black/10 backdrop-blur-sm rounded-full text-[9px] font-bold border border-white/10" style={{ color: project.textColor }}>
+                                            {tag}
+                                        </span>
+                                    ))}
+                                </div>
+
+                                <h2 className="text-2xl font-black leading-tight tracking-tight" style={{ color: project.textColor }}>
+                                    {project.title.split("•")[0]}
+                                    <span className="block text-base opacity-80 font-bold mt-1">{project.title.split("•")[1]}</span>
+                                </h2>
+
+                                <p className="text-xs font-medium opacity-90 leading-relaxed" style={{ color: project.textColor }}>
+                                    {project.description}
+                                </p>
+
+                                <Link to={project.link}>
+                                    <div
+                                        className="px-5 py-2.5 rounded-full font-bold shadow-lg flex items-center gap-2 group transition-all text-sm w-fit cursor-pointer"
+                                        style={{ backgroundColor: project.btnColor, color: project.btnText }}
+                                    >
+                                        View Case Study
+                                        <span className="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                                    </div>
+                                </Link>
+                            </div>
+
+                            {/* Mobile Phone Mockup */}
+                            <div className="flex justify-center mt-2">
+                                <div className="relative w-[180px] aspect-[9/19] bg-black rounded-[1.5rem] p-1.5 shadow-xl border-[4px] border-black ring-1 ring-white/20">
+                                    <div className="w-full h-full bg-white rounded-[1rem] overflow-hidden relative">
+                                        {React.createElement(project.UI)}
+                                        <div className="absolute top-2 left-1/2 -translate-x-1/2 w-12 h-3 bg-black rounded-full z-50 pointer-events-none" />
+                                    </div>
+                                    <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent pointer-events-none rounded-[1.5rem]" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </div>
     );
 };
 

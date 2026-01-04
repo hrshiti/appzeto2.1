@@ -75,7 +75,7 @@ const StatItem = ({ value, suffix, label, index }) => {
             viewport={{ once: false }}
             transition={{ duration: 0.5, delay: index * 0.1, ease: "easeOut" }}
             style={{ perspective: "1200px", transformStyle: "preserve-3d" }}
-            className="group relative flex flex-col items-center justify-center p-6 md:p-8 bg-[#ffffff05] backdrop-blur-2xl rounded-[2.5rem] border border-white/10 overflow-hidden shadow-2xl"
+            className="group relative flex flex-col items-center justify-center p-4 md:p-8 bg-[#ffffff05] backdrop-blur-2xl rounded-[1.5rem] md:rounded-[2.5rem] border border-white/10 overflow-hidden shadow-2xl"
         >
             {/* Inner Glow/Shine */}
             <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#cdbdae]/40 to-transparent" />
@@ -86,16 +86,16 @@ const StatItem = ({ value, suffix, label, index }) => {
             <div className="relative flex items-baseline select-none" style={{ transform: "translateZ(50px)" }}>
                 <span
                     ref={numberRef}
-                    className="text-5xl md:text-7xl font-serif font-bold text-white tracking-tighter"
+                    className="text-4xl md:text-7xl font-serif font-bold text-white tracking-tighter"
                 >
                     0
                 </span>
-                <span className="text-3xl md:text-4xl font-serif font-light text-[#cdbdae] ml-1">{suffix}</span>
+                <span className="text-xl md:text-4xl font-serif font-light text-[#cdbdae] ml-1">{suffix}</span>
             </div>
 
-            <div className="mt-4 flex flex-col items-center" style={{ transform: "translateZ(30px)" }}>
-                <div className="h-[1px] w-8 bg-[#cdbdae]/40 mb-3 group-hover:w-16 transition-all duration-700" />
-                <span className="text-gray-400 font-sans font-bold uppercase tracking-[0.3em] text-[10px] md:text-[11px] text-center group-hover:text-white transition-colors duration-500">
+            <div className="mt-2 md:mt-4 flex flex-col items-center" style={{ transform: "translateZ(30px)" }}>
+                <div className="h-[1px] w-8 bg-[#cdbdae]/40 mb-2 md:mb-3 group-hover:w-16 transition-all duration-700" />
+                <span className="text-gray-400 font-sans font-bold uppercase tracking-[0.3em] text-[8px] md:text-[11px] text-center group-hover:text-white transition-colors duration-500">
                     {label}
                 </span>
             </div>
@@ -115,13 +115,13 @@ const Stats = () => {
     ];
 
     return (
-        <section className="bg-[#011617] py-16 md:py-20 relative overflow-hidden font-serif">
+        <section className="bg-[#011617] py-12 md:py-20 relative overflow-hidden font-serif">
             {/* Luxury Background Elements */}
-            <div className="absolute top-0 left-1/4 w-[400px] h-[400px] bg-[#cdbdae]/5 rounded-full blur-[120px] pointer-events-none animate-pulse" />
-            <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-[#05a4a7]/5 rounded-full blur-[120px] pointer-events-none animate-pulse" style={{ animationDelay: '2s' }} />
+            <div className="absolute top-0 left-1/4 w-[250px] md:w-[400px] h-[250px] md:h-[400px] bg-[#cdbdae]/5 rounded-full blur-[80px] md:blur-[120px] pointer-events-none animate-pulse" />
+            <div className="absolute bottom-0 right-1/4 w-[250px] md:w-[400px] h-[250px] md:h-[400px] bg-[#05a4a7]/5 rounded-full blur-[80px] md:blur-[120px] pointer-events-none animate-pulse" style={{ animationDelay: '2s' }} />
 
-            <div className="max-w-7xl mx-auto px-8 relative z-10">
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+            <div className="max-w-7xl mx-auto px-4 sm:px-8 relative z-10">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
                     {stats.map((stat, index) => (
                         <StatItem
                             key={index}

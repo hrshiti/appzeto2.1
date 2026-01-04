@@ -139,36 +139,36 @@ const Career = () => {
                 <Navbar />
 
                 {/* --- HERO SECTION --- */}
-                <div className="relative pt-16 pb-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto overflow-visible">
-                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-                        <div className="lg:col-span-7 space-y-8 z-10">
+                <div className="relative pt-10 md:pt-16 pb-12 md:pb-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto overflow-visible">
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 items-center">
+                        <div className="lg:col-span-7 space-y-6 md:space-y-8 z-10">
                             <motion.div
                                 initial={{ x: -50, opacity: 0 }}
                                 animate={{ x: 0, opacity: 1 }}
-                                className="inline-flex items-center space-x-3 bg-white px-4 py-2 rounded-full border-2 border-slate-900 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
+                                className="inline-flex items-center space-x-3 bg-white px-3 md:px-4 py-1.5 md:py-2 rounded-full border-2 border-slate-900 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] md:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
                             >
-                                <span className="w-3 h-3 bg-primary rounded-full animate-pulse"></span>
-                                <span className="text-xs uppercase tracking-widest font-black text-slate-900">WE'RE HIRING!</span>
+                                <span className="w-2.5 h-2.5 md:w-3 md:h-3 bg-primary rounded-full animate-pulse"></span>
+                                <span className="text-[10px] md:text-xs uppercase tracking-widest font-black text-slate-900">WE'RE HIRING!</span>
                             </motion.div>
 
-                            <h1 className="text-6xl md:text-8xl font-black leading-[0.9] text-slate-900 tracking-tighter">
+                            <h1 className="text-4xl sm:text-6xl md:text-8xl font-black leading-[0.9] text-slate-900 tracking-tighter">
                                 JOIN THE <br />
                                 <span className="text-primary italic outline-text">REVOLUTION.</span>
                             </h1>
 
-                            <div className="flex flex-wrap gap-4">
+                            <div className="flex flex-wrap gap-3 md:gap-4">
                                 {["Brilliant Minds", "Fast Paced", "Big Impact"].map((item, idx) => (
                                     <motion.span
                                         key={idx}
                                         whileHover={{ scale: 1.1, rotate: idx % 2 === 0 ? 5 : -5 }}
-                                        className="px-6 py-3 rounded-2xl border-2 border-slate-900 bg-white text-sm font-black text-slate-900 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:bg-primary hover:text-white transition-all cursor-pointer"
+                                        className="px-4 py-2 md:px-6 md:py-3 rounded-xl md:rounded-2xl border-2 border-slate-900 bg-white text-xs md:text-sm font-black text-slate-900 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] md:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:bg-primary hover:text-white transition-all cursor-pointer"
                                     >
                                         {item}
                                     </motion.span>
                                 ))}
                             </div>
 
-                            <p className="text-slate-600 max-w-lg text-xl font-medium leading-relaxed">
+                            <p className="text-slate-600 max-w-lg text-sm md:text-xl font-medium leading-relaxed">
                                 Stop working for machines. Start building for humans. Appzeto is looking for the bold, the curious, and the slightly obsessed.
                             </p>
                         </div>
@@ -177,15 +177,15 @@ const Career = () => {
                             <motion.div
                                 initial={{ scale: 0.8, opacity: 0 }}
                                 animate={{ scale: 1, opacity: 1 }}
-                                className="relative aspect-square bg-primary rounded-[3rem] border-[4px] border-slate-900 shadow-[15px_15px_0px_0px_rgba(0,0,0,1)] rotate-3 overflow-hidden"
+                                className="relative aspect-square bg-primary rounded-[2rem] md:rounded-[3rem] border-[4px] border-slate-900 shadow-[10px_10px_0px_0px_rgba(0,0,0,1)] md:shadow-[15px_15px_0px_0px_rgba(0,0,0,1)] rotate-3 overflow-hidden"
                             >
                                 <img
                                     src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=2340&auto=format&fit=crop"
                                     alt="Team"
                                     className="w-full h-full object-cover grayscale mix-blend-overlay hover:grayscale-0 transition-all duration-700"
                                 />
-                                <div className="absolute inset-0 flex items-center justify-center p-10 text-center">
-                                    <h2 className="text-4xl md:text-5xl font-black text-white leading-tight drop-shadow-2xl">
+                                <div className="absolute inset-0 flex items-center justify-center p-6 md:p-10 text-center">
+                                    <h2 className="text-3xl md:text-5xl font-black text-white leading-tight drop-shadow-2xl">
                                         NOT JUST A JOB, <br /> A LEGACY.
                                     </h2>
                                 </div>
@@ -212,7 +212,7 @@ const Career = () => {
 
                 {/* --- OPEN POSITIONS (MODERN MINIMAL LIST - FITS IN 100VH) --- */}
                 <div id="positions" className="lg:h-screen max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 bg-white shadow-sm mt-0 border-b border-slate-100 flex flex-col justify-center overflow-hidden">
-                    <div className="flex flex-col md:flex-row justify-between items-end mb-12 px-4">
+                    <div className="flex flex-col md:flex-row justify-between items-end mb-8 md:mb-12 px-4">
                         <div className="text-left">
                             <p className="text-primary font-bold uppercase tracking-widest text-[10px] mb-2 text-slate-400">Join the squad</p>
                             <h2 className="text-3xl md:text-5xl font-bold text-slate-900 tracking-tighter uppercase">Wanna Join Us?</h2>
@@ -225,22 +225,22 @@ const Career = () => {
                             <motion.div
                                 key={job.id}
                                 whileHover={{ backgroundColor: "rgba(241, 252, 136, 0.2)" }}
-                                className="flex flex-col md:flex-row items-center justify-between py-6 px-6 border-b border-slate-100/50 group transition-all duration-300 cursor-pointer"
+                                className="flex flex-col md:flex-row items-start md:items-center justify-between py-4 md:py-6 px-4 md:px-6 border-b border-slate-100/50 group transition-all duration-300 cursor-pointer"
                             >
-                                <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-12 flex-1">
-                                    <span className="text-[10px] font-black uppercase tracking-widest text-slate-300 w-24">{job.department}</span>
+                                <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-12 flex-1 w-full">
+                                    <span className="text-[9px] md:text-[10px] font-black uppercase tracking-widest text-slate-300 w-24">{job.department}</span>
                                     <div className="flex flex-col">
-                                        <h3 className="text-xl font-bold text-slate-900 group-hover:text-primary transition-colors uppercase tracking-tight">{job.role}</h3>
-                                        <p className="text-slate-500 text-xs mt-0.5">{job.description}</p>
+                                        <h3 className="text-lg md:text-xl font-bold text-slate-900 group-hover:text-primary transition-colors uppercase tracking-tight">{job.role}</h3>
+                                        <p className="text-slate-500 text-[10px] md:text-xs mt-0.5">{job.description}</p>
                                     </div>
                                 </div>
 
-                                <div className="flex items-center gap-8 mt-6 md:mt-0">
+                                <div className="flex items-center justify-between w-full md:w-auto gap-8 mt-4 md:mt-0">
                                     <div className="hidden lg:flex items-center gap-6 text-[10px] font-bold text-slate-400 uppercase tracking-widest">
                                         <span className="flex items-center gap-1.5"><span className="material-icons text-sm opacity-50">schedule</span> {job.type}</span>
                                         <span className="flex items-center gap-1.5"><span className="material-icons text-sm opacity-50">location_on</span> {job.location}</span>
                                     </div>
-                                    <button className="bg-slate-950 text-white px-6 py-2.5 rounded-full font-bold text-[10px] uppercase tracking-widest hover:bg-[#F1FC88] hover:text-slate-900 transition-all flex items-center gap-2">
+                                    <button className="bg-slate-950 text-white px-6 py-2 md:py-2.5 rounded-full font-bold text-[9px] md:text-[10px] uppercase tracking-widest hover:bg-[#F1FC88] hover:text-slate-900 transition-all flex items-center gap-2 ml-auto md:ml-0">
                                         Apply <span className="material-icons text-sm">north_east</span>
                                     </button>
                                 </div>
@@ -253,31 +253,31 @@ const Career = () => {
                 <div id="internship" className="bg-primary py-10 mt-0 border-t-[6px] border-slate-900">
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
                         <div className="absolute top-0 right-10 rotate-12 opacity-10 pointer-events-none text-[#F1FC88]">
-                            <span className="material-icons text-[250px]">school</span>
+                            <span className="material-icons text-[150px] md:text-[250px]">school</span>
                         </div>
 
-                        <div className="relative z-10 flex flex-col gap-12">
-                            <div className="flex flex-col md:flex-row justify-between items-end gap-8">
+                        <div className="relative z-10 flex flex-col gap-8 md:gap-12">
+                            <div className="flex flex-col md:flex-row justify-between items-end gap-6 md:gap-8">
                                 <div className="text-left">
-                                    <h2 className="text-4xl md:text-5xl font-black text-white mb-4 leading-[0.8] uppercase tracking-tighter">
+                                    <h2 className="text-3xl md:text-5xl font-black text-white mb-2 md:mb-4 leading-[0.8] uppercase tracking-tighter">
                                         START AS <br />
                                         <span className="text-slate-900 underline decoration-slate-900 underline-offset-8">A ROOKIE.</span>
                                     </h2>
-                                    <p className="text-white font-bold text-lg opacity-90 italic uppercase">
+                                    <p className="text-white font-bold text-sm md:text-lg opacity-90 italic uppercase">
                                         Internships with serious impact and zero coffee runs.
                                     </p>
                                 </div>
-                                <button className="px-8 py-3 bg-[#F1FC88] text-slate-900 font-bold rounded-2xl uppercase tracking-widest text-xs hover:bg-white transition-all border-4 border-slate-900 shadow-[6px_6px_0px_0px_rgba(0,0,0,0.2)]">
+                                <button className="px-6 py-2.5 md:px-8 md:py-3 bg-[#F1FC88] text-slate-900 font-bold rounded-xl md:rounded-2xl uppercase tracking-widest text-[10px] md:text-xs hover:bg-white transition-all border-4 border-slate-900 shadow-[4px_4px_0px_0px_rgba(0,0,0,0.2)] md:shadow-[6px_6px_0px_0px_rgba(0,0,0,0.2)]">
                                     Grab Your Spot
                                 </button>
                             </div>
 
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
                                 {internships.map((intern) => (
-                                    <div key={intern.id} className="bg-white p-6 rounded-[2rem] border-4 border-slate-900 shadow-[8px_8px_0px_0px_rgba(15,23,42,1)] hover:-translate-y-1 transition-transform">
+                                    <div key={intern.id} className="bg-white p-4 md:p-6 rounded-[1.5rem] md:rounded-[2rem] border-4 border-slate-900 shadow-[6px_6px_0px_0px_rgba(15,23,42,1)] md:shadow-[8px_8px_0px_0px_rgba(15,23,42,1)] hover:-translate-y-1 transition-transform">
                                         <h4 className="text-lg md:text-xl font-bold text-slate-900 mb-1">{intern.role}</h4>
-                                        <div className="text-primary font-black text-[10px] uppercase tracking-widest mb-4">{intern.duration} • {intern.type}</div>
-                                        <p className="text-slate-600 font-normal text-sm line-clamp-2">{intern.description}</p>
+                                        <div className="text-primary font-black text-[10px] uppercase tracking-widest mb-2 md:mb-4">{intern.duration} • {intern.type}</div>
+                                        <p className="text-slate-600 font-normal text-xs md:text-sm line-clamp-2">{intern.description}</p>
                                     </div>
                                 ))}
                             </div>
@@ -286,14 +286,14 @@ const Career = () => {
                 </div>
 
                 {/* --- SCATTERED LIFE AT APPZETO --- */}
-                <div id="culture" className="h-screen max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-center relative overflow-hidden bg-[#f8f9fa]">
-                    <div className="flex flex-col items-center mb-12">
+                <div id="culture" className="h-[60vh] md:h-screen max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-center relative overflow-hidden bg-[#f8f9fa]">
+                    <div className="flex flex-col items-center mb-8 md:mb-12">
                         <h2 className="text-2xl md:text-3xl font-bold text-slate-900 text-center uppercase tracking-tighter">
                             LIFE AT <span className="bg-[#F1FC88] text-slate-900 px-4 py-1 rounded-lg inline-block -rotate-2 scale-90">APPZETO</span>
                         </h2>
                     </div>
 
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-y-12 gap-x-6 relative">
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-y-8 md:gap-y-12 gap-x-4 md:gap-x-6 relative">
                         {cultureItems.map((item, idx) => (
                             <motion.div
                                 key={item.id}
@@ -305,8 +305,8 @@ const Career = () => {
                                 whileHover={{ scale: 1, rotate: 0, zIndex: 10 }}
                                 className="relative group flex justify-center"
                             >
-                                <div className="bg-white p-2 pb-6 shadow-lg border border-slate-100 w-32 md:w-48 lg:w-56">
-                                    <div className="h-24 md:h-32 lg:h-40 w-full overflow-hidden mb-2">
+                                <div className="bg-white p-2 pb-4 md:pb-6 shadow-lg border border-slate-100 w-24 md:w-48 lg:w-56">
+                                    <div className="h-16 md:h-32 lg:h-40 w-full overflow-hidden mb-2">
                                         <img
                                             src={item.img}
                                             className="w-full h-full object-cover grayscale-[0.2] group-hover:grayscale-0 transition-all duration-700"
@@ -314,25 +314,25 @@ const Career = () => {
                                         />
                                     </div>
                                     <div className="text-center">
-                                        <h3 className="text-[8px] md:text-[10px] font-bold text-slate-400 uppercase tracking-widest">{item.title}</h3>
+                                        <h3 className="text-[7px] md:text-[10px] font-bold text-slate-400 uppercase tracking-widest">{item.title}</h3>
                                     </div>
                                 </div>
-                                <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-12 h-4 bg-[#F1FC88]/60 backdrop-blur-sm -rotate-2 group-hover:bg-[#F1FC88] transition-colors z-20" />
+                                <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-8 md:w-12 h-3 md:h-4 bg-[#F1FC88]/60 backdrop-blur-sm -rotate-2 group-hover:bg-[#F1FC88] transition-colors z-20" />
                             </motion.div>
                         ))}
                     </div>
                 </div>
 
                 {/* --- CHIT CHAT CALL TO ACTION --- */}
-                <div className="bg-[#F1FC88] py-20 border-y-[6px] border-slate-950">
+                <div className="bg-[#F1FC88] py-12 md:py-20 border-y-[6px] border-slate-950">
                     <div className="max-w-4xl mx-auto px-4 text-center">
-                        <h2 className="text-4xl md:text-6xl font-black text-slate-900 mb-8 uppercase tracking-tighter italic">
+                        <h2 className="text-3xl md:text-6xl font-black text-slate-900 mb-6 md:mb-8 uppercase tracking-tighter italic">
                             Still Confused? <br /> Let's Chit Chat!
                         </h2>
-                        <p className="text-slate-800 text-xl font-bold mb-10 opacity-70">
+                        <p className="text-slate-800 text-sm md:text-xl font-bold mb-8 md:mb-10 opacity-70">
                             Not sure which role fits you best? Our team is happy to help you find your path.
                         </p>
-                        <Link to="/chit-chat" className="bg-slate-950 text-white px-12 py-5 rounded-full font-black uppercase tracking-widest hover:scale-110 transition-transform shadow-2xl flex items-center gap-3 mx-auto max-w-fit">
+                        <Link to="/chit-chat" className="bg-slate-950 text-white px-8 md:px-12 py-4 md:py-5 rounded-full font-black uppercase tracking-widest hover:scale-110 transition-transform shadow-2xl flex items-center gap-3 mx-auto max-w-fit text-xs md:text-base">
                             Ping Us Now <span className="material-icons">chat</span>
                         </Link>
                     </div>
