@@ -1,6 +1,11 @@
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
 
-// ... (imports remain same)
+import webImg from '../assets/web_dev_service_preview_1767285503403.png';
+import mobileImg from '../assets/mobile_apps_service_preview_1767285521524.png';
+import aiImg from '../assets/ai_ml_service_preview_1767285486518.png';
+import cloudImg from '../assets/cloud_computing_service_preview_1767285540190.png';
 
 const services = [
     {

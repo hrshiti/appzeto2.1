@@ -9,9 +9,9 @@ const Footer = () => {
             <div className="absolute top-0 right-0 w-96 h-96 bg-[#05A4A7]/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
 
             <div className="max-w-7xl mx-auto relative z-10">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8 mb-16">
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8 mb-16">
                     {/* Column 1: Brand & Social */}
-                    <div className="space-y-6">
+                    <div className="col-span-2 lg:col-span-1 space-y-6">
                         <Link to="/" className="block w-fit">
                             <img src={logo} alt="Appzeto Logo" className="h-8 md:h-10 w-auto opacity-90 hover:opacity-100 transition-opacity" />
                         </Link>
@@ -71,6 +71,9 @@ const Footer = () => {
                                 <li><Link to="/career" className="text-gray-400 hover:text-[#05A4A7] transition-colors text-sm font-medium flex items-center gap-2 group">
                                     <span className="w-1 h-1 rounded-full bg-white/20 group-hover:bg-[#05A4A7] transition-colors"></span> Careers
                                 </Link></li>
+                                <li><Link to="/projects" className="text-gray-400 hover:text-[#05A4A7] transition-colors text-sm font-medium flex items-center gap-2 group">
+                                    <span className="w-1 h-1 rounded-full bg-white/20 group-hover:bg-[#05A4A7] transition-colors"></span> Projects
+                                </Link></li>
                                 <li><Link to="/blogs" className="text-gray-400 hover:text-[#05A4A7] transition-colors text-sm font-medium flex items-center gap-2 group">
                                     <span className="w-1 h-1 rounded-full bg-white/20 group-hover:bg-[#05A4A7] transition-colors"></span> Blog / Insights
                                 </Link></li>
@@ -90,7 +93,7 @@ const Footer = () => {
                     </div>
 
                     {/* Column 4: Technologies & Content */}
-                    <div className="flex flex-col gap-8 md:gap-10">
+                    <div className="col-span-2 lg:col-span-1 flex flex-col gap-8 md:gap-10">
                         <div>
                             <h4 className="text-white font-bold mb-4 md:mb-6 uppercase tracking-wider text-xs border-l-2 border-[#05A4A7] pl-3">Technologies</h4>
                             <div className="flex flex-wrap gap-2">

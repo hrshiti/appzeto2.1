@@ -7,11 +7,19 @@ import Navbar from './Navbar';
 const Hero = () => {
     return (
         <div className="bg-background-light dark:bg-background-dark font-body antialiased transition-colors duration-300 min-h-screen flex flex-col">
+
+
+
+
             <Navbar />
             <main className="flex-grow flex relative overflow-hidden">
                 <div className="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 sm:w-96 sm:h-96 bg-primary/10 rounded-full blur-3xl dark:bg-primary/20"></div>
                 <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-56 h-56 sm:w-80 sm:h-80 bg-secondary/20 rounded-full blur-3xl dark:bg-secondary/10"></div>
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-8 sm:pb-10 lg:pt-6 lg:pb-20 w-full relative z-10">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-0 sm:pb-10 lg:pt-6 lg:pb-20 w-full relative z-10">
+
+
+
+
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
                         <motion.div
                             initial={{ x: -70, opacity: 0 }}
@@ -19,6 +27,11 @@ const Hero = () => {
                             viewport={{ once: false, amount: 0.2 }}
                             transition={{ duration: 1.8, ease: [0.22, 1, 0.36, 1] }}
                             className="space-y-6 sm:space-y-8"
+
+
+
+
+
                         >
                             <div className="inline-flex items-center space-x-2 bg-teal-50 dark:bg-teal-900/30 border border-teal-100 dark:border-teal-800 rounded-full px-3 py-1 sm:px-4 sm:py-1.5">
                                 <span className="flex h-2 w-2 relative">
@@ -37,9 +50,22 @@ const Hero = () => {
                                 </span> of Digital Innovation
                             </h1>
 
+
                             <p className="hidden sm:block text-base sm:text-lg lg:text-xl text-gray-600 dark:text-gray-300 max-w-lg leading-relaxed">
                                 We transform businesses with cutting-edge <span className="font-semibold text-gray-800 dark:text-gray-100">Web Development</span>, immersive <span className="font-semibold text-gray-800 dark:text-gray-100">Mobile Apps</span>, and intelligent <span className="font-semibold text-gray-800 dark:text-gray-100">AI &amp; ML</span> solutions.
                             </p>
+
+                            {/* Mobile Only Lottie */}
+                            <div className="lg:hidden relative w-full aspect-square max-w-[280px] mx-auto flex items-center justify-center transform scale-110">
+                                <DotLottieReact
+                                    src="https://lottie.host/f5edc29d-7c20-49be-9b54-7c07fa26f2c6/wKHzGrk2QZ.lottie"
+                                    loop
+                                    autoplay
+                                    className="w-full h-full"
+                                />
+                            </div>
+
+
 
                             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-2 sm:pt-4">
                                 <Link to="/services" className="inline-flex justify-center items-center px-4 py-3 sm:px-8 sm:py-4 bg-[#F1FC88] text-gray-900 font-bold rounded-xl shadow-lg shadow-[#F0FF35]/20 hover:bg-[#EAF576] transform hover:-translate-y-1 transition-all duration-300 text-sm sm:text-lg group">
@@ -63,7 +89,8 @@ const Hero = () => {
                                 </div>
                             </div>
                         </motion.div>
-                        <div className="relative lg:h-full flex items-center justify-center mt-[-20px] lg:mt-0">
+                        <div className="hidden lg:flex relative lg:h-full items-center justify-center mt-[-20px] lg:mt-0">
+
                             <div className="relative w-full aspect-square max-w-[280px] sm:max-w-md lg:max-w-2xl mx-auto flex items-center justify-center transform scale-110 sm:scale-125">
                                 <DotLottieReact
                                     src="https://lottie.host/f5edc29d-7c20-49be-9b54-7c07fa26f2c6/wKHzGrk2QZ.lottie"

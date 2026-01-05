@@ -400,57 +400,76 @@ const Projects = () => {
                 </div>
             </div>
 
-            {/* --- Mobile View (Vertical Card Stack) --- */}
-            <div className="block md:hidden pb-10">
-                {projects.map((project, index) => (
-                    <div key={index} className="w-full relative overflow-hidden py-10 px-4" style={{ backgroundColor: project.bgColor }}>
-                        {/* Background Decor */}
-                        <div className="absolute top-0 right-0 w-[80vw] h-[80vw] bg-white/10 rounded-full blur-[80px] pointer-events-none" />
+            {/* --- Mobile View (Horizontal Scroll Carousel) --- */}
+            <div className="block md:hidden bg-white py-8">
+                <div className="px-4 mb-6">
+                    <p className="text-[#cdbdae] font-medium tracking-widest uppercase mb-1 text-[10px]">Projects</p>
+                    <h2 className="text-2xl font-bold text-gray-900 tracking-tight">Our Creations</h2>
+                </div>
 
-                        <div className="flex flex-col gap-6">
-                            <div className="space-y-3">
-                                <div className="flex flex-wrap gap-2">
-                                    {project.tags.map((tag, i) => (
-                                        <span key={i} className="px-2 py-1 bg-black/10 backdrop-blur-sm rounded-full text-[9px] font-bold border border-white/10" style={{ color: project.textColor }}>
-                                            {tag}
-                                        </span>
-                                    ))}
+                <div className="flex overflow-x-auto snap-x snap-mandatory no-scrollbar pb-6">
+                    {projects.map((project, index) => (
+                        <div
+                            key={index}
+                            className="w-[85vw] flex-shrink-0 snap-center mx-3 first:ml-4 last:mr-4 rounded-[2rem] overflow-hidden relative shadow-xl"
+                            style={{ backgroundColor: project.bgColor }}
+                        >
+                            {/* Background Decor */}
+                            <div className="absolute top-0 right-0 w-[60vw] h-[60vw] bg-white/10 rounded-full blur-[60px] pointer-events-none" />
+
+                            <div className="p-6 flex flex-col h-full">
+                                <div className="space-y-4 flex-grow">
+                                    <div className="flex flex-wrap gap-1.5">
+                                        {project.tags.slice(0, 2).map((tag, i) => (
+                                            <span key={i} className="px-2 py-0.5 bg-black/10 backdrop-blur-sm rounded-full text-[8px] font-bold border border-white/10" style={{ color: project.textColor }}>
+                                                {tag}
+                                            </span>
+                                        ))}
+                                    </div>
+
+                                    <h2 className="text-xl font-black leading-tight tracking-tight" style={{ color: project.textColor }}>
+                                        {project.title.split("•")[0]}
+                                        <span className="block text-sm opacity-80 font-bold mt-0.5">{project.title.split("•")[1]}</span>
+                                    </h2>
+
+                                    <p className="text-[10px] font-medium opacity-90 leading-relaxed line-clamp-2" style={{ color: project.textColor }}>
+                                        {project.description}
+                                    </p>
+
+                                    <Link to={project.link}>
+                                        <div
+                                            className="px-4 py-2 rounded-full font-bold shadow-lg flex items-center gap-2 transition-all text-[10px] w-fit cursor-pointer"
+                                            style={{ backgroundColor: project.btnColor, color: project.btnText }}
+                                        >
+                                            View Study
+                                            <span className="material-symbols-outlined text-xs">arrow_forward</span>
+                                        </div>
+                                    </Link>
                                 </div>
 
-                                <h2 className="text-2xl font-black leading-tight tracking-tight" style={{ color: project.textColor }}>
-                                    {project.title.split("•")[0]}
-                                    <span className="block text-base opacity-80 font-bold mt-1">{project.title.split("•")[1]}</span>
-                                </h2>
-
-                                <p className="text-xs font-medium opacity-90 leading-relaxed" style={{ color: project.textColor }}>
-                                    {project.description}
-                                </p>
-
-                                <Link to={project.link}>
-                                    <div
-                                        className="px-5 py-2.5 rounded-full font-bold shadow-lg flex items-center gap-2 group transition-all text-sm w-fit cursor-pointer"
-                                        style={{ backgroundColor: project.btnColor, color: project.btnText }}
-                                    >
-                                        View Case Study
-                                        <span className="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                                {/* Mobile Phone Mockup - Smaller for Carousel */}
+                                <div className="flex justify-center mt-6">
+                                    <div className="relative w-[140px] aspect-[9/19] bg-black rounded-[1.2rem] p-1 shadow-xl border-[3px] border-black ring-1 ring-white/10">
+                                        <div className="w-full h-full bg-white rounded-[0.8rem] overflow-hidden relative">
+                                            {React.createElement(project.UI)}
+                                            <div className="absolute top-1 left-1/2 -translate-x-1/2 w-8 h-2 bg-black rounded-full z-50 pointer-events-none" />
+                                        </div>
+                                        <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-transparent pointer-events-none rounded-[1.2rem]" />
                                     </div>
-                                </Link>
-                            </div>
-
-                            {/* Mobile Phone Mockup */}
-                            <div className="flex justify-center mt-2">
-                                <div className="relative w-[180px] aspect-[9/19] bg-black rounded-[1.5rem] p-1.5 shadow-xl border-[4px] border-black ring-1 ring-white/20">
-                                    <div className="w-full h-full bg-white rounded-[1rem] overflow-hidden relative">
-                                        {React.createElement(project.UI)}
-                                        <div className="absolute top-2 left-1/2 -translate-x-1/2 w-12 h-3 bg-black rounded-full z-50 pointer-events-none" />
-                                    </div>
-                                    <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent pointer-events-none rounded-[1.5rem]" />
                                 </div>
                             </div>
                         </div>
-                    </div>
-                ))}
+                    ))}
+                </div>
+
+                {/* Scroll Indicator Dots */}
+                <div className="flex justify-center gap-1.5 mt-2">
+                    {projects.map((_, i) => (
+                        <div key={i} className="w-1.5 h-1.5 rounded-full bg-gray-200"></div>
+                    ))}
+                </div>
             </div>
+
         </div>
     );
 };

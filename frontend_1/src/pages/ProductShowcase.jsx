@@ -43,10 +43,10 @@ const ProductShowcase = () => {
         <ScrollWrapper>
             <Navbar />
             <div className="min-h-screen w-full bg-white relative overflow-hidden font-sans selection:bg-[#EF7F1A] selection:text-white">
-                <div className="max-w-[1400px] mx-auto min-h-screen px-4 md:px-10 lg:px-20 py-12 md:py-20 lg:py-0 flex flex-col lg:flex-row items-center relative z-10">
+                <div className="max-w-[1400px] mx-auto min-h-screen px-4 md:px-10 lg:px-20 py-4 md:py-20 lg:py-0 flex flex-col lg:flex-row items-center relative z-10">
 
                     {/* Left Content */}
-                    <div className="w-full lg:w-1/2 flex flex-col gap-6 md:gap-10 pt-4 md:pt-10 lg:pt-0 z-20">
+                    <div className="w-full lg:w-1/2 flex flex-col gap-4 md:gap-10 pt-2 md:pt-10 lg:pt-0 z-20">
                         <motion.div
                             initial={{ opacity: 0, y: 30 }}
                             whileInView={{ opacity: 1, y: 0 }}
@@ -101,7 +101,7 @@ const ProductShowcase = () => {
                     </div>
 
                     {/* Right Content / Hero Graphics */}
-                    <div className="w-full lg:w-1/2 relative mt-16 lg:mt-0 h-[50vh] lg:h-screen flex items-center justify-center">
+                    <div className="w-full lg:w-1/2 relative mt-8 lg:mt-0 h-[40vh] md:h-[50vh] lg:h-screen flex items-center justify-center">
                         {/* Orange Blob Background */}
                         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[140%] bg-[#EF7F1A] rounded-[40%] rotate-12 lg:translate-x-[20%] opacity-100 z-0"></div>
                         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[160%] h-[160%] bg-[#EF7F1A]/10 rounded-[45%] -rotate-6 lg:translate-x-[20%] z-[-1]"></div>
@@ -165,8 +165,8 @@ const ProductShowcase = () => {
                 </div>
 
                 {/* What Comes With Section */}
-                <div className="min-h-screen w-full py-12 md:py-20 bg-gray-50 relative z-20 overflow-hidden flex flex-col justify-center">
-                    <div className="max-w-[1400px] mx-auto px-4 md:px-10 text-center mb-10 lg:mb-16">
+                <div className="min-h-screen w-full py-8 md:py-20 bg-gray-50 relative z-20 overflow-hidden flex flex-col justify-center">
+                    <div className="max-w-[1400px] mx-auto px-4 md:px-10 text-center mb-6 lg:mb-16">
                         <motion.h2
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
@@ -260,7 +260,7 @@ const HowItWorks = () => {
     const inView = useInView(containerRef, { once: false, margin: "-100px" });
 
     return (
-        <div ref={containerRef} className="w-full pt-12 md:pt-20 pb-12 bg-white relative z-20 overflow-hidden">
+        <div ref={containerRef} className="w-full pt-6 md:pt-20 pb-6 bg-white relative z-20 overflow-hidden">
             <div className="max-w-[1200px] mx-auto px-4 md:px-10">
                 {/* Header */}
                 <div className="text-center mb-10 md:mb-16">
@@ -446,7 +446,7 @@ const RevenueModel = () => {
     const yBg2 = useTransform(scrollYProgress, [0, 1], [0, 200]);
 
     return (
-        <div ref={containerRef} className="w-full pt-12 pb-24 bg-gray-50 relative overflow-hidden">
+        <div ref={containerRef} className="w-full pt-6 md:pt-12 pb-12 md:pb-24 bg-gray-50 relative overflow-hidden">
             {/* Background Decor */}
             <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
                 <motion.div style={{ y: yBg1 }} className="absolute -top-40 -left-40 w-[600px] h-[600px] bg-orange-100/30 rounded-full blur-3xl"></motion.div>
@@ -455,7 +455,7 @@ const RevenueModel = () => {
 
             <div className="max-w-[1200px] mx-auto px-4 md:px-10 relative z-10">
                 {/* Header */}
-                <div className="text-center mb-10 md:mb-20">
+                <div className="text-center mb-6 md:mb-20">
                     <motion.div
                         initial={{ opacity: 0, y: -20 }}
                         animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -816,15 +816,15 @@ const ModernInteractiveFeatures = () => {
     ];
 
     return (
-        <div ref={containerRef} className="w-full py-12 md:py-24 bg-white relative">
+        <div ref={containerRef} className="w-full py-8 md:py-24 bg-white relative">
             <div className="max-w-[1400px] mx-auto px-4 md:px-10">
                 {/* Header */}
-                <div className="text-center mb-10 md:mb-16">
+                <div className="text-center mb-6 md:mb-16">
                     <motion.h2
                         initial={{ opacity: 0, y: 30 }}
                         animate={inView ? { opacity: 1, y: 0 } : {}}
                         transition={{ duration: 0.6 }}
-                        className="text-2xl md:text-5xl font-black text-gray-900 mb-6"
+                        className="text-2xl md:text-5xl font-black text-gray-900 mb-4 md:mb-6"
                     >
                         From Search to MUST: Modern & Interactive <span className="text-[#EF7F1A]">Appzeto Food</span>
                     </motion.h2>
@@ -865,7 +865,7 @@ const ModernInteractiveFeatures = () => {
                     {/* Scrollable Area */}
                     <div
                         ref={scrollRef}
-                        className="flex overflow-x-auto gap-4 md:gap-8 pb-10 px-4 hide-scrollbar snap-x snap-mandatory"
+                        className="flex overflow-x-auto gap-3 md:gap-8 pb-4 md:pb-10 px-4 hide-scrollbar snap-x snap-mandatory"
                         style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
                     >
                         {features.map((feature, index) => (
@@ -874,13 +874,13 @@ const ModernInteractiveFeatures = () => {
                                 initial={{ opacity: 0, y: 50, scale: 0.9 }}
                                 animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
                                 transition={{ duration: 0.5, delay: 0.2 + (index * 0.1) }}
-                                className={`min-w-[260px] md:min-w-[320px] h-[340px] md:h-[380px] ${feature.bg} rounded-[32px] p-6 md:p-8 flex flex-col items-center justify-center text-center snap-center hover:-translate-y-2 transition-transform duration-300`}
+                                className={`min-w-[240px] md:min-w-[320px] h-[300px] md:h-[380px] ${feature.bg} rounded-[24px] md:rounded-[32px] p-4 md:p-8 flex flex-col items-center justify-center text-center snap-center hover:-translate-y-2 transition-transform duration-300`}
                             >
-                                <div className="w-16 h-16 md:w-20 md:h-20 bg-white rounded-full flex items-center justify-center mb-6 shadow-sm">
-                                    <span className={`material-symbols-outlined text-3xl md:text-4xl ${feature.iconColor}`}>{feature.icon}</span>
+                                <div className="w-12 h-12 md:w-20 md:h-20 bg-white rounded-full flex items-center justify-center mb-4 md:mb-6 shadow-sm">
+                                    <span className={`material-symbols-outlined text-2xl md:text-4xl ${feature.iconColor}`}>{feature.icon}</span>
                                 </div>
-                                <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-4">{feature.title}</h3>
-                                <p className="text-gray-600 leading-relaxed text-xs md:text-sm">{feature.desc}</p>
+                                <h3 className="text-base md:text-xl font-bold text-gray-900 mb-2 md:mb-4">{feature.title}</h3>
+                                <p className="text-gray-600 leading-relaxed text-[10px] md:text-sm">{feature.desc}</p>
                             </motion.div>
                         ))}
                     </div>

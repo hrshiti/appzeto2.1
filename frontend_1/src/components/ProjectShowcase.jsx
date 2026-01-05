@@ -99,7 +99,7 @@ const ProjectShowcase = () => {
     }, [activeProject]);
 
     return (
-        <section className="h-screen w-full relative overflow-hidden bg-black font-sans select-none">
+        <section className="h-[75vh] md:h-screen w-full relative overflow-hidden bg-black font-sans select-none">
 
             {/* 1. Full-Screen Background */}
             <AnimatePresence mode="popLayout" initial={false}>
@@ -136,14 +136,14 @@ const ProjectShowcase = () => {
             </div>
 
             {/* 3. Central Details (Normal Text, No Card Background) */}
-            <div className="absolute inset-0 flex items-center z-20 px-6 md:px-20 pt-14 md:pt-10 pointer-events-none">
+            <div className="absolute inset-0 flex items-center z-20 px-6 md:px-20 pt-8 md:pt-10 pointer-events-none">
                 <div className="max-w-[1440px] w-full grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-10 h-full">
                     <motion.div
                         initial={{ opacity: 0, y: 100, x: 100 }}
                         whileInView={{ opacity: 1, y: 0, x: 0 }}
                         viewport={{ once: false, amount: 0.3 }}
                         transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-                        className="lg:col-span-12 xl:col-span-6 flex flex-col justify-start md:justify-center mt-20 md:mt-0"
+                        className="lg:col-span-12 xl:col-span-6 flex flex-col justify-start md:justify-center mt-16 md:mt-0"
                     >
                         <AnimatePresence mode="wait">
                             <motion.div
@@ -218,7 +218,7 @@ const ProjectShowcase = () => {
                 </div>
 
                 {/* View All Projects - No background, minimal link */}
-                <Link to="/services">
+                <Link to="/projects">
                     <motion.div
                         whileHover={{ x: 10 }}
                         className="flex flex-col items-center justify-center cursor-pointer group mb-4 md:mb-10"
@@ -232,7 +232,7 @@ const ProjectShowcase = () => {
             </motion.div>
 
             {/* 5. Bottom Navigation Bar */}
-            <div className="absolute bottom-6 left-6 md:bottom-12 md:left-20 z-30 flex items-center gap-4 md:gap-6">
+            <div className="absolute bottom-4 left-6 md:bottom-12 md:left-20 z-30 flex items-center gap-4 md:gap-6">
                 <div className="flex gap-3 md:gap-4">
                     <motion.button
                         whileHover={{ scale: 1.2 }}

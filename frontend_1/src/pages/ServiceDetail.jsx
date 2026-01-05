@@ -178,7 +178,7 @@ const ServiceDetail = () => {
                                 </p>
                             </motion.div>
 
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 pt-4 md:pt-8">
+                            <div className="grid grid-cols-2 md:grid-cols-2 gap-3 md:gap-8 pt-4 md:pt-8">
                                 {service.features.map((feature, i) => (
                                     <motion.div
                                         key={i}
@@ -186,12 +186,12 @@ const ServiceDetail = () => {
                                         whileInView={{ opacity: 1, y: 0 }}
                                         viewport={{ once: true }}
                                         transition={{ delay: i * 0.1 }}
-                                        className="bg-white p-4 md:p-8 rounded-2xl md:rounded-3xl border border-slate-100 shadow-sm flex items-center gap-4 md:gap-6 group hover:border-primary/30 transition-all"
+                                        className="bg-white p-3 md:p-8 rounded-xl md:rounded-3xl border border-slate-100 shadow-sm flex flex-col sm:flex-row items-center sm:items-center gap-2 md:gap-6 group hover:border-primary/30 transition-all text-center sm:text-left"
                                     >
-                                        <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-primary/5 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all">
-                                            <span className="material-icons text-lg md:text-xl">done</span>
+                                        <div className="w-8 h-8 md:w-12 md:h-12 rounded-full bg-primary/5 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all shrink-0">
+                                            <span className="material-icons text-sm md:text-xl">done</span>
                                         </div>
-                                        <span className="text-base md:text-lg font-bold text-slate-800 uppercase italic tracking-tight">{feature}</span>
+                                        <span className="text-[10px] md:text-lg font-bold text-slate-800 uppercase italic tracking-tight">{feature}</span>
                                     </motion.div>
                                 ))}
                             </div>

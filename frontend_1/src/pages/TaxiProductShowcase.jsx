@@ -65,9 +65,9 @@ const MapScreen = () => (
 
 const BookingScreen = () => (
     <div className="w-full h-full bg-white flex flex-col p-4 relative overflow-hidden font-sans">
-        <div className="flex items-center gap-4 mb-6 mt-8">
-            <span className="material-symbols-outlined">arrow_back</span>
-            <h3 className="font-bold text-lg">Select Ride</h3>
+        <div className="flex items-center gap-4 mb-4 mt-2">
+            <span className="material-symbols-outlined text-sm">arrow_back</span>
+            <h3 className="font-bold text-base">Select Ride</h3>
         </div>
 
         <div className="space-y-3">
@@ -337,47 +337,47 @@ const TaxiProductShowcase = () => {
                 <Navbar />
 
                 {/* --- Hero Section --- */}
-                <section className="relative h-screen max-h-screen flex items-center pt-0 overflow-hidden">
+                <section className="relative min-h-0 md:h-screen flex items-center pt-6 md:pt-0 overflow-hidden">
                     {/* Background Blobs (Like screenshot) */}
-                    <div className="absolute top-0 right-0 w-[60%] h-[120%] bg-[#fefce8] rounded-bl-full -z-10 translate-x-1/3 -translate-y-20"></div>
-                    <motion.div style={{ y: heroBlobY }} className="absolute md:top-[10%] md:right-[5%] w-[500px] h-[500px] bg-[#00F2FE]/10 rounded-full blur-3xl -z-10"></motion.div>
+                    <div className="absolute top-0 right-0 w-[80%] md:w-[60%] h-[120%] bg-[#fefce8] rounded-bl-full -z-10 translate-x-1/3 -translate-y-20"></div>
+                    <motion.div style={{ y: heroBlobY }} className="absolute top-[5%] md:top-[10%] right-[3%] md:right-[5%] w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-[#00F2FE]/10 rounded-full blur-3xl -z-10"></motion.div>
 
-                    <div className="max-w-7xl mx-auto px-6 w-full grid grid-cols-1 lg:grid-cols-2 gap-8 items-center h-full">
+                    <div className="max-w-7xl mx-auto px-6 w-full grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
                         {/* Text Content */}
-                        <div className="space-y-4 max-w-lg z-10">
-                            <span className="text-[#008f96] font-bold tracking-widest uppercase text-xs border-b-2 border-[#00F2FE] pb-1 inline-block">Modern Ride Hailing</span>
-                            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-[1] text-[#082F30] tracking-tight">
+                        <div className="space-y-4 max-w-lg z-10 text-center lg:text-left">
+                            <span className="text-[#008f96] font-bold tracking-widest uppercase text-[10px] md:text-xs border-b-2 border-[#00F2FE] pb-1 inline-block">Modern Ride Hailing</span>
+                            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold leading-[1.1] text-[#082F30] tracking-tight">
                                 That Means We <br />
                                 Don't Just <span className="text-[#00babe] underline decoration-4 decoration-[#00F2FE]/50 underline-offset-4">Drive.</span>
                             </h1>
-                            <p className="text-gray-500 text-lg leading-relaxed font-medium">
+                            <p className="text-gray-500 text-sm md:text-lg leading-relaxed font-medium">
                                 Get to your destination with style, safety, and speed. Appzeto Taxi redefines urban mobility.
                             </p>
 
                             {/* Search Input Simulation */}
-                            <div className="relative max-w-sm pt-4">
+                            <div className="relative max-w-sm pt-4 mx-auto lg:mx-0">
                                 <input
                                     type="text"
                                     placeholder="Enter pickup location"
-                                    className="w-full pl-10 pr-4 py-4 rounded-full bg-white shadow-[0_20px_60px_-10px_rgba(0,0,0,0.1)] border-none outline-none text-gray-600 font-bold focus:ring-4 focus:ring-[#00F2FE]/20 transition-all"
+                                    className="w-full pl-10 pr-4 py-3 md:py-4 rounded-full bg-white shadow-[0_20px_60px_-10px_rgba(0,0,0,0.1)] border-none outline-none text-gray-600 font-bold focus:ring-4 focus:ring-[#00F2FE]/20 transition-all text-xs md:text-base"
                                     readOnly
                                 />
-                                <span className="material-symbols-outlined absolute left-4 top-[50%] -translate-y-1/2 text-[#00F2FE] text-xl">search</span>
-                                <button className="absolute right-2 top-[50%] -translate-y-1/2 bg-[#00F2FE] p-2 rounded-full shadow-lg hover:scale-110 hover:shadow-xl transition-all">
-                                    <span className="material-symbols-outlined text-white text-lg">arrow_forward</span>
+                                <span className="material-symbols-outlined absolute left-4 top-[50%] -translate-y-1/2 text-[#00F2FE] text-lg md:text-xl">search</span>
+                                <button className="absolute right-2 top-[50%] -translate-y-1/2 bg-[#00F2FE] p-1.5 md:p-2 rounded-full shadow-lg hover:scale-110 hover:shadow-xl transition-all">
+                                    <span className="material-symbols-outlined text-white text-base md:text-lg">arrow_forward</span>
                                 </button>
                             </div>
                         </div>
 
                         {/* Phone Mockup (Right) */}
-                        <div className="relative flex justify-center lg:justify-end h-full items-center">
+                        <div className="relative flex justify-center lg:justify-end h-full items-center scale-[0.85] md:scale-100">
                             {/* Blob Behind Phone */}
                             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-[#00F2FE] rounded-full opacity-20 blur-xl"></div>
                             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] h-[90%] bg-[#FFD166] rounded-full -rotate-6 z-0"></div>
 
                             <motion.div
                                 style={{ y: heroPhoneY }}
-                                className="relative z-10 w-[280px] border-[10px] border-white rounded-[2.5rem] shadow-2xl bg-black overflow-hidden h-[580px]"
+                                className="relative z-10 w-[240px] md:w-[280px] border-[8px] md:border-[10px] border-white rounded-[2rem] md:rounded-[2.5rem] shadow-2xl bg-black overflow-hidden h-[500px] md:h-[580px]"
                             >
                                 <MapScreen />
                             </motion.div>
@@ -386,28 +386,28 @@ const TaxiProductShowcase = () => {
                             <motion.div
                                 animate={{ y: [-10, 10, -10] }}
                                 transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
-                                className="absolute top-[25%] -left-12 bg-white p-4 rounded-2xl shadow-xl z-20 flex items-center gap-3"
+                                className="absolute top-[15%] md:top-[25%] -left-8 md:-left-12 bg-white p-3 md:p-4 rounded-2xl shadow-xl z-20 flex items-center gap-2 md:gap-3"
                             >
-                                <div className="p-2 bg-green-100 rounded-full text-green-600">
-                                    <span className="material-symbols-outlined text-xl">verified_user</span>
+                                <div className="p-1.5 md:p-2 bg-green-100 rounded-full text-green-600">
+                                    <span className="material-symbols-outlined text-sm md:text-xl">verified_user</span>
                                 </div>
                                 <div>
-                                    <p className="text-xs font-black text-gray-800">Verified Drivers</p>
-                                    <p className="text-[10px] text-gray-500 font-bold">100% Safe</p>
+                                    <p className="text-[10px] md:text-xs font-black text-gray-800">Verified Drivers</p>
+                                    <p className="text-[8px] md:text-[10px] text-gray-500 font-bold">100% Safe</p>
                                 </div>
                             </motion.div>
 
                             <motion.div
                                 animate={{ y: [10, -10, 10] }}
                                 transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
-                                className="absolute bottom-[25%] -right-5 bg-white p-4 rounded-2xl shadow-xl z-20 flex items-center gap-3"
+                                className="absolute bottom-[15%] md:bottom-[25%] -right-4 md:-right-5 bg-white p-3 md:p-4 rounded-2xl shadow-xl z-20 flex items-center gap-2 md:gap-3"
                             >
                                 <div className="text-center">
-                                    <p className="text-[10px] font-bold text-gray-800">Best Prices</p>
-                                    <p className="text-base font-black text-[#008f96]">$5.00</p>
+                                    <p className="text-[8px] md:text-[10px] font-bold text-gray-800">Best Prices</p>
+                                    <p className="text-xs md:text-base font-black text-[#008f96]">$5.00</p>
                                 </div>
-                                <div className="p-2 bg-yellow-100 rounded-full text-yellow-600">
-                                    <span className="material-symbols-outlined text-xl">attach_money</span>
+                                <div className="p-1.5 md:p-2 bg-yellow-100 rounded-full text-yellow-600">
+                                    <span className="material-symbols-outlined text-sm md:text-xl">attach_money</span>
                                 </div>
                             </motion.div>
                         </div>
@@ -415,10 +415,10 @@ const TaxiProductShowcase = () => {
                 </section>
 
                 {/* --- 3 Icons Section --- */}
-                <section className="py-12 md:py-20">
-                    <div className="max-w-7xl mx-auto px-6 text-center">
-                        <p className="text-base font-black text-gray-400 uppercase tracking-widest mb-10">All-in-one Mobility to grow your business</p>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <section className="py-6 md:py-20">
+                    <div className="max-w-7xl mx-auto px-4 md:px-6 text-center">
+                        <p className="text-[10px] md:text-base font-black text-gray-400 uppercase tracking-widest mb-4 md:mb-10">All-in-one Mobility to grow your business</p>
+                        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-12">
                             {[
                                 { title: "Real-time Tracking", desc: "Know exactly where your ride is at all times.", icon: "location_on", color: "bg-blue-100 text-blue-600" },
                                 { title: "Fastest Pickup", desc: "Our smart algorithm finds the nearest driver instantly.", icon: "electric_bolt", color: "bg-yellow-100 text-yellow-600" },
@@ -432,11 +432,11 @@ const TaxiProductShowcase = () => {
                                     viewport={{ once: true }}
                                     className="flex flex-col items-center group cursor-pointer"
                                 >
-                                    <div className={`w-20 h-20 rounded-[2rem] ${item.color} flex items-center justify-center mb-5 shadow-md group-hover:scale-110 group-hover:rotate-3 transition-getAll duration-300`}>
-                                        <span className="material-symbols-outlined text-4xl">{item.icon}</span>
+                                    <div className={`w-12 h-12 md:w-20 md:h-20 rounded-xl md:rounded-[2rem] ${item.color} flex items-center justify-center mb-3 md:mb-5 shadow-md group-hover:scale-110 group-hover:rotate-3 transition-all duration-300`}>
+                                        <span className="material-symbols-outlined text-xl md:text-4xl">{item.icon}</span>
                                     </div>
-                                    <h3 className="text-xl font-black text-gray-900 mb-2">{item.title}</h3>
-                                    <p className="text-gray-500 max-w-xs text-base">{item.desc}</p>
+                                    <h3 className="text-xs md:text-xl font-black text-gray-900 mb-1 md:mb-2">{item.title}</h3>
+                                    <p className="text-[10px] md:text-base text-gray-400 max-w-xs leading-tight">{item.desc}</p>
                                 </motion.div>
                             ))}
                         </div>
@@ -444,59 +444,59 @@ const TaxiProductShowcase = () => {
                 </section>
 
                 {/* --- SECTION 1: USER APP --- */}
-                <section ref={userSectionRef} className="py-12 md:py-16 overflow-hidden relative">
-                    <div className="absolute top-0 right-0 w-1/2 h-full bg-gray-50 -skew-x-12 translate-x-[20%] -z-10"></div>
-                    <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
+                <section ref={userSectionRef} className="py-4 md:py-24 overflow-hidden relative">
+                    <div className="absolute top-0 right-0 w-full lg:w-1/2 h-full bg-gray-50 lg:-skew-x-12 lg:translate-x-[20%] -z-10"></div>
+                    <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-24 items-center">
                         {/* Visual */}
-                        <div className="visual relative flex justify-center">
+                        <div className="visual relative flex justify-center scale-[0.85] md:scale-100">
                             <div className="relative z-10">
-                                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-[#00F2FE] rounded-full blur-[100px] opacity-20"></div>
-                                <div className="w-[340px] border-[14px] border-white rounded-[3rem] shadow-[0_50px_100px_-20px_rgba(0,0,0,0.3)] bg-white overflow-hidden h-[700px] relative z-10">
+                                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] md:w-[400px] h-[300px] md:h-[400px] bg-[#00F2FE] rounded-full blur-[80px] md:blur-[100px] opacity-20"></div>
+                                <div className="w-[280px] md:w-[340px] border-[10px] md:border-[14px] border-white rounded-[2.5rem] md:rounded-[3rem] shadow-[0_50px_100px_-20px_rgba(0,0,0,0.3)] bg-white overflow-hidden h-[580px] md:h-[700px] relative z-10">
                                     <BookingScreen />
                                 </div>
                                 {/* Floating Element */}
-                                <div className="absolute top-24 -right-16 bg-white p-5 rounded-3xl shadow-2xl z-20 flex gap-4 items-center border border-gray-100">
-                                    <div className="w-12 h-12 bg-black rounded-full flex items-center justify-center text-white shadow-lg">
-                                        <span className="material-symbols-outlined">schedule</span>
+                                <div className="absolute top-12 md:top-24 -right-12 md:-right-16 bg-white p-3 md:p-5 rounded-2xl md:rounded-3xl shadow-2xl z-20 flex gap-3 md:gap-4 items-center border border-gray-100 translate-x-4 md:translate-x-0">
+                                    <div className="w-10 h-10 md:w-12 md:h-12 bg-black rounded-full flex items-center justify-center text-white shadow-lg">
+                                        <span className="material-symbols-outlined text-base md:text-xl">schedule</span>
                                     </div>
                                     <div>
-                                        <p className="text-xs font-extrabold text-[#00F2FE] uppercase tracking-wider">Estimated Arrival</p>
-                                        <p className="text-xl font-black text-gray-900">10:45 AM</p>
+                                        <p className="text-[8px] md:text-xs font-extrabold text-[#00F2FE] uppercase tracking-wider">Estimated Arrival</p>
+                                        <p className="text-sm md:text-xl font-black text-gray-900">10:45 AM</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
                         {/* Content */}
-                        <div className="content space-y-4">
+                        <div className="content space-y-2 text-center lg:text-left">
                             <div>
-                                <h4 className="text-[#00F2FE] font-black tracking-[0.2em] uppercase text-sm mb-4 inline-block bg-[#00F2FE]/10 px-4 py-2 rounded-full">For Riders</h4>
-                                <h2 className="text-5xl md:text-6xl lg:text-7xl font-black text-[#082F30] leading-[1.1] tracking-tight">
+                                <h4 className="text-[#00F2FE] font-black tracking-[0.2em] uppercase text-xs mb-1 md:mb-4 inline-block bg-[#00F2FE]/10 px-4 py-2 rounded-full">For Riders</h4>
+                                <h2 className="text-3xl md:text-6xl lg:text-7xl font-black text-[#082F30] leading-[1.1] tracking-tight">
                                     The Ultimate <br /> Booking Experience
                                 </h2>
                             </div>
-                            <p className="text-base text-gray-500 leading-relaxed font-medium">
+                            <p className="text-sm md:text-base text-gray-500 leading-relaxed font-medium">
                                 Give your customers a seamless, premium experience from pickup to drop-off. Our user app is designed for speed, clarity, and ease of use.
                             </p>
-                            <ul className="space-y-3">
+                            <ul className="space-y-3 text-left max-w-md mx-auto lg:mx-0">
                                 {[
                                     "Smart Location Search with Google Places API",
                                     "Multiple Ride Options (Bike, Auto, Sedan, SUV)",
                                     "Real-time Driver Tracking & ETA sharing",
                                     "Secure In-app Payments & Digital Wallets"
                                 ].map((feature, i) => (
-                                    <li key={i} className="flex items-start gap-4 p-3 rounded-2xl hover:bg-gray-50 transition-colors border border-transparent hover:border-gray-100">
-                                        <div className="w-8 h-8 rounded-full bg-[#00F2FE] flex items-center justify-center text-white mt-1 shrink-0 shadow-md">
-                                            <span className="material-symbols-outlined text-sm font-bold">check</span>
+                                    <li key={i} className="flex items-start gap-3 md:gap-4 p-2 md:p-3 rounded-2xl hover:bg-gray-50 transition-colors border border-transparent hover:border-gray-100">
+                                        <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-[#00F2FE] flex items-center justify-center text-white mt-0.5 shrink-0 shadow-md">
+                                            <span className="material-symbols-outlined text-[10px] md:text-sm font-bold">check</span>
                                         </div>
-                                        <span className="font-bold text-gray-800 text-lg">{feature}</span>
+                                        <span className="font-bold text-gray-800 text-sm md:text-lg">{feature}</span>
                                     </li>
                                 ))}
                             </ul>
-                            <div className="pt-2">
-                                <button className="px-10 py-4 bg-[#082F30] text-[#00F2FE] rounded-full font-black text-lg shadow-xl hover:shadow-2xl hover:scale-105 transition-all flex items-center gap-3 group">
-                                    Explorer Rider Features
-                                    <span className="material-symbols-outlined text-2xl group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                            <div className="pt-4">
+                                <button className="w-full sm:w-auto px-8 md:px-10 py-3 md:py-4 bg-[#082F30] text-[#00F2FE] rounded-full font-black text-base md:text-lg shadow-xl hover:shadow-2xl hover:scale-105 transition-all flex items-center justify-center gap-3 group">
+                                    Explore Rider Features
+                                    <span className="material-symbols-outlined text-xl md:text-2xl group-hover:translate-x-1 transition-transform">arrow_forward</span>
                                 </button>
                             </div>
                         </div>
@@ -504,44 +504,42 @@ const TaxiProductShowcase = () => {
                 </section>
 
                 {/* --- SECTION 2: DRIVER APP --- */}
-                <section ref={driverSectionRef} className="py-12 md:py-16 overflow-hidden bg-[#082F30] text-white relative">
-                    {/* Background Pattern */}
+                <section ref={driverSectionRef} className="py-4 md:py-24 overflow-hidden bg-[#082F30] text-white relative">
                     <div className="absolute inset-0 opacity-5" style={{ backgroundImage: 'radial-gradient(#ffffff 1px, transparent 1px)', backgroundSize: '40px 40px' }}></div>
-
-                    <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
-                        {/* Content (Left) */}
-                        <div className="content space-y-4 order-2 lg:order-1">
+                    <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-24 items-center">
+                        {/* Content */}
+                        <div className="content space-y-4 order-2 lg:order-1 text-center lg:text-left">
                             <div>
-                                <h4 className="text-[#00F2FE] font-black tracking-[0.2em] uppercase text-sm mb-4 inline-block bg-[#00F2FE]/10 px-4 py-2 rounded-full">For Drivers</h4>
-                                <h2 className="text-5xl md:text-6xl lg:text-7xl font-black text-white leading-[1.1] tracking-tight">
+                                <h4 className="text-[#00F2FE] font-black tracking-[0.2em] uppercase text-xs mb-3 md:mb-4 inline-block bg-[#00F2FE]/10 px-4 py-2 rounded-full">For Drivers</h4>
+                                <h2 className="text-3xl md:text-6xl lg:text-7xl font-black text-white leading-[1.1] tracking-tight">
                                     Maximize Earnings,<br /> Minimize Hassle
                                 </h2>
                             </div>
-                            <p className="text-base text-gray-400 leading-relaxed font-medium">
+                            <p className="text-sm md:text-base text-gray-400 leading-relaxed font-medium">
                                 Empower your fleet with tools that make their job easier. From intelligent dispatching to instant earnings withdrawals.
                             </p>
 
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
+                            <div className="grid grid-cols-2 gap-3 md:gap-4 mt-6 text-left">
                                 {[
                                     { title: "Smart Heatmaps", desc: "Guide drivers to high-demand zones instantly.", icon: "local_fire_department" },
-                                    { title: "Earnings Tracker", desc: "Daily, weekly and monthly earning reports.", icon: "paid" },
-                                    { title: "In-app Chat", desc: "Seamless communication with riders.", icon: "chat" },
-                                    { title: "Document Upload", desc: "Easy onboarding and verification process.", icon: "upload_file" },
+                                    { title: "Earnings Tracker", desc: "Reports for earnings.", icon: "paid" },
+                                    { title: "In-app Chat", desc: "Chat with riders.", icon: "chat" },
+                                    { title: "Document Upload", desc: "Easy onboarding.", icon: "upload_file" },
                                 ].map((item, i) => (
-                                    <div key={i} className="bg-white/5 border border-white/10 p-4 rounded-3xl hover:bg-white/10 transition-colors group">
-                                        <span className="material-symbols-outlined text-[#00F2FE] text-4xl mb-4 group-hover:scale-100 transition-transform">{item.icon}</span>
-                                        <h4 className="font-bold text-xl mb-2">{item.title}</h4>
-                                        <p className="text-gray-400 text-sm leading-relaxed">{item.desc}</p>
+                                    <div key={i} className="bg-white/5 border border-white/10 p-3 md:p-4 rounded-xl md:rounded-3xl hover:bg-white/10 transition-colors group">
+                                        <span className="material-symbols-outlined text-[#00F2FE] text-2xl md:text-4xl mb-2 md:mb-4 group-hover:scale-100 transition-transform">{item.icon}</span>
+                                        <h4 className="font-bold text-sm md:text-xl mb-1 md:mb-2">{item.title}</h4>
+                                        <p className="text-gray-400 text-[10px] md:text-sm leading-tight">{item.desc}</p>
                                     </div>
                                 ))}
                             </div>
                         </div>
 
-                        {/* Visual (Right) */}
-                        <div className="visual relative flex justify-center order-1 lg:order-2">
+                        {/* Visual */}
+                        <div className="visual relative flex justify-center order-1 lg:order-2 scale-[0.85] md:scale-100">
                             <div className="relative z-10">
-                                <div className="absolute inset-0 bg-white/10 blur-[100px] rounded-full transform rotate-12 scale-110"></div>
-                                <div className="w-[340px] border-[14px] border-gray-800 rounded-[3rem] shadow-2xl bg-black overflow-hidden h-[700px] relative z-10 ring-1 ring-white/20">
+                                <div className="absolute inset-0 bg-white/10 blur-[80px] md:blur-[100px] rounded-full transform rotate-12 scale-110"></div>
+                                <div className="w-[280px] md:w-[340px] border-[10px] md:border-[14px] border-gray-800 rounded-[2.5rem] md:rounded-[3rem] shadow-2xl bg-black overflow-hidden h-[580px] md:h-[700px] relative z-10 ring-1 ring-white/20">
                                     <DriverScreen />
                                 </div>
                             </div>
@@ -550,51 +548,51 @@ const TaxiProductShowcase = () => {
                 </section>
 
                 {/* --- SECTION 3: ADMIN PANEL --- */}
-                <section ref={adminSectionRef} className="py-12 md:py-16 overflow-hidden relative bg-gray-50">
-                    <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
+                <section ref={adminSectionRef} className="pt-12 pb-4 md:py-24 overflow-hidden relative bg-gray-50">
+                    <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-24 items-center">
                         {/* Visual */}
-                        <div className="visual relative flex justify-center perspective-1000">
+                        <div className="visual relative flex justify-center perspective-1000 scale-90 md:scale-100">
                             <div
-                                className="relative z-10 w-full max-w-xl aspect-[16/10] shadow-[0_50px_100px_-20px_rgba(0,0,0,0.2)] rounded-2xl overflow-hidden border-[12px] border-white bg-white transform rotate-y-12"
+                                className="relative z-10 w-full max-w-xl aspect-[16/10] shadow-[0_50px_100px_-20px_rgba(0,0,0,0.2)] rounded-xl md:rounded-2xl overflow-hidden border-[8px] md:border-[12px] border-white bg-white lg:rotate-y-12"
                                 style={{ transformStyle: 'preserve-3d' }}
                             >
                                 <AdminDashboard />
                             </div>
                             {/* Decorative Elements around dashboard */}
-                            <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-[#00F2FE] rounded-full mix-blend-multiply filter blur-3xl opacity-60 animate-blob"></div>
-                            <div className="absolute -top-10 -right-10 w-40 h-40 bg-purple-300 rounded-full mix-blend-multiply filter blur-3xl opacity-60 animate-blob animation-delay-2000"></div>
+                            <div className="absolute -bottom-6 md:-bottom-10 -left-6 md:-left-10 w-24 md:w-40 h-24 md:h-40 bg-[#00F2FE] rounded-full mix-blend-multiply filter blur-3xl opacity-60 animate-blob"></div>
+                            <div className="absolute -top-6 md:-top-10 -right-6 md:-right-10 w-24 md:w-40 h-24 md:h-40 bg-purple-300 rounded-full mix-blend-multiply filter blur-3xl opacity-60 animate-blob animation-delay-2000"></div>
                         </div>
 
                         {/* Content */}
-                        <div className="content space-y-4">
+                        <div className="content space-y-4 text-center lg:text-left">
                             <div>
-                                <h4 className="text-[#082F30] font-black tracking-[0.2em] uppercase text-sm mb-4 inline-block bg-white px-4 py-2 rounded-full border border-gray-100 shadow-sm">For Business Owners</h4>
-                                <h2 className="text-5xl md:text-6xl lg:text-7xl font-black text-[#082F30] leading-[1.1] tracking-tight">
+                                <h4 className="text-[#082F30] font-black tracking-[0.2em] uppercase text-[10px] md:text-sm mb-3 md:mb-4 inline-block bg-white px-4 py-2 rounded-full border border-gray-100 shadow-sm">For Business Owners</h4>
+                                <h2 className="text-3xl md:text-6xl lg:text-7xl font-black text-[#082F30] leading-[1.1] tracking-tight">
                                     The Command Center <br /> for Your Fleet
                                 </h2>
                             </div>
-                            <p className="text-base text-gray-500 leading-relaxed font-medium">
+                            <p className="text-sm md:text-base text-gray-500 leading-relaxed font-medium">
                                 Maintain complete control over your operations. Our powerful admin panel gives you a bird's-eye view of your entire business in real-time.
                             </p>
-                            <div className="space-y-4">
+                            <div className="space-y-4 text-left max-w-md mx-auto lg:mx-0">
                                 {[
                                     { t: "Live Fleet Tracking", d: "Monitor every vehicle location and status on a live interactive map." },
                                     { t: "Dynamic Pricing Control", d: "Set surge pricing, base fares, and zone-based rates instantly." },
                                     { t: "Detailed Analytics", d: "Deep dive into revenue, ride volume, and driver performance metrics." },
                                 ].map((x, i) => (
-                                    <div key={i} className="flex gap-4 group">
-                                        <div className="w-14 h-14 bg-white rounded-2xl shadow-md flex items-center justify-center text-[#082F30] shrink-0 border border-gray-100 font-black text-2xl group-hover:bg-[#082F30] group-hover:text-[#00F2FE] transition-colors duration-300">
+                                    <div key={i} className="flex gap-4 group items-center">
+                                        <div className="w-10 h-10 md:w-14 md:h-14 bg-white rounded-xl md:rounded-2xl shadow-md flex items-center justify-center text-[#082F30] shrink-0 border border-gray-100 font-black text-lg md:text-2xl group-hover:bg-[#082F30] group-hover:text-[#00F2FE] transition-colors duration-300">
                                             {i + 1}
                                         </div>
                                         <div>
-                                            <h4 className="font-bold text-gray-900 text-xl group-hover:text-[#00F2FE] transition-colors">{x.t}</h4>
-                                            <p className="text-gray-500 text-base mt-2 leading-relaxed">{x.d}</p>
+                                            <h4 className="font-bold text-gray-900 text-sm md:text-xl group-hover:text-[#00F2FE] transition-colors">{x.t}</h4>
+                                            <p className="text-[10px] md:text-base text-gray-500 mt-1 leading-relaxed">{x.d}</p>
                                         </div>
                                     </div>
                                 ))}
                             </div>
                             <div className="pt-4">
-                                <button className="text-[#082F30] font-black text-lg border-b-4 border-[#00F2FE] pb-1 hover:text-[#00F2FE] transition-colors">
+                                <button className="text-[#082F30] font-black text-base md:text-lg border-b-4 border-[#00F2FE] pb-1 hover:text-[#00F2FE] transition-colors">
                                     Request Admin Demo
                                 </button>
                             </div>
@@ -603,29 +601,29 @@ const TaxiProductShowcase = () => {
                 </section>
 
                 {/* --- Grid Features --- */}
-                <section className="py-20">
+                <section className="py-8 md:py-20">
                     <div className="max-w-7xl mx-auto px-6">
-                        <div className="text-center mb-16">
-                            <h2 className="text-5xl font-black text-[#082F30] mb-4">Perfect hailing app</h2>
-                            <p className="text-gray-400 text-xl max-w-2xl mx-auto">Everything you need to run a successful taxi business, right out of the box.</p>
+                        <div className="text-center mb-6 md:mb-16">
+                            <h2 className="text-3xl md:text-5xl font-black text-[#082F30] mb-2 md:mb-4">Perfect hailing app</h2>
+                            <p className="text-gray-400 text-sm md:text-xl max-w-2xl mx-auto">Everything you need to run a successful taxi business, right out of the box.</p>
                         </div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-y-12 gap-x-12">
+                        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-x-12">
                             {[
                                 { title: "Zone Management", icon: "map", color: "text-green-500" },
                                 { title: "Panel Control", icon: "admin_panel_settings", color: "text-orange-500" },
-                                { title: "Integrated Payment", icon: "payments", color: "text-blue-500" },
+                                { title: "Payments", icon: "payments", color: "text-blue-500" },
                                 { title: "Vehicle Options", icon: "directions_car", color: "text-purple-500" },
                                 { title: "Ride History", icon: "history", color: "text-red-500" },
-                                { title: "Smart Notifications", icon: "notifications_active", color: "text-teal-500" }
+                                { title: "Notifications", icon: "notifications_active", color: "text-teal-500" }
                             ].map((feature, i) => (
-                                <div key={i} className="flex flex-col items-center text-center p-6 hover:bg-gray-50 rounded-[2rem] transition-colors border border-transparent hover:border-gray-100 group">
-                                    <div className={`mb-6 p-6 bg-white shadow-[0_20px_40px_-10px_rgba(0,0,0,0.1)] rounded-[2rem] ${feature.color} group-hover:scale-110 transition-transform duration-300`}>
-                                        <span className="material-symbols-outlined text-4xl">{feature.icon}</span>
+                                <div key={i} className="flex flex-col items-center text-center p-3 md:p-6 hover:bg-gray-50 rounded-2xl md:rounded-[2rem] transition-colors border border-transparent hover:border-gray-100 group">
+                                    <div className={`mb-3 md:mb-6 p-3 md:p-6 bg-white shadow-[0_10px_20px_-5px_rgba(0,0,0,0.1)] md:shadow-[0_20px_40px_-10px_rgba(0,0,0,0.1)] rounded-xl md:rounded-[2rem] ${feature.color} group-hover:scale-110 transition-transform duration-300`}>
+                                        <span className="material-symbols-outlined text-2xl md:text-4xl">{feature.icon}</span>
                                     </div>
-                                    <h3 className="font-black text-2xl text-gray-900 mb-3">{feature.title}</h3>
-                                    <p className="text-base text-gray-500 leading-relaxed font-medium">
-                                        Complete control over business logic and features with ease.
+                                    <h3 className="font-black text-sm md:text-2xl text-gray-900 mb-1 md:mb-3">{feature.title}</h3>
+                                    <p className="text-[10px] md:text-base text-gray-500 leading-tight">
+                                        Total control with ease.
                                     </p>
                                 </div>
                             ))}
@@ -634,49 +632,49 @@ const TaxiProductShowcase = () => {
                 </section>
 
                 {/* --- App Screen Banner --- */}
-                <section className="py-20 bg-gradient-to-r from-[#FF0844] to-[#FFB199] relative overflow-hidden">
-                    <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
+                <section className="py-6 md:py-20 bg-gradient-to-r from-[#FF0844] to-[#FFB199] relative overflow-hidden">
+                    <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10 text-center lg:text-left">
                         <div className="text-white">
-                            <h2 className="text-5xl md:text-6xl lg:text-7xl font-black mb-8 leading-tight">Get professional Taxi App Modules for your business.</h2>
-                            <p className="text-white/90 text-xl mb-10 max-w-lg font-medium leading-relaxed">
+                            <h2 className="text-3xl md:text-6xl lg:text-7xl font-black mb-6 md:mb-8 leading-tight">Get professional Taxi App Modules for your business.</h2>
+                            <p className="text-white/90 text-sm md:text-xl mb-8 md:mb-10 max-w-lg mx-auto lg:mx-0 font-medium leading-relaxed">
                                 Launch your own taxi business with our white-label solution. Customizable source code included.
                             </p>
-                            <div className="flex gap-4">
-                                <button className="px-10 py-5 bg-white text-[#FF0844] font-black rounded-2xl shadow-xl hover:shadow-2xl hover:scale-105 transition-all text-lg">Contact Sales</button>
+                            <div className="flex justify-center lg:justify-start">
+                                <button className="px-8 md:px-10 py-4 md:py-5 bg-white text-[#FF0844] font-black rounded-xl md:rounded-2xl shadow-xl hover:shadow-2xl hover:scale-105 transition-all text-base md:text-lg">Contact Sales</button>
                             </div>
                         </div>
-                        <div className="relative h-[400px] lg:h-[500px] flex items-center justify-center">
+                        <div className="relative h-[300px] md:h-[500px] flex items-center justify-center scale-75 md:scale-100">
                             {/* Slanted Phones */}
-                            <motion.div initial={{ y: 50, rotate: -12 }} whileInView={{ y: 0, rotate: -12 }} className="absolute left-0 w-[240px] bg-black border-[10px] border-gray-800 rounded-[2.5rem] h-[480px] shadow-2xl z-0 opacity-80"></motion.div>
-                            <motion.div initial={{ y: 100, rotate: -6 }} whileInView={{ y: 0, rotate: -6 }} className="absolute left-[140px] top-10 w-[260px] bg-white border-[8px] border-gray-200 rounded-[2.5rem] h-[520px] shadow-2xl z-10 overflow-hidden"><BookingScreen /></motion.div>
-                            <motion.div initial={{ y: 150, rotate: 6 }} whileInView={{ y: 0, rotate: 6 }} className="absolute left-[300px] top-20 w-[260px] bg-white border-[8px] border-gray-200 rounded-[2.5rem] h-[520px] shadow-2xl z-20 overflow-hidden"><MapScreen /></motion.div>
+                            <motion.div initial={{ y: 50, rotate: -12 }} whileInView={{ y: 0, rotate: -12 }} className="absolute left-0 w-[200px] md:w-[240px] bg-black border-[8px] md:border-[10px] border-gray-800 rounded-[2rem] md:rounded-[2.5rem] h-[400px] md:h-[480px] shadow-2xl z-0 opacity-80"></motion.div>
+                            <motion.div initial={{ y: 100, rotate: -6 }} whileInView={{ y: 0, rotate: -6 }} className="absolute left-[70px] md:left-[140px] top-5 md:top-10 w-[220px] md:w-[260px] bg-white border-[6px] md:border-[8px] border-gray-200 rounded-[2rem] md:rounded-[2.5rem] h-[440px] md:h-[520px] shadow-2xl z-10 overflow-hidden"><BookingScreen /></motion.div>
+                            <motion.div initial={{ y: 150, rotate: 6 }} whileInView={{ y: 0, rotate: 6 }} className="absolute left-[150px] md:left-[300px] top-10 md:top-20 w-[220px] md:w-[260px] bg-white border-[6px] md:border-[8px] border-gray-200 rounded-[2rem] md:rounded-[2.5rem] h-[440px] md:h-[520px] shadow-2xl z-20 overflow-hidden"><MapScreen /></motion.div>
                         </div>
                     </div>
                 </section>
 
                 {/* --- Testimonials --- */}
-                <section className="py-20">
+                <section className="py-8 md:py-20">
                     <div className="max-w-7xl mx-auto px-6 text-center">
-                        <h2 className="text-sm font-black text-gray-400 uppercase tracking-[0.3em] mb-16 text-center relative inline-block">
+                        <h2 className="text-xs font-black text-gray-400 uppercase tracking-[0.3em] mb-6 md:mb-16 text-center relative inline-block">
                             What people say About Us
                             <span className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-12 h-1 bg-gray-200 rounded-full"></span>
                         </h2>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-8">
                             {[
-                                { name: "Oguz Yagiz", text: "The best taxi solution layout I have ever seen. Seamless integration.", img: "https://i.pravatar.cc/150?u=1" },
-                                { name: "Rizwan Gus", text: "Fastest deployment time. My business went live in 2 days.", img: "https://i.pravatar.cc/150?u=2" },
-                                { name: "Marta K.", text: "Support is amazing. They customized the app exactly how I wanted.", img: "https://i.pravatar.cc/150?u=3" }
+                                { name: "Oguz Yagiz", text: "Best taxi solution layout.", img: "https://i.pravatar.cc/150?u=1" },
+                                { name: "Rizwan Gus", text: "Fastest deployment time.", img: "https://i.pravatar.cc/150?u=2" },
+                                { name: "Marta K.", text: "Support is amazing.", img: "https://i.pravatar.cc/150?u=3" }
                             ].map((u, i) => (
-                                <div key={i} className="p-10 bg-white border border-gray-100 shadow-[0_20px_60px_-10px_rgba(0,0,0,0.05)] rounded-[2.5rem] flex flex-col items-center hover:-translate-y-2 transition-transform duration-300">
-                                    <img src={u.img} alt={u.name} className="w-20 h-20 rounded-full mb-6 object-cover ring-4 ring-gray-50" />
-                                    <h4 className="font-black text-xl text-gray-900 mb-2">{u.name}</h4>
-                                    <p className="text-gray-500 text-base leading-relaxed italic">"{u.text}"</p>
-                                    <div className="flex text-yellow-400 text-lg mt-6 gap-1">
-                                        <span className="material-symbols-outlined fill-current">star</span>
-                                        <span className="material-symbols-outlined fill-current">star</span>
-                                        <span className="material-symbols-outlined fill-current">star</span>
-                                        <span className="material-symbols-outlined fill-current">star</span>
-                                        <span className="material-symbols-outlined fill-current">star</span>
+                                <div key={i} className="p-4 md:p-10 bg-white border border-gray-100 shadow-sm rounded-2xl md:rounded-[2.5rem] flex flex-col items-center hover:-translate-y-2 transition-transform duration-300">
+                                    <img src={u.img} alt={u.name} className="w-10 h-10 md:w-20 md:h-20 rounded-full mb-3 md:mb-6 object-cover ring-2 md:ring-4 ring-gray-50" />
+                                    <h4 className="font-black text-xs md:text-xl text-gray-900 mb-1">{u.name}</h4>
+                                    <p className="text-[10px] md:text-base text-gray-500 leading-tight italic">"{u.text}"</p>
+                                    <div className="flex text-yellow-400 text-xs md:text-lg mt-3 md:mt-6 gap-0.5">
+                                        <span className="material-symbols-outlined fill-current text-[10px] md:text-lg">star</span>
+                                        <span className="material-symbols-outlined fill-current text-[10px] md:text-lg">star</span>
+                                        <span className="material-symbols-outlined fill-current text-[10px] md:text-lg">star</span>
+                                        <span className="material-symbols-outlined fill-current text-[10px] md:text-lg">star</span>
+                                        <span className="material-symbols-outlined fill-current text-[10px] md:text-lg">star</span>
                                     </div>
                                 </div>
                             ))}
