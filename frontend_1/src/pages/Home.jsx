@@ -15,16 +15,26 @@ import EntrySplash from '../components/EntrySplash'; // Import Splash
 
 import ProjectShowcase from '../components/ProjectShowcase';
 
+// Global variable to track splash screen state in memory
+// This resets on page reload (Refresh) but persists on Back Navigation (Client-side routing)
+let hasShownSplashInSession = false;
+
 const Home = () => {
-    const [showSplash, setShowSplash] = useState(true);
+    const [showSplash, setShowSplash] = useState(!hasShownSplashInSession);
 
     useEffect(() => {
-        const timer = setTimeout(() => {
-            setShowSplash(false);
-        }, 3000); // Display for 3 seconds
+        if (showSplash) {
+            const timer = setTimeout(() => {
+                setShowSplash(false);
+                hasShownSplashInSession = true;
+            }, 3000); // Display for 3 seconds
 
-        return () => clearTimeout(timer);
-    }, []);
+            return () => clearTimeout(timer);
+        } else {
+            // Ensure flag is set if we skipped it (though logic above handles it, good for robustness)
+            hasShownSplashInSession = true;
+        }
+    }, [showSplash]);
 
     return (
         <ScrollWrapper>
