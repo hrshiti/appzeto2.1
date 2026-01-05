@@ -1,6 +1,11 @@
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
 
-// ... (imports remain same)
+import webImg from '../assets/web_dev_service_preview_1767285503403.png';
+import mobileImg from '../assets/mobile_apps_service_preview_1767285521524.png';
+import aiImg from '../assets/ai_ml_service_preview_1767285486518.png';
+import cloudImg from '../assets/cloud_computing_service_preview_1767285540190.png';
 
 const services = [
     {
@@ -149,7 +154,7 @@ const Services = () => {
                                         animate={{ opacity: 1, scale: 1, x: 0 }}
                                         exit={{ opacity: 0, scale: 0.8, x: 10 }}
                                         transition={{ duration: 0.3, ease: "easeOut" }}
-                                        className="hidden lg:block absolute right-48 top-1/2 -translate-y-1/2 w-96 h-56 rounded-xl overflow-hidden shadow-2xl border border-white/20 z-20 pointer-events-none"
+                                        className="hidden lg:block fixed right-[15%] top-1/2 -translate-y-1/2 w-96 h-56 rounded-xl overflow-hidden shadow-2xl border border-white/20 z-50 pointer-events-none"
                                         style={{ boxShadow: '0 0 30px rgba(0,0,0,0.5)' }}
                                     >
                                         <div className="absolute inset-0 bg-black/20 z-10"></div>
