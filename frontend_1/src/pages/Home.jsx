@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Hero from '../components/Hero';
 import Projects from '../components/Projects';
 import About from '../components/About';
@@ -11,12 +11,25 @@ import ScrollWrapper from '../components/ScrollWrapper';
 import ScrollReveal from '../components/ScrollReveal';
 import Process from '../components/Process';
 import Stats from '../components/Stats';
+import EntrySplash from '../components/EntrySplash'; // Import Splash
 
 import ProjectShowcase from '../components/ProjectShowcase';
 
 const Home = () => {
+    const [showSplash, setShowSplash] = useState(true);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setShowSplash(false);
+        }, 3000); // Display for 3 seconds
+
+        return () => clearTimeout(timer);
+    }, []);
+
     return (
         <ScrollWrapper>
+            <EntrySplash isVisible={showSplash} />
+
             <Hero />
 
 
