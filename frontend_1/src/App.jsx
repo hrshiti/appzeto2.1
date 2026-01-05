@@ -15,6 +15,27 @@ import EcommerceProductShowcase from './pages/EcommerceProductShowcase'
 import HospitalProductShowcase from './pages/HospitalProductShowcase'
 import CustomCursor from './components/CustomCursor'
 import './App.css'
+import { Navigate } from 'react-router-dom'
+
+// Admin Imports
+import { AdminAuthProvider, ProtectedAdminRoute } from './admin/context/AdminAuthContext'
+import AdminLayout from './admin/layouts/AdminLayout'
+import AdminLogin from './admin/pages/AdminLogin'
+import AdminDashboard from './admin/pages/AdminDashboard'
+import AdminServices from './admin/pages/AdminServices'
+import AdminProjects from './admin/pages/AdminProjects'
+import AdminBlogs from './admin/pages/AdminBlogs'
+import AdminMessages from './admin/pages/AdminMessages'
+import AdminUsers from './admin/pages/AdminUsers'
+import HRDashboard from './admin/pages/HRDashboard'
+import AdminLeads from './admin/pages/AdminLeads'
+import HRJobs from './admin/pages/HRJobs'
+import HRApplications from './admin/pages/HRApplications'
+import AdminSettings from './admin/pages/AdminSettings'
+import AdminTeam from './admin/pages/AdminTeam'
+import AdminTable from './admin/components/AdminTable' // for placeholders
+
+import { ToastProvider } from './admin/context/ToastContext'
 
 function App() {
   return (

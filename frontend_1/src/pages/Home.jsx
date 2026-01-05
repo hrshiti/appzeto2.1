@@ -41,15 +41,15 @@ const Home = () => {
             </ScrollReveal>
 
             <ScrollReveal>
+                <Projects />
+            </ScrollReveal>
+
+            <ScrollReveal>
                 <WhyChooseUs />
             </ScrollReveal>
 
             <ScrollReveal>
                 <Reviews />
-            </ScrollReveal>
-
-            <ScrollReveal>
-                <Projects />
             </ScrollReveal>
 
             <ScrollReveal>

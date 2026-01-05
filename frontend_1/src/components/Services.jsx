@@ -154,7 +154,7 @@ const Services = () => {
                                         animate={{ opacity: 1, scale: 1, x: 0 }}
                                         exit={{ opacity: 0, scale: 0.8, x: 10 }}
                                         transition={{ duration: 0.3, ease: "easeOut" }}
-                                        className="hidden lg:block absolute right-48 top-1/2 -translate-y-1/2 w-96 h-56 rounded-xl overflow-hidden shadow-2xl border border-white/20 z-20 pointer-events-none"
+                                        className="hidden lg:block fixed right-[15%] top-1/2 -translate-y-1/2 w-96 h-56 rounded-xl overflow-hidden shadow-2xl border border-white/20 z-50 pointer-events-none"
                                         style={{ boxShadow: '0 0 30px rgba(0,0,0,0.5)' }}
                                     >
                                         <div className="absolute inset-0 bg-black/20 z-10"></div>
