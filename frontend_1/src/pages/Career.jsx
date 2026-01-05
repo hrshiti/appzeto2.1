@@ -7,10 +7,26 @@ import Footer from '../components/Footer';
 import ScrollReveal from '../components/ScrollReveal';
 import ScrollWrapper from '../components/ScrollWrapper';
 
+import { AnimatePresence } from 'framer-motion';
+
 const Career = () => {
+    const [selectedJob, setSelectedJob] = React.useState(null);
+    const [isApplying, setIsApplying] = React.useState(false);
+
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
+
+    useEffect(() => {
+        if (isApplying) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
+        }
+        return () => {
+            document.body.style.overflow = 'unset';
+        };
+    }, [isApplying]);
 
     const positions = [
         {
@@ -225,6 +241,7 @@ const Career = () => {
                             <motion.div
                                 key={job.id}
                                 whileHover={{ backgroundColor: "rgba(241, 252, 136, 0.2)" }}
+                                onClick={() => { setSelectedJob(job.role); setIsApplying(true); }}
                                 className="flex flex-col md:flex-row items-start md:items-center justify-between py-4 md:py-6 px-4 md:px-6 border-b border-slate-100/50 group transition-all duration-300 cursor-pointer"
                             >
                                 <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-12 flex-1 w-full">
@@ -240,7 +257,10 @@ const Career = () => {
                                         <span className="flex items-center gap-1.5"><span className="material-icons text-sm opacity-50">schedule</span> {job.type}</span>
                                         <span className="flex items-center gap-1.5"><span className="material-icons text-sm opacity-50">location_on</span> {job.location}</span>
                                     </div>
-                                    <button className="bg-slate-950 text-white px-6 py-2 md:py-2.5 rounded-full font-bold text-[9px] md:text-[10px] uppercase tracking-widest hover:bg-[#F1FC88] hover:text-slate-900 transition-all flex items-center gap-2 ml-auto md:ml-0">
+                                    <button
+                                        onClick={() => { setSelectedJob(job.role); setIsApplying(true); }}
+                                        className="bg-slate-950 text-white px-6 py-2 md:py-2.5 rounded-full font-bold text-[9px] md:text-[10px] uppercase tracking-widest hover:bg-[#F1FC88] hover:text-slate-900 transition-all flex items-center gap-2 ml-auto md:ml-0"
+                                    >
                                         Apply <span className="material-icons text-sm">north_east</span>
                                     </button>
                                 </div>
@@ -267,17 +287,28 @@ const Career = () => {
                                         Internships with serious impact and zero coffee runs.
                                     </p>
                                 </div>
-                                <button className="px-6 py-2.5 md:px-8 md:py-3 bg-[#F1FC88] text-slate-900 font-bold rounded-xl md:rounded-2xl uppercase tracking-widest text-[10px] md:text-xs hover:bg-white transition-all border-4 border-slate-900 shadow-[4px_4px_0px_0px_rgba(0,0,0,0.2)] md:shadow-[6px_6px_0px_0px_rgba(0,0,0,0.2)]">
+                                <button
+                                    onClick={() => { setSelectedJob("Full Stack Intern"); setIsApplying(true); }}
+                                    className="px-6 py-2.5 md:px-8 md:py-3 bg-[#F1FC88] text-slate-900 font-bold rounded-xl md:rounded-2xl uppercase tracking-widest text-[10px] md:text-xs hover:bg-white transition-all border-4 border-slate-900 shadow-[4px_4px_0px_0px_rgba(0,0,0,0.2)] md:shadow-[6px_6px_0px_0px_rgba(0,0,0,0.2)]"
+                                >
                                     Grab Your Spot
                                 </button>
                             </div>
 
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
                                 {internships.map((intern) => (
-                                    <div key={intern.id} className="bg-white p-4 md:p-6 rounded-[1.5rem] md:rounded-[2rem] border-4 border-slate-900 shadow-[6px_6px_0px_0px_rgba(15,23,42,1)] md:shadow-[8px_8px_0px_0px_rgba(15,23,42,1)] hover:-translate-y-1 transition-transform">
-                                        <h4 className="text-lg md:text-xl font-bold text-slate-900 mb-1">{intern.role}</h4>
-                                        <div className="text-primary font-black text-[10px] uppercase tracking-widest mb-2 md:mb-4">{intern.duration} • {intern.type}</div>
-                                        <p className="text-slate-600 font-normal text-xs md:text-sm line-clamp-2">{intern.description}</p>
+                                    <div key={intern.id} className="bg-white p-4 md:p-6 rounded-[1.5rem] md:rounded-[2rem] border-4 border-slate-900 shadow-[6px_6px_0px_0px_rgba(15,23,42,1)] md:shadow-[8px_8px_0px_0px_rgba(15,23,42,1)] hover:-translate-y-1 transition-transform group flex flex-col justify-between">
+                                        <div>
+                                            <h4 className="text-lg md:text-xl font-bold text-slate-900 mb-1">{intern.role}</h4>
+                                            <div className="text-primary font-black text-[10px] uppercase tracking-widest mb-2 md:mb-4">{intern.duration} • {intern.type}</div>
+                                            <p className="text-slate-600 font-normal text-xs md:text-sm line-clamp-2 mb-6">{intern.description}</p>
+                                        </div>
+                                        <button
+                                            onClick={() => { setSelectedJob(intern.role); setIsApplying(true); }}
+                                            className="w-full py-2.5 bg-slate-900 text-white rounded-xl font-bold text-[10px] uppercase tracking-widest hover:bg-white hover:text-slate-900 transition-all border-2 border-slate-900"
+                                        >
+                                            Apply Now
+                                        </button>
                                     </div>
                                 ))}
                             </div>
@@ -286,27 +317,27 @@ const Career = () => {
                 </div>
 
                 {/* --- SCATTERED LIFE AT APPZETO --- */}
-                <div id="culture" className="h-[60vh] md:h-screen max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-center relative overflow-hidden bg-[#f8f9fa]">
-                    <div className="flex flex-col items-center mb-8 md:mb-12">
-                        <h2 className="text-2xl md:text-3xl font-bold text-slate-900 text-center uppercase tracking-tighter">
+                <div id="culture" className="min-h-screen md:h-screen max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-0 flex flex-col justify-center relative overflow-hidden bg-[#f8f9fa]">
+                    <div className="flex flex-col items-center mb-12 md:mb-16">
+                        <h2 className="text-3xl md:text-4xl font-black text-slate-900 text-center uppercase tracking-tighter">
                             LIFE AT <span className="bg-[#F1FC88] text-slate-900 px-4 py-1 rounded-lg inline-block -rotate-2 scale-90">APPZETO</span>
                         </h2>
                     </div>
 
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-y-8 md:gap-y-12 gap-x-4 md:gap-x-6 relative">
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-y-12 md:gap-y-16 gap-x-6 md:gap-x-10 relative px-2">
                         {cultureItems.map((item, idx) => (
                             <motion.div
                                 key={item.id}
                                 initial={{ opacity: 0, scale: 0.8 }}
-                                whileInView={{ opacity: 1, scale: 0.9, y: item.yOffset / 2 }}
+                                whileInView={{ opacity: 1, scale: 1, y: item.yOffset / 2.5 }}
                                 viewport={{ once: true }}
                                 style={{ rotate: item.rotation }}
                                 transition={{ duration: 0.8, ease: "circOut", delay: idx * 0.05 }}
-                                whileHover={{ scale: 1, rotate: 0, zIndex: 10 }}
+                                whileHover={{ scale: 1.1, rotate: 0, zIndex: 10 }}
                                 className="relative group flex justify-center"
                             >
-                                <div className="bg-white p-2 pb-4 md:pb-6 shadow-lg border border-slate-100 w-24 md:w-48 lg:w-56">
-                                    <div className="h-16 md:h-32 lg:h-40 w-full overflow-hidden mb-2">
+                                <div className="bg-white p-2 md:p-3 pb-5 md:pb-8 shadow-2xl border border-slate-100 w-36 md:w-56 lg:w-64 transition-transform">
+                                    <div className="h-28 md:h-40 lg:h-48 w-full overflow-hidden mb-3">
                                         <img
                                             src={item.img}
                                             className="w-full h-full object-cover grayscale-[0.2] group-hover:grayscale-0 transition-all duration-700"
@@ -314,10 +345,10 @@ const Career = () => {
                                         />
                                     </div>
                                     <div className="text-center">
-                                        <h3 className="text-[7px] md:text-[10px] font-bold text-slate-400 uppercase tracking-widest">{item.title}</h3>
+                                        <h3 className="text-[8px] md:text-[11px] font-black text-slate-400 uppercase tracking-widest">{item.title}</h3>
                                     </div>
                                 </div>
-                                <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-8 md:w-12 h-3 md:h-4 bg-[#F1FC88]/60 backdrop-blur-sm -rotate-2 group-hover:bg-[#F1FC88] transition-colors z-20" />
+                                <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-10 md:w-16 h-4 md:h-5 bg-[#F1FC88]/70 backdrop-blur-sm -rotate-2 group-hover:bg-[#F1FC88] transition-colors z-20" />
                             </motion.div>
                         ))}
                     </div>
@@ -338,6 +369,84 @@ const Career = () => {
                     </div>
                 </div>
             </div>
+
+            <AnimatePresence>
+                {isApplying && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed inset-0 z-[100] flex justify-center items-start p-4 bg-slate-950/80 backdrop-blur-md overflow-y-auto no-scrollbar"
+                    >
+                        <motion.div
+                            initial={{ scale: 0.9, y: 20, opacity: 0 }}
+                            animate={{ scale: 1, y: 0, opacity: 1 }}
+                            exit={{ scale: 0.9, y: 20, opacity: 0 }}
+                            className="bg-white w-full max-w-3xl rounded-[1.5rem] md:rounded-[2rem] border-[3px] md:border-[4px] border-slate-900 shadow-[6px_6px_0px_0px_rgba(241,252,136,1)] md:shadow-[10px_10px_0px_0px_rgba(241,252,136,1)] relative my-4 md:my-10"
+                        >
+                            <button
+                                onClick={() => setIsApplying(false)}
+                                className="absolute top-3 right-3 md:top-6 md:right-6 w-8 h-8 md:w-10 md:h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-900 hover:bg-primary hover:text-white transition-all z-20 shadow-sm"
+                            >
+                                <span className="material-icons text-sm md:text-base">close</span>
+                            </button>
+
+                            <div className="p-4 md:p-8">
+                                <div className="mb-4 md:mb-6">
+                                    <h2 className="text-lg md:text-3xl font-black text-slate-900 tracking-tighter uppercase mb-0.5 md:mb-1 leading-none">Apply For</h2>
+                                    <div className="inline-block bg-[#F1FC88] px-2 py-0.5 md:px-3 md:py-1 rounded-md md:rounded-lg -rotate-1 border-[1.5px] md:border-2 border-slate-900 text-slate-900 font-bold uppercase tracking-tight text-[10px] md:text-sm">
+                                        {selectedJob}
+                                    </div>
+                                </div>
+
+                                <form className="space-y-2 md:space-y-4" onSubmit={(e) => { e.preventDefault(); alert('Application Sent Successfully!'); setIsApplying(false); }}>
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4">
+                                        <div className="space-y-1">
+                                            <label className="text-[8px] md:text-[10px] font-black uppercase text-slate-400 px-1 tracking-widest">Full Name</label>
+                                            <input required type="text" placeholder="John Doe" className="w-full px-3 py-2 md:px-4 md:py-2.5 bg-slate-50 border-[1.5px] md:border-2 border-slate-100 rounded-lg md:rounded-xl focus:border-primary focus:bg-white transition-all text-[10px] md:text-xs font-bold outline-none" />
+                                        </div>
+                                        <div className="space-y-1">
+                                            <label className="text-[8px] md:text-[10px] font-black uppercase text-slate-400 px-1 tracking-widest">Email Address</label>
+                                            <input required type="email" placeholder="john@example.com" className="w-full px-3 py-2 md:px-4 md:py-2.5 bg-slate-50 border-[1.5px] md:border-2 border-slate-100 rounded-lg md:rounded-xl focus:border-primary focus:bg-white transition-all text-[10px] md:text-xs font-bold outline-none" />
+                                        </div>
+                                    </div>
+
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4">
+                                        <div className="space-y-1">
+                                            <label className="text-[8px] md:text-[10px] font-black uppercase text-slate-400 px-1 tracking-widest">Phone Number</label>
+                                            <input required type="tel" placeholder="+91 00000 00000" className="w-full px-3 py-2 md:px-4 md:py-2.5 bg-slate-50 border-[1.5px] md:border-2 border-slate-100 rounded-lg md:rounded-xl focus:border-primary focus:bg-white transition-all text-[10px] md:text-xs font-bold outline-none" />
+                                        </div>
+                                        <div className="space-y-1">
+                                            <label className="text-[8px] md:text-[10px] font-black uppercase text-slate-400 px-1 tracking-widest">LinkedIn / Portfolio</label>
+                                            <input type="url" placeholder="https://..." className="w-full px-3 py-2 md:px-4 md:py-2.5 bg-slate-50 border-[1.5px] md:border-2 border-slate-100 rounded-lg md:rounded-xl focus:border-primary focus:bg-white transition-all text-[10px] md:text-xs font-bold outline-none" />
+                                        </div>
+                                    </div>
+
+                                    <div className="space-y-1">
+                                        <label className="text-[8px] md:text-[10px] font-black uppercase text-slate-400 px-1 tracking-widest">Resume / CV</label>
+                                        <div className="relative">
+                                            <input required type="file" className="hidden" id="resume-upload" />
+                                            <label htmlFor="resume-upload" className="w-full h-12 md:h-16 border-[1.5px] md:border-2 border-dashed border-slate-300 rounded-lg md:rounded-xl flex items-center justify-center gap-2 cursor-pointer hover:border-primary hover:bg-slate-50 transition-all text-[9px] md:text-xs font-bold text-slate-500">
+                                                <span className="material-icons text-lg opacity-50">cloud_upload</span>
+                                                Upload PDF / DOC
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div className="space-y-1">
+                                        <label className="text-[8px] md:text-[10px] font-black uppercase text-slate-400 px-1 tracking-widest">Why should we hire you?</label>
+                                        <textarea rows="2" placeholder="Tell us about your superpower..." className="w-full px-3 py-2 md:px-4 md:py-3 bg-slate-50 border-[1.5px] md:border-2 border-slate-100 rounded-lg md:rounded-xl focus:border-primary focus:bg-white transition-all text-[10px] md:text-xs font-bold outline-none resize-none"></textarea>
+                                    </div>
+
+                                    <button type="submit" className="w-full py-3 md:py-3.5 bg-slate-950 text-white rounded-lg md:rounded-xl font-black uppercase tracking-widest text-[9px] md:text-xs hover:bg-primary hover:text-slate-950 transition-all shadow-xl shadow-slate-900/20 mb-1 md:mb-2">
+                                        Submit Application
+                                    </button>
+                                </form>
+                            </div>
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
 
             <ScrollReveal>
                 <ContactUs isHomePage={true} />

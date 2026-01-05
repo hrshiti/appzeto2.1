@@ -61,6 +61,27 @@ const FAQItem = ({ question, answer, isOpen, toggle }) => {
 
 const ContactUs = ({ isHomePage = false }) => {
     const [openIndex, setOpenIndex] = useState(0);
+    const [status, setStatus] = useState('idle');
+    const [isSalesOpen, setIsSalesOpen] = useState(false);
+
+    // Lock body scroll when modal is open
+    React.useEffect(() => {
+        if (isSalesOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
+        }
+        return () => { document.body.style.overflow = 'unset'; };
+    }, [isSalesOpen]);
+
+    const handleSend = (e) => {
+        e.preventDefault();
+        setStatus('sending');
+        setTimeout(() => {
+            setStatus('sent');
+            setTimeout(() => setStatus('idle'), 3000);
+        }, 2000);
+    };
 
     React.useEffect(() => {
         const hash = window.location.hash;
@@ -79,7 +100,7 @@ const ContactUs = ({ isHomePage = false }) => {
         <section className={`bg-white font-sans overflow-x-hidden pt-0`}>
             {!isHomePage && (
                 <>
-                    <div className="relative h-[50vh] md:h-[85vh] flex items-center justify-center overflow-hidden">
+                    <div className="relative h-[35vh] md:h-[85vh] flex items-center justify-center overflow-hidden">
                         <div className="absolute inset-0">
                             <img
                                 src="https://images.unsplash.com/photo-1497215728101-856f4ea42174?q=80&w=2340&auto=format&fit=crop"
@@ -93,44 +114,44 @@ const ContactUs = ({ isHomePage = false }) => {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: false }}
                             transition={{ duration: 1 }}
-                            className="relative text-center z-10 px-4 -mt-20 md:-mt-32 lg:-mt-40"
+                            className="relative text-center z-10 px-4 -mt-10 md:-mt-32 lg:-mt-40"
                         >
-                            <h1 className="text-4xl md:text-5xl font-black text-white uppercase tracking-tighter italic drop-shadow-2xl">
+                            <h1 className="text-3xl md:text-5xl font-black text-white uppercase tracking-tighter italic drop-shadow-2xl">
                                 Contact <span className="text-primary italic">Us</span>
                             </h1>
-                            <p className="text-white/70 text-[9px] md:text-[10px] font-bold mt-4 max-w-2xl mx-auto uppercase tracking-[0.4em]">
+                            <p className="text-white/70 text-[8px] md:text-[10px] font-bold mt-3 max-w-2xl mx-auto uppercase tracking-[0.3em] md:tracking-[0.4em]">
                                 Let's build something legendary together.
                             </p>
                         </motion.div>
                     </div>
 
-                    <div className="max-w-[1300px] mx-auto px-6 md:px-10 lg:px-24 relative -mt-32 md:-mt-48 lg:-mt-56 z-20">
+                    <div className="max-w-[1300px] mx-auto px-4 md:px-10 lg:px-24 relative -mt-16 md:-mt-48 lg:-mt-56 z-20">
                         {/* --- TOP INQUIRY CARDS (Scroll Animation) --- */}
                         <motion.div
-                            initial={{ opacity: 0, y: 100 }}
+                            initial={{ opacity: 0, y: 50 }}
                             whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: false, margin: "-100px" }}
+                            viewport={{ once: false, margin: "-50px" }}
                             transition={{ duration: 0.8, ease: "easeOut" }}
-                            className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8 mb-10 md:mb-20 bg-white md:bg-transparent rounded-2xl md:rounded-none shadow-xl md:shadow-none p-4 md:p-0"
+                            className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-8 mb-8 md:mb-20 bg-white md:bg-transparent rounded-2xl md:rounded-none shadow-xl md:shadow-none p-3 md:p-0"
                         >
                             {[
-                                { id: "sales", icon: "payments", title: "Sales Inquiry", desc: "Enterprise solutions & tailored pricing." },
-                                { id: "support", icon: "support_agent", title: "Tech Support", desc: "24/7 technical help & maintenance." },
-                                { id: "general", icon: "location_on", title: "World Wide", desc: "Find a local office near you." }
+                                { id: "sales", icon: "payments", title: "Sales Inquiry", desc: "Enterprise solutions & tailored pricing.", action: () => setIsSalesOpen(true) },
+                                { id: "support", icon: "support_agent", title: "Tech Support", desc: "24/7 technical help & maintenance.", action: () => document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' }) }
                             ].map((card, i) => (
                                 <div
                                     key={card.id}
                                     id={card.id}
-                                    className="p-4 border-b md:border-b-0 md:border-l border-slate-100 transition-all group last:border-0 md:last:border-l"
+                                    onClick={card.action}
+                                    className="p-3 md:p-6 border-b md:border-b-0 md:border-l border-slate-100 transition-all group last:border-0 md:last:border-l cursor-pointer bg-white/50 backdrop-blur-sm hover:bg-white md:hover:bg-primary/5 rounded-2xl md:rounded-none"
                                 >
-                                    <div className="w-10 h-10 md:w-12 md:h-12 bg-slate-50 rounded-xl flex items-center justify-center mb-4 md:mb-6 group-hover:bg-primary transition-all duration-500">
-                                        <span className="material-icons text-slate-400 group-hover:text-white text-lg md:text-xl">{card.icon}</span>
+                                    <div className="w-8 h-8 md:w-14 md:h-14 bg-slate-50 rounded-lg md:rounded-2xl flex items-center justify-center mb-3 md:mb-6 group-hover:bg-primary transition-all duration-500 shadow-sm">
+                                        <span className="material-icons text-slate-400 group-hover:text-white text-base md:text-2xl">{card.icon}</span>
                                     </div>
-                                    <h3 className="text-lg md:text-xl font-bold text-slate-900 mb-2 uppercase tracking-tighter group-hover:text-primary transition-colors">{card.title}</h3>
-                                    <p className="text-slate-500 text-xs leading-relaxed mb-4 md:mb-6 font-medium italic">{card.desc}</p>
-                                    <div className="flex items-center gap-3 text-primary group-hover:gap-5 transition-all cursor-pointer">
-                                        <span className="text-[9px] font-black uppercase tracking-[0.3em]">Discuss Project</span>
-                                        <span className="material-icons text-[12px]">east</span>
+                                    <h3 className="text-base md:text-2xl font-black text-slate-900 mb-1 md:mb-3 uppercase tracking-tighter group-hover:text-primary transition-colors">{card.title}</h3>
+                                    <p className="text-slate-500 text-[10px] md:text-sm leading-relaxed mb-3 md:mb-8 font-medium italic">{card.desc}</p>
+                                    <div className="flex items-center gap-2 text-primary group-hover:gap-5 transition-all text-xs font-black uppercase tracking-widest">
+                                        <span>Discuss Project</span>
+                                        <span className="material-icons text-sm">east</span>
                                     </div>
                                 </div>
                             ))}
@@ -141,11 +162,11 @@ const ContactUs = ({ isHomePage = false }) => {
 
             {/* --- THREE COLUMN INTERACTION (Scroll Animation) --- */}
             <motion.div
-                initial={{ opacity: 0, y: 120 }}
+                initial={{ opacity: 0, y: 60 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false, margin: "-100px" }}
+                viewport={{ once: false, margin: "-50px" }}
                 transition={{ duration: 1, ease: "easeOut" }}
-                className={`bg-[#062929] w-full ${isHomePage ? 'min-h-[60vh] md:min-h-screen py-10 md:py-16' : 'min-h-[50vh] md:min-h-[70vh] py-8 md:py-12'} flex items-center relative lg:py-16`}
+                className={`bg-[#062929] w-full ${isHomePage ? 'min-h-[50vh] md:min-h-screen py-8 md:py-16' : 'min-h-[40vh] md:min-h-[70vh] py-6 md:py-12'} flex items-center relative lg:py-16`}
             >
                 <div className="max-w-[1700px] mx-auto px-4 sm:px-10 lg:px-24 w-full">
                     <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr_1.2fr] gap-8 md:gap-12 lg:gap-20 items-center">
@@ -184,31 +205,79 @@ const ContactUs = ({ isHomePage = false }) => {
                         </div>
 
                         {/* Right: Contact Form */}
-                        <div className="flex flex-col justify-center mt-4 md:mt-0">
+                        <div id="contact-form" className="flex flex-col justify-center mt-4 md:mt-0">
                             <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-white mb-6 md:mb-10 tracking-tighter uppercase">Message</h2>
-                            <form className="space-y-4 md:space-y-10">
-                                <div className="space-y-1.5 md:space-y-4">
-                                    <label className="text-[9px] md:text-[10px] font-black uppercase text-slate-400 tracking-widest ml-1">Full Name</label>
-                                    <input
-                                        type="text"
-                                        placeholder="Your Name"
-                                        className="w-full p-3 md:p-6 rounded-lg md:rounded-2xl bg-white/5 border border-white/5 text-white outline-none focus:border-primary/50 transition-all text-xs md:text-sm font-medium placeholder:text-slate-600 shadow-inner"
-                                    />
+                            <form onSubmit={handleSend} className="space-y-4 md:space-y-6 lg:space-y-10">
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 lg:gap-10">
+                                    <div className="space-y-1.5 md:space-y-4">
+                                        <label className="text-[9px] md:text-[10px] font-black uppercase text-slate-400 tracking-widest ml-1">Full Name</label>
+                                        <input
+                                            required
+                                            type="text"
+                                            placeholder="Your Name"
+                                            className="w-full p-3 md:p-6 rounded-lg md:rounded-2xl bg-white/5 border border-white/5 text-white outline-none focus:border-primary/50 transition-all text-xs md:text-sm font-medium placeholder:text-slate-600 shadow-inner"
+                                        />
+                                    </div>
+                                    <div className="space-y-1.5 md:space-y-4">
+                                        <label className="text-[9px] md:text-[10px] font-black uppercase text-slate-400 tracking-widest ml-1">Phone</label>
+                                        <input
+                                            required
+                                            type="tel"
+                                            placeholder="+91 0000..."
+                                            className="w-full p-3 md:p-6 rounded-lg md:rounded-2xl bg-white/5 border border-white/5 text-white outline-none focus:border-primary/50 transition-all text-xs md:text-sm font-medium placeholder:text-slate-600 shadow-inner"
+                                        />
+                                    </div>
                                 </div>
+
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 lg:gap-10">
+                                    <div className="space-y-1.5 md:space-y-4">
+                                        <label className="text-[9px] md:text-[10px] font-black uppercase text-slate-400 tracking-widest ml-1">Email Address</label>
+                                        <input
+                                            required
+                                            type="email"
+                                            placeholder="you@email.com"
+                                            className="w-full p-3 md:p-6 rounded-lg md:rounded-2xl bg-white/5 border border-white/5 text-white outline-none focus:border-primary/50 transition-all text-xs md:text-sm font-medium placeholder:text-slate-600 shadow-inner"
+                                        />
+                                    </div>
+                                    <div className="space-y-1.5 md:space-y-4">
+                                        <label className="text-[10px] md:text-[10px] font-black uppercase text-slate-400 tracking-widest ml-1">Reason</label>
+                                        <div className="relative">
+                                            <select
+                                                required
+                                                className="w-full p-3 md:p-6 rounded-lg md:rounded-2xl bg-white/5 border border-white/5 text-white outline-none focus:border-primary/50 transition-all text-xs md:text-sm font-medium appearance-none cursor-pointer shadow-inner"
+                                            >
+                                                <option value="" disabled selected className="bg-[#062929]">Select reason</option>
+                                                <option value="project" className="bg-[#062929]">New Project</option>
+                                                <option value="partnership" className="bg-[#062929]">Partnership</option>
+                                                <option value="career" className="bg-[#062929]">Careers</option>
+                                                <option value="other" className="bg-[#062929]">General</option>
+                                            </select>
+                                            <span className="material-icons absolute right-4 md:right-6 top-1/2 -translate-y-1/2 text-slate-500 pointer-events-none">expand_more</span>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div className="space-y-1.5 md:space-y-4">
                                     <label className="text-[9px] md:text-[10px] font-black uppercase text-slate-400 tracking-widest ml-1">Message</label>
                                     <textarea
+                                        required
                                         placeholder="How can we help?"
-                                        rows="3"
+                                        rows="2"
                                         className="w-full p-3 md:p-6 rounded-lg md:rounded-2xl bg-white/5 border border-white/5 text-white outline-none focus:border-primary/50 transition-all text-xs md:text-sm font-medium placeholder:text-slate-600 resize-none shadow-inner"
                                     ></textarea>
                                 </div>
                                 <motion.button
                                     whileHover={{ scale: 1.02, y: -2 }}
                                     whileTap={{ scale: 0.98 }}
-                                    className="w-full py-3 md:py-5 bg-white text-[#062929] rounded-lg md:rounded-[1.5rem] font-bold uppercase tracking-[0.2em] md:tracking-[0.25em] text-[9px] md:text-[10px] flex items-center justify-center gap-3 md:gap-5 mt-4 md:mt-6 border border-white/5 shadow-2xl hover:bg-primary transition-all duration-500"
+                                    disabled={status !== 'idle'}
+                                    type="submit"
+                                    className={`w-full py-3 md:py-5 rounded-lg md:rounded-2xl font-bold uppercase tracking-[0.2em] md:tracking-[0.25em] text-[10px] md:text-xs flex items-center justify-center gap-3 md:gap-5 mt-2 md:mt-4 border border-white/5 shadow-2xl transition-all duration-500 ${status === 'idle' ? 'bg-white text-[#062929] hover:bg-primary' :
+                                        status === 'sending' ? 'bg-slate-700 text-slate-400 cursor-not-allowed animate-pulse' : 'bg-green-500 text-white'
+                                        }`}
                                 >
-                                    SEND INQUIRY <span className="material-icons text-sm md:text-xl">near_me</span>
+                                    {status === 'idle' && <>SEND INQUIRY <span className="material-icons text-sm md:text-xl">near_me</span></>}
+                                    {status === 'sending' && <>SENDING... <span className="material-icons text-sm md:text-xl animate-spin">sync</span></>}
+                                    {status === 'sent' && <>SUCCESS! <span className="material-icons text-sm md:text-xl text-white">check_circle</span></>}
                                 </motion.button>
                             </form>
                         </div>
@@ -311,7 +380,10 @@ const ContactUs = ({ isHomePage = false }) => {
                                 />
                                 <h3 className="text-3xl font-semibold text-slate-900 uppercase tracking-tighter italic">Still Stuck?</h3>
                                 <p className="text-slate-500 text-sm mt-6 leading-relaxed mb-10 italic">Our global success managers are available around the clock to guide you.</p>
-                                <button className="text-primary font-black uppercase text-[11px] tracking-[0.3em] flex items-center gap-4 group">
+                                <button
+                                    onClick={() => document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' })}
+                                    className="text-primary font-black uppercase text-[11px] tracking-[0.3em] flex items-center gap-4 group"
+                                >
                                     HELP CENTER <span className="material-icons group-hover:translate-x-3 transition-transform text-lg">east</span>
                                 </button>
                             </motion.div>
@@ -320,6 +392,87 @@ const ContactUs = ({ isHomePage = false }) => {
                     )}
                 </motion.div>
             </div>
+
+            {/* --- SALES INQUIRY MODAL --- */}
+            <AnimatePresence>
+                {isSalesOpen && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed inset-0 z-[200] flex justify-center items-start md:items-center p-4 bg-slate-950/90 backdrop-blur-xl overflow-y-auto"
+                    >
+                        <motion.div
+                            initial={{ scale: 0.9, y: 20, opacity: 0 }}
+                            animate={{ scale: 1, y: 0, opacity: 1 }}
+                            exit={{ scale: 0.9, y: 20, opacity: 0 }}
+                            className="bg-white w-full max-w-2xl rounded-[1.5rem] md:rounded-[2.5rem] p-6 md:p-10 relative shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)] border border-slate-100 overflow-hidden my-4 md:my-0"
+                        >
+                            {/* Decorative Background for Modal */}
+                            <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+
+                            <div className="flex justify-between items-start mb-6 md:mb-8">
+                                <div>
+                                    <p className="text-primary font-black tracking-[0.4em] uppercase text-[9px] md:text-[10px] mb-1 md:mb-2">Lead Genesis</p>
+                                    <h2 className="text-2xl md:text-4xl font-black text-slate-900 tracking-tighter uppercase leading-none">Sales Inquiry</h2>
+                                </div>
+                                <button
+                                    onClick={() => setIsSalesOpen(false)}
+                                    className="w-8 h-8 md:w-12 md:h-12 rounded-full bg-slate-50 flex items-center justify-center text-slate-400 hover:bg-slate-900 hover:text-white transition-all shadow-sm"
+                                >
+                                    <span className="material-icons text-sm md:text-xl">close</span>
+                                </button>
+                            </div>
+
+                            <form className="space-y-3 md:space-y-6" onSubmit={(e) => { e.preventDefault(); alert('Lead Submitted Successfully!'); setIsSalesOpen(false); }}>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-6">
+                                    <div className="space-y-1 md:space-y-2">
+                                        <label className="text-[8px] md:text-[10px] font-black uppercase text-slate-400 tracking-widest ml-1 md:ml-2">Full Name</label>
+                                        <input required type="text" placeholder="John Doe" className="w-full px-4 py-2.5 md:py-4 bg-slate-50 border-2 border-slate-100 rounded-xl md:rounded-2xl focus:border-primary focus:bg-white outline-none transition-all text-[11px] md:text-sm font-bold placeholder:text-slate-300" />
+                                    </div>
+                                    <div className="space-y-1 md:space-y-2">
+                                        <label className="text-[8px] md:text-[10px] font-black uppercase text-slate-400 tracking-widest ml-1 md:ml-2">Company Name</label>
+                                        <input required type="text" placeholder="Appzeto Inc." className="w-full px-4 py-2.5 md:py-4 bg-slate-50 border-2 border-slate-100 rounded-xl md:rounded-2xl focus:border-primary focus:bg-white outline-none transition-all text-[11px] md:text-sm font-bold placeholder:text-slate-300" />
+                                    </div>
+                                </div>
+
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-6">
+                                    <div className="space-y-1 md:space-y-2">
+                                        <label className="text-[8px] md:text-[10px] font-black uppercase text-slate-400 tracking-widest ml-1 md:ml-2">Work Email</label>
+                                        <input required type="email" placeholder="john@company.com" className="w-full px-4 py-2.5 md:py-4 bg-slate-50 border-2 border-slate-100 rounded-xl md:rounded-2xl focus:border-primary focus:bg-white outline-none transition-all text-[11px] md:text-sm font-bold placeholder:text-slate-300" />
+                                    </div>
+                                    <div className="space-y-1 md:space-y-2">
+                                        <label className="text-[8px] md:text-[10px] font-black uppercase text-slate-400 tracking-widest ml-1 md:ml-2">Project Type</label>
+                                        <select required className="w-full px-4 py-2.5 md:py-4 bg-slate-50 border-2 border-slate-100 rounded-xl md:rounded-2xl focus:border-primary focus:bg-white outline-none transition-all text-[11px] md:text-sm font-bold appearance-none cursor-pointer">
+                                            <option value="" disabled selected>Select service</option>
+                                            <option value="web">Web Ecosystem</option>
+                                            <option value="mobile">Mobile App</option>
+                                            <option value="ai">AI Integration</option>
+                                            <option value="enterprise">Enterprise Infra</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div className="space-y-1 md:space-y-2">
+                                    <label className="text-[8px] md:text-[10px] font-black uppercase text-slate-400 tracking-widest ml-1 md:ml-2">Estimated Budget</label>
+                                    <select required className="w-full px-4 py-2.5 md:py-4 bg-slate-50 border-2 border-slate-100 rounded-xl md:rounded-2xl focus:border-primary focus:bg-white outline-none transition-all text-[11px] md:text-sm font-bold appearance-none cursor-pointer">
+                                        <option value="" disabled selected>Select budget range</option>
+                                        <option value="5-10k">$5k - $10k</option>
+                                        <option value="10-25k">$10k - $25k</option>
+                                        <option value="25-50k">$25k - $50k</option>
+                                        <option value="50k+">$50k+</option>
+                                    </select>
+                                </div>
+
+                                <button type="submit" className="w-full py-3.5 md:py-5 bg-slate-950 text-white rounded-xl md:rounded-[1.5rem] font-black uppercase tracking-[0.3em] text-[10px] md:text-xs hover:bg-primary transition-all shadow-xl shadow-slate-200 mt-2">
+                                    Initiate Discussion
+                                </button>
+                                <p className="text-center text-[8px] md:text-[10px] text-slate-400 font-bold uppercase tracking-widest mt-4">Average response time: &lt; 24 Hours</p>
+                            </form>
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </section>
     );
 };

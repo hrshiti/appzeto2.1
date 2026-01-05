@@ -82,7 +82,7 @@ const Process = () => {
     }, []);
 
     return (
-        <section ref={containerRef} className="bg-white min-h-screen py-12 md:py-20 relative overflow-hidden flex flex-col justify-center" style={{ fontFamily: "'Playfair Display', serif" }}>
+        <section ref={containerRef} className="bg-white min-h-0 py-4 md:py-20 relative overflow-hidden flex flex-col justify-center" style={{ fontFamily: "'Playfair Display', serif" }}>
             {/* Background Decorations */}
             <div className="absolute top-0 left-0 w-full h-full pointer-events-none opacity-5">
                 <div className="absolute top-20 left-10 w-64 h-64 bg-[#cdbdae] rounded-full blur-[100px]" />
@@ -95,7 +95,7 @@ const Process = () => {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: false }}
                     transition={{ duration: 1, ease: "easeOut" }}
-                    className="text-left mb-10 md:mb-16"
+                    className="text-left mb-6 md:mb-16"
                 >
                     <p className="text-[#cdbdae] font-medium tracking-widest uppercase mb-2 text-xs md:text-base">Workflow</p>
                     <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-gray-900 mb-4 tracking-tight">How We Bring Your Ideas To Life</h2>

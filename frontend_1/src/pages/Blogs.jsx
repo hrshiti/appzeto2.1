@@ -165,21 +165,33 @@ const Blogs = () => {
                         </h2>
                     </div>
 
-                    <div className="flex flex-col md:flex-row items-start gap-6 md:gap-10">
-                        {/* Image 1 - Large & Main */}
-                        <div className="flex-[1.2] w-full h-[250px] md:h-[400px] relative rounded-[2rem] md:rounded-[3rem] overflow-hidden group shadow-2xl">
+                    {/* Mobile View: Automatic Slider */}
+                    <div className="md:hidden w-full overflow-hidden">
+                        <motion.div
+                            animate={{ x: ["0%", "-100%"] }}
+                            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                            className="flex gap-4 w-fit"
+                        >
+                            {[achImg1, achImg2, achImg3, achImg1, achImg2, achImg3].map((img, idx) => (
+                                <div key={idx} className="flex-shrink-0 w-[70vw] h-[220px] relative rounded-[2rem] overflow-hidden shadow-xl">
+                                    <img src={img} className="w-full h-full object-cover" alt={`Award ${idx}`} />
+                                    <div className="absolute inset-0 bg-black/20" />
+                                </div>
+                            ))}
+                        </motion.div>
+                    </div>
+
+                    {/* Desktop View: Staggered Layout */}
+                    <div className="hidden md:flex flex-row items-start gap-10">
+                        <div className="flex-[1.2] w-full h-[400px] relative rounded-[3rem] overflow-hidden group shadow-2xl">
                             <img src={achImg1} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000" alt="Awards 1" />
                             <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all" />
                         </div>
-
-                        {/* Image 2 - Medium & Staggered Down */}
-                        <div className="flex-1 w-full h-[200px] md:h-[300px] md:mt-24 relative rounded-[2rem] md:rounded-[3rem] overflow-hidden group shadow-2xl">
+                        <div className="flex-1 w-full h-[300px] mt-24 relative rounded-[3rem] overflow-hidden group shadow-2xl">
                             <img src={achImg2} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000" alt="Awards 2" />
                             <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all" />
                         </div>
-
-                        {/* Image 3 - Small & Staggered Mid */}
-                        <div className="flex-1 w-full h-[220px] md:h-[340px] md:mt-8 relative rounded-[2rem] md:rounded-[3rem] overflow-hidden group shadow-2xl">
+                        <div className="flex-1 w-full h-[340px] mt-8 relative rounded-[3rem] overflow-hidden group shadow-2xl">
                             <img src={achImg3} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000" alt="Awards 3" />
                             <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all" />
                         </div>

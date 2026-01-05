@@ -121,7 +121,7 @@ const Stats = () => {
             <div className="absolute bottom-0 right-1/4 w-[250px] md:w-[400px] h-[250px] md:h-[400px] bg-[#05a4a7]/5 rounded-full blur-[80px] md:blur-[120px] pointer-events-none animate-pulse" style={{ animationDelay: '2s' }} />
 
             <div className="max-w-7xl mx-auto px-4 sm:px-8 relative z-10">
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
                     {stats.map((stat, index) => (
                         <StatItem
                             key={index}

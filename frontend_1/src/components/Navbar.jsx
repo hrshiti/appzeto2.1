@@ -15,15 +15,31 @@ const NAV_ITEMS = [
         path: "/services",
         description: "End-to-end development and specialized services.",
         items: [
-            { label: "Website", link: "/services/website" },
-            { label: "Web App", link: "/services/web-app" },
-            { label: "Mobile Application", link: "/services/mobile-application" },
-            { label: "UI/UX Design", link: "/services/ui-ux-design" },
-            { label: "Maintenance", link: "/services/maintenance" },
-            { label: "Digital Marketing", link: "/services/digital-marketing" },
-            { label: "SEO Services", link: "/services/seo-services" },
-            { label: "Logo Design", link: "/services/logo-design" },
-            { label: "Graphic Design", link: "/services/graphic-design" }
+            { label: "Web Development", link: "/services#web-dev" },
+            { label: "App Development", link: "/services#app-dev" },
+            { label: "AI & Machine Learning", link: "/services#ai-ml" },
+            { label: "DevOps & Cloud", link: "/services#devops" }
+        ]
+    },
+    {
+        title: "Projects",
+        path: "/projects",
+        description: "A showcase of our most ambitious digital transformations.",
+        items: [
+            { label: "Logistics", link: "/projects" },
+            { label: "Fintech", link: "/projects" },
+            { label: "Healthcare", link: "/projects" },
+            { label: "AI Solutions", link: "/projects" }
+        ]
+    },
+    {
+        title: "About Us",
+        path: "/about",
+        description: "Learn about our mission, vision, and the team behind Appzeto.",
+        items: [
+            { label: "Our Story", link: "/about#we-are-appzeto" },
+            { label: "Why Choose Us", link: "/about#why-choose-us" },
+            { label: "Meet Team", link: "/about#meet-our-team" }
         ]
     },
     {
@@ -173,7 +189,7 @@ const Navbar = () => {
                                                     </Link>
                                                 </div>
                                                 <div className="w-3/4 pl-8">
-                                                    <div className="grid grid-cols-3 gap-y-4 gap-x-8">
+                                                    <div className="grid grid-cols-2 gap-y-4 gap-x-8">
                                                         {navItem.items.map((subItem, subIndex) => (
                                                             <Link
                                                                 key={subIndex}

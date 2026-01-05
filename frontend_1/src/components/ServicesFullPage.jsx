@@ -63,6 +63,29 @@ const ServicesFullPage = () => {
         return () => observer.disconnect();
     }, []);
 
+    // Handle hash on initial load and changes
+    useEffect(() => {
+        const handleHashScroll = () => {
+            const hash = window.location.hash;
+            if (hash) {
+                const id = hash.replace('#', '');
+                const el = document.getElementById(id);
+                if (el) {
+                    // Check if we just loaded the page or if it's an internal click
+                    const behavior = 'smooth';
+                    el.scrollIntoView({ behavior });
+                }
+            }
+        };
+
+        // Initial check
+        setTimeout(handleHashScroll, 100);
+
+        // Listen for hash changes
+        window.addEventListener('hashchange', handleHashScroll);
+        return () => window.removeEventListener('hashchange', handleHashScroll);
+    }, []);
+
     // Scroll specific section into view
     const scrollToSection = (id) => {
         const el = document.getElementById(id);

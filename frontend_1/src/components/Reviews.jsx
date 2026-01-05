@@ -28,34 +28,93 @@ const Reviews = () => {
         transition: { ...variant.transition, delay }
     });
 
+    const testimonials = [
+        { id: 1, name: "Victoria Linton", role: "@Victoria", text: "Praesent urna neque viverra justo ultrices dui. Est lorem ipsum dolor sit amet consectetur adipiscing.", stars: 5, img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" },
+        { id: 2, name: "Fanny Dean", role: "@Fanny", text: "A scelerisque purus semper eget duis at tellus. Amet cursus sit amet dictum sit justo. Varius sit amet.", stars: 5, img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80" },
+        { id: 3, name: "Client Review", role: "@ArtfulWootton", text: "Rhoncus neque viverra justo ultrices duist lorem dolor sed consect adipiscing.", stars: 4, img: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" },
+        { id: 4, name: "Dmitri Woodhouse", role: "@Dmitri", text: "Mauris in aliquam se fringilla morbi tincidunt augue amet dui massa.", stars: 5, img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" },
+        { id: 5, name: "Nelly Vane", role: "@Nelly", text: "Varius duis at consectetur lorem donec. Et tortor at risus viverra.", stars: 5, img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" },
+        { id: 6, name: "Hindley Micawber", role: "@Hindley", text: "Rhoncus urna neque viverra justo nec ultrices dui. Est lorem ipsum dolor.", stars: 5, img: "https://images.unsplash.com/photo-1544725176-7c40e5a71c5e?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" },
+        { id: 7, name: "Catherine Doe", role: "@Catherine", text: "In hac habitasse platea dictumst quisque sagittis pur convallis.", stars: 5, img: "https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" },
+        { id: 8, name: "Jane Prokofich", role: "@Jane", text: "Vestibulum mattis enim aulit tortor se ullamcorper morbi pretium", stars: 5, img: "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" },
+    ];
+
+    const row1 = [...testimonials.slice(0, 4), ...testimonials.slice(0, 4)];
+    const row2 = [...testimonials.slice(4, 8), ...testimonials.slice(4, 8)];
+
     return (
-        <section className="bg-[#cdbdae] py-8 md:py-24 font-serif overflow-hidden">
+        <section className="bg-[#cdbdae] py-12 md:py-24 font-serif overflow-hidden">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: false }}
-                    className="text-center mb-6 md:mb-12"
+                    className="text-center mb-10 md:mb-12"
                 >
                     <p className="text-white/80 font-medium tracking-widest uppercase mb-2 text-xs md:text-base">Testimonials</p>
-                    <h2 className="text-2xl md:text-5xl font-bold text-white mb-4 md:mb-6">What Our Clients Say</h2>
+                    <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 md:mb-6">What Our Clients Say</h2>
                 </motion.div>
 
-                <div className="grid grid-cols-1 md:grid-cols-12 gap-3 md:gap-6 auto-rows-min">
+                {/* Mobile View: Sliding Rows */}
+                <div className="md:hidden space-y-4">
+                    <div className="flex overflow-hidden">
+                        <motion.div
+                            animate={{ x: [0, -1000] }}
+                            transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+                            className="flex space-x-4 pr-4"
+                        >
+                            {row1.map((item, idx) => (
+                                <div key={idx} className="flex-shrink-0 w-72 bg-white rounded-2xl p-4 shadow-md">
+                                    <div className="flex items-center space-x-3 mb-2">
+                                        <img src={item.img} className="w-8 h-8 rounded-full object-cover" alt="" />
+                                        <div>
+                                            <h4 className="text-xs font-bold text-gray-900">{item.name}</h4>
+                                            <div className="flex text-yellow-400 text-[8px]">{'★'.repeat(item.stars)}</div>
+                                        </div>
+                                    </div>
+                                    <p className="text-[10px] text-gray-500 leading-relaxed line-clamp-3 italic">"{item.text}"</p>
+                                </div>
+                            ))}
+                        </motion.div>
+                    </div>
 
+                    <div className="flex overflow-hidden">
+                        <motion.div
+                            animate={{ x: [-1000, 0] }}
+                            transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+                            className="flex space-x-4 pr-4"
+                        >
+                            {row2.map((item, idx) => (
+                                <div key={idx} className="flex-shrink-0 w-72 bg-white rounded-2xl p-4 shadow-md">
+                                    <div className="flex items-center space-x-3 mb-2">
+                                        <img src={item.img} className="w-8 h-8 rounded-full object-cover" alt="" />
+                                        <div>
+                                            <h4 className="text-xs font-bold text-gray-900">{item.name}</h4>
+                                            <div className="flex text-yellow-400 text-[8px]">{'★'.repeat(item.stars)}</div>
+                                        </div>
+                                    </div>
+                                    <p className="text-[10px] text-gray-500 leading-relaxed line-clamp-3 italic">"{item.text}"</p>
+                                </div>
+                            ))}
+                        </motion.div>
+                    </div>
+                </div>
+
+                {/* Desktop View: Static Grid (Existing Design) */}
+                <div className="hidden md:grid grid-cols-12 gap-6 auto-rows-min">
                     {/* 1. Victoria Linton (Left) */}
                     <motion.div
                         {...delayed(slideInLeft, 0.1)}
-                        className="md:col-span-4 bg-white rounded-[1.5rem] md:rounded-[2rem] p-5 md:p-6 relative shadow-lg"
+                        className="col-span-4 bg-white rounded-[2rem] p-6 relative shadow-lg"
                     >
                         <div className="flex items-center space-x-4 mb-3">
                             <img
                                 src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80"
                                 alt="Victoria"
-                                className="w-10 h-10 md:w-12 md:h-12 rounded-full object-cover"
+                                className="w-12 h-12 rounded-full object-cover"
                             />
                             <div>
-                                <h3 className="font-bold text-gray-900 font-sans text-sm md:text-base">Victoria Linton</h3>
+                                <h3 className="font-bold text-gray-900 font-sans text-base">Victoria Linton</h3>
                                 <div className="flex text-yellow-400 text-xs">
                                     {'★★★★★'.split('').map((c, i) => <span key={i}>{c}</span>)}
                                 </div>
@@ -64,16 +123,16 @@ const Reviews = () => {
                         <p className="text-gray-500 text-xs leading-relaxed font-sans mb-4">
                             Praesent urna neque viverra justo ultrices dui. Est lorem ipsum dolor sit amet consectetur adipiscing. Vitae nunc sed velit dignissim. In hendrerit gravida.
                         </p>
-                        <span className="absolute top-4 right-6 text-gray-300 text-4xl md:text-5xl font-serif">”</span>
+                        <span className="absolute top-4 right-6 text-gray-300 text-5xl font-serif">”</span>
                     </motion.div>
 
                     {/* 2. Center Large Card (Center) */}
                     <motion.div
                         {...slideInUp}
-                        className="md:col-span-4 md:row-span-2 bg-white rounded-[2rem] md:rounded-[2.5rem] p-6 md:p-8 text-center flex flex-col items-center justify-center shadow-xl relative mt-6 md:mt-0"
+                        className="col-span-4 row-span-2 bg-white rounded-[2.5rem] p-8 text-center flex flex-col items-center justify-center shadow-xl relative"
                     >
                         <div className="absolute -top-10">
-                            <div className="w-16 h-16 md:w-20 md:h-20 rounded-full p-1 bg-[#cdbdae]">
+                            <div className="w-20 h-20 rounded-full p-1 bg-[#cdbdae]">
                                 <img
                                     src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80"
                                     alt="Excellent Job"
@@ -81,23 +140,23 @@ const Reviews = () => {
                                 />
                             </div>
                         </div>
-                        <h3 className="font-serif text-lg md:text-xl font-bold text-gray-900 mt-6 md:mt-8 mb-2 uppercase tracking-wide">Excellent Job!</h3>
+                        <h3 className="font-serif text-xl font-bold text-gray-900 mt-8 mb-2 uppercase tracking-wide">Excellent Job!</h3>
                         <div className="flex text-gray-300 text-sm mb-4">
                             {'★★★★★'.split('').map((c, i) => <span key={i}>{c}</span>)}
                         </div>
-                        <p className="text-gray-500 text-xs md:text-sm leading-relaxed italic mb-4 md:mb-6">
+                        <p className="text-gray-500 text-sm leading-relaxed italic mb-6">
                             "A scelerisque purus semper eget duis at tellus. Amet cursus sit amet dictum sit justo. Varius sit amet."
                         </p>
-                        <div className="font-handwriting text-2xl md:text-3xl text-gray-400 rotate-[-5deg]">Fanny Dean</div>
+                        <div className="font-handwriting text-3xl text-gray-400 rotate-[-5deg]">Fanny Dean</div>
                     </motion.div>
 
                     {/* 3. Client Review (Right) */}
                     <motion.div
                         {...delayed(slideInRight, 0.1)}
-                        className="md:col-span-4 bg-white rounded-3xl p-5 md:p-6 shadow-lg"
+                        className="col-span-4 bg-white rounded-3xl p-6 shadow-lg"
                     >
                         <div className="flex justify-between items-start mb-2">
-                            <h3 className="font-bold text-gray-900 font-serif text-sm md:text-base">Client Review</h3>
+                            <h3 className="font-bold text-gray-900 font-serif text-base">Client Review</h3>
                             <span className="text-xs text-gray-400">@ArtfulWootton</span>
                         </div>
                         <p className="text-gray-500 text-xs italic mb-4">
@@ -116,16 +175,16 @@ const Reviews = () => {
                     {/* 4. Dimitri Woodhouse (Left) */}
                     <motion.div
                         {...delayed(slideInLeft, 0.2)}
-                        className="md:col-span-4 bg-white rounded-full p-2 pr-6 md:pr-8 shadow-lg flex items-center mt-2 md:mt-4"
+                        className="col-span-4 bg-white rounded-full p-2 pr-8 shadow-lg flex items-center mt-4"
                     >
-                        <div className="flex-1 pl-4 md:pl-8 py-2">
-                            <p className="text-gray-500 text-[10px] md:text-xs italic mb-1 line-clamp-2 md:line-clamp-none">
+                        <div className="flex-1 pl-8 py-2">
+                            <p className="text-gray-500 text-xs italic mb-1">
                                 "Mauris in aliquam se fringilla morbi tincidunt augue amet dui massa"
                             </p>
                             <div className="flex items-center justify-between">
                                 <div>
-                                    <h4 className="font-bold text-gray-900 text-[10px] md:text-xs uppercase">Dmitri Woodhouse</h4>
-                                    <span className="text-[9px] md:text-[10px] text-gray-400">@yournamehere</span>
+                                    <h4 className="font-bold text-gray-900 text-xs uppercase">Dmitri Woodhouse</h4>
+                                    <span className="text-[10px] text-gray-400">@yournamehere</span>
                                 </div>
                                 <div className="flex text-yellow-400 text-[10px]">
                                     {'★★★★★'.split('').map((c, i) => <span key={i}>{c}</span>)}
@@ -135,41 +194,41 @@ const Reviews = () => {
                         <img
                             src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80"
                             alt="Dmitri"
-                            className="w-12 h-12 md:w-16 md:h-16 rounded-full object-cover border-4 border-[#cdbdae]"
+                            className="w-16 h-16 rounded-full object-cover border-4 border-[#cdbdae]"
                         />
                     </motion.div>
 
                     {/* 5. Nelly Vane (Right) */}
                     <motion.div
                         {...delayed(slideInRight, 0.2)}
-                        className="md:col-span-4 bg-white rounded-full p-2 pl-2 shadow-lg flex items-center relative mt-2 md:mt-4"
+                        className="col-span-4 bg-white rounded-full p-2 pl-2 shadow-lg flex items-center relative mt-4"
                     >
                         <img
                             src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80"
                             alt="Nelly"
-                            className="w-12 h-12 md:w-16 md:h-16 rounded-full object-cover border-4 border-gray-100"
+                            className="w-16 h-16 rounded-full object-cover border-4 border-gray-100"
                         />
                         <div className="flex-1 px-4">
-                            <h3 className="font-serif font-bold text-gray-900 text-xs md:text-sm">NELLY VANE</h3>
-                            <p className="text-[9px] md:text-[10px] text-gray-500 leading-tight my-1">
+                            <h3 className="font-serif font-bold text-gray-900 text-sm">NELLY VANE</h3>
+                            <p className="text-[10px] text-gray-500 leading-tight my-1">
                                 Varius duis at consectetur lorem donec. Et tortor at risus viverra.
                             </p>
                             <div className="flex text-yellow-400 text-[10px]">
                                 {'★★★★★'.split('').map((c, i) => <span key={i}>{c}</span>)} <span className="text-gray-300 ml-1">(5.0)</span>
                             </div>
                         </div>
-                        <div className="absolute -top-2 -right-2 bg-[#9D8F8F] w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center text-white border-4 border-[#cdbdae]">
-                            <span className="material-icons text-xs md:text-sm">thumb_up</span>
+                        <div className="absolute -top-2 -right-2 bg-[#9D8F8F] w-10 h-10 rounded-full flex items-center justify-center text-white border-4 border-[#cdbdae]">
+                            <span className="material-icons text-sm">thumb_up</span>
                         </div>
                     </motion.div>
 
                     {/* 6. Top-notch (Left) */}
                     <motion.div
                         {...delayed(slideInLeft, 0.3)}
-                        className="md:col-span-3 bg-white rounded-3xl p-5 md:p-6 shadow-lg flex flex-col justify-between mt-2 md:mt-4"
+                        className="col-span-3 bg-white rounded-3xl p-6 shadow-lg flex flex-col justify-between mt-4"
                     >
                         <div className="text-center">
-                            <h3 className="font-serif font-bold text-lg md:text-xl text-gray-900 mb-2">Top-notch!</h3>
+                            <h3 className="font-serif font-bold text-xl text-gray-900 mb-2">Top-notch!</h3>
                             <p className="text-gray-500 text-xs mb-4">
                                 Rhoncus urna neque viverra justo nec ultrices dui. Est lorem ipsum dolor.
                             </p>
@@ -193,18 +252,18 @@ const Reviews = () => {
                     {/* 7. Testimonial (Center-Left) */}
                     <motion.div
                         {...delayed(slideInLeft, 0.35)}
-                        className="md:col-span-3 bg-white rounded-3xl p-5 md:p-6 shadow-lg flex flex-col relative mt-2 md:mt-4"
+                        className="col-span-3 bg-white rounded-3xl p-6 shadow-lg flex flex-col relative mt-4"
                     >
                         <div className="flex items-start space-x-3 mb-4">
                             <div className="bg-[#cdbdae] p-1 rounded-full">
                                 <img
                                     src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80"
                                     alt="Testimonial"
-                                    className="w-10 h-10 md:w-12 md:h-12 rounded-full object-cover"
+                                    className="w-12 h-12 rounded-full object-cover"
                                 />
                             </div>
                             <div>
-                                <h4 className="font-serif font-bold text-gray-900 text-sm md:text-base">TESTIMONIAL</h4>
+                                <h4 className="font-serif font-bold text-gray-900 text-base">TESTIMONIAL</h4>
                                 <p className="text-xs text-gray-500 mt-1 italic">
                                     "In hac habitasse platea dictumst quisque sagittis pur convallis."
                                 </p>
@@ -212,7 +271,7 @@ const Reviews = () => {
                         </div>
                         <div className="mt-auto text-right">
                             <span className="text-gray-400 font-bold text-xs">@CatherineDoe</span>
-                            <div className="flex justify-end text-[#cdbdae] text-base md:text-lg mt-1">★★★★★</div>
+                            <div className="flex justify-end text-[#cdbdae] text-lg mt-1">★★★★★</div>
                         </div>
                         <div className="absolute -bottom-2 left-8 w-6 h-6 bg-white transform rotate-45"></div>
                     </motion.div>
@@ -220,13 +279,13 @@ const Reviews = () => {
                     {/* 8. Recommended (Center-Right) */}
                     <motion.div
                         {...delayed(slideInRight, 0.35)}
-                        className="md:col-span-3 bg-white rounded-3xl p-4 shadow-lg text-center mt-2 md:mt-4"
+                        className="col-span-3 bg-white rounded-3xl p-4 shadow-lg text-center mt-4"
                     >
                         <div className="relative mb-3">
                             <img
                                 src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80"
                                 alt="Rec"
-                                className="w-full h-20 md:h-24 object-cover rounded-xl grayscale opacity-80"
+                                className="w-full h-24 object-cover rounded-xl grayscale opacity-80"
                             />
                             <div className="absolute top-0 left-4 bg-[#cdbdae] text-white w-6 h-8 flex items-end justify-center pb-1 rounded-b-lg shadow-sm">
                                 <span className="text-xs">★</span>
@@ -242,27 +301,27 @@ const Reviews = () => {
                     {/* 9. Bubble Quote (Right) */}
                     <motion.div
                         {...delayed(slideInRight, 0.4)}
-                        className="md:col-span-3 flex flex-col justify-end mt-2 md:mt-4"
+                        className="col-span-3 flex flex-col justify-end mt-4"
                     >
-                        <div className="bg-white p-5 md:p-6 rounded-t-3xl rounded-br-3xl rounded-bl-none shadow-lg relative mb-4">
+                        <div className="bg-white p-6 rounded-t-3xl rounded-br-3xl rounded-bl-none shadow-lg relative mb-4">
                             <p className="text-xs text-gray-500 italic">
                                 "Vestibulum mattis enim aulit tortor se ullamcorper morbi pretium"
                             </p>
-                            <div className="text-right font-handwriting text-gray-400 mt-2 text-base md:text-lg">Jane</div>
+                            <div className="text-right font-handwriting text-gray-400 mt-2 text-lg">Jane</div>
                             <div className="text-right text-[10px] text-gray-300">@JaneProkofich</div>
-                            <span className="text-3xl md:text-4xl text-[#8E847F] absolute -bottom-4 left-4 font-serif">”</span>
+                            <span className="text-4xl text-[#8E847F] absolute -bottom-4 left-4 font-serif">”</span>
                         </div>
                         <div className="flex justify-end pr-4">
                             <img
                                 src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80"
                                 alt="Jane"
-                                className="w-8 h-8 md:w-10 md:h-10 rounded-full border-2 border-white shadow-md relative z-10"
+                                className="w-10 h-10 rounded-full border-2 border-white shadow-md relative z-10"
                             />
                         </div>
                     </motion.div>
-
                 </div>
             </div>
+
             <style>{`
                 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
                 .font-serif { font-family: 'Playfair Display', serif; }

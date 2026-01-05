@@ -9,6 +9,7 @@ import ServiceDetail from './pages/ServiceDetail'
 import Blogs from './pages/Blogs'
 import ChitChat from './pages/ChitChat'
 import Login from './pages/Login'
+import Projects from './pages/Projects'
 import TaxiProductShowcase from './pages/TaxiProductShowcase'
 import EcommerceProductShowcase from './pages/EcommerceProductShowcase'
 import HospitalProductShowcase from './pages/HospitalProductShowcase'
@@ -52,6 +53,7 @@ function App() {
             <Route path="/blogs" element={<Blogs />} />
             <Route path="/career" element={<Career />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/projects" element={<Projects />} />
             <Route path="/chit-chat" element={<ChitChat />} />
             <Route path="/login" element={<Login />} />
             <Route path="/appzeto-food" element={<ProductShowcase />} />
