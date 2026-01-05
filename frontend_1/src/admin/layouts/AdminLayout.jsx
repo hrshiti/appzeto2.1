@@ -13,7 +13,9 @@ import {
     Layers,
     MessageSquare,
     Globe,
-    UserPlus
+    UserPlus,
+    HelpCircle,
+    Mail
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import logo from '../../assets/logo.png';
@@ -76,8 +78,12 @@ const AdminLayout = () => {
                             <SidebarItem to="/admin/services" icon={Layers} label="Services" />
                             <SidebarItem to="/admin/projects" icon={Briefcase} label="Projects" />
                             <SidebarItem to="/admin/blogs" icon={FileText} label="Blogs" />
-                            <SectionLabel label="Sales & CRM" />
-                            <SidebarItem to="/admin/leads" icon={Users} label="Leads Pipeline" />
+
+                            <SectionLabel label="Forms & Leads" />
+                            <SidebarItem to="/admin/leads" icon={Mail} label="Contact Submissions" />
+                            <SidebarItem to="/admin/queries" icon={HelpCircle} label="Query Submissions" />
+
+                            <SectionLabel label="Communication" />
                             <SidebarItem to="/admin/messages" icon={MessageSquare} label="Inbox" />
 
                             <SectionLabel label="Organization" />
@@ -97,7 +103,7 @@ const AdminLayout = () => {
                                 <SidebarItem to="/hr/dashboard" icon={LayoutDashboard} label="Dashboard" />
                             )}
                             <SidebarItem to="/hr/jobs" icon={Briefcase} label="Job Openings" />
-                            <SidebarItem to="/hr/applications" icon={Users} label="Applications" />
+                            <SidebarItem to="/hr/applications" icon={Users} label="Job Applications" />
                         </>
                     )}
                 </div>
@@ -153,7 +159,12 @@ const AdminLayout = () => {
                                 <SidebarItem to="/admin/services" icon={Layers} label="Services" onClick={() => setIsMobileMenuOpen(false)} />
                                 <SidebarItem to="/admin/projects" icon={Briefcase} label="Projects" onClick={() => setIsMobileMenuOpen(false)} />
                                 <SidebarItem to="/admin/blogs" icon={FileText} label="Blogs" onClick={() => setIsMobileMenuOpen(false)} />
-                                <SidebarItem to="/admin/messages" icon={MessageSquare} label="Messages" onClick={() => setIsMobileMenuOpen(false)} />
+
+                                <SectionLabel label="Forms & Leads" />
+                                <SidebarItem to="/admin/leads" icon={Mail} label="Contact Submissions" onClick={() => setIsMobileMenuOpen(false)} />
+                                <SidebarItem to="/admin/queries" icon={HelpCircle} label="Query Submissions" onClick={() => setIsMobileMenuOpen(false)} />
+
+                                <SidebarItem to="/admin/messages" icon={MessageSquare} label="Inbox" onClick={() => setIsMobileMenuOpen(false)} />
 
                                 <SectionLabel label="Organization" />
                                 <SidebarItem to="/admin/team" icon={Users} label="Team" onClick={() => setIsMobileMenuOpen(false)} />
@@ -171,7 +182,7 @@ const AdminLayout = () => {
                                     <SidebarItem to="/hr/dashboard" icon={LayoutDashboard} label="Dashboard" onClick={() => setIsMobileMenuOpen(false)} />
                                 )}
                                 <SidebarItem to="/hr/jobs" icon={Briefcase} label="Job Openings" onClick={() => setIsMobileMenuOpen(false)} />
-                                <SidebarItem to="/hr/applications" icon={Users} label="Applications" onClick={() => setIsMobileMenuOpen(false)} />
+                                <SidebarItem to="/hr/applications" icon={Users} label="Job Applications" onClick={() => setIsMobileMenuOpen(false)} />
                             </>
                         )}
                     </div>

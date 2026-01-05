@@ -28,6 +28,7 @@ import AdminMessages from './admin/pages/AdminMessages'
 import AdminUsers from './admin/pages/AdminUsers'
 import HRDashboard from './admin/pages/HRDashboard'
 import AdminLeads from './admin/pages/AdminLeads'
+import AdminQueries from './admin/pages/AdminQueries'
 import HRJobs from './admin/pages/HRJobs'
 import HRApplications from './admin/pages/HRApplications'
 import AdminSettings from './admin/pages/AdminSettings'
@@ -75,6 +76,7 @@ function App() {
               <Route path="projects" element={<AdminProjects />} />
               <Route path="blogs" element={<AdminBlogs />} />
               <Route path="leads" element={<AdminLeads />} />
+              <Route path="queries" element={<AdminQueries />} />
               <Route path="messages" element={<AdminMessages />} />
               <Route path="users" element={<AdminUsers />} />
               <Route path="settings" element={<AdminSettings />} />
