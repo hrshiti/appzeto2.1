@@ -33,6 +33,7 @@ import AdminMessages from './admin/pages/AdminMessages'
 import AdminUsers from './admin/pages/AdminUsers'
 import HRDashboard from './admin/pages/HRDashboard'
 import AdminLeads from './admin/pages/AdminLeads'
+import AdminQueries from './admin/pages/AdminQueries'
 import HRJobs from './admin/pages/HRJobs'
 import HRApplications from './admin/pages/HRApplications'
 import AdminSettings from './admin/pages/AdminSettings'
@@ -45,26 +46,68 @@ function App() {
   return (
     <>
       <CustomCursor />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<AboutUs />} />
-        <Route path="/services" element={<Services />} />
-        <Route path="/services/:slug" element={<ServiceDetail />} />
-        <Route path="/blogs" element={<Blogs />} />
-        <Route path="/career" element={<Career />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/projects" element={<Projects />} />
-        <Route path="/projects/:slug" element={<ProjectDetail />} />
-        <Route path="/chit-chat" element={<ChitChat />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/appzeto-food" element={<ProductShowcase />} />
-        <Route path="/appzeto-taxi" element={<TaxiProductShowcase />} />
-        <Route path="/appzeto-ecommerce" element={<EcommerceProductShowcase />} />
-        <Route path="/appzeto-hospital" element={<HospitalProductShowcase />} />
-        <Route path="/channel-partners" element={<ChannelPartnersPage />} />
-        <Route path="/demo" element={<DemoCenter />} />
-        <Route path="/offices/:slug" element={<OfficeDetail />} />
-      </Routes>
+      <ToastProvider>
+        <AdminAuthProvider>
+          <Routes>
+            {/* Public Routes */}
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<AboutUs />} />
+            <Route path="/services" element={<Services />} />
+            <Route path="/services/:slug" element={<ServiceDetail />} />
+            <Route path="/blogs" element={<Blogs />} />
+            <Route path="/career" element={<Career />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/projects" element={<Projects />} />
+            <Route path="/projects/:slug" element={<ProjectDetail />} />
+            <Route path="/chit-chat" element={<ChitChat />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/appzeto-food" element={<ProductShowcase />} />
+            <Route path="/appzeto-taxi" element={<TaxiProductShowcase />} />
+            <Route path="/appzeto-ecommerce" element={<EcommerceProductShowcase />} />
+            <Route path="/appzeto-hospital" element={<HospitalProductShowcase />} />
+            <Route path="/channel-partners" element={<ChannelPartnersPage />} />
+            <Route path="/demo" element={<DemoCenter />} />
+            <Route path="/offices/:slug" element={<OfficeDetail />} />
+
+            {/* Admin Authentication */}
+            <Route path="/admin/login" element={<AdminLogin />} />
+
+            {/* Admin Routes (Restricted to ADMIN role only) */}
+            <Route path="/admin" element={
+              <ProtectedAdminRoute requiredRole="ADMIN">
+                <AdminLayout />
+              </ProtectedAdminRoute>
+            }>
+              <Route index element={<Navigate to="dashboard" replace />} />
+              <Route path="dashboard" element={<AdminDashboard />} />
+              <Route path="services" element={<AdminServices />} />
+
+
+              <Route path="projects" element={<AdminProjects />} />
+              <Route path="blogs" element={<AdminBlogs />} />
+              <Route path="leads" element={<AdminLeads />} />
+              <Route path="queries" element={<AdminQueries />} />
+              <Route path="messages" element={<AdminMessages />} />
+              <Route path="users" element={<AdminUsers />} />
+              <Route path="settings" element={<AdminSettings />} />
+              <Route path="team" element={<AdminTeam />} />
+            </Route>
+
+            {/* HR Routes (Accessible by HR and ADMIN) */}
+            <Route path="/hr" element={
+              <ProtectedAdminRoute requiredRole="HR">
+                <AdminLayout />
+              </ProtectedAdminRoute>
+            }>
+              <Route index element={<Navigate to="dashboard" replace />} />
+              <Route path="dashboard" element={<HRDashboard />} />
+              <Route path="jobs" element={<HRJobs />} />
+              <Route path="applications" element={<HRApplications />} />
+            </Route>
+
+          </Routes>
+        </AdminAuthProvider>
+      </ToastProvider>
     </>
   )
 }

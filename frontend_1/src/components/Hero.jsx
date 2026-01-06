@@ -107,7 +107,7 @@ const Hero = () => {
                 </div>
             </main>
             <section className="border-y border-gray-200 dark:border-gray-800 bg-primary/5 dark:bg-primary/10 overflow-hidden py-3 sm:py-4">
-                <div className="flex animate-scroll whitespace-nowrap group">
+                <div className="flex animate-scroll-fast sm:animate-scroll whitespace-nowrap group">
                     {[
                         { icon: 'web', label: 'Web Dev' },
                         { icon: 'smartphone', label: 'App Dev' },
