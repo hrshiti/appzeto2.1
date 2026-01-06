@@ -6,6 +6,7 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import ScrollWrapper from '../components/ScrollWrapper';
 import ContactUs from '../components/ContactUs';
+import ProductReviews from '../components/ProductReviews';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -310,6 +311,8 @@ const EcommerceProductShowcase = () => {
                         <button className="px-8 md:px-10 py-4 md:py-5 bg-[#4F46E5] text-white font-black rounded-full text-base md:text-lg shadow-xl hover:scale-105 transition-all outline outline-4 outline-[#4F46E5]/30">Start Free Trial</button>
                     </div>
                 </section>
+
+                <ProductReviews color="#4F46E5" />
 
                 <ContactUs isHomePage={true} />
                 <Footer />

@@ -7,6 +7,7 @@ import ContactUs from '../components/ContactUs';
 import Footer from '../components/Footer';
 import ScrollReveal from '../components/ScrollReveal';
 import ScrollWrapper from '../components/ScrollWrapper';
+import ProductReviews from '../components/ProductReviews';
 
 import heroImage from '../assets/appzeto-food-hero.jpg';
 import floatingImage1 from '../assets/appzeto-food-1.jpg';
@@ -237,6 +238,9 @@ const ProductShowcase = () => {
 
                 {/* Modern Interactive Features Section */}
                 <ModernInteractiveFeatures />
+
+                {/* Reviews Section */}
+                <ProductReviews color="#EF7F1A" />
 
                 {/* Background decorative elements */}
                 <motion.div style={{ y: yText }} className="absolute top-10 left-10 text-gray-200 text-6xl md:text-9xl font-black opacity-10 select-none z-0">FOOD</motion.div>

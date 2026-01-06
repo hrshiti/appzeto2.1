@@ -72,7 +72,7 @@ const Hero = () => {
                                     Explore Services
                                     <span className="material-icons ml-2 group-hover:translate-x-1 transition-transform">arrow_forward</span>
                                 </Link>
-                                <Link to="/services/web-app" className="inline-flex justify-center items-center px-4 py-3 sm:px-8 sm:py-4 bg-white dark:bg-surface-dark text-gray-700 dark:text-gray-200 font-semibold rounded-xl border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors duration-300 text-sm sm:text-lg">
+                                <Link to="/demo" className="inline-flex justify-center items-center px-4 py-3 sm:px-8 sm:py-4 bg-white dark:bg-surface-dark text-gray-700 dark:text-gray-200 font-semibold rounded-xl border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors duration-300 text-sm sm:text-lg">
                                     <span className="material-icons mr-2 text-primary">play_circle_filled</span>
                                     Watch Demo
                                 </Link>

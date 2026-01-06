@@ -6,6 +6,7 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import ScrollWrapper from '../components/ScrollWrapper';
 import ContactUs from '../components/ContactUs';
+import ProductReviews from '../components/ProductReviews';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -652,35 +653,7 @@ const TaxiProductShowcase = () => {
                     </div>
                 </section>
 
-                {/* --- Testimonials --- */}
-                <section className="py-8 md:py-20">
-                    <div className="max-w-7xl mx-auto px-6 text-center">
-                        <h2 className="text-xs font-black text-gray-400 uppercase tracking-[0.3em] mb-6 md:mb-16 text-center relative inline-block">
-                            What people say About Us
-                            <span className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-12 h-1 bg-gray-200 rounded-full"></span>
-                        </h2>
-                        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-8">
-                            {[
-                                { name: "Oguz Yagiz", text: "Best taxi solution layout.", img: "https://i.pravatar.cc/150?u=1" },
-                                { name: "Rizwan Gus", text: "Fastest deployment time.", img: "https://i.pravatar.cc/150?u=2" },
-                                { name: "Marta K.", text: "Support is amazing.", img: "https://i.pravatar.cc/150?u=3" }
-                            ].map((u, i) => (
-                                <div key={i} className="p-4 md:p-10 bg-white border border-gray-100 shadow-sm rounded-2xl md:rounded-[2.5rem] flex flex-col items-center hover:-translate-y-2 transition-transform duration-300">
-                                    <img src={u.img} alt={u.name} className="w-10 h-10 md:w-20 md:h-20 rounded-full mb-3 md:mb-6 object-cover ring-2 md:ring-4 ring-gray-50" />
-                                    <h4 className="font-black text-xs md:text-xl text-gray-900 mb-1">{u.name}</h4>
-                                    <p className="text-[10px] md:text-base text-gray-500 leading-tight italic">"{u.text}"</p>
-                                    <div className="flex text-yellow-400 text-xs md:text-lg mt-3 md:mt-6 gap-0.5">
-                                        <span className="material-symbols-outlined fill-current text-[10px] md:text-lg">star</span>
-                                        <span className="material-symbols-outlined fill-current text-[10px] md:text-lg">star</span>
-                                        <span className="material-symbols-outlined fill-current text-[10px] md:text-lg">star</span>
-                                        <span className="material-symbols-outlined fill-current text-[10px] md:text-lg">star</span>
-                                        <span className="material-symbols-outlined fill-current text-[10px] md:text-lg">star</span>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </section>
+                <ProductReviews color="#00F2FE" />
 
                 <ContactUs isHomePage={true} />
                 <Footer />

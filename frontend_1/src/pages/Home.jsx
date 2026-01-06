@@ -11,6 +11,7 @@ import ScrollWrapper from '../components/ScrollWrapper';
 import ScrollReveal from '../components/ScrollReveal';
 import Process from '../components/Process';
 import Stats from '../components/Stats';
+import ChannelPartners from '../components/ChannelPartners';
 
 import ProjectShowcase from '../components/ProjectShowcase';
 
@@ -27,6 +28,8 @@ const Home = () => {
             <ScrollReveal>
                 <Services />
             </ScrollReveal>
+
+            <ChannelPartners />
 
             <ScrollReveal>
                 <ProjectShowcase />

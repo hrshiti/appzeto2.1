@@ -9,6 +9,7 @@ import Footer from '../components/Footer';
 import ScrollReveal from '../components/ScrollReveal';
 import ScrollWrapper from '../components/ScrollWrapper';
 import { motion } from 'framer-motion';
+import { officesData } from '../data/officesData';
 
 const fadeInUp = {
     initial: { opacity: 0, y: 60 },
@@ -222,6 +223,63 @@ const AboutUs = () => {
 
                 {/* New Middle Section */}
                 <AboutSections />
+
+                <section id="offices" className="py-8 md:py-16 bg-gray-50 overflow-hidden scroll-mt-20">
+                    <div className="max-w-7xl mx-auto px-4 md:px-10">
+                        <motion.div
+                            {...fadeInUp}
+                            className="text-center mb-8 md:mb-12"
+                        >
+                            <span className="text-primary font-bold tracking-[0.3em] uppercase text-[10px] mb-2 block">Global Footprint</span>
+                            <h2 className="text-2xl md:text-4xl font-black text-gray-900 uppercase tracking-tighter mb-4">Our <span className="text-primary">Offices</span></h2>
+                            <p className="text-gray-500 max-w-xl mx-auto text-xs md:text-sm leading-relaxed">
+                                Strategically located in the world's leading technology hubs to better serve our global clientele.
+                            </p>
+                        </motion.div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+                            {officesData.map((office, idx) => (
+                                <motion.div
+                                    key={idx}
+                                    initial={{ opacity: 0, y: 30 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    transition={{ duration: 0.6, delay: idx * 0.1 }}
+                                    viewport={{ once: false }}
+                                    className="group bg-white rounded-[2rem] overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100"
+                                >
+                                    <Link to={`/offices/${office.slug}`} className="block">
+                                        <div className="relative h-48 overflow-hidden">
+                                            <img
+                                                src={office.heroImage}
+                                                alt={office.city}
+                                                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                            />
+                                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                                            <div className="absolute bottom-4 left-6 flex items-center gap-3">
+                                                <div className="w-10 h-10 rounded-full bg-primary/20 backdrop-blur-md flex items-center justify-center text-white border border-white/20">
+                                                    <span className="material-icons text-xl">location_on</span>
+                                                </div>
+                                                <h3 className="text-white font-bold text-lg">{office.city}</h3>
+                                            </div>
+                                        </div>
+                                    </Link>
+                                    <div className="p-8">
+                                        <p className="text-primary font-bold uppercase text-[10px] tracking-widest mb-3">{office.id.includes('hq') ? 'Corporate Headquarters' : 'Branch Office'}</p>
+                                        <p className="text-gray-500 text-xs md:text-sm leading-relaxed min-h-[40px]">
+                                            {office.address}
+                                        </p>
+                                        <div className="mt-6 pt-6 border-t border-gray-50">
+                                            <Link to={`/offices/${office.slug}`} className="flex items-center gap-2 text-gray-900 group/link font-black text-[10px] uppercase tracking-widest hover:text-primary transition-colors">
+                                                View Office Details
+                                                <span className="material-icons text-sm transform group-hover/link:translate-x-1 transition-transform">arrow_forward</span>
+                                            </Link>
+                                        </div>
+                                    </div>
+                                </motion.div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
 
                 <section id="meet-our-team" className="py-12 md:py-24 px-4 bg-white overflow-hidden scroll-mt-20">
                     <div className="max-w-7xl mx-auto">

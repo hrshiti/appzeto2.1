@@ -2,88 +2,22 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const projectsData = [
-    {
-        id: "p1",
-        title: "APPZETO GO",
-        subtitle: "Logistics Reimagined",
-        category: "LOGISTICS",
-        description: "A complete mobility solution with real-time tracking, multi-modal transport, and peak-hour load balancing for modern enterprises.",
-        link: "/appzeto-taxi",
-        images: [
-            "https://images.unsplash.com/photo-1580674285054-bed31e145f59?q=80&w=2340&auto=format&fit=crop",
-            "https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=1000&auto=format&fit=crop",
-            "https://images.unsplash.com/photo-1519003722824-191d446dc344?q=80&w=2340&auto=format&fit=crop"
-        ],
-        thumbnail: "https://images.unsplash.com/photo-1580674285054-bed31e145f59?q=80&w=2340&auto=format&fit=crop"
-    },
-    {
-        id: "p2",
-        title: "APPZETO FOOD",
-        subtitle: "Next-Gen Gastronomy",
-        category: "NEXT-GEN",
-        description: "Intelligent food discovery app using predictive analytics to suggest meals based on dietary habits and history.",
-        link: "/appzeto-food",
-        images: [
-            "https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=2340&auto=format&fit=crop",
-            "https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=1000&auto=format&fit=crop",
-            "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?q=80&w=2340&auto=format&fit=crop"
-        ],
-        thumbnail: "https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=1000&auto=format&fit=crop"
-    },
-    {
-        id: "p3",
-        title: "APPZETO LEARN",
-        subtitle: "Personalized Education",
-        category: "PERSONALIZED",
-        description: "Gamified learning platform with AI tutors and dynamic curriculum adjustment for every student.",
-        link: "/services/mobile-application",
-        images: [
-            "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=2340&auto=format&fit=crop",
-            "https://images.unsplash.com/photo-1501504905252-473c47e087f8?q=80&w=2340&auto=format&fit=crop",
-            "https://images.unsplash.com/photo-1503676260728-1c00da07bb5e?q=80&w=2340&auto=format&fit=crop"
-        ],
-        thumbnail: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=2340&auto=format&fit=crop"
-    },
-    {
-        id: "p4",
-        title: "APPZETO PAY",
-        subtitle: "Unified Digital Assets",
-        category: "FINTECH",
-        description: "Ultra-secure wealth management app with biometric multi-sig, instant FX, and portfolio tracking.",
-        link: "/appzeto-ecommerce",
-        images: [
-            "https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=2340&auto=format&fit=crop",
-            "https://images.unsplash.com/photo-1550565118-3a14e8d0386f?q=80&w=2340&auto=format&fit=crop",
-            "https://images.unsplash.com/photo-1551288049-bb848a4f691f?q=80&w=2340&auto=format&fit=crop"
-        ],
-        thumbnail: "https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=2340&auto=format&fit=crop"
-    },
-    {
-        id: "p5",
-        title: "APPZETO VOICE",
-        subtitle: "Intelligent Assistant",
-        category: "AI VOICE",
-        description: "Voice-first AI that integrates with your entire workspace to automate tasks via natural language.",
-        link: "/services/ai-machine-learning",
-        images: [
-            "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=2340&auto=format&fit=crop",
-            "https://images.unsplash.com/photo-1589254065878-42c9da997008?q=80&w=2340&auto=format&fit=crop",
-            "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=2340&auto=format&fit=crop"
-        ],
-        thumbnail: "https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=2340&auto=format&fit=crop"
-    }
-];
+import { projectsData as allProjects } from '../data/projectsData';
 
 const ProjectShowcase = () => {
-    const [activeProject, setActiveProject] = useState(projectsData[0]);
-    const [carouselItems, setCarouselItems] = useState(projectsData.slice(1));
+    // We only want the first 4 projects as requested
+    const displayProjects = allProjects.slice(0, 4);
+
+    const [activeProject, setActiveProject] = useState(displayProjects[0]);
+    const [carouselItems, setCarouselItems] = useState(displayProjects.slice(1));
     const [bgImageIndex, setBgImageIndex] = useState(0);
 
-    // Auto-cycle background images
+    // Auto-cycle background images from the project's images array
     useEffect(() => {
         const timer = setInterval(() => {
-            setBgImageIndex((prev) => (prev + 1) % activeProject.images.length);
+            if (activeProject.images && activeProject.images.length > 0) {
+                setBgImageIndex((prev) => (prev + 1) % activeProject.images.length);
+            }
         }, 5000);
         return () => clearInterval(timer);
     }, [activeProject]);
@@ -97,6 +31,10 @@ const ProjectShowcase = () => {
         });
         setBgImageIndex(0);
     }, [activeProject]);
+
+    const getSafeImages = (project) => {
+        return project.images && project.images.length > 0 ? project.images : [project.thumbnail];
+    };
 
     return (
         <section className="h-[75vh] md:h-screen w-full relative overflow-hidden bg-black font-sans select-none">
@@ -121,7 +59,7 @@ const ProjectShowcase = () => {
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
                             transition={{ duration: 1.2 }}
-                            src={activeProject.images[bgImageIndex]}
+                            src={getSafeImages(activeProject)[bgImageIndex]}
                             alt={activeProject.title}
                             className="w-full h-full object-cover brightness-[0.4]"
                         />
@@ -130,7 +68,7 @@ const ProjectShowcase = () => {
             </AnimatePresence>
 
             <div className="absolute top-6 left-6 md:top-16 md:left-20 z-30 pointer-events-none">
-                <motion.h2 className="text-white text-xs md:text-2xl font-bold uppercase tracking-widest pointer-events-none">
+                <motion.h2 className="text-white text-[10px] md:text-lg font-bold uppercase tracking-widest pointer-events-none">
                     Projects We Have <span className="text-primary italic">Created</span>
                 </motion.h2>
             </div>
@@ -166,7 +104,7 @@ const ProjectShowcase = () => {
                                     <p className="hidden sm:block text-gray-300 text-[10px] sm:text-xs md:text-sm leading-relaxed font-medium opacity-90">{activeProject.description}</p>
                                 </div>
 
-                                <Link to={activeProject.link}>
+                                <Link to={`/projects/${activeProject.slug}`}>
                                     <motion.button
                                         whileHover={{ scale: 1.05 }}
                                         whileTap={{ scale: 0.95 }}
@@ -255,7 +193,7 @@ const ProjectShowcase = () => {
                 <div className="hidden md:block h-[1px] w-48 md:w-64 bg-white/10 relative rounded-full overflow-hidden">
                     <motion.div
                         className="absolute h-full bg-primary"
-                        animate={{ width: `${((projectsData.findIndex(p => p.id === activeProject.id) + 1) / projectsData.length) * 100}%` }}
+                        animate={{ width: `${((displayProjects.findIndex(p => p.id === activeProject.id) + 1) / displayProjects.length) * 100}%` }}
                         transition={{ duration: 1, ease: [0.19, 1, 0.22, 1] }}
                     />
                 </div>

@@ -22,24 +22,27 @@ const NAV_ITEMS = [
         ]
     },
     {
+        title: "Products",
+        path: "/appzeto-food",
+        description: "Ready-to-deploy white-label solutions for your business.",
+        items: [
+            { label: "Food Delivery", link: "/appzeto-food" },
+            { label: "Taxi Booking", link: "/appzeto-taxi" },
+            { label: "E-commerce", link: "/appzeto-ecommerce" },
+            { label: "Hospital Mgmt", link: "/appzeto-hospital" }
+        ]
+    },
+    {
         title: "Projects",
         path: "/projects",
         description: "A showcase of our most ambitious digital transformations.",
         items: [
-            { label: "Logistics", link: "/projects" },
-            { label: "Fintech", link: "/projects" },
-            { label: "Healthcare", link: "/projects" },
-            { label: "AI Solutions", link: "/projects" }
-        ]
-    },
-    {
-        title: "About Us",
-        path: "/about",
-        description: "Learn about our mission, vision, and the team behind Appzeto.",
-        items: [
-            { label: "Our Story", link: "/about#we-are-appzeto" },
-            { label: "Why Choose Us", link: "/about#why-choose-us" },
-            { label: "Meet Team", link: "/about#meet-our-team" }
+            { label: "Logistics", link: "/projects/fleet-master-pro" },
+            { label: "Fintech", link: "/projects/neon-banking-ui" },
+            { label: "Healthcare", link: "/projects/health-hub-ecosystem" },
+            { label: "AI Solutions", link: "/projects/smart-grid-automation" },
+            { label: "EdTech", link: "/projects/eduverse-learning" },
+            { label: "E-commerce", link: "/projects/omnichannel-retail" }
         ]
     },
     {
@@ -69,7 +72,7 @@ const NAV_ITEMS = [
         items: [
             { label: "Sales Inquiry", link: "/contact#sales" },
             { label: "Technical Support", link: "/contact#support" },
-            { label: "Office Locations", link: "/contact#locations" }
+            { label: "Office Locations", link: "/about#offices" }
         ]
     }
 ];

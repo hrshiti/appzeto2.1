@@ -6,6 +6,7 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import ScrollWrapper from '../components/ScrollWrapper';
 import ContactUs from '../components/ContactUs';
+import ProductReviews from '../components/ProductReviews';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -296,6 +297,8 @@ const HospitalProductShowcase = () => {
                         <button className="px-8 md:px-10 py-4 md:py-5 bg-[#0EA5E9] text-white font-black rounded-full text-base md:text-lg shadow-xl hover:scale-105 transition-all">Begin Transformation</button>
                     </div>
                 </section>
+
+                <ProductReviews color="#0EA5E9" />
 
                 <ContactUs isHomePage={true} />
                 <Footer />

@@ -78,6 +78,7 @@ const projects = [
     {
         id: "food",
         title: "Appzeto Food",
+        slug: "appzeto-food",
         subtitle: "Delivered Hot",
         description: "AI-powered food delivery with predictive ordering.",
         icon: "restaurant",
@@ -88,6 +89,7 @@ const projects = [
     {
         id: "shop",
         title: "Appzeto Shop",
+        slug: "appzeto-pay",
         subtitle: "Future Commerce",
         description: "AR-enabled shopping experience.",
         icon: "shopping_bag",
@@ -97,7 +99,8 @@ const projects = [
     },
     {
         id: "care",
-        title: "Appzeto Care",
+        title: "Appzeto Health",
+        slug: "appzeto-health",
         subtitle: "Smart Health",
         description: "Telemedicine & comprehensive hospital management.",
         icon: "local_hospital",
@@ -108,6 +111,7 @@ const projects = [
     {
         id: "go",
         title: "Appzeto Go",
+        slug: "appzeto-go",
         subtitle: "Mobility",
         description: "Smart logistics and ride-sharing network.",
         icon: "local_taxi",
