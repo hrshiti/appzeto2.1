@@ -1,78 +1,140 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import AdminTable from '../components/AdminTable';
 import Modal from '../components/ui/Modal';
 import { useToast } from '../context/ToastContext';
 import { Edit, Trash2 } from 'lucide-react';
+import { dataService } from '../services/dataService';
 
 const AdminProjects = () => {
     const { addToast } = useToast();
 
     // -- State --
-    const [projects, setProjects] = useState([
-        { id: 1, name: 'Appzeto Food', client: 'Internal', category: 'Product', status: 'Live', updated: '1 week ago' },
-        { id: 2, name: 'EcoTracker App', client: 'Green Solutions', category: 'Mobile App', status: 'In Progress', updated: '1 day ago' },
-        { id: 3, name: 'Finance Dash', client: 'FinCorp', category: 'Web App', status: 'Completed', updated: '3 weeks ago' },
-    ]);
-
+    const [projects, setProjects] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isEditMode, setIsEditMode] = useState(false);
-    const [currentProject, setCurrentProject] = useState({ id: '', name: '', client: '', category: '', status: 'In Progress' });
 
-    // -- Handlers --
+    const [currentProject, setCurrentProject] = useState({
+        _id: '',
+        title: '',
+        slug: '',
+        subtitle: '',
+        category: '',
+        description: '', // Short summary
+        fullDescription: '', // Long description
+        thumbnail: '',
+        coverImage: '',
+        images: '', // string for input
+        tags: '', // map to technologies
+        client: '',
+        industry: '',
+        year: new Date().getFullYear().toString(),
+        challenge: '',
+        solution: '',
+        features: '', // string
+        results: '', // string
+        testimonialText: '',
+        testimonialAuthor: '',
+        testimonialRole: ''
+    });
+
+    useEffect(() => {
+        loadProjects();
+    }, []);
+
+    const loadProjects = async () => {
+        try {
+            const data = await dataService.getProjects();
+            setProjects(data || []);
+        } catch (err) {
+            console.error(err);
+            addToast('Failed to load projects', 'error');
+        }
+    };
+
     const openAddModal = () => {
         setIsEditMode(false);
-        setCurrentProject({ id: '', name: '', client: '', category: '', status: 'In Progress' });
+        setCurrentProject({
+            _id: '', title: '', slug: '', subtitle: '', category: '', description: '', fullDescription: '',
+            thumbnail: '', coverImage: '', images: '', tags: '', client: '', industry: '', year: new Date().getFullYear().toString(),
+            challenge: '', solution: '', features: '', results: '',
+            testimonialText: '', testimonialAuthor: '', testimonialRole: ''
+        });
         setIsModalOpen(true);
     };
 
-    const openEditModal = (project) => {
+    const openEditModal = (p) => {
         setIsEditMode(true);
-        setCurrentProject({ ...project });
+        setCurrentProject({
+            ...p,
+            _id: p._id,
+            images: (p.images || []).join(', '),
+            tags: (p.technologies || []).join(', '),
+            features: (p.features || []).join(', '),
+            results: (p.results || []).join(', '),
+            testimonialText: p.testimonial?.text || '',
+            testimonialAuthor: p.testimonial?.author || '',
+            testimonialRole: p.testimonial?.role || ''
+        });
         setIsModalOpen(true);
     };
 
-    const handleDelete = (id) => {
+    const handleDelete = async (id) => {
         if (window.confirm('Delete this project?')) {
-            setProjects(prev => prev.filter(p => p.id !== id));
-            addToast('Project deleted', 'error');
+            try {
+                await dataService.deleteProject(id);
+                setProjects(prev => prev.filter(p => p._id !== id));
+                addToast('Project deleted', 'success');
+            } catch (err) {
+                addToast('Failed to delete project', 'error');
+            }
         }
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (isEditMode) {
-            setProjects(prev => prev.map(p => p.id === currentProject.id ? { ...currentProject, updated: 'Just now' } : p));
-            addToast('Project updated', 'success');
-        } else {
-            const newProject = {
-                ...currentProject,
-                id: Date.now(),
-                updated: 'Just now'
-            };
-            setProjects(prev => [newProject, ...prev]);
-            addToast('Project created', 'success');
+        // Construct payload
+        const payload = {
+            ...currentProject,
+            technologies: currentProject.tags.split(',').map(s => s.trim()).filter(Boolean),
+            images: currentProject.images.split(',').map(s => s.trim()).filter(Boolean),
+            features: currentProject.features.split(',').map(s => s.trim()).filter(Boolean),
+            results: currentProject.results.split(',').map(s => s.trim()).filter(Boolean),
+            testimonial: {
+                text: currentProject.testimonialText,
+                author: currentProject.testimonialAuthor,
+                role: currentProject.testimonialRole
+            }
+        };
+
+        // Clean up UI-only fields
+        delete payload.tags;
+        delete payload.testimonialText;
+        delete payload.testimonialAuthor;
+        delete payload.testimonialRole;
+        delete payload._id;
+
+        try {
+            if (isEditMode) {
+                await dataService.updateProject(currentProject._id, payload);
+                addToast('Project updated', 'success');
+            } else {
+                await dataService.createProject(payload);
+                addToast('Project created', 'success');
+            }
+            await loadProjects();
+            setIsModalOpen(false);
+        } catch (err) {
+            console.error(err);
+            addToast('Operation failed', 'error');
         }
-        setIsModalOpen(false);
     };
 
-    // -- Render --
     const columns = [
-        { header: 'Project Name', accessor: 'name' },
+        { header: 'Project Name', accessor: 'title' },
         { header: 'Client', accessor: 'client' },
         { header: 'Category', accessor: 'category' },
-        {
-            header: 'Status',
-            accessor: 'status',
-            render: (row) => (
-                <span className={`px-2 py-1 rounded text-[10px] font-bold uppercase ${row.status === 'Live' || row.status === 'Completed' ? 'bg-emerald-100 text-emerald-600' :
-                        row.status === 'In Progress' ? 'bg-blue-100 text-blue-600' : 'bg-slate-100 text-slate-500'
-                    }`}>
-                    {row.status}
-                </span>
-            )
-        },
-        { header: 'Last Updated', accessor: 'updated' },
+        { header: 'Year', accessor: 'year' }
     ];
 
     const renderActions = (row) => (
@@ -85,7 +147,7 @@ const AdminProjects = () => {
                 <Edit size={16} />
             </button>
             <button
-                onClick={() => handleDelete(row.id)}
+                onClick={() => handleDelete(row._id)}
                 className="p-1.5 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"
                 title="Delete"
             >
@@ -110,23 +172,36 @@ const AdminProjects = () => {
                 onClose={() => setIsModalOpen(false)}
                 title={isEditMode ? 'Edit Project' : 'Add New Project'}
             >
-                <form onSubmit={handleSubmit} className="space-y-4">
-                    <div>
-                        <label className="block text-sm font-bold text-slate-700 mb-1">Project Name</label>
-                        <input
-                            type="text"
-                            required
-                            value={currentProject.name}
-                            onChange={(e) => setCurrentProject({ ...currentProject, name: e.target.value })}
-                            className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:outline-none focus:border-primary"
-                        />
+                <form onSubmit={handleSubmit} className="space-y-6">
+                    {/* Basic Info */}
+                    <div className="grid grid-cols-2 gap-4">
+                        <div>
+                            <label className="block text-sm font-bold text-slate-700 mb-1">Project Title</label>
+                            <input
+                                type="text"
+                                required
+                                value={currentProject.title}
+                                onChange={(e) => setCurrentProject({ ...currentProject, title: e.target.value })}
+                                className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:outline-none focus:border-primary"
+                            />
+                        </div>
+                        <div>
+                            <label className="block text-sm font-bold text-slate-700 mb-1">Slug (URL)</label>
+                            <input
+                                type="text"
+                                placeholder="Auto-generated if empty"
+                                value={currentProject.slug}
+                                onChange={(e) => setCurrentProject({ ...currentProject, slug: e.target.value })}
+                                className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:outline-none focus:border-primary"
+                            />
+                        </div>
                     </div>
+
                     <div className="grid grid-cols-2 gap-4">
                         <div>
                             <label className="block text-sm font-bold text-slate-700 mb-1">Client</label>
                             <input
                                 type="text"
-                                required
                                 value={currentProject.client}
                                 onChange={(e) => setCurrentProject({ ...currentProject, client: e.target.value })}
                                 className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:outline-none focus:border-primary"
@@ -136,27 +211,102 @@ const AdminProjects = () => {
                             <label className="block text-sm font-bold text-slate-700 mb-1">Category</label>
                             <input
                                 type="text"
-                                required
                                 value={currentProject.category}
                                 onChange={(e) => setCurrentProject({ ...currentProject, category: e.target.value })}
                                 className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:outline-none focus:border-primary"
-                                placeholder="Web / Mobile / AI"
                             />
                         </div>
                     </div>
+
+                    {/* Descriptions */}
                     <div>
-                        <label className="block text-sm font-bold text-slate-700 mb-1">Status</label>
-                        <select
-                            value={currentProject.status}
-                            onChange={(e) => setCurrentProject({ ...currentProject, status: e.target.value })}
-                            className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:outline-none focus:border-primary"
-                        >
-                            <option value="In Progress">In Progress</option>
-                            <option value="Completed">Completed</option>
-                            <option value="Live">Live</option>
-                            <option value="On Hold">On Hold</option>
-                        </select>
+                        <label className="block text-sm font-bold text-slate-700 mb-1">Short Summary</label>
+                        <textarea
+                            value={currentProject.description}
+                            onChange={(e) => setCurrentProject({ ...currentProject, description: e.target.value })}
+                            className="w-full px-3 py-2 border border-slate-200 rounded-lg h-20 resize-none"
+                        />
                     </div>
+                    <div>
+                        <label className="block text-sm font-bold text-slate-700 mb-1">Full Description</label>
+                        <textarea
+                            value={currentProject.fullDescription}
+                            onChange={(e) => setCurrentProject({ ...currentProject, fullDescription: e.target.value })}
+                            className="w-full px-3 py-2 border border-slate-200 rounded-lg h-32 resize-none"
+                        />
+                    </div>
+
+                    {/* Arrays */}
+                    <div className="grid grid-cols-2 gap-4">
+                        <div>
+                            <label className="block text-sm font-bold text-slate-700 mb-1">Tech Stack (comma sep)</label>
+                            <input
+                                type="text"
+                                value={currentProject.tags}
+                                onChange={(e) => setCurrentProject({ ...currentProject, tags: e.target.value })}
+                                className="w-full px-3 py-2 border border-slate-200 rounded-lg"
+                                placeholder="React, Node.js..."
+                            />
+                        </div>
+                        <div>
+                            <label className="block text-sm font-bold text-slate-700 mb-1">Features (comma sep)</label>
+                            <input
+                                type="text"
+                                value={currentProject.features}
+                                onChange={(e) => setCurrentProject({ ...currentProject, features: e.target.value })}
+                                className="w-full px-3 py-2 border border-slate-200 rounded-lg"
+                                placeholder="Feat 1, Feat 2..."
+                            />
+                        </div>
+                    </div>
+
+                    {/* Images */}
+                    <div>
+                        <label className="block text-sm font-bold text-slate-700 mb-1">Thumbnail URL</label>
+                        <input
+                            type="text"
+                            value={currentProject.thumbnail}
+                            onChange={(e) => setCurrentProject({ ...currentProject, thumbnail: e.target.value })}
+                            className="w-full px-3 py-2 border border-slate-200 rounded-lg"
+                        />
+                    </div>
+                    <div>
+                        <label className="block text-sm font-bold text-slate-700 mb-1">Gallery Images (comma sep)</label>
+                        <textarea
+                            value={currentProject.images}
+                            onChange={(e) => setCurrentProject({ ...currentProject, images: e.target.value })}
+                            className="w-full px-3 py-2 border border-slate-200 rounded-lg h-20 resize-none"
+                            placeholder="url1, url2, url3..."
+                        />
+                    </div>
+
+                    {/* Testimonial */}
+                    <div className="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                        <label className="block text-xs font-bold uppercase text-slate-400 mb-2">Client Testimonial</label>
+                        <div className="grid grid-cols-2 gap-4 mb-2">
+                            <input
+                                type="text"
+                                placeholder="Author Name"
+                                value={currentProject.testimonialAuthor}
+                                onChange={(e) => setCurrentProject({ ...currentProject, testimonialAuthor: e.target.value })}
+                                className="w-full px-3 py-2 border border-slate-200 rounded-lg"
+                            />
+                            <input
+                                type="text"
+                                placeholder="Role"
+                                value={currentProject.testimonialRole}
+                                onChange={(e) => setCurrentProject({ ...currentProject, testimonialRole: e.target.value })}
+                                className="w-full px-3 py-2 border border-slate-200 rounded-lg"
+                            />
+                        </div>
+                        <textarea
+                            placeholder="Quote..."
+                            value={currentProject.testimonialText}
+                            onChange={(e) => setCurrentProject({ ...currentProject, testimonialText: e.target.value })}
+                            className="w-full px-3 py-2 border border-slate-200 rounded-lg h-20 resize-none"
+                        />
+                    </div>
+
                     <div className="pt-4 flex justify-end gap-2">
                         <button
                             type="button"

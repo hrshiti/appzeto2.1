@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Search, Filter, Plus, MoreHorizontal, Edit, Trash2, Eye } from 'lucide-react';
+import { Search, Filter, Plus, MoreHorizontal, Edit, Trash2, Eye, Inbox } from 'lucide-react';
 
 const AdminTable = ({
     title,
@@ -58,47 +58,65 @@ const AdminTable = ({
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-slate-100">
-                            {data.map((row, rowIdx) => (
-                                <tr key={rowIdx} className="hover:bg-slate-50/80 transition-colors group">
-                                    {columns.map((col, colIdx) => (
-                                        <td key={colIdx} className="p-4 text-sm text-slate-700 font-medium">
-                                            {col.render ? col.render(row) : row[col.accessor]}
+                            {data.length > 0 ? (
+                                data.map((row, rowIdx) => (
+                                    <tr key={rowIdx} className="hover:bg-slate-50/80 transition-colors group">
+                                        {columns.map((col, colIdx) => (
+                                            <td key={colIdx} className="p-4 text-sm text-slate-700 font-medium">
+                                                {col.render ? col.render(row) : row[col.accessor]}
+                                            </td>
+                                        ))}
+                                        <td className="p-4 text-right">
+                                            {customActions ? customActions(row) : (
+                                                <div className="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                                    {actions.includes('view') && (
+                                                        <button className="p-1.5 text-slate-400 hover:text-blue-500 hover:bg-blue-50 rounded-lg transition-colors">
+                                                            <Eye size={16} />
+                                                        </button>
+                                                    )}
+                                                    {actions.includes('edit') && (
+                                                        <button className="p-1.5 text-slate-400 hover:text-amber-500 hover:bg-amber-50 rounded-lg transition-colors">
+                                                            <Edit size={16} />
+                                                        </button>
+                                                    )}
+                                                    {actions.includes('delete') && (
+                                                        <button className="p-1.5 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors">
+                                                            <Trash2 size={16} />
+                                                        </button>
+                                                    )}
+                                                </div>
+                                            )}
                                         </td>
-                                    ))}
-                                    <td className="p-4 text-right">
-                                        {customActions ? customActions(row) : (
-                                            <div className="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                                                {actions.includes('view') && (
-                                                    <button className="p-1.5 text-slate-400 hover:text-blue-500 hover:bg-blue-50 rounded-lg transition-colors">
-                                                        <Eye size={16} />
-                                                    </button>
-                                                )}
-                                                {actions.includes('edit') && (
-                                                    <button className="p-1.5 text-slate-400 hover:text-amber-500 hover:bg-amber-50 rounded-lg transition-colors">
-                                                        <Edit size={16} />
-                                                    </button>
-                                                )}
-                                                {actions.includes('delete') && (
-                                                    <button className="p-1.5 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors">
-                                                        <Trash2 size={16} />
-                                                    </button>
-                                                )}
+                                    </tr>
+                                ))
+                            ) : (
+                                <tr>
+                                    <td colSpan={columns.length + 1} className="p-12 text-center text-slate-400">
+                                        <div className="flex flex-col items-center justify-center gap-3">
+                                            <div className="w-12 h-12 rounded-full bg-slate-50 flex items-center justify-center">
+                                                <Inbox className="w-6 h-6 text-slate-300" />
                                             </div>
-                                        )}
+                                            <p className="text-sm font-medium">No records found</p>
+                                            <p className="text-xs text-slate-300 max-w-xs">
+                                                Start by adding a new record using the "Add New" button above.
+                                            </p>
+                                        </div>
                                     </td>
                                 </tr>
-                            ))}
+                            )}
                         </tbody>
                     </table>
                 </div>
                 {/* Pagination */}
-                <div className="p-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
-                    <span>Showing 1 to {data.length} of {data.length} entries</span>
-                    <div className="flex gap-2">
-                        <button className="px-3 py-1 border border-slate-200 rounded-lg hover:bg-slate-50">Previous</button>
-                        <button className="px-3 py-1 border border-slate-200 rounded-lg hover:bg-slate-50">Next</button>
+                {data.length > 0 && (
+                    <div className="p-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
+                        <span>Showing 1 to {data.length} of {data.length} entries</span>
+                        <div className="flex gap-2">
+                            <button className="px-3 py-1 border border-slate-200 rounded-lg hover:bg-slate-50">Previous</button>
+                            <button className="px-3 py-1 border border-slate-200 rounded-lg hover:bg-slate-50">Next</button>
+                        </div>
                     </div>
-                </div>
+                )}
             </div>
         </div>
     );

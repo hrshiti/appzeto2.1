@@ -1,76 +1,138 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import AdminTable from '../components/AdminTable';
 import { useToast } from '../context/ToastContext';
 import { Edit, Trash2 } from 'lucide-react';
 import Modal from '../components/ui/Modal';
+import { dataService } from '../services/dataService';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
+import '../styles/editor.css';
 
 const HRJobs = () => {
     const { addToast } = useToast();
 
     // -- State --
-    const [jobs, setJobs] = useState([
-        { id: 1, title: 'Senior Frontend Developer', type: 'Full-time', location: 'Remote', status: 'Open', applicants: 12 },
-        { id: 2, title: 'Marketing Intern', type: 'Internship', location: 'New York', status: 'Closed', applicants: 45 },
-    ]);
+    const [jobs, setJobs] = useState([]);
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isEditMode, setIsEditMode] = useState(false);
-    const [currentJob, setCurrentJob] = useState({ id: '', title: '', type: 'Full-time', location: 'Remote', status: 'Open' });
 
-    // -- Handlers --
+    // Expanded State
+    const [currentJob, setCurrentJob] = useState({
+        _id: '',
+        title: '',
+        department: '',
+        type: 'Full-time',
+        location: 'Remote',
+        status: 'Open',
+        description: '', // HTML
+        requirements: '', // HTML
+        applicants: 0
+    });
+
+    useEffect(() => {
+        loadJobs();
+    }, []);
+
+    const loadJobs = async () => {
+        try {
+            const data = await dataService.getJobs();
+            setJobs(data || []);
+        } catch (err) {
+            console.error(err);
+            addToast("Failed to load jobs", "error");
+        }
+    };
+
     const openAddModal = () => {
         setIsEditMode(false);
-        setCurrentJob({ id: '', title: '', type: 'Full-time', location: 'Remote', status: 'Open' });
+        setCurrentJob({
+            _id: '',
+            title: '',
+            department: '',
+            type: 'Full-time',
+            location: 'Remote',
+            status: 'Open',
+            description: '',
+            requirements: '',
+            applicants: 0
+        });
         setIsModalOpen(true);
     };
 
     const openEditModal = (job) => {
         setIsEditMode(true);
-        setCurrentJob({ ...job });
+        setCurrentJob({
+            ...job,
+            _id: job._id,
+            status: job.active ? 'Open' : 'Closed'
+        });
         setIsModalOpen(true);
     };
 
-    const handleDelete = (id) => {
+    const handleDelete = async (id) => {
         if (window.confirm('Remove this job opening?')) {
-            setJobs(prev => prev.filter(j => j.id !== id));
-            addToast('Job opening removed', 'success');
+            try {
+                await dataService.deleteJob(id);
+                setJobs(prev => prev.filter(j => j._id !== id));
+                addToast('Job opening removed', 'success');
+            } catch (err) {
+                addToast('Failed to remove job', 'error');
+            }
         }
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (isEditMode) {
-            setJobs(prev => prev.map(j => j.id === currentJob.id ? { ...currentJob } : j));
-            addToast('Job updated', 'success');
-        } else {
-            const newJob = {
-                ...currentJob,
-                id: Date.now(),
-                applicants: 0
-            };
-            setJobs(prev => [newJob, ...prev]);
-            addToast('New Job posted', 'success');
+        const payload = {
+            ...currentJob,
+            active: currentJob.status === 'Open'
+        };
+        delete payload._id;
+        delete payload.status;
+        delete payload.applicants;
+
+        try {
+            if (isEditMode) {
+                await dataService.updateJob(currentJob._id, payload);
+                addToast('Job updated', 'success');
+            } else {
+                await dataService.createJob(payload);
+                addToast('New Job posted', 'success');
+            }
+            loadJobs();
+            setIsModalOpen(false);
+        } catch (err) {
+            console.error(err);
+            addToast('Operation failed', 'error');
         }
-        setIsModalOpen(false);
     };
 
-    // -- Render --
+    const modules = {
+        toolbar: [
+            ['bold', 'italic', 'underline'],
+            [{ 'list': 'bullet' }],
+            ['clean']
+        ],
+    };
+
     const columns = [
         { header: 'Job Title', accessor: 'title' },
+        { header: 'Department', accessor: 'department' },
         { header: 'Type', accessor: 'type' },
         { header: 'Location', accessor: 'location' },
         {
             header: 'Status',
-            accessor: 'status',
+            accessor: 'active',
             render: (row) => (
-                <span className={`px-2 py-1 rounded text-[10px] font-bold uppercase ${row.status === 'Open' ? 'bg-emerald-100 text-emerald-600' : 'bg-slate-100 text-slate-500'
+                <span className={`px-2 py-1 rounded text-[10px] font-bold uppercase ${row.active ? 'bg-emerald-100 text-emerald-600' : 'bg-slate-100 text-slate-500'
                     }`}>
-                    {row.status}
+                    {row.active ? 'Open' : 'Closed'}
                 </span>
             )
         },
-        { header: 'Applicants', accessor: 'applicants' },
+        { header: 'Applicants', accessor: 'applicants', render: () => 0 }, // Mock applicants for now
     ];
 
     const renderActions = (row) => (
@@ -83,7 +145,7 @@ const HRJobs = () => {
                 <Edit size={16} />
             </button>
             <button
-                onClick={() => handleDelete(row.id)}
+                onClick={() => handleDelete(row._id)}
                 className="p-1.5 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"
                 title="Remove Job"
             >
@@ -109,16 +171,29 @@ const HRJobs = () => {
                 title={isEditMode ? 'Edit Job Opening' : 'Post New Job'}
             >
                 <form onSubmit={handleSubmit} className="space-y-4">
-                    <div>
-                        <label className="block text-sm font-bold text-slate-700 mb-1">Job Title</label>
-                        <input
-                            type="text"
-                            required
-                            value={currentJob.title}
-                            onChange={(e) => setCurrentJob({ ...currentJob, title: e.target.value })}
-                            className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:outline-none focus:border-primary"
-                        />
+                    <div className="grid grid-cols-2 gap-4">
+                        <div>
+                            <label className="block text-sm font-bold text-slate-700 mb-1">Job Title</label>
+                            <input
+                                type="text"
+                                required
+                                value={currentJob.title}
+                                onChange={(e) => setCurrentJob({ ...currentJob, title: e.target.value })}
+                                className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:outline-none focus:border-primary"
+                            />
+                        </div>
+                        <div>
+                            <label className="block text-sm font-bold text-slate-700 mb-1">Department</label>
+                            <input
+                                type="text"
+                                required
+                                value={currentJob.department}
+                                onChange={(e) => setCurrentJob({ ...currentJob, department: e.target.value })}
+                                className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:outline-none focus:border-primary"
+                            />
+                        </div>
                     </div>
+
                     <div className="grid grid-cols-2 gap-4">
                         <div>
                             <label className="block text-sm font-bold text-slate-700 mb-1">Type</label>
@@ -155,7 +230,30 @@ const HRJobs = () => {
                             <option value="Closed">Closed</option>
                         </select>
                     </div>
-                    <div className="pt-4 flex justify-end gap-2">
+
+                    <div>
+                        <label className="block text-sm font-bold text-slate-700 mb-1">Job Description</label>
+                        <ReactQuill
+                            theme="snow"
+                            value={currentJob.description}
+                            onChange={(content) => setCurrentJob({ ...currentJob, description: content })}
+                            modules={modules}
+                            className="bg-white rounded-lg"
+                        />
+                    </div>
+
+                    <div className="pb-12">
+                        <label className="block text-sm font-bold text-slate-700 mb-1">Requirements</label>
+                        <ReactQuill
+                            theme="snow"
+                            value={currentJob.requirements}
+                            onChange={(content) => setCurrentJob({ ...currentJob, requirements: content })}
+                            modules={modules}
+                            className="bg-white rounded-lg"
+                        />
+                    </div>
+
+                    <div className="pt-4 flex justify-end gap-2 border-t border-slate-100">
                         <button
                             type="button"
                             onClick={() => setIsModalOpen(false)}

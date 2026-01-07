@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Navigate } from 'react-router-dom'
 import Home from './pages/Home'
 import ProductShowcase from './pages/ProductShowcase'
 import AboutUs from './pages/AboutUs'
@@ -19,7 +19,6 @@ import DemoCenter from './pages/DemoCenter'
 import OfficeDetail from './pages/OfficeDetail'
 import CustomCursor from './components/CustomCursor'
 import './App.css'
-import { Navigate } from 'react-router-dom'
 
 // Admin Imports
 import { AdminAuthProvider, ProtectedAdminRoute } from './admin/context/AdminAuthContext'
@@ -29,16 +28,18 @@ import AdminDashboard from './admin/pages/AdminDashboard'
 import AdminServices from './admin/pages/AdminServices'
 import AdminProjects from './admin/pages/AdminProjects'
 import AdminBlogs from './admin/pages/AdminBlogs'
+import AdminProducts from './admin/pages/AdminProducts'
+import AdminVideos from './admin/pages/AdminVideos'
 import AdminMessages from './admin/pages/AdminMessages'
 import AdminUsers from './admin/pages/AdminUsers'
 import HRDashboard from './admin/pages/HRDashboard'
 import AdminLeads from './admin/pages/AdminLeads'
 import AdminQueries from './admin/pages/AdminQueries'
 import HRJobs from './admin/pages/HRJobs'
+import HRInternships from './admin/pages/HRInternships'
 import HRApplications from './admin/pages/HRApplications'
 import AdminSettings from './admin/pages/AdminSettings'
 import AdminTeam from './admin/pages/AdminTeam'
-import AdminTable from './admin/components/AdminTable' // for placeholders
 
 import { ToastProvider } from './admin/context/ToastContext'
 
@@ -81,10 +82,10 @@ function App() {
               <Route index element={<Navigate to="dashboard" replace />} />
               <Route path="dashboard" element={<AdminDashboard />} />
               <Route path="services" element={<AdminServices />} />
-
-
               <Route path="projects" element={<AdminProjects />} />
               <Route path="blogs" element={<AdminBlogs />} />
+              <Route path="products" element={<AdminProducts />} />
+              <Route path="videos" element={<AdminVideos />} />
               <Route path="leads" element={<AdminLeads />} />
               <Route path="queries" element={<AdminQueries />} />
               <Route path="messages" element={<AdminMessages />} />
@@ -102,6 +103,7 @@ function App() {
               <Route index element={<Navigate to="dashboard" replace />} />
               <Route path="dashboard" element={<HRDashboard />} />
               <Route path="jobs" element={<HRJobs />} />
+              <Route path="internships" element={<HRInternships />} />
               <Route path="applications" element={<HRApplications />} />
             </Route>
 

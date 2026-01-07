@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import AdminTable from '../components/AdminTable';
 import Modal from '../components/ui/Modal';
 import { useToast } from '../context/ToastContext';
@@ -6,60 +6,111 @@ import { Edit, Trash2 } from 'lucide-react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import '../styles/editor.css';
+import { dataService } from '../services/dataService';
 
 const AdminBlogs = () => {
     const { addToast } = useToast();
 
     // -- State --
-    const [blogs, setBlogs] = useState([
-        { id: 101, title: 'The Future of AI', author: 'John Doe', status: 'Published', date: '2025-01-10', views: 1200, content: '<p>AI is changing the world...</p>' },
-        { id: 102, title: 'Web Development Trends', author: 'Jane Smith', status: 'Draft', date: '2025-01-12', views: 0, content: '<h1>React 19 is coming</h1>' },
-    ]);
-
+    const [blogs, setBlogs] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isEditMode, setIsEditMode] = useState(false);
-    const [currentBlog, setCurrentBlog] = useState({ id: '', title: '', author: '', status: 'Draft', content: '' });
 
-    // -- Handlers --
+    const [currentBlog, setCurrentBlog] = useState({
+        _id: '',
+        title: '',
+        author: '',
+        status: 'Draft',
+        content: '',
+        thumbnail: '',
+        seoTitle: '',
+        seoDesc: '',
+        views: 0,
+        date: ''
+    });
+
+    useEffect(() => {
+        loadBlogs();
+    }, []);
+
+    const loadBlogs = async () => {
+        try {
+            const data = await dataService.getBlogs();
+            setBlogs(data || []);
+        } catch (err) {
+            console.error(err);
+            addToast("Failed to load blogs", "error");
+        }
+    };
+
     const openAddModal = () => {
         setIsEditMode(false);
-        setCurrentBlog({ id: '', title: '', author: '', status: 'Draft', content: '' });
+        setCurrentBlog({
+            _id: '',
+            title: '',
+            author: '',
+            status: 'Draft',
+            content: '',
+            thumbnail: '',
+            seoTitle: '',
+            seoDesc: '',
+            views: 0,
+            date: ''
+        });
         setIsModalOpen(true);
     };
 
     const openEditModal = (blog) => {
         setIsEditMode(true);
-        setCurrentBlog({ ...blog });
+        setCurrentBlog({
+            ...blog,
+            _id: blog._id,
+            status: blog.active ? 'Published' : 'Draft'
+        });
         setIsModalOpen(true);
     };
 
-    const handleDelete = (id) => {
+    const handleDelete = async (id) => {
         if (window.confirm('Are you sure you want to delete this post?')) {
-            setBlogs(prev => prev.filter(b => b.id !== id));
-            addToast('Blog post deleted successfully', 'success');
+            try {
+                await dataService.deleteBlog(id);
+                setBlogs(prev => prev.filter(b => b._id !== id));
+                addToast('Blog post deleted successfully', 'success');
+            } catch (err) {
+                addToast('Failed to delete blog', 'error');
+            }
         }
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault(); // Note: Quill handles its own state, but wrapped form submission needs this.
+    const handleSubmit = async (e) => {
+        e.preventDefault();
 
-        if (isEditMode) {
-            setBlogs(prev => prev.map(b => b.id === currentBlog.id ? { ...currentBlog, date: new Date().toISOString().split('T')[0] } : b));
-            addToast('Blog post updated', 'success');
-        } else {
-            const newBlog = {
-                ...currentBlog,
-                id: Date.now(),
-                date: new Date().toISOString().split('T')[0],
-                views: 0
-            };
-            setBlogs(prev => [newBlog, ...prev]);
-            addToast('Blog post created', 'success');
+        const payload = {
+            ...currentBlog,
+            active: currentBlog.status === 'Published'
+        };
+
+        delete payload._id;
+        delete payload.status;
+        delete payload.views;
+        delete payload.date;
+
+        try {
+            if (isEditMode) {
+                await dataService.updateBlog(currentBlog._id, payload);
+                addToast('Blog post updated', 'success');
+            } else {
+                await dataService.createBlog(payload);
+                addToast('Blog post created', 'success');
+            }
+            loadBlogs();
+            setIsModalOpen(false);
+        } catch (err) {
+            console.error(err);
+            addToast('Operation failed', 'error');
         }
-        setIsModalOpen(false);
     };
 
-    // Quill Toolbar Modules
     const modules = {
         toolbar: [
             [{ 'header': [1, 2, 3, false] }],
@@ -70,22 +121,25 @@ const AdminBlogs = () => {
         ],
     };
 
-    // -- Render --
     const columns = [
         { header: 'Title', accessor: 'title' },
         { header: 'Author', accessor: 'author' },
         {
             header: 'Status',
-            accessor: 'status',
+            accessor: 'active', // Derived
             render: (row) => (
-                <span className={`px-2 py-1 rounded text-[10px] font-bold uppercase ${row.status === 'Published' ? 'bg-blue-100 text-blue-600' : 'bg-amber-100 text-amber-600'
+                <span className={`px-2 py-1 rounded text-[10px] font-bold uppercase ${row.active ? 'bg-blue-100 text-blue-600' : 'bg-amber-100 text-amber-600'
                     }`}>
-                    {row.status}
+                    {row.active ? 'Published' : 'Draft'}
                 </span>
             )
         },
-        { header: 'Date', accessor: 'date' },
         { header: 'Views', accessor: 'views' },
+        {
+            header: 'Date',
+            accessor: 'createdAt',
+            render: (row) => row.createdAt ? new Date(row.createdAt).toLocaleDateString() : '-'
+        }
     ];
 
     const renderActions = (row) => (
@@ -98,7 +152,7 @@ const AdminBlogs = () => {
                 <Edit size={16} />
             </button>
             <button
-                onClick={() => handleDelete(row.id)}
+                onClick={() => handleDelete(row._id)}
                 className="p-1.5 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"
                 title="Delete"
             >
@@ -134,6 +188,7 @@ const AdminBlogs = () => {
                             className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:outline-none focus:border-primary"
                         />
                     </div>
+
                     <div className="grid grid-cols-2 gap-4">
                         <div>
                             <label className="block text-sm font-bold text-slate-700 mb-1">Author</label>
@@ -158,8 +213,45 @@ const AdminBlogs = () => {
                         </div>
                     </div>
 
+                    <div>
+                        <label className="block text-sm font-bold text-slate-700 mb-1">Thumbnail URL</label>
+                        <input
+                            type="text"
+                            value={currentBlog.thumbnail}
+                            onChange={(e) => setCurrentBlog({ ...currentBlog, thumbnail: e.target.value })}
+                            className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:outline-none focus:border-primary"
+                            placeholder="https://..."
+                        />
+                    </div>
+
+                    {/* SEO Section */}
+                    <div className="p-4 bg-slate-50 rounded-xl border border-slate-100">
+                        <label className="block text-xs font-bold uppercase text-slate-400 mb-3">SEO Settings (Optional)</label>
+                        <div className="space-y-3">
+                            <div>
+                                <label className="block text-xs font-bold text-slate-500 mb-1">SEO Title</label>
+                                <input
+                                    type="text"
+                                    value={currentBlog.seoTitle}
+                                    onChange={(e) => setCurrentBlog({ ...currentBlog, seoTitle: e.target.value })}
+                                    className="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm"
+                                    placeholder="Meta Title"
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-xs font-bold text-slate-500 mb-1">Meta Description</label>
+                                <textarea
+                                    value={currentBlog.seoDesc}
+                                    onChange={(e) => setCurrentBlog({ ...currentBlog, seoDesc: e.target.value })}
+                                    className="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm h-16 resize-none"
+                                    placeholder="Brief summary for search engines..."
+                                />
+                            </div>
+                        </div>
+                    </div>
+
                     {/* Rich Text Editor */}
-                    <div className="pb-12"> {/* Extra padding for toolbar */}
+                    <div className="pb-12">
                         <label className="block text-sm font-bold text-slate-700 mb-1">Content</label>
                         <ReactQuill
                             theme="snow"

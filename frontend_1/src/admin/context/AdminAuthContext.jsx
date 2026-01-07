@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import api from '../services/api';
 
 const AdminAuthContext = createContext();
 
@@ -9,57 +10,54 @@ export const AdminAuthProvider = ({ children }) => {
     const navigate = useNavigate();
     const location = useLocation();
 
+    // Check for logged in user
     useEffect(() => {
-        // Check local storage for existing session
-        const storedUser = localStorage.getItem('appzeto_admin_user');
-        if (storedUser) {
-            setUser(JSON.parse(storedUser));
-        }
-        setLoading(false);
+        const checkLoggedIn = async () => {
+            const token = localStorage.getItem('adminToken');
+
+            if (token) {
+                try {
+                    const { data } = await api.get('/auth/me');
+                    setUser(data.data);
+                } catch (err) {
+                    console.error('Auth Check Failed:', err);
+                    localStorage.removeItem('adminToken');
+                    localStorage.removeItem('appzeto_admin_user');
+                    setUser(null);
+                }
+            }
+            setLoading(false);
+        };
+        checkLoggedIn();
     }, []);
 
-    const login = (email, password) => {
-        // Mock Login Logic
-        return new Promise((resolve, reject) => {
-            setTimeout(() => {
-                if (email === 'admin@appzeto.com' && password === 'admin123') {
-                    const adminUser = {
-                        id: '1',
-                        name: 'Super Admin',
-                        email: 'admin@appzeto.com',
-                        role: 'ADMIN',
-                        avatar: 'https://ui-avatars.com/api/?name=Super+Admin&background=05A4A7&color=fff'
-                    };
-                    setUser(adminUser);
-                    localStorage.setItem('appzeto_admin_user', JSON.stringify(adminUser));
-                    resolve(adminUser);
-                } else if (email === 'hr@appzeto.com' && password === 'hr123') {
-                    const hrUser = {
-                        id: '2',
-                        name: 'HR Manager',
-                        email: 'hr@appzeto.com',
-                        role: 'HR',
-                        avatar: 'https://ui-avatars.com/api/?name=HR+Manager&background=6366f1&color=fff'
-                    };
-                    setUser(hrUser);
-                    localStorage.setItem('appzeto_admin_user', JSON.stringify(hrUser));
-                    resolve(hrUser);
-                } else {
-                    reject(new Error('Invalid credentials'));
-                }
-            }, 1000);
-        });
+    const login = async (email, password) => {
+        try {
+            const { data } = await api.post('/auth/login', { email, password });
+
+            // Set User and Token
+            localStorage.setItem('adminToken', data.token);
+            // We store user too just for ease, but relying on /me is better. 
+            // However, /me is async, so storing user helps with instant feedback.
+            localStorage.setItem('appzeto_admin_user', JSON.stringify(data.user));
+
+            setUser(data.user);
+            return data.user;
+        } catch (err) {
+            throw new Error(err.response?.data?.error || 'Login failed');
+        }
     };
 
     const logout = () => {
         setUser(null);
+        localStorage.removeItem('adminToken');
         localStorage.removeItem('appzeto_admin_user');
         navigate('/admin/login');
     };
 
     const hasPermission = (requiredRole) => {
         if (!user) return false;
-        if (user.role === 'ADMIN') return true; // Admin has all permissions
+        if (user.role === 'ADMIN') return true;
         return user.role === requiredRole;
     };
 
@@ -72,7 +70,6 @@ export const AdminAuthProvider = ({ children }) => {
 
 export const useAdminAuth = () => useContext(AdminAuthContext);
 
-// Protected Route Component
 export const ProtectedAdminRoute = ({ children, requiredRole }) => {
     const { user, isLoading } = useAdminAuth();
     const navigate = useNavigate();
@@ -83,9 +80,7 @@ export const ProtectedAdminRoute = ({ children, requiredRole }) => {
             navigate('/admin/login', { state: { from: location } });
         }
 
-        // If specific role required and user doesn't have it (and is not ADMIN)
         if (!isLoading && user && requiredRole && user.role !== requiredRole && user.role !== 'ADMIN') {
-            // Redirect HR to their dashboard if they try to access admin pages
             if (user.role === 'HR') {
                 navigate('/hr/dashboard');
             } else {
@@ -96,9 +91,8 @@ export const ProtectedAdminRoute = ({ children, requiredRole }) => {
 
     if (isLoading) return <div className="min-h-screen flex items-center justify-center bg-slate-50 text-slate-400">Loading...</div>;
 
-    if (!user) return null; // Will redirect via useEffect
+    if (!user) return null;
 
-    // Role check for render
     if (requiredRole && user.role !== requiredRole && user.role !== 'ADMIN') return null;
 
     return children;

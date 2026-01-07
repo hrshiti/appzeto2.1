@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import AdminTable from '../components/AdminTable';
 import { useToast } from '../context/ToastContext';
 import {
@@ -13,56 +13,27 @@ import {
 } from 'lucide-react';
 import Modal from '../components/ui/Modal';
 import AdminFormBuilder from '../components/AdminFormBuilder';
+import { dataService } from '../services/dataService';
 
 const AdminLeads = () => {
     const { addToast } = useToast();
     const [pageTab, setPageTab] = useState('submissions'); // 'submissions' or 'settings'
 
     // -- CRM State --
-    const [leads, setLeads] = useState([
-        {
-            id: 1,
-            name: 'Michael Scott',
-            company: 'Dunder Mifflin',
-            email: 'michael@dundermifflin.com',
-            phone: '+1 555 0199',
-            subject: 'Enterprise Web Portal',
-            date: '2025-01-02',
-            status: 'New',
-            source: 'Contact Form',
-            message: 'We need a scalable internal portal for our branches.',
-            notes: [],
-            value: '-'
-        },
-        {
-            id: 2,
-            name: 'Dwight Schrute',
-            company: 'Schrute Farms',
-            email: 'dwight@farms.com',
-            phone: '+1 555 2342',
-            subject: 'E-commerce for Agrotech',
-            date: '2025-01-03',
-            status: 'In Negotiation',
-            source: 'Contact Form',
-            message: 'Looking to sell organic beets online. Need robust inventory system.',
-            notes: ["Sent initial proposal", "Follow up scheduled for Tuesday"],
-            value: '-'
-        },
-        {
-            id: 3,
-            name: 'Pam Beesly',
-            company: 'Art Design Co',
-            email: 'pam@art.com',
-            phone: '+1 555 9988',
-            subject: 'Portfolio Website',
-            date: '2025-01-05',
-            status: 'Contacted',
-            source: 'Contact Form',
-            message: 'I need a simple portfolio site for my illustrations.',
-            notes: [],
-            value: '-'
+    const [leads, setLeads] = useState([]);
+
+    useEffect(() => {
+        loadLeads();
+    }, []);
+
+    const loadLeads = async () => {
+        try {
+            const data = await dataService.getLeads();
+            setLeads(data || []);
+        } catch (err) {
+            console.error("Failed to load leads", err);
         }
-    ]);
+    };
 
     const [selectedLead, setSelectedLead] = useState(null);
     const [replyMode, setReplyMode] = useState(false); // 'reply', 'note'
@@ -76,26 +47,47 @@ const AdminLeads = () => {
         setReplyMode(false);
     };
 
-    const handleDelete = (id) => {
+    const handleDelete = async (id) => {
         if (window.confirm('Delete this submission permanently?')) {
-            setLeads(prev => prev.filter(l => l.id !== id));
-            addToast('Submission deleted', 'error');
-            if (selectedLead?.id === id) setSelectedLead(null);
+            try {
+                await dataService.deleteLead(id);
+                setLeads(prev => prev.filter(l => l._id !== id));
+                addToast('Submission deleted', 'success');
+                if (selectedLead?._id === id) setSelectedLead(null);
+            } catch (err) {
+                addToast('Failed to delete lead', 'error');
+            }
         }
     };
 
-    const updateStatus = (newStatus) => {
-        setLeads(prev => prev.map(l => l.id === selectedLead.id ? { ...l, status: newStatus } : l));
-        setSelectedLead(prev => ({ ...prev, status: newStatus }));
-        addToast(`Status updated to: ${newStatus}`, 'success');
-        addSystemNote(`Status changed to ${newStatus}`);
+    const updateStatus = async (newStatus) => {
+        const updatedLead = { ...selectedLead, status: newStatus };
+        setSelectedLead(updatedLead);
+        setLeads(prev => prev.map(l => l._id === selectedLead._id ? updatedLead : l));
+
+        try {
+            await dataService.updateLead(selectedLead._id, { status: newStatus });
+            addToast(`Status updated to: ${newStatus}`, 'success');
+            addSystemNote(`Status changed to ${newStatus}`);
+        } catch (err) {
+            console.error(err);
+            addToast("Failed to update status", "error");
+        }
     };
 
-    const addSystemNote = (text) => {
+    const addSystemNote = async (text) => {
         const timestamp = new Date().toLocaleString();
         const noteEntry = `${text} - ${timestamp}`;
-        setLeads(prev => prev.map(l => l.id === selectedLead.id ? { ...l, notes: [...l.notes, noteEntry] } : l));
-        setSelectedLead(prev => ({ ...prev, notes: [...prev.notes, noteEntry] }));
+        const updatedNotes = [...(selectedLead.notes || []), noteEntry];
+
+        setSelectedLead(prev => ({ ...prev, notes: updatedNotes }));
+        setLeads(prev => prev.map(l => l._id === selectedLead._id ? { ...l, notes: updatedNotes } : l));
+
+        try {
+            await dataService.updateLead(selectedLead._id, { notes: updatedNotes });
+        } catch (err) {
+            console.error(err);
+        }
     };
 
     const handleActionSubmit = (e) => {
@@ -137,9 +129,9 @@ const AdminLeads = () => {
             )
         },
         {
-            header: 'Subject',
-            accessor: 'subject',
-            render: (row) => <span className="text-slate-700 font-medium text-sm">{row.subject}</span>
+            header: 'Project Type',
+            accessor: 'service',
+            render: (row) => <span className="text-slate-700 font-medium text-sm">{row.service}</span>
         },
         {
             header: 'Status',
@@ -150,7 +142,11 @@ const AdminLeads = () => {
                 </span>
             )
         },
-        { header: 'Date', accessor: 'date' },
+        {
+            header: 'Date',
+            accessor: 'createdAt',
+            render: (row) => new Date(row.createdAt).toLocaleDateString()
+        },
     ];
 
     const renderActions = (row) => (
@@ -163,7 +159,7 @@ const AdminLeads = () => {
                 <ArrowRight size={16} />
             </button>
             <button
-                onClick={() => handleDelete(row.id)}
+                onClick={() => handleDelete(row._id)}
                 className="p-1.5 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"
                 title="Delete"
             >
@@ -180,7 +176,6 @@ const AdminLeads = () => {
                     <p className="text-slate-500 mt-1">Manage contact form submissions and settings.</p>
                 </div>
 
-                {/* Page Tab Switcher */}
                 <div className="flex p-1 bg-white border border-slate-200 rounded-xl mt-4 md:mt-0">
                     <button
                         onClick={() => setPageTab('submissions')}
@@ -274,7 +269,7 @@ const AdminLeads = () => {
                                         <span className={`inline-block px-3 py-1 rounded-lg text-xs font-bold uppercase mb-1 ${getStatusColor(selectedLead.status)}`}>
                                             {selectedLead.status}
                                         </span>
-                                        <p className="text-sm font-bold text-slate-400">{selectedLead.date}</p>
+                                        <p className="text-sm font-bold text-slate-400">{new Date(selectedLead.createdAt).toLocaleString()}</p>
                                     </div>
                                 </div>
 
@@ -309,16 +304,16 @@ const AdminLeads = () => {
                                             </h4>
                                             <div className="space-y-2">
                                                 <p className="text-sm font-medium text-slate-700">{selectedLead.email}</p>
-                                                <p className="text-sm font-medium text-slate-700">{selectedLead.phone}</p>
-                                                <p className="text-xs text-slate-400 mt-2">Source: {selectedLead.source}</p>
+                                                <p className="text-sm font-medium text-slate-700">{selectedLead.phone || 'No phone'}</p>
+                                                <p className="text-xs text-slate-400 mt-2">Budget: {selectedLead.budget || '-'}</p>
                                             </div>
                                         </div>
                                         <div className="p-4 bg-slate-50/50 border border-slate-100 rounded-xl">
                                             <h4 className="flex items-center gap-2 text-xs font-bold uppercase text-slate-400 mb-3">
-                                                <MessageSquare size={14} /> Message
+                                                <MessageSquare size={14} /> Project
                                             </h4>
-                                            <p className="text-sm font-bold text-slate-800 mb-1">{selectedLead.subject}</p>
-                                            <p className="text-sm text-slate-600 italic leading-relaxed">"{selectedLead.message}"</p>
+                                            <p className="text-sm font-bold text-slate-800 mb-1">{selectedLead.service}</p>
+                                            <p className="text-sm text-slate-600 italic leading-relaxed">{/* No message field in Lead yet */}</p>
                                         </div>
                                     </div>
 
@@ -327,7 +322,7 @@ const AdminLeads = () => {
                                             <Clock size={14} /> Activity & Notes
                                         </h4>
                                         <div className="space-y-3 pl-4 border-l-2 border-slate-100">
-                                            {selectedLead.notes.length === 0 ? (
+                                            {(!selectedLead.notes || selectedLead.notes.length === 0) ? (
                                                 <p className="text-sm text-slate-400">No notes yet.</p>
                                             ) : (
                                                 selectedLead.notes.map((note, idx) => (
@@ -341,7 +336,6 @@ const AdminLeads = () => {
                                     </div>
                                 </div>
 
-                                {/* Sticky Action Footer */}
                                 <div className="pt-4 mt-4 border-t border-slate-100">
                                     {replyMode ? (
                                         <form onSubmit={handleActionSubmit} className="space-y-3">

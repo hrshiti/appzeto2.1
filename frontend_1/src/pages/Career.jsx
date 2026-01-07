@@ -1,33 +1,19 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Navbar from '../components/Navbar';
 import ContactUs from '../components/ContactUs';
 import Footer from '../components/Footer';
 import ScrollReveal from '../components/ScrollReveal';
 import ScrollWrapper from '../components/ScrollWrapper';
-
 import { AnimatePresence } from 'framer-motion';
+import { dataService } from '../admin/services/dataService';
 
 const Career = () => {
-    const [selectedJob, setSelectedJob] = React.useState(null);
-    const [isApplying, setIsApplying] = React.useState(false);
+    const [selectedJob, setSelectedJob] = useState(null);
+    const [isApplying, setIsApplying] = useState(false);
 
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, []);
-
-    useEffect(() => {
-        if (isApplying) {
-            document.body.style.overflow = 'hidden';
-        } else {
-            document.body.style.overflow = 'unset';
-        }
-        return () => {
-            document.body.style.overflow = 'unset';
-        };
-    }, [isApplying]);
-
+    // RESTORED STATIC DATA AS PER USER REQUEST
     const positions = [
         {
             id: 1,
@@ -90,6 +76,32 @@ const Career = () => {
         }
     ];
 
+    useEffect(() => {
+        window.scrollTo(0, 0);
+
+        // // Fetch Jobs - commented out as per instruction
+        // const allJobs = dataService.getJobs();
+        // // Filter only Active jobs - commented out as per instruction
+        // setPositions(allJobs.filter(j => j.status === 'Active'));
+
+        // // Fetch Internships - commented out as per instruction
+        // const allInternships = dataService.getInternships();
+        // // Filter only Active internships - commented out as per instruction
+        // setInternships(allInternships.filter(i => i.status === 'Active'));
+
+    }, []);
+
+    useEffect(() => {
+        if (isApplying) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
+        }
+        return () => {
+            document.body.style.overflow = 'unset';
+        };
+    }, [isApplying]);
+
     const cultureItems = [
         {
             id: 1,
@@ -148,6 +160,14 @@ const Career = () => {
             yOffset: -30,
         }
     ];
+
+    // Helper to strip HTML tags for preview
+    const stripHtml = (html) => {
+        if (!html) return '';
+        const tmp = document.createElement("DIV");
+        tmp.innerHTML = html;
+        return tmp.textContent || tmp.innerText || "";
+    };
 
     return (
         <ScrollWrapper>
@@ -288,7 +308,7 @@ const Career = () => {
                                     </p>
                                 </div>
                                 <button
-                                    onClick={() => { setSelectedJob("Full Stack Intern"); setIsApplying(true); }}
+                                    onClick={() => { setSelectedJob("General Internship"); setIsApplying(true); }}
                                     className="px-6 py-2.5 md:px-8 md:py-3 bg-[#F1FC88] text-slate-900 font-bold rounded-xl md:rounded-2xl uppercase tracking-widest text-[10px] md:text-xs hover:bg-white transition-all border-4 border-slate-900 shadow-[4px_4px_0px_0px_rgba(0,0,0,0.2)] md:shadow-[6px_6px_0px_0px_rgba(0,0,0,0.2)]"
                                 >
                                     Grab Your Spot

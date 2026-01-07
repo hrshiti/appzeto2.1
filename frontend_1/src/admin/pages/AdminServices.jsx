@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import AdminTable from '../components/AdminTable';
 import Modal from '../components/ui/Modal';
 import { useToast } from '../context/ToastContext';
@@ -6,51 +6,56 @@ import { Edit, Trash2 } from 'lucide-react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import '../styles/editor.css';
+import { dataService } from '../services/dataService';
 
 const AdminServices = () => {
     const { addToast } = useToast();
 
     // -- State --
-    const [services, setServices] = useState([
-        {
-            id: 1,
-            title: 'Web Development',
-            category: 'Development',
-            status: 'Active',
-            updated: '2 days ago',
-            description: 'Full stack web development services...',
-            icon: 'language',
-            features: ['Responsive', 'SEO Friendly', 'Fast']
-        },
-        {
-            id: 2,
-            title: 'UI/UX Design',
-            category: 'Design',
-            status: 'Active',
-            updated: '5 days ago',
-            description: 'User interface design...',
-            icon: 'brush',
-            features: ['Prototyping', 'Wireframing']
-        },
-    ]);
-
+    const [services, setServices] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isEditMode, setIsEditMode] = useState(false);
 
     // Expanded State Model
     const [currentService, setCurrentService] = useState({
-        id: '',
+        _id: '',
         title: '',
+        slug: '',
         category: '',
         status: 'Active',
-        description: '', // HTML content
+        shortDescription: '',
+        fullDescription: '', // HTML content
         icon: '',
         features: '' // comma separated string for input
     });
 
+    useEffect(() => {
+        loadServices();
+    }, []);
+
+    const loadServices = async () => {
+        try {
+            const data = await dataService.getServices();
+            setServices(data || []);
+        } catch (err) {
+            console.error("Failed to load services", err);
+            addToast("Failed to load services", "error");
+        }
+    };
+
     const openAddModal = () => {
         setIsEditMode(false);
-        setCurrentService({ id: '', title: '', category: '', status: 'Active', description: '', icon: '', features: '' });
+        setCurrentService({
+            _id: '',
+            title: '',
+            slug: '',
+            category: '',
+            status: 'Active',
+            shortDescription: '',
+            fullDescription: '',
+            icon: '',
+            features: ''
+        });
         setIsModalOpen(true);
     };
 
@@ -58,44 +63,58 @@ const AdminServices = () => {
         setIsEditMode(true);
         setCurrentService({
             ...service,
-            features: service.features ? service.features.join(', ') : ''
+            _id: service._id,
+            slug: service.slug,
+            features: (service.features || []).join(', '),
+            status: service.active ? 'Active' : 'Inactive'
         });
         setIsModalOpen(true);
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const servicePayload = {
+        const payload = {
             ...currentService,
-            features: currentService.features.split(',').map(f => f.trim()).filter(f => f !== '')
+            features: currentService.features.split(',').map(f => f.trim()).filter(Boolean),
+            slug: currentService.slug || undefined,
+            active: currentService.status === 'Active'
         };
 
-        if (isEditMode) {
-            setServices(prev => prev.map(s => s.id === currentService.id ? { ...servicePayload, updated: 'Just now' } : s));
-            addToast('Service updated successfully', 'success');
-        } else {
-            const newService = {
-                ...servicePayload,
-                id: Date.now(),
-                updated: 'Just now'
-            };
-            setServices(prev => [newService, ...prev]);
-            addToast('New service added successfully', 'success');
+        delete payload._id;
+        delete payload.status;
+
+        try {
+            if (isEditMode) {
+                await dataService.updateService(currentService._id, payload);
+                addToast('Service updated successfully', 'success');
+            } else {
+                await dataService.createService(payload);
+                addToast('New service added successfully', 'success');
+            }
+            loadServices();
+            setIsModalOpen(false);
+        } catch (err) {
+            console.error(err);
+            addToast('Operation failed', 'error');
         }
-        setIsModalOpen(false);
     };
 
-    const handleDelete = (id) => {
+    const handleDelete = async (id) => {
         if (window.confirm('Are you sure you want to delete this service?')) {
-            setServices(prev => prev.filter(s => s.id !== id));
-            addToast('Service deleted successfully', 'success');
+            try {
+                await dataService.deleteService(id);
+                setServices(prev => prev.filter(s => s._id !== id));
+                addToast('Service deleted successfully', 'success');
+            } catch (err) {
+                addToast('Failed to delete service', 'error');
+            }
         }
     }
 
     const modules = {
         toolbar: [
-            [{ 'header': [false] }],
+            [{ 'header': [false, 1, 2, 3] }],
             ['bold', 'italic', 'underline'],
             [{ 'list': 'ordered' }, { 'list': 'bullet' }],
             ['clean']
@@ -107,11 +126,11 @@ const AdminServices = () => {
         { header: 'Category', accessor: 'category' },
         {
             header: 'Status',
-            accessor: 'status',
+            accessor: 'active', // Use active boolean for render logic
             render: (row) => (
-                <span className={`px-2 py-1 rounded text-[10px] font-bold uppercase ${row.status === 'Active' ? 'bg-emerald-100 text-emerald-600' : 'bg-slate-100 text-slate-500'
+                <span className={`px-2 py-1 rounded text-[10px] font-bold uppercase ${row.active ? 'bg-emerald-100 text-emerald-600' : 'bg-slate-100 text-slate-500'
                     }`}>
-                    {row.status}
+                    {row.active ? 'Active' : 'Inactive'}
                 </span>
             )
         },
@@ -123,12 +142,14 @@ const AdminServices = () => {
             <button
                 onClick={() => openEditModal(row)}
                 className="p-1.5 text-slate-400 hover:text-amber-500 hover:bg-amber-50 rounded-lg transition-colors"
+                title="Edit"
             >
                 <Edit size={16} />
             </button>
             <button
-                onClick={() => handleDelete(row.id)}
+                onClick={() => handleDelete(row._id)}
                 className="p-1.5 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"
+                title="Delete"
             >
                 <Trash2 size={16} />
             </button>
@@ -164,6 +185,19 @@ const AdminServices = () => {
                             />
                         </div>
                         <div>
+                            <label className="block text-sm font-bold text-slate-700 mb-1">ID (Slug)</label>
+                            <input
+                                type="text"
+                                value={currentService.slug}
+                                onChange={(e) => setCurrentService({ ...currentService, slug: e.target.value })}
+                                className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:outline-none focus:border-primary"
+                                placeholder="Auto-generated if empty"
+                            />
+                        </div>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-4">
+                        <div>
                             <label className="block text-sm font-bold text-slate-700 mb-1">Google Icon Name</label>
                             <input
                                 type="text"
@@ -174,9 +208,6 @@ const AdminServices = () => {
                                 placeholder="e.g. smartphone"
                             />
                         </div>
-                    </div>
-
-                    <div className="grid grid-cols-2 gap-4">
                         <div>
                             <label className="block text-sm font-bold text-slate-700 mb-1">Category</label>
                             <select
@@ -188,19 +219,19 @@ const AdminServices = () => {
                                 <option value="Development">Development</option>
                                 <option value="Design">Design</option>
                                 <option value="Marketing">Marketing</option>
+                                <option value="AI">AI</option>
+                                <option value="Operations">Operations</option>
                             </select>
                         </div>
-                        <div>
-                            <label className="block text-sm font-bold text-slate-700 mb-1">Status</label>
-                            <select
-                                value={currentService.status}
-                                onChange={(e) => setCurrentService({ ...currentService, status: e.target.value })}
-                                className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:outline-none focus:border-primary"
-                            >
-                                <option value="Active">Active</option>
-                                <option value="Draft">Draft</option>
-                            </select>
-                        </div>
+                    </div>
+
+                    <div>
+                        <label className="block text-sm font-bold text-slate-700 mb-1">Short Description</label>
+                        <textarea
+                            value={currentService.shortDescription}
+                            onChange={(e) => setCurrentService({ ...currentService, shortDescription: e.target.value })}
+                            className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:outline-none focus:border-primary h-20 resize-none"
+                        />
                     </div>
 
                     <div>
@@ -215,11 +246,11 @@ const AdminServices = () => {
                     </div>
 
                     <div className="pb-12">
-                        <label className="block text-sm font-bold text-slate-700 mb-1">Detailed Description</label>
+                        <label className="block text-sm font-bold text-slate-700 mb-1">Full Detailed Content</label>
                         <ReactQuill
                             theme="snow"
-                            value={currentService.description}
-                            onChange={(content) => setCurrentService({ ...currentService, description: content })}
+                            value={currentService.fullDescription}
+                            onChange={(content) => setCurrentService({ ...currentService, fullDescription: content })}
                             modules={modules}
                             className="bg-white rounded-lg"
                         />

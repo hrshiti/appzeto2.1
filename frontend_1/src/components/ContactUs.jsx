@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { dataService } from '../admin/services/dataService';
 
 const faqData = [
     {
@@ -64,6 +65,31 @@ const ContactUs = ({ isHomePage = false }) => {
     const [status, setStatus] = useState('idle');
     const [isSalesOpen, setIsSalesOpen] = useState(false);
 
+    // Dynamic Settings
+    const [settings, setSettings] = useState({
+        contactPhone: '+465 723 723 566',
+        contactEmail: 'contact@appzeto.com',
+        contactAddress: '1784 Griffin Street, AL, USA',
+        offices: [
+            { id: 1, title: "Global Headquarters", address: "1784 Griffin Street, Birmingham, Alabama 35203, USA", icon: "apartment", time: "Mon - Fri" },
+            { id: 2, title: "Innovation Tech Hub", address: "548 Market St, Suite 120, San Francisco, CA 94104, USA", icon: "business_center", time: "Mon - Sat" }
+        ]
+    });
+
+    useEffect(() => {
+        const load = async () => {
+            try {
+                const loadedSettings = await dataService.getSettings();
+                if (loadedSettings) {
+                    setSettings(prev => ({ ...prev, ...loadedSettings }));
+                }
+            } catch (e) {
+                console.error("Failed to load settings", e);
+            }
+        };
+        load();
+    }, []);
+
     // Lock body scroll when modal is open
     React.useEffect(() => {
         if (isSalesOpen) {
@@ -74,13 +100,38 @@ const ContactUs = ({ isHomePage = false }) => {
         return () => { document.body.style.overflow = 'unset'; };
     }, [isSalesOpen]);
 
-    const handleSend = (e) => {
+    const handleSend = async (e) => {
         e.preventDefault();
         setStatus('sending');
-        setTimeout(() => {
+
+        const formData = new FormData(e.target);
+        const payload = Object.fromEntries(formData.entries());
+
+        try {
+            await dataService.submitMessage(payload);
             setStatus('sent');
             setTimeout(() => setStatus('idle'), 3000);
-        }, 2000);
+            e.target.reset();
+        } catch (err) {
+            console.error(err);
+            setStatus('idle');
+            alert('Failed to send message. Please try again.');
+        }
+    };
+
+    const handleLeadSubmit = async (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        const payload = Object.fromEntries(formData.entries());
+
+        try {
+            await dataService.submitLead(payload);
+            alert('Lead Submitted Successfully! We will contact you shortly.');
+            setIsSalesOpen(false);
+        } catch (err) {
+            console.error(err);
+            alert('Failed to submit lead. Please try again.');
+        }
     };
 
     React.useEffect(() => {
@@ -187,9 +238,9 @@ const ContactUs = ({ isHomePage = false }) => {
                             <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-white mb-6 md:mb-12 tracking-tighter uppercase">Meet Us</h2>
                             <div className="space-y-6 md:space-y-12">
                                 {[
-                                    { icon: "call", label: "Phone", info: "+465 723 723 566" },
-                                    { icon: "alternate_email", label: "Email", info: "contact@appzeto.com" },
-                                    { icon: "location_on", label: "Address", info: "1784 Griffin Street, AL, USA" }
+                                    { icon: "call", label: "Phone", info: settings.contactPhone },
+                                    { icon: "alternate_email", label: "Email", info: settings.contactEmail },
+                                    { icon: "location_on", label: "Address", info: settings.contactAddress }
                                 ].map((item, i) => (
                                     <div key={i} className="flex items-center gap-4 md:gap-8 group">
                                         <div className="w-10 h-10 md:w-14 md:h-14 rounded-full border border-white/5 flex items-center justify-center flex-shrink-0 group-hover:border-primary/40 transition-all duration-500">
@@ -213,6 +264,7 @@ const ContactUs = ({ isHomePage = false }) => {
                                         <label className="text-[9px] md:text-[10px] font-black uppercase text-slate-400 tracking-widest ml-1">Full Name</label>
                                         <input
                                             required
+                                            name="name"
                                             type="text"
                                             placeholder="Your Name"
                                             className="w-full p-3 md:p-6 rounded-lg md:rounded-2xl bg-white/5 border border-white/5 text-white outline-none focus:border-primary/50 transition-all text-xs md:text-sm font-medium placeholder:text-slate-600 shadow-inner"
@@ -222,6 +274,7 @@ const ContactUs = ({ isHomePage = false }) => {
                                         <label className="text-[9px] md:text-[10px] font-black uppercase text-slate-400 tracking-widest ml-1">Phone</label>
                                         <input
                                             required
+                                            name="phone"
                                             type="tel"
                                             placeholder="+91 0000..."
                                             className="w-full p-3 md:p-6 rounded-lg md:rounded-2xl bg-white/5 border border-white/5 text-white outline-none focus:border-primary/50 transition-all text-xs md:text-sm font-medium placeholder:text-slate-600 shadow-inner"
@@ -234,6 +287,7 @@ const ContactUs = ({ isHomePage = false }) => {
                                         <label className="text-[9px] md:text-[10px] font-black uppercase text-slate-400 tracking-widest ml-1">Email Address</label>
                                         <input
                                             required
+                                            name="email"
                                             type="email"
                                             placeholder="you@email.com"
                                             className="w-full p-3 md:p-6 rounded-lg md:rounded-2xl bg-white/5 border border-white/5 text-white outline-none focus:border-primary/50 transition-all text-xs md:text-sm font-medium placeholder:text-slate-600 shadow-inner"
@@ -244,6 +298,7 @@ const ContactUs = ({ isHomePage = false }) => {
                                         <div className="relative">
                                             <select
                                                 required
+                                                name="reason"
                                                 className="w-full p-3 md:p-6 rounded-lg md:rounded-2xl bg-white/5 border border-white/5 text-white outline-none focus:border-primary/50 transition-all text-xs md:text-sm font-medium appearance-none cursor-pointer shadow-inner"
                                             >
                                                 <option value="" disabled selected className="bg-[#062929]">Select reason</option>
@@ -261,6 +316,7 @@ const ContactUs = ({ isHomePage = false }) => {
                                     <label className="text-[9px] md:text-[10px] font-black uppercase text-slate-400 tracking-widest ml-1">Message</label>
                                     <textarea
                                         required
+                                        name="message"
                                         placeholder="How can we help?"
                                         rows="2"
                                         className="w-full p-3 md:p-6 rounded-lg md:rounded-2xl bg-white/5 border border-white/5 text-white outline-none focus:border-primary/50 transition-all text-xs md:text-sm font-medium placeholder:text-slate-600 resize-none shadow-inner"
@@ -308,21 +364,18 @@ const ContactUs = ({ isHomePage = false }) => {
                             </div>
 
                             <div className="lg:w-2/3 w-full">
-                                {[
-                                    { title: "Global Headquarters", addr: "1784 Griffin Street, Birmingham, Alabama 35203, USA", icon: "apartment", time: "Mon - Fri" },
-                                    { title: "Innovation Tech Hub", addr: "548 Market St, Suite 120, San Francisco, CA 94104, USA", icon: "business_center", time: "Mon - Sat" }
-                                ].map((office, i) => (
+                                {settings.offices.map((office, i) => (
                                     <motion.div
-                                        key={i}
+                                        key={office.id || i}
                                         className="py-6 md:py-12 border-b border-slate-100 flex flex-col md:flex-row md:items-center justify-between gap-4 md:gap-8 group"
                                     >
                                         <div className="flex items-center gap-4 md:gap-8">
                                             <div className="w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-slate-50 flex items-center justify-center flex-shrink-0 border border-slate-100 transition-all duration-500 group-hover:bg-primary">
-                                                <span className="material-icons text-slate-400 group-hover:text-white text-xl md:text-2xl transition-all">{office.icon}</span>
+                                                <span className="material-icons text-slate-400 group-hover:text-white text-xl md:text-2xl transition-all">{office.icon || 'apartment'}</span>
                                             </div>
                                             <div>
                                                 <h3 className="text-lg md:text-2xl font-bold text-slate-900 tracking-tighter uppercase group-hover:text-primary transition-colors">{office.title}</h3>
-                                                <p className="text-slate-500 text-xs md:text-sm mt-1 md:mt-2 max-w-md font-medium italic">{office.addr}</p>
+                                                <p className="text-slate-500 text-xs md:text-sm mt-1 md:mt-2 max-w-md font-medium italic">{office.address}</p>
                                             </div>
                                         </div>
                                         <div className="flex items-center gap-3 md:gap-4 px-4 md:px-6 py-2 md:py-2.5 rounded-full border border-slate-100 bg-white flex-shrink-0 self-start md:self-center group-hover:border-primary/30 transition-all">
@@ -424,26 +477,26 @@ const ContactUs = ({ isHomePage = false }) => {
                                 </button>
                             </div>
 
-                            <form className="space-y-3 md:space-y-6" onSubmit={(e) => { e.preventDefault(); alert('Lead Submitted Successfully!'); setIsSalesOpen(false); }}>
+                            <form className="space-y-3 md:space-y-6" onSubmit={handleLeadSubmit}>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-6">
                                     <div className="space-y-1 md:space-y-2">
                                         <label className="text-[8px] md:text-[10px] font-black uppercase text-slate-400 tracking-widest ml-1 md:ml-2">Full Name</label>
-                                        <input required type="text" placeholder="John Doe" className="w-full px-4 py-2.5 md:py-4 bg-slate-50 border-2 border-slate-100 rounded-xl md:rounded-2xl focus:border-primary focus:bg-white outline-none transition-all text-[11px] md:text-sm font-bold placeholder:text-slate-300" />
+                                        <input required name="name" type="text" placeholder="John Doe" className="w-full px-4 py-2.5 md:py-4 bg-slate-50 border-2 border-slate-100 rounded-xl md:rounded-2xl focus:border-primary focus:bg-white outline-none transition-all text-[11px] md:text-sm font-bold placeholder:text-slate-300" />
                                     </div>
                                     <div className="space-y-1 md:space-y-2">
                                         <label className="text-[8px] md:text-[10px] font-black uppercase text-slate-400 tracking-widest ml-1 md:ml-2">Company Name</label>
-                                        <input required type="text" placeholder="Appzeto Inc." className="w-full px-4 py-2.5 md:py-4 bg-slate-50 border-2 border-slate-100 rounded-xl md:rounded-2xl focus:border-primary focus:bg-white outline-none transition-all text-[11px] md:text-sm font-bold placeholder:text-slate-300" />
+                                        <input required name="company" type="text" placeholder="Appzeto Inc." className="w-full px-4 py-2.5 md:py-4 bg-slate-50 border-2 border-slate-100 rounded-xl md:rounded-2xl focus:border-primary focus:bg-white outline-none transition-all text-[11px] md:text-sm font-bold placeholder:text-slate-300" />
                                     </div>
                                 </div>
 
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-6">
                                     <div className="space-y-1 md:space-y-2">
                                         <label className="text-[8px] md:text-[10px] font-black uppercase text-slate-400 tracking-widest ml-1 md:ml-2">Work Email</label>
-                                        <input required type="email" placeholder="john@company.com" className="w-full px-4 py-2.5 md:py-4 bg-slate-50 border-2 border-slate-100 rounded-xl md:rounded-2xl focus:border-primary focus:bg-white outline-none transition-all text-[11px] md:text-sm font-bold placeholder:text-slate-300" />
+                                        <input required name="email" type="email" placeholder="john@company.com" className="w-full px-4 py-2.5 md:py-4 bg-slate-50 border-2 border-slate-100 rounded-xl md:rounded-2xl focus:border-primary focus:bg-white outline-none transition-all text-[11px] md:text-sm font-bold placeholder:text-slate-300" />
                                     </div>
                                     <div className="space-y-1 md:space-y-2">
                                         <label className="text-[8px] md:text-[10px] font-black uppercase text-slate-400 tracking-widest ml-1 md:ml-2">Project Type</label>
-                                        <select required className="w-full px-4 py-2.5 md:py-4 bg-slate-50 border-2 border-slate-100 rounded-xl md:rounded-2xl focus:border-primary focus:bg-white outline-none transition-all text-[11px] md:text-sm font-bold appearance-none cursor-pointer">
+                                        <select required name="service" className="w-full px-4 py-2.5 md:py-4 bg-slate-50 border-2 border-slate-100 rounded-xl md:rounded-2xl focus:border-primary focus:bg-white outline-none transition-all text-[11px] md:text-sm font-bold appearance-none cursor-pointer">
                                             <option value="" disabled selected>Select service</option>
                                             <option value="web">Web Ecosystem</option>
                                             <option value="mobile">Mobile App</option>
@@ -455,7 +508,7 @@ const ContactUs = ({ isHomePage = false }) => {
 
                                 <div className="space-y-1 md:space-y-2">
                                     <label className="text-[8px] md:text-[10px] font-black uppercase text-slate-400 tracking-widest ml-1 md:ml-2">Estimated Budget</label>
-                                    <select required className="w-full px-4 py-2.5 md:py-4 bg-slate-50 border-2 border-slate-100 rounded-xl md:rounded-2xl focus:border-primary focus:bg-white outline-none transition-all text-[11px] md:text-sm font-bold appearance-none cursor-pointer">
+                                    <select required name="budget" className="w-full px-4 py-2.5 md:py-4 bg-slate-50 border-2 border-slate-100 rounded-xl md:rounded-2xl focus:border-primary focus:bg-white outline-none transition-all text-[11px] md:text-sm font-bold appearance-none cursor-pointer">
                                         <option value="" disabled selected>Select budget range</option>
                                         <option value="5-10k">$5k - $10k</option>
                                         <option value="10-25k">$10k - $25k</option>
