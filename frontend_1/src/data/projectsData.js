@@ -32,9 +32,9 @@ export const projectsData = [
         coverImage: goAppImg,
         images: [
             goAppImg,
-            mobileServiceImg,
-            aiServiceImg,
-            webServiceImg
+            food4,
+            food2,
+            goAppImg
         ],
         tags: ["IoT", "Node.js", "AWS", "React"],
         industry: "Global Logistics",
@@ -71,10 +71,10 @@ export const projectsData = [
         thumbnail: uiServiceImg,
         coverImage: uiServiceImg,
         images: [
-            uiServiceImg,
-            cloudServiceImg,
-            mobileServiceImg,
-            webServiceImg
+            shopAppImg,
+            healthAppImg,
+            food3,
+            shopAppImg
         ],
         tags: ["Fintech", "Mobile App", "Security", "Swift"],
         industry: "Financial Services",
@@ -112,9 +112,9 @@ export const projectsData = [
         coverImage: healthAppImg,
         images: [
             healthAppImg,
-            aiServiceImg,
-            cloudServiceImg,
-            mobileServiceImg
+            food1,
+            goAppImg,
+            healthAppImg
         ],
         tags: ["EHR", "Blockchain", "HIPAA", "React"],
         industry: "Medical / Enterprise",
@@ -193,9 +193,9 @@ export const projectsData = [
         coverImage: shopAppImg,
         images: [
             shopAppImg,
-            mobileServiceImg,
-            uiServiceImg,
-            webServiceImg
+            foodHero,
+            food2,
+            shopAppImg
         ],
         tags: ["Next.js", "GraphQL", "Redis", "ElasticSearch"],
         industry: "Retail / Fashion",

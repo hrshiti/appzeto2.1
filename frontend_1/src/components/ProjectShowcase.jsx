@@ -8,16 +8,16 @@ import { projectsData } from '../data/projectsData';
 const PhoneMockup = ({ image, title, isActive }) => {
     return (
         <div className={`
-            relative rounded-[2rem] md:rounded-[3rem] border-8 md:border-[10px] border-[#1a1a1a] bg-black overflow-hidden shadow-2xl
-            w-[220px] md:w-[280px] aspect-[9/18]
+            relative rounded-[2rem] md:rounded-[3rem] border-4 md:border-[6px] border-black bg-black overflow-hidden shadow-2xl
+            w-[220px] md:w-[280px] aspect-[9/18] ring-1 ring-gray-800/50
         `}>
-            {/* Phone Bezel/Camera */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/3 h-4 md:h-6 bg-[#1a1a1a] rounded-b-xl z-20 flex justify-center items-center">
-                <div className="w-8 md:w-12 h-1 bg-[#2a2a2a] rounded-full" />
+            {/* Phone Bezel/Camera - Black Style */}
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/3 h-4 md:h-6 bg-black rounded-b-xl z-20 flex justify-center items-center shadow-sm border-b border-x border-gray-800">
+                <div className="w-8 md:w-12 h-1 bg-gray-800 rounded-full" />
             </div>
 
             {/* Screen Content */}
-            <div className="relative w-full h-full bg-gray-900">
+            <div className="relative w-full h-full bg-gray-900 text-white">
                 <img
                     src={image || "https://via.placeholder.com/400x800?text=No+Image"}
                     alt={title}
@@ -25,11 +25,11 @@ const PhoneMockup = ({ image, title, isActive }) => {
                     onError={(e) => { e.target.src = "https://via.placeholder.com/400x800?text=Image+Error"; }}
                 />
 
-                {/* Overlay for inactive (Animated via GSAP opacity) */}
+                {/* Overlay for inactive - Reduced opacity significantly */}
                 <div className="absolute inset-0 bg-black/40 transition-opacity duration-300 mask-overlay" />
             </div>
 
-            {/* Glass Glare */}
+            {/* Glass Glare - adjusted for black phone */}
             <div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent pointer-events-none z-10" />
         </div>
     );
@@ -109,12 +109,12 @@ const ProjectShowcase = () => {
             if (diff === 0) { // CENTER
                 config = { ...config, x: 0, scale: 1.1, opacity: 1, zIndex: 30, filter: "blur(0px)" };
                 if (overlay) gsap.to(overlay, { opacity: 0, duration: 0.5 });
-            } else if (diff === 1) { // RIGHT
-                config = { ...config, x: 280, scale: 0.85, opacity: 0.8, zIndex: 10, filter: "blur(0px)" }; // Slight blur removed or reduced
-                if (overlay) gsap.to(overlay, { opacity: 0.3, duration: 0.5 });
-            } else if (diff === -1) { // LEFT
-                config = { ...config, x: -280, scale: 0.85, opacity: 0.8, zIndex: 10, filter: "blur(0px)" };
-                if (overlay) gsap.to(overlay, { opacity: 0.3, duration: 0.5 });
+            } else if (diff === 1) { // RIGHT - Increased opacity
+                config = { ...config, x: 280, scale: 0.85, opacity: 1, zIndex: 10, filter: "blur(0px)" }; // Full opacity
+                if (overlay) gsap.to(overlay, { opacity: 0.1, duration: 0.5 }); // Minimal overlay
+            } else if (diff === -1) { // LEFT - Increased opacity
+                config = { ...config, x: -280, scale: 0.85, opacity: 1, zIndex: 10, filter: "blur(0px)" }; // Full opacity 
+                if (overlay) gsap.to(overlay, { opacity: 0.1, duration: 0.5 }); // Minimal overlay
             } else if (diff === 2) { // FAR RIGHT
                 config = { ...config, x: 500, scale: 0.5, opacity: 0, zIndex: 0 };
             } else if (diff === -2) { // FAR LEFT
@@ -130,13 +130,13 @@ const ProjectShowcase = () => {
 
 
     return (
-        <section className="relative w-full min-h-screen bg-[#020617] overflow-hidden flex items-center py-24">
+        <section className="relative w-full min-h-screen bg-slate-50 overflow-hidden flex items-center py-24">
 
             {/* Background Texture */}
             <div className="absolute inset-0 pointer-events-none">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_50%,rgba(5,164,167,0.08),transparent_70%)]" />
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_50%,rgba(5,164,167,0.05),transparent_70%)]" />
                 <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-primary/5 blur-[100px] rounded-full" />
-                <div className="absolute top-0 left-0 w-full h-full bg-[linear-gradient(to_right,#ffffff03_1px,transparent_1px),linear-gradient(to_bottom,#ffffff03_1px,transparent_1px)] bg-[size:40px_40px]" />
+                <div className="absolute top-0 left-0 w-full h-full bg-[linear-gradient(to_right,#00000005_1px,transparent_1px),linear-gradient(to_bottom,#00000005_1px,transparent_1px)] bg-[size:40px_40px]" />
             </div>
 
             <div className="max-w-7xl mx-auto w-full px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center relative z-10">
@@ -147,9 +147,9 @@ const ProjectShowcase = () => {
                     {/* 1. Main Static Heading Section - CLEANER TYPOGRAPHY */}
                     <div className="mb-2">
                         {/* Removed 'Featured Works' eyebrow */}
-                        <h1 className="text-5xl md:text-7xl font-bold text-white leading-tight tracking-tight drop-shadow-lg">
+                        <h1 className="text-5xl md:text-7xl font-bold text-slate-900 leading-tight tracking-tight drop-shadow-sm">
                             Projects <br />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-100 to-gray-400">
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-slate-600 to-slate-900">
                                 We Created
                             </span>
                         </h1>
@@ -167,23 +167,23 @@ const ProjectShowcase = () => {
                         >
                             {/* Project Title & Category */}
                             <div className="space-y-2">
-                                <h3 className="text-3xl md:text-4xl font-semibold text-white tracking-normal">
+                                <h3 className="text-3xl md:text-4xl font-semibold text-slate-900 tracking-normal">
                                     {activeProject.title}
                                 </h3>
-                                <p className="text-primary font-medium tracking-wide text-sm">
+                                <p className="text-[#05A4A7] font-medium tracking-wide text-sm">
                                     {activeProject.category}
                                 </p>
                             </div>
 
                             {/* Description - Cleaner, normal weight */}
-                            <p className="text-gray-300 text-base md:text-lg leading-relaxed font-normal">
+                            <p className="text-slate-600 text-base md:text-lg leading-relaxed font-normal">
                                 {activeProject.description}
                             </p>
 
                             {/* Tags bubble */}
                             <div className="flex flex-wrap gap-2">
                                 {activeProject.tags?.slice(0, 3).map((tag, i) => (
-                                    <span key={i} className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs text-gray-200 font-medium tracking-wide">
+                                    <span key={i} className="px-3 py-1 bg-slate-200 border border-slate-300 rounded-full text-xs text-slate-700 font-medium tracking-wide">
                                         {tag}
                                     </span>
                                 ))}
@@ -192,7 +192,7 @@ const ProjectShowcase = () => {
                             {/* Actions */}
                             <div className="pt-6 flex items-center gap-5">
                                 <Link to={`/projects/${activeProject.slug}`}>
-                                    <button className="px-8 py-3.5 bg-white text-black font-bold text-sm tracking-wide rounded-full hover:bg-gray-200 transition-all duration-300 flex items-center gap-2 shadow-lg hover:shadow-xl">
+                                    <button className="px-8 py-3.5 bg-slate-900 text-white font-bold text-sm tracking-wide rounded-full hover:bg-slate-800 transition-all duration-300 flex items-center gap-2 shadow-lg hover:shadow-xl">
                                         View Case Study
                                         <span className="material-symbols-outlined text-sm transform -rotate-45">arrow_forward</span>
                                     </button>
@@ -200,7 +200,7 @@ const ProjectShowcase = () => {
 
                                 <button
                                     onClick={nextProject}
-                                    className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white/10 transition-all active:scale-95"
+                                    className="w-12 h-12 rounded-full border border-slate-300 flex items-center justify-center text-slate-900 hover:bg-slate-200 transition-all active:scale-95"
                                     aria-label="Next Project"
                                 >
                                     <span className="material-symbols-outlined text-xl">arrow_forward_ios</span>

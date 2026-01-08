@@ -66,7 +66,7 @@ const Hero = () => {
                     </div>
                 </div>
 
-                {/* THE PHONE LOTTIE (Moved Below Hero Content) */}
+                {/* THE PHONE LOTTIE (Moved Below Hero Content) - HIDDEN
                 <div className="w-full relative flex flex-col items-center justify-center py-20 bg-primary/5 dark:bg-white/5 mt-10">
                     <div className="text-center mb-10 px-4">
                         <p className="text-primary font-black uppercase tracking-[0.3em] text-[10px] mb-2">Immersive Experience</p>
@@ -81,6 +81,7 @@ const Hero = () => {
                         />
                     </div>
                 </div>
+                */}
 
                 <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 hidden lg:block animate-bounce z-20">
                     <span className="material-icons text-gray-400 dark:text-gray-600">keyboard_arrow_down</span>
