@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Hero from '../components/Hero';
-import ProductEcosystem from '../components/ProductEcosystem';
+
 import About from '../components/About';
 import Services from '../components/Services';
 import Reviews from '../components/Reviews';
@@ -11,7 +11,7 @@ import ScrollWrapper from '../components/ScrollWrapper';
 import ScrollReveal from '../components/ScrollReveal';
 import Process from '../components/Process';
 import Stats from '../components/Stats';
-import ChannelPartners from '../components/ChannelPartners';
+// import ChannelPartners from '../components/ChannelPartners'; // Removed as requested
 import EntrySplash from '../components/EntrySplash'; // Import Splash
 
 import ProjectShowcase from '../components/ProjectShowcase';
@@ -56,7 +56,7 @@ const Home = () => {
                 <ProjectShowcase />
             </ScrollReveal>
 
-            <ChannelPartners />
+            {/* <ChannelPartners /> Removed */}
 
             <ScrollReveal>
                 <Process />
@@ -65,9 +65,7 @@ const Home = () => {
                 <Stats />
             </ScrollReveal>
 
-            <ScrollReveal>
-                <ProductEcosystem />
-            </ScrollReveal>
+
 
             <ScrollReveal>
                 <WhyChooseUs />

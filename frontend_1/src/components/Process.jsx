@@ -82,7 +82,7 @@ const Process = () => {
     }, []);
 
     return (
-        <section ref={containerRef} className="bg-white min-h-0 py-4 md:py-20 relative overflow-hidden flex flex-col justify-center" style={{ fontFamily: "'Playfair Display', serif" }}>
+        <section ref={containerRef} className="bg-white min-h-0 py-4 md:py-20 relative overflow-hidden flex flex-col justify-center">
             {/* Background Decorations */}
             <div className="absolute top-0 left-0 w-full h-full pointer-events-none opacity-5">
                 <div className="absolute top-20 left-10 w-64 h-64 bg-[#cdbdae] rounded-full blur-[100px]" />
@@ -133,7 +133,7 @@ const Process = () => {
                                                 className="text-right max-w-sm"
                                             >
                                                 <h3 className="text-xl font-bold text-gray-900 mb-1">{step.title}</h3>
-                                                <p className="text-gray-500 text-sm font-sans leading-relaxed">{step.description}</p>
+                                                <p className="text-gray-500 text-sm leading-relaxed">{step.description}</p>
                                             </motion.div>
                                         </div>
 
@@ -152,7 +152,7 @@ const Process = () => {
                                                 whileInView={{ opacity: 1, scale: 1 }}
                                                 viewport={{ once: false }}
                                                 transition={{ delay: 0.4 }}
-                                                className="absolute -top-1 -right-1 w-5 h-5 md:w-6 md:h-6 bg-gray-900 text-white text-[9px] md:text-[10px] flex items-center justify-center rounded-full font-sans font-bold shadow-md"
+                                                className="absolute -top-1 -right-1 w-5 h-5 md:w-6 md:h-6 bg-gray-900 text-white text-[9px] md:text-[10px] flex items-center justify-center rounded-full font-bold shadow-md"
                                             >
                                                 0{index + 1}
                                             </motion.div>
@@ -168,7 +168,7 @@ const Process = () => {
                                                 className="text-left max-w-sm"
                                             >
                                                 <h3 className="text-base sm:text-lg md:text-xl font-bold text-gray-900 mb-0 md:mb-1">{step.title}</h3>
-                                                <p className="hidden sm:block text-gray-500 text-xs md:text-sm font-sans leading-relaxed">{step.description}</p>
+                                                <p className="hidden sm:block text-gray-500 text-xs md:text-sm leading-relaxed">{step.description}</p>
                                             </motion.div>
                                         </div>
                                     </div>

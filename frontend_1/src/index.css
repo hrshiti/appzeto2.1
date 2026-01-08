@@ -7,9 +7,10 @@
   --color-card-light: #ffffff;
   --color-card-dark: #023638;
 
+  /* UPDATED: Strictly enforced Inter font for everything */
   --font-display: "Inter", "sans-serif";
-  --font-body: "Nunito", "sans-serif";
-  --font-nunito: "Nunito", "sans-serif";
+  --font-body: "Inter", "sans-serif";
+  --font-nunito: "Inter", "sans-serif";
 
   --animate-fade-in-up: fadeInUp 0.8s ease-out forwards;
   --animate-carousel-cycle: carouselFade 9s infinite;
@@ -38,7 +39,6 @@
 
   --animate-scroll: scroll 40s linear infinite;
   --animate-scroll-fast: scroll 15s linear infinite;
-  /* Added for faster mobile scrolling */
   --animate-slide-in-right: slideInRight 3.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
   --animate-slide-in-left: slideInLeft 3.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
   --animate-text-fill: textFill 4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
@@ -100,6 +100,23 @@
   --animate-scroll-vertical: scrollVertical 20s linear infinite;
   --animate-scroll-vertical-reverse: scrollVerticalReverse 20s linear infinite;
 }
+
+/* GLOBAL FONT RESET */
+/* We set Inter on body, but DO NOT use * selector to avoid breaking icons */
+body {
+  font-family: "Inter", sans-serif !important;
+}
+
+/* Explicitly protect Icon Fonts from being overridden if they have inline styles or specific classes */
+.material-icons {
+  font-family: 'Material Icons' !important;
+}
+
+.material-symbols-outlined {
+  font-family: 'Material Symbols Outlined' !important;
+}
+
+/* Lucide icons work with SVG so they are fine, but text-based icons need protection */
 
 /* Custom CSS from hero.txt */
 .glass-effect {

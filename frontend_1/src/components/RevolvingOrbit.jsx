@@ -1,0 +1,208 @@
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Link } from 'react-router-dom';
+import logo from '../assets/logo.png';
+import foodLogo from '../assets/apps/food.png';
+import shopLogo from '../assets/apps/shop.png';
+import healthLogo from '../assets/apps/health.png';
+import goLogo from '../assets/apps/go.png';
+
+const projects = [
+    {
+        id: "food",
+        title: "Appzeto Food",
+        description: "AI-powered food delivery.",
+        icon: "restaurant", // Fallback
+        image: foodLogo,
+        color: "#FF0844",
+        link: "/appzeto-food"
+    },
+    {
+        id: "shop",
+        title: "Appzeto Shop",
+        description: "AR-enabled shopping.",
+        icon: "shopping_bag", // Fallback
+        image: shopLogo,
+        color: "#4F46E5",
+        link: "/appzeto-ecommerce"
+    },
+    {
+        id: "care",
+        title: "Appzeto Health",
+        description: "Telemedicine solutions.",
+        icon: "local_hospital", // Fallback
+        image: healthLogo,
+        color: "#0EA5E9",
+        link: "/appzeto-hospital"
+    },
+    {
+        id: "go",
+        title: "Appzeto Go",
+        description: "Smart logistics network.",
+        icon: "local_taxi", // Fallback
+        image: goLogo,
+        color: "#00F2FE",
+        link: "/appzeto-taxi"
+    }
+];
+
+const techStack = [
+    { icon: "psychology", label: "AI" },
+    { icon: "code", label: "React" },
+    { icon: "terminal", label: "Node" },
+    { icon: "database", label: "SQL" },
+    { icon: "cloud", label: "Cloud" },
+    { icon: "api", label: "API" }
+];
+
+const RevolvingOrbit = ({ size = "md" }) => {
+    const [hoveredProduct, setHoveredProduct] = useState(null);
+
+    const sizeClasses = {
+        sm: "w-[250px] h-[250px]",
+        md: "w-[300px] h-[300px] sm:w-[450px] sm:h-[450px] md:w-[600px] md:h-[600px]",
+        lg: "w-full aspect-square max-w-2xl"
+    };
+
+    return (
+        <div className={`relative flex items-center justify-center z-10 ${sizeClasses[size]}`}>
+
+            {/* 1. OUTER DECORATIVE CIRCLE */}
+            <div className="absolute inset-0 rounded-full border border-white/5 pointer-events-none scale-110" />
+
+            {/* 2. MAIN SYSTEM (Rotating Container) */}
+            <motion.div
+                className="absolute w-[80%] h-[80%] z-10"
+                animate={{ rotate: 360 }}
+                transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+                style={{ animationPlayState: hoveredProduct ? "paused" : "running" }}
+            >
+                {/* CIRCULAR TRACK PATH */}
+                <svg viewBox="0 0 100 100" className="absolute inset-0 w-full h-full overflow-visible pointer-events-none">
+                    <circle
+                        cx="50" cy="50" r="50"
+                        fill="none"
+                        stroke="rgba(5, 164, 167, 0.2)"
+                        strokeWidth="0.5"
+                    />
+                    <circle
+                        cx="50" cy="50" r="50"
+                        fill="none"
+                        stroke="rgba(255, 255, 255, 0.2)"
+                        strokeWidth="0.2"
+                        strokeDasharray="4, 4"
+                    />
+                </svg>
+
+                {/* PRODUCT NODES */}
+                {projects.map((product, index) => {
+                    const angle = (index / projects.length) * 360;
+                    return (
+                        <div
+                            key={product.id}
+                            className="absolute"
+                            style={{
+                                top: `${50 + 50 * Math.sin((angle * Math.PI) / 180)}%`,
+                                left: `${50 + 50 * Math.cos((angle * Math.PI) / 180)}%`,
+                                transform: 'translate(-50%, -50%)'
+                            }}
+                        >
+                            <motion.div
+                                animate={{ rotate: -360 }}
+                                transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+                                style={{ animationPlayState: hoveredProduct ? "paused" : "running" }}
+                                className="relative group flex flex-col items-center"
+                                onMouseEnter={() => setHoveredProduct(product)}
+                                onMouseLeave={() => setHoveredProduct(null)}
+                            >
+                                <Link to={product.link} className="flex flex-col items-center">
+                                    {/* CIRCULAR TOKEN CONTAINER */}
+                                    <div className={`
+                                        w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-[#050505] border border-white/20 
+                                        flex items-center justify-center relative z-20 transition-all duration-300 shadow-[0_0_15px_rgba(0,0,0,0.8)]
+                                        ${hoveredProduct?.id === product.id ? 'scale-125 border-primary shadow-[0_0_25px_rgba(5,164,167,0.4)]' : 'hover:scale-110 group-hover:border-white/40'}
+                                    `}>
+                                        <div className="w-8 h-8 sm:w-10 sm:h-10 relative z-10">
+                                            <img
+                                                src={product.image}
+                                                alt={product.title}
+                                                className="w-full h-full object-contain drop-shadow-md"
+                                            />
+                                        </div>
+                                    </div>
+
+                                    <div className="mt-3 text-center pointer-events-none">
+                                        <p className={`
+                                            text-[7px] sm:text-[9px] font-bold uppercase tracking-wider transition-all duration-300
+                                            bg-black/80 px-2 py-0.5 rounded-full border border-white/10
+                                            ${hoveredProduct?.id === product.id ? 'text-primary border-primary/40' : 'text-gray-400 opacity-0 group-hover:opacity-100'}
+                                        `}>
+                                            {product.title}
+                                        </p>
+                                    </div>
+                                </Link>
+                            </motion.div>
+                        </div>
+                    );
+                })}
+            </motion.div>
+
+            {/* 3. INNER CORE AREA (Tech Icons + Pulse) */}
+            <div className="absolute w-[55%] h-[55%] pointer-events-none">
+                <motion.div
+                    className="absolute inset-0 rounded-full"
+                    animate={{ rotate: -180 }}
+                    transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
+                >
+                    {/* Inner track line */}
+                    <svg viewBox="0 0 100 100" className="absolute inset-0 w-full h-full overflow-visible opacity-30">
+                        <circle cx="50" cy="50" r="50" fill="none" stroke="white" strokeWidth="0.5" strokeDasharray="2,5" />
+                    </svg>
+
+                    {techStack.map((tech, index) => {
+                        const angle = (index / techStack.length) * 360;
+                        return (
+                            <div
+                                key={index}
+                                className="absolute"
+                                style={{
+                                    top: `${50 + 50 * Math.sin((angle * Math.PI) / 180)}%`,
+                                    left: `${50 + 50 * Math.cos((angle * Math.PI) / 180)}%`,
+                                    transform: 'translate(-50%, -50%)'
+                                }}
+                            >
+                                {/* Floating Tech Icon - No Background */}
+                                <motion.div
+                                    className=""
+                                    animate={{ rotate: 180 }}
+                                    transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
+                                >
+                                    <span className="material-symbols-outlined text-[10px] sm:text-sm text-primary/60 font-medium">
+                                        {tech.icon}
+                                    </span>
+                                </motion.div>
+                            </div>
+                        );
+                    })}
+                </motion.div>
+            </div>
+
+            {/* 4. CENTRAL LOGO CORE */}
+            <div className="relative z-30 w-20 h-20 sm:w-32 sm:h-32 md:w-44 md:h-44 rounded-full bg-black shadow-[0_0_60px_-10px_rgba(5,164,167,0.4)] flex items-center justify-center border border-white/10 overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 via-transparent to-transparent opacity-50" />
+                <motion.div
+                    initial={{ scale: 0.9, opacity: 0.8 }}
+                    animate={{ scale: 1.1, opacity: 1 }}
+                    transition={{ duration: 4, repeat: Infinity, repeatType: "mirror" }}
+                    className="absolute inset-0 bg-[radial-gradient(circle,rgba(5,164,167,0.1)_0%,transparent_70%)]"
+                />
+                <img src={logo} alt="Appzeto" className="w-12 sm:w-20 md:w-28 relative z-10 brightness-125 drop-shadow-[0_0_15px_rgba(5,164,167,0.5)]" />
+            </div>
+
+            {/* BACKGROUND DECORATIVE GLOW */}
+            <div className="absolute inset-0 bg-[radial-gradient(circle,rgba(5,164,167,0.05)_0%,transparent_70%)] pointer-events-none" />
+        </div>
+    );
+};
+
+export default RevolvingOrbit;

@@ -43,7 +43,7 @@ const Reviews = () => {
     const row2 = [...testimonials.slice(4, 8), ...testimonials.slice(4, 8)];
 
     return (
-        <section className="bg-[#cdbdae] py-12 md:py-24 font-serif overflow-hidden">
+        <section className="bg-[#cdbdae] py-12 md:py-24 overflow-hidden">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
@@ -114,16 +114,16 @@ const Reviews = () => {
                                 className="w-12 h-12 rounded-full object-cover"
                             />
                             <div>
-                                <h3 className="font-bold text-gray-900 font-sans text-base">Victoria Linton</h3>
+                                <h3 className="font-bold text-gray-900 text-base">Victoria Linton</h3>
                                 <div className="flex text-yellow-400 text-xs">
                                     {'★★★★★'.split('').map((c, i) => <span key={i}>{c}</span>)}
                                 </div>
                             </div>
                         </div>
-                        <p className="text-gray-500 text-xs leading-relaxed font-sans mb-4">
+                        <p className="text-gray-500 text-xs leading-relaxed mb-4">
                             Praesent urna neque viverra justo ultrices dui. Est lorem ipsum dolor sit amet consectetur adipiscing. Vitae nunc sed velit dignissim. In hendrerit gravida.
                         </p>
-                        <span className="absolute top-4 right-6 text-gray-300 text-5xl font-serif">”</span>
+                        <span className="absolute top-4 right-6 text-gray-300 text-5xl">”</span>
                     </motion.div>
 
                     {/* 2. Center Large Card (Center) */}
@@ -140,14 +140,14 @@ const Reviews = () => {
                                 />
                             </div>
                         </div>
-                        <h3 className="font-serif text-xl font-bold text-gray-900 mt-8 mb-2 uppercase tracking-wide">Excellent Job!</h3>
+                        <h3 className="text-xl font-bold text-gray-900 mt-8 mb-2 uppercase tracking-wide">Excellent Job!</h3>
                         <div className="flex text-gray-300 text-sm mb-4">
                             {'★★★★★'.split('').map((c, i) => <span key={i}>{c}</span>)}
                         </div>
                         <p className="text-gray-500 text-sm leading-relaxed italic mb-6">
                             "A scelerisque purus semper eget duis at tellus. Amet cursus sit amet dictum sit justo. Varius sit amet."
                         </p>
-                        <div className="font-handwriting text-3xl text-gray-400 rotate-[-5deg]">Fanny Dean</div>
+                        <div className="text-3xl text-gray-400 rotate-[-5deg] italic font-bold">Fanny Dean</div>
                     </motion.div>
 
                     {/* 3. Client Review (Right) */}
@@ -156,7 +156,7 @@ const Reviews = () => {
                         className="col-span-4 bg-white rounded-3xl p-6 shadow-lg"
                     >
                         <div className="flex justify-between items-start mb-2">
-                            <h3 className="font-bold text-gray-900 font-serif text-base">Client Review</h3>
+                            <h3 className="font-bold text-gray-900 text-base">Client Review</h3>
                             <span className="text-xs text-gray-400">@ArtfulWootton</span>
                         </div>
                         <p className="text-gray-500 text-xs italic mb-4">
@@ -209,7 +209,7 @@ const Reviews = () => {
                             className="w-16 h-16 rounded-full object-cover border-4 border-gray-100"
                         />
                         <div className="flex-1 px-4">
-                            <h3 className="font-serif font-bold text-gray-900 text-sm">NELLY VANE</h3>
+                            <h3 className="font-bold text-gray-900 text-sm">NELLY VANE</h3>
                             <p className="text-[10px] text-gray-500 leading-tight my-1">
                                 Varius duis at consectetur lorem donec. Et tortor at risus viverra.
                             </p>
@@ -228,7 +228,7 @@ const Reviews = () => {
                         className="col-span-3 bg-white rounded-3xl p-6 shadow-lg flex flex-col justify-between mt-4"
                     >
                         <div className="text-center">
-                            <h3 className="font-serif font-bold text-xl text-gray-900 mb-2">Top-notch!</h3>
+                            <h3 className="font-bold text-xl text-gray-900 mb-2">Top-notch!</h3>
                             <p className="text-gray-500 text-xs mb-4">
                                 Rhoncus urna neque viverra justo nec ultrices dui. Est lorem ipsum dolor.
                             </p>
@@ -263,7 +263,7 @@ const Reviews = () => {
                                 />
                             </div>
                             <div>
-                                <h4 className="font-serif font-bold text-gray-900 text-base">TESTIMONIAL</h4>
+                                <h4 className="font-bold text-gray-900 text-base">TESTIMONIAL</h4>
                                 <p className="text-xs text-gray-500 mt-1 italic">
                                     "In hac habitasse platea dictumst quisque sagittis pur convallis."
                                 </p>
@@ -291,7 +291,7 @@ const Reviews = () => {
                                 <span className="text-xs">★</span>
                             </div>
                         </div>
-                        <h4 className="font-serif font-bold text-gray-900 text-sm">RECOMMENDED!</h4>
+                        <h4 className="font-bold text-gray-900 text-sm">RECOMMENDED!</h4>
                         <div className="flex justify-center text-yellow-400 text-xs my-1">
                             {'★★★★★'.split('').map((c, i) => <span key={i}>{c}</span>)}
                         </div>
@@ -307,9 +307,9 @@ const Reviews = () => {
                             <p className="text-xs text-gray-500 italic">
                                 "Vestibulum mattis enim aulit tortor se ullamcorper morbi pretium"
                             </p>
-                            <div className="text-right font-handwriting text-gray-400 mt-2 text-lg">Jane</div>
+                            <div className="text-right font-bold text-gray-400 mt-2 text-lg">Jane</div>
                             <div className="text-right text-[10px] text-gray-300">@JaneProkofich</div>
-                            <span className="text-4xl text-[#8E847F] absolute -bottom-4 left-4 font-serif">”</span>
+                            <span className="text-4xl text-[#8E847F] absolute -bottom-4 left-4">”</span>
                         </div>
                         <div className="flex justify-end pr-4">
                             <img
@@ -321,12 +321,6 @@ const Reviews = () => {
                     </motion.div>
                 </div>
             </div>
-
-            <style>{`
-                @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
-                .font-serif { font-family: 'Playfair Display', serif; }
-                .font-handwriting { font-family: 'Dancing Script', cursive; }
-            `}</style>
         </section>
     );
 };
