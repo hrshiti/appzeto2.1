@@ -82,7 +82,7 @@ const AdminLayout = () => {
                             <SidebarItem to="/admin/services" icon={Layers} label="Services" />
                             <SidebarItem to="/admin/projects" icon={Briefcase} label="Projects" />
                             <SidebarItem to="/admin/blogs" icon={FileText} label="Blogs" />
-                            <SidebarItem to="/admin/products" icon={Package} label="Products" />
+                            {/* Products Removed as requested */}
                             <SidebarItem to="/admin/videos" icon={Tv} label="Watch Demo" />
 
                             <SectionLabel label="Forms & Leads" />
@@ -164,7 +164,7 @@ const AdminLayout = () => {
                                 <SidebarItem to="/admin/services" icon={Layers} label="Services" onClick={() => setIsMobileMenuOpen(false)} />
                                 <SidebarItem to="/admin/projects" icon={Briefcase} label="Projects" onClick={() => setIsMobileMenuOpen(false)} />
                                 <SidebarItem to="/admin/blogs" icon={FileText} label="Blogs" onClick={() => setIsMobileMenuOpen(false)} />
-                                <SidebarItem to="/admin/products" icon={Package} label="Products" onClick={() => setIsMobileMenuOpen(false)} />
+                                {/* Products Removed */}
                                 <SidebarItem to="/admin/videos" icon={Tv} label="Watch Demo" onClick={() => setIsMobileMenuOpen(false)} />
 
                                 <SectionLabel label="Forms & Leads" />
