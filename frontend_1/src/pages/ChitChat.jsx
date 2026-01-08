@@ -3,14 +3,28 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import ScrollWrapper from '../components/ScrollWrapper';
 import { motion, AnimatePresence } from 'framer-motion';
+import { dataService } from '../admin/services/dataService';
 
 const ChitChat = () => {
     const [status, setStatus] = useState('idle');
 
-    const handleSend = (e) => {
+    const handleSend = async (e) => {
         e.preventDefault();
         setStatus('sending');
-        setTimeout(() => setStatus('sent'), 2000);
+
+        const formData = new FormData(e.target);
+        const payload = Object.fromEntries(formData.entries());
+
+        try {
+            await dataService.submitMessage(payload);
+            setStatus('sent');
+            setTimeout(() => setStatus('idle'), 3000);
+            e.target.reset();
+        } catch (err) {
+            console.error(err);
+            setStatus('idle');
+            alert('Failed to send message. Please try again.');
+        }
     };
 
     return (
@@ -81,6 +95,7 @@ const ChitChat = () => {
                                                 <label className="text-[9px] font-black uppercase tracking-[0.2em] text-slate-400 ml-3">Full Name</label>
                                                 <input
                                                     required
+                                                    name="name"
                                                     type="text"
                                                     placeholder="Your Name"
                                                     className="w-full bg-slate-50/80 border border-slate-100 p-3 rounded-xl focus:border-primary focus:bg-white outline-none transition-all placeholder:text-slate-300 text-sm font-bold italic text-slate-800"
@@ -90,6 +105,7 @@ const ChitChat = () => {
                                                 <label className="text-[9px] font-black uppercase tracking-[0.2em] text-slate-400 ml-3">Phone</label>
                                                 <input
                                                     required
+                                                    name="phone"
                                                     type="tel"
                                                     placeholder="+91 0000..."
                                                     className="w-full bg-slate-50/80 border border-slate-100 p-3 rounded-xl focus:border-primary focus:bg-white outline-none transition-all placeholder:text-slate-300 text-sm font-bold italic text-slate-800"
@@ -101,6 +117,7 @@ const ChitChat = () => {
                                             <label className="text-[9px] font-black uppercase tracking-[0.2em] text-slate-400 ml-3">Email Address</label>
                                             <input
                                                 required
+                                                name="email"
                                                 type="email"
                                                 placeholder="you@email.com"
                                                 className="w-full bg-slate-50/80 border border-slate-100 p-3 rounded-xl focus:border-primary focus:bg-white outline-none transition-all placeholder:text-slate-300 text-sm font-bold italic text-slate-800"
@@ -112,6 +129,7 @@ const ChitChat = () => {
                                             <div className="relative">
                                                 <select
                                                     required
+                                                    name="reason"
                                                     className="w-full bg-slate-50/80 border border-slate-100 p-3 rounded-xl focus:border-primary focus:bg-white outline-none transition-all text-sm font-bold italic text-slate-800 appearance-none cursor-pointer"
                                                 >
                                                     <option value="" disabled selected>Select reason</option>
@@ -128,6 +146,7 @@ const ChitChat = () => {
                                             <label className="text-[9px] font-black uppercase tracking-[0.2em] text-slate-400 ml-3">Message</label>
                                             <textarea
                                                 required
+                                                name="message"
                                                 rows="2"
                                                 placeholder="How can we help?"
                                                 className="w-full bg-slate-50/80 border border-slate-100 p-3 rounded-xl focus:border-primary focus:bg-white outline-none transition-all placeholder:text-slate-300 text-sm font-bold italic text-slate-800 resize-none"
@@ -137,7 +156,7 @@ const ChitChat = () => {
                                         <button
                                             disabled={status !== 'idle'}
                                             className={`w-full py-4 rounded-xl font-black uppercase tracking-[0.4em] transition-all flex items-center justify-center gap-3 text-[10px] shadow-lg ${status === 'idle' ? 'bg-primary text-white hover:scale-[1.02] active:scale-[0.98]' :
-                                                    status === 'sending' ? 'bg-slate-100 text-slate-400 animate-pulse' : 'bg-green-500 text-white'
+                                                status === 'sending' ? 'bg-slate-100 text-slate-400 animate-pulse' : 'bg-green-500 text-white'
                                                 }`}
                                         >
                                             {status === 'idle' && <>Send Message <span className="material-icons text-sm">send</span></>}

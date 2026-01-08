@@ -122,7 +122,12 @@ const ContactUs = ({ isHomePage = false }) => {
     const handleLeadSubmit = async (e) => {
         e.preventDefault();
         const formData = new FormData(e.target);
-        const payload = Object.fromEntries(formData.entries());
+        const rawData = Object.fromEntries(formData.entries());
+
+        const payload = {
+            ...rawData,
+            leadType: 'Sales'
+        };
 
         try {
             await dataService.submitLead(payload);

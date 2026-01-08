@@ -18,7 +18,8 @@ import {
     Mail,
     Package,
     Tv,
-    GraduationCap
+    GraduationCap,
+    Handshake
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import logo from '../../assets/logo.png';
@@ -85,11 +86,9 @@ const AdminLayout = () => {
                             <SidebarItem to="/admin/videos" icon={Tv} label="Watch Demo" />
 
                             <SectionLabel label="Forms & Leads" />
-                            <SidebarItem to="/admin/leads" icon={Mail} label="Contact Submissions" />
-                            <SidebarItem to="/admin/queries" icon={HelpCircle} label="Query Submissions" />
-
-                            <SectionLabel label="Communication" />
-                            <SidebarItem to="/admin/messages" icon={MessageSquare} label="Inbox" />
+                            <SidebarItem to="/admin/leads" icon={Mail} label="Sales Leads" />
+                            <SidebarItem to="/admin/messages" icon={MessageSquare} label="General Inquiries" />
+                            <SidebarItem to="/hr/applications" icon={Users} label="Career Applications" />
 
                             <SectionLabel label="Organization" />
                             <SidebarItem to="/admin/team" icon={Users} label="Team" />
@@ -109,7 +108,7 @@ const AdminLayout = () => {
                             )}
                             <SidebarItem to="/hr/jobs" icon={Briefcase} label="Job Openings" />
                             <SidebarItem to="/hr/internships" icon={GraduationCap} label="Internships" />
-                            <SidebarItem to="/hr/applications" icon={Users} label="Job Applications" />
+                            <SidebarItem to="/hr/applications" icon={Users} label="Career Applications" />
                         </>
                     )}
                 </div>
@@ -169,10 +168,9 @@ const AdminLayout = () => {
                                 <SidebarItem to="/admin/videos" icon={Tv} label="Watch Demo" onClick={() => setIsMobileMenuOpen(false)} />
 
                                 <SectionLabel label="Forms & Leads" />
-                                <SidebarItem to="/admin/leads" icon={Mail} label="Contact Submissions" onClick={() => setIsMobileMenuOpen(false)} />
-                                <SidebarItem to="/admin/queries" icon={HelpCircle} label="Query Submissions" onClick={() => setIsMobileMenuOpen(false)} />
-
-                                <SidebarItem to="/admin/messages" icon={MessageSquare} label="Inbox" onClick={() => setIsMobileMenuOpen(false)} />
+                                <SidebarItem to="/admin/leads" icon={Mail} label="Sales Leads" onClick={() => setIsMobileMenuOpen(false)} />
+                                <SidebarItem to="/admin/messages" icon={MessageSquare} label="General Inquiries" onClick={() => setIsMobileMenuOpen(false)} />
+                                <SidebarItem to="/hr/applications" icon={Users} label="Career Applications" onClick={() => setIsMobileMenuOpen(false)} />
 
                                 <SectionLabel label="Organization" />
                                 <SidebarItem to="/admin/team" icon={Users} label="Team" onClick={() => setIsMobileMenuOpen(false)} />
@@ -191,7 +189,7 @@ const AdminLayout = () => {
                                 )}
                                 <SidebarItem to="/hr/jobs" icon={Briefcase} label="Job Openings" onClick={() => setIsMobileMenuOpen(false)} />
                                 <SidebarItem to="/hr/internships" icon={GraduationCap} label="Internships" onClick={() => setIsMobileMenuOpen(false)} />
-                                <SidebarItem to="/hr/applications" icon={Users} label="Job Applications" onClick={() => setIsMobileMenuOpen(false)} />
+                                <SidebarItem to="/hr/applications" icon={Users} label="Career Applications" onClick={() => setIsMobileMenuOpen(false)} />
                             </>
                         )}
                     </div>

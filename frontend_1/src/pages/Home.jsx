@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Hero from '../components/Hero';
-import Projects from '../components/Projects';
+import ProductEcosystem from '../components/ProductEcosystem';
 import About from '../components/About';
 import Services from '../components/Services';
 import Reviews from '../components/Reviews';
@@ -52,22 +52,21 @@ const Home = () => {
                 <Services />
             </ScrollReveal>
 
-            <ChannelPartners />
-
             <ScrollReveal>
                 <ProjectShowcase />
             </ScrollReveal>
 
+            <ChannelPartners />
+
             <ScrollReveal>
                 <Process />
             </ScrollReveal>
-
             <ScrollReveal>
                 <Stats />
             </ScrollReveal>
 
             <ScrollReveal>
-                <Projects />
+                <ProductEcosystem />
             </ScrollReveal>
 
             <ScrollReveal>

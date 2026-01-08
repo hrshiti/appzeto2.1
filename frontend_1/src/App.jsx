@@ -7,6 +7,7 @@ import Contact from './pages/Contact'
 import Services from './pages/Services'
 import ServiceDetail from './pages/ServiceDetail'
 import Blogs from './pages/Blogs'
+import BlogDetail from './pages/BlogDetail'
 import ChitChat from './pages/ChitChat'
 import Login from './pages/Login'
 import Projects from './pages/Projects'
@@ -40,6 +41,8 @@ import HRInternships from './admin/pages/HRInternships'
 import HRApplications from './admin/pages/HRApplications'
 import AdminSettings from './admin/pages/AdminSettings'
 import AdminTeam from './admin/pages/AdminTeam'
+import AdminPartners from './admin/pages/AdminPartners'
+import AdminApplications from './admin/pages/AdminApplications'
 
 import { ToastProvider } from './admin/context/ToastContext'
 
@@ -56,6 +59,7 @@ function App() {
             <Route path="/services" element={<Services />} />
             <Route path="/services/:slug" element={<ServiceDetail />} />
             <Route path="/blogs" element={<Blogs />} />
+            <Route path="/blogs/:slug" element={<BlogDetail />} />
             <Route path="/career" element={<Career />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/projects" element={<Projects />} />
@@ -92,6 +96,7 @@ function App() {
               <Route path="users" element={<AdminUsers />} />
               <Route path="settings" element={<AdminSettings />} />
               <Route path="team" element={<AdminTeam />} />
+              <Route path="partners" element={<AdminPartners />} />
             </Route>
 
             {/* HR Routes (Accessible by HR and ADMIN) */}

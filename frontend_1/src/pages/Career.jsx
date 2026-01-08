@@ -12,6 +12,7 @@ import { dataService } from '../admin/services/dataService';
 const Career = () => {
     const [selectedJob, setSelectedJob] = useState(null);
     const [isApplying, setIsApplying] = useState(false);
+    const [appStatus, setAppStatus] = useState('idle'); // idle, sending, success, error
 
     // RESTORED STATIC DATA AS PER USER REQUEST
     const positions = [
@@ -419,47 +420,65 @@ const Career = () => {
                                     </div>
                                 </div>
 
-                                <form className="space-y-2 md:space-y-4" onSubmit={(e) => { e.preventDefault(); alert('Application Sent Successfully!'); setIsApplying(false); }}>
+                                <form className="space-y-2 md:space-y-4" onSubmit={async (e) => {
+                                    e.preventDefault();
+                                    setAppStatus('sending');
+                                    const formData = new FormData(e.target);
+                                    const payload = Object.fromEntries(formData.entries());
+                                    payload.jobTitle = selectedJob;
+
+                                    try {
+                                        await dataService.submitApplication(payload);
+                                        setAppStatus('success');
+                                        setTimeout(() => {
+                                            setIsApplying(false);
+                                            setAppStatus('idle');
+                                        }, 3000);
+                                    } catch (err) {
+                                        console.error(err);
+                                        setAppStatus('error');
+                                        setTimeout(() => setAppStatus('idle'), 3000);
+                                    }
+                                }}>
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4">
                                         <div className="space-y-1">
                                             <label className="text-[8px] md:text-[10px] font-black uppercase text-slate-400 px-1 tracking-widest">Full Name</label>
-                                            <input required type="text" placeholder="John Doe" className="w-full px-3 py-2 md:px-4 md:py-2.5 bg-slate-50 border-[1.5px] md:border-2 border-slate-100 rounded-lg md:rounded-xl focus:border-primary focus:bg-white transition-all text-[10px] md:text-xs font-bold outline-none" />
+                                            <input name="name" required type="text" placeholder="John Doe" className="w-full px-3 py-2 md:px-4 md:py-2.5 bg-slate-50 border-[1.5px] md:border-2 border-slate-100 rounded-lg md:rounded-xl focus:border-primary focus:bg-white transition-all text-[10px] md:text-xs font-bold outline-none" />
                                         </div>
                                         <div className="space-y-1">
                                             <label className="text-[8px] md:text-[10px] font-black uppercase text-slate-400 px-1 tracking-widest">Email Address</label>
-                                            <input required type="email" placeholder="john@example.com" className="w-full px-3 py-2 md:px-4 md:py-2.5 bg-slate-50 border-[1.5px] md:border-2 border-slate-100 rounded-lg md:rounded-xl focus:border-primary focus:bg-white transition-all text-[10px] md:text-xs font-bold outline-none" />
+                                            <input name="email" required type="email" placeholder="john@example.com" className="w-full px-3 py-2 md:px-4 md:py-2.5 bg-slate-50 border-[1.5px] md:border-2 border-slate-100 rounded-lg md:rounded-xl focus:border-primary focus:bg-white transition-all text-[10px] md:text-xs font-bold outline-none" />
                                         </div>
                                     </div>
 
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4">
                                         <div className="space-y-1">
                                             <label className="text-[8px] md:text-[10px] font-black uppercase text-slate-400 px-1 tracking-widest">Phone Number</label>
-                                            <input required type="tel" placeholder="+91 00000 00000" className="w-full px-3 py-2 md:px-4 md:py-2.5 bg-slate-50 border-[1.5px] md:border-2 border-slate-100 rounded-lg md:rounded-xl focus:border-primary focus:bg-white transition-all text-[10px] md:text-xs font-bold outline-none" />
+                                            <input name="phone" required type="tel" placeholder="+91 00000 00000" className="w-full px-3 py-2 md:px-4 md:py-2.5 bg-slate-50 border-[1.5px] md:border-2 border-slate-100 rounded-lg md:rounded-xl focus:border-primary focus:bg-white transition-all text-[10px] md:text-xs font-bold outline-none" />
                                         </div>
                                         <div className="space-y-1">
                                             <label className="text-[8px] md:text-[10px] font-black uppercase text-slate-400 px-1 tracking-widest">LinkedIn / Portfolio</label>
-                                            <input type="url" placeholder="https://..." className="w-full px-3 py-2 md:px-4 md:py-2.5 bg-slate-50 border-[1.5px] md:border-2 border-slate-100 rounded-lg md:rounded-xl focus:border-primary focus:bg-white transition-all text-[10px] md:text-xs font-bold outline-none" />
-                                        </div>
-                                    </div>
-
-                                    <div className="space-y-1">
-                                        <label className="text-[8px] md:text-[10px] font-black uppercase text-slate-400 px-1 tracking-widest">Resume / CV</label>
-                                        <div className="relative">
-                                            <input required type="file" className="hidden" id="resume-upload" />
-                                            <label htmlFor="resume-upload" className="w-full h-12 md:h-16 border-[1.5px] md:border-2 border-dashed border-slate-300 rounded-lg md:rounded-xl flex items-center justify-center gap-2 cursor-pointer hover:border-primary hover:bg-slate-50 transition-all text-[9px] md:text-xs font-bold text-slate-500">
-                                                <span className="material-icons text-lg opacity-50">cloud_upload</span>
-                                                Upload PDF / DOC
-                                            </label>
+                                            <input name="portfolio" type="url" placeholder="https://..." className="w-full px-3 py-2 md:px-4 md:py-2.5 bg-slate-50 border-[1.5px] md:border-2 border-slate-100 rounded-lg md:rounded-xl focus:border-primary focus:bg-white transition-all text-[10px] md:text-xs font-bold outline-none" />
                                         </div>
                                     </div>
 
                                     <div className="space-y-1">
                                         <label className="text-[8px] md:text-[10px] font-black uppercase text-slate-400 px-1 tracking-widest">Why should we hire you?</label>
-                                        <textarea rows="2" placeholder="Tell us about your superpower..." className="w-full px-3 py-2 md:px-4 md:py-3 bg-slate-50 border-[1.5px] md:border-2 border-slate-100 rounded-lg md:rounded-xl focus:border-primary focus:bg-white transition-all text-[10px] md:text-xs font-bold outline-none resize-none"></textarea>
+                                        <textarea name="coverLetter" rows="3" placeholder="Tell us about your superpower..." className="w-full px-3 py-2 md:px-4 md:py-3 bg-slate-50 border-[1.5px] md:border-2 border-slate-100 rounded-lg md:rounded-xl focus:border-primary focus:bg-white transition-all text-[10px] md:text-xs font-bold outline-none resize-none"></textarea>
                                     </div>
 
-                                    <button type="submit" className="w-full py-3 md:py-3.5 bg-slate-950 text-white rounded-lg md:rounded-xl font-black uppercase tracking-widest text-[9px] md:text-xs hover:bg-primary hover:text-slate-950 transition-all shadow-xl shadow-slate-900/20 mb-1 md:mb-2">
-                                        Submit Application
+                                    <button
+                                        type="submit"
+                                        disabled={appStatus !== 'idle'}
+                                        className={`w-full py-3 md:py-3.5 rounded-lg md:rounded-xl font-black uppercase tracking-widest text-[9px] md:text-xs transition-all shadow-xl shadow-slate-900/20 mb-1 md:mb-2 ${appStatus === 'idle' ? 'bg-slate-950 text-white hover:bg-primary hover:text-slate-950' :
+                                                appStatus === 'sending' ? 'bg-slate-400 text-white animate-pulse' :
+                                                    appStatus === 'success' ? 'bg-green-500 text-white' : 'bg-red-500 text-white'
+                                            }`}
+                                    >
+                                        {appStatus === 'idle' && 'Submit Application'}
+                                        {appStatus === 'sending' && 'Sending...'}
+                                        {appStatus === 'success' && 'Success!'}
+                                        {appStatus === 'error' && 'Error! Try Again'}
                                     </button>
                                 </form>
                             </div>

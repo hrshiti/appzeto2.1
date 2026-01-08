@@ -119,19 +119,29 @@ const AdminLeads = () => {
 
     const columns = [
         {
+            header: 'Type',
+            accessor: 'leadType',
+            render: (row) => (
+                <span className={`px-2 py-0.5 rounded-[4px] text-[9px] font-bold uppercase ${row.leadType === 'Partner' ? 'bg-indigo-100 text-indigo-600 border border-indigo-200' : 'bg-blue-100 text-blue-600 border border-blue-200'
+                    }`}>
+                    {row.leadType || 'Sales'}
+                </span>
+            )
+        },
+        {
             header: 'Name & Company',
             accessor: 'name',
             render: (row) => (
                 <div>
                     <p className="font-bold text-slate-800">{row.name}</p>
-                    <p className="text-xs text-slate-500">{row.company}</p>
+                    <p className="text-xs text-slate-500 font-medium">{row.company}</p>
                 </div>
             )
         },
         {
-            header: 'Project Type',
+            header: 'Inquiry / Project',
             accessor: 'service',
-            render: (row) => <span className="text-slate-700 font-medium text-sm">{row.service}</span>
+            render: (row) => <span className="text-slate-700 font-bold text-sm tracking-tight">{row.service}</span>
         },
         {
             header: 'Status',
@@ -172,8 +182,8 @@ const AdminLeads = () => {
         <>
             <div className="flex flex-col md:flex-row md:items-center justify-between mb-8 pb-6 border-b border-slate-200">
                 <div>
-                    <h1 className="text-3xl font-black text-slate-900 tracking-tight">Contact Us Management</h1>
-                    <p className="text-slate-500 mt-1">Manage contact form submissions and settings.</p>
+                    <h1 className="text-3xl font-black text-slate-900 tracking-tight">Sales & Project Leads</h1>
+                    <p className="text-slate-500 mt-1">Manage project inquiries from the "Discuss Project" / "Sales Inquiry" modal.</p>
                 </div>
 
                 <div className="flex p-1 bg-white border border-slate-200 rounded-xl mt-4 md:mt-0">
@@ -244,8 +254,8 @@ const AdminLeads = () => {
                     </div>
 
                     <AdminTable
-                        title="Contact Submissions"
-                        subtitle="View and manage messages from the Contact Us form."
+                        title="Project Submission Leads"
+                        subtitle="Detailed inquiries from high-intent potential clients."
                         columns={columns}
                         data={filteredLeads}
                         customActions={renderActions}
@@ -310,10 +320,12 @@ const AdminLeads = () => {
                                         </div>
                                         <div className="p-4 bg-slate-50/50 border border-slate-100 rounded-xl">
                                             <h4 className="flex items-center gap-2 text-xs font-bold uppercase text-slate-400 mb-3">
-                                                <MessageSquare size={14} /> Project
+                                                <MessageSquare size={14} /> Message / Requirement
                                             </h4>
-                                            <p className="text-sm font-bold text-slate-800 mb-1">{selectedLead.service}</p>
-                                            <p className="text-sm text-slate-600 italic leading-relaxed">{/* No message field in Lead yet */}</p>
+                                            <p className="text-sm font-bold text-slate-800 mb-2">{selectedLead.service}</p>
+                                            <p className="text-sm text-slate-600 italic leading-relaxed bg-white p-3 rounded-lg border border-slate-100">
+                                                {selectedLead.message || "No additional message provided."}
+                                            </p>
                                         </div>
                                     </div>
 

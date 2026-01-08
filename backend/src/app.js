@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
 const helmet = require('helmet');
+const path = require('path');
 
 // Initialize app
 const app = express();
@@ -10,7 +11,12 @@ const app = express();
 app.use(express.json()); // Parse JSON bodies
 app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies
 app.use(cors()); // Enable CORS
-app.use(helmet()); // Set security headers
+// app.use(helmet()); // Temporarily commented if it blocks images, usually fine but careful with CSP
+app.use(helmet({ crossOriginResourcePolicy: false })); // Allow cross-origin images
+
+// Serve static files from public/uploads
+app.use('/uploads', express.static(path.join(__dirname, '../public/uploads')));
+
 if (process.env.NODE_ENV === 'development') {
     app.use(morgan('dev')); // Logging
 }
@@ -29,6 +35,7 @@ const videoRoutes = require('./routes/videoRoutes');
 const productRoutes = require('./routes/productRoutes');
 const jobRoutes = require('./routes/jobRoutes');
 const contactRoutes = require('./routes/contactRoutes');
+const uploadRoutes = require('./routes/uploadRoutes');
 
 app.use('/api/auth', authRoutes);
 app.use('/api/services', serviceRoutes);
@@ -39,6 +46,7 @@ app.use('/api/videos', videoRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/jobs', jobRoutes);
 app.use('/api/contact', contactRoutes);
+app.use('/api/upload', uploadRoutes);
 
 // Error Handling Middleware
 app.use((err, req, res, next) => {

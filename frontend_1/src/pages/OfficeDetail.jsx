@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import ScrollWrapper from '../components/ScrollWrapper';
+import { dataService } from '../admin/services/dataService';
 import { officesData } from '../data/officesData';
 
 const OfficeDetail = () => {
@@ -34,10 +35,23 @@ const OfficeDetail = () => {
         alert('Address copied to clipboard!');
     };
 
-    const handleSubmit = (e) => {
+    const handleSend = async (e) => {
         e.preventDefault();
-        setFormStatus('Message sent successfully!');
-        setTimeout(() => setFormStatus(''), 3000);
+        setFormStatus('sending');
+
+        const formData = new FormData(e.target);
+        const payload = Object.fromEntries(formData.entries());
+
+        try {
+            await dataService.submitMessage(payload);
+            setFormStatus('success');
+            setTimeout(() => setFormStatus(''), 3000);
+            e.target.reset();
+        } catch (err) {
+            console.error(err);
+            setFormStatus('error');
+            setTimeout(() => setFormStatus(''), 3000);
+        }
     };
 
     return (
@@ -207,35 +221,84 @@ const OfficeDetail = () => {
                                 </Link>
                             </div>
 
-                            <form onSubmit={handleSubmit} className="space-y-6">
-                                <div className="space-y-2">
-                                    <input
-                                        type="text"
-                                        required
-                                        placeholder="Your Name"
-                                        className="w-full bg-white/5 border border-white/10 rounded-2xl py-5 px-8 outline-none focus:border-primary focus:bg-white/10 transition-all"
-                                    />
+                            <form onSubmit={handleSend} className="space-y-4 md:space-y-6">
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                                    <div className="space-y-1.5 md:space-y-2">
+                                        <label className="text-[9px] md:text-[10px] font-black uppercase text-slate-500 tracking-widest ml-1">Full Name</label>
+                                        <input
+                                            required
+                                            name="name"
+                                            type="text"
+                                            placeholder="Your Name"
+                                            className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 md:py-5 px-6 md:px-8 outline-none focus:border-primary focus:bg-white/10 transition-all text-sm"
+                                        />
+                                    </div>
+                                    <div className="space-y-1.5 md:space-y-2">
+                                        <label className="text-[9px] md:text-[10px] font-black uppercase text-slate-500 tracking-widest ml-1">Phone</label>
+                                        <input
+                                            required
+                                            name="phone"
+                                            type="tel"
+                                            placeholder="+91 0000..."
+                                            className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 md:py-5 px-6 md:px-8 outline-none focus:border-primary focus:bg-white/10 transition-all text-sm"
+                                        />
+                                    </div>
                                 </div>
-                                <div className="space-y-2">
-                                    <input
-                                        type="email"
-                                        required
-                                        placeholder="Business Email"
-                                        className="w-full bg-white/5 border border-white/10 rounded-2xl py-5 px-8 outline-none focus:border-primary focus:bg-white/10 transition-all"
-                                    />
+
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                                    <div className="space-y-1.5 md:space-y-2">
+                                        <label className="text-[9px] md:text-[10px] font-black uppercase text-slate-500 tracking-widest ml-1">Email Address</label>
+                                        <input
+                                            required
+                                            name="email"
+                                            type="email"
+                                            placeholder="you@email.com"
+                                            className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 md:py-5 px-6 md:px-8 outline-none focus:border-primary focus:bg-white/10 transition-all text-sm"
+                                        />
+                                    </div>
+                                    <div className="space-y-1.5 md:space-y-2">
+                                        <label className="text-[9px] md:text-[10px] font-black uppercase text-slate-500 tracking-widest ml-1">Reason</label>
+                                        <div className="relative">
+                                            <select
+                                                required
+                                                name="reason"
+                                                className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 md:py-5 px-6 md:px-8 outline-none focus:border-primary focus:bg-white/10 transition-all text-sm appearance-none cursor-pointer"
+                                            >
+                                                <option value="" disabled selected>Select reason</option>
+                                                <option value="project">New Project</option>
+                                                <option value="partnership">Partnership</option>
+                                                <option value="career">Careers</option>
+                                                <option value="other">General</option>
+                                            </select>
+                                            <span className="material-icons absolute right-6 top-1/2 -translate-y-1/2 text-slate-500 pointer-events-none">expand_more</span>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className="space-y-2">
+
+                                <div className="space-y-1.5 md:space-y-2">
+                                    <label className="text-[9px] md:text-[10px] font-black uppercase text-slate-500 tracking-widest ml-1">Message</label>
                                     <textarea
                                         required
-                                        rows="4"
+                                        name="message"
+                                        rows="3"
                                         placeholder="How can we help?"
-                                        className="w-full bg-white/5 border border-white/10 rounded-3xl py-5 px-8 outline-none focus:border-primary focus:bg-white/10 transition-all resize-none"
+                                        className="w-full bg-white/5 border border-white/10 rounded-3xl py-4 md:py-5 px-6 md:px-8 outline-none focus:border-primary focus:bg-white/10 transition-all resize-none text-sm"
                                     />
                                 </div>
-                                <button className="w-full py-6 bg-primary text-white font-black uppercase tracking-[0.3em] rounded-full hover:bg-white hover:text-black transition-all transform hover:-translate-y-1">
-                                    Deliver Message
+
+                                <button
+                                    disabled={formStatus === 'sending'}
+                                    className={`w-full py-5 md:py-6 font-black uppercase tracking-[0.3em] rounded-full transition-all transform hover:-translate-y-1 flex items-center justify-center gap-3 ${formStatus === 'sending'
+                                        ? 'bg-slate-800 text-slate-500 cursor-not-allowed'
+                                        : 'bg-primary text-white hover:bg-white hover:text-black'
+                                        }`}
+                                >
+                                    {formStatus === 'sending' ? 'Delivering...' : 'Deliver Message'}
+                                    <span className="material-symbols-outlined text-sm">near_me</span>
                                 </button>
-                                {formStatus && <p className="text-emerald-500 font-black text-center text-xs uppercase tracking-widest animate-pulse">{formStatus}</p>}
+
+                                {formStatus === 'success' && <p className="text-emerald-500 font-black text-center text-xs uppercase tracking-widest animate-pulse">Message sent successfully!</p>}
+                                {formStatus === 'error' && <p className="text-red-500 font-black text-center text-xs uppercase tracking-widest">Failed to send message. Please try again.</p>}
                             </form>
                         </div>
                     </div>

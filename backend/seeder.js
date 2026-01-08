@@ -13,7 +13,7 @@ connectDB();
 const adminUser = {
     name: 'Admin User',
     email: 'admin@appzeto.com',
-    password: 'password123',
+    password: 'adminpassword',
     role: 'ADMIN'
 };
 

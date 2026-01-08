@@ -6,55 +6,115 @@ import ScrollWrapper from '../components/ScrollWrapper';
 import { dataService } from '../admin/services/dataService';
 
 const DemoCenter = () => {
+    const HERO_VIDEO = {
+        _id: 'hero-static',
+        title: "Appzeto Core Platform",
+        description: "A comprehensive walk-through of our flagship ecosystem, showing real-time data sync and AI capabilities.",
+        url: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        thumbnail: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2340&auto=format&fit=crop",
+        visibility: "Public"
+    };
+
     const [selectedVideo, setSelectedVideo] = useState(null);
     const [videos, setVideos] = useState([]);
-    const [mainDemo, setMainDemo] = useState(null);
+    const [mainDemo, setMainDemo] = useState(HERO_VIDEO);
+    const [loading, setLoading] = useState(true);
+
+    const getImgUrl = (path) => {
+        if (!path) return '';
+        if (path.startsWith('http')) return path;
+        return path.startsWith('/uploads') ? `http://localhost:5000${path}` : path;
+    };
+
+    const getFullUrl = (url) => {
+        if (!url) return '';
+        if (url.startsWith('http')) return url;
+        return url.startsWith('/uploads') ? `http://localhost:5000${url}` : url;
+    };
 
     useEffect(() => {
-        const allVideos = dataService.getVideos();
-        // Filter public videos
-        const publicVideos = allVideos.filter(v => v.visibility === 'Public');
+        const fetchVideos = async () => {
+            try {
+                const allVideos = await dataService.getVideos();
+                // Filter public videos
+                const publicVideos = Array.isArray(allVideos) ? allVideos.filter(v => v.visibility === 'Public') : [];
 
-        if (publicVideos.length > 0) {
-            setMainDemo(publicVideos[0]); // First video as Main/Hero
-            setVideos(publicVideos.slice(1)); // Rest as list
-        } else {
-            setVideos([]);
-        }
+                // Logic:
+                // 1. Check if any video is marked as featured in backend
+                const featuredVideo = publicVideos.find(v => v.featured);
+
+                if (featuredVideo) {
+                    setMainDemo(featuredVideo);
+                    // Filter out the featured video from the grid
+                    setVideos(publicVideos.filter(v => v._id !== featuredVideo._id));
+                } else {
+                    // Fallback to static hero if nothing featured exists
+                    setMainDemo(HERO_VIDEO);
+                    setVideos(publicVideos);
+                }
+            } catch (error) {
+                console.error("Error fetching videos:", error);
+                setMainDemo(HERO_VIDEO);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchVideos();
+        window.scrollTo(0, 0);
     }, []);
 
-    const VideoModal = ({ video, onClose }) => (
-        <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/90 backdrop-blur-md"
-            onClick={onClose}
-        >
+    const VideoModal = ({ video, onClose }) => {
+        const url = video.url;
+        const isVideoFile = url.startsWith('/uploads') ||
+            url.includes('cloudinary.com') ||
+            url.match(/\.(mp4|webm|ogg)$/i);
+        const fullUrl = getFullUrl(url);
+
+        return (
             <motion.div
-                initial={{ scale: 0.9, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                exit={{ scale: 0.9, opacity: 0 }}
-                className="relative w-full max-w-5xl aspect-video bg-gray-900 rounded-3xl overflow-hidden shadow-2xl"
-                onClick={e => e.stopPropagation()}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/90 backdrop-blur-md"
+                onClick={onClose}
             >
-                <button
-                    onClick={onClose}
-                    className="absolute top-4 right-4 z-10 w-10 h-10 bg-white/10 hover:bg-white/20 text-white rounded-full flex items-center justify-center backdrop-blur-md transition-all"
+                <motion.div
+                    initial={{ scale: 0.9, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    exit={{ scale: 0.9, opacity: 0 }}
+                    className="relative w-full max-w-5xl aspect-video bg-gray-900 rounded-3xl overflow-hidden shadow-2xl"
+                    onClick={e => e.stopPropagation()}
                 >
-                    <span className="material-symbols-outlined">close</span>
-                </button>
-                <iframe
-                    src={`${video.url}${video.url.includes('?') ? '&' : '?'}autoplay=1`}
-                    className="w-full h-full"
-                    title={video.title}
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                ></iframe>
+                    <button
+                        onClick={onClose}
+                        className="absolute top-4 right-4 z-10 w-10 h-10 bg-white/10 hover:bg-white/20 text-white rounded-full flex items-center justify-center backdrop-blur-md transition-all"
+                    >
+                        <span className="material-symbols-outlined">close</span>
+                    </button>
+
+                    {isVideoFile ? (
+                        <video
+                            src={fullUrl}
+                            controls
+                            autoPlay
+                            className="w-full h-full object-contain"
+                        />
+                    ) : (
+                        <iframe
+                            src={url.includes('youtube.com/embed') || url.includes('vimeo.com') ?
+                                `${url}${url.includes('?') ? '&' : '?'}autoplay=1` :
+                                url}
+                            className="w-full h-full"
+                            title={video.title}
+                            frameBorder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                        ></iframe>
+                    )}
+                </motion.div>
             </motion.div>
-        </motion.div>
-    );
+        );
+    };
 
     return (
         <ScrollWrapper>
@@ -65,7 +125,7 @@ const DemoCenter = () => {
                 {mainDemo && (
                     <section className="relative w-full h-[25vh] md:h-[85vh] overflow-hidden cursor-pointer group" onClick={() => setSelectedVideo(mainDemo)}>
                         <img
-                            src={mainDemo.thumbnail}
+                            src={getImgUrl(mainDemo.thumbnail)}
                             className="absolute inset-0 w-full h-full object-cover brightness-[0.4] group-hover:scale-105 transition-transform duration-[3s] ease-out"
                             alt="Core Demo"
                         />
@@ -111,7 +171,7 @@ const DemoCenter = () => {
                             {videos.length > 0 ? (
                                 videos.map((demo, idx) => (
                                     <motion.div
-                                        key={demo.id}
+                                        key={demo._id}
                                         initial={{ opacity: 0, y: 30 }}
                                         whileInView={{ opacity: 1, y: 0 }}
                                         transition={{ delay: idx * 0.1 }}
@@ -119,7 +179,7 @@ const DemoCenter = () => {
                                         onClick={() => setSelectedVideo(demo)}
                                     >
                                         <div className="relative aspect-video md:aspect-[16/10] rounded-2xl md:rounded-3xl overflow-hidden bg-gray-900 mb-3 md:mb-6 border border-gray-100">
-                                            <img src={demo.thumbnail} className="w-full h-full object-cover opacity-80 group-hover:scale-110 transition-transform duration-700" alt={demo.title} />
+                                            <img src={getImgUrl(demo.thumbnail)} className="w-full h-full object-cover opacity-80 group-hover:scale-110 transition-transform duration-700" alt={demo.title} />
                                             <div className="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors" />
                                             <div className="absolute inset-0 flex items-center justify-center">
                                                 <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white transition-transform duration-300 group-hover:scale-110">

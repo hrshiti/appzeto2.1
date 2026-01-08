@@ -37,7 +37,7 @@ const ProjectShowcase = () => {
     };
 
     return (
-        <section className="h-[75vh] md:h-screen w-full relative overflow-hidden bg-black font-sans select-none">
+        <section className="h-[60vh] md:h-screen w-full relative overflow-hidden bg-black font-sans select-none">
 
             {/* 1. Full-Screen Background */}
             <AnimatePresence mode="popLayout" initial={false}>
@@ -120,13 +120,13 @@ const ProjectShowcase = () => {
                 </div>
             </div>
 
-            {/* 4. Bottom Right Carousel & View All Link */}
+            {/* 4. Carousel & View All Link */}
             <motion.div
                 initial={{ opacity: 0, y: 100, x: -100 }}
                 whileInView={{ opacity: 1, y: 0, x: 0 }}
                 viewport={{ once: false, amount: 0.2 }}
                 transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-                className="absolute bottom-20 right-6 md:bottom-16 md:right-20 z-30 flex items-end gap-4 md:gap-10 pointer-events-auto hidden sm:flex"
+                className="absolute bottom-20 right-6 md:bottom-16 md:right-20 z-30 flex items-end gap-3 md:gap-10 pointer-events-auto"
             >
                 <div className="flex gap-2 md:gap-4 items-end">
                     <AnimatePresence mode="popLayout" initial={false}>
@@ -139,7 +139,7 @@ const ProjectShowcase = () => {
                                 exit={{ opacity: 0, x: -100, scale: 1.2, filter: "blur(20px)" }}
                                 transition={{ duration: 1, ease: [0.19, 1, 0.22, 1] }}
                                 onClick={() => handleSelect(project)}
-                                className="group relative w-20 md:w-32 lg:w-40 aspect-[3/4.5] rounded-xl md:rounded-[2rem] overflow-hidden cursor-pointer border border-white/10 bg-white/5 shadow-2xl"
+                                className="group relative w-14 md:w-32 lg:w-40 aspect-[3/4.5] rounded-lg md:rounded-[2rem] overflow-hidden cursor-pointer border border-white/10 bg-white/5 shadow-2xl"
                             >
                                 <motion.img
                                     layoutId={`card-img-${project.id}`}
@@ -147,24 +147,24 @@ const ProjectShowcase = () => {
                                     alt={project.title}
                                     className="absolute inset-0 w-full h-full object-cover grayscale-[0.3] group-hover:grayscale-0 transition-all duration-700 active:scale-95"
                                 />
-                                <div className="absolute inset-0 bg-black/40 flex flex-col items-center justify-center p-2 text-center">
-                                    <h4 className="text-white text-[6px] md:text-[9px] font-black uppercase tracking-widest px-1 drop-shadow-lg">{project.title}</h4>
+                                <div className="absolute inset-0 bg-black/40 flex flex-col items-center justify-center p-1 text-center">
+                                    <h4 className="text-white text-[5px] md:text-[9px] font-black uppercase tracking-widest px-1 drop-shadow-lg">{project.title}</h4>
                                 </div>
                             </motion.div>
                         ))}
                     </AnimatePresence>
                 </div>
 
-                {/* View All Projects - No background, minimal link */}
+                {/* View All Projects */}
                 <Link to="/projects">
                     <motion.div
                         whileHover={{ x: 10 }}
-                        className="flex flex-col items-center justify-center cursor-pointer group mb-4 md:mb-10"
+                        className="flex flex-col items-center justify-center cursor-pointer group mb-1 md:mb-10"
                     >
-                        <div className="w-10 h-10 md:w-14 md:h-14 rounded-full border border-white/20 flex flex-col items-center justify-center transition-all group-hover:border-primary group-hover:bg-primary/10">
-                            <span className="material-icons text-white text-base md:text-2xl group-hover:text-primary transition-colors">east</span>
+                        <div className="w-8 h-8 md:w-14 md:h-14 rounded-full border border-white/20 flex flex-col items-center justify-center transition-all group-hover:border-primary group-hover:bg-primary/10">
+                            <span className="material-icons text-white text-xs md:text-2xl group-hover:text-primary transition-colors">east</span>
                         </div>
-                        <span className="text-[8px] md:text-[10px] font-black text-white/40 group-hover:text-white uppercase tracking-widest mt-2 md:mt-3 transition-colors">View All</span>
+                        <span className="text-[6px] md:text-[10px] font-black text-white/40 group-hover:text-white uppercase tracking-widest mt-1 md:mt-3 transition-colors">View All</span>
                     </motion.div>
                 </Link>
             </motion.div>

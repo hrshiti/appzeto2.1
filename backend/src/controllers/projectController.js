@@ -1,4 +1,5 @@
 const Project = require('../models/Project');
+const mongoose = require('mongoose');
 
 // @desc    Get all projects
 // @route   GET /api/projects

@@ -120,7 +120,7 @@ const ChannelPartners = () => {
                     </div>
                 </div>
 
-                <div className="partner-cards-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div className="partner-cards-grid grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-8">
                     {partners.map((partner) => (
                         <div
                             key={partner.id}
@@ -129,31 +129,31 @@ const ChannelPartners = () => {
                             <motion.div
                                 whileHover={{ y: -15 }}
                                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                                className="bg-gray-50 border border-gray-100 rounded-[2rem] overflow-hidden transition-all duration-500 shadow-sm hover:shadow-2xl hover:shadow-[#05A4A7]/10"
+                                className="bg-gray-50 border border-gray-100 rounded-2xl md:rounded-[2rem] overflow-hidden transition-all duration-500 shadow-sm hover:shadow-2xl hover:shadow-[#05A4A7]/10"
                             >
-                                <div className="relative h-60 overflow-hidden">
+                                <div className="relative h-32 md:h-60 overflow-hidden">
                                     <img
                                         src={partner.image}
                                         alt={partner.name}
                                         className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-115"
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-40 group-hover:opacity-20 transition-opacity" />
-                                    <div className="absolute top-5 right-5">
-                                        <div className="bg-white/90 backdrop-blur-md px-4 py-1.5 rounded-full border border-gray-100 shadow-sm">
-                                            <span className="text-[10px] font-black text-[#05A4A7] uppercase tracking-widest">{partner.type}</span>
+                                    <div className="absolute top-2 right-2 md:top-5 md:right-5">
+                                        <div className="bg-white/90 backdrop-blur-md px-2 py-1 md:px-4 md:py-1.5 rounded-full border border-gray-100 shadow-sm">
+                                            <span className="text-[7px] md:text-[10px] font-black text-[#05A4A7] uppercase tracking-widest">{partner.type.split(' ')[0]}</span>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div className="p-8">
-                                    <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-[#05A4A7] transition-colors line-clamp-1">
+                                <div className="p-3 md:p-8">
+                                    <h3 className="text-sm md:text-2xl font-bold text-gray-900 mb-1 md:mb-3 group-hover:text-[#05A4A7] transition-colors line-clamp-1">
                                         {partner.name}
                                     </h3>
-                                    <div className="flex items-center gap-2 text-gray-500 font-medium">
-                                        <div className="w-8 h-8 rounded-full bg-[#05A4A7]/10 flex items-center justify-center">
-                                            <span className="material-symbols-outlined text-sm text-[#05A4A7]">location_on</span>
+                                    <div className="flex items-center gap-1 md:gap-2 text-gray-500 font-medium">
+                                        <div className="w-5 h-5 md:w-8 md:h-8 rounded-full bg-[#05A4A7]/10 flex items-center justify-center">
+                                            <span className="material-symbols-outlined text-[10px] md:text-sm text-[#05A4A7]">location_on</span>
                                         </div>
-                                        <span className="text-sm tracking-wide">{partner.location}</span>
+                                        <span className="text-[9px] md:text-sm tracking-wide truncate">{partner.location}</span>
                                     </div>
                                 </div>
                             </motion.div>

@@ -77,8 +77,8 @@ const AdminMessages = () => {
     return (
         <>
             <AdminTable
-                title="Inbox"
-                subtitle="General contact form inquiries."
+                title="General Inquiries"
+                subtitle="Consolidated messages from: Office Details Page, Contact Us Page (Main Form), and ChitChat Page."
                 columns={columns}
                 data={messages}
                 customActions={renderActions}
@@ -94,17 +94,6 @@ const AdminMessages = () => {
                             <p className="text-xs text-slate-400">{new Date(selectedMessage.createdAt).toLocaleString()}</p>
                         </div>
                         <p className="text-slate-800 bg-slate-50 p-4 rounded-lg text-sm">{selectedMessage.message}</p>
-                        <div className="flex justify-end pt-2">
-                            <button
-                                onClick={() => {
-                                    addToast('Reply functionality not implemented yet.', 'info');
-                                    setSelectedMessage(null);
-                                }}
-                                className="bg-primary text-white px-4 py-2 rounded-lg text-sm font-bold"
-                            >
-                                Reply (Simulated)
-                            </button>
-                        </div>
                     </div>
                 )}
             </Modal>

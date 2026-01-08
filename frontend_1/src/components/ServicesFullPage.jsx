@@ -14,6 +14,55 @@ import uiuxImg from '../assets/ui_ux_design_service_preview_1767285557945.png';
 
 gsap.registerPlugin(ScrollTrigger);
 
+// Static Data (Restored from previous version)
+const staticServices = [
+    {
+        id: "web-dev",
+        slug: "web-development",
+        title: "Web Development",
+        icon: "language",
+        shortDescription: "High-performance websites and web applications built with modern technologies like React, Next.js, and Node.js.",
+        fullDescription: "We build scalable, secure, and fast web applications tailored to your business needs. Our expertise includes frontend development with React, backend systems with Node.js, and full-stack solutions that drive growth.",
+        features: ["Custom React Development", "Next.js SSR & SSG", "Responsive Design", "API Integration"]
+    },
+    {
+        id: "app-dev",
+        slug: "mobile-apps",
+        title: "Mobile App Development",
+        icon: "smartphone",
+        shortDescription: "Native and cross-platform mobile apps for iOS and Android using Flutter and React Native.",
+        fullDescription: "Transform your ideas into powerful mobile experiences. We specialize in creating intuitive, high-performance mobile applications that engage users and provide seamless functionality across all devices.",
+        features: ["iOS & Android Apps", "Cross-Platform Flutter", "React Native Solutions", "App Store Optimization"]
+    },
+    {
+        id: "ai-ml",
+        slug: "ai-solutions",
+        title: "AI & Machine Learning",
+        icon: "smart_toy",
+        shortDescription: "Intelligent automation and data-driven solutions to future-proof your business.",
+        fullDescription: "Leverage the power of Artificial Intelligence to automate processes and gain insights. From custom chatbots to predictive modeling, we integrate AI into your workflow for maximum efficiency.",
+        features: ["Custom AI Models", "NLP & Chatbots", "Predictive Analytics", "Machine Learning Integration"]
+    },
+    {
+        id: "cloud-devops",
+        slug: "cloud-devops",
+        title: "Cloud & DevOps",
+        icon: "cloud_sync",
+        shortDescription: "Streamlined deployment pipelines and robust cloud infrastructure for high availability.",
+        fullDescription: "Optimize your software delivery process with our DevOps expertise. We manage cloud infrastructure on AWS and Azure, ensuring your applications are always available, scalable, and secure.",
+        features: ["AWS/Azure Management", "CI/CD Pipelines", "Docker & Kubernetes", "Infrastructure as Code"]
+    },
+    {
+        id: "ui-ux",
+        slug: "ui-ux-design",
+        title: "UI/UX Design",
+        icon: "design_services",
+        shortDescription: "User-centric designs that combine aesthetics with seamless functional experiences.",
+        fullDescription: "We believe that great technology starts with great design. Our team creates visually stunning and Highly functional interfaces that provide an exceptional user experience on every screen.",
+        features: ["User Research", "Wireframing & Prototyping", "Visual Design", "Interaction Design"]
+    }
+];
+
 const ServicesFullPage = () => {
     const containerRef = useRef(null);
     const [activeSection, setActiveSection] = useState('');
@@ -21,40 +70,36 @@ const ServicesFullPage = () => {
 
     // Fetch Services
     useEffect(() => {
-        const allServices = dataService.getServices();
-        setServices(allServices);
-        if (allServices.length > 0) {
-            setActiveSection(allServices[0].id);
-        }
+        const fetchServices = async () => {
+            try {
+                const allServices = await dataService.getServices();
+                if (Array.isArray(allServices)) {
+                    setServices(allServices);
+                    if (allServices.length > 0) {
+                        setActiveSection(allServices[0].slug || allServices[0]._id);
+                    }
+                }
+            } catch (error) {
+                console.error("Failed to fetch services:", error);
+            }
+        };
+        fetchServices();
     }, []);
 
     // Smooth Scroll Setup
     useEffect(() => {
-        const lenis = new Lenis({
-            duration: 1.2,
-            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-            direction: 'vertical',
-            gestureDirection: 'vertical',
-            smooth: true,
-            mouseMultiplier: 1,
-            smoothTouch: false,
-            touchMultiplier: 2,
-        });
-
+        const lenis = new Lenis();
         function raf(time) {
             lenis.raf(time);
             requestAnimationFrame(raf);
         }
-
         requestAnimationFrame(raf);
 
         return () => lenis.destroy();
     }, []);
 
-    // Scroll Spy Logic
+    // Intersection Observer for Active Section
     useEffect(() => {
-        if (services.length === 0) return;
-
         const observer = new IntersectionObserver(
             (entries) => {
                 entries.forEach((entry) => {
@@ -63,23 +108,44 @@ const ServicesFullPage = () => {
                     }
                 });
             },
-            { threshold: 0.3, rootMargin: "-10% 0px -50% 0px" }
+            { threshold: 0.5, rootMargin: "-10% 0px -40% 0px" }
         );
 
         services.forEach(service => {
-            const el = document.getElementById(service.id);
+            const el = document.getElementById(service.slug || service._id);
             if (el) observer.observe(el);
         });
 
         return () => observer.disconnect();
     }, [services]);
 
-
     const scrollToSection = (id) => {
-        const el = document.getElementById(id);
-        if (el) {
-            el.scrollIntoView({ behavior: 'smooth' });
+        const element = document.getElementById(id);
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
         }
+    };
+
+    // Helper to format code content for display
+    const renderCodeSnippet = (service) => {
+        if (!service.visualCode) return (
+            <div className="space-y-1 opacity-80 group-hover:opacity-100 transition-opacity">
+                <p><span className="text-purple-400">import</span> React <span className="text-purple-400">from</span> 'react';</p>
+                <p><span className="text-purple-400">const</span> <span className="text-yellow-300">App</span> = () {'=>'} {'{'}</p>
+                <p className="pl-4"><span className="text-purple-400">return</span> (</p>
+                <p className="pl-8 text-green-300">{'<div className="app-container">'}</p>
+                <p className="pl-12 text-green-300">{'<h1>'}{service.title}{'</h1>'}</p>
+                <p className="pl-8 text-green-300">{'</div>'}</p>
+                <p className="pl-4">);</p>
+                <p>{'}'};</p>
+            </div>
+        );
+
+        return (
+            <pre className="whitespace-pre-wrap break-all text-xs text-green-400 overflow-x-auto custom-scrollbar">
+                {service.visualCode}
+            </pre>
+        );
     };
 
     // Helper to determine layout type based on content
@@ -126,7 +192,7 @@ const ServicesFullPage = () => {
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
                                 className="px-6 py-3 sm:px-8 sm:py-4 bg-[#05A4A7] text-white font-bold rounded-lg shadow-lg hover:shadow-[#05A4A7]/30 transition-shadow text-sm sm:text-base"
-                                onClick={() => services.length > 0 && scrollToSection(services[0].id)}
+                                onClick={() => Array.isArray(services) && services.length > 0 && scrollToSection(services[0].slug || services[0]._id)}
                             >
                                 Explore Services
                             </motion.button>
@@ -161,11 +227,11 @@ const ServicesFullPage = () => {
                     <div className="sticky top-32">
                         <h4 className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-6">Service Menu</h4>
                         <div className="flex flex-col gap-2 border-l border-slate-200">
-                            {services.map((service) => (
+                            {Array.isArray(services) && services.map((service) => (
                                 <button
-                                    key={service.id}
-                                    onClick={() => scrollToSection(service.id)}
-                                    className={`text-left px-6 py-3 text-sm font-bold transition-all duration-300 border-l-[3px] -ml-[3px] flex items-center gap-3 ${activeSection === service.id
+                                    key={service._id}
+                                    onClick={() => scrollToSection(service.slug || service._id)}
+                                    className={`text-left px-6 py-3 text-sm font-bold transition-all duration-300 border-l-[3px] -ml-[3px] flex items-center gap-3 ${activeSection === (service.slug || service._id)
                                         ? 'border-[#05A4A7] text-[#05A4A7] bg-slate-50'
                                         : 'border-transparent text-slate-500 hover:text-slate-900'
                                         }`}
@@ -187,11 +253,11 @@ const ServicesFullPage = () => {
                 {/* RIGHT CONTENT */}
                 <div className="flex-1 w-full space-y-16 md:space-y-32">
 
-                    {services.map((service) => {
-                        const layout = getLayoutType(service.title);
+                    {Array.isArray(services) && services.map((service) => {
+                        const layout = service.layoutType || 'web';
 
                         return (
-                            <section key={service.id} id={service.id} className="scroll-mt-24 md:scroll-mt-32">
+                            <section key={service._id} id={service.slug || service._id} className="scroll-mt-24 md:scroll-mt-32">
                                 <motion.div
                                     initial={{ opacity: 0, y: 30 }}
                                     whileInView={{ opacity: 1, y: 0 }}
@@ -213,21 +279,23 @@ const ServicesFullPage = () => {
                                                     <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-red-500"></div>
                                                     <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-yellow-500"></div>
                                                     <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-green-500"></div>
-                                                    <div className="text-[10px] text-gray-500 ml-4">App.tsx</div>
+                                                    <div className="text-[10px] text-gray-500 ml-4">{service.visualFilename || 'ServicePreview.png'}</div>
                                                 </div>
-                                                <div className="space-y-1 opacity-80 group-hover:opacity-100 transition-opacity">
-                                                    <p><span className="text-purple-400">import</span> React <span className="text-purple-400">from</span> 'react';</p>
-                                                    <p><span className="text-purple-400">const</span> <span className="text-yellow-300">App</span> = () {'=>'} {'{'}</p>
-                                                    <p className="pl-4"><span className="text-purple-400">return</span> (</p>
-                                                    <p className="pl-8 text-green-300">{'<div className="app-container">'}</p>
-                                                    <p className="pl-12 text-green-300">{'<h1>'}{service.title}{'</h1>'}</p>
-                                                    <p className="pl-8 text-green-300">{'</div>'}</p>
-                                                    <p className="pl-4">);</p>
-                                                    <p>{'}'};</p>
-                                                </div>
+                                                {service.image ? (
+                                                    <div className="relative w-full h-full overflow-hidden rounded-lg">
+                                                        <img
+                                                            src={service.image.startsWith('/uploads') ? `http://localhost:5000${service.image}` : service.image}
+                                                            alt={service.title}
+                                                            className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500"
+                                                        />
+                                                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                                                    </div>
+                                                ) : (
+                                                    renderCodeSnippet(service)
+                                                )}
                                             </div>
                                             <div className="space-y-3 sm:space-y-4">
-                                                {service.features.map((feature, idx) => (
+                                                {Array.isArray(service.features) && service.features.map((feature, idx) => (
                                                     <motion.div key={idx} className="p-4 sm:p-6 bg-white border border-slate-100 rounded-xl shadow-sm flex items-start gap-4">
                                                         <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-blue-50 flex items-center justify-center shrink-0`}>
                                                             <span className={`material-symbols-outlined text-base sm:text-xl text-blue-500`}>check</span>
@@ -248,7 +316,7 @@ const ServicesFullPage = () => {
                                                 <div className="flex-1 space-y-6 sm:space-y-8 pt-0 sm:pt-6">
                                                     <div className="prose prose-invert max-w-none text-slate-400 text-sm" dangerouslySetInnerHTML={{ __html: service.fullDescription }}></div>
                                                     <ul className="space-y-3 sm:space-y-4">
-                                                        {service.features.map((item, i) => (
+                                                        {Array.isArray(service.features) && service.features.map((item, i) => (
                                                             <li key={i} className="flex items-center gap-3">
                                                                 <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-[#05A4A7] flex items-center justify-center text-black">
                                                                     <span className="material-symbols-outlined text-xs sm:text-sm font-bold">check</span>
@@ -259,18 +327,21 @@ const ServicesFullPage = () => {
                                                     </ul>
                                                 </div>
                                                 <div className="flex-1 relative flex justify-center items-center">
-                                                    <img src="https://assets.codepen.io/t-1/mobile-frame-png.png" width="200" alt="App" className="relative z-10" />
+                                                    <div className="relative group">
+                                                        <div className="absolute -inset-1 bg-gradient-to-r from-[#05A4A7] to-emerald-500 rounded-[2.5rem] blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
+                                                        <img src="https://assets.codepen.io/t-1/mobile-frame-png.png" width="220" alt="App" className="relative z-10" />
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     )}
 
                                     {/* GENERIC / OTHER LAYOUTS */}
-                                    {(layout !== 'web' && layout !== 'app') && (
+                                    {layout === 'generic' && (
                                         <div className="bg-white rounded-2xl p-6 sm:p-10 shadow-sm border border-slate-100">
                                             <div className="prose prose-slate max-w-none mb-8" dangerouslySetInnerHTML={{ __html: service.fullDescription || service.shortDescription }}></div>
                                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                                {service.features.map((feature, idx) => (
+                                                {Array.isArray(service.features) && service.features.map((feature, idx) => (
                                                     <div key={idx} className="flex items-center gap-3 p-3 bg-slate-50 rounded-lg">
                                                         <span className="material-symbols-outlined text-[#05A4A7]">check_circle</span>
                                                         <span className="text-sm font-medium text-slate-700">{feature}</span>

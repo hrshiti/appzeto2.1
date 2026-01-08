@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const Service = require('../models/Service');
 
 // @desc    Get all services
@@ -51,7 +52,12 @@ exports.createService = async (req, res, next) => {
         const service = await Service.create(req.body);
         res.status(201).json({ success: true, data: service });
     } catch (err) {
-        res.status(400).json({ success: false, error: err.message });
+        let error = err.message;
+        // Handle duplicate key error
+        if (err.code === 11000) {
+            error = 'A service with this title or slug already exists.';
+        }
+        res.status(400).json({ success: false, error: error });
     }
 };
 

@@ -8,7 +8,8 @@
   --color-card-dark: #023638;
 
   --font-display: "Inter", "sans-serif";
-  --font-body: "Inter", "sans-serif";
+  --font-body: "Nunito", "sans-serif";
+  --font-nunito: "Nunito", "sans-serif";
 
   --animate-fade-in-up: fadeInUp 0.8s ease-out forwards;
   --animate-carousel-cycle: carouselFade 9s infinite;

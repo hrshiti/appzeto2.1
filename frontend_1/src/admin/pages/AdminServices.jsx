@@ -7,6 +7,7 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import '../styles/editor.css';
 import { dataService } from '../services/dataService';
+import api from '../services/api';
 
 const AdminServices = () => {
     const { addToast } = useToast();
@@ -15,18 +16,17 @@ const AdminServices = () => {
     const [services, setServices] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isEditMode, setIsEditMode] = useState(false);
+    const [uploading, setUploading] = useState(false);
 
     // Expanded State Model
     const [currentService, setCurrentService] = useState({
         _id: '',
-        title: '',
-        slug: '',
-        category: '',
-        status: 'Active',
-        shortDescription: '',
-        fullDescription: '', // HTML content
-        icon: '',
-        features: '' // comma separated string for input
+        title: '', // Heading
+        shortDescription: '', // Paragraph
+        features: '', // Bullet Points (comma separated)
+        image: '', // Image URL
+        category: 'Development',
+        status: 'Active'
     });
 
     useEffect(() => {
@@ -48,13 +48,11 @@ const AdminServices = () => {
         setCurrentService({
             _id: '',
             title: '',
-            slug: '',
-            category: '',
-            status: 'Active',
             shortDescription: '',
-            fullDescription: '',
-            icon: '',
-            features: ''
+            features: '',
+            image: '',
+            category: 'Development',
+            status: 'Active'
         });
         setIsModalOpen(true);
     };
@@ -64,25 +62,53 @@ const AdminServices = () => {
         setCurrentService({
             ...service,
             _id: service._id,
-            slug: service.slug,
             features: (service.features || []).join(', '),
-            status: service.active ? 'Active' : 'Inactive'
+            status: service.active ? 'Active' : 'Inactive',
+            image: service.image || ''
         });
         setIsModalOpen(true);
+    };
+
+    const uploadFileHandler = async (e) => {
+        const file = e.target.files[0];
+        const formData = new FormData();
+        formData.append('image', file);
+        setUploading(true);
+
+        try {
+            const config = {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            };
+
+            const { data } = await api.post('/upload', formData, config);
+            setCurrentService({ ...currentService, image: data.image });
+            setUploading(false);
+            addToast('Image uploaded successfully', 'success');
+        } catch (error) {
+            console.error(error);
+            setUploading(false);
+            addToast('Image upload failed', 'error');
+        }
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const payload = {
-            ...currentService,
-            features: currentService.features.split(',').map(f => f.trim()).filter(Boolean),
-            slug: currentService.slug || undefined,
-            active: currentService.status === 'Active'
-        };
+        // Client-side Validation
+        if (!currentService.title.trim()) return addToast('Title is required', 'error');
+        if (!currentService.shortDescription.trim()) return addToast('Short description is required', 'error');
 
-        delete payload._id;
-        delete payload.status;
+        const payload = {
+            title: currentService.title.trim(),
+            shortDescription: currentService.shortDescription.trim(),
+            features: (currentService.features || '').split(',').map(f => f.trim()).filter(Boolean),
+            image: currentService.image.trim(),
+            active: currentService.status === 'Active',
+            category: currentService.category,
+            fullDescription: currentService.shortDescription.trim() // Syncing full with short for simplicity
+        };
 
         try {
             if (isEditMode) {
@@ -96,7 +122,8 @@ const AdminServices = () => {
             setIsModalOpen(false);
         } catch (err) {
             console.error(err);
-            addToast('Operation failed', 'error');
+            const errorMsg = err.response?.data?.error || 'Operation failed';
+            addToast(errorMsg, 'error');
         }
     };
 
@@ -172,103 +199,110 @@ const AdminServices = () => {
                 onClose={() => setIsModalOpen(false)}
                 title={isEditMode ? 'Edit Service' : 'Add New Service'}
             >
-                <form onSubmit={handleSubmit} className="space-y-4">
-                    <div className="grid grid-cols-2 gap-4">
-                        <div>
-                            <label className="block text-sm font-bold text-slate-700 mb-1">Service Title</label>
+                <form onSubmit={handleSubmit} className="space-y-4 font-sans">
+                    <div>
+                        <label className="block text-sm font-bold text-slate-700 mb-1 caps">Heading (Service Title)</label>
+                        <input
+                            type="text"
+                            required
+                            value={currentService.title}
+                            onChange={(e) => setCurrentService({ ...currentService, title: e.target.value })}
+                            className="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:border-[#05A4A7] transition-all"
+                            placeholder="e.g. Web Development"
+                        />
+                    </div>
+
+                    <div>
+                        <label className="block text-sm font-bold text-slate-700 mb-1">Paragraph (Description)</label>
+                        <textarea
+                            required
+                            value={currentService.shortDescription}
+                            onChange={(e) => setCurrentService({ ...currentService, shortDescription: e.target.value })}
+                            className="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:border-[#05A4A7] transition-all h-24 resize-none"
+                            placeholder="Write a small paragraph about this service..."
+                        />
+                    </div>
+
+                    <div>
+                        <label className="block text-sm font-bold text-slate-700 mb-1">Bullet Points (Features)</label>
+                        <input
+                            type="text"
+                            value={currentService.features}
+                            onChange={(e) => setCurrentService({ ...currentService, features: e.target.value })}
+                            className="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:border-[#05A4A7] transition-all"
+                            placeholder="e.g. SEO, Responsive, Next.js (comma separated)"
+                        />
+                        <p className="text-[10px] text-slate-400 mt-1">Add features separated by commas.</p>
+                    </div>
+
+                    <div>
+                        <label className="block text-sm font-bold text-slate-700 mb-1">Service Image</label>
+                        <div className="flex flex-col gap-2">
+                            {currentService.image && (
+                                <div className="w-20 h-20 rounded-lg overflow-hidden border border-slate-200">
+                                    <img
+                                        src={`http://localhost:5000${currentService.image}`}
+                                        alt="Preview"
+                                        className="w-full h-full object-cover"
+                                        onError={(e) => { e.target.src = 'https://placehold.co/100x100?text=Error'; }}
+                                    />
+                                </div>
+                            )}
                             <input
-                                type="text"
-                                required
-                                value={currentService.title}
-                                onChange={(e) => setCurrentService({ ...currentService, title: e.target.value })}
-                                className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:outline-none focus:border-primary"
+                                type="file"
+                                onChange={uploadFileHandler}
+                                className="w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-[#05A4A7]/10 file:text-[#05A4A7] hover:file:bg-[#05A4A7]/20"
                             />
-                        </div>
-                        <div>
-                            <label className="block text-sm font-bold text-slate-700 mb-1">ID (Slug)</label>
+                            {uploading && <p className="text-[10px] text-[#05A4A7] animate-pulse">Uploading image...</p>}
                             <input
                                 type="text"
-                                value={currentService.slug}
-                                onChange={(e) => setCurrentService({ ...currentService, slug: e.target.value })}
-                                className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:outline-none focus:border-primary"
-                                placeholder="Auto-generated if empty"
+                                value={currentService.image}
+                                onChange={(e) => setCurrentService({ ...currentService, image: e.target.value })}
+                                className="w-full px-4 py-2 border border-slate-200 rounded-xl focus:outline-none focus:border-[#05A4A7] text-[10px]"
+                                placeholder="Or paste image URL directly"
                             />
                         </div>
                     </div>
 
                     <div className="grid grid-cols-2 gap-4">
-                        <div>
-                            <label className="block text-sm font-bold text-slate-700 mb-1">Google Icon Name</label>
-                            <input
-                                type="text"
-                                required
-                                value={currentService.icon}
-                                onChange={(e) => setCurrentService({ ...currentService, icon: e.target.value })}
-                                className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:outline-none focus:border-primary"
-                                placeholder="e.g. smartphone"
-                            />
-                        </div>
                         <div>
                             <label className="block text-sm font-bold text-slate-700 mb-1">Category</label>
                             <select
                                 value={currentService.category}
                                 onChange={(e) => setCurrentService({ ...currentService, category: e.target.value })}
-                                className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:outline-none focus:border-primary"
+                                className="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:border-[#05A4A7] appearance-none bg-white"
                             >
-                                <option value="">Select Category</option>
                                 <option value="Development">Development</option>
                                 <option value="Design">Design</option>
                                 <option value="Marketing">Marketing</option>
-                                <option value="AI">AI</option>
-                                <option value="Operations">Operations</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label className="block text-sm font-bold text-slate-700 mb-1">Status</label>
+                            <select
+                                value={currentService.status}
+                                onChange={(e) => setCurrentService({ ...currentService, status: e.target.value })}
+                                className="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:border-[#05A4A7] appearance-none bg-white"
+                            >
+                                <option value="Active">Active</option>
+                                <option value="Inactive">Inactive</option>
                             </select>
                         </div>
                     </div>
 
-                    <div>
-                        <label className="block text-sm font-bold text-slate-700 mb-1">Short Description</label>
-                        <textarea
-                            value={currentService.shortDescription}
-                            onChange={(e) => setCurrentService({ ...currentService, shortDescription: e.target.value })}
-                            className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:outline-none focus:border-primary h-20 resize-none"
-                        />
-                    </div>
-
-                    <div>
-                        <label className="block text-sm font-bold text-slate-700 mb-1">Features <span className="text-xs font-normal text-slate-400">(Comma separated)</span></label>
-                        <input
-                            type="text"
-                            value={currentService.features}
-                            onChange={(e) => setCurrentService({ ...currentService, features: e.target.value })}
-                            className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:outline-none focus:border-primary"
-                            placeholder="SEO, Responsive, Mobile Ready"
-                        />
-                    </div>
-
-                    <div className="pb-12">
-                        <label className="block text-sm font-bold text-slate-700 mb-1">Full Detailed Content</label>
-                        <ReactQuill
-                            theme="snow"
-                            value={currentService.fullDescription}
-                            onChange={(content) => setCurrentService({ ...currentService, fullDescription: content })}
-                            modules={modules}
-                            className="bg-white rounded-lg"
-                        />
-                    </div>
-
-                    <div className="pt-4 flex justify-end gap-2 border-t border-slate-100">
+                    <div className="pt-6 flex justify-end gap-3 border-t border-slate-100">
                         <button
                             type="button"
                             onClick={() => setIsModalOpen(false)}
-                            className="px-4 py-2 text-slate-500 font-bold hover:bg-slate-50 rounded-lg transition-colors"
+                            className="px-6 py-2.5 text-slate-500 font-bold hover:bg-slate-50 rounded-xl transition-all"
                         >
                             Cancel
                         </button>
                         <button
                             type="submit"
-                            className="px-4 py-2 bg-primary text-white font-bold rounded-lg hover:bg-[#048a8d] transition-colors shadow-lg shadow-primary/20"
+                            className="px-8 py-2.5 bg-[#05A4A7] text-white font-bold rounded-xl hover:bg-[#048a8d] transition-all shadow-lg shadow-[#05A4A7]/20"
                         >
-                            {isEditMode ? 'Save Changes' : 'Create Service'}
+                            {isEditMode ? 'Update Service' : 'Create Service'}
                         </button>
                     </div>
                 </form>

@@ -16,11 +16,27 @@ exports.getAdminBlogs = async (req, res) => {
 
 exports.getBlog = async (req, res) => {
     try {
-        const query = req.params.id.match(/^[0-9a-fA-F]{24}$/) ? { _id: req.params.id } : { slug: req.params.id };
-        const blog = await Blog.findOne(query);
-        if (!blog) return res.status(404).json({ success: false, error: 'Blog not found' });
+        const { id } = req.params;
+        let blog;
+
+        // Try finding by MongoDB ID first
+        if (id.match(/^[0-9a-fA-F]{24}$/)) {
+            blog = await Blog.findById(id);
+        }
+
+        // If not found by ID, try searching by slug
+        if (!blog) {
+            blog = await Blog.findOne({ slug: id });
+        }
+
+        if (!blog) {
+            return res.status(404).json({ success: false, error: 'Blog not found' });
+        }
+
         res.status(200).json({ success: true, data: blog });
-    } catch (err) { res.status(500).json({ success: false, error: err.message }); }
+    } catch (err) {
+        res.status(500).json({ success: false, error: err.message });
+    }
 };
 
 exports.createBlog = async (req, res) => {

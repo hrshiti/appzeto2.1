@@ -1,5 +1,7 @@
 const Message = require('../models/Message');
 const Lead = require('../models/Lead');
+const Application = require('../models/Application');
+const PartnerInquiry = require('../models/PartnerInquiry');
 
 // Public
 exports.submitMessage = async (req, res) => {
@@ -49,5 +51,49 @@ exports.updateLead = async (req, res) => {
     try {
         const lead = await Lead.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
         res.status(200).json({ success: true, data: lead });
+    } catch (e) { res.status(500).json({ success: false, error: e.message }); }
+};
+
+// Careers (Applications)
+exports.submitApplication = async (req, res) => {
+    try {
+        await Application.create(req.body);
+        res.status(201).json({ success: true, message: 'Application submitted' });
+    } catch (e) { res.status(400).json({ success: false, error: e.message }); }
+};
+
+exports.getApplications = async (req, res) => {
+    try {
+        const data = await Application.find().sort('-createdAt');
+        res.status(200).json({ success: true, data });
+    } catch (e) { res.status(500).json({ success: false, error: e.message }); }
+};
+
+exports.deleteApplication = async (req, res) => {
+    try {
+        await Application.findByIdAndDelete(req.params.id);
+        res.status(200).json({ success: true, data: {} });
+    } catch (e) { res.status(500).json({ success: false, error: e.message }); }
+};
+
+// Partners
+exports.submitPartnerInquiry = async (req, res) => {
+    try {
+        await PartnerInquiry.create(req.body);
+        res.status(201).json({ success: true, message: 'Partner inquiry submitted' });
+    } catch (e) { res.status(400).json({ success: false, error: e.message }); }
+};
+
+exports.getPartnerInquiries = async (req, res) => {
+    try {
+        const data = await PartnerInquiry.find().sort('-createdAt');
+        res.status(200).json({ success: true, data });
+    } catch (e) { res.status(500).json({ success: false, error: e.message }); }
+};
+
+exports.deletePartnerInquiry = async (req, res) => {
+    try {
+        await PartnerInquiry.findByIdAndDelete(req.params.id);
+        res.status(200).json({ success: true, data: {} });
     } catch (e) { res.status(500).json({ success: false, error: e.message }); }
 };

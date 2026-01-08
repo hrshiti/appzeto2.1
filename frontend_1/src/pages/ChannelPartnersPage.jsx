@@ -3,6 +3,8 @@ import { motion } from 'framer-motion';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import ScrollWrapper from '../components/ScrollWrapper';
+import { dataService } from '../admin/services/dataService';
+import { useState } from 'react';
 
 const allPartners = [
     {
@@ -50,6 +52,8 @@ const allPartners = [
 ];
 
 const ChannelPartnersPage = () => {
+    const [status, setStatus] = useState('idle'); // idle, sending, success, error
+
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
@@ -154,11 +158,40 @@ const ChannelPartnersPage = () => {
                                 </div>
                             </div>
 
-                            <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+                            <form className="space-y-6" onSubmit={async (e) => {
+                                e.preventDefault();
+                                setStatus('sending');
+                                const formData = new FormData(e.target);
+                                const rawData = Object.fromEntries(formData.entries());
+
+                                // Map to Lead Model
+                                const payload = {
+                                    name: rawData.contactPerson,
+                                    company: rawData.companyName,
+                                    email: rawData.email,
+                                    phone: rawData.phone,
+                                    service: `Partner: ${rawData.businessType}`,
+                                    message: rawData.message,
+                                    leadType: 'Partner'
+                                };
+
+                                try {
+                                    await dataService.submitLead(payload);
+                                    setStatus('success');
+                                    setTimeout(() => setStatus('idle'), 3000);
+                                    e.target.reset();
+                                } catch (err) {
+                                    console.error(err);
+                                    setStatus('error');
+                                    setTimeout(() => setStatus('idle'), 3000);
+                                }
+                            }}>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     <div className="space-y-2">
                                         <label className="text-xs font-bold text-gray-500 uppercase tracking-widest ml-1">Company Name</label>
                                         <input
+                                            required
+                                            name="companyName"
                                             type="text"
                                             placeholder="Enter your company"
                                             className="w-full bg-white border border-gray-200 rounded-2xl py-4 px-6 text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#05A4A7] transition-colors"
@@ -167,6 +200,8 @@ const ChannelPartnersPage = () => {
                                     <div className="space-y-2">
                                         <label className="text-xs font-bold text-gray-500 uppercase tracking-widest ml-1">Company Email</label>
                                         <input
+                                            required
+                                            name="email"
                                             type="email"
                                             placeholder="email@company.com"
                                             className="w-full bg-white border border-gray-200 rounded-2xl py-4 px-6 text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#05A4A7] transition-colors"
@@ -177,6 +212,8 @@ const ChannelPartnersPage = () => {
                                     <div className="space-y-2">
                                         <label className="text-xs font-bold text-gray-500 uppercase tracking-widest ml-1">Contact Person</label>
                                         <input
+                                            required
+                                            name="contactPerson"
                                             type="text"
                                             placeholder="Your name"
                                             className="w-full bg-white border border-gray-200 rounded-2xl py-4 px-6 text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#05A4A7] transition-colors"
@@ -185,6 +222,8 @@ const ChannelPartnersPage = () => {
                                     <div className="space-y-2">
                                         <label className="text-xs font-bold text-gray-500 uppercase tracking-widest ml-1">Phone Number</label>
                                         <input
+                                            required
+                                            name="phone"
                                             type="tel"
                                             placeholder="+91 ...."
                                             className="w-full bg-white border border-gray-200 rounded-2xl py-4 px-6 text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#05A4A7] transition-colors"
@@ -193,7 +232,7 @@ const ChannelPartnersPage = () => {
                                 </div>
                                 <div className="space-y-2">
                                     <label className="text-xs font-bold text-gray-500 uppercase tracking-widest ml-1">Business Nature</label>
-                                    <select className="w-full bg-white border border-gray-200 rounded-2xl py-4 px-6 text-gray-900 focus:outline-none focus:border-[#05A4A7] transition-colors appearance-none">
+                                    <select name="businessType" className="w-full bg-white border border-gray-200 rounded-2xl py-4 px-6 text-gray-900 focus:outline-none focus:border-[#05A4A7] transition-colors appearance-none">
                                         <option>Technology Consulting</option>
                                         <option>Digital Agency</option>
                                         <option>System Integrator</option>
@@ -204,14 +243,24 @@ const ChannelPartnersPage = () => {
                                     <label className="text-xs font-bold text-gray-500 uppercase tracking-widest ml-1">Message</label>
                                     {/* Note: textarea background is white to match the theme */}
                                     <textarea
+                                        name="message"
                                         rows="4"
                                         placeholder="How can we help you?"
                                         className="w-full bg-white border border-gray-200 rounded-2xl py-4 px-6 text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#05A4A7] transition-colors resize-none"
                                     ></textarea>
                                 </div>
 
-                                <button className="w-full py-5 bg-gradient-to-r from-[#05A4A7] to-emerald-500 rounded-2xl text-white font-black text-sm uppercase tracking-[0.3em] hover:shadow-[0_10px_30px_rgba(5,164,167,0.3)] transition-all duration-300 transform hover:-translate-y-1">
-                                    Submit Application
+                                <button
+                                    disabled={status !== 'idle'}
+                                    className={`w-full py-5 rounded-2xl text-white font-black text-sm uppercase tracking-[0.3em] transition-all duration-300 transform hover:-translate-y-1 ${status === 'idle' ? 'bg-gradient-to-r from-[#05A4A7] to-emerald-500 hover:shadow-[0_10px_30px_rgba(5,164,167,0.3)]' :
+                                        status === 'sending' ? 'bg-gray-400 animate-pulse' :
+                                            status === 'success' ? 'bg-green-500' : 'bg-red-500'
+                                        }`}
+                                >
+                                    {status === 'idle' && 'Submit Application'}
+                                    {status === 'sending' && 'Submitting...'}
+                                    {status === 'success' && 'Submitted Successfully!'}
+                                    {status === 'error' && 'Error! Please Try Again'}
                                 </button>
                             </form>
                         </div>

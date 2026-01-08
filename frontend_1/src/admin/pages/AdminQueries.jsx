@@ -97,7 +97,7 @@ const AdminQueries = () => {
             <div className="flex flex-col md:flex-row justify-between mb-8 pb-6 border-b border-slate-200">
                 <div>
                     <h1 className="text-3xl font-black text-slate-900 tracking-tight">Support Queries</h1>
-                    <p className="text-slate-500 mt-1">Manage user support tickets and general queries.</p>
+                    <p className="text-slate-500 mt-1">Manage technical support tickets and general user help requests.</p>
                 </div>
                 <div className="flex p-1 bg-white border border-slate-200 rounded-xl mt-4 md:mt-0">
                     <button onClick={() => setPageTab('submissions')} className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-bold transition-all ${pageTab === 'submissions' ? 'bg-slate-800 text-white shadow-md' : 'text-slate-500 hover:bg-slate-50'}`}>

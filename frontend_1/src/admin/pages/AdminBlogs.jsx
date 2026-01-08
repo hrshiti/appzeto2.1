@@ -7,6 +7,7 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import '../styles/editor.css';
 import { dataService } from '../services/dataService';
+import api from '../services/api';
 
 const AdminBlogs = () => {
     const { addToast } = useToast();
@@ -19,15 +20,20 @@ const AdminBlogs = () => {
     const [currentBlog, setCurrentBlog] = useState({
         _id: '',
         title: '',
-        author: '',
-        status: 'Draft',
+        tag: 'GENERAL',
+        publishDate: new Date().toISOString().split('T')[0],
+        excerpt: '',
         content: '',
-        thumbnail: '',
-        seoTitle: '',
-        seoDesc: '',
-        views: 0,
-        date: ''
+        featuredImage: '',
+        status: 'Draft',
+        author: 'Admin',
+        stats: [
+            { label: '', subtext: '' },
+            { label: '', subtext: '' },
+            { label: '', subtext: '' }
+        ]
     });
+    const [uploading, setUploading] = useState(false);
 
     useEffect(() => {
         loadBlogs();
@@ -48,14 +54,18 @@ const AdminBlogs = () => {
         setCurrentBlog({
             _id: '',
             title: '',
-            author: '',
-            status: 'Draft',
+            tag: 'GENERAL',
+            publishDate: new Date().toISOString().split('T')[0],
+            excerpt: '',
             content: '',
-            thumbnail: '',
-            seoTitle: '',
-            seoDesc: '',
-            views: 0,
-            date: ''
+            featuredImage: '',
+            status: 'Draft',
+            author: 'Admin',
+            stats: [
+                { label: '', subtext: '' },
+                { label: '', subtext: '' },
+                { label: '', subtext: '' }
+            ]
         });
         setIsModalOpen(true);
     };
@@ -65,9 +75,33 @@ const AdminBlogs = () => {
         setCurrentBlog({
             ...blog,
             _id: blog._id,
-            status: blog.active ? 'Published' : 'Draft'
+            status: blog.active ? 'Published' : 'Draft',
+            publishDate: blog.publishDate ? new Date(blog.publishDate).toISOString().split('T')[0] : '',
+            stats: blog.stats && blog.stats.length > 0 ? blog.stats : [
+                { label: '', subtext: '' },
+                { label: '', subtext: '' },
+                { label: '', subtext: '' }
+            ]
         });
         setIsModalOpen(true);
+    };
+
+    const uploadFileHandler = async (e) => {
+        const file = e.target.files[0];
+        const formData = new FormData();
+        formData.append('image', file);
+        setUploading(true);
+
+        try {
+            const config = { headers: { 'Content-Type': 'multipart/form-data' } };
+            const { data } = await api.post('/upload', formData, config);
+            setCurrentBlog({ ...currentBlog, featuredImage: data.image });
+            setUploading(false);
+            addToast('Image uploaded', 'success');
+        } catch (error) {
+            setUploading(false);
+            addToast('Upload failed', 'error');
+        }
     };
 
     const handleDelete = async (id) => {
@@ -87,13 +121,12 @@ const AdminBlogs = () => {
 
         const payload = {
             ...currentBlog,
-            active: currentBlog.status === 'Published'
+            active: currentBlog.status === 'Published',
+            stats: currentBlog.stats.filter(s => s.label.trim() !== '')
         };
 
         delete payload._id;
         delete payload.status;
-        delete payload.views;
-        delete payload.date;
 
         try {
             if (isEditMode) {
@@ -177,27 +210,40 @@ const AdminBlogs = () => {
                 onClose={() => setIsModalOpen(false)}
                 title={isEditMode ? 'Edit Blog Post' : 'New Blog Post'}
             >
-                <form onSubmit={handleSubmit} className="space-y-4">
-                    <div>
-                        <label className="block text-sm font-bold text-slate-700 mb-1">Title</label>
-                        <input
-                            type="text"
-                            required
-                            value={currentBlog.title}
-                            onChange={(e) => setCurrentBlog({ ...currentBlog, title: e.target.value })}
-                            className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:outline-none focus:border-primary"
-                        />
+                <form onSubmit={handleSubmit} className="space-y-4 max-h-[80vh] overflow-y-auto px-1 custom-scrollbar">
+                    <div className="grid grid-cols-2 gap-4">
+                        <div className="col-span-2 sm:col-span-1">
+                            <label className="block text-sm font-bold text-slate-700 mb-1">Heading (Main Title)</label>
+                            <input
+                                type="text"
+                                required
+                                value={currentBlog.title}
+                                onChange={(e) => setCurrentBlog({ ...currentBlog, title: e.target.value })}
+                                className="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:border-[#05A4A7]"
+                                placeholder="THE BONFIRE NIGHT"
+                            />
+                        </div>
+                        <div className="col-span-2 sm:col-span-1">
+                            <label className="block text-sm font-bold text-slate-700 mb-1">Badge Tag</label>
+                            <input
+                                type="text"
+                                required
+                                value={currentBlog.tag}
+                                onChange={(e) => setCurrentBlog({ ...currentBlog, tag: e.target.value })}
+                                className="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:border-[#05A4A7]"
+                                placeholder="WINTER VIBES"
+                            />
+                        </div>
                     </div>
 
                     <div className="grid grid-cols-2 gap-4">
                         <div>
-                            <label className="block text-sm font-bold text-slate-700 mb-1">Author</label>
+                            <label className="block text-sm font-bold text-slate-700 mb-1">Publish Date</label>
                             <input
-                                type="text"
-                                required
-                                value={currentBlog.author}
-                                onChange={(e) => setCurrentBlog({ ...currentBlog, author: e.target.value })}
-                                className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:outline-none focus:border-primary"
+                                type="date"
+                                value={currentBlog.publishDate}
+                                onChange={(e) => setCurrentBlog({ ...currentBlog, publishDate: e.target.value })}
+                                className="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:border-[#05A4A7]"
                             />
                         </div>
                         <div>
@@ -205,7 +251,7 @@ const AdminBlogs = () => {
                             <select
                                 value={currentBlog.status}
                                 onChange={(e) => setCurrentBlog({ ...currentBlog, status: e.target.value })}
-                                className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:outline-none focus:border-primary"
+                                className="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:border-[#05A4A7] bg-white"
                             >
                                 <option value="Draft">Draft</option>
                                 <option value="Published">Published</option>
@@ -214,51 +260,81 @@ const AdminBlogs = () => {
                     </div>
 
                     <div>
-                        <label className="block text-sm font-bold text-slate-700 mb-1">Thumbnail URL</label>
-                        <input
-                            type="text"
-                            value={currentBlog.thumbnail}
-                            onChange={(e) => setCurrentBlog({ ...currentBlog, thumbnail: e.target.value })}
-                            className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:outline-none focus:border-primary"
-                            placeholder="https://..."
+                        <label className="block text-sm font-bold text-slate-700 mb-1">Excerpt (Intro Quote)</label>
+                        <textarea
+                            value={currentBlog.excerpt}
+                            onChange={(e) => setCurrentBlog({ ...currentBlog, excerpt: e.target.value })}
+                            className="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:border-[#05A4A7] h-24 resize-none italic"
+                            placeholder="Warmed by a bright bonfire..."
                         />
                     </div>
 
-                    {/* SEO Section */}
-                    <div className="p-4 bg-slate-50 rounded-xl border border-slate-100">
-                        <label className="block text-xs font-bold uppercase text-slate-400 mb-3">SEO Settings (Optional)</label>
-                        <div className="space-y-3">
-                            <div>
-                                <label className="block text-xs font-bold text-slate-500 mb-1">SEO Title</label>
+                    {/* Image Section */}
+                    <div>
+                        <label className="block text-sm font-bold text-slate-700 mb-1">Featured Image</label>
+                        <div className="flex items-center gap-4 p-4 bg-slate-50 border border-slate-200 rounded-xl">
+                            {currentBlog.featuredImage && (
+                                <img
+                                    src={currentBlog.featuredImage.startsWith('/uploads') ? `http://localhost:5000${currentBlog.featuredImage}` : currentBlog.featuredImage}
+                                    className="w-20 h-20 object-cover rounded-lg shadow-sm"
+                                    alt="Preview"
+                                />
+                            )}
+                            <div className="flex-1">
+                                <input type="file" onChange={uploadFileHandler} className="text-xs mb-2 block" />
                                 <input
                                     type="text"
-                                    value={currentBlog.seoTitle}
-                                    onChange={(e) => setCurrentBlog({ ...currentBlog, seoTitle: e.target.value })}
-                                    className="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm"
-                                    placeholder="Meta Title"
-                                />
-                            </div>
-                            <div>
-                                <label className="block text-xs font-bold text-slate-500 mb-1">Meta Description</label>
-                                <textarea
-                                    value={currentBlog.seoDesc}
-                                    onChange={(e) => setCurrentBlog({ ...currentBlog, seoDesc: e.target.value })}
-                                    className="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm h-16 resize-none"
-                                    placeholder="Brief summary for search engines..."
+                                    value={currentBlog.featuredImage}
+                                    onChange={(e) => setCurrentBlog({ ...currentBlog, featuredImage: e.target.value })}
+                                    className="w-full px-2 py-1 border border-slate-200 rounded text-[10px]"
+                                    placeholder="Or paste URL"
                                 />
                             </div>
                         </div>
                     </div>
 
+                    {/* Stats Section */}
+                    <div className="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-4">
+                        <label className="block text-xs font-bold uppercase text-slate-400">Premium Stats / Highlights (Max 3)</label>
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                            {currentBlog.stats.map((stat, index) => (
+                                <div key={index} className="space-y-2">
+                                    <input
+                                        type="text"
+                                        placeholder="Label (e.g. 50+)"
+                                        value={stat.label}
+                                        onChange={(e) => {
+                                            const newStats = [...currentBlog.stats];
+                                            newStats[index].label = e.target.value;
+                                            setCurrentBlog({ ...currentBlog, stats: newStats });
+                                        }}
+                                        className="w-full px-3 py-2 border border-slate-200 rounded-lg text-xs font-bold text-[#05A4A7]"
+                                    />
+                                    <input
+                                        type="text"
+                                        placeholder="Subtext (e.g. STORIES)"
+                                        value={stat.subtext}
+                                        onChange={(e) => {
+                                            const newStats = [...currentBlog.stats];
+                                            newStats[index].subtext = e.target.value;
+                                            setCurrentBlog({ ...currentBlog, stats: newStats });
+                                        }}
+                                        className="w-full px-3 py-2 border border-slate-200 rounded-lg text-[10px]"
+                                    />
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
                     {/* Rich Text Editor */}
                     <div className="pb-12">
-                        <label className="block text-sm font-bold text-slate-700 mb-1">Content</label>
+                        <label className="block text-sm font-bold text-slate-700 mb-1">Full Blog Content</label>
                         <ReactQuill
                             theme="snow"
                             value={currentBlog.content}
                             onChange={(content) => setCurrentBlog({ ...currentBlog, content })}
                             modules={modules}
-                            className="bg-white rounded-lg"
+                            className="bg-white rounded-lg h-60"
                         />
                     </div>
 

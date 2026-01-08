@@ -8,11 +8,26 @@ import { dataService } from '../admin/services/dataService';
 
 const Projects = () => {
     const [projects, setProjects] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    const getImgUrl = (path) => {
+        if (!path) return '';
+        if (path.startsWith('http')) return path; // Support Cloudinary/External
+        return path.startsWith('/uploads') ? `http://localhost:5000${path}` : path;
+    };
 
     useEffect(() => {
-        // Fetch projects from data service
-        const allProjects = dataService.getProjects();
-        setProjects(allProjects);
+        const fetchProjects = async () => {
+            try {
+                const data = await dataService.getProjects();
+                setProjects(data || []);
+            } catch (err) {
+                console.error("Error fetching projects:", err);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchProjects();
     }, []);
 
     return (
@@ -43,10 +58,14 @@ const Projects = () => {
                 {/* Projects Grid */}
                 <section className="pb-12 md:pb-24 px-2 md:px-20">
                     <div className="max-w-7xl mx-auto grid grid-cols-2 lg:grid-cols-3 gap-2 md:gap-8">
-                        {projects.length > 0 ? (
+                        {loading ? (
+                            <div className="col-span-full flex justify-center py-20">
+                                <div className="w-10 h-10 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
+                            </div>
+                        ) : projects.length > 0 ? (
                             projects.map((project, idx) => (
                                 <motion.div
-                                    key={project.id || idx}
+                                    key={project._id || idx}
                                     initial={{ opacity: 0, y: 30 }}
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
@@ -57,7 +76,7 @@ const Projects = () => {
                                         <div className="relative aspect-[4/5] rounded-[0.8rem] md:rounded-[2rem] overflow-hidden border border-gray-100 bg-gray-50 transition-all duration-500 md:group-hover:border-primary/40 shadow-lg md:group-hover:shadow-2xl">
                                             {/* Image */}
                                             <img
-                                                src={project.thumbnail}
+                                                src={getImgUrl(project.thumbnail)}
                                                 alt={project.title}
                                                 className="w-full h-full object-cover md:group-hover:scale-105 transition-all duration-700"
                                             />

@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import logo from '../assets/logo.png';
+import { dataService } from '../admin/services/dataService';
 
 const NAV_ITEMS = [
     {
@@ -131,6 +132,48 @@ const Navbar = () => {
     const [isBlasting, setIsBlasting] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [activeMobileSubmenu, setActiveMobileSubmenu] = useState(null);
+    const [dynamicItems, setDynamicItems] = useState(NAV_ITEMS);
+
+    useEffect(() => {
+        loadDynamicData();
+    }, []);
+
+    const loadDynamicData = async () => {
+        try {
+            const [services, products, projects, blogs] = await Promise.all([
+                dataService.getServices(),
+                dataService.getProducts(),
+                dataService.getProjects(),
+                dataService.getBlogs()
+            ]);
+
+            const updatedNav = NAV_ITEMS.map(item => {
+                if (item.title === "Services" && services) {
+                    return {
+                        ...item,
+                        items: services.slice(0, 6).map(s => ({ label: s.title, link: `/services#${s.title.toLowerCase().replace(/\s+/g, '-')}` }))
+                    };
+                }
+                if (item.title === "Projects" && projects) {
+                    return {
+                        ...item,
+                        items: projects.slice(0, 6).map(p => ({ label: p.title, link: `/projects/${p.slug}` }))
+                    };
+                }
+                if (item.title === "Blogs" && blogs) {
+                    return {
+                        ...item,
+                        items: blogs.slice(0, 6).map(b => ({ label: b.title, link: `/blogs/${b.slug}` }))
+                    };
+                }
+                return item;
+            });
+
+            setDynamicItems(updatedNav);
+        } catch (err) {
+            console.error("Failed to load navbar dynamic data", err);
+        }
+    };
 
     // Lock body scroll when mobile menu is open
     useEffect(() => {
@@ -191,7 +234,7 @@ const Navbar = () => {
 
                         {/* Desktop Menu */}
                         <div className="hidden md:flex items-center h-full">
-                            {NAV_ITEMS.map((navItem, index) => (
+                            {dynamicItems.map((navItem, index) => (
                                 <div key={index} className="group static h-full flex items-center px-4">
                                     <Link
                                         to={navItem.path || "#"}
@@ -323,7 +366,7 @@ const Navbar = () => {
 
                             {/* Mobile Navigation List */}
                             <motion.div className="flex-1 overflow-y-auto px-6 py-4 space-y-4 relative z-10 custom-scrollbar">
-                                {NAV_ITEMS.map((item, index) => (
+                                {dynamicItems.map((item, index) => (
                                     <motion.div key={index} variants={mobileLinkVars} className="border-b border-gray-200/50 dark:border-gray-700/50 last:border-0 pb-4">
                                         <div
                                             className="flex items-center justify-between py-2 cursor-pointer group"

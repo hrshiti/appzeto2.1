@@ -11,38 +11,9 @@ import boatingImg from '../assets/boating.jpg';
 import achImg1 from '../assets/acheivement1.jpeg';
 import achImg2 from '../assets/achievement2.jpeg';
 import achImg3 from '../assets/achievement3.jpg';
+import { Link } from 'react-router-dom';
 
 gsap.registerPlugin(ScrollTrigger);
-
-const blogPosts = [
-    {
-        id: 1,
-        title: "Magic at Maheshwar",
-        category: "Team Retreat",
-        date: "Dec 28, 2025",
-        image: groupImg,
-        description: "Everything about our trip to Maheshwar was legendary. The historic forts, the peaceful Narmada river, and the team bonding sessions created memories that will last a lifetime. We explored every corner of the Ahilya Ghat and felt the rich heritage in every stone.",
-        stats: { people: "25+", days: "3", fun: "100%" }
-    },
-    {
-        id: 2,
-        title: "The Bonfire Night",
-        category: "Winter Vibes",
-        date: "Dec 30, 2025",
-        image: bonfireImg,
-        description: "There's nothing quite like a cold night warmed by a bright bonfire and even warmer conversations. We had 'badhiya' snacks, shared our funniest office stories, and bonded over music under the open sky. A true highlight of our cultural life.",
-        stats: { stories: "50+", laughter: "Infinite", heat: "Perfect" }
-    },
-    {
-        id: 3,
-        title: "Boating Adventures",
-        category: "Adventure",
-        date: "Jan 2, 2026",
-        image: boatingImg,
-        description: "Navigating the serene waters together, our boating trip was a masterclass in teamwork and relaxation. The gentle rhythm of the oars and the breathtaking views provided the perfect backdrop for meaningful conversations and shared laughter.",
-        stats: { boats: "5", waves: "Calm", joy: "Pure" }
-    }
-];
 
 const achievements = [
     { title: "Best Startup 2025", award: "National Tech Excellence", icon: "emoji_events", image: achImg1 },
@@ -51,31 +22,47 @@ const achievements = [
     { title: "Design Excellence", award: "International UI/UX Forum", icon: "auto_awesome", image: achImg2 }
 ];
 
+import { dataService } from '../admin/services/dataService';
+
 const Blogs = () => {
     const containerRef = useRef(null);
+    const [blogs, setBlogs] = React.useState([]);
 
     useEffect(() => {
-        const sections = gsap.utils.toArray('.blog-section');
-
-        sections.forEach((section, i) => {
-            if (window.innerWidth >= 768) { // Only animate sideways on desktop
-                gsap.fromTo(section.querySelector('.content-box'),
-                    { opacity: 0, x: i % 2 === 0 ? 100 : -100 },
-                    {
-                        opacity: 1,
-                        x: 0,
-                        duration: 1.5,
-                        ease: "power4.out",
-                        scrollTrigger: {
-                            trigger: section,
-                            start: "top 70%",
-                            toggleActions: "play none none reverse"
-                        }
-                    }
-                );
+        const fetchBlogs = async () => {
+            try {
+                const data = await dataService.getBlogs();
+                setBlogs(data || []);
+            } catch (err) {
+                console.error("Error fetching blogs:", err);
             }
-        });
+        };
+        fetchBlogs();
     }, []);
+
+    useEffect(() => {
+        if (blogs.length > 0) {
+            const sections = gsap.utils.toArray('.blog-section');
+            sections.forEach((section, i) => {
+                if (window.innerWidth >= 768) {
+                    gsap.fromTo(section.querySelector('.content-box'),
+                        { opacity: 0, x: i % 2 === 0 ? 100 : -100 },
+                        {
+                            opacity: 1,
+                            x: 0,
+                            duration: 1.5,
+                            ease: "power4.out",
+                            scrollTrigger: {
+                                trigger: section,
+                                start: "top 70%",
+                                toggleActions: "play none none reverse"
+                            }
+                        }
+                    );
+                }
+            });
+        }
+    }, [blogs]);
 
     return (
         <ScrollWrapper>
@@ -117,41 +104,88 @@ const Blogs = () => {
 
                 {/* --- BLOG SECTIONS (SIDE BY SIDE) --- */}
                 <div ref={containerRef} className="space-y-0">
-                    {blogPosts.map((post, i) => (
-                        <section key={post.id} className="blog-section relative h-auto md:h-[70vh] flex items-center overflow-hidden border-b border-slate-100 bg-white">
+                    {blogs.length > 0 ? blogs.map((post, i) => (
+                        <section key={post._id} className="blog-section relative h-auto md:h-[85vh] flex items-center overflow-hidden border-b border-slate-100 bg-white">
                             <div className={`flex w-full h-full flex-col ${i % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
                                 {/* --- IMAGE SIDE --- */}
-                                <div className="w-full md:w-1/2 h-64 md:h-full overflow-hidden relative image-container">
-                                    <img src={post.image} className="w-full h-full object-cover transition-transform duration-700" alt={post.title} />
+                                <div className="w-full md:w-1/2 h-[300px] md:h-full overflow-hidden relative group p-4 md:p-10">
+                                    <div className="w-full h-full rounded-[2rem] overflow-hidden shadow-2xl relative">
+                                        <img
+                                            src={post.featuredImage && post.featuredImage.startsWith('/uploads') ? `http://localhost:5000${post.featuredImage}` : (post.featuredImage || bonfireImg)}
+                                            className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                                            alt={post.title}
+                                        />
+                                        <div className="absolute inset-0 bg-black/5" />
+                                    </div>
                                 </div>
 
                                 {/* --- CONTENT SIDE --- */}
-                                <div className="w-full md:w-1/2 px-4 py-8 md:px-12 lg:px-24 flex items-center">
-                                    <div className="content-box max-w-2xl mx-auto w-full">
-                                        <div className="flex items-center gap-4 mb-4 md:mb-6">
-                                            <span className="px-3 py-1 md:px-5 md:py-1.5 bg-primary/5 border border-primary/20 rounded-full text-primary text-[9px] md:text-[10px] font-black uppercase tracking-widest">{post.category}</span>
-                                            <span className="text-slate-400 text-[9px] md:text-[10px] font-bold uppercase tracking-widest">{post.date}</span>
+                                <div className="w-full md:w-1/2 px-6 py-6 md:px-10 lg:px-16 h-full flex items-center justify-center">
+                                    <div className="content-box max-w-xl w-full">
+                                        <div className="flex items-center gap-4 mb-3 md:mb-5">
+                                            <span className="px-4 py-1 bg-[#05A4A7]/5 border border-[#05A4A7]/20 rounded-full text-[#05A4A7] text-[9px] md:text-[10px] font-black uppercase tracking-widest">{post.tag || 'Updates'}</span>
+                                            <span className="text-slate-400 text-[9px] md:text-[10px] font-bold uppercase tracking-widest">
+                                                {post.publishDate ? new Date(post.publishDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'Jan 01, 2026'}
+                                            </span>
                                         </div>
-                                        <h2 className="text-2xl md:text-6xl font-black text-slate-800 uppercase italic tracking-tight mb-4 md:mb-8 leading-tight">
+                                        <h2 className="text-2xl md:text-[4vw] font-black text-slate-900 uppercase italic tracking-tighter mb-3 md:mb-6 leading-[0.85] hover:text-[#05A4A7] transition-colors">
                                             {post.title}
                                         </h2>
-                                        <p className="text-slate-500 text-xs md:text-base lg:text-lg leading-relaxed mb-6 md:mb-12 italic border-l-4 border-primary/20 pl-4 md:pl-8">
-                                            {post.description}
-                                        </p>
+                                        <div className="relative mb-5 md:mb-8">
+                                            <div className="absolute left-0 top-0 bottom-0 w-[4px] bg-[#05A4A7]/30 rounded-full" />
+                                            <p className="text-slate-600 text-sm md:text-lg leading-relaxed italic pl-6 md:pl-10 font-medium line-clamp-3">
+                                                {post.excerpt || "There's nothing quite like a cold night warmed by a bright bonfire and even warmer conversations."}
+                                            </p>
+                                        </div>
 
-                                        <div className="grid grid-cols-3 gap-4 md:gap-8">
-                                            {Object.entries(post.stats).map(([key, value]) => (
-                                                <div key={key}>
-                                                    <div className="text-xl md:text-3xl font-black text-primary uppercase italic">{value}</div>
-                                                    <div className="text-[9px] md:text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">{key}</div>
+                                        <div className="grid grid-cols-3 gap-6 md:gap-8 mb-8">
+                                            {post.stats && post.stats.map((stat, idx) => (
+                                                <div key={idx} className="group cursor-default">
+                                                    <div className="text-2xl md:text-4xl font-black text-[#05A4A7] uppercase italic tracking-tighter group-hover:scale-110 transition-transform origin-left">{stat.label}</div>
+                                                    <div className="text-[10px] md:text-[11px] font-bold text-slate-400 uppercase tracking-[0.2em] mt-2">{stat.subtext}</div>
                                                 </div>
                                             ))}
+                                            {(!post.stats || post.stats.length === 0) && (
+                                                <>
+                                                    <div>
+                                                        <div className="text-2xl md:text-4xl font-black text-[#05A4A7] uppercase italic tracking-tighter">50+</div>
+                                                        <div className="text-[10px] md:text-[11px] font-bold text-slate-400 uppercase tracking-[0.2em] mt-2">STORIES</div>
+                                                    </div>
+                                                    <div>
+                                                        <div className="text-2xl md:text-4xl font-black text-[#05A4A7] uppercase italic tracking-tighter">INFINITE</div>
+                                                        <div className="text-[10px] md:text-[11px] font-bold text-slate-400 uppercase tracking-[0.2em] mt-2">LAUGHTER</div>
+                                                    </div>
+                                                    <div>
+                                                        <div className="text-2xl md:text-4xl font-black text-[#05A4A7] uppercase italic tracking-tighter">PERFECT</div>
+                                                        <div className="text-[10px] md:text-[11px] font-bold text-slate-400 uppercase tracking-[0.2em] mt-2">HEAT</div>
+                                                    </div>
+                                                </>
+                                            )}
                                         </div>
+
+                                        {/* VIEW FULL STORY BUTTON - CONDITIONAL */}
+                                        {post.content && post.content.replace(/<[^>]*>?/gm, '').trim().length > 0 && (
+                                            <motion.div
+                                                initial={{ opacity: 0, y: 10 }}
+                                                whileInView={{ opacity: 1, y: 0 }}
+                                                className="mt-12 md:mt-16"
+                                            >
+                                                <Link
+                                                    to={`/blogs/${post.slug || post._id}`}
+                                                    className="inline-flex items-center gap-4 px-8 py-4 bg-slate-900 text-white rounded-full font-black uppercase italic tracking-widest text-[10px] md:text-xs hover:bg-[#05A4A7] transition-all duration-500 shadow-xl shadow-slate-200"
+                                                >
+                                                    Read Full Story
+                                                    <span className="material-icons text-sm md:text-lg">arrow_forward</span>
+                                                </Link>
+                                            </motion.div>
+                                        )}
                                     </div>
                                 </div>
                             </div>
                         </section>
-                    ))}
+                    )) : (
+                        <div className="py-20 text-center text-slate-400 font-bold uppercase tracking-widest">No stories found. Start building the future...</div>
+                    )}
                 </div>
 
                 {/* --- ACHIEVEMENTS SECTION --- */}

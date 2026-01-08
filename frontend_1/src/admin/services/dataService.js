@@ -39,6 +39,10 @@ export const dataService = {
         return response.data.data;
     },
     createProject: async (data) => api.post('/projects', data),
+    getProject: async (id) => {
+        const response = await api.get(`/projects/${id}`);
+        return response.data.data;
+    },
     updateProject: async (id, data) => api.put(`/projects/${id}`, data),
     deleteProject: async (id) => api.delete(`/projects/${id}`),
 
@@ -52,6 +56,10 @@ export const dataService = {
         return response.data.data;
     },
     createBlog: async (data) => api.post('/blogs', data),
+    getBlog: async (id) => {
+        const response = await api.get(`/blogs/${id}`);
+        return response.data.data;
+    },
     updateBlog: async (id, data) => api.put(`/blogs/${id}`, data),
     deleteBlog: async (id) => api.delete(`/blogs/${id}`),
 
@@ -103,4 +111,19 @@ export const dataService = {
     },
     updateLead: async (id, data) => api.put(`/contact/leads/${id}`, data),
     deleteLead: async (id) => api.delete(`/contact/leads/${id}`),
+
+    // --- Careers / Partners ---
+    submitApplication: async (data) => api.post('/contact/application', data),
+    getApplications: async () => {
+        const response = await api.get('/contact/applications');
+        return response.data.data;
+    },
+    deleteApplication: async (id) => api.delete(`/contact/applications/${id}`),
+
+    submitPartner: async (data) => api.post('/contact/partner', data),
+    getPartners: async () => {
+        const response = await api.get('/contact/partners');
+        return response.data.data;
+    },
+    deletePartner: async (id) => api.delete(`/contact/partners/${id}`),
 };

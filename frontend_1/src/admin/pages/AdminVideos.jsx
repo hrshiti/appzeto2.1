@@ -4,6 +4,7 @@ import Modal from '../components/ui/Modal';
 import { useToast } from '../context/ToastContext';
 import { Edit, Trash2, Video } from 'lucide-react';
 import { dataService } from '../services/dataService';
+import api from '../services/api';
 
 const AdminVideos = () => {
     const { addToast } = useToast();
@@ -16,10 +17,10 @@ const AdminVideos = () => {
         _id: '',
         title: '',
         url: '',
-        thumbnail: '',
-        description: '',
-        visibility: 'Public'
+        visibility: 'Public',
+        featured: false
     });
+    const [isUploading, setIsUploading] = useState(false);
 
     useEffect(() => {
         loadVideos();
@@ -37,7 +38,7 @@ const AdminVideos = () => {
 
     const openAddModal = () => {
         setIsEditMode(false);
-        setCurrentVideo({ _id: '', title: '', url: '', thumbnail: '', description: '', visibility: 'Public' });
+        setCurrentVideo({ _id: '', title: '', url: '', thumbnail: '', description: '', visibility: 'Public', featured: false });
         setIsModalOpen(true);
     };
 
@@ -134,25 +135,106 @@ const AdminVideos = () => {
                     </div>
 
                     <div>
-                        <label className="block text-sm font-bold text-slate-700 mb-1">Video URL / Embed</label>
-                        <input
-                            type="text"
-                            required
-                            value={currentVideo.url}
-                            onChange={(e) => setCurrentVideo({ ...currentVideo, url: e.target.value })}
-                            className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:outline-none focus:border-primary"
-                            placeholder="https://www.youtube.com/embed/..."
-                        />
+                        <label className="block text-sm font-bold text-slate-700 mb-1">Video File (Upload Only)</label>
+                        <div className="space-y-4 p-4 border-2 border-dashed border-slate-200 rounded-xl bg-slate-50/50">
+                            {currentVideo.url ? (
+                                <div className="space-y-2">
+                                    <div className="flex items-center justify-between p-2 bg-emerald-50 border border-emerald-100 rounded-lg">
+                                        <div className="flex items-center gap-2 overflow-hidden">
+                                            <span className="material-symbols-outlined text-emerald-500 text-lg">check_circle</span>
+                                            <span className="text-[11px] text-emerald-700 font-medium truncate max-w-[200px]">{currentVideo.url}</span>
+                                        </div>
+                                        <button
+                                            type="button"
+                                            onClick={() => setCurrentVideo({ ...currentVideo, url: '' })}
+                                            className="p-1 hover:bg-emerald-100 rounded-md text-emerald-600 transition-colors"
+                                        >
+                                            <Trash2 size={14} />
+                                        </button>
+                                    </div>
+                                </div>
+                            ) : (
+                                <div className="text-center py-2">
+                                    <input
+                                        type="file"
+                                        id="video-upload"
+                                        className="hidden"
+                                        accept="video/mp4,video/webm"
+                                        onChange={async (e) => {
+                                            const file = e.target.files[0];
+                                            if (!file) return;
+                                            const formData = new FormData();
+                                            formData.append('video', file);
+                                            try {
+                                                setIsUploading(true);
+                                                addToast('Uploading video...', 'info');
+                                                const { data } = await api.post('/upload/video', formData, {
+                                                    headers: { 'Content-Type': 'multipart/form-data' }
+                                                });
+                                                setCurrentVideo(prev => ({ ...prev, url: data.url }));
+                                                addToast('Video uploaded successfully', 'success');
+                                            } catch (err) {
+                                                addToast('Video upload failed', 'error');
+                                            } finally {
+                                                setIsUploading(false);
+                                            }
+                                        }}
+                                    />
+                                    <label
+                                        htmlFor="video-upload"
+                                        className="cursor-pointer inline-flex items-center gap-2 px-4 py-2 bg-white border border-slate-200 rounded-lg text-sm font-bold text-slate-600 hover:bg-slate-50 hover:border-slate-300 transition-all shadow-sm"
+                                    >
+                                        <span className="material-symbols-outlined">upload_file</span>
+                                        Choose Video File
+                                    </label>
+                                    <p className="mt-2 text-[10px] text-slate-400 font-medium uppercase tracking-wider">MP4 or WEBM files only</p>
+                                </div>
+                            )}
+                        </div>
                     </div>
 
                     <div>
-                        <label className="block text-sm font-bold text-slate-700 mb-1">Thumbnail URL</label>
-                        <input
-                            type="text"
-                            value={currentVideo.thumbnail}
-                            onChange={(e) => setCurrentVideo({ ...currentVideo, thumbnail: e.target.value })}
-                            className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:outline-none focus:border-primary"
-                        />
+                        <label className="block text-sm font-bold text-slate-700 mb-1">Thumbnail (Image)</label>
+                        <div className="flex items-center gap-4">
+                            {currentVideo.thumbnail && (
+                                <div className="relative w-20 h-20 rounded-lg overflow-hidden border border-slate-200">
+                                    <img
+                                        src={currentVideo.thumbnail.startsWith('/uploads') ? `http://localhost:5000${currentVideo.thumbnail}` : currentVideo.thumbnail}
+                                        className="w-full h-full object-cover"
+                                        alt="Preview"
+                                    />
+                                    <button
+                                        type="button"
+                                        onClick={() => setCurrentVideo({ ...currentVideo, thumbnail: '' })}
+                                        className="absolute top-0 right-0 bg-red-500 text-white p-0.5 rounded-bl-lg"
+                                    >
+                                        <Trash2 size={12} />
+                                    </button>
+                                </div>
+                            )}
+                            <input
+                                type="file"
+                                onChange={async (e) => {
+                                    const file = e.target.files[0];
+                                    if (!file) return;
+                                    const formData = new FormData();
+                                    formData.append('image', file);
+                                    try {
+                                        setIsUploading(true);
+                                        const { data } = await api.post('/upload', formData, {
+                                            headers: { 'Content-Type': 'multipart/form-data' }
+                                        });
+                                        setCurrentVideo(prev => ({ ...prev, thumbnail: data.url }));
+                                        addToast('Thumbnail uploaded', 'success');
+                                    } catch (err) {
+                                        addToast('Upload failed', 'error');
+                                    } finally {
+                                        setIsUploading(false);
+                                    }
+                                }}
+                                className="text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-primary/10 file:text-primary hover:file:bg-primary/20"
+                            />
+                        </div>
                     </div>
 
                     <div>
@@ -176,12 +258,30 @@ const AdminVideos = () => {
                         </select>
                     </div>
 
+                    <div className="flex items-center gap-2">
+                        <input
+                            type="checkbox"
+                            id="featured"
+                            checked={currentVideo.featured}
+                            onChange={(e) => setCurrentVideo({ ...currentVideo, featured: e.target.checked })}
+                            className="w-4 h-4 text-primary border-slate-300 rounded focus:ring-primary"
+                        />
+                        <label htmlFor="featured" className="text-sm font-bold text-slate-700">Set as Featured (Hero Demo)</label>
+                    </div>
+
                     <div className="pt-4 flex justify-end gap-2 border-t border-slate-100 mt-6">
                         <button type="button" onClick={() => setIsModalOpen(false)} className="px-4 py-2 text-slate-500 font-bold hover:bg-slate-50 rounded-lg">
                             Cancel
                         </button>
-                        <button type="submit" className="px-4 py-2 bg-primary text-white font-bold rounded-lg hover:bg-[#048a8d] shadow-lg shadow-primary/20">
-                            {isEditMode ? 'Save Changes' : 'Add Video'}
+                        <button
+                            type="submit"
+                            disabled={isUploading || !currentVideo.url || !currentVideo.title}
+                            className={`px-4 py-2 font-bold rounded-lg transition-all shadow-lg ${isUploading || !currentVideo.url || !currentVideo.title
+                                    ? 'bg-slate-300 text-slate-500 cursor-not-allowed shadow-none'
+                                    : 'bg-primary text-white hover:bg-[#048a8d] shadow-primary/20'
+                                }`}
+                        >
+                            {isUploading ? 'Uploading...' : (isEditMode ? 'Save Changes' : 'Add Video')}
                         </button>
                     </div>
                 </form>

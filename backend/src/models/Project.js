@@ -1,5 +1,11 @@
 const mongoose = require('mongoose');
 
+const testimonialSchema = new mongoose.Schema({
+    text: { type: String, default: '' },
+    author: { type: String, default: '' },
+    role: { type: String, default: '' }
+});
+
 const projectSchema = new mongoose.Schema({
     title: {
         type: String,
@@ -11,47 +17,69 @@ const projectSchema = new mongoose.Schema({
         type: String,
         unique: true
     },
+    subtitle: {
+        type: String,
+        default: ''
+    },
     category: {
-        type: String, // e.g., 'Web App', 'Mobile App', 'AI'
+        type: String, // e.g., 'Web App', 'Fintech'
         required: true
     },
-    summary: {
+    industry: {
         type: String,
-        required: [true, 'Please add a summary'],
-        maxlength: 300
+        default: ''
+    },
+    client: {
+        type: String,
+        default: ''
+    },
+    year: {
+        type: String,
+        default: ''
+    },
+    description: { // Changed from summary to match original structure
+        type: String,
+        default: ''
     },
     fullDescription: {
         type: String,
         required: [true, 'Please add a full description']
     },
     thumbnail: {
-        type: String, // URL
+        type: String, // Main display image
         required: true
     },
+    coverImage: { // Added to match original structure
+        type: String,
+        default: ''
+    },
     images: {
-        type: [String], // Array of URLs
+        type: [String], // Gallery for slideshow
         default: []
     },
-    technologies: {
+    tags: { // Changed from technologies to match original structure
         type: [String],
         default: []
     },
-    year: String,
-    industry: String,
-    subtitle: String,
-    challenge: String,
-    solution: String,
-    results: [String],
+    challenge: {
+        type: String,
+        default: ''
+    },
+    solution: {
+        type: String,
+        default: ''
+    },
+    features: {
+        type: [String], // List of core features
+        default: []
+    },
+    results: {
+        type: [String], // e.g., ["1M+ USERS", "40% INCREASE"]
+        default: []
+    },
     testimonial: {
-        text: String,
-        author: String,
-        role: String
-    },
-    client: {
-        type: String
-    },
-    siteLink: {
-        type: String
+        type: testimonialSchema,
+        default: () => ({})
     },
     featured: {
         type: Boolean,
@@ -70,12 +98,17 @@ const projectSchema = new mongoose.Schema({
 });
 
 // Create slug from title
-projectSchema.pre('save', function (next) {
-    this.slug = this.title
-        .toLowerCase()
-        .replace(/[^\w ]+/g, '')
-        .replace(/ +/g, '-');
-    next();
+projectSchema.pre('save', async function () {
+    if (this.isModified('title')) {
+        this.slug = this.title
+            .toLowerCase()
+            .replace(/[^\w ]+/g, '')
+            .replace(/ +/g, '-');
+    }
+    // Set coverImage to thumbnail if empty
+    if (!this.coverImage) {
+        this.coverImage = this.thumbnail;
+    }
 });
 
 module.exports = mongoose.model('Project', projectSchema);

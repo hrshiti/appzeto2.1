@@ -37,6 +37,23 @@ const serviceSchema = new mongoose.Schema({
         type: String,
         default: 'Development'
     },
+    image: {
+        type: String,
+        default: ''
+    },
+    layoutType: {
+        type: String,
+        enum: ['web', 'app', 'generic'],
+        default: 'web'
+    },
+    visualFilename: {
+        type: String,
+        default: 'App.tsx'
+    },
+    visualCode: {
+        type: String,
+        default: ''
+    },
     active: {
         type: Boolean,
         default: true
@@ -50,14 +67,13 @@ const serviceSchema = new mongoose.Schema({
 });
 
 // Create slug from title if not provided
-serviceSchema.pre('save', function (next) {
-    if (!this.slug) {
+serviceSchema.pre('save', async function () {
+    if (this.title && !this.slug) {
         this.slug = this.title
             .toLowerCase()
             .replace(/[^\w ]+/g, '')
             .replace(/ +/g, '-');
     }
-    next();
 });
 
 module.exports = mongoose.model('Service', serviceSchema);
