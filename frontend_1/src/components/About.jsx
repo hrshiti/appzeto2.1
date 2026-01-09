@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
+import groupImg from '../assets/group_photo.jpeg';
+
 const About = () => {
     const [charIndex, setCharIndex] = useState(0);
     const [isInView, setIsInView] = useState(false);
@@ -87,7 +89,7 @@ const About = () => {
                                 <div className="absolute -bottom-8 -right-8 w-64 h-64 bg-[#ffffff] dark:bg-[#023638] rounded-full mix-blend-multiply filter blur-3xl opacity-50 dark:opacity-20 hidden sm:block"></div>
                                 <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-gray-100 dark:border-gray-700 group w-full">
                                     <div className="absolute inset-0 bg-gradient-to-tr from-[#012829]/80 via-transparent to-transparent z-10"></div>
-                                    <div className="aspect-[4/3] w-full bg-cover bg-center transition-transform duration-1000 group-hover:scale-105" data-alt="Modern collaborative office space with diverse team working on computers" style={{ backgroundImage: 'url("https://lh3.googleusercontent.com/aida-public/AB6AXuAvHdnN71Uc7VP5JfWs3Bi1tibY-BmrucyzsJWI-hHxdIv5oOnKBjtg7LfdwdC2rad-d0p4iPj9LwWlPseEbHZdUYkE87e-DHyeGAI4RrkWzWxw_1fKf_LEMqgFt5YL0TXzftrBmHTaUDovzaWII4YmKuPIxE_1L45FcbAXywasSgBLYxmh34fFB4-NL0YCipqEJwLITSceOiLPvBgcNIQp8rQmiGfqRtTJbBdNbdZdPHouDbj_ZX-ViI8fnifJEZNvo902FOESnJ4L")' }}></div>
+                                    <div className="aspect-[4/3] w-full bg-cover bg-center transition-transform duration-1000 group-hover:scale-105" data-alt="Modern collaborative office space with diverse team working on computers" style={{ backgroundImage: `url("${groupImg}")` }}></div>
                                     <div className="absolute bottom-0 left-0 p-4 sm:p-8 z-20 w-full">
                                         <div className="backdrop-blur-md bg-white/10 border border-white/20 p-4 sm:p-6 rounded-xl overflow-hidden relative">
                                             <div className="absolute top-0 left-0 w-1 h-full bg-[#EAB308]"></div>

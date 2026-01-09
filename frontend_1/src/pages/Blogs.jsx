@@ -5,7 +5,7 @@ import ScrollWrapper from '../components/ScrollWrapper';
 import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import groupImg from '../assets/group (1).jpeg';
+import groupImg from '../assets/group_photo.jpeg';
 // Fixed: Pointing to existing file 'boating.jpg' instead of missing 'bonfire.jpg'
 import bonfireImg from '../assets/boating.jpg';
 import boatingImg from '../assets/boating.jpg';

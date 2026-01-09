@@ -7,30 +7,39 @@ import { projectsData } from '../data/projectsData';
 // --- Internal Phone Mockup Component ---
 const PhoneMockup = ({ image, title, isActive }) => {
     return (
-        <div className={`
-            relative rounded-[1.5rem] md:rounded-[2rem] border-[3px] md:border-[4px] border-black bg-black overflow-hidden shadow-2xl
-            w-[160px] md:w-[200px] aspect-[9/18] ring-1 ring-gray-800/50
-        `}>
-            {/* Phone Bezel/Camera - Black Style */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/3 h-3 md:h-4 bg-black rounded-b-lg z-20 flex justify-center items-center shadow-sm border-b border-x border-gray-800">
-                <div className="w-6 md:w-8 h-0.5 bg-gray-800 rounded-full" />
+        <div className="relative group flex flex-col items-center">
+            <div className={`
+                relative rounded-[1.5rem] md:rounded-[2rem] border-[3px] md:border-[4px] border-black bg-black overflow-hidden shadow-2xl
+                w-[160px] md:w-[200px] aspect-[9/18] ring-1 ring-gray-800/50
+            `}>
+                {/* Phone Bezel/Camera - Black Style */}
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/3 h-3 md:h-4 bg-black rounded-b-lg z-20 flex justify-center items-center shadow-sm border-b border-x border-gray-800">
+                    <div className="w-6 md:w-8 h-0.5 bg-gray-800 rounded-full" />
+                </div>
+
+                {/* Screen Content */}
+                <div className="relative w-full h-full bg-gray-900 text-white">
+                    <img
+                        src={image || "https://via.placeholder.com/400x800?text=No+Image"}
+                        alt={title}
+                        className="w-full h-full object-cover"
+                        onError={(e) => { e.target.src = "https://via.placeholder.com/400x800?text=Image+Error"; }}
+                    />
+
+                    {/* Overlay for inactive */}
+                    <div className="absolute inset-0 bg-black/40 transition-opacity duration-300 mask-overlay" />
+                </div>
+
+                {/* Glass Glare */}
+                <div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent pointer-events-none z-10" />
             </div>
 
-            {/* Screen Content */}
-            <div className="relative w-full h-full bg-gray-900 text-white">
-                <img
-                    src={image || "https://via.placeholder.com/400x800?text=No+Image"}
-                    alt={title}
-                    className="w-full h-full object-cover"
-                    onError={(e) => { e.target.src = "https://via.placeholder.com/400x800?text=Image+Error"; }}
-                />
-
-                {/* Overlay for inactive - Reduced opacity significantly */}
-                <div className="absolute inset-0 bg-black/40 transition-opacity duration-300 mask-overlay" />
+            {/* Title for Mobile & Desktop - Positioned Below */}
+            <div className="absolute -bottom-16 left-1/2 -translate-x-1/2 w-[200px] text-center z-50">
+                <h3 className="text-sm font-bold text-slate-900 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg border border-slate-200 inline-block mx-auto leading-tight whitespace-nowrap">
+                    {title}
+                </h3>
             </div>
-
-            {/* Glass Glare - adjusted for black phone */}
-            <div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent pointer-events-none z-10" />
         </div>
     );
 };
@@ -74,7 +83,7 @@ const ProjectShowcase = () => {
         if (isAutoPlaying) {
             timer = setInterval(() => {
                 setCurrentImageIndex((prev) => (prev + 1) % projectImages.length);
-            }, 2500);
+            }, 1500);
         }
         return () => clearInterval(timer);
     }, [isAutoPlaying, projectImages.length]);
@@ -100,7 +109,7 @@ const ProjectShowcase = () => {
                 zIndex: 0,
                 // rotateY: 0, // Removed
                 filter: "blur(10px)",
-                duration: 0.8,
+                duration: 0.5,
                 ease: "power3.inOut"
             };
 
@@ -127,7 +136,6 @@ const ProjectShowcase = () => {
         });
 
     }, [currentImageIndex, projectImages.length, activeProject.id]);
-
 
     return (
         <section className="relative w-full min-h-screen bg-slate-50 overflow-hidden flex items-center py-24">
