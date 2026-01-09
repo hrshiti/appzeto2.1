@@ -34,12 +34,21 @@ const PhoneMockup = ({ image, title, isActive }) => {
                 <div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent pointer-events-none z-10" />
             </div>
 
-            {/* Title for Mobile & Desktop - Positioned Below */}
-            <div className="absolute -bottom-16 left-1/2 -translate-x-1/2 w-[200px] text-center z-50">
-                <h3 className="text-sm font-bold text-slate-900 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg border border-slate-200 inline-block mx-auto leading-tight whitespace-nowrap">
-                    {title}
-                </h3>
-            </div>
+            {/* Title for Mobile & Desktop - Positioned Below - ONLY VISIBLE IF ACTIVE */}
+            <AnimatePresence>
+                {isActive && (
+                    <motion.div
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -10 }}
+                        className="absolute -bottom-16 left-1/2 -translate-x-1/2 w-[200px] text-center z-50"
+                    >
+                        <h3 className="text-sm font-bold text-slate-900 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg border border-slate-200 inline-block mx-auto leading-tight whitespace-nowrap">
+                            {title}
+                        </h3>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </div>
     );
 };
@@ -234,7 +243,7 @@ const ProjectShowcase = () => {
                             className="absolute origin-center will-change-transform"
                             style={{ transform: 'scale(0) translateX(0)', opacity: 0 }}
                         >
-                            <PhoneMockup image={item.img} title={activeProject.title} />
+                            <PhoneMockup image={item.img} title={activeProject.title} isActive={i === currentImageIndex} />
                         </div>
                     ))}
 

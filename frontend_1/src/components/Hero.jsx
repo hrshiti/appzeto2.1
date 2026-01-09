@@ -4,7 +4,7 @@ import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import { motion } from 'framer-motion';
 import Navbar from './Navbar';
 import RevolvingOrbit from './RevolvingOrbit';
-import aapreecLogo from '../assets/logos/aapreec.jpg';
+import aapreecLogo from '../assets/logos/aapreec_logo.jpg';
 import autoRideLogo from '../assets/logos/auto_ride.jpg';
 import beeyouLogo from '../assets/logos/beeyou.jpg';
 import bookMyTempoLogo from '../assets/logos/book_my_tempo.jpg';
