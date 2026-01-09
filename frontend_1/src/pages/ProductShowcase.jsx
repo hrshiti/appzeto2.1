@@ -9,12 +9,12 @@ import ScrollReveal from '../components/ScrollReveal';
 import ScrollWrapper from '../components/ScrollWrapper';
 import ProductReviews from '../components/ProductReviews';
 
-import heroImage from '../assets/appzeto-food-hero.jpg';
-import floatingImage1 from '../assets/appzeto-food-1.jpg';
-import floatingImage2 from '../assets/appzeto-food-2.jpg';
-import carouselImage1 from '../assets/appzeto-food-3.jpg';
-import carouselImage2 from '../assets/appzeto-food-4.jpg';
-import carouselImage3 from '../assets/appzeto-food-5.jpg';
+import heroImage from '../assets/projects/appzeto-food-hero.jpg';
+import floatingImage1 from '../assets/projects/appzeto-food-1.jpg';
+import floatingImage2 from '../assets/projects/appzeto-food-2.jpg';
+import carouselImage1 from '../assets/projects/appzeto-food-3.jpg';
+import carouselImage2 from '../assets/projects/appzeto-food-4.jpg';
+import carouselImage3 from '../assets/projects/appzeto-food-5.jpg';
 
 gsap.registerPlugin(ScrollTrigger);
 
