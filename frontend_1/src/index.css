@@ -236,3 +236,18 @@ body {
 .animate-blast-content {
   animation: blast-content-fade 0.5s ease-out forwards;
 }
+
+/* SHIMMER ANIMATION */
+@keyframes shimmer {
+  0% {
+    transform: skewX(-12deg) translateX(-150%);
+  }
+
+  100% {
+    transform: skewX(-12deg) translateX(150%);
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 1.5s infinite;
+}

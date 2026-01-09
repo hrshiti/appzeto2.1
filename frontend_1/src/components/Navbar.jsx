@@ -299,15 +299,29 @@ const Navbar = () => {
                                     )}
                                 </div>
                             ))}
-                            <div className="pl-4 ml-2 border-l border-gray-200 dark:border-gray-700 h-10 flex items-center relative group/btn">
-                                {isBlasting && <div className="absolute inset-0 bg-[#F1FC88] rounded-full animate-blast-ring z-0 pointer-events-none"></div>}
-                                <Link
-                                    className={`bg-[#F1FC88] hover:bg-[#EAF576] text-gray-900 px-6 py-2.5 rounded-full font-bold transition-all shadow-lg shadow-[#F0FF35]/20 relative z-10 ${isBlasting ? 'animate-blast-content' : ''}`}
-                                    to="/chit-chat"
-                                    onClick={handleChitChat}
+                            <div className="pl-4 ml-2 border-l border-gray-200 dark:border-gray-700 h-12 flex items-center relative group/btn">
+                                <motion.div
+                                    whileHover={{ scale: 1.05 }}
+                                    whileTap={{ scale: 0.95 }}
+                                    className="relative p-[2px] rounded-xl overflow-hidden shadow-lg shadow-[#05A4A7]/20"
                                 >
-                                    Let's Chit Chat
-                                </Link>
+                                    {/* Moving Border Beam (Fixed All-Side Flow) */}
+                                    <div className="absolute inset-0 z-0">
+                                        <motion.div
+                                            animate={{ rotate: [360, 0] }}
+                                            transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+                                            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600%] h-[600%] bg-[conic-gradient(from_0deg,transparent_0deg,transparent_340deg,#05A4A7_355deg,#05A4A7_360deg)] opacity-100 blur-[1px]"
+                                        />
+                                    </div>
+
+                                    <Link
+                                        className="relative z-10 flex items-center justify-center px-6 py-2 bg-gradient-to-r from-[#05A4A7] to-[#037A7C] text-white font-black rounded-[10px] overflow-hidden whitespace-nowrap"
+                                        to="/chit-chat"
+                                        onClick={handleChitChat}
+                                    >
+                                        Let's Chit Chat
+                                    </Link>
+                                </motion.div>
                             </div>
                         </div>
 
@@ -437,18 +451,33 @@ const Navbar = () => {
                                 variants={mobileLinkVars}
                                 className="p-6 border-t border-gray-100 dark:border-gray-800 bg-white/50 dark:bg-black/20 backdrop-blur-lg mt-auto relative z-20"
                             >
-                                <Link
-                                    to="/chit-chat"
-                                    className="w-full flex items-center justify-center gap-3 bg-[#F1FC88] py-4 rounded-xl text-gray-900 font-bold uppercase tracking-wide shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all active:scale-95"
-                                    onClick={(e) => {
-                                        e.preventDefault();
-                                        handleLinkClick();
-                                        handleChitChat(e);
-                                    }}
+                                <motion.div
+                                    whileHover={{ scale: 1.02 }}
+                                    whileTap={{ scale: 0.98 }}
+                                    className="relative p-[2px] rounded-xl overflow-hidden shadow-xl"
                                 >
-                                    Let's Chit Chat
-                                    <span className="material-symbols-outlined">chat</span>
-                                </Link>
+                                    {/* Moving Border Beam (Fixed All-Side Flow) */}
+                                    <div className="absolute inset-0 z-0">
+                                        <motion.div
+                                            animate={{ rotate: [360, 0] }}
+                                            transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+                                            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600%] h-[600%] bg-[conic-gradient(from_0deg,transparent_0deg,transparent_340deg,#05A4A7_355deg,#05A4A7_360deg)] opacity-100 blur-[1px]"
+                                        />
+                                    </div>
+
+                                    <Link
+                                        to="/chit-chat"
+                                        className="w-full flex items-center justify-center gap-3 bg-gradient-to-r from-[#05A4A7] to-[#037A7C] py-4 rounded-[10px] text-white font-black uppercase tracking-wide relative z-10"
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            handleLinkClick();
+                                            handleChitChat(e);
+                                        }}
+                                    >
+                                        Let's Chit Chat
+                                        <span className="material-symbols-outlined">chat</span>
+                                    </Link>
+                                </motion.div>
                             </motion.div>
                         </motion.div>
                     )}

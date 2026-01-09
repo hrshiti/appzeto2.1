@@ -45,14 +45,56 @@ const Hero = () => {
                                 We help startups, founders, and businesses design, develop, and scale reliable digital products using modern technologies and proven development processes.
                             </p>
 
-                            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-2 sm:pt-4">
-                                <Link to="/contact" className="inline-flex justify-center items-center px-6 py-3 sm:px-10 sm:py-5 bg-[#F1FC88] text-gray-900 font-black rounded-2xl shadow-xl shadow-[#F0FF35]/10 hover:bg-[#EAF576] transform hover:-translate-y-1 transition-all duration-300 text-sm sm:text-lg group">
-                                    Book Free Consultation
-                                    <span className="material-icons ml-2 group-hover:translate-x-1 transition-transform">rocket_launch</span>
-                                </Link>
-                                <Link to="/projects" className="inline-flex justify-center items-center px-6 py-3 sm:px-10 sm:py-5 bg-white/50 dark:bg-white/5 backdrop-blur-md text-gray-700 dark:text-gray-200 font-bold rounded-2xl border border-gray-200 dark:border-white/10 hover:bg-white dark:hover:bg-white/10 transition-all duration-300 text-sm sm:text-lg">
-                                    View Case Studies
-                                </Link>
+                            <div className="flex flex-col sm:flex-row gap-5 pt-4">
+                                {/* Primary Button: Vibrant Gradient Consultation with Thin Border Beam */}
+                                {/* Primary Button: Theme-Matched Teal Gradient with Fixed All-Side Animation */}
+                                <div className="relative group">
+                                    <motion.div
+                                        whileHover={{ y: -6, scale: 1.05 }}
+                                        whileTap={{ scale: 0.98 }}
+                                        className="relative p-[2px] rounded-xl overflow-hidden bg-white/10 shadow-[0_20px_40px_rgba(5,164,167,0.25)]"
+                                    >
+                                        <div className="absolute inset-0 z-0">
+                                            <motion.div
+                                                animate={{ rotate: [360, 0] }}
+                                                transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+                                                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600%] h-[600%] bg-[conic-gradient(from_0deg,transparent_0deg,transparent_340deg,#05A4A7_355deg,#05A4A7_360deg)] opacity-100 blur-[1px]"
+                                            />
+                                        </div>
+
+                                        <Link to="/contact" className="relative z-10 flex items-center justify-center px-7 py-3 bg-gradient-to-br from-[#05A4A7] to-[#037A7C] text-white font-black rounded-[11px] overflow-hidden group/btn">
+                                            <span className="relative z-10 text-sm uppercase tracking-wider">Book Free Consultation</span>
+                                            <motion.span
+                                                className="relative z-10 material-icons ml-2 text-xl"
+                                                animate={{ x: [0, 5, 0] }}
+                                                transition={{ duration: 1, repeat: Infinity }}
+                                            >
+                                                rocket_launch
+                                            </motion.span>
+                                        </Link>
+                                    </motion.div>
+                                </div>
+
+                                {/* Secondary Button: Glassmorphic Case Studies with Fixed All-Side Animation */}
+                                <div className="relative group">
+                                    <motion.div
+                                        whileHover={{ y: -6, scale: 1.05 }}
+                                        whileTap={{ scale: 0.98 }}
+                                        className="relative p-[2px] rounded-xl overflow-hidden bg-white/10"
+                                    >
+                                        <div className="absolute inset-0 z-0">
+                                            <motion.div
+                                                animate={{ rotate: [360, 0] }}
+                                                transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+                                                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600%] h-[600%] bg-[conic-gradient(from_0deg,transparent_0deg,transparent_340deg,#3B82F6_355deg,#3B82F6_360deg)] opacity-100 blur-[1px]"
+                                            />
+                                        </div>
+
+                                        <Link to="/projects" className="relative z-10 flex items-center justify-center px-7 py-3 bg-white dark:bg-slate-900 border border-transparent dark:border-white/5 text-gray-800 dark:text-white font-bold rounded-[11px] shadow-xl overflow-hidden group/btn">
+                                            <span className="relative z-10 text-sm uppercase tracking-wider">View Case Studies</span>
+                                        </Link>
+                                    </motion.div>
+                                </div>
                             </div>
                         </motion.div>
 
@@ -70,7 +112,6 @@ const Hero = () => {
                                 initial={{ opacity: 0, x: 20 }}
                                 animate={{ opacity: 1, x: 0 }}
                                 transition={{ delay: 1, duration: 0.8 }}
-                                // Fixed: Smaller size (p-3), positioned properly to the right (-right-24) and slightly bumped up (bottom-8)
                                 className="absolute -bottom-4 right-0 sm:bottom-8 sm:-right-24 flex items-center gap-2 sm:gap-3 bg-white dark:bg-slate-900 border border-gray-100 dark:border-slate-800 p-2 pr-4 sm:p-3 sm:pr-5 rounded-full shadow-2xl z-20"
                             >
                                 <div className="flex -space-x-2 sm:-space-x-3">
@@ -97,38 +138,21 @@ const Hero = () => {
                             </motion.div>
                         </motion.div>
                     </div>
-                </div>
-
-                {/* THE PHONE LOTTIE (Moved Below Hero Content) - HIDDEN
-                <div className="w-full relative flex flex-col items-center justify-center py-20 bg-primary/5 dark:bg-white/5 mt-10">
-                    <div className="text-center mb-10 px-4">
-                        <p className="text-primary font-black uppercase tracking-[0.3em] text-[10px] mb-2">Immersive Experience</p>
-                        <h2 className="text-3xl md:text-5xl font-black text-gray-900 dark:text-white uppercase tracking-tighter">Mobile-First <span className="text-primary">Precision</span></h2>
-                    </div>
-                    <div className="relative w-full aspect-square max-w-[300px] sm:max-w-md lg:max-w-xl mx-auto flex items-center justify-center">
-                        <DotLottieReact
-                            src="https://lottie.host/f5edc29d-7c20-49be-9b54-7c07fa26f2c6/wKHzGrk2QZ.lottie"
-                            loop
-                            autoplay
-                            className="w-full h-full transform scale-150"
-                        />
-                    </div>
-                </div>
-                */}
+                </div >
 
                 <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 hidden lg:block animate-bounce z-20">
                     <span className="material-icons text-gray-400 dark:text-gray-600">keyboard_arrow_down</span>
                 </div>
-            </main>
+            </main >
             <section className="relative border-y border-emerald-900 bg-emerald-950 py-2">
-                {/* CENTERED LABEL OVERLAY */}
-                <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
-                    <span className="text-emerald-50 font-black uppercase tracking-[0.2em] text-sm sm:text-lg drop-shadow-md">
-                        Happy Clients
+                {/* PREMIUM WATERMARK OVERLAY (Behind Logos) */}
+                <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
+                    <span className="text-white font-black uppercase tracking-[0.3em] text-4xl sm:text-7xl lg:text-8xl opacity-[0.12] select-none">
+                        HAPPY CLIENTS
                     </span>
                 </div>
 
-                <div className="flex animate-scroll-fast whitespace-nowrap group opacity-60">
+                <div className="flex animate-scroll-fast whitespace-nowrap group relative z-10">
                     {[
                         { name: "Aapreec", logo: aapreecLogo },
                         { name: "AutoRide", logo: autoRideLogo },
@@ -141,15 +165,15 @@ const Hero = () => {
                         { name: "Rent Yatra", logo: rentYatraLogo },
                         { name: "Blue Ride", logo: blueRideLogo },
                     ].map((client, index) => (
-                        <div key={index} className="flex flex-col items-center space-y-1 mx-4 sm:mx-6 cursor-pointer hover:scale-105 transition-transform duration-300">
-                            <div className="h-10 w-10 sm:h-12 sm:w-12 bg-white rounded-full shadow-sm border border-emerald-900 overflow-hidden relative p-0.5">
+                        <div key={index} className="flex flex-row items-center gap-2 sm:gap-3 mx-6 sm:mx-8 cursor-pointer hover:scale-105 transition-transform duration-300">
+                            <div className="h-8 w-8 sm:h-10 sm:w-10 bg-white rounded-full shadow-sm border border-emerald-900 overflow-hidden relative p-0.5 shrink-0">
                                 <img
                                     src={client.logo}
                                     alt={client.name}
                                     className="w-full h-full object-cover rounded-full"
                                 />
                             </div>
-                            <span className="font-bold text-[9px] sm:text-[10px] text-emerald-100/70 uppercase tracking-widest">{client.name}</span>
+                            <span className="font-bold text-[10px] sm:text-[11px] text-emerald-100/90 uppercase tracking-widest whitespace-nowrap">{client.name}</span>
                         </div>
                     ))}
                     {[
@@ -164,20 +188,20 @@ const Hero = () => {
                         { name: "Rent Yatra", logo: rentYatraLogo },
                         { name: "Blue Ride", logo: blueRideLogo },
                     ].map((client, index) => (
-                        <div key={`duplicate-${index}`} className="flex flex-col items-center space-y-1 mx-4 sm:mx-6 cursor-pointer hover:scale-105 transition-transform duration-300">
-                            <div className="h-10 w-10 sm:h-12 sm:w-12 bg-white rounded-full shadow-sm border border-emerald-900 overflow-hidden relative p-0.5">
+                        <div key={`duplicate-${index}`} className="flex flex-row items-center gap-2 sm:gap-3 mx-6 sm:mx-8 cursor-pointer hover:scale-105 transition-transform duration-300">
+                            <div className="h-8 w-8 sm:h-10 sm:w-10 bg-white rounded-full shadow-sm border border-emerald-900 overflow-hidden relative p-0.5 shrink-0">
                                 <img
                                     src={client.logo}
                                     alt={client.name}
                                     className="w-full h-full object-cover rounded-full"
                                 />
                             </div>
-                            <span className="font-bold text-[9px] sm:text-[10px] text-emerald-100/70 uppercase tracking-widest">{client.name}</span>
+                            <span className="font-bold text-[10px] sm:text-[11px] text-emerald-100/90 uppercase tracking-widest whitespace-nowrap">{client.name}</span>
                         </div>
                     ))}
                 </div>
             </section>
-        </div>
+        </div >
     );
 };
 

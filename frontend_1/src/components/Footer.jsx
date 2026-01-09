@@ -5,9 +5,9 @@ import { dataService } from '../admin/services/dataService';
 
 const Footer = () => {
     const [settings, setSettings] = useState({
-        contactEmail: 'contact@appzeto.com',
-        contactPhone: '+91 888 234 5678',
-        contactAddress: 'Bangalore, India',
+        contactEmail: 'appzeto@gmail.com',
+        contactPhone: '+91 7691810506',
+        contactAddress: 'Office No. 114, Business Park, Vijay Nagar, Indore, Madhya Pradesh, 452010',
         social: {
             linkedin: '#',
             instagram: '#',

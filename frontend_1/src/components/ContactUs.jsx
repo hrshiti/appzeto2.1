@@ -67,15 +67,16 @@ const ContactUs = ({ isHomePage = false }) => {
 
     // Dynamic Settings
     const [settings, setSettings] = useState({
-        contactPhone: '+465 723 723 566',
-        contactEmail: 'contact@appzeto.com',
-        contactAddress: '1784 Griffin Street, AL, USA',
+        contactPhone: '+91 7691810506',
+        contactEmail: 'appzeto@gmail.com',
+        contactAddress: 'Office No. 114, Business Park, Vijay Nagar, Indore, Madhya Pradesh, 452010',
         offices: [
-            { id: 1, title: "Global Headquarters", address: "1784 Griffin Street, Birmingham, Alabama 35203, USA", icon: "apartment", time: "Mon - Fri" },
-            { id: 2, title: "Innovation Tech Hub", address: "548 Market St, Suite 120, San Francisco, CA 94104, USA", icon: "business_center", time: "Mon - Sat" }
+            { id: 1, title: "Headquarters", address: "Office No. 114, Business Park, Vijay Nagar, Indore, Madhya Pradesh, 452010", icon: "apartment", time: "Mon - Fri" },
         ]
     });
 
+    // Removed useEffect that fetches from dataService to prevent overriding hardcoded "Indore" address with old "Bangalore" data.
+    /*
     useEffect(() => {
         const load = async () => {
             try {
@@ -89,6 +90,7 @@ const ContactUs = ({ isHomePage = false }) => {
         };
         load();
     }, []);
+    */
 
     // Lock body scroll when modal is open
     React.useEffect(() => {
@@ -230,7 +232,7 @@ const ContactUs = ({ isHomePage = false }) => {
                         {/* Left: Map - HIDDEN ON MOBILE */}
                         <div className="hidden lg:block h-[250px] md:h-[400px] lg:h-[500px] overflow-hidden relative rounded-2xl md:rounded-[2rem] border-4 border-white/30 shadow-2xl bg-white">
                             <iframe
-                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d193595.25280821814!2d-74.119763973046!3d40.69740344223377!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2sin!4v1703951567403!5m2!1sen!2sin"
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3680.0810793132646!2d75.8950663750438!3d22.753556779363577!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x396302a6d7a22409%3A0x8e0404a0889c250!2sVijay%20Nagar%2C%20Indore%2C%20Madhya%20Pradesh!5e0!3m2!1sen!2sin!4v1703951567403!5m2!1sen!2sin"
                                 width="100%"
                                 height="100%"
                                 style={{ border: 0 }}
