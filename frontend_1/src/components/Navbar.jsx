@@ -38,24 +38,13 @@ const NAV_ITEMS = [
         title: "Projects",
         path: "/projects",
         description: "A showcase of our most ambitious digital transformations.",
-        items: [
-            { label: "Logistics", link: "/projects/fleet-master-pro" },
-            { label: "Fintech", link: "/projects/neon-banking-ui" },
-            { label: "Healthcare", link: "/projects/health-hub-ecosystem" },
-            { label: "AI Solutions", link: "/projects/smart-grid-automation" },
-            { label: "EdTech", link: "/projects/eduverse-learning" },
-            { label: "E-commerce", link: "/projects/omnichannel-retail" }
-        ]
+        items: []
     },
     {
         title: "Blogs",
         path: "/blogs",
         description: "Insights, updates, and articles from our expert team.",
-        items: [
-            { label: "Latest News", link: "/blogs" },
-            { label: "Tech Trends", link: "/blogs" },
-            { label: "Case Breakdowns", link: "/blogs" }
-        ]
+        items: []
     },
     {
         title: "Careers",
@@ -148,24 +137,24 @@ const Navbar = () => {
             ]);
 
             const updatedNav = NAV_ITEMS.map(item => {
+                // Dynamically update Services
                 if (item.title === "Services" && services) {
                     return {
                         ...item,
-                        items: services.slice(0, 6).map(s => ({ label: s.title, link: `/services#${s.title.toLowerCase().replace(/\s+/g, '-')}` }))
+                        items: services.map(s => ({ label: s.title, link: `/services#${s.slug}` }))
                     };
                 }
-                if (item.title === "Projects" && projects) {
+                // Dynamically update Products
+                if (item.title === "Products" && products && products.length > 0) {
                     return {
                         ...item,
-                        items: projects.slice(0, 6).map(p => ({ label: p.title, link: `/projects/${p.slug}` }))
+                        items: products.map(p => ({
+                            label: p.title,
+                            link: p.slug ? `/appzeto-${p.slug}` : `/appzeto-food` // Fallback or strict slug usage
+                        }))
                     };
                 }
-                if (item.title === "Blogs" && blogs) {
-                    return {
-                        ...item,
-                        items: blogs.slice(0, 6).map(b => ({ label: b.title, link: `/blogs/${b.slug}` }))
-                    };
-                }
+                // Skip Projects and Blogs -> they remain static (empty for direct links)
                 return item;
             });
 

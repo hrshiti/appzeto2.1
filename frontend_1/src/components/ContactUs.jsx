@@ -305,9 +305,10 @@ const ContactUs = ({ isHomePage = false }) => {
                                             <select
                                                 required
                                                 name="reason"
+                                                defaultValue=""
                                                 className="w-full p-3 md:p-6 rounded-lg md:rounded-2xl bg-white/5 border border-white/5 text-white outline-none focus:border-primary/50 transition-all text-xs md:text-sm font-medium appearance-none cursor-pointer shadow-inner"
                                             >
-                                                <option value="" disabled selected className="bg-[#062929]">Select reason</option>
+                                                <option value="" disabled className="bg-[#062929]">Select reason</option>
                                                 <option value="project" className="bg-[#062929]">New Project</option>
                                                 <option value="partnership" className="bg-[#062929]">Partnership</option>
                                                 <option value="career" className="bg-[#062929]">Careers</option>
@@ -502,8 +503,8 @@ const ContactUs = ({ isHomePage = false }) => {
                                     </div>
                                     <div className="space-y-1 md:space-y-2">
                                         <label className="text-[8px] md:text-[10px] font-black uppercase text-slate-400 tracking-widest ml-1 md:ml-2">Project Type</label>
-                                        <select required name="service" className="w-full px-4 py-2.5 md:py-4 bg-slate-50 border-2 border-slate-100 rounded-xl md:rounded-2xl focus:border-primary focus:bg-white outline-none transition-all text-[11px] md:text-sm font-bold appearance-none cursor-pointer">
-                                            <option value="" disabled selected>Select service</option>
+                                        <select required name="service" defaultValue="" className="w-full px-4 py-2.5 md:py-4 bg-slate-50 border-2 border-slate-100 rounded-xl md:rounded-2xl focus:border-primary focus:bg-white outline-none transition-all text-[11px] md:text-sm font-bold appearance-none cursor-pointer">
+                                            <option value="" disabled>Select service</option>
                                             <option value="web">Web Ecosystem</option>
                                             <option value="mobile">Mobile App</option>
                                             <option value="ai">AI Integration</option>
@@ -514,8 +515,8 @@ const ContactUs = ({ isHomePage = false }) => {
 
                                 <div className="space-y-1 md:space-y-2">
                                     <label className="text-[8px] md:text-[10px] font-black uppercase text-slate-400 tracking-widest ml-1 md:ml-2">Estimated Budget</label>
-                                    <select required name="budget" className="w-full px-4 py-2.5 md:py-4 bg-slate-50 border-2 border-slate-100 rounded-xl md:rounded-2xl focus:border-primary focus:bg-white outline-none transition-all text-[11px] md:text-sm font-bold appearance-none cursor-pointer">
-                                        <option value="" disabled selected>Select budget range</option>
+                                    <select required name="budget" defaultValue="" className="w-full px-4 py-2.5 md:py-4 bg-slate-50 border-2 border-slate-100 rounded-xl md:rounded-2xl focus:border-primary focus:bg-white outline-none transition-all text-[11px] md:text-sm font-bold appearance-none cursor-pointer">
+                                        <option value="" disabled>Select budget range</option>
                                         <option value="5-10k">$5k - $10k</option>
                                         <option value="10-25k">$10k - $25k</option>
                                         <option value="25-50k">$25k - $50k</option>
