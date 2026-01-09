@@ -1,134 +1,125 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import thinkingPersonGreenImg from '../assets/thinking_professional_green.png';
+import innovationPremiumImg from '../assets/innovation_premium.png';
 
 const features = [
     {
         id: "01",
-        title: "Cutting-Edge Technology",
-        description: "We leverage React, MERN, AI, and Cloud to build scalable, future-ready products.",
-        color: "bg-[#2E583E]", // Dark Green (Matches Left Sidebar)
-        textColor: "text-white"
+        title: "Cutting-Edge Tech",
+        description: "We use the latest stacks like React, Next.js, and AI."
     },
     {
         id: "02",
-        title: "Client First Approach",
-        description: "Your goals are our priority. We tailor every solution to fit your specific business needs.",
-        color: "bg-gray-400", // Grey
-        textColor: "text-white"
+        title: "Ironclad Security",
+        description: "Your data is safe with our enterprise-grade protocols."
     },
     {
         id: "03",
-        title: "Secure & Reliable",
-        description: "Enterprise-grade security protocols to protect your sensitive data and systems.",
-        color: "bg-[#94D2BD]", // Light Teal/Mint
-        textColor: "text-[#2E583E]"
+        title: "Agile Execution",
+        description: "Fast development with updates for on-time delivery."
     },
     {
         id: "04",
-        title: "On-Time Delivery",
-        description: "Agile workflows and sprint planning ensure fast, timely project completion.",
-        color: "bg-[#2E583E]",
-        textColor: "text-white"
-    },
-    {
-        id: "05",
-        title: "Stunning UI/UX",
-        description: "Modern, user-centric designs that drive engagement and retention.",
-        color: "bg-gray-400",
-        textColor: "text-white"
+        title: "Global Excellence",
+        description: "Award-winning standards for every project we build."
     }
 ];
 
-const MarqueeRow = ({ items, reverse = false }) => {
-    return (
-        <div className="relative flex overflow-hidden w-full bg-slate-50 py-3 border-y border-slate-100">
-            <motion.div
-                className="flex whitespace-nowrap gap-12 items-center"
-                animate={{ x: reverse ? ["-50%", "0%"] : ["0%", "-50%"] }}
-                transition={{ repeat: Infinity, ease: "linear", duration: 25 }}
-            >
-                {[...items, ...items, ...items, ...items].map((item, i) => (
-                    <div key={i} className="flex items-center gap-4 text-slate-400 font-bold uppercase tracking-widest text-xs md:text-sm opacity-60">
-                        <span>{item}</span>
-                        <div className="w-1.5 h-1.5 rounded-full bg-slate-300" />
-                    </div>
-                ))}
-            </motion.div>
-        </div>
-    );
-};
-
 const WhyChooseUs = () => {
-    const keywords = ["Innovation", "Scalability", "Security", "Performance", "Reliability", "Excellence"];
-    const keywords2 = ["React", "Node.js", "AI Solutions", "Cloud Native", "Mobile Apps", "UI/UX Design"];
-
     return (
-        <div className="flex flex-col">
-            <section className="w-full flex flex-col md:flex-row min-h-screen font-sans">
-                {/* LEFT SIDE - Image & Title Combined */}
-                <div className="md:w-5/12 lg:w-5/12 bg-[#2E583E] relative flex flex-col justify-center p-10 md:p-14 lg:p-20 overflow-hidden group">
-                    {/* Background Image */}
-                    <div className="absolute inset-0 z-0">
-                        <img
-                            src={thinkingPersonGreenImg}
-                            alt="Background"
-                            className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-1000"
-                        />
-                        {/* Dark Overlay for Text Readability */}
-                        <div className="absolute inset-0 bg-[#2E583E]/80 mix-blend-multiply"></div>
-                        <div className="absolute inset-0 bg-gradient-to-t from-[#2E583E] via-transparent to-transparent"></div>
+        <section className="w-full bg-white overflow-hidden font-sans border-y border-slate-50 flex flex-col lg:flex-row">
+
+            {/* LEFT: Compact High-Impact Visual */}
+            <div className="w-full lg:w-[45%] h-[280px] lg:h-[500px] relative overflow-hidden group">
+                <motion.div
+                    initial={{ opacity: 0, scale: 1.1 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 1.5, ease: "easeOut" }}
+                    className="absolute inset-0"
+                >
+                    <img
+                        src={innovationPremiumImg}
+                        alt="Premium Innovation"
+                        className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-r from-[#021F20]/50 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#021F20]/80 via-transparent to-transparent opacity-80" />
+
+                    {/* Compact Label */}
+                    <div className="absolute bottom-8 left-8 z-10">
+                        <motion.h2
+                            initial={{ opacity: 0, y: 10 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            className="text-white text-2xl md:text-4xl font-black tracking-tighter leading-none"
+                        >
+                            Redefining <br />
+                            <span className="text-[#05A4A7]">The Future.</span>
+                        </motion.h2>
+                    </div>
+                </motion.div>
+            </div>
+
+            {/* RIGHT: Tighter Content Area */}
+            <div className="w-full lg:w-[55%] flex flex-col justify-center px-8 md:px-16 lg:px-20 py-10 lg:py-12 bg-white relative">
+                <div className="max-w-2xl relative z-10">
+                    <div className="mb-8">
+                        <motion.span
+                            initial={{ opacity: 0 }}
+                            whileInView={{ opacity: 1 }}
+                            className="text-[#05A4A7] font-black uppercase tracking-[0.5em] text-[10px] mb-2.5 block"
+                        >
+                            Excellence Driven
+                        </motion.span>
+                        <motion.h3
+                            initial={{ opacity: 0, y: 15 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            className="text-3xl md:text-4xl lg:text-5xl font-black text-slate-900 tracking-tighter leading-[0.9]"
+                        >
+                            Why Choose <br />
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#05A4A7] to-[#013537]">Appzeto?</span>
+                        </motion.h3>
                     </div>
 
-                    <motion.div
-                        initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.8 }}
-                        className="relative z-10 text-white"
-                    >
-                        <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-8 drop-shadow-lg">
-                            Why<br />Choose<br />Appzeto?
-                        </h2>
-                        <div className="w-24 h-1.5 bg-white/40 mb-8 rounded-full"></div>
-                        <p className="text-xl md:text-2xl text-white/90 font-medium leading-relaxed max-w-md drop-shadow-md">
-                            The numbers speak for themselves. We deliver excellence.
-                        </p>
-                    </motion.div>
-                </div>
-
-                {/* RIGHT SIDE - Features (White Content) */}
-                <div className="md:w-7/12 lg:w-7/12 bg-white p-6 md:p-16 lg:p-24 flex flex-col justify-center">
-                    <div className="max-w-3xl space-y-8 md:space-y-12">
+                    {/* Compact Grid */}
+                    <div className="grid sm:grid-cols-2 gap-x-8 gap-y-6 lg:gap-y-8">
                         {features.map((feature, index) => (
                             <motion.div
                                 key={feature.id}
-                                initial={{ opacity: 0, x: 50 }}
+                                initial={{ opacity: 0, x: 15 }}
                                 whileInView={{ opacity: 1, x: 0 }}
-                                whileHover={{ x: -10, transition: { duration: 0.3 } }}
-                                viewport={{ once: true, margin: "-50px" }}
                                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                                className="flex items-start gap-5 md:gap-8 group cursor-pointer"
+                                className="group"
                             >
-                                <div className={`flex-shrink-0 w-12 h-12 md:w-16 md:h-16 ${feature.color} rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300`}>
-                                    <span className={`text-xl md:text-2xl font-bold ${feature.textColor}`}>{feature.id}</span>
+                                <div className="flex items-center gap-3 mb-2.5">
+                                    <span className="text-[#05A4A7] font-mono font-black text-xs bg-[#05A4A7]/5 px-2 py-0.5 rounded-lg group-hover:bg-[#05A4A7] group-hover:text-white transition-all duration-300">
+                                        {feature.id}
+                                    </span>
+                                    <h4 className="text-base lg:text-lg font-black text-slate-900 uppercase tracking-tight group-hover:text-[#05A4A7] transition-colors">
+                                        {feature.title}
+                                    </h4>
                                 </div>
-                                <div className="pt-2">
-                                    <h3 className="text-xl md:text-2xl font-bold text-[#2E583E] mb-2 group-hover:text-emerald-700 transition-colors">{feature.title}</h3>
-                                    <p className="text-slate-500 text-sm md:text-base leading-relaxed">{feature.description}</p>
-                                </div>
+                                <p className="text-slate-500 text-xs lg:text-sm leading-relaxed font-medium pl-3 border-l-2 border-slate-100 group-hover:border-[#05A4A7] transition-colors">
+                                    {feature.description}
+                                </p>
                             </motion.div>
                         ))}
                     </div>
-                </div>
-            </section>
 
-            {/* Reverse Marquee Section */}
-            <div className="bg-slate-50">
-                <MarqueeRow items={keywords} />
-                <MarqueeRow items={keywords2} reverse={true} />
+                    {/* Lean Status Bar */}
+                    <div className="mt-10 pt-5 border-t border-slate-50 flex items-center gap-6">
+                        <div className="flex items-center gap-2">
+                            <div className="w-1.5 h-1.5 rounded-full bg-[#05A4A7] animate-pulse" />
+                            <span className="text-[10px] font-black text-slate-400 uppercase tracking-[0.3em]">Client First</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                            <div className="w-1.5 h-1.5 rounded-full bg-slate-100" />
+                            <span className="text-[10px] font-black text-slate-400 uppercase tracking-[0.3em]">24/7 Support</span>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
+
+        </section>
     );
 };
 
