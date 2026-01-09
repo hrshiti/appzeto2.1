@@ -62,6 +62,37 @@ const Hero = () => {
                             className="flex items-center justify-center relative scale-50 sm:scale-75 lg:scale-90 xl:scale-110 py-6 lg:py-0"
                         >
                             <RevolvingOrbit size="lg" />
+
+                            {/* Happy Clients Floating Card */}
+                            <motion.div
+                                initial={{ opacity: 0, x: 20 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: 1, duration: 0.8 }}
+                                // Fixed: Smaller size (p-3), positioned properly to the right (-right-24) and slightly bumped up (bottom-8)
+                                className="absolute -bottom-4 right-0 sm:bottom-8 sm:-right-24 flex items-center gap-2 sm:gap-3 bg-white dark:bg-slate-900 border border-gray-100 dark:border-slate-800 p-2 pr-4 sm:p-3 sm:pr-5 rounded-full shadow-2xl z-20"
+                            >
+                                <div className="flex -space-x-2 sm:-space-x-3">
+                                    {[
+                                        "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=64&h=64",
+                                        "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=64&h=64",
+                                        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=64&h=64",
+                                        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=64&h=64"
+                                    ].map((src, i) => (
+                                        <div key={i} className="w-6 h-6 sm:w-8 sm:h-8 rounded-full border-2 border-white dark:border-slate-800 overflow-hidden">
+                                            <img src={src} alt="Client" className="w-full h-full object-cover" />
+                                        </div>
+                                    ))}
+                                </div>
+                                <div className="flex flex-col">
+                                    <span className="text-[10px] sm:text-xs font-black text-gray-900 dark:text-white">500+ Happy Clients</span>
+                                    <div className="flex items-center gap-1">
+                                        <span className="flex text-yellow-400 text-[8px] sm:text-[10px]">
+                                            {"★★★★★".split("").map((star, i) => <span key={i}>{star}</span>)}
+                                        </span>
+                                        <span className="text-[8px] sm:text-[10px] text-gray-500 font-medium">4.9/5</span>
+                                    </div>
+                                </div>
+                            </motion.div>
                         </motion.div>
                     </div>
                 </div>

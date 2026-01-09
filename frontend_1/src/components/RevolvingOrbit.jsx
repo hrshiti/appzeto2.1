@@ -2,45 +2,52 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import logo from '../assets/logo.png';
-import foodLogo from '../assets/apps/food.png';
-import shopLogo from '../assets/apps/shop.png';
-import healthLogo from '../assets/apps/health.png';
-import goLogo from '../assets/apps/go.png';
+
+// Importing specific product logos
+import ecommerceLogo from '../assets/logos/Appzeto Ecommerce.jpg';
+import foodLogo from '../assets/logos/Appzeto Food.jpg';
+import multiVendorLogo from '../assets/logos/Appzeto Multi Vendor.jpg';
+import quickCommerceLogo from '../assets/logos/Appzeto Quick Commerce.jpg';
+import taxiLogo from '../assets/logos/Appzeto Taxi.jpg';
 
 const projects = [
+    {
+        id: "ecommerce",
+        title: "Appzeto Ecommerce",
+        description: "Complete online store solution.",
+        image: ecommerceLogo,
+        color: "#4F46E5",
+        link: "/appzeto-ecommerce"
+    },
     {
         id: "food",
         title: "Appzeto Food",
         description: "AI-powered food delivery.",
-        icon: "restaurant", // Fallback
         image: foodLogo,
         color: "#FF0844",
         link: "/appzeto-food"
     },
     {
-        id: "shop",
-        title: "Appzeto Shop",
-        description: "AR-enabled shopping.",
-        icon: "shopping_bag", // Fallback
-        image: shopLogo,
-        color: "#4F46E5",
+        id: "multivendor",
+        title: "Appzeto Multi Vendor",
+        description: "Marketplace platform.",
+        image: multiVendorLogo,
+        color: "#8B5CF6",
         link: "/appzeto-ecommerce"
     },
     {
-        id: "care",
-        title: "Appzeto Health",
-        description: "Telemedicine solutions.",
-        icon: "local_hospital", // Fallback
-        image: healthLogo,
-        color: "#0EA5E9",
-        link: "/appzeto-hospital"
+        id: "quick-commerce",
+        title: "Appzeto Quick Commerce",
+        description: "Hyper-local delivery.",
+        image: quickCommerceLogo,
+        color: "#F59E0B",
+        link: "/appzeto-taxi"
     },
     {
-        id: "go",
-        title: "Appzeto Go",
+        id: "taxi",
+        title: "Appzeto Taxi",
         description: "Smart logistics network.",
-        icon: "local_taxi", // Fallback
-        image: goLogo,
+        image: taxiLogo,
         color: "#00F2FE",
         link: "/appzeto-taxi"
     }
@@ -77,7 +84,7 @@ const RevolvingOrbit = ({ size = "md" }) => {
                 transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
                 style={{ animationPlayState: hoveredProduct ? "paused" : "running" }}
             >
-                {/* CIRCULAR TRACK PATH */}
+                {/* CIRCULAR TRACK PATH - OUTER */}
                 <svg viewBox="0 0 100 100" className="absolute inset-0 w-full h-full overflow-visible pointer-events-none">
                     <circle
                         cx="50" cy="50" r="50"
@@ -118,17 +125,15 @@ const RevolvingOrbit = ({ size = "md" }) => {
                                 <Link to={product.link} className="flex flex-col items-center">
                                     {/* CIRCULAR TOKEN CONTAINER */}
                                     <div className={`
-                                        w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-[#050505] border border-white/20 
-                                        flex items-center justify-center relative z-20 transition-all duration-300 shadow-[0_0_15px_rgba(0,0,0,0.8)]
-                                        ${hoveredProduct?.id === product.id ? 'scale-125 border-primary shadow-[0_0_25px_rgba(5,164,167,0.4)]' : 'hover:scale-110 group-hover:border-white/40'}
+                                        w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-transparent 
+                                        flex items-center justify-center relative z-20 transition-all duration-300 shadow-[0_0_15px_rgba(0,0,0,0.5)] overflow-hidden
+                                        ${hoveredProduct?.id === product.id ? 'scale-125 shadow-[0_0_25px_rgba(5,164,167,0.4)]' : 'hover:scale-110'}
                                     `}>
-                                        <div className="w-8 h-8 sm:w-10 sm:h-10 relative z-10">
-                                            <img
-                                                src={product.image}
-                                                alt={product.title}
-                                                className="w-full h-full object-contain drop-shadow-md"
-                                            />
-                                        </div>
+                                        <img
+                                            src={product.image}
+                                            alt={product.title}
+                                            className="w-full h-full object-cover"
+                                        />
                                     </div>
 
                                     <div className="mt-3 text-center pointer-events-none">
@@ -154,9 +159,21 @@ const RevolvingOrbit = ({ size = "md" }) => {
                     animate={{ rotate: -180 }}
                     transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
                 >
-                    {/* Inner track line */}
-                    <svg viewBox="0 0 100 100" className="absolute inset-0 w-full h-full overflow-visible opacity-30">
-                        <circle cx="50" cy="50" r="50" fill="none" stroke="white" strokeWidth="0.5" strokeDasharray="2,5" />
+                    {/* Inner track line - UPDATED to be solid like the outer one */}
+                    <svg viewBox="0 0 100 100" className="absolute inset-0 w-full h-full overflow-visible opacity-60">
+                        <circle
+                            cx="50" cy="50" r="50"
+                            fill="none"
+                            stroke="rgba(5, 164, 167, 0.2)"
+                            strokeWidth="0.5"
+                        />
+                        <circle
+                            cx="50" cy="50" r="50"
+                            fill="none"
+                            stroke="white"
+                            strokeWidth="0.2"
+                            strokeDasharray="0"
+                        />
                     </svg>
 
                     {techStack.map((tech, index) => {
