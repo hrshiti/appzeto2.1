@@ -38,6 +38,7 @@
   }
 
   --animate-scroll: scroll 40s linear infinite;
+  --animate-scroll-fast: scroll 20s linear infinite;
   --animate-scroll-fast: scroll 15s linear infinite;
   --animate-slide-in-right: slideInRight 3.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
   --animate-slide-in-left: slideInLeft 3.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;

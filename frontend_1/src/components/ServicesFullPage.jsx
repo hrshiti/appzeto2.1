@@ -19,47 +19,38 @@ const staticServices = [
     {
         id: "web-dev",
         slug: "web-development",
-        title: "Web Development",
+        title: "Web Development Company Building Fast & Scalable Websites",
         icon: "language",
-        shortDescription: "High-performance websites and web applications built with modern technologies like React, Next.js, and Node.js.",
-        fullDescription: "We build scalable, secure, and fast web applications tailored to your business needs. Our expertise includes frontend development with React, backend systems with Node.js, and full-stack solutions that drive growth.",
+        shortDescription: "We build high-performance websites and web applications ensuring scalability, speed, and SEO optimization.",
+        fullDescription: "As a leading web development company, we build scalable, secure, and fast web applications tailored to your business needs. Our expertise includes frontend development with React, backend systems with Node.js, and full-stack solutions that drive growth for startups and enterprises.",
         features: ["Custom React Development", "Next.js SSR & SSG", "Responsive Design", "API Integration"]
     },
     {
         id: "app-dev",
         slug: "mobile-apps",
-        title: "Mobile App Development",
+        title: "Mobile App Development Company for Android & iOS Solutions",
         icon: "smartphone",
         shortDescription: "Native and cross-platform mobile apps for iOS and Android using Flutter and React Native.",
-        fullDescription: "Transform your ideas into powerful mobile experiences. We specialize in creating intuitive, high-performance mobile applications that engage users and provide seamless functionality across all devices.",
+        fullDescription: "We are a mobile app development company transforming ideas into powerful mobile experiences. We specialize in creating intuitive, high-performance mobile applications that engage users and provide seamless functionality across all devices.",
         features: ["iOS & Android Apps", "Cross-Platform Flutter", "React Native Solutions", "App Store Optimization"]
     },
     {
         id: "ai-ml",
         slug: "ai-solutions",
-        title: "AI & Machine Learning",
+        title: "AI & Machine Learning Software Development Services",
         icon: "smart_toy",
         shortDescription: "Intelligent automation and data-driven solutions to future-proof your business.",
-        fullDescription: "Leverage the power of Artificial Intelligence to automate processes and gain insights. From custom chatbots to predictive modeling, we integrate AI into your workflow for maximum efficiency.",
+        fullDescription: "Leverage the power of Artificial Intelligence to automate processes and gain insights. From custom chatbots to predictive modeling, our AI software development services integrate intelligent algorithms into your workflow for maximum efficiency.",
         features: ["Custom AI Models", "NLP & Chatbots", "Predictive Analytics", "Machine Learning Integration"]
     },
     {
-        id: "cloud-devops",
-        slug: "cloud-devops",
-        title: "Cloud & DevOps",
-        icon: "cloud_sync",
-        shortDescription: "Streamlined deployment pipelines and robust cloud infrastructure for high availability.",
-        fullDescription: "Optimize your software delivery process with our DevOps expertise. We manage cloud infrastructure on AWS and Azure, ensuring your applications are always available, scalable, and secure.",
-        features: ["AWS/Azure Management", "CI/CD Pipelines", "Docker & Kubernetes", "Infrastructure as Code"]
-    },
-    {
-        id: "ui-ux",
-        slug: "ui-ux-design",
-        title: "UI/UX Design",
-        icon: "design_services",
-        shortDescription: "User-centric designs that combine aesthetics with seamless functional experiences.",
-        fullDescription: "We believe that great technology starts with great design. Our team creates visually stunning and Highly functional interfaces that provide an exceptional user experience on every screen.",
-        features: ["User Research", "Wireframing & Prototyping", "Visual Design", "Interaction Design"]
+        id: "custom-software",
+        slug: "custom-software",
+        title: "Custom Software Development Company for Businesses",
+        icon: "business",
+        shortDescription: "Scalable architectures, cloud solutions, and tailored enterprise software.",
+        fullDescription: "As a custom software development company, we design and build software tailored to your specific business processes. We emphasize scalable architecture, cloud integration, and enterprise-grade security to support your long-term growth.",
+        features: ["Enterprise Software", "Cloud Solutions", "Workflow Automation", "API Development"]
     }
 ];
 

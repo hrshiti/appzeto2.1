@@ -4,12 +4,12 @@ import goAppImg from '../assets/apps/go.png';
 import healthAppImg from '../assets/apps/health.png';
 import shopAppImg from '../assets/apps/shop.png';
 
-// Service Previews (Generic Tech UI)
-import aiServiceImg from '../assets/ai_ml_service_preview_1767285486518.png';
-import cloudServiceImg from '../assets/cloud_computing_service_preview_1767285540190.png';
-import mobileServiceImg from '../assets/mobile_apps_service_preview_1767285521524.png';
-import uiServiceImg from '../assets/ui_ux_design_service_preview_1767285557945.png';
-import webServiceImg from '../assets/web_dev_service_preview_1767285503403.png';
+// Service Previews (Generic Tech UI) - Kept for reference or secondary use if needed
+// import aiServiceImg from '../assets/ai_ml_service_preview_1767285486518.png';
+// import cloudServiceImg from '../assets/cloud_computing_service_preview_1767285540190.png';
+// import mobileServiceImg from '../assets/mobile_apps_service_preview_1767285521524.png';
+// import uiServiceImg from '../assets/ui_ux_design_service_preview_1767285557945.png';
+// import webServiceImg from '../assets/web_dev_service_preview_1767285503403.png';
 
 // Food Series
 import food1 from '../assets/appzeto-food-1.jpg';
@@ -31,10 +31,10 @@ export const projectsData = [
         thumbnail: goAppImg,
         coverImage: goAppImg,
         images: [
-            goAppImg,
-            food4,
+            shopAppImg,
+            foodHero,
             food2,
-            goAppImg
+            shopAppImg
         ],
         tags: ["IoT", "Node.js", "AWS", "React"],
         industry: "Global Logistics",
@@ -68,8 +68,8 @@ export const projectsData = [
         category: "FINTECH",
         description: "Complete digital transformation of a legacy banking institution into a modern, mobile-first financial powerhouse.",
         fullDescription: "Neon Banking represents a complete overhaul of traditional banking. We redesigned the core banking experience from the ground up, focusing on speed, security, and a minimalist UI that makes complex financial tasks intuitive.",
-        thumbnail: uiServiceImg,
-        coverImage: uiServiceImg,
+        thumbnail: shopAppImg,
+        coverImage: shopAppImg,
         images: [
             shopAppImg,
             healthAppImg,

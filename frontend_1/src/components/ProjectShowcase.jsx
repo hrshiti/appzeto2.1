@@ -8,12 +8,12 @@ import { projectsData } from '../data/projectsData';
 const PhoneMockup = ({ image, title, isActive }) => {
     return (
         <div className={`
-            relative rounded-[2rem] md:rounded-[3rem] border-4 md:border-[6px] border-black bg-black overflow-hidden shadow-2xl
-            w-[220px] md:w-[280px] aspect-[9/18] ring-1 ring-gray-800/50
+            relative rounded-[1.5rem] md:rounded-[2rem] border-[3px] md:border-[4px] border-black bg-black overflow-hidden shadow-2xl
+            w-[160px] md:w-[200px] aspect-[9/18] ring-1 ring-gray-800/50
         `}>
             {/* Phone Bezel/Camera - Black Style */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/3 h-4 md:h-6 bg-black rounded-b-xl z-20 flex justify-center items-center shadow-sm border-b border-x border-gray-800">
-                <div className="w-8 md:w-12 h-1 bg-gray-800 rounded-full" />
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/3 h-3 md:h-4 bg-black rounded-b-lg z-20 flex justify-center items-center shadow-sm border-b border-x border-gray-800">
+                <div className="w-6 md:w-8 h-0.5 bg-gray-800 rounded-full" />
             </div>
 
             {/* Screen Content */}
@@ -110,15 +110,15 @@ const ProjectShowcase = () => {
                 config = { ...config, x: 0, scale: 1.1, opacity: 1, zIndex: 30, filter: "blur(0px)" };
                 if (overlay) gsap.to(overlay, { opacity: 0, duration: 0.5 });
             } else if (diff === 1) { // RIGHT - Increased opacity
-                config = { ...config, x: 280, scale: 0.85, opacity: 1, zIndex: 10, filter: "blur(0px)" }; // Full opacity
+                config = { ...config, x: 220, scale: 0.85, opacity: 1, zIndex: 10, filter: "blur(0px)" }; // Full opacity
                 if (overlay) gsap.to(overlay, { opacity: 0.1, duration: 0.5 }); // Minimal overlay
             } else if (diff === -1) { // LEFT - Increased opacity
-                config = { ...config, x: -280, scale: 0.85, opacity: 1, zIndex: 10, filter: "blur(0px)" }; // Full opacity 
+                config = { ...config, x: -220, scale: 0.85, opacity: 1, zIndex: 10, filter: "blur(0px)" }; // Full opacity 
                 if (overlay) gsap.to(overlay, { opacity: 0.1, duration: 0.5 }); // Minimal overlay
             } else if (diff === 2) { // FAR RIGHT
-                config = { ...config, x: 500, scale: 0.5, opacity: 0, zIndex: 0 };
+                config = { ...config, x: 400, scale: 0.5, opacity: 0, zIndex: 0 };
             } else if (diff === -2) { // FAR LEFT
-                config = { ...config, x: -500, scale: 0.5, opacity: 0, zIndex: 0 };
+                config = { ...config, x: -400, scale: 0.5, opacity: 0, zIndex: 0 };
             } else { // HIDDEN
                 config = { ...config, x: 0, scale: 0.2, opacity: 0 };
             }

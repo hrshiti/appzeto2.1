@@ -172,8 +172,9 @@ const ContactUs = ({ isHomePage = false }) => {
                             transition={{ duration: 1 }}
                             className="relative text-center z-10 px-4 -mt-10 md:-mt-32 lg:-mt-40"
                         >
-                            <h1 className="text-3xl md:text-5xl font-black text-white uppercase tracking-tighter italic drop-shadow-2xl">
-                                Contact <span className="text-primary italic">Us</span>
+                            <h1 className="text-3xl md:text-4xl lg:text-5xl font-black text-white uppercase tracking-tighter italic drop-shadow-2xl">
+                                Contact Appzeto for <br />
+                                <span className="text-primary italic">Software Development Consultation</span>
                             </h1>
                             <p className="text-white/70 text-[8px] md:text-[10px] font-bold mt-3 max-w-2xl mx-auto uppercase tracking-[0.3em] md:tracking-[0.4em]">
                                 Let's build something legendary together.

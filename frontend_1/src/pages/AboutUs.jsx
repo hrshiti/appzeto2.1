@@ -65,21 +65,17 @@ const AboutUs = () => {
                         <div className="absolute inset-0 bg-black/40"></div>
                     </motion.div>
                     <div className="relative z-10 text-center text-white px-4">
-                        <motion.h1
-                            initial={{ opacity: 0, y: 30 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.8, delay: 0.2 }}
-                            className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tight mb-2 md:mb-4 font-display uppercase"
-                        >
-                            ABOUT US
-                        </motion.h1>
+                        <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tight mb-2 md:mb-4 font-display uppercase">
+                            About Appzeto – <br />
+                            Technology Solutions Company
+                        </h1>
                         <motion.p
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8, delay: 0.4 }}
                             className="text-xs sm:text-lg lg:text-xl font-light text-gray-200 tracking-wide mb-4 md:mb-6 max-w-xs sm:max-w-none mx-auto"
                         >
-                            Innovating for those who demand excellence, not just solutions.
+                            Innovating for those who demand excellence.
                         </motion.p>
                         <motion.div
                             initial={{ opacity: 0 }}
@@ -92,6 +88,7 @@ const AboutUs = () => {
                             <span className="text-primary font-medium">About Us</span>
                         </motion.div>
                     </div>
+
                 </header>
 
                 <section id="we-are-appzeto" className="py-12 md:py-24 px-4 md:px-10 max-w-7xl mx-auto overflow-hidden scroll-mt-20">
@@ -106,10 +103,10 @@ const AboutUs = () => {
                             <div>
                                 <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-3 md:mb-6 font-display tracking-tight">WE ARE APPZETO</h2>
                                 <blockquote className="text-sm md:text-xl text-gray-500 italic border-l-4 border-primary pl-4 mb-3 md:mb-6">
-                                    "Technology is best when it brings people together."
+                                    "We don't impress with design. We build trust with clarity."
                                 </blockquote>
                                 <p className="text-gray-600 leading-relaxed mb-3 text-xs sm:text-base">
-                                    Appzeto is a forward-thinking IT solutions provider dedicated to transforming businesses through digital innovation. We specialize in robust Web Development, cutting-edge Mobile Apps, and intelligent AI & ML solutions.
+                                    Appzeto is a technology solutions company dedicated to transforming businesses through digital innovation. We specialize in robust Web Development, cutting-edge Mobile Apps, and intelligent AI & ML solutions.
                                 </p>
                                 <p className="text-gray-600 leading-relaxed text-xs sm:text-base hidden sm:block">
                                     Our philosophy is simple: we don't just build software; we engineer ecosystems. Reliability, scalability, and user-centric design are at the core of everything we create.
@@ -376,7 +373,7 @@ const AboutUs = () => {
                         </div>
                     </div>
                 </section>
-            </div>
+            </div >
 
             <ScrollReveal>
                 <ContactUs isHomePage={true} />
@@ -385,7 +382,7 @@ const AboutUs = () => {
             <ScrollReveal>
                 <Footer />
             </ScrollReveal>
-        </ScrollWrapper>
+        </ScrollWrapper >
     );
 };
 

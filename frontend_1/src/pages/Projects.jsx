@@ -46,8 +46,8 @@ const Projects = () => {
                         className="max-w-7xl mx-auto"
                     >
                         <h1 className="text-2xl sm:text-4xl md:text-5xl font-extrabold uppercase tracking-tighter leading-[0.9] italic text-gray-900 mb-3 md:mb-6">
-                            PROJECTS WE HAVE <br />
-                            <span className="text-primary">CREATED</span>
+                            Software Development <br />
+                            <span className="text-primary">Case Studies</span>
                         </h1>
                         <p className="text-gray-600 text-[11px] md:text-base max-w-lg font-medium tracking-wide leading-relaxed mx-auto md:mx-0 opacity-80">
                             A showcase of our most ambitious digital transformations. We build high-performance instruments for the future.

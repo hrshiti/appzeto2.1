@@ -3,34 +3,34 @@ import { motion } from 'framer-motion';
 
 const comparisonData = [
     {
-        feature: "Timeline",
-        appzeto: "4-8 Weeks",
-        others: "6-12 Months",
-        icon: "schedule"
+        feature: "Development Approach",
+        appzeto: "Business-First",
+        others: "Code-First",
+        icon: "business_center"
     },
     {
-        feature: "Tech Stack",
-        appzeto: "Next-Gen AI",
-        others: "Legacy Code",
-        icon: "bolt"
+        feature: "Communication",
+        appzeto: "Clear (Non-Tech)",
+        others: "Jargon Heavy",
+        icon: "chat"
     },
     {
-        feature: "Security",
-        appzeto: "Military Grade",
-        others: "Basic SSL",
-        icon: "security"
+        feature: "Scalability",
+        appzeto: "Day 1 Priority",
+        others: "Afterthought",
+        icon: "trending_up"
+    },
+    {
+        feature: "Development",
+        appzeto: "Agile & Transparent",
+        others: "Opaque Process",
+        icon: "visibility"
     },
     {
         feature: "Support",
-        appzeto: "24/7 Priority",
-        others: "Business Hours",
-        icon: "support_agent"
-    },
-    {
-        feature: "Cost Model",
-        appzeto: "Fixed & Clear",
-        others: "Hidden Fees",
-        icon: "payments"
+        appzeto: "Long-Term Partner",
+        others: "Project Based",
+        icon: "handshake"
     }
 ];
 
@@ -50,8 +50,8 @@ const WhyChooseUs = () => {
                     >
                         <p className="text-primary font-semibold tracking-[0.2em] uppercase text-[9px] md:text-[10px] mb-3 md:mb-4">The Advantage</p>
                         <h2 className="text-xl sm:text-3xl md:text-5xl font-semibold text-slate-900 dark:text-white leading-[1.1] mb-2 md:mb-6">
-                            Why Choose <br className="hidden lg:block" />
-                            <span className="text-primary italic">Appzeto?</span>
+                            Why Choose Appzeto as <br className="hidden lg:block" />
+                            <span className="text-primary italic">Your Technology Partner</span>
                         </h2>
                         <p className="hidden sm:block text-sm md:text-base text-gray-500 dark:text-gray-400 font-medium leading-relaxed max-w-xs">
                             We deliver enterprise-grade engineering at the speed of light.

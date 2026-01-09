@@ -7,32 +7,26 @@ gsap.registerPlugin(ScrollTrigger);
 
 const steps = [
     {
-        title: "Discovery",
+        title: "Discovery & Planning",
         description: "We dive deep into your requirements, target audience, and business goals to create a solid roadmap.",
         icon: "🔍",
         color: "#cdbdae"
     },
     {
-        title: "UI/UX Design",
-        description: "Crafting intuitive layouts and stunning visuals that ensure an exceptional user experience.",
+        title: "UI/UX Design & Architecture",
+        description: "Crafting intuitive layouts and stunning visuals that ensure an exceptional user experience and solid technical foundation.",
         icon: "🎨",
         color: "#9D8F8F"
     },
     {
-        title: "Development",
-        description: "Transforming designs into robust, scalable code using the latest technology stack.",
+        title: "Development & Testing",
+        description: "Transforming designs into robust, scalable code and ensuring every feature works perfectly.",
         icon: "💻",
         color: "#8E847F"
     },
     {
-        title: "Testing",
-        description: "Rigorous quality assurance to ensure every feature works perfectly across all devices.",
-        icon: "🧪",
-        color: "#7D746F"
-    },
-    {
-        title: "Deployment",
-        description: "Launching your product to the world and providing ongoing support for growth.",
+        title: "Launch & Ongoing Support",
+        description: "Launching your product to the world and providing long-term maintenance and growth support.",
         icon: "🚀",
         color: "#5C5652"
     }
@@ -98,7 +92,7 @@ const Process = () => {
                     className="text-left mb-6 md:mb-16"
                 >
                     <p className="text-[#cdbdae] font-medium tracking-widest uppercase mb-2 text-xs md:text-base">Workflow</p>
-                    <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-gray-900 mb-4 tracking-tight">How We Bring Your Ideas To Life</h2>
+                    <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-gray-900 mb-4 tracking-tight">Our Software Development Process</h2>
                     <div className="w-16 md:w-24 h-1 bg-[#cdbdae] rounded-full" />
                 </motion.div>
 

@@ -4,6 +4,16 @@ import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import { motion } from 'framer-motion';
 import Navbar from './Navbar';
 import RevolvingOrbit from './RevolvingOrbit';
+import aapreecLogo from '../assets/logos/aapreec.jpg';
+import autoRideLogo from '../assets/logos/auto_ride.jpg';
+import beeyouLogo from '../assets/logos/beeyou.jpg';
+import bookMyTempoLogo from '../assets/logos/book_my_tempo.jpg';
+import createBharatLogo from '../assets/logos/create_bharat.jpg';
+import dailyHisabLogo from '../assets/logos/daily_hisab.jpg';
+import doctorOnHomeLogo from '../assets/logos/doctor_on_home.jpg';
+import fixflyLogo from '../assets/logos/fixfly.jpg';
+import rentYatraLogo from '../assets/logos/rent_yatra.jpg';
+import blueRideLogo from '../assets/logos/blue_ride.jpg';
 
 const Hero = () => {
     return (
@@ -25,31 +35,23 @@ const Hero = () => {
                             transition={{ duration: 1.8, ease: [0.22, 1, 0.36, 1] }}
                             className="space-y-6 sm:space-y-8"
                         >
-                            <div className="inline-flex items-center space-x-2 bg-teal-50 dark:bg-teal-900/30 border border-teal-100 dark:border-teal-800 rounded-full px-3 py-1 sm:px-4 sm:py-1.5">
-                                <span className="flex h-2 w-2 relative">
-                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-                                    <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
-                                </span>
-                                <span className="text-xs sm:text-sm font-semibold text-primary tracking-wide uppercase">Innovation Ecosystem</span>
-                            </div>
-
-                            <h1 className="text-4xl sm:text-5xl lg:text-7xl font-display font-black text-gray-800 dark:text-white leading-[1.1] tracking-tight">
-                                One Unified <br />
-                                <span className="text-primary">Product Engine</span> <br />
-                                for Businesses.
+                            <h1 className="text-2xl sm:text-3xl lg:text-5xl font-display font-black text-gray-800 dark:text-white leading-[1.2] tracking-tight">
+                                IT Services Company <br className="hidden lg:block" />
+                                <span className="text-primary">Building Scalable</span> <br className="hidden lg:block" />
+                                Web, App & AI Solutions
                             </h1>
 
-                            <p className="hidden sm:block text-base sm:text-lg lg:text-xl text-gray-500 dark:text-gray-400 max-w-lg leading-relaxed font-medium">
-                                We've built an interconnected suite of AI-native platforms to automate your logistics, food delivery, and commerce needs.
+                            <p className="hidden sm:block text-sm sm:text-base lg:text-lg text-gray-500 dark:text-gray-400 max-w-lg leading-relaxed font-medium">
+                                We help startups, founders, and businesses design, develop, and scale reliable digital products using modern technologies and proven development processes.
                             </p>
 
                             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-2 sm:pt-4">
-                                <Link to="/services" className="inline-flex justify-center items-center px-6 py-3 sm:px-10 sm:py-5 bg-[#F1FC88] text-gray-900 font-black rounded-2xl shadow-xl shadow-[#F0FF35]/10 hover:bg-[#EAF576] transform hover:-translate-y-1 transition-all duration-300 text-sm sm:text-lg group">
-                                    Get Started
+                                <Link to="/contact" className="inline-flex justify-center items-center px-6 py-3 sm:px-10 sm:py-5 bg-[#F1FC88] text-gray-900 font-black rounded-2xl shadow-xl shadow-[#F0FF35]/10 hover:bg-[#EAF576] transform hover:-translate-y-1 transition-all duration-300 text-sm sm:text-lg group">
+                                    Book Free Consultation
                                     <span className="material-icons ml-2 group-hover:translate-x-1 transition-transform">rocket_launch</span>
                                 </Link>
-                                <Link to="/demo" className="inline-flex justify-center items-center px-6 py-3 sm:px-10 sm:py-5 bg-white/50 dark:bg-white/5 backdrop-blur-md text-gray-700 dark:text-gray-200 font-bold rounded-2xl border border-gray-200 dark:border-white/10 hover:bg-white dark:hover:bg-white/10 transition-all duration-300 text-sm sm:text-lg">
-                                    Case Studies
+                                <Link to="/projects" className="inline-flex justify-center items-center px-6 py-3 sm:px-10 sm:py-5 bg-white/50 dark:bg-white/5 backdrop-blur-md text-gray-700 dark:text-gray-200 font-bold rounded-2xl border border-gray-200 dark:border-white/10 hover:bg-white dark:hover:bg-white/10 transition-all duration-300 text-sm sm:text-lg">
+                                    View Case Studies
                                 </Link>
                             </div>
                         </motion.div>
@@ -59,7 +61,7 @@ const Hero = () => {
                             initial={{ opacity: 0, scale: 0.8 }}
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ duration: 1.5, ease: "easeOut" }}
-                            className="flex items-center justify-center relative scale-50 sm:scale-75 lg:scale-90 xl:scale-110 py-6 lg:py-0"
+                            className="flex items-center justify-center relative scale-50 sm:scale-65 lg:scale-75 xl:scale-90 py-6 lg:py-0"
                         >
                             <RevolvingOrbit size="lg" />
                         </motion.div>
@@ -88,41 +90,51 @@ const Hero = () => {
                 </div>
             </main>
             <section className="border-y border-gray-200 dark:border-gray-800 bg-primary/5 dark:bg-primary/10 overflow-hidden py-3 sm:py-4">
-                <div className="flex animate-scroll-fast sm:animate-scroll whitespace-nowrap group">
+                <div className="flex animate-scroll-fast whitespace-nowrap group">
                     {[
-                        { icon: 'web', label: 'Web Dev' },
-                        { icon: 'smartphone', label: 'App Dev' },
-                        { icon: 'psychology', label: 'AI Solutions' },
-                        { icon: 'cloud', label: 'Cloud Ops' },
-                        { icon: 'security', label: 'Cybersecurity' },
-                        { icon: 'bar_chart', label: 'Data Analytics' },
-                        { icon: 'brush', label: 'UI/UX Design' },
-                        { icon: 'settings', label: 'DevOps' },
-                        { icon: 'link', label: 'Blockchain' },
-                    ].map((item, index) => (
-                        <div key={index} className="flex items-center space-x-2 sm:space-x-3 mx-4 sm:mx-8 cursor-pointer hover:scale-110 transition-transform">
-                            <div className="p-2 sm:p-2.5 bg-gray-100 dark:bg-gray-800 rounded-xl">
-                                <span className="material-icons text-gray-500 dark:text-gray-400 text-sm sm:text-lg">{item.icon}</span>
+                        { name: "Aapreec", logo: aapreecLogo },
+                        { name: "AutoRide", logo: autoRideLogo },
+                        { name: "Beeyou", logo: beeyouLogo },
+                        { name: "Book My Tempo", logo: bookMyTempoLogo },
+                        { name: "Create Bharat", logo: createBharatLogo },
+                        { name: "Daily Hisab", logo: dailyHisabLogo },
+                        { name: "Doctor on Home", logo: doctorOnHomeLogo },
+                        { name: "Fixfly", logo: fixflyLogo },
+                        { name: "Rent Yatra", logo: rentYatraLogo },
+                        { name: "Blue Ride", logo: blueRideLogo },
+                    ].map((client, index) => (
+                        <div key={index} className="flex items-center space-x-2 sm:space-x-4 mx-4 sm:mx-8 cursor-pointer hover:scale-105 transition-transform duration-300">
+                            <div className="h-16 w-16 sm:h-20 sm:w-20 bg-white rounded-xl shadow-sm border border-gray-100 flex items-center justify-center p-2">
+                                <img
+                                    src={client.logo}
+                                    alt={client.name}
+                                    className="max-h-full max-w-full object-contain mix-blend-multiply"
+                                />
                             </div>
-                            <span className="font-bold text-sm sm:text-base text-gray-700 dark:text-gray-300">{item.label}</span>
+                            <span className="font-bold text-sm sm:text-base text-gray-700 dark:text-gray-300">{client.name}</span>
                         </div>
                     ))}
                     {[
-                        { icon: 'web', label: 'Web Dev' },
-                        { icon: 'smartphone', label: 'App Dev' },
-                        { icon: 'psychology', label: 'AI Solutions' },
-                        { icon: 'cloud', label: 'Cloud Ops' },
-                        { icon: 'security', label: 'Cybersecurity' },
-                        { icon: 'bar_chart', label: 'Data Analytics' },
-                        { icon: 'brush', label: 'UI/UX Design' },
-                        { icon: 'settings', label: 'DevOps' },
-                        { icon: 'link', label: 'Blockchain' },
-                    ].map((item, index) => (
-                        <div key={`duplicate-${index}`} className="flex items-center space-x-2 sm:space-x-3 mx-4 sm:mx-8 cursor-pointer hover:scale-110 transition-transform">
-                            <div className="p-2 sm:p-2.5 bg-gray-100 dark:bg-gray-800 rounded-xl">
-                                <span className="material-icons text-gray-500 dark:text-gray-400 text-sm sm:text-lg">{item.icon}</span>
+                        { name: "Aapreec", logo: aapreecLogo },
+                        { name: "AutoRide", logo: autoRideLogo },
+                        { name: "Beeyou", logo: beeyouLogo },
+                        { name: "Book My Tempo", logo: bookMyTempoLogo },
+                        { name: "Create Bharat", logo: createBharatLogo },
+                        { name: "Daily Hisab", logo: dailyHisabLogo },
+                        { name: "Doctor on Home", logo: doctorOnHomeLogo },
+                        { name: "Fixfly", logo: fixflyLogo },
+                        { name: "Rent Yatra", logo: rentYatraLogo },
+                        { name: "Blue Ride", logo: blueRideLogo },
+                    ].map((client, index) => (
+                        <div key={`duplicate-${index}`} className="flex items-center space-x-2 sm:space-x-4 mx-4 sm:mx-8 cursor-pointer hover:scale-105 transition-transform duration-300">
+                            <div className="h-16 w-16 sm:h-20 sm:w-20 bg-white rounded-xl shadow-sm border border-gray-100 flex items-center justify-center p-2">
+                                <img
+                                    src={client.logo}
+                                    alt={client.name}
+                                    className="max-h-full max-w-full object-contain mix-blend-multiply"
+                                />
                             </div>
-                            <span className="font-bold text-sm sm:text-base text-gray-700 dark:text-gray-300">{item.label}</span>
+                            <span className="font-bold text-sm sm:text-base text-gray-700 dark:text-gray-300">{client.name}</span>
                         </div>
                     ))}
                 </div>

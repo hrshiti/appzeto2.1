@@ -1,325 +1,224 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 
 const Reviews = () => {
-    const slideInLeft = {
-        initial: { opacity: 0, x: -100 },
-        whileInView: { opacity: 1, x: 0 },
-        viewport: { once: false, amount: 0.1 },
-        transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] }
-    };
-
-    const slideInRight = {
-        initial: { opacity: 0, x: 100 },
-        whileInView: { opacity: 1, x: 0 },
-        viewport: { once: false, amount: 0.1 },
-        transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] }
-    };
-
-    const slideInUp = {
-        initial: { opacity: 0, y: 80 },
-        whileInView: { opacity: 1, y: 0 },
-        viewport: { once: false, amount: 0.1 },
-        transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] }
-    };
-
-    const delayed = (variant, delay) => ({
-        ...variant,
-        transition: { ...variant.transition, delay }
-    });
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 768);
+    const [isPaused, setIsPaused] = useState(false);
 
     const testimonials = [
-        { id: 1, name: "Victoria Linton", role: "@Victoria", text: "Praesent urna neque viverra justo ultrices dui. Est lorem ipsum dolor sit amet consectetur adipiscing.", stars: 5, img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" },
-        { id: 2, name: "Fanny Dean", role: "@Fanny", text: "A scelerisque purus semper eget duis at tellus. Amet cursus sit amet dictum sit justo. Varius sit amet.", stars: 5, img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80" },
-        { id: 3, name: "Client Review", role: "@ArtfulWootton", text: "Rhoncus neque viverra justo ultrices duist lorem dolor sed consect adipiscing.", stars: 4, img: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" },
-        { id: 4, name: "Dmitri Woodhouse", role: "@Dmitri", text: "Mauris in aliquam se fringilla morbi tincidunt augue amet dui massa.", stars: 5, img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" },
-        { id: 5, name: "Nelly Vane", role: "@Nelly", text: "Varius duis at consectetur lorem donec. Et tortor at risus viverra.", stars: 5, img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" },
-        { id: 6, name: "Hindley Micawber", role: "@Hindley", text: "Rhoncus urna neque viverra justo nec ultrices dui. Est lorem ipsum dolor.", stars: 5, img: "https://images.unsplash.com/photo-1544725176-7c40e5a71c5e?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" },
-        { id: 7, name: "Catherine Doe", role: "@Catherine", text: "In hac habitasse platea dictumst quisque sagittis pur convallis.", stars: 5, img: "https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" },
-        { id: 8, name: "Jane Prokofich", role: "@Jane", text: "Vestibulum mattis enim aulit tortor se ullamcorper morbi pretium", stars: 5, img: "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" },
+        {
+            id: 1,
+            name: "Victoria Linton",
+            role: "CEO, TechFlow",
+            text: "Appzeto transformed our digital presence. Their team's attention to detail and commitment to quality is unmatched. The final product exceeded our expectations in every way.",
+            stars: 5,
+            img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80"
+        },
+        {
+            id: 2,
+            name: "Dmitri Woodhouse",
+            role: "Founder, StartupX",
+            text: "Working with Appzeto was a game-changer. They understood our vision perfectly and delivered a scalable solution that helped us secure our Series A funding.",
+            stars: 5,
+            img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80"
+        },
+        {
+            id: 3,
+            name: "Fanny Dean",
+            role: "Marketing Director, Studio G",
+            text: "The UI/UX design provided by Appzeto is simply world-class. Our user engagement metrics have skyrocketed since the launch. Highly recommended!",
+            stars: 5,
+            img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80"
+        },
+        {
+            id: 4,
+            name: "Hindley Micawber",
+            role: "CTO, FutureNet",
+            text: "Technical expertise at its finest. They tackled complex challenges with ease and delivered a robust, high-performance application on time and within budget.",
+            stars: 5,
+            img: "https://images.unsplash.com/photo-1544725176-7c40e5a71c5e?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80"
+        },
+        {
+            id: 5,
+            name: "Nelly Vane",
+            role: "Product Owner, CreativeSol",
+            text: "A true partner in development. Their proactive communication and agile methodology made the entire process smooth and transparent. We love our new app!",
+            stars: 4,
+            img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80"
+        }
     ];
 
-    const row1 = [...testimonials.slice(0, 4), ...testimonials.slice(0, 4)];
-    const row2 = [...testimonials.slice(4, 8), ...testimonials.slice(4, 8)];
+    useEffect(() => {
+        const handleResize = () => {
+            setIsDesktop(window.innerWidth >= 768);
+        };
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    useEffect(() => {
+        if (!isPaused) {
+            const timer = setInterval(() => {
+                nextSlide();
+            }, 5000);
+            return () => clearInterval(timer);
+        }
+    }, [currentIndex, isPaused, isDesktop]);
+
+    const nextSlide = () => {
+        setCurrentIndex((prevIndex) =>
+            prevIndex === testimonials.length - 1 ? 0 : prevIndex + 1
+        );
+    };
+
+    const prevSlide = () => {
+        setCurrentIndex((prevIndex) =>
+            prevIndex === 0 ? testimonials.length - 1 : prevIndex - 1
+        );
+    };
+
+    const goToSlide = (index) => {
+        setCurrentIndex(index);
+    };
 
     return (
-        <section className="bg-[#cdbdae] py-12 md:py-24 overflow-hidden">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: false }}
-                    className="text-center mb-10 md:mb-12"
+        <section className="bg-gradient-to-b from-gray-900 via-[#012829] to-gray-900 py-12 md:py-20 relative overflow-hidden font-display flex flex-col justify-center min-h-[85vh]">
+            {/* Background Accents */}
+            <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+                <div className="absolute top-[-20%] left-[-10%] w-[400px] h-[400px] bg-primary/20 rounded-full blur-[80px] opacity-40 mix-blend-screen"></div>
+                <div className="absolute bottom-[-20%] right-[-10%] w-[400px] h-[400px] bg-purple-500/20 rounded-full blur-[80px] opacity-40 mix-blend-screen"></div>
+            </div>
+
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+                {/* Header */}
+                <div className="text-center mb-8 md:mb-10">
+                    <motion.span
+                        initial={{ opacity: 0, y: 10 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5 }}
+                        className="inline-block py-1 px-3 rounded-full bg-white/10 border border-white/20 backdrop-blur-md text-xs font-medium text-primary mb-3"
+                    >
+                        Client Success Stories
+                    </motion.span>
+                    <motion.h2
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5, delay: 0.1 }}
+                        className="text-3xl md:text-4xl lg:text-5xl font-bold text-white tracking-tight mb-3 font-display"
+                    >
+                        Trusted by Companies for <span className="text-primary">IT Services</span>
+                    </motion.h2>
+                    <motion.p
+                        initial={{ opacity: 0, y: 10 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5, delay: 0.2 }}
+                        className="text-gray-400 text-sm md:text-base max-w-2xl mx-auto leading-relaxed"
+                    >
+                        We help startups and businesses design, develop, and scale reliable digital products using modern technologies.
+                    </motion.p>
+                </div>
+
+                {/* Testimonial Carousel Container */}
+                <div
+                    className="relative"
+                    onMouseEnter={() => setIsPaused(true)}
+                    onMouseLeave={() => setIsPaused(false)}
                 >
-                    <p className="text-white/80 font-medium tracking-widest uppercase mb-2 text-xs md:text-base">Testimonials</p>
-                    <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 md:mb-6">What Our Clients Say</h2>
-                </motion.div>
-
-                {/* Mobile View: Sliding Rows */}
-                <div className="md:hidden space-y-4">
-                    <div className="flex overflow-hidden">
+                    {/* Items Wrapper */}
+                    <div className="overflow-hidden px-2 -mx-2 py-4">
                         <motion.div
-                            animate={{ x: [0, -1000] }}
-                            transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-                            className="flex space-x-4 pr-4"
+                            className="flex transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]"
+                            style={{
+                                transform: `translateX(-${currentIndex * (isDesktop ? 33.333 : 100)}%)`
+                            }}
                         >
-                            {row1.map((item, idx) => (
-                                <div key={idx} className="flex-shrink-0 w-72 bg-white rounded-2xl p-4 shadow-md">
-                                    <div className="flex items-center space-x-3 mb-2">
-                                        <img src={item.img} className="w-8 h-8 rounded-full object-cover" alt="" />
-                                        <div>
-                                            <h4 className="text-xs font-bold text-gray-900">{item.name}</h4>
-                                            <div className="flex text-yellow-400 text-[8px]">{'★'.repeat(item.stars)}</div>
+                            {testimonials.map((item) => (
+                                <div
+                                    key={item.id}
+                                    className="w-full md:w-1/3 flex-shrink-0 px-3"
+                                >
+                                    <div className="h-full bg-white/5 backdrop-blur-xl border border-white/10 rounded-[1.5rem] p-6 md:p-8 hover:bg-white/10 transition-colors duration-300 group shadow-lg relative overflow-hidden">
+
+                                        {/* Glow Effect on Hover */}
+                                        <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+
+                                        {/* Quote Icon */}
+                                        <div className="absolute top-6 right-6 text-primary/20 transform rotate-12">
+                                            <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M14.017 21L14.017 18C14.017 16.8906 14.3219 15.9375 14.9316 15.1406C15.5414 14.3438 16.3262 13.9141 17.2861 13.8516C17.0781 13.25 17.0254 12.6797 17.1289 12.1406C17.3828 10.9609 18.0664 10.0547 19.1797 9.42188C19.7422 9.10938 20.375 8.95312 21.0781 8.95312V9.04688C20.6953 9.42188 20.4766 9.875 20.4219 10.4062C20.4219 11.0234 20.6582 11.5391 21.1309 11.9531C21.6035 12.3672 22.1523 12.5742 22.7773 12.5742C23.6367 12.5742 24.3164 12.2812 24.8164 11.6953C25.3164 11.1094 25.5664 10.4062 25.5664 9.58594C25.5664 8.52344 25.1016 7.57031 24.1719 6.72656C23.2383 5.88281 21.8203 5.46094 19.918 5.46094C17.2422 5.46094 15.2227 6.45312 13.8594 8.4375C13.0625 9.58594 12.6016 11.0859 12.4766 12.9375L12.4219 14.25L12.4766 21H14.017ZM0.59375 21L0.59375 18C0.59375 16.8906 0.898438 15.9375 1.50813 15.1406C2.11719 14.3438 2.90234 13.9141 3.8623 13.8516C3.6543 13.25 3.60156 12.6797 3.70508 12.1406C3.95898 10.9609 4.64258 10.0547 5.75586 9.42188C6.31836 9.10938 6.95117 8.95312 7.6543 8.95312V9.04688C7.27148 9.42188 7.05273 9.875 6.99805 10.4062C6.99805 11.0234 7.23438 11.5391 7.70703 11.9531C8.17969 12.3672 8.72852 12.5742 9.35352 12.5742C10.2129 12.5742 10.8926 12.2812 11.3926 11.6953C11.8926 11.1094 12.1426 10.4062 12.1426 9.58594C12.1426 8.52344 11.6777 7.57031 10.748 6.72656C9.81445 5.88281 8.39648 5.46094 6.49414 5.46094C3.81836 5.46094 1.79883 6.45312 0.435547 8.4375C-0.361328 9.58594 -0.822266 11.0859 -0.947266 12.9375L-1.00195 14.25L-0.947266 21H0.59375Z" />
+                                            </svg>
+                                        </div>
+
+                                        {/* Stars */}
+                                        <div className="flex space-x-1 mb-4">
+                                            {[...Array(5)].map((_, i) => (
+                                                <span key={i} className={`text-base ${i < item.stars ? 'text-yellow-400' : 'text-gray-600'}`}>★</span>
+                                            ))}
+                                        </div>
+
+                                        {/* Text */}
+                                        <p className="text-gray-300 text-sm md:text-base leading-relaxed mb-6 relative z-10 font-light line-clamp-4">
+                                            "{item.text}"
+                                        </p>
+
+                                        {/* Profile */}
+                                        <div className="flex items-center space-x-3 mt-auto">
+                                            <div className="relative">
+                                                <div className="absolute inset-0 bg-primary/30 rounded-full blur-md"></div>
+                                                <img
+                                                    src={item.img}
+                                                    alt={item.name}
+                                                    className="w-10 h-10 rounded-full object-cover relative z-10 border border-white/20"
+                                                />
+                                            </div>
+                                            <div>
+                                                <h4 className="text-white font-bold text-sm">{item.name}</h4>
+                                                <p className="text-primary text-[10px] font-semibold uppercase tracking-wider">{item.role}</p>
+                                            </div>
                                         </div>
                                     </div>
-                                    <p className="text-[10px] text-gray-500 leading-relaxed line-clamp-3 italic">"{item.text}"</p>
                                 </div>
                             ))}
                         </motion.div>
                     </div>
 
-                    <div className="flex overflow-hidden">
-                        <motion.div
-                            animate={{ x: [-1000, 0] }}
-                            transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-                            className="flex space-x-4 pr-4"
+                    {/* Navigation Controls */}
+                    <div className="flex justify-center items-center space-x-4 mt-8">
+                        <button
+                            onClick={prevSlide}
+                            className="p-2 rounded-full bg-white/5 border border-white/10 hover:bg-primary hover:text-white hover:border-primary text-white transition-all duration-300 group"
                         >
-                            {row2.map((item, idx) => (
-                                <div key={idx} className="flex-shrink-0 w-72 bg-white rounded-2xl p-4 shadow-md">
-                                    <div className="flex items-center space-x-3 mb-2">
-                                        <img src={item.img} className="w-8 h-8 rounded-full object-cover" alt="" />
-                                        <div>
-                                            <h4 className="text-xs font-bold text-gray-900">{item.name}</h4>
-                                            <div className="flex text-yellow-400 text-[8px]">{'★'.repeat(item.stars)}</div>
-                                        </div>
-                                    </div>
-                                    <p className="text-[10px] text-gray-500 leading-relaxed line-clamp-3 italic">"{item.text}"</p>
-                                </div>
+                            <span className="material-icons text-sm group-hover:-translate-x-1 transition-transform">arrow_back</span>
+                        </button>
+
+                        {/* Pagination Dots */}
+                        <div className="flex space-x-2">
+                            {testimonials.map((_, index) => (
+                                <button
+                                    key={index}
+                                    onClick={() => goToSlide(index)}
+                                    className={`h-1.5 rounded-full transition-all duration-300 ${index === currentIndex
+                                            ? 'w-6 bg-primary'
+                                            : 'w-1.5 bg-white/20 hover:bg-white/40'
+                                        }`}
+                                />
                             ))}
-                        </motion.div>
+                        </div>
+
+                        <button
+                            onClick={nextSlide}
+                            className="p-2 rounded-full bg-white/5 border border-white/10 hover:bg-primary hover:text-white hover:border-primary text-white transition-all duration-300 group"
+                        >
+                            <span className="material-icons text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                        </button>
                     </div>
                 </div>
 
-                {/* Desktop View: Static Grid (Existing Design) */}
-                <div className="hidden md:grid grid-cols-12 gap-6 auto-rows-min">
-                    {/* 1. Victoria Linton (Left) */}
-                    <motion.div
-                        {...delayed(slideInLeft, 0.1)}
-                        className="col-span-4 bg-white rounded-[2rem] p-6 relative shadow-lg"
-                    >
-                        <div className="flex items-center space-x-4 mb-3">
-                            <img
-                                src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80"
-                                alt="Victoria"
-                                className="w-12 h-12 rounded-full object-cover"
-                            />
-                            <div>
-                                <h3 className="font-bold text-gray-900 text-base">Victoria Linton</h3>
-                                <div className="flex text-yellow-400 text-xs">
-                                    {'★★★★★'.split('').map((c, i) => <span key={i}>{c}</span>)}
-                                </div>
-                            </div>
-                        </div>
-                        <p className="text-gray-500 text-xs leading-relaxed mb-4">
-                            Praesent urna neque viverra justo ultrices dui. Est lorem ipsum dolor sit amet consectetur adipiscing. Vitae nunc sed velit dignissim. In hendrerit gravida.
-                        </p>
-                        <span className="absolute top-4 right-6 text-gray-300 text-5xl">”</span>
-                    </motion.div>
-
-                    {/* 2. Center Large Card (Center) */}
-                    <motion.div
-                        {...slideInUp}
-                        className="col-span-4 row-span-2 bg-white rounded-[2.5rem] p-8 text-center flex flex-col items-center justify-center shadow-xl relative"
-                    >
-                        <div className="absolute -top-10">
-                            <div className="w-20 h-20 rounded-full p-1 bg-[#cdbdae]">
-                                <img
-                                    src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80"
-                                    alt="Excellent Job"
-                                    className="w-full h-full rounded-full object-cover border-4 border-white"
-                                />
-                            </div>
-                        </div>
-                        <h3 className="text-xl font-bold text-gray-900 mt-8 mb-2 uppercase tracking-wide">Excellent Job!</h3>
-                        <div className="flex text-gray-300 text-sm mb-4">
-                            {'★★★★★'.split('').map((c, i) => <span key={i}>{c}</span>)}
-                        </div>
-                        <p className="text-gray-500 text-sm leading-relaxed italic mb-6">
-                            "A scelerisque purus semper eget duis at tellus. Amet cursus sit amet dictum sit justo. Varius sit amet."
-                        </p>
-                        <div className="text-3xl text-gray-400 rotate-[-5deg] italic font-bold">Fanny Dean</div>
-                    </motion.div>
-
-                    {/* 3. Client Review (Right) */}
-                    <motion.div
-                        {...delayed(slideInRight, 0.1)}
-                        className="col-span-4 bg-white rounded-3xl p-6 shadow-lg"
-                    >
-                        <div className="flex justify-between items-start mb-2">
-                            <h3 className="font-bold text-gray-900 text-base">Client Review</h3>
-                            <span className="text-xs text-gray-400">@ArtfulWootton</span>
-                        </div>
-                        <p className="text-gray-500 text-xs italic mb-4">
-                            "Rhoncus neque viverra justo ultrices duist lorem dolor sed consect adipiscing."
-                        </p>
-                        <div className="flex justify-between items-center bg-gray-50 rounded-full px-4 py-1">
-                            <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wider cursor-pointer">Read More &rarr;</span>
-                            <div className="flex space-x-2 text-gray-300 text-xs">
-                                <span>♡</span>
-                                <span>⊞</span>
-                                <span>↗</span>
-                            </div>
-                        </div>
-                    </motion.div>
-
-                    {/* 4. Dimitri Woodhouse (Left) */}
-                    <motion.div
-                        {...delayed(slideInLeft, 0.2)}
-                        className="col-span-4 bg-white rounded-full p-2 pr-8 shadow-lg flex items-center mt-4"
-                    >
-                        <div className="flex-1 pl-8 py-2">
-                            <p className="text-gray-500 text-xs italic mb-1">
-                                "Mauris in aliquam se fringilla morbi tincidunt augue amet dui massa"
-                            </p>
-                            <div className="flex items-center justify-between">
-                                <div>
-                                    <h4 className="font-bold text-gray-900 text-xs uppercase">Dmitri Woodhouse</h4>
-                                    <span className="text-[10px] text-gray-400">@yournamehere</span>
-                                </div>
-                                <div className="flex text-yellow-400 text-[10px]">
-                                    {'★★★★★'.split('').map((c, i) => <span key={i}>{c}</span>)}
-                                </div>
-                            </div>
-                        </div>
-                        <img
-                            src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80"
-                            alt="Dmitri"
-                            className="w-16 h-16 rounded-full object-cover border-4 border-[#cdbdae]"
-                        />
-                    </motion.div>
-
-                    {/* 5. Nelly Vane (Right) */}
-                    <motion.div
-                        {...delayed(slideInRight, 0.2)}
-                        className="col-span-4 bg-white rounded-full p-2 pl-2 shadow-lg flex items-center relative mt-4"
-                    >
-                        <img
-                            src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80"
-                            alt="Nelly"
-                            className="w-16 h-16 rounded-full object-cover border-4 border-gray-100"
-                        />
-                        <div className="flex-1 px-4">
-                            <h3 className="font-bold text-gray-900 text-sm">NELLY VANE</h3>
-                            <p className="text-[10px] text-gray-500 leading-tight my-1">
-                                Varius duis at consectetur lorem donec. Et tortor at risus viverra.
-                            </p>
-                            <div className="flex text-yellow-400 text-[10px]">
-                                {'★★★★★'.split('').map((c, i) => <span key={i}>{c}</span>)} <span className="text-gray-300 ml-1">(5.0)</span>
-                            </div>
-                        </div>
-                        <div className="absolute -top-2 -right-2 bg-[#9D8F8F] w-10 h-10 rounded-full flex items-center justify-center text-white border-4 border-[#cdbdae]">
-                            <span className="material-icons text-sm">thumb_up</span>
-                        </div>
-                    </motion.div>
-
-                    {/* 6. Top-notch (Left) */}
-                    <motion.div
-                        {...delayed(slideInLeft, 0.3)}
-                        className="col-span-3 bg-white rounded-3xl p-6 shadow-lg flex flex-col justify-between mt-4"
-                    >
-                        <div className="text-center">
-                            <h3 className="font-bold text-xl text-gray-900 mb-2">Top-notch!</h3>
-                            <p className="text-gray-500 text-xs mb-4">
-                                Rhoncus urna neque viverra justo nec ultrices dui. Est lorem ipsum dolor.
-                            </p>
-                            <div className="flex justify-center text-gray-300 text-xs mb-1">
-                                {'★★★★★'.split('').map((c, i) => <span key={i}>{c}</span>)} <span className="ml-1">(5.0)</span>
-                            </div>
-                        </div>
-                        <div className="flex items-center space-x-3 mt-4 bg-[#F2F0ED] p-2 rounded-xl">
-                            <img
-                                src="https://images.unsplash.com/photo-1544725176-7c40e5a71c5e?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80"
-                                alt="User"
-                                className="w-8 h-8 rounded-full"
-                            />
-                            <div>
-                                <div className="font-bold text-xs text-gray-800">Hindley Micawber</div>
-                                <div className="text-[10px] text-gray-400">@yoursocialmedia</div>
-                            </div>
-                        </div>
-                    </motion.div>
-
-                    {/* 7. Testimonial (Center-Left) */}
-                    <motion.div
-                        {...delayed(slideInLeft, 0.35)}
-                        className="col-span-3 bg-white rounded-3xl p-6 shadow-lg flex flex-col relative mt-4"
-                    >
-                        <div className="flex items-start space-x-3 mb-4">
-                            <div className="bg-[#cdbdae] p-1 rounded-full">
-                                <img
-                                    src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80"
-                                    alt="Testimonial"
-                                    className="w-12 h-12 rounded-full object-cover"
-                                />
-                            </div>
-                            <div>
-                                <h4 className="font-bold text-gray-900 text-base">TESTIMONIAL</h4>
-                                <p className="text-xs text-gray-500 mt-1 italic">
-                                    "In hac habitasse platea dictumst quisque sagittis pur convallis."
-                                </p>
-                            </div>
-                        </div>
-                        <div className="mt-auto text-right">
-                            <span className="text-gray-400 font-bold text-xs">@CatherineDoe</span>
-                            <div className="flex justify-end text-[#cdbdae] text-lg mt-1">★★★★★</div>
-                        </div>
-                        <div className="absolute -bottom-2 left-8 w-6 h-6 bg-white transform rotate-45"></div>
-                    </motion.div>
-
-                    {/* 8. Recommended (Center-Right) */}
-                    <motion.div
-                        {...delayed(slideInRight, 0.35)}
-                        className="col-span-3 bg-white rounded-3xl p-4 shadow-lg text-center mt-4"
-                    >
-                        <div className="relative mb-3">
-                            <img
-                                src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80"
-                                alt="Rec"
-                                className="w-full h-24 object-cover rounded-xl grayscale opacity-80"
-                            />
-                            <div className="absolute top-0 left-4 bg-[#cdbdae] text-white w-6 h-8 flex items-end justify-center pb-1 rounded-b-lg shadow-sm">
-                                <span className="text-xs">★</span>
-                            </div>
-                        </div>
-                        <h4 className="font-bold text-gray-900 text-sm">RECOMMENDED!</h4>
-                        <div className="flex justify-center text-yellow-400 text-xs my-1">
-                            {'★★★★★'.split('').map((c, i) => <span key={i}>{c}</span>)}
-                        </div>
-                        <p className="text-[10px] text-gray-400 italic">"Habitant morbi tristique et netus blandit molestie."</p>
-                    </motion.div>
-
-                    {/* 9. Bubble Quote (Right) */}
-                    <motion.div
-                        {...delayed(slideInRight, 0.4)}
-                        className="col-span-3 flex flex-col justify-end mt-4"
-                    >
-                        <div className="bg-white p-6 rounded-t-3xl rounded-br-3xl rounded-bl-none shadow-lg relative mb-4">
-                            <p className="text-xs text-gray-500 italic">
-                                "Vestibulum mattis enim aulit tortor se ullamcorper morbi pretium"
-                            </p>
-                            <div className="text-right font-bold text-gray-400 mt-2 text-lg">Jane</div>
-                            <div className="text-right text-[10px] text-gray-300">@JaneProkofich</div>
-                            <span className="text-4xl text-[#8E847F] absolute -bottom-4 left-4">”</span>
-                        </div>
-                        <div className="flex justify-end pr-4">
-                            <img
-                                src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80"
-                                alt="Jane"
-                                className="w-10 h-10 rounded-full border-2 border-white shadow-md relative z-10"
-                            />
-                        </div>
-                    </motion.div>
-                </div>
+                {/* Trusted Badge - Removed explicitly to keep "compact" as per user request to fit in one view, if you want it back add it here in a small footer line */}
             </div>
         </section>
     );

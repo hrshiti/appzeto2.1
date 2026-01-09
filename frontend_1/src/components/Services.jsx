@@ -11,34 +11,34 @@ const services = [
     {
         id: "01",
         title: "Web Development",
-        description: "High-performance websites and web applications built with modern technologies like React, Next.js, and Node.js. We ensure scalability, speed, and SEO optimization.",
+        description: "Web development company building fast & scalable websites using React, Next.js, and Node.js. We ensure SEO, speed, and security.",
         icon: "language",
         image: webImg,
-        slug: "website"
+        slug: "web-development"
     },
     {
         id: "02",
         title: "Mobile App Development",
-        description: "Native and cross-platform mobile apps for iOS and Android. We create seamless user experiences using Flutter, React Native, and Swift/Kotlin.",
+        description: "Mobile app development company for Android & iOS solutions. Native and cross-platform apps using Flutter and React Native.",
         icon: "smartphone",
         image: mobileImg,
-        slug: "mobile-application"
+        slug: "mobile-apps"
     },
     {
         id: "03",
         title: "AI & Machine Learning",
-        description: "Intelligent automation and data-driven solutions. From chatbots to predictive analytics, we help you leverage the power of AI to grow your business.",
+        description: "AI software development services. Intelligent automation, custom AI models, and data-driven solutions to grow your business.",
         icon: "smart_toy",
         image: aiImg,
-        slug: "ai-machine-learning"
+        slug: "ai-solutions"
     },
     {
         id: "04",
-        title: "DevOps & Cloud",
-        description: "Streamline your deployment pipeline and ensure high availability. We specialize in AWS, Azure, Docker, and Kubernetes for robust infrastructure.",
+        title: "Custom Software",
+        description: "Custom software development company for businesses. Scalable architectures, cloud solutions, and tailored enterprise software.",
         icon: "cloud_sync",
         image: cloudImg,
-        slug: "devops-cloud"
+        slug: "custom-software"
     }
 ];
 
@@ -123,7 +123,7 @@ const Services = () => {
                             transition={{ delay: 0.1 }}
                             className="text-3xl md:text-6xl font-black text-white uppercase tracking-tighter"
                         >
-                            Solutions We <br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-[#05A4A7] to-emerald-400">Deliver</span>
+                            Our IT & Software <br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-[#05A4A7] to-emerald-400">Development Services</span>
                         </motion.h2>
                     </div>
                     <motion.p
