@@ -54,12 +54,12 @@ const projects = [
 ];
 
 const techStack = [
-    { icon: "psychology", label: "AI" },
-    { icon: "code", label: "React" },
-    { icon: "terminal", label: "Node" },
-    { icon: "database", label: "SQL" },
-    { icon: "cloud", label: "Cloud" },
-    { icon: "api", label: "API" }
+    { icon: "psychology", label: "AI & ML", color: "text-purple-400", bg: "bg-purple-500/10", border: "border-purple-500/20" },
+    { icon: "code", label: "React Native", color: "text-sky-400", bg: "bg-sky-500/10", border: "border-sky-500/20" },
+    { icon: "dns", label: "Node.js", color: "text-green-400", bg: "bg-green-500/10", border: "border-green-500/20" },
+    { icon: "database", label: "MongoDB", color: "text-emerald-400", bg: "bg-emerald-500/10", border: "border-emerald-500/20" },
+    { icon: "cloud", label: "AWS Cloud", color: "text-orange-400", bg: "bg-orange-500/10", border: "border-orange-500/20" },
+    { icon: "api", label: "REST API", color: "text-pink-400", bg: "bg-pink-500/10", border: "border-pink-500/20" }
 ];
 
 const RevolvingOrbit = ({ size = "md" }) => {
@@ -153,7 +153,7 @@ const RevolvingOrbit = ({ size = "md" }) => {
             </motion.div>
 
             {/* 3. INNER CORE AREA (Tech Icons + Pulse) */}
-            <div className="absolute w-[55%] h-[55%] pointer-events-none">
+            <div className="absolute w-[40%] h-[40%] pointer-events-auto">
                 <motion.div
                     className="absolute inset-0 rounded-full"
                     animate={{ rotate: -180 }}
@@ -188,15 +188,33 @@ const RevolvingOrbit = ({ size = "md" }) => {
                                     transform: 'translate(-50%, -50%)'
                                 }}
                             >
-                                {/* Floating Tech Icon - No Background */}
+                                {/* Floating Tech Bubble */}
                                 <motion.div
-                                    className=""
+                                    className="relative group cursor-pointer"
                                     animate={{ rotate: 180 }}
                                     transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
                                 >
-                                    <span className="material-symbols-outlined text-[10px] sm:text-sm text-primary/60 font-medium">
-                                        {tech.icon}
-                                    </span>
+                                    <div className={`
+                                        w-6 h-6 sm:w-8 sm:h-8 rounded-full backdrop-blur-md flex items-center justify-center
+                                        border transition-all duration-300 shadow-lg hover:scale-125
+                                        ${tech.bg} ${tech.border}
+                                    `}>
+                                        <span className={`material-symbols-outlined text-[8px] sm:text-xs font-bold ${tech.color}`}>
+                                            {tech.icon}
+                                        </span>
+                                    </div>
+
+                                    {/* Tech Label Tooltip */}
+                                    <div className={`
+                                        absolute -bottom-5 left-1/2 -translate-x-1/2 
+                                        px-1.5 py-0.5 rounded-full bg-slate-900/90 border border-white/10
+                                        opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none
+                                        whitespace-nowrap z-20
+                                    `}>
+                                        <span className={`text-[6px] sm:text-[8px] font-bold uppercase tracking-wide ${tech.color}`}>
+                                            {tech.label}
+                                        </span>
+                                    </div>
                                 </motion.div>
                             </div>
                         );

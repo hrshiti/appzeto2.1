@@ -97,17 +97,17 @@ const AdminServices = () => {
         e.preventDefault();
 
         // Client-side Validation
-        if (!currentService.title.trim()) return addToast('Title is required', 'error');
-        if (!currentService.shortDescription.trim()) return addToast('Short description is required', 'error');
+        if (!currentService.title?.trim()) return addToast('Title is required', 'error');
+        if (!currentService.shortDescription?.trim()) return addToast('Short description is required', 'error');
 
         const payload = {
-            title: currentService.title.trim(),
-            shortDescription: currentService.shortDescription.trim(),
+            title: (currentService.title || '').trim(),
+            shortDescription: (currentService.shortDescription || '').trim(),
             features: (currentService.features || '').split(',').map(f => f.trim()).filter(Boolean),
-            image: currentService.image.trim(),
+            image: (currentService.image || '').trim(),
             active: currentService.status === 'Active',
             category: currentService.category,
-            fullDescription: currentService.shortDescription.trim() // Syncing full with short for simplicity
+            fullDescription: (currentService.shortDescription || '').trim() // Syncing full with short for simplicity
         };
 
         try {

@@ -8,9 +8,9 @@
   --color-card-dark: #023638;
 
   /* UPDATED: Strictly enforced Inter font for everything */
-  --font-display: "Inter", "sans-serif";
-  --font-body: "Inter", "sans-serif";
-  --font-nunito: "Inter", "sans-serif";
+  --font-display: "Inter", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --font-nunito: "Inter", sans-serif;
 
   --animate-fade-in-up: fadeInUp 0.8s ease-out forwards;
   --animate-carousel-cycle: carouselFade 9s infinite;

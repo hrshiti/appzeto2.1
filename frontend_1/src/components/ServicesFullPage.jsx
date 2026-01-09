@@ -199,22 +199,69 @@ const ServicesFullPage = () => {
                         </div>
                     </motion.div>
 
-                    {/* Orbit Animation - Keeping as static visual for Hero */}
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.9, x: 50 }}
-                        animate={{ opacity: 1, scale: 1, x: 0 }}
-                        transition={{ duration: 0.8, delay: 0.3 }}
-                        className="relative w-full max-w-md mx-auto lg:max-w-full aspect-[4/3] rounded-2xl bg-[#081226] overflow-hidden shadow-2xl group hidden md:block"
-                    >
-                        <div className="absolute inset-0 opacity-40">
-                            <div className="w-full h-full bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-20"></div>
-                        </div>
-                        <div className="relative z-10 w-full h-full flex items-center justify-center scale-75 sm:scale-100">
-                            <div className="w-16 h-16 bg-[#05A4A7] rounded-full flex items-center justify-center z-20 shadow-lg shadow-[#05A4A7]/50">
-                                <span className="material-symbols-outlined text-3xl text-white">hub</span>
+                    {/* Dynamic Tech Orbit Animation */}
+                    <div className="relative w-full max-w-[500px] aspect-square mx-auto lg:mx-0 hidden md:flex items-center justify-center perspective-1000">
+
+                        {/* Core Glow */}
+                        <div className="absolute w-[40%] h-[40%] bg-[#05A4A7]/20 blur-[60px] rounded-full animate-pulse"></div>
+
+                        {/* Center Hub */}
+                        <motion.div
+                            initial={{ scale: 0 }}
+                            animate={{ scale: 1 }}
+                            transition={{ duration: 0.5, delay: 0.2 }}
+                            className="relative z-20 w-24 h-24 bg-white/90 backdrop-blur-xl rounded-2xl shadow-[0_0_40px_rgba(5,164,167,0.2)] flex items-center justify-center border border-white"
+                        >
+                            <img src="/src/assets/logo.png" alt="Appzeto" className="w-[80%] h-[80%] object-contain" />
+                        </motion.div>
+
+                        {/* Orbit 1 (Inner) */}
+                        <div className="absolute w-[65%] h-[65%] rounded-full border border-[#05A4A7]/20 animate-[spin_20s_linear_infinite]">
+                            {/* React */}
+                            <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-14 h-14 bg-white rounded-full shadow-lg p-3 flex items-center justify-center animate-[spin_20s_linear_infinite_reverse] group cursor-pointer">
+                                <img src="/src/assets/react.svg" alt="React" className="w-full h-full object-contain animate-[spin_10s_linear_infinite]" />
+                                <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-[10px] font-bold px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+                                    React JS
+                                </div>
+                            </div>
+                            {/* Node/Server */}
+                            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-14 h-14 bg-white rounded-full shadow-lg p-3 flex items-center justify-center animate-[spin_20s_linear_infinite_reverse] group cursor-pointer">
+                                <span className="material-symbols-outlined text-3xl text-green-600">dns</span>
+                                <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-[10px] font-bold px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+                                    Backend
+                                </div>
                             </div>
                         </div>
-                    </motion.div>
+
+                        {/* Orbit 2 (Middle) */}
+                        <div className="absolute w-[90%] h-[90%] rounded-full border border-slate-200 animate-[spin_30s_linear_infinite_reverse]">
+                            {/* Mobile */}
+                            <div className="absolute top-1/2 right-0 translate-x-1/2 -translate-y-1/2 w-16 h-16 bg-white rounded-full shadow-lg p-3.5 flex items-center justify-center animate-[spin_30s_linear_infinite] group cursor-pointer">
+                                <span className="material-symbols-outlined text-3xl text-blue-500">smartphone</span>
+                                <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-[10px] font-bold px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+                                    Mobile Apps
+                                </div>
+                            </div>
+                            {/* Cloud */}
+                            <div className="absolute top-1/2 left-0 -translate-x-1/2 -translate-y-1/2 w-16 h-16 bg-white rounded-full shadow-lg p-3.5 flex items-center justify-center animate-[spin_30s_linear_infinite] group cursor-pointer">
+                                <span className="material-symbols-outlined text-3xl text-sky-500">cloud</span>
+                                <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-[10px] font-bold px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+                                    Cloud Infra
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Orbit 3 (Outer Decor) */}
+                        <div className="absolute w-[120%] h-[120%] rounded-full border border-dashed border-slate-200/50 animate-[spin_60s_linear_infinite]">
+                            <div className="absolute top-[15%] left-[15%] w-10 h-10 bg-white rounded-full shadow text-xs flex items-center justify-center font-bold text-purple-500 animate-[spin_60s_linear_infinite_reverse]">
+                                AI
+                            </div>
+                            <div className="absolute bottom-[20%] right-[10%] w-10 h-10 bg-white rounded-full shadow text-xs flex items-center justify-center font-bold text-orange-500 animate-[spin_60s_linear_infinite_reverse]">
+                                UX
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
             </section>
 
@@ -256,6 +303,20 @@ const ServicesFullPage = () => {
                     {Array.isArray(services) && services.map((service) => {
                         const layout = service.layoutType || 'web';
 
+                        // Helper to get static asset image based on title
+                        const getServiceAssetImage = (title) => {
+                            if (!title) return null;
+                            const t = title.toLowerCase();
+                            if (t.includes('web')) return webImg;
+                            if (t.includes('app') || t.includes('mobile')) return mobileImg;
+                            if (t.includes('ai') || t.includes('intelligence') || t.includes('ml')) return aiImg;
+                            if (t.includes('devops') || t.includes('cloud')) return cloudImg;
+                            if (t.includes('ui') || t.includes('ux') || t.includes('design')) return uiuxImg;
+                            return null;
+                        };
+
+                        const displayImage = getServiceAssetImage(service.title) || service.image;
+
                         return (
                             <section key={service._id} id={service.slug || service._id} className="scroll-mt-24 md:scroll-mt-32">
                                 <motion.div
@@ -281,10 +342,10 @@ const ServicesFullPage = () => {
                                                     <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-green-500"></div>
                                                     <div className="text-[10px] text-gray-500 ml-4">{service.visualFilename || 'ServicePreview.png'}</div>
                                                 </div>
-                                                {service.image ? (
+                                                {displayImage ? (
                                                     <div className="relative w-full h-full overflow-hidden rounded-lg">
                                                         <img
-                                                            src={service.image.startsWith('/uploads') ? `http://localhost:5000${service.image}` : service.image}
+                                                            src={displayImage.startsWith('/uploads') ? `http://localhost:5000${displayImage}` : displayImage}
                                                             alt={service.title}
                                                             className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500"
                                                         />
@@ -329,7 +390,12 @@ const ServicesFullPage = () => {
                                                 <div className="flex-1 relative flex justify-center items-center">
                                                     <div className="relative group">
                                                         <div className="absolute -inset-1 bg-gradient-to-r from-[#05A4A7] to-emerald-500 rounded-[2.5rem] blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
-                                                        <img src="https://assets.codepen.io/t-1/mobile-frame-png.png" width="220" alt="App" className="relative z-10" />
+                                                        <img
+                                                            src={displayImage && displayImage.startsWith('/uploads') ? `http://localhost:5000${displayImage}` : (displayImage || "https://assets.codepen.io/t-1/mobile-frame-png.png")}
+                                                            width="220"
+                                                            alt={service.title}
+                                                            className="relative z-10 rounded-[2rem] object-cover h-[440px] w-[220px]"
+                                                        />
                                                     </div>
                                                 </div>
                                             </div>
@@ -342,10 +408,10 @@ const ServicesFullPage = () => {
                                             <div className="prose prose-slate max-w-none mb-8" dangerouslySetInnerHTML={{ __html: service.fullDescription || service.shortDescription }}></div>
                                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                                 {Array.isArray(service.features) && service.features.map((feature, idx) => (
-                                                    <div key={idx} className="flex items-center gap-3 p-3 bg-slate-50 rounded-lg">
+                                                    <section key={idx} className="flex items-center gap-3 p-3 bg-slate-50 rounded-lg">
                                                         <span className="material-symbols-outlined text-[#05A4A7]">check_circle</span>
                                                         <span className="text-sm font-medium text-slate-700">{feature}</span>
-                                                    </div>
+                                                    </section>
                                                 ))}
                                             </div>
                                         </div>

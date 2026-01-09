@@ -7,175 +7,204 @@ gsap.registerPlugin(ScrollTrigger);
 
 const steps = [
     {
-        title: "Discovery",
-        description: "We dive deep into your requirements, target audience, and business goals to create a solid roadmap.",
-        icon: "🔍",
-        color: "#cdbdae"
+        id: "01",
+        title: "Idea & Plan",
+        subtitle: "The Beginning",
+        description: "We discuss your vision and create a solid roadmap.",
+        icon: "lightbulb",
+        pos: { top: 50, left: 100 }
     },
     {
-        title: "UI/UX Design",
-        description: "Crafting intuitive layouts and stunning visuals that ensure an exceptional user experience.",
-        icon: "🎨",
-        color: "#9D8F8F"
+        id: "02",
+        title: "Sketching",
+        subtitle: "Rough Draft",
+        description: "Drafting the basic layout to visualize structure.",
+        icon: "edit",
+        pos: { top: 50, left: 450 }
     },
     {
-        title: "Development",
-        description: "Transforming designs into robust, scalable code using the latest technology stack.",
-        icon: "💻",
-        color: "#8E847F"
+        id: "03",
+        title: "Designing",
+        subtitle: "Look & Feel",
+        description: "Adding colors and styles for a beautiful UI.",
+        icon: "palette",
+        pos: { top: 50, left: 800 }
     },
     {
+        id: "04",
+        title: "Coding",
+        subtitle: "Building It",
+        description: "Writing clean code to bring designs to life.",
+        icon: "code",
+        pos: { top: 250, left: 800 }
+    },
+    {
+        id: "05",
         title: "Testing",
-        description: "Rigorous quality assurance to ensure every feature works perfectly across all devices.",
-        icon: "🧪",
-        color: "#7D746F"
+        subtitle: "Quality Check",
+        description: "Ensuring zero bugs across all devices.",
+        icon: "bug_report",
+        pos: { top: 250, left: 450 }
     },
     {
-        title: "Deployment",
-        description: "Launching your product to the world and providing ongoing support for growth.",
-        icon: "🚀",
-        color: "#5C5652"
+        id: "06",
+        title: "Launch",
+        subtitle: "Going Live",
+        description: "Deploying your project to the world.",
+        icon: "rocket_launch",
+        pos: { top: 250, left: 100 }
+    },
+    {
+        id: "07",
+        title: "Support",
+        subtitle: "Here to Help",
+        description: "Continuous growth and maintenance.",
+        icon: "support_agent",
+        pos: { top: 450, left: 100 }
     }
 ];
 
 const Process = () => {
     const containerRef = useRef(null);
-    const lineRef = useRef(null);
-    const mobileLineRef = useRef(null);
+    const pathRef = useRef(null);
 
     useLayoutEffect(() => {
         const ctx = gsap.context(() => {
-            // GSAP ScrollTrigger for the connector line
-            if (lineRef.current) {
-                gsap.fromTo(lineRef.current,
-                    { scaleY: 0 },
-                    {
-                        scaleY: 1,
-                        ease: "none",
-                        scrollTrigger: {
-                            trigger: containerRef.current,
-                            start: "top center",
-                            end: "bottom center",
-                            scrub: 1, // Smoothly link to scroll
-                        }
+            if (pathRef.current) {
+                const pathLength = pathRef.current.getTotalLength();
+                gsap.set(pathRef.current, { strokeDasharray: pathLength, strokeDashoffset: pathLength });
+
+                gsap.to(pathRef.current, {
+                    strokeDashoffset: 0,
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: containerRef.current,
+                        start: "top center",
+                        end: "bottom center",
+                        scrub: 1,
                     }
-                );
-            }
-            if (mobileLineRef.current) {
-                gsap.fromTo(mobileLineRef.current,
-                    { scaleY: 0 },
-                    {
-                        scaleY: 1,
-                        ease: "none",
-                        scrollTrigger: {
-                            trigger: containerRef.current,
-                            start: "top center",
-                            end: "bottom center",
-                            scrub: 1,
-                        }
-                    }
-                );
+                });
             }
         }, containerRef);
-
         return () => ctx.revert();
     }, []);
 
     return (
-        <section ref={containerRef} className="bg-white min-h-0 py-4 md:py-20 relative overflow-hidden flex flex-col justify-center">
-            {/* Background Decorations */}
-            <div className="absolute top-0 left-0 w-full h-full pointer-events-none opacity-5">
-                <div className="absolute top-20 left-10 w-64 h-64 bg-[#cdbdae] rounded-full blur-[100px]" />
-                <div className="absolute bottom-20 right-10 w-96 h-96 bg-[#cdbdae] rounded-full blur-[100px]" />
+        <section ref={containerRef} className="bg-slate-50 py-12 lg:h-screen lg:max-h-[850px] relative overflow-hidden flex flex-col items-center justify-center">
+
+            <div className="absolute inset-0 w-full h-full pointer-events-none opacity-[0.03]"
+                style={{ backgroundImage: 'radial-gradient(#000 1px, transparent 1px)', backgroundSize: '30px 30px' }}>
             </div>
 
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <div className="max-w-[1200px] mx-auto px-4 w-full relative z-10 h-full flex flex-col justify-center">
                 <motion.div
-                    initial={{ opacity: 0, x: -30 }}
-                    whileInView={{ opacity: 1, x: 0 }}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: false }}
-                    transition={{ duration: 1, ease: "easeOut" }}
-                    className="text-left mb-6 md:mb-16"
+                    transition={{ duration: 0.6 }}
+                    className="text-center mb-8 flex-shrink-0"
                 >
-                    <p className="text-[#cdbdae] font-medium tracking-widest uppercase mb-2 text-xs md:text-base">Workflow</p>
-                    <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-gray-900 mb-4 tracking-tight">How We Bring Your Ideas To Life</h2>
-                    <div className="w-16 md:w-24 h-1 bg-[#cdbdae] rounded-full" />
+                    <span className="bg-white border border-slate-200 text-slate-900 px-4 py-1 rounded-full text-xs font-bold uppercase tracking-wider shadow-sm mb-3 inline-block">
+                        Workflow
+                    </span>
+                    <h2 className="text-3xl md:text-5xl font-black text-slate-900 tracking-tight mb-2">
+                        How We Work
+                    </h2>
+                    <p className="text-slate-500 max-w-xl mx-auto text-sm md:text-base">
+                        Simple steps to take your idea from concept to reality.
+                    </p>
                 </motion.div>
 
-                <div className="relative">
-                    {/* GSAP Managed Vertical Connector Line */}
-                    <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-[2px] bg-gray-100 -translate-x-1/2 hidden md:block" />
-                    <div
-                        ref={lineRef}
-                        className="absolute left-6 md:left-1/2 top-0 bottom-0 w-[2px] bg-[#cdbdae] -translate-x-1/2 hidden md:block origin-top scale-y-0"
-                    />
+                {/* DESKTOP COMPACT LAYOUT */}
+                <div className="hidden lg:block relative h-[550px] w-full max-w-[900px] mx-auto flex-grow-0">
+                    <svg className="absolute inset-0 w-full h-full pointer-events-none overflow-visible" viewBox="0 0 900 550">
+                        <path
+                            d="M 100 50 L 800 50 Q 900 50 900 150 Q 900 250 800 250 L 100 250 Q 0 250 0 350 Q 0 450 100 450 L 250 450"
+                            fill="none"
+                            stroke="#e2e8f0"
+                            strokeWidth="3"
+                        />
+                        <path
+                            ref={pathRef}
+                            d="M 100 50 L 800 50 Q 900 50 900 150 Q 900 250 800 250 L 100 250 Q 0 250 0 350 Q 0 450 100 450 L 250 450"
+                            fill="none"
+                            stroke="#0f172a"
+                            strokeWidth="4"
+                            strokeLinecap="round"
+                        />
+                    </svg>
 
-                    {/* GSAP Managed Mobile Connector Line */}
-                    <div className="absolute left-6 top-0 bottom-0 w-[2px] bg-gray-100 md:hidden" />
-                    <div
-                        ref={mobileLineRef}
-                        className="absolute left-6 top-0 bottom-0 w-[2px] bg-[#cdbdae] md:hidden origin-top scale-y-0"
-                    />
+                    {steps.map((step, index) => (
+                        <motion.div
+                            key={index}
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            viewport={{ margin: "-50px" }}
+                            transition={{ duration: 0.4, delay: index * 0.1 }}
+                            className="absolute flex flex-col items-center group"
+                            style={{
+                                left: `${(step.pos.left / 900) * 100}%`,
+                                top: `${(step.pos.top / 550) * 100}%`,
+                                transform: 'translate(-50%, -50%)',
+                                width: '220px'
+                            }}
+                        >
+                            {/* Card Container */}
+                            <div className="relative bg-white pt-10 pb-4 px-4 rounded-2xl shadow-lg border border-slate-100 text-center w-full transition-all duration-300 group-hover:-translate-y-2 group-hover:shadow-xl">
 
-                    <div className="space-y-8 md:space-y-0">
-                        {steps.map((step, index) => {
-                            const isOdd = index % 2 !== 0;
-                            return (
-                                <div key={index} className="relative flex items-center md:h-32">
-                                    <div className="flex w-full items-center">
-                                        {/* Left Side Content (Framer Motion) */}
-                                        <div className={`hidden md:flex w-1/2 justify-end pr-16 ${isOdd ? 'invisible order-1' : 'order-1'}`}>
-                                            <motion.div
-                                                initial={{ opacity: 0, x: -60, filter: "blur(10px)" }}
-                                                whileInView={{ opacity: 1, x: 0, filter: "blur(0px)" }}
-                                                viewport={{ once: false, amount: 0.3 }}
-                                                transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
-                                                className="text-right max-w-sm"
-                                            >
-                                                <h3 className="text-xl font-bold text-gray-900 mb-1">{step.title}</h3>
-                                                <p className="text-gray-500 text-sm leading-relaxed">{step.description}</p>
-                                            </motion.div>
-                                        </div>
-
-                                        {/* Center Icon (Framer Motion) */}
-                                        <div className="relative z-10 w-12 h-12 bg-white border-2 border-[#cdbdae] rounded-full flex items-center justify-center text-xl shadow-lg order-2 md:absolute md:left-1/2 md:-translate-x-1/2">
-                                            <motion.div
-                                                initial={{ scale: 0, rotate: -45 }}
-                                                whileInView={{ scale: 1, rotate: 0 }}
-                                                viewport={{ once: false, amount: 0.5 }}
-                                                transition={{ type: "spring", stiffness: 100, damping: 15, delay: 0.2 }}
-                                            >
-                                                {step.icon}
-                                            </motion.div>
-                                            <motion.div
-                                                initial={{ opacity: 0, scale: 0 }}
-                                                whileInView={{ opacity: 1, scale: 1 }}
-                                                viewport={{ once: false }}
-                                                transition={{ delay: 0.4 }}
-                                                className="absolute -top-1 -right-1 w-5 h-5 md:w-6 md:h-6 bg-gray-900 text-white text-[9px] md:text-[10px] flex items-center justify-center rounded-full font-bold shadow-md"
-                                            >
-                                                0{index + 1}
-                                            </motion.div>
-                                        </div>
-
-                                        {/* Right Side Content (Framer Motion) */}
-                                        <div className={`w-full md:w-1/2 pl-6 md:pl-16 ${!isOdd ? 'md:invisible order-3' : 'order-3'}`}>
-                                            <motion.div
-                                                initial={{ opacity: 0, x: 60, filter: "blur(10px)" }}
-                                                whileInView={{ opacity: 1, x: 0, filter: "blur(0px)" }}
-                                                viewport={{ once: false, amount: 0.3 }}
-                                                transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
-                                                className="text-left max-w-sm"
-                                            >
-                                                <h3 className="text-base sm:text-lg md:text-xl font-bold text-gray-900 mb-0 md:mb-1">{step.title}</h3>
-                                                <p className="hidden sm:block text-gray-500 text-xs md:text-sm leading-relaxed">{step.description}</p>
-                                            </motion.div>
-                                        </div>
+                                {/* Floating Icon (Positioned Absolute relative to Container) */}
+                                <div className="absolute -top-7 left-1/2 -translate-x-1/2 w-14 h-14 bg-white border-4 border-slate-50 rounded-full flex items-center justify-center shadow-md z-20">
+                                    <span className="material-symbols-outlined text-2xl text-slate-800">
+                                        {step.icon}
+                                    </span>
+                                    {/* Number Badge */}
+                                    <div className="absolute -top-1 -right-1 w-6 h-6 bg-slate-900 text-white text-xs font-bold rounded-full flex items-center justify-center border-2 border-white">
+                                        {step.id}
                                     </div>
                                 </div>
-                            );
-                        })}
-                    </div>
+
+                                {/* Content */}
+                                <div>
+                                    <h3 className="font-bold text-slate-900 text-lg mb-1 leading-tight">{step.title}</h3>
+                                    <p className="text-[10px] text-primary font-bold uppercase tracking-wide mb-2 opacity-80">{step.subtitle}</p>
+                                    <p className="text-xs text-slate-500 leading-relaxed font-medium">
+                                        {step.description}
+                                    </p>
+                                </div>
+                            </div>
+                        </motion.div>
+                    ))}
+
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: 0.9 }}
+                        className="absolute left-[300px] top-[450px] -translate-y-1/2 ml-0 flex items-center gap-2"
+                    >
+                        <span className="material-symbols-outlined text-3xl text-green-500 animate-bounce">flag</span>
+                        <span className="font-bold text-slate-900 text-lg">Goal!</span>
+                    </motion.div>
+                </div>
+
+                {/* MOBILE LIST LAYOUT */}
+                <div className="lg:hidden w-full max-w-md mx-auto space-y-4 mt-8">
+                    {steps.map((step, index) => (
+                        <div key={index} className="bg-white p-5 rounded-xl border border-slate-100 shadow-sm flex gap-4 items-start">
+                            <div className="relative flex-shrink-0">
+                                <div className="w-10 h-10 bg-slate-100 rounded-full flex items-center justify-center text-slate-900">
+                                    <span className="material-symbols-outlined text-xl">{step.icon}</span>
+                                </div>
+                                <div className="absolute -top-1 -right-1 w-5 h-5 bg-slate-900 text-white text-[10px] rounded-full flex items-center justify-center border border-white">
+                                    {step.id}
+                                </div>
+                            </div>
+                            <div>
+                                <h3 className="font-bold text-slate-900 text-base">{step.title}</h3>
+                                <p className="text-[10px] text-primary font-bold uppercase mb-1 opacity-80">{step.subtitle}</p>
+                                <p className="text-xs text-slate-500 leading-relaxed">{step.description}</p>
+                            </div>
+                        </div>
+                    ))}
                 </div>
             </div>
         </section>
