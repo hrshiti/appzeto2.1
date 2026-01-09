@@ -64,6 +64,37 @@ const Hero = () => {
                             className="flex items-center justify-center relative scale-50 sm:scale-65 lg:scale-75 xl:scale-90 py-6 lg:py-0"
                         >
                             <RevolvingOrbit size="lg" />
+
+                            {/* Happy Clients Floating Card */}
+                            <motion.div
+                                initial={{ opacity: 0, x: 20 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: 1, duration: 0.8 }}
+                                // Fixed: Smaller size (p-3), positioned properly to the right (-right-24) and slightly bumped up (bottom-8)
+                                className="absolute -bottom-4 right-0 sm:bottom-8 sm:-right-24 flex items-center gap-2 sm:gap-3 bg-white dark:bg-slate-900 border border-gray-100 dark:border-slate-800 p-2 pr-4 sm:p-3 sm:pr-5 rounded-full shadow-2xl z-20"
+                            >
+                                <div className="flex -space-x-2 sm:-space-x-3">
+                                    {[
+                                        "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=64&h=64",
+                                        "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=64&h=64",
+                                        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=64&h=64",
+                                        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=64&h=64"
+                                    ].map((src, i) => (
+                                        <div key={i} className="w-6 h-6 sm:w-8 sm:h-8 rounded-full border-2 border-white dark:border-slate-800 overflow-hidden">
+                                            <img src={src} alt="Client" className="w-full h-full object-cover" />
+                                        </div>
+                                    ))}
+                                </div>
+                                <div className="flex flex-col">
+                                    <span className="text-[10px] sm:text-xs font-black text-gray-900 dark:text-white">500+ Happy Clients</span>
+                                    <div className="flex items-center gap-1">
+                                        <span className="flex text-yellow-400 text-[8px] sm:text-[10px]">
+                                            {"★★★★★".split("").map((star, i) => <span key={i}>{star}</span>)}
+                                        </span>
+                                        <span className="text-[8px] sm:text-[10px] text-gray-500 font-medium">4.9/5</span>
+                                    </div>
+                                </div>
+                            </motion.div>
                         </motion.div>
                     </div>
                 </div>
@@ -89,8 +120,15 @@ const Hero = () => {
                     <span className="material-icons text-gray-400 dark:text-gray-600">keyboard_arrow_down</span>
                 </div>
             </main>
-            <section className="border-y border-gray-200 dark:border-gray-800 bg-primary/5 dark:bg-primary/10 overflow-hidden py-3 sm:py-4">
-                <div className="flex animate-scroll-fast whitespace-nowrap group">
+            <section className="relative border-y border-emerald-900 bg-emerald-950 py-2">
+                {/* CENTERED LABEL OVERLAY */}
+                <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
+                    <span className="text-emerald-50 font-black uppercase tracking-[0.2em] text-sm sm:text-lg drop-shadow-md">
+                        Happy Clients
+                    </span>
+                </div>
+
+                <div className="flex animate-scroll-fast whitespace-nowrap group opacity-60">
                     {[
                         { name: "Aapreec", logo: aapreecLogo },
                         { name: "AutoRide", logo: autoRideLogo },
@@ -103,15 +141,15 @@ const Hero = () => {
                         { name: "Rent Yatra", logo: rentYatraLogo },
                         { name: "Blue Ride", logo: blueRideLogo },
                     ].map((client, index) => (
-                        <div key={index} className="flex items-center space-x-2 sm:space-x-4 mx-4 sm:mx-8 cursor-pointer hover:scale-105 transition-transform duration-300">
-                            <div className="h-16 w-16 sm:h-20 sm:w-20 bg-white rounded-xl shadow-sm border border-gray-100 flex items-center justify-center p-2">
+                        <div key={index} className="flex flex-col items-center space-y-1 mx-4 sm:mx-6 cursor-pointer hover:scale-105 transition-transform duration-300">
+                            <div className="h-10 w-10 sm:h-12 sm:w-12 bg-white rounded-full shadow-sm border border-emerald-900 overflow-hidden relative p-0.5">
                                 <img
                                     src={client.logo}
                                     alt={client.name}
-                                    className="max-h-full max-w-full object-contain mix-blend-multiply"
+                                    className="w-full h-full object-cover rounded-full"
                                 />
                             </div>
-                            <span className="font-bold text-sm sm:text-base text-gray-700 dark:text-gray-300">{client.name}</span>
+                            <span className="font-bold text-[9px] sm:text-[10px] text-emerald-100/70 uppercase tracking-widest">{client.name}</span>
                         </div>
                     ))}
                     {[
@@ -126,15 +164,15 @@ const Hero = () => {
                         { name: "Rent Yatra", logo: rentYatraLogo },
                         { name: "Blue Ride", logo: blueRideLogo },
                     ].map((client, index) => (
-                        <div key={`duplicate-${index}`} className="flex items-center space-x-2 sm:space-x-4 mx-4 sm:mx-8 cursor-pointer hover:scale-105 transition-transform duration-300">
-                            <div className="h-16 w-16 sm:h-20 sm:w-20 bg-white rounded-xl shadow-sm border border-gray-100 flex items-center justify-center p-2">
+                        <div key={`duplicate-${index}`} className="flex flex-col items-center space-y-1 mx-4 sm:mx-6 cursor-pointer hover:scale-105 transition-transform duration-300">
+                            <div className="h-10 w-10 sm:h-12 sm:w-12 bg-white rounded-full shadow-sm border border-emerald-900 overflow-hidden relative p-0.5">
                                 <img
                                     src={client.logo}
                                     alt={client.name}
-                                    className="max-h-full max-w-full object-contain mix-blend-multiply"
+                                    className="w-full h-full object-cover rounded-full"
                                 />
                             </div>
-                            <span className="font-bold text-sm sm:text-base text-gray-700 dark:text-gray-300">{client.name}</span>
+                            <span className="font-bold text-[9px] sm:text-[10px] text-emerald-100/70 uppercase tracking-widest">{client.name}</span>
                         </div>
                     ))}
                 </div>

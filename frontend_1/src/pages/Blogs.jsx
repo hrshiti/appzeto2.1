@@ -6,7 +6,8 @@ import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import groupImg from '../assets/group (1).jpeg';
-import bonfireImg from '../assets/bonfire.jpg';
+// Fixed: Pointing to existing file 'boating.jpg' instead of missing 'bonfire.jpg'
+import bonfireImg from '../assets/boating.jpg';
 import boatingImg from '../assets/boating.jpg';
 import achImg1 from '../assets/acheivement1.jpeg';
 import achImg2 from '../assets/achievement2.jpeg';
