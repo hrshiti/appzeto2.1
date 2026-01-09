@@ -21,18 +21,12 @@ const staticServices = [
         slug: "web-development",
         title: "Web Development Company Building Fast & Scalable Websites",
         icon: "language",
-<<<<<<< HEAD
+        layoutType: 'web',
         shortDescription: "We build high-performance websites and web applications ensuring scalability, speed, and SEO optimization.",
         fullDescription: "As a leading web development company, we build scalable, secure, and fast web applications tailored to your business needs. Our expertise includes frontend development with React, backend systems with Node.js, and full-stack solutions that drive growth for startups and enterprises.",
-        features: ["Custom React Development", "Next.js SSR & SSG", "Responsive Design", "API Integration"]
-=======
-        layoutType: 'web',
-        shortDescription: "High-performance websites and web applications built with modern technologies like React, Next.js, and Node.js.",
-        fullDescription: "We build scalable, secure, and fast web applications tailored to your business needs. Our expertise includes frontend development with React, backend systems with Node.js, and full-stack solutions that drive growth.",
         features: ["Custom React Development", "Next.js SSR & SSG", "Responsive Design", "API Integration"],
         image: webImg,
         visualFilename: "WebDevPreview.png"
->>>>>>> 6c2142524a8eacd17fa108e90b3e92a965eb9627
     },
     {
         id: "app-dev",
@@ -41,15 +35,10 @@ const staticServices = [
         icon: "smartphone",
         layoutType: 'app',
         shortDescription: "Native and cross-platform mobile apps for iOS and Android using Flutter and React Native.",
-<<<<<<< HEAD
         fullDescription: "We are a mobile app development company transforming ideas into powerful mobile experiences. We specialize in creating intuitive, high-performance mobile applications that engage users and provide seamless functionality across all devices.",
-        features: ["iOS & Android Apps", "Cross-Platform Flutter", "React Native Solutions", "App Store Optimization"]
-=======
-        fullDescription: "Transform your ideas into powerful mobile experiences. We specialize in creating intuitive, high-performance mobile applications that engage users and provide seamless functionality across all devices.",
         features: ["iOS & Android Apps", "Cross-Platform Flutter", "React Native Solutions", "App Store Optimization"],
         image: mobileImg,
         visualFilename: "AppDevPreview.png"
->>>>>>> 6c2142524a8eacd17fa108e90b3e92a965eb9627
     },
     {
         id: "ai-ml",
@@ -58,9 +47,10 @@ const staticServices = [
         icon: "smart_toy",
         layoutType: 'generic',
         shortDescription: "Intelligent automation and data-driven solutions to future-proof your business.",
-<<<<<<< HEAD
         fullDescription: "Leverage the power of Artificial Intelligence to automate processes and gain insights. From custom chatbots to predictive modeling, our AI software development services integrate intelligent algorithms into your workflow for maximum efficiency.",
-        features: ["Custom AI Models", "NLP & Chatbots", "Predictive Analytics", "Machine Learning Integration"]
+        features: ["Custom AI Models", "NLP & Chatbots", "Predictive Analytics", "Machine Learning Integration"],
+        image: aiImg,
+        visualFilename: "AIPreview.png"
     },
     {
         id: "custom-software",
@@ -70,11 +60,6 @@ const staticServices = [
         shortDescription: "Scalable architectures, cloud solutions, and tailored enterprise software.",
         fullDescription: "As a custom software development company, we design and build software tailored to your specific business processes. We emphasize scalable architecture, cloud integration, and enterprise-grade security to support your long-term growth.",
         features: ["Enterprise Software", "Cloud Solutions", "Workflow Automation", "API Development"]
-=======
-        fullDescription: "Leverage the power of Artificial Intelligence to automate processes and gain insights. From custom chatbots to predictive modeling, we integrate AI into your workflow for maximum efficiency.",
-        features: ["Custom AI Models", "NLP & Chatbots", "Predictive Analytics", "Machine Learning Integration"],
-        image: aiImg,
-        visualFilename: "AIPreview.png"
     },
     {
         id: "cloud-devops",
@@ -99,7 +84,6 @@ const staticServices = [
         features: ["User Research", "Wireframing & Prototyping", "Visual Design", "Interaction Design"],
         image: uiuxImg,
         visualFilename: "UIUXPreview.png"
->>>>>>> 6c2142524a8eacd17fa108e90b3e92a965eb9627
     }
 ];
 
