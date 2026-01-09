@@ -3,7 +3,7 @@ import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
-import { dataService } from '../admin/services/dataService';
+import { Link } from 'react-router-dom';
 
 // Importing existing assets
 import aiImg from '../assets/ai_ml_service_preview_1767285486518.png';
@@ -14,32 +14,51 @@ import uiuxImg from '../assets/ui_ux_design_service_preview_1767285557945.png';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Static Data (Restored from previous version)
+// Static Data
 const staticServices = [
     {
         id: "web-dev",
         slug: "web-development",
         title: "Web Development Company Building Fast & Scalable Websites",
         icon: "language",
+<<<<<<< HEAD
         shortDescription: "We build high-performance websites and web applications ensuring scalability, speed, and SEO optimization.",
         fullDescription: "As a leading web development company, we build scalable, secure, and fast web applications tailored to your business needs. Our expertise includes frontend development with React, backend systems with Node.js, and full-stack solutions that drive growth for startups and enterprises.",
         features: ["Custom React Development", "Next.js SSR & SSG", "Responsive Design", "API Integration"]
+=======
+        layoutType: 'web',
+        shortDescription: "High-performance websites and web applications built with modern technologies like React, Next.js, and Node.js.",
+        fullDescription: "We build scalable, secure, and fast web applications tailored to your business needs. Our expertise includes frontend development with React, backend systems with Node.js, and full-stack solutions that drive growth.",
+        features: ["Custom React Development", "Next.js SSR & SSG", "Responsive Design", "API Integration"],
+        image: webImg,
+        visualFilename: "WebDevPreview.png"
+>>>>>>> 6c2142524a8eacd17fa108e90b3e92a965eb9627
     },
     {
         id: "app-dev",
         slug: "mobile-apps",
         title: "Mobile App Development Company for Android & iOS Solutions",
         icon: "smartphone",
+        layoutType: 'app',
         shortDescription: "Native and cross-platform mobile apps for iOS and Android using Flutter and React Native.",
+<<<<<<< HEAD
         fullDescription: "We are a mobile app development company transforming ideas into powerful mobile experiences. We specialize in creating intuitive, high-performance mobile applications that engage users and provide seamless functionality across all devices.",
         features: ["iOS & Android Apps", "Cross-Platform Flutter", "React Native Solutions", "App Store Optimization"]
+=======
+        fullDescription: "Transform your ideas into powerful mobile experiences. We specialize in creating intuitive, high-performance mobile applications that engage users and provide seamless functionality across all devices.",
+        features: ["iOS & Android Apps", "Cross-Platform Flutter", "React Native Solutions", "App Store Optimization"],
+        image: mobileImg,
+        visualFilename: "AppDevPreview.png"
+>>>>>>> 6c2142524a8eacd17fa108e90b3e92a965eb9627
     },
     {
         id: "ai-ml",
         slug: "ai-solutions",
         title: "AI & Machine Learning Software Development Services",
         icon: "smart_toy",
+        layoutType: 'generic',
         shortDescription: "Intelligent automation and data-driven solutions to future-proof your business.",
+<<<<<<< HEAD
         fullDescription: "Leverage the power of Artificial Intelligence to automate processes and gain insights. From custom chatbots to predictive modeling, our AI software development services integrate intelligent algorithms into your workflow for maximum efficiency.",
         features: ["Custom AI Models", "NLP & Chatbots", "Predictive Analytics", "Machine Learning Integration"]
     },
@@ -51,31 +70,43 @@ const staticServices = [
         shortDescription: "Scalable architectures, cloud solutions, and tailored enterprise software.",
         fullDescription: "As a custom software development company, we design and build software tailored to your specific business processes. We emphasize scalable architecture, cloud integration, and enterprise-grade security to support your long-term growth.",
         features: ["Enterprise Software", "Cloud Solutions", "Workflow Automation", "API Development"]
+=======
+        fullDescription: "Leverage the power of Artificial Intelligence to automate processes and gain insights. From custom chatbots to predictive modeling, we integrate AI into your workflow for maximum efficiency.",
+        features: ["Custom AI Models", "NLP & Chatbots", "Predictive Analytics", "Machine Learning Integration"],
+        image: aiImg,
+        visualFilename: "AIPreview.png"
+    },
+    {
+        id: "cloud-devops",
+        slug: "cloud-devops",
+        title: "Cloud & DevOps",
+        icon: "cloud_sync",
+        layoutType: 'generic',
+        shortDescription: "Streamlined deployment pipelines and robust cloud infrastructure for high availability.",
+        fullDescription: "Optimize your software delivery process with our DevOps expertise. We manage cloud infrastructure on AWS and Azure, ensuring your applications are always available, scalable, and secure.",
+        features: ["AWS/Azure Management", "CI/CD Pipelines", "Docker & Kubernetes", "Infrastructure as Code"],
+        image: cloudImg,
+        visualFilename: "CloudPreview.png"
+    },
+    {
+        id: "ui-ux",
+        slug: "ui-ux-design",
+        title: "UI/UX Design",
+        icon: "design_services",
+        layoutType: 'generic',
+        shortDescription: "User-centric designs that combine aesthetics with seamless functional experiences.",
+        fullDescription: "We believe that great technology starts with great design. Our team creates visually stunning and Highly functional interfaces that provide an exceptional user experience on every screen.",
+        features: ["User Research", "Wireframing & Prototyping", "Visual Design", "Interaction Design"],
+        image: uiuxImg,
+        visualFilename: "UIUXPreview.png"
+>>>>>>> 6c2142524a8eacd17fa108e90b3e92a965eb9627
     }
 ];
 
 const ServicesFullPage = () => {
     const containerRef = useRef(null);
-    const [activeSection, setActiveSection] = useState('');
-    const [services, setServices] = useState([]);
-
-    // Fetch Services
-    useEffect(() => {
-        const fetchServices = async () => {
-            try {
-                const allServices = await dataService.getServices();
-                if (Array.isArray(allServices)) {
-                    setServices(allServices);
-                    if (allServices.length > 0) {
-                        setActiveSection(allServices[0].slug || allServices[0]._id);
-                    }
-                }
-            } catch (error) {
-                console.error("Failed to fetch services:", error);
-            }
-        };
-        fetchServices();
-    }, []);
+    const [activeSection, setActiveSection] = useState(staticServices[0].slug);
+    const services = staticServices; // Use static data directly
 
     // Smooth Scroll Setup
     useEffect(() => {
@@ -139,16 +170,6 @@ const ServicesFullPage = () => {
         );
     };
 
-    // Helper to determine layout type based on content
-    const getLayoutType = (title) => {
-        const t = title.toLowerCase();
-        if (t.includes('web')) return 'web';
-        if (t.includes('app') || t.includes('mobile')) return 'app';
-        if (t.includes('ai') || t.includes('intelligence') || t.includes('ml')) return 'ai';
-        if (t.includes('devops') || t.includes('cloud')) return 'devops';
-        return 'generic';
-    };
-
     return (
         <div ref={containerRef} className="w-full bg-[#FAFAFA] text-slate-900 font-sans selection:bg-[#05A4A7] selection:text-white">
 
@@ -183,7 +204,7 @@ const ServicesFullPage = () => {
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
                                 className="px-6 py-3 sm:px-8 sm:py-4 bg-[#05A4A7] text-white font-bold rounded-lg shadow-lg hover:shadow-[#05A4A7]/30 transition-shadow text-sm sm:text-base"
-                                onClick={() => Array.isArray(services) && services.length > 0 && scrollToSection(services[0].slug || services[0]._id)}
+                                onClick={() => services.length > 0 && scrollToSection(services[0].slug)}
                             >
                                 Explore Services
                             </motion.button>
@@ -265,11 +286,11 @@ const ServicesFullPage = () => {
                     <div className="sticky top-32">
                         <h4 className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-6">Service Menu</h4>
                         <div className="flex flex-col gap-2 border-l border-slate-200">
-                            {Array.isArray(services) && services.map((service) => (
+                            {services.map((service) => (
                                 <button
-                                    key={service._id}
-                                    onClick={() => scrollToSection(service.slug || service._id)}
-                                    className={`text-left px-6 py-3 text-sm font-bold transition-all duration-300 border-l-[3px] -ml-[3px] flex items-center gap-3 ${activeSection === (service.slug || service._id)
+                                    key={service.id}
+                                    onClick={() => scrollToSection(service.slug)}
+                                    className={`text-left px-6 py-3 text-sm font-bold transition-all duration-300 border-l-[3px] -ml-[3px] flex items-center gap-3 ${activeSection === service.slug
                                         ? 'border-[#05A4A7] text-[#05A4A7] bg-slate-50'
                                         : 'border-transparent text-slate-500 hover:text-slate-900'
                                         }`}
@@ -291,25 +312,15 @@ const ServicesFullPage = () => {
                 {/* RIGHT CONTENT */}
                 <div className="flex-1 w-full space-y-16 md:space-y-32">
 
-                    {Array.isArray(services) && services.map((service) => {
+                    {services.map((service) => {
                         const layout = service.layoutType || 'web';
 
                         // Helper to get static asset image based on title
-                        const getServiceAssetImage = (title) => {
-                            if (!title) return null;
-                            const t = title.toLowerCase();
-                            if (t.includes('web')) return webImg;
-                            if (t.includes('app') || t.includes('mobile')) return mobileImg;
-                            if (t.includes('ai') || t.includes('intelligence') || t.includes('ml')) return aiImg;
-                            if (t.includes('devops') || t.includes('cloud')) return cloudImg;
-                            if (t.includes('ui') || t.includes('ux') || t.includes('design')) return uiuxImg;
-                            return null;
-                        };
-
-                        const displayImage = getServiceAssetImage(service.title) || service.image;
+                        // For static data, we assume service.image is already the imported asset
+                        const displayImage = service.image;
 
                         return (
-                            <section key={service._id} id={service.slug || service._id} className="scroll-mt-24 md:scroll-mt-32">
+                            <section key={service.id} id={service.slug} className="scroll-mt-24 md:scroll-mt-32">
                                 <motion.div
                                     initial={{ opacity: 0, y: 30 }}
                                     whileInView={{ opacity: 1, y: 0 }}
@@ -336,7 +347,7 @@ const ServicesFullPage = () => {
                                                 {displayImage ? (
                                                     <div className="relative w-full h-full overflow-hidden rounded-lg">
                                                         <img
-                                                            src={displayImage.startsWith('/uploads') ? `http://localhost:5000${displayImage}` : displayImage}
+                                                            src={displayImage}
                                                             alt={service.title}
                                                             className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500"
                                                         />
@@ -382,7 +393,7 @@ const ServicesFullPage = () => {
                                                     <div className="relative group">
                                                         <div className="absolute -inset-1 bg-gradient-to-r from-[#05A4A7] to-emerald-500 rounded-[2.5rem] blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
                                                         <img
-                                                            src={displayImage && displayImage.startsWith('/uploads') ? `http://localhost:5000${displayImage}` : (displayImage || "https://assets.codepen.io/t-1/mobile-frame-png.png")}
+                                                            src={displayImage || "https://assets.codepen.io/t-1/mobile-frame-png.png"}
                                                             width="220"
                                                             alt={service.title}
                                                             className="relative z-10 rounded-[2rem] object-cover h-[440px] w-[220px]"

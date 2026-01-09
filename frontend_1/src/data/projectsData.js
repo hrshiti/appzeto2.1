@@ -12,11 +12,11 @@ import shopAppImg from '../assets/apps/shop.png';
 // import webServiceImg from '../assets/web_dev_service_preview_1767285503403.png';
 
 // Food Series
-import food1 from '../assets/appzeto-food-1.jpg';
-import food2 from '../assets/appzeto-food-2.jpg';
-import food3 from '../assets/appzeto-food-3.jpg';
-import food4 from '../assets/appzeto-food-4.jpg';
-import foodHero from '../assets/appzeto-food-hero.jpg';
+import food1 from '../assets/projects/appzeto-food-1.jpg';
+import food2 from '../assets/projects/appzeto-food-2.jpg';
+import food3 from '../assets/projects/appzeto-food-3.jpg';
+import food4 from '../assets/projects/appzeto-food-4.jpg';
+import foodHero from '../assets/projects/appzeto-food-hero.jpg';
 
 
 export const projectsData = [
