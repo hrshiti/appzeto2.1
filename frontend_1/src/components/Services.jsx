@@ -11,7 +11,7 @@ const services = [
     {
         id: "01",
         title: "Web Development",
-        description: "Web development company building fast & scalable websites using React, Next.js, and Node.js. We ensure SEO, speed, and security.",
+        description: "Fast & scalable websites using React, Next.js, and Node.js. Optimized for SEO and speed.",
         icon: "language",
         image: webImg,
         slug: "web-development"
@@ -19,7 +19,7 @@ const services = [
     {
         id: "02",
         title: "Mobile App Development",
-        description: "Mobile app development company for Android & iOS solutions. Native and cross-platform apps using Flutter and React Native.",
+        description: "Android & iOS solutions with native performance using Flutter and React Native.",
         icon: "smartphone",
         image: mobileImg,
         slug: "mobile-apps"
@@ -27,7 +27,7 @@ const services = [
     {
         id: "03",
         title: "AI & Machine Learning",
-        description: "AI software development services. Intelligent automation, custom AI models, and data-driven solutions to grow your business.",
+        description: "Automation and data-driven custom AI models to grow your business efficiency.",
         icon: "smart_toy",
         image: aiImg,
         slug: "ai-solutions"
@@ -35,7 +35,7 @@ const services = [
     {
         id: "04",
         title: "Custom Software",
-        description: "Custom software development company for businesses. Scalable architectures, cloud solutions, and tailored enterprise software.",
+        description: "Scalable architectures and tailored enterprise solutions for business growth.",
         icon: "cloud_sync",
         image: cloudImg,
         slug: "custom-software"
@@ -48,27 +48,27 @@ const ServiceItem = ({ service, index, activeIndex, setActiveIndex }) => {
     return (
         <Link to={`/services/${service.slug}`} className="block w-full">
             <motion.div
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 15 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className={`group border-b border-white/10 cursor-pointer transition-colors duration-500 ${isActive ? 'bg-white/5' : 'hover:bg-white/5'}`}
+                transition={{ duration: 0.4, delay: index * 0.1 }}
+                className={`group border-b border-slate-100 cursor-pointer transition-colors duration-300 ${isActive ? 'bg-slate-50/50' : 'hover:bg-slate-50/30'}`}
                 onMouseEnter={() => setActiveIndex(index)}
             >
-                <div className="py-4 md:py-10 px-2 md:px-6 flex flex-row md:items-center justify-between gap-4 md:gap-8 items-center">
+                <div className="py-4 md:py-7 px-2 md:px-6 flex flex-row md:items-center justify-between gap-4 md:gap-8 items-center">
                     {/* ID & Title */}
-                    <div className="flex items-center gap-3 md:gap-8 flex-1 relative z-10">
-                        <span className={`text-base md:text-xl font-mono ${isActive ? 'text-[#05A4A7]' : 'text-gray-600'} transition-colors duration-300`}>
+                    <div className="flex items-center gap-3 md:gap-6 flex-1 relative z-10">
+                        <span className={`text-sm md:text-lg font-mono font-bold ${isActive ? 'text-[#05A4A7]' : 'text-slate-200'} transition-colors duration-300`}>
                             {service.id}
                         </span>
-                        <h3 className={`text-lg md:text-3xl font-bold uppercase tracking-tight ${isActive ? 'text-white' : 'text-gray-400'} group-hover:text-white transition-colors duration-300 line-clamp-1`}>
+                        <h3 className={`text-lg md:text-2xl font-black uppercase tracking-tight ${isActive ? 'text-[#05A4A7]' : 'text-slate-400'} group-hover:text-[#05A4A7] transition-colors duration-300`}>
                             {service.title}
                         </h3>
                     </div>
 
                     {/* Arrow Icon */}
-                    <div className={`w-8 h-8 md:w-12 md:h-12 rounded-full border border-white/20 flex items-center justify-center transition-all duration-300 shrink-0 ${isActive ? 'bg-[#05A4A7] border-[#05A4A7] rotate-[-45deg]' : 'group-hover:border-white'}`}>
-                        <span className={`material-symbols-outlined text-base md:text-xl ${isActive ? 'text-white' : 'text-gray-400 group-hover:text-white'}`}>
+                    <div className={`w-8 h-8 md:w-10 md:h-10 rounded-full border border-slate-200 flex items-center justify-center transition-all duration-300 shrink-0 ${isActive ? 'bg-[#05A4A7] border-[#05A4A7] -rotate-45' : 'group-hover:border-[#05A4A7]'}`}>
+                        <span className={`material-symbols-outlined text-[18px] md:text-xl ${isActive ? 'text-white' : 'text-slate-300 group-hover:text-[#05A4A7]'}`}>
                             arrow_forward
                         </span>
                     </div>
@@ -81,11 +81,11 @@ const ServiceItem = ({ service, index, activeIndex, setActiveIndex }) => {
                             initial={{ height: 0, opacity: 0 }}
                             animate={{ height: "auto", opacity: 1 }}
                             exit={{ height: 0, opacity: 0 }}
-                            transition={{ duration: 0.4, ease: "easeInOut" }}
+                            transition={{ duration: 0.3 }}
                             className="overflow-hidden"
                         >
-                            <div className="pb-4 px-2 pl-8 max-w-4xl">
-                                <p className="text-gray-400 text-xs leading-relaxed font-light">
+                            <div className="pb-6 px-2 pl-12 md:pl-24 max-w-2xl">
+                                <p className="text-slate-500 text-sm leading-relaxed font-medium">
                                     {service.description}
                                 </p>
                             </div>
@@ -101,43 +101,30 @@ const Services = () => {
     const [activeIndex, setActiveIndex] = useState(null);
 
     return (
-        <section className="bg-[#0b0c10] py-16 md:py-32 relative overflow-hidden font-sans">
-            {/* Ambient Background */}
-            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#05A4A7]/5 rounded-full blur-[120px] pointer-events-none" />
-            <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#05A4A7]/5 rounded-full blur-[120px] pointer-events-none" />
-
+        <section className="bg-white py-12 md:py-20 relative overflow-hidden font-sans">
             <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-12 relative z-10">
-                {/* Heading */}
-                <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 md:mb-20 gap-4 md:gap-6">
-                    <div>
+                {/* Heading - Compact */}
+                <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 md:mb-16 gap-4">
+                    <div className="max-w-3xl">
                         <motion.span
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            className="block text-[#05A4A7] font-bold tracking-[0.2em] uppercase text-xs md:text-sm mb-2 md:mb-4"
+                            initial={{ opacity: 0 }}
+                            whileInView={{ opacity: 1 }}
+                            className="block text-[#05A4A7] font-black uppercase tracking-[0.3em] text-[10px] mb-2"
                         >
                             Our Expertise
                         </motion.span>
                         <motion.h2
-                            initial={{ opacity: 0, y: 20 }}
+                            initial={{ opacity: 0, y: 15 }}
                             whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.1 }}
-                            className="text-3xl md:text-6xl font-black text-white uppercase tracking-tighter"
+                            className="text-3xl md:text-5xl font-black text-slate-900 uppercase tracking-tighter leading-none"
                         >
-                            Our IT & Software <br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-[#05A4A7] to-emerald-400">Development Services</span>
+                            IT & Software <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#05A4A7] to-emerald-500">Development</span>
                         </motion.h2>
                     </div>
-                    <motion.p
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.2 }}
-                        className="hidden sm:block text-gray-400 text-sm md:text-base max-w-md leading-relaxed"
-                    >
-                        We combine strategy, design, and technology to build digital products that drive growth and efficiency.
-                    </motion.p>
                 </div>
 
-                {/* Services List - Full Width */}
-                <div className="border-t border-white/10 relative" onMouseLeave={() => setActiveIndex(null)} data-cursor-text="View Detail">
+                {/* Services List */}
+                <div className="border-t border-slate-100 relative" onMouseLeave={() => setActiveIndex(null)}>
                     {services.map((service, index) => (
                         <div key={index} className="relative">
                             <ServiceItem
@@ -146,18 +133,17 @@ const Services = () => {
                                 activeIndex={activeIndex}
                                 setActiveIndex={setActiveIndex}
                             />
-                            {/* Floating Image Overlay - Only visible on Desktop Hover */}
+                            {/* Floating Image Overlay - Compact & Small */}
                             <AnimatePresence>
                                 {activeIndex === index && (
                                     <motion.div
-                                        initial={{ opacity: 0, scale: 0.8, x: 20 }}
+                                        initial={{ opacity: 0, scale: 0.9, x: 10 }}
                                         animate={{ opacity: 1, scale: 1, x: 0 }}
-                                        exit={{ opacity: 0, scale: 0.8, x: 10 }}
-                                        transition={{ duration: 0.3, ease: "easeOut" }}
-                                        className="hidden lg:block fixed right-[15%] top-1/2 -translate-y-1/2 w-96 h-56 rounded-xl overflow-hidden shadow-2xl border border-white/20 z-50 pointer-events-none"
-                                        style={{ boxShadow: '0 0 30px rgba(0,0,0,0.5)' }}
+                                        exit={{ opacity: 0, scale: 0.9, x: 5 }}
+                                        transition={{ duration: 0.25 }}
+                                        className="hidden lg:block fixed right-[15%] top-1/2 -translate-y-1/2 w-64 h-40 rounded-2xl overflow-hidden shadow-xl border border-slate-100 z-50 pointer-events-none"
                                     >
-                                        <div className="absolute inset-0 bg-black/20 z-10"></div>
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent z-10" />
                                         <img
                                             src={service.image}
                                             alt={service.title}
