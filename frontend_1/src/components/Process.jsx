@@ -12,55 +12,39 @@ const steps = [
         subtitle: "The Beginning",
         description: "We discuss your vision and create a solid roadmap.",
         icon: "lightbulb",
-        pos: { top: 50, left: 100 }
+        pos: { top: 70, left: 100 }
     },
     {
         id: "02",
-        title: "Sketching",
-        subtitle: "Rough Draft",
-        description: "Drafting the basic layout to visualize structure.",
-        icon: "edit",
-        pos: { top: 50, left: 450 }
+        title: "Design",
+        subtitle: "Look & Feel",
+        description: "Crafting beautiful, intuitive interfaces.",
+        icon: "palette",
+        pos: { top: 70, left: 450 }
     },
     {
         id: "03",
-        title: "Designing",
-        subtitle: "Look & Feel",
-        description: "Adding colors and styles for a beautiful UI.",
-        icon: "palette",
-        pos: { top: 50, left: 800 }
-    },
-    {
-        id: "04",
         title: "Coding",
         subtitle: "Building It",
         description: "Writing clean code to bring designs to life.",
         icon: "code",
-        pos: { top: 250, left: 800 }
+        pos: { top: 70, left: 800 }
     },
     {
-        id: "05",
+        id: "04",
         title: "Testing",
         subtitle: "Quality Check",
         description: "Ensuring zero bugs across all devices.",
         icon: "bug_report",
-        pos: { top: 250, left: 450 }
+        pos: { top: 350, left: 800 }
     },
     {
-        id: "06",
+        id: "05",
         title: "Launch",
         subtitle: "Going Live",
         description: "Deploying your project to the world.",
         icon: "rocket_launch",
-        pos: { top: 250, left: 100 }
-    },
-    {
-        id: "07",
-        title: "Support",
-        subtitle: "Here to Help",
-        description: "Continuous growth and maintenance.",
-        icon: "support_agent",
-        pos: { top: 450, left: 100 }
+        pos: { top: 350, left: 450 }
     }
 ];
 
@@ -90,7 +74,7 @@ const Process = () => {
     }, []);
 
     return (
-        <section ref={containerRef} className="bg-slate-50 py-12 lg:h-screen lg:max-h-[850px] relative overflow-hidden flex flex-col items-center justify-center">
+        <section ref={containerRef} className="bg-slate-50 py-12 lg:h-screen lg:max-h-[800px] relative overflow-hidden flex flex-col items-center justify-center">
 
             <div className="absolute inset-0 w-full h-full pointer-events-none opacity-[0.03]"
                 style={{ backgroundImage: 'radial-gradient(#000 1px, transparent 1px)', backgroundSize: '30px 30px' }}>
@@ -102,7 +86,7 @@ const Process = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: false }}
                     transition={{ duration: 0.6 }}
-                    className="text-center mb-8 flex-shrink-0"
+                    className="text-center mb-10 flex-shrink-0"
                 >
                     <span className="bg-white border border-slate-200 text-slate-900 px-4 py-1 rounded-full text-xs font-bold uppercase tracking-wider shadow-sm mb-3 inline-block">
                         Workflow
@@ -115,18 +99,19 @@ const Process = () => {
                     </p>
                 </motion.div>
 
-                {/* DESKTOP COMPACT LAYOUT */}
-                <div className="hidden lg:block relative h-[550px] w-full max-w-[900px] mx-auto flex-grow-0">
-                    <svg className="absolute inset-0 w-full h-full pointer-events-none overflow-visible" viewBox="0 0 900 550">
+                {/* DESKTOP COMPACT LAYOUT - 2 Row Snake */}
+                <div className="hidden lg:block relative h-[500px] w-full max-w-[900px] mx-auto flex-grow-0">
+                    <svg className="absolute inset-0 w-full h-full pointer-events-none overflow-visible" viewBox="0 0 900 500">
+                        {/* Path: 1-2-3 (Top R) -> Curve Down -> 4-5 (Bottom L) */}
                         <path
-                            d="M 100 50 L 800 50 Q 900 50 900 150 Q 900 250 800 250 L 100 250 Q 0 250 0 350 Q 0 450 100 450 L 250 450"
+                            d="M 100 70 L 800 70 Q 900 70 900 210 Q 900 350 800 350 L 150 350"
                             fill="none"
                             stroke="#e2e8f0"
                             strokeWidth="3"
                         />
                         <path
                             ref={pathRef}
-                            d="M 100 50 L 800 50 Q 900 50 900 150 Q 900 250 800 250 L 100 250 Q 0 250 0 350 Q 0 450 100 450 L 250 450"
+                            d="M 100 70 L 800 70 Q 900 70 900 210 Q 900 350 800 350 L 150 350"
                             fill="none"
                             stroke="#0f172a"
                             strokeWidth="4"
@@ -144,15 +129,15 @@ const Process = () => {
                             className="absolute flex flex-col items-center group"
                             style={{
                                 left: `${(step.pos.left / 900) * 100}%`,
-                                top: `${(step.pos.top / 550) * 100}%`,
+                                top: `${(step.pos.top / 500) * 100}%`,
                                 transform: 'translate(-50%, -50%)',
                                 width: '220px'
                             }}
                         >
-                            {/* Card Container */}
+                            {/* Card Container - Floating Icon Style */}
                             <div className="relative bg-white pt-10 pb-4 px-4 rounded-2xl shadow-lg border border-slate-100 text-center w-full transition-all duration-300 group-hover:-translate-y-2 group-hover:shadow-xl">
 
-                                {/* Floating Icon (Positioned Absolute relative to Container) */}
+                                {/* Floating Icon */}
                                 <div className="absolute -top-7 left-1/2 -translate-x-1/2 w-14 h-14 bg-white border-4 border-slate-50 rounded-full flex items-center justify-center shadow-md z-20">
                                     <span className="material-symbols-outlined text-2xl text-slate-800">
                                         {step.icon}
@@ -175,11 +160,12 @@ const Process = () => {
                         </motion.div>
                     ))}
 
+                    {/* Finish Line */}
                     <motion.div
                         initial={{ opacity: 0, scale: 0 }}
                         whileInView={{ opacity: 1, scale: 1 }}
-                        transition={{ delay: 0.9 }}
-                        className="absolute left-[300px] top-[450px] -translate-y-1/2 ml-0 flex items-center gap-2"
+                        transition={{ delay: 0.8 }}
+                        className="absolute left-[150px] top-[350px] -translate-y-1/2 ml-0 flex items-center gap-2"
                     >
                         <span className="material-symbols-outlined text-3xl text-green-500 animate-bounce">flag</span>
                         <span className="font-bold text-slate-900 text-lg">Goal!</span>
@@ -187,7 +173,7 @@ const Process = () => {
                 </div>
 
                 {/* MOBILE LIST LAYOUT */}
-                <div className="lg:hidden w-full max-w-md mx-auto space-y-4 mt-8">
+                <div className="lg:hidden w-full max-w-md mx-auto space-y-4">
                     {steps.map((step, index) => (
                         <div key={index} className="bg-white p-5 rounded-xl border border-slate-100 shadow-sm flex gap-4 items-start">
                             <div className="relative flex-shrink-0">
