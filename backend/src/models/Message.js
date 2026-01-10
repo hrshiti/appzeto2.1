@@ -6,5 +6,5 @@ const messageSchema = new mongoose.Schema({
     reason: String,
     message: String,
     status: { type: String, default: 'New' } // New, Read, Replied
-}, { timestamps: true });
+}, { timestamps: true, strict: false });
 module.exports = mongoose.model('Message', messageSchema);

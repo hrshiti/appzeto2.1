@@ -10,6 +10,8 @@ const upload = multer({
 
 router.post('/', (req, res, next) => {
     upload.single('image')(req, res, (err) => {
+        console.log('Upload Request Headers:', req.headers['content-type']);
+        console.log('Upload Request File:', req.file);
         if (err) {
             return res.status(400).json({ message: 'Image Upload Failed', error: err.message });
         }

@@ -93,9 +93,10 @@ const AdminBlogs = () => {
         setUploading(true);
 
         try {
-            const config = { headers: { 'Content-Type': 'multipart/form-data' } };
+            // const config = { headers: { 'Content-Type': 'multipart/form-data' } };
+            const config = { headers: { 'Content-Type': undefined } };
             const { data } = await api.post('/upload', formData, config);
-            setCurrentBlog({ ...currentBlog, featuredImage: data.image });
+            setCurrentBlog({ ...currentBlog, featuredImage: data.url });
             setUploading(false);
             addToast('Image uploaded', 'success');
         } catch (error) {

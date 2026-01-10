@@ -24,6 +24,7 @@ const AdminTable = ({
                         <input
                             type="text"
                             placeholder="Search records..."
+                            onChange={(e) => onSearch && onSearch(e.target.value)}
                             className="pl-9 pr-4 py-2 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-primary w-64"
                         />
                     </div>

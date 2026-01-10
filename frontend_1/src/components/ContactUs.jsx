@@ -75,22 +75,25 @@ const ContactUs = ({ isHomePage = false }) => {
         ]
     });
 
-    // Removed useEffect that fetches from dataService to prevent overriding hardcoded "Indore" address with old "Bangalore" data.
-    /*
+    // Load Settings & Dynamic Form
     useEffect(() => {
         const load = async () => {
             try {
-                const loadedSettings = await dataService.getSettings();
-                if (loadedSettings) {
-                    setSettings(prev => ({ ...prev, ...loadedSettings }));
+                // Load General Settings (if needed in future)
+                // const loadedSettings = await dataService.getSettings();
+
+                // Load Dynamic Form Config
+                const config = await dataService.getFormConfig('contact');
+                if (config && config.fields) {
+                    setSettings(prev => ({ ...prev, formFields: config.fields }));
                 }
+
             } catch (e) {
                 console.error("Failed to load settings", e);
             }
         };
         load();
     }, []);
-    */
 
     // Lock body scroll when modal is open
     React.useEffect(() => {
@@ -267,70 +270,119 @@ const ContactUs = ({ isHomePage = false }) => {
                         <div id="contact-form" className="flex flex-col justify-center bg-primary/[0.03] p-8 md:p-12 lg:p-16 border-l border-primary/5">
                             <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-slate-900 mb-6 md:mb-10 tracking-tighter uppercase">Message</h2>
                             <form onSubmit={handleSend} className="space-y-4 md:space-y-6 lg:space-y-10">
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 lg:gap-10">
-                                    <div className="space-y-1.5 md:space-y-4">
-                                        <label className="text-[9px] md:text-[10px] font-black uppercase text-slate-400 tracking-widest ml-1">Full Name</label>
-                                        <input
-                                            required
-                                            name="name"
-                                            type="text"
-                                            placeholder="Your Name"
-                                            className="w-full p-3 md:p-6 rounded-lg md:rounded-2xl bg-white border border-slate-100 text-slate-900 outline-none focus:border-primary/50 focus:bg-white transition-all text-xs md:text-sm font-medium placeholder:text-slate-300 shadow-sm"
-                                        />
-                                    </div>
-                                    <div className="space-y-1.5 md:space-y-4">
-                                        <label className="text-[9px] md:text-[10px] font-black uppercase text-slate-400 tracking-widest ml-1">Phone</label>
-                                        <input
-                                            required
-                                            name="phone"
-                                            type="tel"
-                                            placeholder="+91 0000..."
-                                            className="w-full p-3 md:p-6 rounded-lg md:rounded-2xl bg-white border border-slate-100 text-slate-900 outline-none focus:border-primary/50 focus:bg-white transition-all text-xs md:text-sm font-medium placeholder:text-slate-300 shadow-sm"
-                                        />
-                                    </div>
-                                </div>
-
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 lg:gap-10">
-                                    <div className="space-y-1.5 md:space-y-4">
-                                        <label className="text-[9px] md:text-[10px] font-black uppercase text-slate-400 tracking-widest ml-1">Email Address</label>
-                                        <input
-                                            required
-                                            name="email"
-                                            type="email"
-                                            placeholder="you@email.com"
-                                            className="w-full p-3 md:p-6 rounded-lg md:rounded-2xl bg-white border border-slate-100 text-slate-900 outline-none focus:border-primary/50 focus:bg-white transition-all text-xs md:text-sm font-medium placeholder:text-slate-300 shadow-sm"
-                                        />
-                                    </div>
-                                    <div className="space-y-1.5 md:space-y-4">
-                                        <label className="text-[10px] md:text-[10px] font-black uppercase text-slate-400 tracking-widest ml-1">Reason</label>
-                                        <div className="relative">
-                                            <select
-                                                required
-                                                name="reason"
-                                                defaultValue=""
-                                                className="w-full p-3 md:p-6 rounded-lg md:rounded-2xl bg-white border border-slate-100 text-slate-900 outline-none focus:border-primary/50 focus:bg-white transition-all text-xs md:text-sm font-medium appearance-none cursor-pointer shadow-sm"
-                                            >
-                                                <option value="" disabled className="bg-white">Select reason</option>
-                                                <option value="project" className="bg-white">New Project</option>
-                                                <option value="partnership" className="bg-white">Partnership</option>
-                                                <option value="career" className="bg-white">Careers</option>
-                                                <option value="other" className="bg-white">General</option>
-                                            </select>
-                                            <span className="material-icons absolute right-4 md:right-6 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none">expand_more</span>
+                                {settings.formFields ? (
+                                    <>
+                                        {/* Dynamic Form Rendering */}
+                                        <div className="space-y-4 md:space-y-6">
+                                            {settings.formFields.map((field) => (
+                                                <div key={field.id} className="space-y-1.5 md:space-y-4">
+                                                    <label className="text-[9px] md:text-[10px] font-black uppercase text-slate-400 tracking-widest ml-1 lg:ml-0">
+                                                        {field.label} {field.required && <span className="text-red-500">*</span>}
+                                                    </label>
+                                                    {field.type === 'textarea' ? (
+                                                        <textarea
+                                                            name={field.label.toLowerCase().replace(/\s/g, '_')}
+                                                            required={field.required}
+                                                            placeholder={field.placeholder}
+                                                            rows="3"
+                                                            className="w-full p-3 md:p-6 rounded-lg md:rounded-2xl bg-white border border-slate-100 text-slate-900 outline-none focus:border-primary/50 focus:bg-white transition-all text-xs md:text-sm font-medium placeholder:text-slate-300 resize-none shadow-sm"
+                                                        ></textarea>
+                                                    ) : field.type === 'select' ? (
+                                                        <div className="relative">
+                                                            <select
+                                                                name={field.label.toLowerCase().replace(/\s/g, '_')}
+                                                                required={field.required}
+                                                                defaultValue=""
+                                                                className="w-full p-3 md:p-6 rounded-lg md:rounded-2xl bg-white border border-slate-100 text-slate-900 outline-none focus:border-primary/50 focus:bg-white transition-all text-xs md:text-sm font-medium appearance-none cursor-pointer shadow-sm"
+                                                            >
+                                                                <option value="" disabled className="bg-white">Select...</option>
+                                                                <option value="General" className="bg-white">General</option>
+                                                                <option value="Project" className="bg-white">Project</option>
+                                                                <option value="Support" className="bg-white">Support</option>
+                                                            </select>
+                                                            <span className="material-icons absolute right-4 md:right-6 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none">expand_more</span>
+                                                        </div>
+                                                    ) : (
+                                                        <input
+                                                            type={field.type}
+                                                            name={field.label.toLowerCase().replace(/\s/g, '_')}
+                                                            required={field.required}
+                                                            placeholder={field.placeholder}
+                                                            className="w-full p-3 md:p-6 rounded-lg md:rounded-2xl bg-white border border-slate-100 text-slate-900 outline-none focus:border-primary/50 focus:bg-white transition-all text-xs md:text-sm font-medium placeholder:text-slate-300 shadow-sm"
+                                                        />
+                                                    )}
+                                                </div>
+                                            ))}
                                         </div>
-                                    </div>
-                                </div>
+                                    </>
+                                ) : (
+                                    <>
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 lg:gap-10">
+                                            <div className="space-y-1.5 md:space-y-4">
+                                                <label className="text-[9px] md:text-[10px] font-black uppercase text-slate-400 tracking-widest ml-1">Full Name</label>
+                                                <input
+                                                    required
+                                                    name="name"
+                                                    type="text"
+                                                    placeholder="Your Name"
+                                                    className="w-full p-3 md:p-6 rounded-lg md:rounded-2xl bg-white border border-slate-100 text-slate-900 outline-none focus:border-primary/50 focus:bg-white transition-all text-xs md:text-sm font-medium placeholder:text-slate-300 shadow-sm"
+                                                />
+                                            </div>
+                                            <div className="space-y-1.5 md:space-y-4">
+                                                <label className="text-[9px] md:text-[10px] font-black uppercase text-slate-400 tracking-widest ml-1">Phone</label>
+                                                <input
+                                                    required
+                                                    name="phone"
+                                                    type="tel"
+                                                    placeholder="+91 0000..."
+                                                    className="w-full p-3 md:p-6 rounded-lg md:rounded-2xl bg-white border border-slate-100 text-slate-900 outline-none focus:border-primary/50 focus:bg-white transition-all text-xs md:text-sm font-medium placeholder:text-slate-300 shadow-sm"
+                                                />
+                                            </div>
+                                        </div>
 
-                                <div className="space-y-1.5 md:space-y-4">
-                                    <label className="text-[9px] md:text-[10px] font-black uppercase text-slate-400 tracking-widest ml-1">Message</label>
-                                    <textarea
-                                        required
-                                        name="message"
-                                        placeholder="How can we help?"
-                                        rows="2"
-                                        className="w-full p-3 md:p-6 rounded-lg md:rounded-2xl bg-white border border-slate-100 text-slate-900 outline-none focus:border-primary/50 focus:bg-white transition-all text-xs md:text-sm font-medium placeholder:text-slate-300 resize-none shadow-sm"
-                                    ></textarea>
-                                </div>
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 lg:gap-10">
+                                            <div className="space-y-1.5 md:space-y-4">
+                                                <label className="text-[9px] md:text-[10px] font-black uppercase text-slate-400 tracking-widest ml-1">Email Address</label>
+                                                <input
+                                                    required
+                                                    name="email"
+                                                    type="email"
+                                                    placeholder="you@email.com"
+                                                    className="w-full p-3 md:p-6 rounded-lg md:rounded-2xl bg-white border border-slate-100 text-slate-900 outline-none focus:border-primary/50 focus:bg-white transition-all text-xs md:text-sm font-medium placeholder:text-slate-300 shadow-sm"
+                                                />
+                                            </div>
+                                            <div className="space-y-1.5 md:space-y-4">
+                                                <label className="text-[10px] md:text-[10px] font-black uppercase text-slate-400 tracking-widest ml-1">Reason</label>
+                                                <div className="relative">
+                                                    <select
+                                                        required
+                                                        name="reason"
+                                                        defaultValue=""
+                                                        className="w-full p-3 md:p-6 rounded-lg md:rounded-2xl bg-white border border-slate-100 text-slate-900 outline-none focus:border-primary/50 focus:bg-white transition-all text-xs md:text-sm font-medium appearance-none cursor-pointer shadow-sm"
+                                                    >
+                                                        <option value="" disabled className="bg-white">Select reason</option>
+                                                        <option value="project" className="bg-white">New Project</option>
+                                                        <option value="partnership" className="bg-white">Partnership</option>
+                                                        <option value="career" className="bg-white">Careers</option>
+                                                        <option value="other" className="bg-white">General</option>
+                                                    </select>
+                                                    <span className="material-icons absolute right-4 md:right-6 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none">expand_more</span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div className="space-y-1.5 md:space-y-4">
+                                            <label className="text-[9px] md:text-[10px] font-black uppercase text-slate-400 tracking-widest ml-1">Message</label>
+                                            <textarea
+                                                required
+                                                name="message"
+                                                placeholder="How can we help?"
+                                                rows="2"
+                                                className="w-full p-3 md:p-6 rounded-lg md:rounded-2xl bg-white border border-slate-100 text-slate-900 outline-none focus:border-primary/50 focus:bg-white transition-all text-xs md:text-sm font-medium placeholder:text-slate-300 resize-none shadow-sm"
+                                            ></textarea>
+                                        </div>
+                                    </>
+                                )}
                                 <motion.button
                                     whileHover={{ scale: 1.02, y: -2 }}
                                     whileTap={{ scale: 0.98 }}

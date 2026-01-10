@@ -77,13 +77,11 @@ const AdminServices = () => {
 
         try {
             const config = {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
+                headers: { 'Content-Type': undefined },
             };
 
             const { data } = await api.post('/upload', formData, config);
-            setCurrentService({ ...currentService, image: data.image });
+            setCurrentService({ ...currentService, image: data.url });
             setUploading(false);
             addToast('Image uploaded successfully', 'success');
         } catch (error) {

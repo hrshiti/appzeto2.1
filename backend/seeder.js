@@ -10,17 +10,27 @@ dotenv.config();
 connectDB();
 
 // Build Admin User
-const adminUser = {
-    name: 'Admin User',
-    email: 'admin@appzeto.com',
-    password: 'adminpassword',
-    role: 'ADMIN'
-};
+const users = [
+    {
+        name: 'Admin User',
+        email: 'admin@appzeto.com',
+        phone: '9876543210',
+        password: 'adminpassword',
+        role: 'ADMIN'
+    },
+    {
+        name: 'HR Manager',
+        email: 'hr@appzeto.com',
+        phone: '9876543211',
+        password: 'hrpassword',
+        role: 'HR'
+    }
+];
 
 const importData = async () => {
     try {
         await User.deleteMany(); // Clear existing users
-        await User.create(adminUser);
+        await User.create(users);
         console.log('Data Imported...');
         process.exit();
     } catch (err) {

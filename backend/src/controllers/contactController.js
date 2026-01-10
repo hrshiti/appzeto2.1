@@ -6,9 +6,13 @@ const PartnerInquiry = require('../models/PartnerInquiry');
 // Public
 exports.submitMessage = async (req, res) => {
     try {
+        console.log('Received payload:', req.body);
         await Message.create(req.body);
         res.status(201).json({ success: true, message: 'Message sent' });
-    } catch (e) { res.status(400).json({ success: false, error: e.message }); }
+    } catch (e) {
+        console.error('Submit Message Error:', e);
+        res.status(400).json({ success: false, error: e.message });
+    }
 };
 
 exports.submitLead = async (req, res) => {

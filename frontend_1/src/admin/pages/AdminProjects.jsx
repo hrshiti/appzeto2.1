@@ -81,7 +81,10 @@ const AdminProjects = () => {
 
         setUploading(true);
         try {
-            const config = { headers: { 'Content-Type': 'multipart/form-data' } };
+            // const config = { headers: { 'Content-Type': 'multipart/form-data' } };
+            // Let axios/browser set the content type with boundary automatically
+            // We must explicitly unset the default application/json
+            const config = { headers: { 'Content-Type': undefined } };
 
             if (isGallery) {
                 // Multiple upload logic if backend supports it, else loop
@@ -91,14 +94,14 @@ const AdminProjects = () => {
                     const { data } = await api.post('/upload', fd, config);
                     setCurrentProject(prev => ({
                         ...prev,
-                        images: [...prev.images, data.image]
+                        images: [...prev.images, data.url]
                     }));
                 }
                 addToast(`${files.length} images added to gallery`, 'success');
             } else {
                 formData.append('image', files[0]);
                 const { data } = await api.post('/upload', formData, config);
-                setCurrentProject({ ...currentProject, thumbnail: data.image });
+                setCurrentProject({ ...currentProject, thumbnail: data.url });
                 addToast('Thumbnail uploaded', 'success');
             }
         } catch (error) {
@@ -316,7 +319,7 @@ const AdminProjects = () => {
                                 {currentProject.images.map((img, idx) => (
                                     <div key={idx} className="relative group aspect-square">
                                         <img
-                                            src={img.startsWith('/uploads') ? `http://localhost:5000${img}` : img}
+                                            src={img && img.startsWith('/uploads') ? `http://localhost:5000${img}` : img}
                                             className="w-full h-full object-cover rounded-xl shadow-md"
                                         />
                                         <button

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Plus, Trash2, Save, Move, Edit2 } from 'lucide-react';
 import { useToast } from '../context/ToastContext';
 
-const AdminFormBuilder = ({ formName, initialFields = [] }) => {
+const AdminFormBuilder = ({ formName, initialFields = [], onSave }) => {
     const { addToast } = useToast();
 
     // Default Fields based on form type if initial is empty
@@ -38,9 +38,13 @@ const AdminFormBuilder = ({ formName, initialFields = [] }) => {
     };
 
     const handleSave = () => {
-        // Here you would typically send this config to your backend
-        console.log(`Saving ${formName} configuration:`, { fields, submitButtonText });
-        addToast(`${formName} form updated successfully`, 'success');
+        if (onSave) {
+            onSave({ fields, submitButtonText });
+        } else {
+            // Fallback
+            console.log(`Saving ${formName} configuration:`, { fields, submitButtonText });
+            addToast(`${formName} form updated successfully`, 'success');
+        }
     };
 
     return (

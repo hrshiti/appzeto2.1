@@ -169,7 +169,7 @@ const AdminVideos = () => {
                                                 setIsUploading(true);
                                                 addToast('Uploading video...', 'info');
                                                 const { data } = await api.post('/upload/video', formData, {
-                                                    headers: { 'Content-Type': 'multipart/form-data' }
+                                                    headers: { 'Content-Type': undefined }
                                                 });
                                                 setCurrentVideo(prev => ({ ...prev, url: data.url }));
                                                 addToast('Video uploaded successfully', 'success');
@@ -222,7 +222,7 @@ const AdminVideos = () => {
                                     try {
                                         setIsUploading(true);
                                         const { data } = await api.post('/upload', formData, {
-                                            headers: { 'Content-Type': 'multipart/form-data' }
+                                            headers: { 'Content-Type': undefined }
                                         });
                                         setCurrentVideo(prev => ({ ...prev, thumbnail: data.url }));
                                         addToast('Thumbnail uploaded', 'success');
@@ -277,8 +277,8 @@ const AdminVideos = () => {
                             type="submit"
                             disabled={isUploading || !currentVideo.url || !currentVideo.title}
                             className={`px-4 py-2 font-bold rounded-lg transition-all shadow-lg ${isUploading || !currentVideo.url || !currentVideo.title
-                                    ? 'bg-slate-300 text-slate-500 cursor-not-allowed shadow-none'
-                                    : 'bg-primary text-white hover:bg-[#048a8d] shadow-primary/20'
+                                ? 'bg-slate-300 text-slate-500 cursor-not-allowed shadow-none'
+                                : 'bg-primary text-white hover:bg-[#048a8d] shadow-primary/20'
                                 }`}
                         >
                             {isUploading ? 'Uploading...' : (isEditMode ? 'Save Changes' : 'Add Video')}
