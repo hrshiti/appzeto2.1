@@ -84,8 +84,8 @@ const Process = () => {
                     ease: "none",
                     scrollTrigger: {
                         trigger: containerRef.current,
-                        start: "top center",
-                        end: "bottom center",
+                        start: "top 70%", // Starts early
+                        end: "bottom 40%", // Finishes while Goal is clearly visible
                         scrub: 1,
                     },
                     onUpdate: () => {
@@ -122,27 +122,27 @@ const Process = () => {
     }, []);
 
     return (
-        <section ref={containerRef} className="bg-slate-50 pt-12 pb-32 lg:h-auto lg:min-h-[850px] relative overflow-hidden flex flex-col items-center justify-center">
+        <section ref={containerRef} className="bg-[#062929] pt-12 pb-32 lg:h-auto lg:min-h-[850px] relative overflow-hidden flex flex-col items-center justify-center">
 
-            <div className="absolute inset-0 w-full h-full pointer-events-none opacity-[0.03]"
-                style={{ backgroundImage: 'radial-gradient(#000 1px, transparent 1px)', backgroundSize: '30px 30px' }}>
+            <div className="absolute inset-0 w-full h-full pointer-events-none opacity-[0.05]"
+                style={{ backgroundImage: 'radial-gradient(#fff 1px, transparent 1px)', backgroundSize: '30px 30px' }}>
             </div>
 
-            <div className="max-w-[1200px] mx-auto px-4 w-full relative z-10 h-full flex flex-col justify-center">
+            <div className="max-w-[1200px] mx-auto px-4 w-full relative z-10 h-full flex flex-col justify-center items-center">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: false }}
                     transition={{ duration: 0.6 }}
-                    className="text-center mb-12 flex-shrink-0"
+                    className="text-center mb-12 flex-shrink-0 w-full max-w-4xl mx-auto"
                 >
                     <span className="bg-white border border-slate-200 text-slate-900 px-4 py-1 rounded-full text-xs font-bold uppercase tracking-wider shadow-sm mb-3 inline-block">
                         Workflow
                     </span>
-                    <h2 className="text-3xl md:text-5xl font-black text-slate-900 tracking-tight mb-2">
+                    <h2 className="text-3xl md:text-5xl font-black text-white tracking-tight mb-2">
                         How We Work
                     </h2>
-                    <p className="text-slate-500 max-w-xl mx-auto text-sm md:text-base">
+                    <p className="text-gray-400 max-w-xl mx-auto text-sm md:text-base">
                         Simple steps to take your idea from concept to reality.
                     </p>
                 </motion.div>
@@ -157,16 +157,17 @@ const Process = () => {
                            Row 3 Y: 500 (Gap = 220px)
                         */}
                         <path
-                            d="M 100 60 L 800 60 Q 900 60 900 170 Q 900 280 800 280 L 100 280 Q 0 280 0 390 Q 0 500 100 500 L 250 500"
+                            d="M 100 60 L 800 60 Q 900 60 900 170 Q 900 280 800 280 L 100 280 Q 20 280 20 390 Q 20 500 100 500 L 350 500"
                             fill="none"
-                            stroke="#e2e8f0"
+                            stroke="#ffffff"
+                            strokeOpacity="0.1"
                             strokeWidth="3"
                         />
                         <path
                             ref={pathRef}
-                            d="M 100 60 L 800 60 Q 900 60 900 170 Q 900 280 800 280 L 100 280 Q 0 280 0 390 Q 0 500 100 500 L 250 500"
+                            d="M 100 60 L 800 60 Q 900 60 900 170 Q 900 280 800 280 L 100 280 Q 20 280 20 390 Q 20 500 100 500 L 350 500"
                             fill="none"
-                            stroke="#0f172a"
+                            stroke="#05A4A7"
                             strokeWidth="4"
                             strokeLinecap="round"
                         />
@@ -228,12 +229,12 @@ const Process = () => {
                         className="absolute left-[300px] top-[500px] -translate-y-1/2 ml-0 flex items-center gap-2"
                     >
                         <span className="material-symbols-outlined text-3xl text-green-500 animate-bounce">flag</span>
-                        <span className="font-bold text-slate-900 text-lg">Goal!</span>
+                        <span className="font-bold text-white text-lg">Goal!</span>
                     </motion.div>
                 </div>
 
                 {/* MOBILE LIST LAYOUT */}
-                <div className="lg:hidden w-full max-m-md mx-auto space-y-4 mt-8">
+                <div className="lg:hidden w-full max-w-md mx-auto space-y-4 mt-8">
                     {steps.map((step, index) => (
                         <div key={index} className="bg-white p-5 rounded-xl border border-slate-100 shadow-sm flex gap-4 items-start">
                             <div className="relative flex-shrink-0">

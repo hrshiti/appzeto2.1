@@ -54,44 +54,47 @@ const ServiceCard = ({ service, index }) => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.2 }}
-                className="group relative h-full bg-white p-6 md:p-8 rounded-2xl overflow-hidden transition-all duration-500 hover:-translate-y-2 shadow-sm hover:shadow-2xl border border-slate-100"
+                className="group relative h-full bg-[#062929] rounded-2xl overflow-hidden shadow-xl border border-transparent transition-all duration-500 hover:-translate-y-2"
             >
-                {/* Background Image on Hover - Fills from Bottom */}
-                <div className="absolute bottom-0 left-0 right-0 z-0 h-0 group-hover:h-full transition-all duration-500 ease-out overflow-hidden">
+                {/* 1. Background Image (Base Layer) */}
+                <div className="absolute inset-0 z-0 h-full w-full">
                     <img
                         src={service.image}
                         alt={service.title}
-                        className="w-full h-full object-cover object-bottom transition-transform duration-700 scale-105 group-hover:scale-100"
+                        className="w-full h-full object-cover object-center scale-105 transition-transform duration-700 group-hover:scale-100"
                     />
-                    <div className="absolute inset-0 bg-[#05A4A7]/90 mix-blend-multiply opacity-90"></div>
-                    <div className="absolute inset-0 bg-black/40"></div>
+                    {/* Dark Teal Overlay */}
+                    <div className="absolute inset-0 bg-[#062929]/90 mix-blend-multiply"></div>
                 </div>
 
-                {/* Content */}
-                <div className="relative z-10 flex flex-col h-full">
+                {/* 2. White Hover Overlay (Fills from Bottom) */}
+                <div className="absolute bottom-0 left-0 right-0 h-0 bg-white z-10 group-hover:h-full transition-all duration-500 ease-in-out"></div>
+
+                {/* 3. Content */}
+                <div className="relative z-20 flex flex-col h-full p-6 md:p-8">
                     {/* Header: Number Only */}
                     <div className="flex justify-end items-start mb-2">
-                        <span className="text-5xl md:text-6xl font-bold text-slate-100 group-hover:text-white/20 transition-colors duration-300 leading-none select-none">
+                        <span className="text-5xl md:text-6xl font-bold text-white/50 group-hover:text-slate-200 transition-colors duration-300 leading-none select-none">
                             {service.id}
                         </span>
                     </div>
 
                     <div className="mt-auto">
-                        <h3 className="text-xl md:text-2xl font-bold text-slate-900 mb-2 group-hover:text-white transition-colors duration-300 relative inline-block">
+                        <h3 className="text-xl md:text-2xl font-bold text-white mb-2 group-hover:text-slate-900 transition-colors duration-300 relative inline-block">
                             {service.title}
                         </h3>
 
-                        <p className="text-slate-500 text-sm mb-4 line-clamp-3 group-hover:text-slate-100 transition-colors duration-300 leading-relaxed">
+                        <p className="text-slate-200 text-sm mb-4 line-clamp-3 group-hover:text-slate-500 transition-colors duration-300 leading-relaxed font-medium">
                             {service.description}
                         </p>
 
                         <ul className="space-y-2">
                             {service.features.map((feature, i) => (
-                                <li key={i} className="flex items-center gap-2.5 group-hover:text-white transition-colors duration-300">
-                                    <div className="w-4 h-4 rounded-full bg-[#05A4A7]/10 group-hover:bg-white/20 flex items-center justify-center flex-shrink-0 transition-colors">
-                                        <span className="material-icons text-[#05A4A7] group-hover:text-white text-[8px] font-bold">check</span>
+                                <li key={i} className="flex items-center gap-2.5 text-white/90 group-hover:text-slate-600 transition-colors duration-300">
+                                    <div className="w-4 h-4 rounded-full bg-[#05A4A7] group-hover:bg-[#05A4A7]/10 flex items-center justify-center flex-shrink-0 transition-colors">
+                                        <span className="material-icons text-white group-hover:text-[#05A4A7] text-[8px] font-bold">check</span>
                                     </div>
-                                    <span className="text-slate-600 text-[11px] md:text-xs font-semibold group-hover:text-slate-100 transition-colors">{feature}</span>
+                                    <span className="text-[11px] md:text-xs font-semibold">{feature}</span>
                                 </li>
                             ))}
                         </ul>
