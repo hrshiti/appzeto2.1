@@ -10,14 +10,10 @@ import Footer from '../components/Footer';
 import ScrollWrapper from '../components/ScrollWrapper';
 import ScrollReveal from '../components/ScrollReveal';
 import Process from '../components/Process';
-import Stats from '../components/Stats';
-// import ChannelPartners from '../components/ChannelPartners'; // Removed as requested
-import EntrySplash from '../components/EntrySplash'; // Import Splash
-
+import EntrySplash from '../components/EntrySplash';
 import ProjectShowcase from '../components/ProjectShowcase';
+import HappyClientsBar from '../components/HappyClientsBar';
 
-// Global variable to track splash screen state in memory
-// This resets on page reload (Refresh) but persists on Back Navigation (Client-side routing)
 let hasShownSplashInSession = false;
 
 const Home = () => {
@@ -28,11 +24,10 @@ const Home = () => {
             const timer = setTimeout(() => {
                 setShowSplash(false);
                 hasShownSplashInSession = true;
-            }, 3000); // Display for 3 seconds
+            }, 3000);
 
             return () => clearTimeout(timer);
         } else {
-            // Ensure flag is set if we skipped it (though logic above handles it, good for robustness)
             hasShownSplashInSession = true;
         }
     }, [showSplash]);
@@ -56,16 +51,13 @@ const Home = () => {
                 <ProjectShowcase />
             </ScrollReveal>
 
-            {/* <ChannelPartners /> Removed */}
+            <ScrollReveal>
+                <HappyClientsBar />
+            </ScrollReveal>
 
             <ScrollReveal>
                 <Process />
             </ScrollReveal>
-            <ScrollReveal>
-                <Stats />
-            </ScrollReveal>
-
-
 
             <ScrollReveal>
                 <WhyChooseUs />
