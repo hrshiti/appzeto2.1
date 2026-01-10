@@ -9,8 +9,8 @@ const PhoneMockup = ({ image, title, isActive }) => {
     return (
         <div className="relative group flex flex-col items-center">
             <div className={`
-                relative rounded-[1.5rem] md:rounded-[2rem] border-[3px] md:border-[4px] border-black bg-black overflow-hidden shadow-2xl
-                w-[160px] md:w-[200px] aspect-[9/18] ring-1 ring-gray-800/50
+                relative rounded-[1rem] md:rounded-[2rem] border-[3px] md:border-[4px] border-black bg-black overflow-hidden shadow-2xl
+                w-[90px] md:w-[200px] aspect-[9/18] ring-1 ring-gray-800/50
             `}>
                 {/* Phone Bezel/Camera - Black Style */}
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/3 h-3 md:h-4 bg-black rounded-b-lg z-20 flex justify-center items-center shadow-sm border-b border-x border-gray-800">
@@ -124,19 +124,24 @@ const ProjectShowcase = () => {
 
             const overlay = phone.querySelector('.mask-overlay');
 
+            // Mobile-aware spacing logic
+            const isMobile = window.innerWidth < 1024;
+            const xBase = isMobile ? 100 : 220; // Increased spacing for larger phones
+            const xFar = isMobile ? 180 : 400;
+
             if (diff === 0) { // CENTER
                 config = { ...config, x: 0, scale: 1.1, opacity: 1, zIndex: 30, filter: "blur(0px)" };
                 if (overlay) gsap.to(overlay, { opacity: 0, duration: 0.5 });
-            } else if (diff === 1) { // RIGHT - Increased opacity
-                config = { ...config, x: 220, scale: 0.85, opacity: 1, zIndex: 10, filter: "blur(0px)" }; // Full opacity
-                if (overlay) gsap.to(overlay, { opacity: 0.1, duration: 0.5 }); // Minimal overlay
-            } else if (diff === -1) { // LEFT - Increased opacity
-                config = { ...config, x: -220, scale: 0.85, opacity: 1, zIndex: 10, filter: "blur(0px)" }; // Full opacity 
-                if (overlay) gsap.to(overlay, { opacity: 0.1, duration: 0.5 }); // Minimal overlay
+            } else if (diff === 1) { // RIGHT
+                config = { ...config, x: xBase, scale: 0.85, opacity: 1, zIndex: 10, filter: "blur(0px)" };
+                if (overlay) gsap.to(overlay, { opacity: 0.1, duration: 0.5 });
+            } else if (diff === -1) { // LEFT
+                config = { ...config, x: -xBase, scale: 0.85, opacity: 1, zIndex: 10, filter: "blur(0px)" };
+                if (overlay) gsap.to(overlay, { opacity: 0.1, duration: 0.5 });
             } else if (diff === 2) { // FAR RIGHT
-                config = { ...config, x: 400, scale: 0.5, opacity: 0, zIndex: 0 };
+                config = { ...config, x: xFar, scale: 0.5, opacity: 0, zIndex: 0 };
             } else if (diff === -2) { // FAR LEFT
-                config = { ...config, x: -400, scale: 0.5, opacity: 0, zIndex: 0 };
+                config = { ...config, x: -xFar, scale: 0.5, opacity: 0, zIndex: 0 };
             } else { // HIDDEN
                 config = { ...config, x: 0, scale: 0.2, opacity: 0 };
             }
@@ -147,7 +152,7 @@ const ProjectShowcase = () => {
     }, [currentImageIndex, projectImages.length, activeProject.id]);
 
     return (
-        <section className="relative w-full min-h-screen bg-slate-50 overflow-hidden flex items-center py-24">
+        <section className="relative w-full min-h-0 lg:min-h-screen bg-slate-50 overflow-hidden flex items-center py-4 lg:py-24">
 
             {/* Background Texture */}
             <div className="absolute inset-0 pointer-events-none">
@@ -156,15 +161,12 @@ const ProjectShowcase = () => {
                 <div className="absolute top-0 left-0 w-full h-full bg-[linear-gradient(to_right,#00000005_1px,transparent_1px),linear-gradient(to_bottom,#00000005_1px,transparent_1px)] bg-[size:40px_40px]" />
             </div>
 
-            <div className="max-w-7xl mx-auto w-full px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center relative z-10">
+            <div className="max-w-7xl mx-auto w-full px-6 relative z-10 flex flex-col items-start lg:block">
 
-                {/* LEFT SIDE: CONTENT */}
-                <div className="flex flex-col items-start space-y-6 order-2 lg:order-1 pt-10 lg:pt-0">
-
-                    {/* 1. Main Static Heading Section - CLEANER TYPOGRAPHY */}
-                    <div className="mb-2">
-                        {/* Removed 'Featured Works' eyebrow */}
-                        <h1 className="text-5xl md:text-7xl font-bold text-slate-900 leading-tight tracking-tight drop-shadow-sm">
+                {/* 1. TEXT INFO (Left on Desktop, Top on Mobile) */}
+                <div className="w-full lg:w-[45%] lg:pr-10 mb-0 lg:mb-0">
+                    <div className="mb-1 lg:mb-2">
+                        <h1 className="text-3xl md:text-7xl font-bold text-slate-900 leading-tight tracking-tight drop-shadow-sm">
                             Projects <br />
                             <span className="text-transparent bg-clip-text bg-gradient-to-r from-slate-600 to-slate-900">
                                 We Created
@@ -172,7 +174,6 @@ const ProjectShowcase = () => {
                         </h1>
                     </div>
 
-                    {/* 2. Dynamic Project Details */}
                     <AnimatePresence mode="wait">
                         <motion.div
                             key={activeProject.id}
@@ -180,10 +181,9 @@ const ProjectShowcase = () => {
                             animate={{ opacity: 1, x: 0 }}
                             exit={{ opacity: 0, x: 20 }}
                             transition={{ duration: 0.4 }}
-                            className="space-y-6 max-w-lg"
+                            className="space-y-4 lg:space-y-6 max-w-lg"
                         >
-                            {/* Project Title & Category */}
-                            <div className="space-y-2">
+                            <div className="space-y-1 lg:space-y-2">
                                 <h3 className="text-3xl md:text-4xl font-semibold text-slate-900 tracking-normal">
                                     {activeProject.title}
                                 </h3>
@@ -191,13 +191,9 @@ const ProjectShowcase = () => {
                                     {activeProject.category}
                                 </p>
                             </div>
-
-                            {/* Description - Cleaner, normal weight */}
                             <p className="text-slate-600 text-base md:text-lg leading-relaxed font-normal">
                                 {activeProject.description}
                             </p>
-
-                            {/* Tags bubble */}
                             <div className="flex flex-wrap gap-2">
                                 {activeProject.tags?.slice(0, 3).map((tag, i) => (
                                     <span key={i} className="px-3 py-1 bg-slate-200 border border-slate-300 rounded-full text-xs text-slate-700 font-medium tracking-wide">
@@ -205,37 +201,17 @@ const ProjectShowcase = () => {
                                     </span>
                                 ))}
                             </div>
-
-                            {/* Actions */}
-                            <div className="pt-6 flex items-center gap-5">
-                                <Link to={`/projects/${activeProject.slug}`}>
-                                    <button className="px-8 py-3.5 bg-slate-900 text-white font-bold text-sm tracking-wide rounded-full hover:bg-slate-800 transition-all duration-300 flex items-center gap-2 shadow-lg hover:shadow-xl">
-                                        View Case Study
-                                        <span className="material-symbols-outlined text-sm transform -rotate-45">arrow_forward</span>
-                                    </button>
-                                </Link>
-
-                                <button
-                                    onClick={nextProject}
-                                    className="w-12 h-12 rounded-full border border-slate-300 flex items-center justify-center text-slate-900 hover:bg-slate-200 transition-all active:scale-95"
-                                    aria-label="Next Project"
-                                >
-                                    <span className="material-symbols-outlined text-xl">arrow_forward_ios</span>
-                                </button>
-                            </div>
                         </motion.div>
                     </AnimatePresence>
                 </div>
 
-                {/* RIGHT SIDE: GSAP CAROUSEL (Updated to be FLAT) */}
+                {/* 2. CAROUSEL (Middle on Mobile, Absolute Right on Desktop) */}
                 <div
                     ref={carouselRef}
-                    className="relative h-[600px] w-full flex items-center justify-center order-1 lg:order-2"
+                    className="relative w-full lg:absolute lg:right-0 lg:top-1/2 lg:-translate-y-1/2 lg:w-[50%] h-[280px] lg:h-[600px] flex items-center justify-center mb-4 mt-0 lg:my-0"
                     onMouseEnter={() => setIsAutoPlaying(false)}
                     onMouseLeave={() => setIsAutoPlaying(true)}
                 >
-                    {/* Removed perspective-[1200px] class from container above */}
-
                     {projectImages.map((item, i) => (
                         <div
                             key={`${activeProject.id}-img-${i}`}
@@ -246,11 +222,39 @@ const ProjectShowcase = () => {
                             <PhoneMockup image={item.img} title={activeProject.title} isActive={i === currentImageIndex} />
                         </div>
                     ))}
-
                     {/* Decorative Elements */}
                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] pointer-events-none">
                         <div className="w-full h-full border border-white/5 rounded-full animate-spin-slow opacity-30" />
                     </div>
+                </div>
+
+                {/* 3. BUTTONS (Bottom on Mobile, Left on Desktop) */}
+                <div className="w-full lg:w-[45%]">
+                    <AnimatePresence mode="wait">
+                        <motion.div
+                            key={`btn-${activeProject.id}`}
+                            initial={{ opacity: 0, x: -20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            exit={{ opacity: 0, x: 20 }}
+                            transition={{ duration: 0.4 }}
+                            className="flex items-center gap-5 pt-6 lg:pt-6"
+                        >
+                            <Link to={`/projects/${activeProject.slug}`}>
+                                <button className="px-8 py-3.5 bg-slate-900 text-white font-bold text-sm tracking-wide rounded-full hover:bg-slate-800 transition-all duration-300 flex items-center gap-2 shadow-lg hover:shadow-xl">
+                                    View Case Study
+                                    <span className="material-symbols-outlined text-sm transform -rotate-45">arrow_forward</span>
+                                </button>
+                            </Link>
+
+                            <button
+                                onClick={nextProject}
+                                className="w-12 h-12 rounded-full border border-slate-300 flex items-center justify-center text-slate-900 hover:bg-slate-200 transition-all active:scale-95"
+                                aria-label="Next Project"
+                            >
+                                <span className="material-symbols-outlined text-xl">arrow_forward_ios</span>
+                            </button>
+                        </motion.div>
+                    </AnimatePresence>
                 </div>
             </div>
 

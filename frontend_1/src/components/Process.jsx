@@ -68,6 +68,9 @@ const Process = () => {
     const containerRef = useRef(null);
     const pathRef = useRef(null);
     const rocketRef = useRef(null);
+    const mobileWrapperRef = useRef(null);
+    const mobileProgressLineRef = useRef(null);
+    const mobileRocketRef = useRef(null);
 
     useLayoutEffect(() => {
         const ctx = gsap.context(() => {
@@ -117,12 +120,28 @@ const Process = () => {
                     }
                 });
             }
+
+            // MOBILE PROGRESS LINE ANIMATION
+            if (mobileWrapperRef.current && mobileProgressLineRef.current && mobileRocketRef.current) {
+                const tl = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: mobileWrapperRef.current,
+                        start: "top 60%",
+                        end: "bottom 60%",
+                        scrub: 1
+                    }
+                });
+
+                tl.to(mobileProgressLineRef.current, { height: "100%", ease: "none" }, 0)
+                    .to(mobileRocketRef.current, { top: "100%", ease: "none" }, 0);
+            }
+
         }, containerRef);
         return () => ctx.revert();
     }, []);
 
     return (
-        <section ref={containerRef} className="bg-[#062929] pt-12 pb-32 lg:h-auto lg:min-h-[850px] relative overflow-hidden flex flex-col items-center justify-center">
+        <section ref={containerRef} className="bg-[#062929] pt-12 pb-12 lg:pb-32 lg:h-auto lg:min-h-[850px] relative overflow-hidden flex flex-col items-center justify-center">
 
             <div className="absolute inset-0 w-full h-full pointer-events-none opacity-[0.05]"
                 style={{ backgroundImage: 'radial-gradient(#fff 1px, transparent 1px)', backgroundSize: '30px 30px' }}>
@@ -134,7 +153,7 @@ const Process = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: false }}
                     transition={{ duration: 0.6 }}
-                    className="text-center mb-12 flex-shrink-0 w-full max-w-4xl mx-auto"
+                    className="text-center mb-6 md:mb-12 flex-shrink-0 w-full max-w-4xl mx-auto"
                 >
                     <span className="bg-white border border-slate-200 text-slate-900 px-4 py-1 rounded-full text-xs font-bold uppercase tracking-wider shadow-sm mb-3 inline-block">
                         Workflow
@@ -234,24 +253,51 @@ const Process = () => {
                 </div>
 
                 {/* MOBILE LIST LAYOUT */}
-                <div className="lg:hidden w-full max-w-md mx-auto space-y-4 mt-8">
-                    {steps.map((step, index) => (
-                        <div key={index} className="bg-white p-5 rounded-xl border border-slate-100 shadow-sm flex gap-4 items-start">
-                            <div className="relative flex-shrink-0">
-                                <div className="w-10 h-10 bg-slate-100 rounded-full flex items-center justify-center text-slate-900">
-                                    <span className="material-symbols-outlined text-xl">{step.icon}</span>
-                                </div>
-                                <div className="absolute -top-1 -right-1 w-5 h-5 bg-slate-900 text-white text-[10px] rounded-full flex items-center justify-center border border-white">
-                                    {step.id}
-                                </div>
-                            </div>
-                            <div>
-                                <h3 className="font-bold text-slate-900 text-base">{step.title}</h3>
-                                <p className="text-[10px] text-primary font-bold uppercase mb-1 opacity-80">{step.subtitle}</p>
-                                <p className="text-xs text-slate-500 leading-relaxed">{step.description}</p>
-                            </div>
+                {/* MOBILE LIST LAYOUT - ALTERNATING & COMPACT */}
+                {/* MOBILE LIST LAYOUT - ALTERNATING & COMPACT */}
+                <div ref={mobileWrapperRef} className="lg:hidden w-full max-w-md mx-auto mt-4 relative px-2">
+                    {/* Central Line Base */}
+                    <div className="absolute left-1/2 top-4 bottom-4 w-0.5 bg-slate-700/20 -translate-x-1/2 rounded-full">
+                        {/* Scroll Progress Line */}
+                        <div ref={mobileProgressLineRef} className="absolute top-0 left-0 w-full bg-[#05A4A7] rounded-full" style={{ height: '0%' }}></div>
+
+                        {/* Mobile Rocket */}
+                        <div
+                            ref={mobileRocketRef}
+                            className="absolute top-0 left-1/2 -translate-x-1/2 w-8 h-8 bg-white border-2 border-slate-900 rounded-full flex items-center justify-center text-lg shadow-lg z-20 -mt-4"
+                        >
+                            🚀
                         </div>
-                    ))}
+                    </div>
+
+                    <div className="flex flex-col gap-4 py-4">
+                        {steps.map((step, index) => {
+                            const isEven = index % 2 === 0; // Left Side
+                            return (
+                                <div key={index} className={`relative flex items-center justify-between w-full ${isEven ? '' : 'flex-row-reverse'}`}>
+
+                                    {/* CONTENT CARD (42% Width to fit tight screens) */}
+                                    <div className="w-[42%]">
+                                        <div className={`bg-white p-2.5 rounded-xl border border-slate-200 shadow-sm relative ${isEven ? 'text-right' : 'text-left'}`}>
+                                            <h3 className="font-bold text-slate-900 text-sm leading-tight mb-0.5">{step.title}</h3>
+                                            <p className="text-[9px] text-[#05A4A7] font-bold uppercase mb-1 tracking-wide">{step.subtitle}</p>
+                                            <p className="text-[10px] text-slate-500 leading-tight">{step.description}</p>
+                                        </div>
+                                    </div>
+
+                                    {/* CENTER ICON */}
+                                    <div className="absolute left-1/2 -translate-x-1/2 z-10 flex flex-col items-center justify-center">
+                                        <div className="w-8 h-8 bg-slate-900 border-2 border-[#062929] rounded-full flex items-center justify-center text-white shadow-md">
+                                            <span className="material-symbols-outlined text-xs">{step.icon}</span>
+                                        </div>
+                                    </div>
+
+                                    {/* SPACER */}
+                                    <div className="w-[42%]"></div>
+                                </div>
+                            );
+                        })}
+                    </div>
                 </div>
             </div>
         </section>

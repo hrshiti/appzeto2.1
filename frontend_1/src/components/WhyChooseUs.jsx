@@ -32,13 +32,13 @@ const StatCard = ({ value, suffix, label, index }) => {
             whileInView={{ opacity: 1, y: 0 }}
             whileHover={{ y: -10, transition: { duration: 0.3 } }}
             transition={{ duration: 0.5, delay: index * 0.15 }}
-            className="bg-white/95 backdrop-blur-xl p-6 rounded-2xl shadow-xl flex flex-col items-center justify-center text-center border border-white/20 w-full min-w-[180px] group hover:shadow-2xl hover:border-[#05A4A7]/30 transition-all duration-300"
+            className="bg-white/95 backdrop-blur-xl p-3 md:p-6 rounded-2xl shadow-xl flex flex-col items-center justify-center text-center border border-white/20 w-full min-w-0 md:min-w-[180px] group hover:shadow-2xl hover:border-[#05A4A7]/30 transition-all duration-300"
         >
             <div className="flex items-baseline md:mb-1 group-hover:scale-105 transition-transform duration-300">
-                <span ref={numberRef} className="text-4xl font-black text-[#012828] tracking-tighter">0</span>
-                <span className="text-2xl font-black text-[#05A4A7] ml-0.5">{suffix}</span>
+                <span ref={numberRef} className="text-2xl md:text-4xl font-black text-[#012828] tracking-tighter">0</span>
+                <span className="text-lg md:text-2xl font-black text-[#05A4A7] ml-0.5">{suffix}</span>
             </div>
-            <span className="text-[10px] font-black text-[#012828]/60 uppercase tracking-widest leading-tight mt-1">
+            <span className="text-[9px] md:text-[10px] font-black text-[#012828]/60 uppercase tracking-widest leading-tight mt-1">
                 {label}
             </span>
         </motion.div>
@@ -54,7 +54,7 @@ const WhyChooseUs = () => {
     ];
 
     return (
-        <section className="relative w-full py-20 min-h-[550px] flex items-center overflow-hidden font-sans bg-[#012828]">
+        <section className="relative w-full py-6 md:py-20 min-h-0 md:min-h-[550px] flex items-center overflow-hidden font-sans bg-[#012828]">
             {/* Background Layer */}
             <div
                 className="absolute inset-0 z-0 pointer-events-none"
@@ -67,16 +67,15 @@ const WhyChooseUs = () => {
                 }}
             />
 
-            <div className="relative z-10 w-full max-w-[1600px] mx-auto px-6 md:px-12 lg:px-24">
-                <div className="grid lg:grid-cols-12 gap-12 lg:gap-24 items-start">
+            <div className="relative z-10 w-full max-w-[1600px] mx-auto px-4 md:px-12 lg:px-24">
+                <div className="grid lg:grid-cols-12 gap-2 lg:gap-24 items-start">
 
                     {/* LEFT SIDE: Heading (Takes ~40% width) */}
-                    <div className="lg:col-span-5 flex flex-col justify-center h-full pt-10 lg:pt-0">
+                    <div className="lg:col-span-5 flex flex-col justify-center h-full pt-4 lg:pt-0">
                         <motion.div
-                            initial={{ opacity: 0, x: -30 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             transition={{ duration: 0.6 }}
-                            className="flex items-center gap-3 mb-8 text-[#05A4A7] font-black uppercase tracking-[0.4em] text-xs"
+                            className="flex items-center gap-3 mb-4 md:mb-8 text-[#05A4A7] font-black uppercase tracking-[0.4em] text-xs"
                         >
                             <motion.span
                                 initial={{ width: 0 }}
@@ -91,7 +90,7 @@ const WhyChooseUs = () => {
                             initial={{ opacity: 0, y: 40 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8, ease: "easeOut" }}
-                            className="text-6xl md:text-8xl lg:text-[110px] font-black text-white leading-[0.8] tracking-tighter uppercase mb-6"
+                            className="text-3xl md:text-8xl lg:text-[110px] font-black text-white leading-none md:leading-[0.8] tracking-tighter uppercase mb-2 md:mb-6"
                         >
                             WHY <br />
                             <motion.span
@@ -135,7 +134,7 @@ const WhyChooseUs = () => {
                     </div>
 
                     {/* RIGHT SIDE: Detailed Content & Stats (Takes ~60% width) */}
-                    <div className="lg:col-span-7 flex flex-col justify-center gap-10 h-full lg:pt-16">
+                    <div className="lg:col-span-7 flex flex-col justify-center gap-8 md:gap-10 h-full lg:pt-16">
 
                         {/* 1. Main Tagline/Description */}
                         <motion.p
@@ -148,14 +147,14 @@ const WhyChooseUs = () => {
                         </motion.p>
 
                         {/* 2. Stats Grid */}
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
+                        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-6 w-full">
                             <StatCard value={12} suffix="+" label="Years Of Exp" index={0} />
                             <StatCard value={250} suffix="+" label="Happy Clients" index={1} />
-                            <StatCard value={100} suffix="+" label="Successful Projects" index={2} />
+                            <StatCard value={100} suffix="+" label="Success Projects" index={2} />
                         </div>
 
                         {/* 3. Checkmarks Grid */}
-                        <div className="grid grid-cols-2 gap-y-6 gap-x-8 pt-6 border-t border-white/10 w-full">
+                        <div className="grid grid-cols-2 gap-y-5 md:gap-y-6 gap-x-6 md:gap-x-8 pt-6 md:pt-6 border-t border-white/10 w-full">
                             {points.map((point, i) => (
                                 <motion.div
                                     key={i}
@@ -189,7 +188,7 @@ const WhyChooseUs = () => {
                     }
                 }
             ` }} />
-        </section>
+        </section >
     );
 };
 

@@ -73,11 +73,11 @@ const About = () => {
         <div className="relative z-30 w-full bg-[#f6f8f8] dark:bg-[#012829] text-[#111817] transition-colors duration-200">
             <div className="flex-1">
                 {/* Vision Section */}
-                <section className="relative w-full min-h-screen flex items-center justify-center py-12 md:py-20 px-4 sm:px-6 md:px-12 lg:px-16 overflow-hidden bg-[#ffffff] dark:bg-[#023638]">
+                <section className="relative w-full min-h-0 md:min-h-screen flex items-center justify-center pt-10 pb-2.5 md:py-20 px-4 sm:px-6 md:px-12 lg:px-16 overflow-hidden bg-[#ffffff] dark:bg-[#023638]">
                     <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#05A4A7]/5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
                     <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-[#EAB308]/5 rounded-full blur-[80px] translate-y-1/3 -translate-x-1/3 pointer-events-none"></div>
                     <div className="max-w-[1280px] mx-auto w-full">
-                        <div className="grid lg:grid-cols-2 gap-10 lg:gap-24 items-center h-full">
+                        <div className="grid lg:grid-cols-2 gap-2 sm:gap-10 lg:gap-24 items-center h-full">
                             <motion.div
                                 initial={{ opacity: 0, x: -100 }}
                                 whileInView={{ opacity: 1, x: 0 }}
@@ -89,7 +89,7 @@ const About = () => {
                                 <div className="absolute -bottom-8 -right-8 w-64 h-64 bg-[#ffffff] dark:bg-[#023638] rounded-full mix-blend-multiply filter blur-3xl opacity-50 dark:opacity-20 hidden sm:block"></div>
                                 <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-gray-100 dark:border-gray-700 group w-full">
                                     <div className="absolute inset-0 bg-gradient-to-tr from-[#012829]/80 via-transparent to-transparent z-10"></div>
-                                    <div className="aspect-[4/3] w-full bg-cover bg-center transition-transform duration-1000 group-hover:scale-105" data-alt="Modern collaborative office space with diverse team working on computers" style={{ backgroundImage: `url("${groupImg}")` }}></div>
+                                    <div className="aspect-video sm:aspect-[4/3] w-full bg-cover bg-center transition-transform duration-1000 group-hover:scale-105" data-alt="Modern collaborative office space with diverse team working on computers" style={{ backgroundImage: `url("${groupImg}")` }}></div>
                                     <div className="absolute bottom-0 left-0 p-4 sm:p-8 z-20 w-full">
                                         <div className="backdrop-blur-md bg-white/10 border border-white/20 p-4 sm:p-6 rounded-xl overflow-hidden relative">
                                             <div className="absolute top-0 left-0 w-1 h-full bg-[#EAB308]"></div>
@@ -126,15 +126,15 @@ const About = () => {
                                 whileInView={{ opacity: 1, x: 0 }}
                                 viewport={{ once: false }}
                                 transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
-                                className="relative z-10 w-full flex flex-col gap-4 sm:gap-5"
+                                className="relative z-10 w-full flex flex-col gap-2 sm:gap-5"
                             >
-                                <div className="flex flex-col gap-4 sm:gap-6">
-                                    <div className="mb-2 sm:mb-4">
-                                        <h1 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight text-slate-900 dark:text-white uppercase">
+                                <div className="flex flex-col gap-1 sm:gap-6">
+                                    <div className="mb-1 sm:mb-4">
+                                        <h1 className="text-xl sm:text-3xl md:text-4xl font-black tracking-tight text-slate-900 dark:text-white uppercase">
                                             Who We Are
                                         </h1>
                                     </div>
-                                    <h2 className="text-lg sm:text-xl md:text-3xl font-bold text-[#05A4A7] leading-tight">
+                                    <h2 className="text-base sm:text-xl md:text-3xl font-bold text-[#05A4A7] leading-tight">
                                         Engineering the Digital Future.
                                     </h2>
                                     <p ref={paragraphRef} className="hidden sm:block text-base sm:text-lg lg:text-xl text-[#618983] dark:text-gray-400 leading-relaxed max-w-lg min-h-[5rem]">
@@ -146,34 +146,34 @@ const About = () => {
                                         <span className="animate-pulse">|</span>
                                     </p>
                                 </div>
-                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4 border-t border-dashed border-gray-200 dark:border-gray-700 pt-2 sm:pt-6">
+                                <div className="grid grid-cols-2 gap-2 sm:gap-4 border-t border-dashed border-gray-200 dark:border-gray-700 pt-2 sm:pt-6">
                                     <div className="group flex flex-col gap-1 p-2 -ml-2 rounded-lg hover:bg-gray-50 dark:hover:bg-white/5 transition-colors">
-                                        <div className="flex items-center gap-2 mb-1">
-                                            <span className="material-symbols-outlined text-[#05A4A7] group-hover:scale-110 transition-transform">neurology</span>
-                                            <h3 className="font-bold text-[#111817] dark:text-white text-sm sm:text-base">AI & Machine Learning</h3>
+                                        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-1 sm:gap-2 mb-1">
+                                            <span className="material-symbols-outlined text-[#05A4A7] text-lg group-hover:scale-110 transition-transform">neurology</span>
+                                            <h3 className="font-bold text-[#111817] dark:text-white text-[10px] sm:text-base leading-tight">AI & ML</h3>
                                         </div>
-                                        <p className="text-xs sm:text-sm text-[#618983] dark:text-gray-500">Predictive algorithms that drive automation and smarter decisions.</p>
+                                        <p className="text-[9px] sm:text-sm text-[#618983] dark:text-gray-500 leading-tight">Predictive algorithms & automation.</p>
                                     </div>
                                     <div className="group flex flex-col gap-1 p-2 -ml-2 rounded-lg hover:bg-gray-50 dark:hover:bg-white/5 transition-colors">
-                                        <div className="flex items-center gap-2 mb-1">
-                                            <span className="material-symbols-outlined text-[#EAB308] group-hover:scale-110 transition-transform">layers</span>
-                                            <h3 className="font-bold text-[#111817] dark:text-white text-sm sm:text-base">Web & App Development</h3>
+                                        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-1 sm:gap-2 mb-1">
+                                            <span className="material-symbols-outlined text-[#EAB308] text-lg group-hover:scale-110 transition-transform">layers</span>
+                                            <h3 className="font-bold text-[#111817] dark:text-white text-[10px] sm:text-base leading-tight">Web & App</h3>
                                         </div>
-                                        <p className="text-xs sm:text-sm text-[#618983] dark:text-gray-500">High-performance, scalable architectures for web and mobile.</p>
+                                        <p className="text-[9px] sm:text-sm text-[#618983] dark:text-gray-500 leading-tight">High-performance scalable architectures.</p>
                                     </div>
                                 </div>
-                                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 sm:gap-8 pt-2">
-                                    <Link to="/about" className="group flex items-center justify-center gap-2 h-10 sm:h-12 px-6 sm:px-8 rounded-lg bg-[#111817] dark:bg-white text-white dark:text-[#111817] text-sm sm:text-base font-bold hover:bg-opacity-90 transition-all shadow-xl hover:shadow-2xl hover:-translate-y-0.5">
+                                <div className="flex flex-col-reverse sm:flex-row items-start sm:items-center gap-2 sm:gap-8 pt-1 sm:pt-2">
+                                    <Link to="/about" className="group flex items-center justify-center gap-2 h-10 sm:h-12 px-6 sm:px-8 rounded-lg bg-[#111817] dark:bg-white text-white dark:text-[#111817] text-sm sm:text-base font-bold hover:bg-opacity-90 transition-all shadow-xl hover:shadow-2xl hover:-translate-y-0.5 w-full sm:w-auto">
                                         <span>Our Vision</span>
                                         <span className="material-symbols-outlined text-base sm:text-lg group-hover:translate-x-1 transition-transform">arrow_forward</span>
                                     </Link>
-                                    <div className="flex items-center gap-4 sm:gap-6 text-sm">
-                                        <div className="flex flex-col">
+                                    <div className="flex items-center justify-center sm:justify-start w-full sm:w-auto gap-4 sm:gap-6 text-sm bg-gray-50 dark:bg-white/5 sm:bg-transparent sm:dark:bg-transparent p-3 sm:p-0 rounded-lg sm:rounded-none">
+                                        <div className="flex items-center gap-2">
                                             <span className="font-black text-xl sm:text-2xl text-[#05A4A7] leading-none">5+</span>
                                             <span className="text-[#618983] font-medium text-[10px] sm:text-xs uppercase">Years</span>
                                         </div>
-                                        <div className="w-px h-8 bg-gray-200 dark:border-gray-700"></div>
-                                        <div className="flex flex-col">
+                                        <div className="w-px h-8 bg-gray-200 dark:border-gray-700 mx-2"></div>
+                                        <div className="flex items-center gap-2">
                                             <span className="font-black text-xl sm:text-2xl text-[#05A4A7] leading-none">100+</span>
                                             <span className="text-[#618983] font-medium text-[10px] sm:text-xs uppercase">Projects</span>
                                         </div>
