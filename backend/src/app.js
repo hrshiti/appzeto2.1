@@ -46,6 +46,7 @@ app.use('/api/videos', videoRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/jobs', jobRoutes);
 app.use('/api/contact', contactRoutes);
+app.use('/api/forms', require('./routes/formRoutes'));
 app.use('/api/upload', uploadRoutes);
 
 // Error Handling Middleware

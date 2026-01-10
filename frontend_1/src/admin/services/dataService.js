@@ -126,4 +126,14 @@ export const dataService = {
         return response.data.data;
     },
     deletePartner: async (id) => api.delete(`/contact/partners/${id}`),
+
+    // --- Form Configuration ---
+    getFormConfig: async (formId) => {
+        const response = await api.get(`/forms/${formId}`);
+        return response.data;
+    },
+    updateFormConfig: async (formId, data) => {
+        const response = await api.put(`/forms/${formId}`, data);
+        return response.data;
+    },
 };

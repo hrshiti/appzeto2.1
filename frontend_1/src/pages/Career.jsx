@@ -77,18 +77,23 @@ const Career = () => {
         }
     ];
 
+    const [formFields, setFormFields] = useState(null);
+
     useEffect(() => {
         window.scrollTo(0, 0);
 
-        // // Fetch Jobs - commented out as per instruction
-        // const allJobs = dataService.getJobs();
-        // // Filter only Active jobs - commented out as per instruction
-        // setPositions(allJobs.filter(j => j.status === 'Active'));
-
-        // // Fetch Internships - commented out as per instruction
-        // const allInternships = dataService.getInternships();
-        // // Filter only Active internships - commented out as per instruction
-        // setInternships(allInternships.filter(i => i.status === 'Active'));
+        // Load Dynamic Form Config
+        const loadConfig = async () => {
+            try {
+                const config = await dataService.getFormConfig('career');
+                if (config && config.fields) {
+                    setFormFields(config.fields);
+                }
+            } catch (e) {
+                console.error("Failed to load career form config", e);
+            }
+        };
+        loadConfig();
 
     }, []);
 
@@ -440,39 +445,70 @@ const Career = () => {
                                         setTimeout(() => setAppStatus('idle'), 3000);
                                     }
                                 }}>
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4">
-                                        <div className="space-y-1">
-                                            <label className="text-[8px] md:text-[10px] font-black uppercase text-slate-400 px-1 tracking-widest">Full Name</label>
-                                            <input name="name" required type="text" placeholder="John Doe" className="w-full px-3 py-2 md:px-4 md:py-2.5 bg-slate-50 border-[1.5px] md:border-2 border-slate-100 rounded-lg md:rounded-xl focus:border-primary focus:bg-white transition-all text-[10px] md:text-xs font-bold outline-none" />
+                                    {formFields ? (
+                                        <div className="space-y-4">
+                                            {formFields.map((field) => (
+                                                <div key={field.id} className="space-y-1">
+                                                    <label className="text-[8px] md:text-[10px] font-black uppercase text-slate-400 px-1 tracking-widest">
+                                                        {field.label} {field.required && <span className="text-red-500">*</span>}
+                                                    </label>
+                                                    {field.type === 'textarea' ? (
+                                                        <textarea
+                                                            name={field.label.toLowerCase().replace(/\s/g, '_')}
+                                                            required={field.required}
+                                                            placeholder={field.placeholder}
+                                                            rows="3"
+                                                            className="w-full px-3 py-2 md:px-4 md:py-3 bg-slate-50 border-[1.5px] md:border-2 border-slate-100 rounded-lg md:rounded-xl focus:border-primary focus:bg-white transition-all text-[10px] md:text-xs font-bold outline-none resize-none"
+                                                        ></textarea>
+                                                    ) : (
+                                                        <input
+                                                            type={field.type}
+                                                            name={field.label.toLowerCase().replace(/\s/g, '_')}
+                                                            required={field.required}
+                                                            placeholder={field.placeholder}
+                                                            className="w-full px-3 py-2 md:px-4 md:py-2.5 bg-slate-50 border-[1.5px] md:border-2 border-slate-100 rounded-lg md:rounded-xl focus:border-primary focus:bg-white transition-all text-[10px] md:text-xs font-bold outline-none"
+                                                        />
+                                                    )}
+                                                </div>
+                                            ))}
                                         </div>
-                                        <div className="space-y-1">
-                                            <label className="text-[8px] md:text-[10px] font-black uppercase text-slate-400 px-1 tracking-widest">Email Address</label>
-                                            <input name="email" required type="email" placeholder="john@example.com" className="w-full px-3 py-2 md:px-4 md:py-2.5 bg-slate-50 border-[1.5px] md:border-2 border-slate-100 rounded-lg md:rounded-xl focus:border-primary focus:bg-white transition-all text-[10px] md:text-xs font-bold outline-none" />
-                                        </div>
-                                    </div>
+                                    ) : (
+                                        <>
+                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4">
+                                                <div className="space-y-1">
+                                                    <label className="text-[8px] md:text-[10px] font-black uppercase text-slate-400 px-1 tracking-widest">Full Name</label>
+                                                    <input name="name" required type="text" placeholder="John Doe" className="w-full px-3 py-2 md:px-4 md:py-2.5 bg-slate-50 border-[1.5px] md:border-2 border-slate-100 rounded-lg md:rounded-xl focus:border-primary focus:bg-white transition-all text-[10px] md:text-xs font-bold outline-none" />
+                                                </div>
+                                                <div className="space-y-1">
+                                                    <label className="text-[8px] md:text-[10px] font-black uppercase text-slate-400 px-1 tracking-widest">Email Address</label>
+                                                    <input name="email" required type="email" placeholder="john@example.com" className="w-full px-3 py-2 md:px-4 md:py-2.5 bg-slate-50 border-[1.5px] md:border-2 border-slate-100 rounded-lg md:rounded-xl focus:border-primary focus:bg-white transition-all text-[10px] md:text-xs font-bold outline-none" />
+                                                </div>
+                                            </div>
 
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4">
-                                        <div className="space-y-1">
-                                            <label className="text-[8px] md:text-[10px] font-black uppercase text-slate-400 px-1 tracking-widest">Phone Number</label>
-                                            <input name="phone" required type="tel" placeholder="+91 00000 00000" className="w-full px-3 py-2 md:px-4 md:py-2.5 bg-slate-50 border-[1.5px] md:border-2 border-slate-100 rounded-lg md:rounded-xl focus:border-primary focus:bg-white transition-all text-[10px] md:text-xs font-bold outline-none" />
-                                        </div>
-                                        <div className="space-y-1">
-                                            <label className="text-[8px] md:text-[10px] font-black uppercase text-slate-400 px-1 tracking-widest">LinkedIn / Portfolio</label>
-                                            <input name="portfolio" type="url" placeholder="https://..." className="w-full px-3 py-2 md:px-4 md:py-2.5 bg-slate-50 border-[1.5px] md:border-2 border-slate-100 rounded-lg md:rounded-xl focus:border-primary focus:bg-white transition-all text-[10px] md:text-xs font-bold outline-none" />
-                                        </div>
-                                    </div>
+                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4">
+                                                <div className="space-y-1">
+                                                    <label className="text-[8px] md:text-[10px] font-black uppercase text-slate-400 px-1 tracking-widest">Phone Number</label>
+                                                    <input name="phone" required type="tel" placeholder="+91 00000 00000" className="w-full px-3 py-2 md:px-4 md:py-2.5 bg-slate-50 border-[1.5px] md:border-2 border-slate-100 rounded-lg md:rounded-xl focus:border-primary focus:bg-white transition-all text-[10px] md:text-xs font-bold outline-none" />
+                                                </div>
+                                                <div className="space-y-1">
+                                                    <label className="text-[8px] md:text-[10px] font-black uppercase text-slate-400 px-1 tracking-widest">LinkedIn / Portfolio</label>
+                                                    <input name="portfolio" type="url" placeholder="https://..." className="w-full px-3 py-2 md:px-4 md:py-2.5 bg-slate-50 border-[1.5px] md:border-2 border-slate-100 rounded-lg md:rounded-xl focus:border-primary focus:bg-white transition-all text-[10px] md:text-xs font-bold outline-none" />
+                                                </div>
+                                            </div>
 
-                                    <div className="space-y-1">
-                                        <label className="text-[8px] md:text-[10px] font-black uppercase text-slate-400 px-1 tracking-widest">Why should we hire you?</label>
-                                        <textarea name="coverLetter" rows="3" placeholder="Tell us about your superpower..." className="w-full px-3 py-2 md:px-4 md:py-3 bg-slate-50 border-[1.5px] md:border-2 border-slate-100 rounded-lg md:rounded-xl focus:border-primary focus:bg-white transition-all text-[10px] md:text-xs font-bold outline-none resize-none"></textarea>
-                                    </div>
+                                            <div className="space-y-1">
+                                                <label className="text-[8px] md:text-[10px] font-black uppercase text-slate-400 px-1 tracking-widest">Why should we hire you?</label>
+                                                <textarea name="coverLetter" rows="3" placeholder="Tell us about your superpower..." className="w-full px-3 py-2 md:px-4 md:py-3 bg-slate-50 border-[1.5px] md:border-2 border-slate-100 rounded-lg md:rounded-xl focus:border-primary focus:bg-white transition-all text-[10px] md:text-xs font-bold outline-none resize-none"></textarea>
+                                            </div>
+                                        </>
+                                    )}
 
                                     <button
                                         type="submit"
                                         disabled={appStatus !== 'idle'}
                                         className={`w-full py-3 md:py-3.5 rounded-lg md:rounded-xl font-black uppercase tracking-widest text-[9px] md:text-xs transition-all shadow-xl shadow-slate-900/20 mb-1 md:mb-2 ${appStatus === 'idle' ? 'bg-slate-950 text-white hover:bg-primary hover:text-slate-950' :
-                                                appStatus === 'sending' ? 'bg-slate-400 text-white animate-pulse' :
-                                                    appStatus === 'success' ? 'bg-green-500 text-white' : 'bg-red-500 text-white'
+                                            appStatus === 'sending' ? 'bg-slate-400 text-white animate-pulse' :
+                                                appStatus === 'success' ? 'bg-green-500 text-white' : 'bg-red-500 text-white'
                                             }`}
                                     >
                                         {appStatus === 'idle' && 'Submit Application'}

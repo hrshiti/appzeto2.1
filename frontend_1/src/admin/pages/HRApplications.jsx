@@ -13,20 +13,39 @@ const HRApplications = () => {
     const [selectedApp, setSelectedApp] = useState(null);
     const [loading, setLoading] = useState(true);
 
+    const [formConfig, setFormConfig] = useState(null);
+
     useEffect(() => {
-        loadApplications();
+        loadData();
     }, []);
 
-    const loadApplications = async () => {
+    const loadData = async () => {
         try {
             setLoading(true);
-            const data = await dataService.getApplications();
-            setApplications(data || []);
+            const [apps, config] = await Promise.all([
+                dataService.getApplications(),
+                dataService.getFormConfig('career')
+            ]);
+            setApplications(apps || []);
+            if (config && config.fields) {
+                setFormConfig(config.fields);
+            }
         } catch (err) {
-            console.error("Failed to load applications", err);
-            addToast('Failed to load applications', 'error');
+            console.error("Failed to load data", err);
+            addToast('Failed to load data', 'error');
         } finally {
             setLoading(false);
+        }
+    };
+
+    const handleSaveForm = async (configData) => {
+        try {
+            await dataService.updateFormConfig('career', configData);
+            setFormConfig(configData.fields);
+            addToast('Application Form updated successfully', 'success');
+        } catch (err) {
+            console.error(err);
+            addToast('Failed to update form', 'error');
         }
     };
 
@@ -44,6 +63,18 @@ const HRApplications = () => {
                 addToast('Delete failed', 'error');
             }
         }
+    };
+
+    const [searchTerm, setSearchTerm] = useState('');
+
+    const getFilteredApplications = () => {
+        if (!searchTerm) return applications;
+        const lower = searchTerm.toLowerCase();
+        return applications.filter(app =>
+            (app.name && app.name.toLowerCase().includes(lower)) ||
+            (app.email && app.email.toLowerCase().includes(lower)) ||
+            (app.jobTitle && app.jobTitle.toLowerCase().includes(lower))
+        );
     };
 
     // -- Render --
@@ -113,18 +144,27 @@ const HRApplications = () => {
             </div>
 
             {pageTab === 'settings' ? (
-                <div className="bg-white p-8 rounded-3xl border border-slate-200 text-center">
-                    <p className="text-slate-400 italic">Advanced recruitment settings coming soon.</p>
-                </div>
+                <AdminFormBuilder
+                    formName="Job Application"
+                    initialFields={formConfig || [
+                        { id: 1, label: 'Name', type: 'text', placeholder: 'John Doe', required: true },
+                        { id: 2, label: 'Email', type: 'email', placeholder: 'john@example.com', required: true },
+                        { id: 3, label: 'Phone', type: 'tel', placeholder: '+91 ...', required: true },
+                        { id: 4, label: 'Portfolio', type: 'url', placeholder: 'https://...', required: false },
+                        { id: 5, label: 'Cover Letter', type: 'textarea', placeholder: 'Tell us...', required: true },
+                    ]}
+                    onSave={handleSaveForm}
+                />
             ) : (
                 <div className="animate-fade-in-up">
                     <AdminTable
                         title="Career Applications"
                         subtitle="Candidate applications from the 'Careers & Opportunities' page."
                         columns={columns}
-                        data={applications}
+                        data={getFilteredApplications()}
                         customActions={renderActions}
                         loading={loading}
+                        onSearch={setSearchTerm}
                     />
 
                     <Modal
@@ -165,9 +205,9 @@ const HRApplications = () => {
                                 )}
 
                                 <div>
-                                    <label className="block text-[10px] font-black uppercase text-slate-400 mb-2">Cover Note</label>
+                                    <label className="block text-[10px] font-black uppercase text-slate-400 mb-2">Cover Note / Letter</label>
                                     <div className="bg-slate-50 p-4 rounded-xl text-sm border border-slate-100 max-h-40 overflow-y-auto">
-                                        {selectedApp.coverLetter || "No note provided."}
+                                        {selectedApp.coverLetter || selectedApp.cover_letter || "No note provided."}
                                     </div>
                                 </div>
                             </div>
