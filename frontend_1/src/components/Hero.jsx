@@ -1,21 +1,22 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import { motion } from 'framer-motion';
 import Navbar from './Navbar';
 import RevolvingOrbit from './RevolvingOrbit';
-import aapreecLogo from '../assets/logos/aapreec_logo.jpg';
-import autoRideLogo from '../assets/logos/auto_ride.jpg';
-import beeyouLogo from '../assets/logos/beeyou.jpg';
-import bookMyTempoLogo from '../assets/logos/book_my_tempo.jpg';
-import createBharatLogo from '../assets/logos/create_bharat.jpg';
-import dailyHisabLogo from '../assets/logos/daily_hisab.jpg';
-import doctorOnHomeLogo from '../assets/logos/doctor_on_home.jpg';
-import fixflyLogo from '../assets/logos/fixfly.jpg';
-import rentYatraLogo from '../assets/logos/rent_yatra.jpg';
-import blueRideLogo from '../assets/logos/blue_ride.jpg';
 
 const Hero = () => {
+    const serviceItems = [
+        { icon: 'web', label: 'Web Dev' },
+        { icon: 'smartphone', label: 'App Dev' },
+        { icon: 'psychology', label: 'AI Solutions' },
+        { icon: 'cloud', label: 'Cloud Ops' },
+        { icon: 'security', label: 'Cybersecurity' },
+        { icon: 'bar_chart', label: 'Data Analytics' },
+        { icon: 'brush', label: 'UI/UX Design' },
+        { icon: 'settings', label: 'DevOps' },
+        { icon: 'link', label: 'Blockchain' },
+    ];
+
     return (
         <div className="bg-background-light dark:bg-background-dark font-body antialiased transition-colors duration-300 min-h-screen flex flex-col relative overflow-hidden">
 
@@ -46,8 +47,6 @@ const Hero = () => {
                             </p>
 
                             <div className="flex flex-col sm:flex-row gap-5 pt-4">
-                                {/* Primary Button: Vibrant Gradient Consultation with Thin Border Beam */}
-                                {/* Primary Button: Theme-Matched Teal Gradient with Fixed All-Side Animation */}
                                 <div className="relative group">
                                     <motion.div
                                         whileHover={{ y: -6, scale: 1.05 }}
@@ -75,7 +74,6 @@ const Hero = () => {
                                     </motion.div>
                                 </div>
 
-                                {/* Secondary Button: Glassmorphic Case Studies with Fixed All-Side Animation */}
                                 <div className="relative group">
                                     <motion.div
                                         whileHover={{ y: -6, scale: 1.05 }}
@@ -98,7 +96,6 @@ const Hero = () => {
                             </div>
                         </motion.div>
 
-                        {/* THE REVOLVING ORBIT (Visible on both Mobile and Desktop) */}
                         <motion.div
                             initial={{ opacity: 0, scale: 0.8 }}
                             animate={{ opacity: 1, scale: 1 }}
@@ -107,7 +104,6 @@ const Hero = () => {
                         >
                             <RevolvingOrbit size="lg" />
 
-                            {/* Happy Clients Floating Card */}
                             <motion.div
                                 initial={{ opacity: 0, x: 20 }}
                                 animate={{ opacity: 1, x: 0 }}
@@ -144,63 +140,20 @@ const Hero = () => {
                     <span className="material-icons text-gray-400 dark:text-gray-600">keyboard_arrow_down</span>
                 </div>
             </main >
-            <section className="relative border-y border-emerald-900 bg-emerald-950 py-2">
-                {/* PREMIUM WATERMARK OVERLAY (Behind Logos) */}
-                <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
-                    <span className="text-white font-black uppercase tracking-[0.3em] text-4xl sm:text-7xl lg:text-8xl opacity-[0.12] select-none">
-                        HAPPY CLIENTS
-                    </span>
-                </div>
 
-                <div className="flex animate-scroll-fast whitespace-nowrap group relative z-10">
-                    {[
-                        { name: "Aapreec", logo: aapreecLogo },
-                        { name: "AutoRide", logo: autoRideLogo },
-                        { name: "Beeyou", logo: beeyouLogo },
-                        { name: "Book My Tempo", logo: bookMyTempoLogo },
-                        { name: "Create Bharat", logo: createBharatLogo },
-                        { name: "Daily Hisab", logo: dailyHisabLogo },
-                        { name: "Doctor on Home", logo: doctorOnHomeLogo },
-                        { name: "Fixfly", logo: fixflyLogo },
-                        { name: "Rent Yatra", logo: rentYatraLogo },
-                        { name: "Blue Ride", logo: blueRideLogo },
-                    ].map((client, index) => (
-                        <div key={index} className="flex flex-row items-center gap-2 sm:gap-3 mx-6 sm:mx-8 cursor-pointer hover:scale-105 transition-transform duration-300">
-                            <div className="h-8 w-8 sm:h-10 sm:w-10 bg-white rounded-full shadow-sm border border-emerald-900 overflow-hidden relative p-0.5 shrink-0">
-                                <img
-                                    src={client.logo}
-                                    alt={client.name}
-                                    className="w-full h-full object-cover rounded-full"
-                                />
+            <section className="border-y border-gray-200 dark:border-gray-800 bg-primary/5 dark:bg-primary/10 overflow-hidden py-3 sm:py-4">
+                <div className="flex animate-scroll-fast whitespace-nowrap group">
+                    {[...serviceItems, ...serviceItems].map((item, index) => (
+                        <div key={index} className="flex items-center space-x-2 sm:space-x-3 mx-4 sm:mx-8 cursor-pointer hover:scale-110 transition-transform">
+                            <div className="p-2 sm:p-2.5 bg-gray-100 dark:bg-gray-800 rounded-xl">
+                                <span className="material-icons text-gray-500 dark:text-gray-400 text-sm sm:text-lg">{item.icon}</span>
                             </div>
-                            <span className="font-bold text-[10px] sm:text-[11px] text-emerald-100/90 uppercase tracking-widest whitespace-nowrap">{client.name}</span>
-                        </div>
-                    ))}
-                    {[
-                        { name: "Aapreec", logo: aapreecLogo },
-                        { name: "AutoRide", logo: autoRideLogo },
-                        { name: "Beeyou", logo: beeyouLogo },
-                        { name: "Book My Tempo", logo: bookMyTempoLogo },
-                        { name: "Create Bharat", logo: createBharatLogo },
-                        { name: "Daily Hisab", logo: dailyHisabLogo },
-                        { name: "Doctor on Home", logo: doctorOnHomeLogo },
-                        { name: "Fixfly", logo: fixflyLogo },
-                        { name: "Rent Yatra", logo: rentYatraLogo },
-                        { name: "Blue Ride", logo: blueRideLogo },
-                    ].map((client, index) => (
-                        <div key={`duplicate-${index}`} className="flex flex-row items-center gap-2 sm:gap-3 mx-6 sm:mx-8 cursor-pointer hover:scale-105 transition-transform duration-300">
-                            <div className="h-8 w-8 sm:h-10 sm:w-10 bg-white rounded-full shadow-sm border border-emerald-900 overflow-hidden relative p-0.5 shrink-0">
-                                <img
-                                    src={client.logo}
-                                    alt={client.name}
-                                    className="w-full h-full object-cover rounded-full"
-                                />
-                            </div>
-                            <span className="font-bold text-[10px] sm:text-[11px] text-emerald-100/90 uppercase tracking-widest whitespace-nowrap">{client.name}</span>
+                            <span className="font-bold text-sm sm:text-base text-gray-700 dark:text-gray-300 uppercase tracking-wider">{item.label}</span>
                         </div>
                     ))}
                 </div>
             </section>
+
         </div >
     );
 };

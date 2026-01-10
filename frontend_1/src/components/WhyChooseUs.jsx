@@ -1,124 +1,194 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import innovationPremiumImg from '../assets/innovation_premium.png';
+import React, { useLayoutEffect, useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
+import gsap from 'gsap';
 
-const features = [
-    {
-        id: "01",
-        title: "Cutting-Edge Tech",
-        description: "We use the latest stacks like React, Next.js, and AI."
-    },
-    {
-        id: "02",
-        title: "Ironclad Security",
-        description: "Your data is safe with our enterprise-grade protocols."
-    },
-    {
-        id: "03",
-        title: "Agile Execution",
-        description: "Fast development with updates for on-time delivery."
-    },
-    {
-        id: "04",
-        title: "Global Excellence",
-        description: "Award-winning standards for every project we build."
-    }
-];
+const TECH_IMAGE_URL = "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80";
+
+const StatCard = ({ value, suffix, label, index }) => {
+    const numberRef = useRef(null);
+    const containerRef = useRef(null);
+    const isInView = useInView(containerRef, { once: false, amount: 0.5 });
+
+    useLayoutEffect(() => {
+        if (isInView) {
+            const obj = { val: 0 };
+            gsap.to(obj, {
+                val: value,
+                duration: 2.5,
+                ease: "power2.out",
+                onUpdate: () => {
+                    if (numberRef.current) {
+                        numberRef.current.innerText = Math.round(obj.val);
+                    }
+                }
+            });
+        }
+    }, [value, isInView]);
+
+    return (
+        <motion.div
+            ref={containerRef}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            whileHover={{ y: -10, transition: { duration: 0.3 } }}
+            transition={{ duration: 0.5, delay: index * 0.15 }}
+            className="bg-white/95 backdrop-blur-xl p-6 rounded-2xl shadow-xl flex flex-col items-center justify-center text-center border border-white/20 w-full min-w-[180px] group hover:shadow-2xl hover:border-[#05A4A7]/30 transition-all duration-300"
+        >
+            <div className="flex items-baseline md:mb-1 group-hover:scale-105 transition-transform duration-300">
+                <span ref={numberRef} className="text-4xl font-black text-[#012828] tracking-tighter">0</span>
+                <span className="text-2xl font-black text-[#05A4A7] ml-0.5">{suffix}</span>
+            </div>
+            <span className="text-[10px] font-black text-[#012828]/60 uppercase tracking-widest leading-tight mt-1">
+                {label}
+            </span>
+        </motion.div>
+    );
+};
 
 const WhyChooseUs = () => {
+    const points = [
+        "Advanced AI Solutions",
+        "Cybersecurity Audits",
+        "Cloud Architecture",
+        "Modern UI/UX Design"
+    ];
+
     return (
-        <section className="w-full bg-white overflow-hidden font-sans border-y border-slate-50 flex flex-col lg:flex-row">
+        <section className="relative w-full py-20 min-h-[550px] flex items-center overflow-hidden font-sans bg-[#012828]">
+            {/* Background Layer */}
+            <div
+                className="absolute inset-0 z-0 pointer-events-none"
+                style={{
+                    backgroundImage: `url(${TECH_IMAGE_URL})`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    backgroundAttachment: 'fixed',
+                    filter: 'blur(1px) brightness(20%)'
+                }}
+            />
 
-            {/* LEFT: Compact High-Impact Visual */}
-            <div className="w-full lg:w-[45%] h-[280px] lg:h-[500px] relative overflow-hidden group">
-                <motion.div
-                    initial={{ opacity: 0, scale: 1.1 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 1.5, ease: "easeOut" }}
-                    className="absolute inset-0"
-                >
-                    <img
-                        src={innovationPremiumImg}
-                        alt="Premium Innovation"
-                        className="w-full h-full object-cover"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-r from-[#021F20]/50 to-transparent" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#021F20]/80 via-transparent to-transparent opacity-80" />
+            <div className="relative z-10 w-full max-w-[1600px] mx-auto px-6 md:px-12 lg:px-24">
+                <div className="grid lg:grid-cols-12 gap-12 lg:gap-24 items-start">
 
-                    {/* Compact Label */}
-                    <div className="absolute bottom-8 left-8 z-10">
+                    {/* LEFT SIDE: Heading (Takes ~40% width) */}
+                    <div className="lg:col-span-5 flex flex-col justify-center h-full pt-10 lg:pt-0">
+                        <motion.div
+                            initial={{ opacity: 0, x: -30 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.6 }}
+                            className="flex items-center gap-3 mb-8 text-[#05A4A7] font-black uppercase tracking-[0.4em] text-xs"
+                        >
+                            <motion.span
+                                initial={{ width: 0 }}
+                                whileInView={{ width: "2.5rem" }}
+                                transition={{ duration: 0.8, delay: 0.2 }}
+                                className="h-[2px] bg-[#05A4A7]"
+                            ></motion.span>
+                            Excellence
+                        </motion.div>
+
                         <motion.h2
-                            initial={{ opacity: 0, y: 10 }}
+                            initial={{ opacity: 0, y: 40 }}
                             whileInView={{ opacity: 1, y: 0 }}
-                            className="text-white text-2xl md:text-4xl font-black tracking-tighter leading-none"
+                            transition={{ duration: 0.8, ease: "easeOut" }}
+                            className="text-6xl md:text-8xl lg:text-[110px] font-black text-white leading-[0.8] tracking-tighter uppercase mb-6"
                         >
-                            Redefining <br />
-                            <span className="text-[#05A4A7]">The Future.</span>
-                        </motion.h2>
-                    </div>
-                </motion.div>
-            </div>
-
-            {/* RIGHT: Tighter Content Area */}
-            <div className="w-full lg:w-[55%] flex flex-col justify-center px-8 md:px-16 lg:px-20 py-10 lg:py-12 bg-white relative">
-                <div className="max-w-2xl relative z-10">
-                    <div className="mb-8">
-                        <motion.span
-                            initial={{ opacity: 0 }}
-                            whileInView={{ opacity: 1 }}
-                            className="text-[#05A4A7] font-black uppercase tracking-[0.5em] text-[10px] mb-2.5 block"
-                        >
-                            Excellence Driven
-                        </motion.span>
-                        <motion.h3
-                            initial={{ opacity: 0, y: 15 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            className="text-3xl md:text-4xl lg:text-5xl font-black text-slate-900 tracking-tighter leading-[0.9]"
-                        >
-                            Why Choose <br />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#05A4A7] to-[#013537]">Appzeto?</span>
-                        </motion.h3>
-                    </div>
-
-                    {/* Compact Grid */}
-                    <div className="grid sm:grid-cols-2 gap-x-8 gap-y-6 lg:gap-y-8">
-                        {features.map((feature, index) => (
-                            <motion.div
-                                key={feature.id}
-                                initial={{ opacity: 0, x: 15 }}
-                                whileInView={{ opacity: 1, x: 0 }}
-                                transition={{ duration: 0.5, delay: index * 0.1 }}
-                                className="group"
+                            WHY <br />
+                            <motion.span
+                                initial={{ color: "#ffffff" }}
+                                whileInView={{ color: "transparent" }}
+                                transition={{ delay: 0.5, duration: 0.1 }}
+                                className="stroke-text-white relative inline-block"
                             >
-                                <div className="flex items-center gap-3 mb-2.5">
-                                    <span className="text-[#05A4A7] font-mono font-black text-xs bg-[#05A4A7]/5 px-2 py-0.5 rounded-lg group-hover:bg-[#05A4A7] group-hover:text-white transition-all duration-300">
-                                        {feature.id}
-                                    </span>
-                                    <h4 className="text-base lg:text-lg font-black text-slate-900 uppercase tracking-tight group-hover:text-[#05A4A7] transition-colors">
-                                        {feature.title}
-                                    </h4>
-                                </div>
-                                <p className="text-slate-500 text-xs lg:text-sm leading-relaxed font-medium pl-3 border-l-2 border-slate-100 group-hover:border-[#05A4A7] transition-colors">
-                                    {feature.description}
-                                </p>
-                            </motion.div>
-                        ))}
+                                <span className="absolute inset-0 text-transparent stroke-text-white z-10">CHOOSE</span>
+                                <motion.span
+                                    initial={{ width: "0%" }}
+                                    whileInView={{ width: "100%" }}
+                                    transition={{ duration: 1, delay: 0.6, ease: "easeInOut" }}
+                                    className="absolute inset-0 text-white overflow-hidden whitespace-nowrap z-20"
+                                >
+                                    CHOOSE
+                                </motion.span>
+                                <span className="opacity-0">CHOOSE</span>
+                            </motion.span> <br />
+                            <span className="text-[#05A4A7]">APPZETO?</span>
+                        </motion.h2>
+
+                        <motion.div
+                            className="relative pl-6 py-2 hidden lg:block max-w-md"
+                        >
+                            <motion.div
+                                initial={{ height: 0 }}
+                                whileInView={{ height: "100%" }}
+                                transition={{ duration: 1, delay: 0.4 }}
+                                className="absolute left-0 top-0 w-1 bg-[#05A4A7]"
+                            />
+                            <motion.p
+                                initial={{ opacity: 0, x: 20 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                transition={{ delay: 0.5, duration: 0.6 }}
+                                className="text-white/60 text-lg font-medium"
+                            >
+                                We build enterprise-grade digital solutions that transform businesses with precision and future-proof technology.
+                            </motion.p>
+                        </motion.div>
                     </div>
 
-                    {/* Lean Status Bar */}
-                    <div className="mt-10 pt-5 border-t border-slate-50 flex items-center gap-6">
-                        <div className="flex items-center gap-2">
-                            <div className="w-1.5 h-1.5 rounded-full bg-[#05A4A7] animate-pulse" />
-                            <span className="text-[10px] font-black text-slate-400 uppercase tracking-[0.3em]">Client First</span>
+                    {/* RIGHT SIDE: Detailed Content & Stats (Takes ~60% width) */}
+                    <div className="lg:col-span-7 flex flex-col justify-center gap-10 h-full lg:pt-16">
+
+                        {/* 1. Main Tagline/Description */}
+                        <motion.p
+                            initial={{ opacity: 0, x: 30 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.8 }}
+                            className="text-white text-2xl md:text-3xl font-bold leading-snug max-w-2xl"
+                        >
+                            Your strategic technology partner for building resilient, scalable, and secure digital ecosystems.
+                        </motion.p>
+
+                        {/* 2. Stats Grid */}
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
+                            <StatCard value={12} suffix="+" label="Years Of Exp" index={0} />
+                            <StatCard value={250} suffix="+" label="Happy Clients" index={1} />
+                            <StatCard value={100} suffix="+" label="Successful Projects" index={2} />
                         </div>
-                        <div className="flex items-center gap-2">
-                            <div className="w-1.5 h-1.5 rounded-full bg-slate-100" />
-                            <span className="text-[10px] font-black text-slate-400 uppercase tracking-[0.3em]">24/7 Support</span>
+
+                        {/* 3. Checkmarks Grid */}
+                        <div className="grid grid-cols-2 gap-y-6 gap-x-8 pt-6 border-t border-white/10 w-full">
+                            {points.map((point, i) => (
+                                <motion.div
+                                    key={i}
+                                    initial={{ opacity: 0, y: 15 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    whileHover={{ x: 5 }}
+                                    transition={{ duration: 0.4, delay: 0.6 + i * 0.1 }}
+                                    className="flex items-center gap-4 group cursor-default"
+                                >
+                                    <div className="w-8 h-8 rounded-full bg-[#05A4A7]/20 flex items-center justify-center border border-[#05A4A7] group-hover:bg-[#05A4A7] transition-colors duration-300">
+                                        <span className="material-icons text-[#05A4A7] text-[14px] font-black group-hover:text-white transition-colors duration-300">done</span>
+                                    </div>
+                                    <span className="text-white/90 font-bold text-sm tracking-widest uppercase group-hover:text-[#05A4A7] transition-colors duration-300">{point}</span>
+                                </motion.div>
+                            ))}
                         </div>
                     </div>
+
                 </div>
             </div>
 
+            <style dangerouslySetInnerHTML={{
+                __html: `
+                .stroke-text-white {
+                    -webkit-text-stroke: 2px white;
+                    color: transparent;
+                }
+                @media (max-width: 768px) {
+                    .stroke-text-white {
+                        -webkit-text-stroke: 1px white;
+                    }
+                }
+            ` }} />
         </section>
     );
 };

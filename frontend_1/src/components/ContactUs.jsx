@@ -50,7 +50,7 @@ const FAQItem = ({ question, answer, isOpen, toggle }) => {
                         transition={{ duration: 0.3, ease: "easeInOut" }}
                         className="overflow-hidden"
                     >
-                        <div className="px-4 md:px-6 py-2 md:py-3 text-[10px] md:text-xs text-slate-500 leading-relaxed italic border-l-2 border-primary/20 ml-3 md:ml-4 mt-1">
+                        <div className="px-4 md:px-6 py-2 md:py-3 text-[10px] md:text-xs text-slate-500 leading-relaxed border-l-2 border-primary/20 ml-3 md:ml-4 mt-1">
                             {answer}
                         </div>
                     </motion.div>
@@ -177,9 +177,9 @@ const ContactUs = ({ isHomePage = false }) => {
                             transition={{ duration: 1 }}
                             className="relative text-center z-10 px-4 -mt-10 md:-mt-32 lg:-mt-40"
                         >
-                            <h1 className="text-3xl md:text-4xl lg:text-5xl font-black text-white uppercase tracking-tighter italic drop-shadow-2xl">
+                            <h1 className="text-3xl md:text-4xl lg:text-5xl font-black text-white uppercase tracking-tighter drop-shadow-2xl">
                                 Contact Appzeto for <br />
-                                <span className="text-primary italic">Software Development Consultation</span>
+                                <span className="text-primary">Software Development Consultation</span>
                             </h1>
                             <p className="text-white/70 text-[8px] md:text-[10px] font-bold mt-3 max-w-2xl mx-auto uppercase tracking-[0.3em] md:tracking-[0.4em]">
                                 Let's build something legendary together.
@@ -210,7 +210,7 @@ const ContactUs = ({ isHomePage = false }) => {
                                         <span className="material-icons text-slate-400 group-hover:text-white text-base md:text-2xl">{card.icon}</span>
                                     </div>
                                     <h3 className="text-base md:text-2xl font-black text-slate-900 mb-1 md:mb-3 uppercase tracking-tighter group-hover:text-primary transition-colors">{card.title}</h3>
-                                    <p className="text-slate-500 text-[10px] md:text-sm leading-relaxed mb-3 md:mb-8 font-medium italic">{card.desc}</p>
+                                    <p className="text-slate-500 text-[10px] md:text-sm leading-relaxed mb-3 md:mb-8 font-medium">{card.desc}</p>
                                     <div className="flex items-center gap-2 text-primary group-hover:gap-5 transition-all text-xs font-black uppercase tracking-widest">
                                         <span>Discuss Project</span>
                                         <span className="material-icons text-sm">east</span>
@@ -228,12 +228,12 @@ const ContactUs = ({ isHomePage = false }) => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: false, margin: "-50px" }}
                 transition={{ duration: 1, ease: "easeOut" }}
-                className={`bg-[#062929] w-full ${isHomePage ? 'min-h-[50vh] md:min-h-screen py-8 md:py-16' : 'min-h-[40vh] md:min-h-[70vh] py-6 md:py-12'} flex items-center relative lg:py-16`}
+                className={`bg-white w-full ${isHomePage ? 'min-h-[30vh] md:min-h-[60vh]' : 'min-h-[25vh] md:min-h-[50vh]'} flex items-center relative overflow-hidden`}
             >
-                <div className="max-w-[1700px] mx-auto px-4 sm:px-10 lg:px-24 w-full">
-                    <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr_1.2fr] gap-8 md:gap-12 lg:gap-20 items-center">
+                <div className="w-full h-full">
+                    <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr_1.2fr] items-stretch h-full">
                         {/* Left: Map - HIDDEN ON MOBILE */}
-                        <div className="hidden lg:block h-[250px] md:h-[400px] lg:h-[500px] overflow-hidden relative rounded-2xl md:rounded-[2rem] border-4 border-white/30 shadow-2xl bg-white">
+                        <div className="hidden lg:block h-full overflow-hidden relative bg-white">
                             <iframe
                                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3680.0810793132646!2d75.8950663750438!3d22.753556779363577!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x396302a6d7a22409%3A0x8e0404a0889c250!2sVijay%20Nagar%2C%20Indore%2C%20Madhya%20Pradesh!5e0!3m2!1sen!2sin!4v1703951567403!5m2!1sen!2sin"
                                 width="100%"
@@ -245,8 +245,8 @@ const ContactUs = ({ isHomePage = false }) => {
                         </div>
 
                         {/* Middle: Meet Us */}
-                        <div className="flex flex-col justify-center py-2 md:py-8">
-                            <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-white mb-6 md:mb-12 tracking-tighter uppercase">Meet Us</h2>
+                        <div className="flex flex-col justify-center py-8 px-6 md:px-12 lg:px-16">
+                            <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-slate-900 mb-6 md:mb-12 tracking-tighter uppercase">Meet Us</h2>
                             <div className="space-y-6 md:space-y-12">
                                 {[
                                     { icon: "call", label: "Phone", info: settings.contactPhone },
@@ -254,12 +254,12 @@ const ContactUs = ({ isHomePage = false }) => {
                                     { icon: "location_on", label: "Address", info: settings.contactAddress }
                                 ].map((item, i) => (
                                     <div key={i} className="flex items-center gap-4 md:gap-8 group">
-                                        <div className="w-10 h-10 md:w-14 md:h-14 rounded-full border border-white/5 flex items-center justify-center flex-shrink-0 group-hover:border-primary/40 transition-all duration-500">
-                                            <span className="material-icons text-slate-500 text-lg md:text-2xl group-hover:text-primary transition-all">{item.icon}</span>
+                                        <div className="w-10 h-10 md:w-14 md:h-14 rounded-full border border-slate-100 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/10 group-hover:border-primary/40 transition-all duration-500">
+                                            <span className="material-icons text-slate-400 text-lg md:text-2xl group-hover:text-primary transition-all">{item.icon}</span>
                                         </div>
                                         <div className="flex flex-col gap-0.5 md:gap-1">
-                                            <span className="text-[8px] md:text-[10px] uppercase font-bold tracking-[0.25em] text-slate-500">{item.label}</span>
-                                            <span className="text-sm md:text-lg font-medium text-slate-200 group-hover:text-white transition-colors">{item.info}</span>
+                                            <span className="text-[8px] md:text-[10px] uppercase font-bold tracking-[0.25em] text-slate-400">{item.label}</span>
+                                            <span className="text-sm md:text-lg font-medium text-slate-700 group-hover:text-primary transition-colors">{item.info}</span>
                                         </div>
                                     </div>
                                 ))}
@@ -267,8 +267,8 @@ const ContactUs = ({ isHomePage = false }) => {
                         </div>
 
                         {/* Right: Contact Form */}
-                        <div id="contact-form" className="flex flex-col justify-center mt-4 md:mt-0">
-                            <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-white mb-6 md:mb-10 tracking-tighter uppercase">Message</h2>
+                        <div id="contact-form" className="flex flex-col justify-center bg-primary/[0.03] p-8 md:p-12 lg:p-16 border-l border-primary/5">
+                            <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-slate-900 mb-6 md:mb-10 tracking-tighter uppercase">Message</h2>
                             <form onSubmit={handleSend} className="space-y-4 md:space-y-6 lg:space-y-10">
                                 {settings.formFields ? (
                                     <>
@@ -281,11 +281,11 @@ const ContactUs = ({ isHomePage = false }) => {
                                                     </label>
                                                     {field.type === 'textarea' ? (
                                                         <textarea
-                                                            name={field.label.toLowerCase().replace(/\s/g, '_')} // simple slug
+                                                            name={field.label.toLowerCase().replace(/\s/g, '_')}
                                                             required={field.required}
                                                             placeholder={field.placeholder}
                                                             rows="3"
-                                                            className="w-full p-3 md:p-6 rounded-lg md:rounded-2xl bg-white/5 border border-white/5 text-white outline-none focus:border-primary/50 transition-all text-xs md:text-sm font-medium placeholder:text-slate-600 resize-none shadow-inner"
+                                                            className="w-full p-3 md:p-6 rounded-lg md:rounded-2xl bg-white border border-slate-100 text-slate-900 outline-none focus:border-primary/50 focus:bg-white transition-all text-xs md:text-sm font-medium placeholder:text-slate-300 resize-none shadow-sm"
                                                         ></textarea>
                                                     ) : field.type === 'select' ? (
                                                         <div className="relative">
@@ -293,14 +293,14 @@ const ContactUs = ({ isHomePage = false }) => {
                                                                 name={field.label.toLowerCase().replace(/\s/g, '_')}
                                                                 required={field.required}
                                                                 defaultValue=""
-                                                                className="w-full p-3 md:p-6 rounded-lg md:rounded-2xl bg-white/5 border border-white/5 text-white outline-none focus:border-primary/50 transition-all text-xs md:text-sm font-medium appearance-none cursor-pointer shadow-inner"
+                                                                className="w-full p-3 md:p-6 rounded-lg md:rounded-2xl bg-white border border-slate-100 text-slate-900 outline-none focus:border-primary/50 focus:bg-white transition-all text-xs md:text-sm font-medium appearance-none cursor-pointer shadow-sm"
                                                             >
-                                                                <option value="" disabled className="bg-[#062929]">Select...</option>
-                                                                <option value="General" className="bg-[#062929]">General</option>
-                                                                <option value="Project" className="bg-[#062929]">Project</option>
-                                                                <option value="Support" className="bg-[#062929]">Support</option>
+                                                                <option value="" disabled className="bg-white">Select...</option>
+                                                                <option value="General" className="bg-white">General</option>
+                                                                <option value="Project" className="bg-white">Project</option>
+                                                                <option value="Support" className="bg-white">Support</option>
                                                             </select>
-                                                            <span className="material-icons absolute right-4 md:right-6 top-1/2 -translate-y-1/2 text-slate-500 pointer-events-none">expand_more</span>
+                                                            <span className="material-icons absolute right-4 md:right-6 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none">expand_more</span>
                                                         </div>
                                                     ) : (
                                                         <input
@@ -308,7 +308,7 @@ const ContactUs = ({ isHomePage = false }) => {
                                                             name={field.label.toLowerCase().replace(/\s/g, '_')}
                                                             required={field.required}
                                                             placeholder={field.placeholder}
-                                                            className="w-full p-3 md:p-6 rounded-lg md:rounded-2xl bg-white/5 border border-white/5 text-white outline-none focus:border-primary/50 transition-all text-xs md:text-sm font-medium placeholder:text-slate-600 shadow-inner"
+                                                            className="w-full p-3 md:p-6 rounded-lg md:rounded-2xl bg-white border border-slate-100 text-slate-900 outline-none focus:border-primary/50 focus:bg-white transition-all text-xs md:text-sm font-medium placeholder:text-slate-300 shadow-sm"
                                                         />
                                                     )}
                                                 </div>
@@ -317,41 +317,69 @@ const ContactUs = ({ isHomePage = false }) => {
                                     </>
                                 ) : (
                                     <>
-                                        {/* Fallback Hardcoded Form (Existing) */}
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 lg:gap-10">
                                             <div className="space-y-1.5 md:space-y-4">
                                                 <label className="text-[9px] md:text-[10px] font-black uppercase text-slate-400 tracking-widest ml-1">Full Name</label>
-                                                <input required name="name" type="text" placeholder="Your Name" className="w-full p-3 md:p-6 rounded-lg md:rounded-2xl bg-white/5 border border-white/5 text-white outline-none focus:border-primary/50 transition-all text-xs md:text-sm font-medium placeholder:text-slate-600 shadow-inner" />
+                                                <input
+                                                    required
+                                                    name="name"
+                                                    type="text"
+                                                    placeholder="Your Name"
+                                                    className="w-full p-3 md:p-6 rounded-lg md:rounded-2xl bg-white border border-slate-100 text-slate-900 outline-none focus:border-primary/50 focus:bg-white transition-all text-xs md:text-sm font-medium placeholder:text-slate-300 shadow-sm"
+                                                />
                                             </div>
                                             <div className="space-y-1.5 md:space-y-4">
                                                 <label className="text-[9px] md:text-[10px] font-black uppercase text-slate-400 tracking-widest ml-1">Phone</label>
-                                                <input required name="phone" type="tel" placeholder="+91 0000..." className="w-full p-3 md:p-6 rounded-lg md:rounded-2xl bg-white/5 border border-white/5 text-white outline-none focus:border-primary/50 transition-all text-xs md:text-sm font-medium placeholder:text-slate-600 shadow-inner" />
+                                                <input
+                                                    required
+                                                    name="phone"
+                                                    type="tel"
+                                                    placeholder="+91 0000..."
+                                                    className="w-full p-3 md:p-6 rounded-lg md:rounded-2xl bg-white border border-slate-100 text-slate-900 outline-none focus:border-primary/50 focus:bg-white transition-all text-xs md:text-sm font-medium placeholder:text-slate-300 shadow-sm"
+                                                />
                                             </div>
                                         </div>
 
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 lg:gap-10">
                                             <div className="space-y-1.5 md:space-y-4">
                                                 <label className="text-[9px] md:text-[10px] font-black uppercase text-slate-400 tracking-widest ml-1">Email Address</label>
-                                                <input required name="email" type="email" placeholder="you@email.com" className="w-full p-3 md:p-6 rounded-lg md:rounded-2xl bg-white/5 border border-white/5 text-white outline-none focus:border-primary/50 transition-all text-xs md:text-sm font-medium placeholder:text-slate-600 shadow-inner" />
+                                                <input
+                                                    required
+                                                    name="email"
+                                                    type="email"
+                                                    placeholder="you@email.com"
+                                                    className="w-full p-3 md:p-6 rounded-lg md:rounded-2xl bg-white border border-slate-100 text-slate-900 outline-none focus:border-primary/50 focus:bg-white transition-all text-xs md:text-sm font-medium placeholder:text-slate-300 shadow-sm"
+                                                />
                                             </div>
                                             <div className="space-y-1.5 md:space-y-4">
                                                 <label className="text-[10px] md:text-[10px] font-black uppercase text-slate-400 tracking-widest ml-1">Reason</label>
                                                 <div className="relative">
-                                                    <select required name="reason" defaultValue="" className="w-full p-3 md:p-6 rounded-lg md:rounded-2xl bg-white/5 border border-white/5 text-white outline-none focus:border-primary/50 transition-all text-xs md:text-sm font-medium appearance-none cursor-pointer shadow-inner">
-                                                        <option value="" disabled className="bg-[#062929]">Select reason</option>
-                                                        <option value="project" className="bg-[#062929]">New Project</option>
-                                                        <option value="partnership" className="bg-[#062929]">Partnership</option>
-                                                        <option value="career" className="bg-[#062929]">Careers</option>
-                                                        <option value="other" className="bg-[#062929]">General</option>
+                                                    <select
+                                                        required
+                                                        name="reason"
+                                                        defaultValue=""
+                                                        className="w-full p-3 md:p-6 rounded-lg md:rounded-2xl bg-white border border-slate-100 text-slate-900 outline-none focus:border-primary/50 focus:bg-white transition-all text-xs md:text-sm font-medium appearance-none cursor-pointer shadow-sm"
+                                                    >
+                                                        <option value="" disabled className="bg-white">Select reason</option>
+                                                        <option value="project" className="bg-white">New Project</option>
+                                                        <option value="partnership" className="bg-white">Partnership</option>
+                                                        <option value="career" className="bg-white">Careers</option>
+                                                        <option value="other" className="bg-white">General</option>
                                                     </select>
-                                                    <span className="material-icons absolute right-4 md:right-6 top-1/2 -translate-y-1/2 text-slate-500 pointer-events-none">expand_more</span>
+                                                    <span className="material-icons absolute right-4 md:right-6 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none">expand_more</span>
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div className="space-y-1.5 md:space-y-4">
                                             <label className="text-[9px] md:text-[10px] font-black uppercase text-slate-400 tracking-widest ml-1">Message</label>
-                                            <textarea required name="message" placeholder="How can we help?" rows="2" className="w-full p-3 md:p-6 rounded-lg md:rounded-2xl bg-white/5 border border-white/5 text-white outline-none focus:border-primary/50 transition-all text-xs md:text-sm font-medium placeholder:text-slate-600 resize-none shadow-inner"></textarea>
+                                            <textarea
+                                                required
+                                                name="message"
+                                                placeholder="How can we help?"
+                                                rows="2"
+                                                className="w-full p-3 md:p-6 rounded-lg md:rounded-2xl bg-white border border-slate-100 text-slate-900 outline-none focus:border-primary/50 focus:bg-white transition-all text-xs md:text-sm font-medium placeholder:text-slate-300 resize-none shadow-sm"
+                                            ></textarea>
                                         </div>
                                     </>
                                 )}
@@ -360,7 +388,7 @@ const ContactUs = ({ isHomePage = false }) => {
                                     whileTap={{ scale: 0.98 }}
                                     disabled={status !== 'idle'}
                                     type="submit"
-                                    className={`w-full py-3 md:py-5 rounded-lg md:rounded-2xl font-bold uppercase tracking-[0.2em] md:tracking-[0.25em] text-[10px] md:text-xs flex items-center justify-center gap-3 md:gap-5 mt-2 md:mt-4 border border-white/5 shadow-2xl transition-all duration-500 ${status === 'idle' ? 'bg-white text-[#062929] hover:bg-primary' :
+                                    className={`w-full py-3 md:py-5 rounded-lg md:rounded-2xl font-bold uppercase tracking-[0.2em] md:tracking-[0.25em] text-[10px] md:text-xs flex items-center justify-center gap-3 md:gap-5 mt-2 md:mt-4 border border-slate-100 shadow-xl transition-all duration-500 ${status === 'idle' ? 'bg-slate-900 text-white hover:bg-primary' :
                                         status === 'sending' ? 'bg-slate-700 text-slate-400 cursor-not-allowed animate-pulse' : 'bg-green-500 text-white'
                                         }`}
                                 >
@@ -374,9 +402,9 @@ const ContactUs = ({ isHomePage = false }) => {
                 </div>
             </motion.div>
 
-            <div className={`max-w-[1700px] mx-auto px-4 sm:px-10 lg:px-24 ${isHomePage ? 'min-h-[50vh] flex flex-col justify-center py-8 md:py-10 overflow-hidden' : 'py-10 md:py-20'}`}>
-                {/* --- VISIT OFFICES (Scroll Animation) --- */}
-                {!isHomePage && (
+            {!isHomePage && (
+                <div className={`max-w-[1700px] mx-auto px-4 sm:px-10 lg:px-24 py-10 md:py-20`}>
+                    {/* --- VISIT OFFICES (Scroll Animation) --- */}
                     <motion.div
                         id="locations"
                         initial={{ opacity: 0, y: 80 }}
@@ -389,9 +417,9 @@ const ContactUs = ({ isHomePage = false }) => {
                             <div className="lg:w-1/3">
                                 <p className="text-primary font-black tracking-[0.3em] uppercase text-[10px] mb-2 md:mb-4">Our Presence</p>
                                 <h2 className="text-3xl md:text-5xl font-semibold text-slate-900 uppercase tracking-tighter leading-tight">
-                                    Visit Our <br /> <span className="text-primary italic">Offices</span>
+                                    Visit Our <br /> <span className="text-primary">Offices</span>
                                 </h2>
-                                <p className="text-slate-400 text-xs md:text-sm mt-4 md:mt-8 leading-relaxed italic max-w-xs">
+                                <p className="text-slate-400 text-xs md:text-sm mt-4 md:mt-8 leading-relaxed max-w-xs">
                                     Stop by our innovation hubs to meet the team and discuss your next big idea.
                                 </p>
                             </div>
@@ -408,7 +436,7 @@ const ContactUs = ({ isHomePage = false }) => {
                                             </div>
                                             <div>
                                                 <h3 className="text-lg md:text-2xl font-bold text-slate-900 tracking-tighter uppercase group-hover:text-primary transition-colors">{office.title}</h3>
-                                                <p className="text-slate-500 text-xs md:text-sm mt-1 md:mt-2 max-w-md font-medium italic">{office.address}</p>
+                                                <p className="text-slate-500 text-xs md:text-sm mt-1 md:mt-2 max-w-md font-medium">{office.address}</p>
                                             </div>
                                         </div>
                                         <div className="flex items-center gap-3 md:gap-4 px-4 md:px-6 py-2 md:py-2.5 rounded-full border border-slate-100 bg-white flex-shrink-0 self-start md:self-center group-hover:border-primary/30 transition-all">
@@ -420,37 +448,35 @@ const ContactUs = ({ isHomePage = false }) => {
                             </div>
                         </div>
                     </motion.div>
-                )}
 
-                {/* --- FAQ SECTION (Scroll Animation) --- */}
-                <motion.div
-                    initial={{ opacity: 0, y: 80 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: false, margin: "-100px" }}
-                    transition={{ duration: 0.8, ease: "easeOut" }}
-                    className={`grid grid-cols-1 ${isHomePage ? 'lg:grid-cols-1' : 'lg:grid-cols-2'} gap-8 md:gap-12 items-center ${isHomePage ? 'pt-0' : 'pt-6 md:pt-10'}`}
-                >
-                    <div className={`w-full ${isHomePage ? 'max-w-3xl mx-auto text-center' : ''}`}>
-                        <div className="mb-6">
-                            <p className="text-primary font-black tracking-[0.3em] uppercase text-[9px] mb-2">Support & Help</p>
-                            <h2 className="text-2xl md:text-3xl font-semibold text-slate-900 leading-[1.1] uppercase tracking-tighter">
-                                Frequently <br /> <span className="text-primary italic">Asked</span>
-                            </h2>
+                    {/* --- FAQ SECTION (Scroll Animation) --- */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 80 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: false, margin: "-100px" }}
+                        transition={{ duration: 0.8, ease: "easeOut" }}
+                        className={`grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center pt-6 md:pt-10`}
+                    >
+                        <div className={`w-full`}>
+                            <div className="mb-6">
+                                <p className="text-primary font-black tracking-[0.3em] uppercase text-[9px] mb-2">Support & Help</p>
+                                <h2 className="text-2xl md:text-3xl font-semibold text-slate-900 leading-[1.1] uppercase tracking-tighter">
+                                    Frequently <br /> <span className="text-primary">Asked</span>
+                                </h2>
+                            </div>
+                            <div className="space-y-2 md:space-y-4">
+                                {faqData.map((faq, index) => (
+                                    <FAQItem
+                                        key={index}
+                                        question={faq.question}
+                                        answer={faq.answer}
+                                        isOpen={openIndex === index}
+                                        toggle={() => setOpenIndex(index === openIndex ? -1 : index)}
+                                    />
+                                ))}
+                            </div>
                         </div>
-                        <div className="space-y-2 md:space-y-4">
-                            {faqData.map((faq, index) => (
-                                <FAQItem
-                                    key={index}
-                                    question={faq.question}
-                                    answer={faq.answer}
-                                    isOpen={openIndex === index}
-                                    toggle={() => setOpenIndex(index === openIndex ? -1 : index)}
-                                />
-                            ))}
-                        </div>
-                    </div>
 
-                    {!isHomePage && (
                         <div className="relative pt-10 hidden lg:block">
                             <motion.div
                                 initial={{ opacity: 0, rotate: 2, scale: 0.9 }}
@@ -464,8 +490,8 @@ const ContactUs = ({ isHomePage = false }) => {
                                     className="w-full h-72 object-cover rounded-3xl mb-10 grayscale-[0.5] hover:grayscale-0 transition-all duration-1000"
                                     alt="Support"
                                 />
-                                <h3 className="text-3xl font-semibold text-slate-900 uppercase tracking-tighter italic">Still Stuck?</h3>
-                                <p className="text-slate-500 text-sm mt-6 leading-relaxed mb-10 italic">Our global success managers are available around the clock to guide you.</p>
+                                <h3 className="text-3xl font-semibold text-slate-900 uppercase tracking-tighter">Still Stuck?</h3>
+                                <p className="text-slate-500 text-sm mt-6 leading-relaxed mb-10">Our global success managers are available around the clock to guide you.</p>
                                 <button
                                     onClick={() => document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' })}
                                     className="text-primary font-black uppercase text-[11px] tracking-[0.3em] flex items-center gap-4 group"
@@ -475,9 +501,9 @@ const ContactUs = ({ isHomePage = false }) => {
                             </motion.div>
                             <div className="absolute -top-10 -right-10 w-80 h-80 bg-primary/10 rounded-full blur-[120px] -z-10" />
                         </div>
-                    )}
-                </motion.div>
-            </div>
+                    </motion.div>
+                </div>
+            )}
 
             {/* --- SALES INQUIRY MODAL --- */}
             <AnimatePresence>
