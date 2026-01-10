@@ -43,6 +43,24 @@ const services = [
         icon: "psychology",
         image: aiImg,
         slug: "ai-solutions"
+    },
+    {
+        id: "05",
+        title: "Cloud DevOps",
+        description: "Optimized infrastructure and automated deployment pipelines for maximum uptime and reliability.",
+        features: ["AWS/Azure Specialists", "Docker & Kubernetes", "CI/CD Automation", "Infrastructure as Code"],
+        icon: "cloud",
+        image: cloudImg,
+        slug: "cloud-devops"
+    },
+    {
+        id: "06",
+        title: "Cyber Security",
+        description: "End-to-end security audits and implementation to protect your digital assets and user data.",
+        features: ["Vulnerability Testing", "Zero Trust Security", "Compliance & Privacy", "Managed Firewall"],
+        icon: "security",
+        image: webImg,
+        slug: "cyber-security"
     }
 ];
 
@@ -50,11 +68,11 @@ const ServiceCard = ({ service, index }) => {
     return (
         <Link to={`/services/${service.slug}`} className="block h-full">
             <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, x: 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.2 }}
-                className="group relative h-full bg-[#062929] rounded-2xl overflow-hidden shadow-xl border border-transparent transition-all duration-500 hover:-translate-y-2"
+                transition={{ duration: 0.5, delay: index * 0.15 }}
+                className="group relative flex-shrink-0 w-[260px] md:w-[280px] h-[420px] bg-[#062929] rounded-2xl overflow-hidden shadow-xl border border-transparent transition-all duration-500 hover:-translate-y-2"
             >
                 {/* 1. Background Image (Base Layer) */}
                 <div className="absolute inset-0 z-0 h-full w-full">
@@ -107,8 +125,8 @@ const ServiceCard = ({ service, index }) => {
 
 const Services = () => {
     return (
-        <section className="bg-[#062929] min-h-screen flex flex-col justify-center py-10 md:py-0 font-sans relative">
-            <div className="max-w-[1380px] mx-auto px-4 md:px-8 w-full">
+        <section className="bg-[#062929] h-screen min-h-[750px] flex flex-col justify-center py-10 overflow-hidden font-sans relative">
+            <div className="container mx-auto px-4 md:px-8 w-full max-w-[1500px]">
                 {/* Header Section */}
                 <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-10 gap-6">
                     <div className="max-w-3xl">
@@ -129,13 +147,38 @@ const Services = () => {
                     </div>
                 </div>
 
-                {/* Cards Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-4 md:gap-6">
-                    {services.map((service, index) => (
-                        <ServiceCard key={index} service={service} index={index} />
-                    ))}
+                {/* Cards Container (Horizontal Scroll) */}
+                <div className="relative group/scroll">
+                    <div className="flex gap-6 overflow-x-auto no-scrollbar pb-10 px-2 mask-linear">
+                        {services.map((service, index) => (
+                            <ServiceCard key={index} service={service} index={index} />
+                        ))}
+                    </div>
+
+                    {/* Visual Scroll Hint */}
+                    <div className="mt-4 flex items-center gap-4 text-white/30 text-[10px] font-black uppercase tracking-[0.3em]">
+                        <span className="animate-pulse">Scroll to explore services</span>
+                        <div className="w-12 h-[1px] bg-white/20"></div>
+                        <div className="flex gap-2">
+                            {[1, 2, 3, 4, 5].map(i => <div key={i} className="w-1 h-1 rounded-full bg-white/10"></div>)}
+                        </div>
+                    </div>
                 </div>
             </div>
+
+            <style dangerouslySetInnerHTML={{
+                __html: `
+                .no-scrollbar::-webkit-scrollbar {
+                    display: none;
+                }
+                .no-scrollbar {
+                    -ms-overflow-style: none;
+                    scrollbar-width: none;
+                }
+                .mask-linear {
+                    mask-image: linear-gradient(to right, black 85%, transparent 100%);
+                }
+            ` }} />
         </section>
     );
 };
