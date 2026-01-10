@@ -77,7 +77,7 @@ const About = () => {
                     <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#05A4A7]/5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
                     <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-[#EAB308]/5 rounded-full blur-[80px] translate-y-1/3 -translate-x-1/3 pointer-events-none"></div>
                     <div className="max-w-[1280px] mx-auto w-full">
-                        <div className="grid lg:grid-cols-2 gap-2 sm:gap-10 lg:gap-24 items-center h-full">
+                        <div className="flex flex-col-reverse lg:grid lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-24 items-center h-full">
                             <motion.div
                                 initial={{ opacity: 0, x: -100 }}
                                 whileInView={{ opacity: 1, x: 0 }}
@@ -89,22 +89,22 @@ const About = () => {
                                 <div className="absolute -bottom-8 -right-8 w-64 h-64 bg-[#ffffff] dark:bg-[#023638] rounded-full mix-blend-multiply filter blur-3xl opacity-50 dark:opacity-20 hidden sm:block"></div>
                                 <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-gray-100 dark:border-gray-700 group w-full">
                                     <div className="absolute inset-0 bg-gradient-to-tr from-[#012829]/80 via-transparent to-transparent z-10"></div>
-                                    <div className="aspect-video sm:aspect-[4/3] w-full bg-cover bg-center transition-transform duration-1000 group-hover:scale-105" data-alt="Modern collaborative office space with diverse team working on computers" style={{ backgroundImage: `url("${groupImg}")` }}></div>
-                                    <div className="absolute bottom-0 left-0 p-4 sm:p-8 z-20 w-full">
-                                        <div className="backdrop-blur-md bg-white/10 border border-white/20 p-4 sm:p-6 rounded-xl overflow-hidden relative">
+                                    <div className="aspect-[4/3] sm:aspect-[4/3] w-full bg-cover bg-center transition-transform duration-1000 group-hover:scale-105" data-alt="Modern collaborative office space with diverse team working on computers" style={{ backgroundImage: `url("${groupImg}")` }}></div>
+                                    <div className="absolute bottom-0 left-0 p-2 sm:p-8 z-20 w-full">
+                                        <div className="backdrop-blur-md bg-white/10 border border-white/20 p-3 sm:p-6 rounded-xl overflow-hidden relative">
                                             <div className="absolute top-0 left-0 w-1 h-full bg-[#EAB308]"></div>
-                                            <p className="text-white/80 text-xs sm:text-sm font-bold uppercase tracking-widest mb-2">Our Mission</p>
-                                            <p className="text-white text-lg sm:text-xl font-bold leading-snug">"We don't follow trends. We engineer the technologies that create them."</p>
+                                            <p className="text-white/80 text-[10px] sm:text-sm font-bold uppercase tracking-widest mb-1 sm:mb-2">Our Mission</p>
+                                            <p className="text-white text-sm sm:text-xl font-bold leading-snug">"We don't follow trends. We engineer the technologies that create them."</p>
                                         </div>
                                     </div>
                                 </div>
-                                <div className="absolute -top-6 -right-6 md:-right-6 right-0 bg-[#ffffff] dark:bg-[#023638] p-3 sm:p-4 pr-4 sm:pr-6 rounded-lg shadow-[0_8px_30px_rgb(0,0,0,0.12)] border-r-4 border-[#05A4A7] flex flex-row-reverse items-center gap-3 sm:gap-4 hover:-translate-y-1 transition-transform duration-300 scale-90 sm:scale-100">
-                                    <div className="bg-[#05A4A7]/10 p-2 rounded-full text-[#05A4A7]">
-                                        <span className="material-symbols-outlined text-lg sm:text-2xl">verified</span>
+                                <div className="absolute -top-4 -right-2 md:-right-6 right-0 bg-[#ffffff] dark:bg-[#023638] p-2 sm:p-4 pr-3 sm:pr-6 rounded-lg shadow-[0_8px_30px_rgb(0,0,0,0.12)] border-r-2 sm:border-r-4 border-[#05A4A7] flex flex-row-reverse items-center gap-2 sm:gap-4 hover:-translate-y-1 transition-transform duration-300 scale-90 sm:scale-100 origin-top-right z-30">
+                                    <div className="bg-[#05A4A7]/10 p-1.5 sm:p-2 rounded-full text-[#05A4A7]">
+                                        <span className="material-symbols-outlined text-base sm:text-2xl">verified</span>
                                     </div>
                                     <div className="text-right">
-                                        <p className="text-[10px] sm:text-xs text-[#618983] font-bold uppercase">Client Retention</p>
-                                        <p className="text-lg sm:text-xl font-black text-[#111817] dark:text-white">98%</p>
+                                        <p className="text-[9px] sm:text-xs text-[#618983] font-bold uppercase">Client Retention</p>
+                                        <p className="text-base sm:text-xl font-black text-[#111817] dark:text-white">98%</p>
                                     </div>
                                 </div>
                                 <div className="absolute -left-4 top-1/2 -translate-y-1/2 hidden lg:flex flex-col gap-3">
@@ -118,6 +118,30 @@ const About = () => {
                                         <span className="material-symbols-outlined">cloud</span>
                                     </div>
                                 </div>
+
+                                {/* Mobile AI/ML Features - Appears below image on mobile */}
+                                <div className="grid sm:hidden grid-cols-2 gap-2 border-t border-dashed border-gray-200 dark:border-gray-700 pt-4 mt-4 w-full">
+                                    <div className="group flex flex-col gap-1 p-2 rounded-lg hover:bg-gray-50 dark:hover:bg-white/5 transition-colors">
+                                        <div className="flex flex-col items-start gap-1 mb-1">
+                                            <span className="material-symbols-outlined text-[#05A4A7] text-lg group-hover:scale-110 transition-transform">neurology</span>
+                                            <h3 className="font-bold text-[#111817] dark:text-white text-[10px] leading-tight">AI & ML</h3>
+                                        </div>
+                                        <p className="text-[9px] text-[#618983] dark:text-gray-500 leading-tight">Predictive algorithms & automation.</p>
+                                    </div>
+                                    <div className="group flex flex-col gap-1 p-2 rounded-lg hover:bg-gray-50 dark:hover:bg-white/5 transition-colors">
+                                        <div className="flex flex-col items-start gap-1 mb-1">
+                                            <span className="material-symbols-outlined text-[#EAB308] text-lg group-hover:scale-110 transition-transform">layers</span>
+                                            <h3 className="font-bold text-[#111817] dark:text-white text-[10px] leading-tight">Web & App</h3>
+                                        </div>
+                                        <p className="text-[9px] text-[#618983] dark:text-gray-500 leading-tight">High-performance scalable architectures.</p>
+                                    </div>
+                                </div>
+
+                                {/* Mobile Vision Button - Appears below image on mobile */}
+                                <Link to="/about" className="flex sm:hidden group items-center justify-center gap-2 h-12 px-8 mt-6 rounded-lg bg-[#111817] dark:bg-white text-white dark:text-[#111817] text-sm font-bold shadow-xl w-full">
+                                    <span>Our Vision</span>
+                                    <span className="material-symbols-outlined text-base group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                                </Link>
                             </motion.div>
 
                             {/* Right Content */}
@@ -146,7 +170,7 @@ const About = () => {
                                         <span className="animate-pulse">|</span>
                                     </p>
                                 </div>
-                                <div className="grid grid-cols-2 gap-2 sm:gap-4 border-t border-dashed border-gray-200 dark:border-gray-700 pt-2 sm:pt-6">
+                                <div className="hidden sm:grid grid-cols-2 gap-2 sm:gap-4 border-t border-dashed border-gray-200 dark:border-gray-700 pt-2 sm:pt-6">
                                     <div className="group flex flex-col gap-1 p-2 -ml-2 rounded-lg hover:bg-gray-50 dark:hover:bg-white/5 transition-colors">
                                         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-1 sm:gap-2 mb-1">
                                             <span className="material-symbols-outlined text-[#05A4A7] text-lg group-hover:scale-110 transition-transform">neurology</span>
@@ -163,7 +187,7 @@ const About = () => {
                                     </div>
                                 </div>
                                 <div className="flex flex-col-reverse sm:flex-row items-start sm:items-center gap-2 sm:gap-8 pt-1 sm:pt-2">
-                                    <Link to="/about" className="group flex items-center justify-center gap-2 h-10 sm:h-12 px-6 sm:px-8 rounded-lg bg-[#111817] dark:bg-white text-white dark:text-[#111817] text-sm sm:text-base font-bold hover:bg-opacity-90 transition-all shadow-xl hover:shadow-2xl hover:-translate-y-0.5 w-full sm:w-auto">
+                                    <Link to="/about" className="hidden sm:flex group items-center justify-center gap-2 h-10 sm:h-12 px-6 sm:px-8 rounded-lg bg-[#111817] dark:bg-white text-white dark:text-[#111817] text-sm sm:text-base font-bold hover:bg-opacity-90 transition-all shadow-xl hover:shadow-2xl hover:-translate-y-0.5 w-full sm:w-auto">
                                         <span>Our Vision</span>
                                         <span className="material-symbols-outlined text-base sm:text-lg group-hover:translate-x-1 transition-transform">arrow_forward</span>
                                     </Link>

@@ -264,13 +264,13 @@ const Process = () => {
                         {/* Mobile Rocket */}
                         <div
                             ref={mobileRocketRef}
-                            className="absolute top-0 left-1/2 -translate-x-1/2 w-8 h-8 bg-white border-2 border-slate-900 rounded-full flex items-center justify-center text-lg shadow-lg z-20 -mt-4"
+                            className="absolute top-0 left-1/2 -translate-x-1/2 w-8 h-8 bg-white border-2 border-slate-900 rounded-full flex items-center justify-center text-lg shadow-lg z-20 -mt-4 rotate-[135deg]"
                         >
                             🚀
                         </div>
                     </div>
 
-                    <div className="flex flex-col gap-4 py-4">
+                    <div className="flex flex-col gap-2 py-4">
                         {steps.map((step, index) => {
                             const isEven = index % 2 === 0; // Left Side
                             return (
