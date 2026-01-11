@@ -66,7 +66,7 @@ const RevolvingOrbit = ({ size = "md" }) => {
     const [hoveredProduct, setHoveredProduct] = useState(null);
 
     const sizeClasses = {
-        sm: "w-[250px] h-[250px]",
+        sm: "w-[280px] h-[280px]",
         md: "w-[300px] h-[300px] sm:w-[450px] sm:h-[450px] md:w-[600px] md:h-[600px]",
         lg: "w-full aspect-square max-w-2xl"
     };
@@ -100,7 +100,7 @@ const RevolvingOrbit = ({ size = "md" }) => {
                 `}
             </style>
             <div
-                className={`absolute w-[80%] h-[80%] z-10 animate-orbit ${hoveredProduct ? 'paused' : ''}`}
+                className={`absolute w-[95%] h-[95%] md:w-[80%] md:h-[80%] z-10 animate-orbit ${hoveredProduct ? 'paused' : ''}`}
             >
                 {/* CIRCULAR TRACK PATH - OUTER */}
                 <svg viewBox="0 0 100 100" className="absolute inset-0 w-full h-full overflow-visible pointer-events-none">
@@ -168,7 +168,7 @@ const RevolvingOrbit = ({ size = "md" }) => {
             </div>
 
             {/* 3. INNER CORE AREA (Tech Icons + Pulse) */}
-            <div className="absolute w-[40%] h-[40%] pointer-events-auto">
+            <div className="absolute w-[55%] h-[55%] md:w-[40%] md:h-[40%] pointer-events-auto">
                 <motion.div
                     className="absolute inset-0 rounded-full"
                     animate={{ rotate: -180 }}

@@ -72,7 +72,7 @@ const ServiceCard = ({ service, index }) => {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.15 }}
-                className="group relative flex-shrink-0 w-[260px] md:w-[280px] h-[420px] bg-[#062929] rounded-2xl overflow-hidden shadow-xl border border-transparent transition-all duration-500 hover:-translate-y-2"
+                className="group relative flex-shrink-0 w-[160px] md:w-[280px] h-[260px] md:h-[420px] bg-[#062929] rounded-2xl overflow-hidden shadow-xl border border-transparent transition-all duration-500 hover:-translate-y-2"
             >
                 {/* 1. Background Image (Base Layer) */}
                 <div className="absolute inset-0 z-0 h-full w-full">
@@ -89,30 +89,30 @@ const ServiceCard = ({ service, index }) => {
                 <div className="absolute bottom-0 left-0 right-0 h-0 bg-white z-10 group-hover:h-full transition-all duration-500 ease-in-out"></div>
 
                 {/* 3. Content */}
-                <div className="relative z-20 flex flex-col h-full p-6 md:p-8">
+                <div className="relative z-20 flex flex-col h-full p-3 md:p-8">
                     {/* Header: Number Only */}
-                    <div className="flex justify-end items-start mb-2">
-                        <span className="text-5xl md:text-6xl font-bold text-white/50 group-hover:text-slate-200 transition-colors duration-300 leading-none select-none">
+                    <div className="flex justify-end items-start mb-1 md:mb-2">
+                        <span className="text-3xl md:text-6xl font-bold text-white/50 group-hover:text-slate-200 transition-colors duration-300 leading-none select-none">
                             {service.id}
                         </span>
                     </div>
 
                     <div className="mt-auto">
-                        <h3 className="text-xl md:text-2xl font-bold text-white mb-2 group-hover:text-slate-900 transition-colors duration-300 relative inline-block">
+                        <h3 className="text-sm md:text-2xl font-bold text-white mb-1 md:mb-2 group-hover:text-slate-900 transition-colors duration-300 relative inline-block leading-tight">
                             {service.title}
                         </h3>
 
-                        <p className="text-slate-200 text-sm mb-4 line-clamp-3 group-hover:text-slate-500 transition-colors duration-300 leading-relaxed font-medium">
+                        <p className="text-slate-200 text-[10px] md:text-sm mb-2 md:mb-4 line-clamp-2 md:line-clamp-3 group-hover:text-slate-500 transition-colors duration-300 leading-relaxed font-medium">
                             {service.description}
                         </p>
 
-                        <ul className="space-y-2">
-                            {service.features.map((feature, i) => (
-                                <li key={i} className="flex items-center gap-2.5 text-white/90 group-hover:text-slate-600 transition-colors duration-300">
-                                    <div className="w-4 h-4 rounded-full bg-[#05A4A7] group-hover:bg-[#05A4A7]/10 flex items-center justify-center flex-shrink-0 transition-colors">
-                                        <span className="material-icons text-white group-hover:text-[#05A4A7] text-[8px] font-bold">check</span>
+                        <ul className="space-y-1 md:space-y-2">
+                            {service.features.slice(0, 3).map((feature, i) => (
+                                <li key={i} className="flex items-center gap-1.5 md:gap-2.5 text-white/90 group-hover:text-slate-600 transition-colors duration-300">
+                                    <div className="w-3 h-3 md:w-4 md:h-4 rounded-full bg-[#05A4A7] group-hover:bg-[#05A4A7]/10 flex items-center justify-center flex-shrink-0 transition-colors">
+                                        <span className="material-icons text-white group-hover:text-[#05A4A7] text-[6px] md:text-[8px] font-bold">check</span>
                                     </div>
-                                    <span className="text-[11px] md:text-xs font-semibold">{feature}</span>
+                                    <span className="text-[9px] md:text-xs font-semibold truncate">{feature}</span>
                                 </li>
                             ))}
                         </ul>
@@ -125,15 +125,15 @@ const ServiceCard = ({ service, index }) => {
 
 const Services = () => {
     return (
-        <section className="bg-[#062929] h-screen min-h-[750px] flex flex-col justify-center py-10 overflow-hidden font-sans relative">
+        <section className="bg-[#062929] min-h-0 lg:h-screen lg:min-h-[750px] flex flex-col justify-center pt-8 pb-8 md:py-10 overflow-hidden font-sans relative">
             <div className="container mx-auto px-4 md:px-8 w-full max-w-[1500px]">
                 {/* Header Section */}
-                <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-10 gap-6">
-                    <div className="max-w-3xl">
+                <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-8 md:mb-10 gap-4 sm:gap-6">
+                    <div className="max-w-3xl py-2 md:py-0">
                         <span className="block text-[#05A4A7] font-bold tracking-[0.2em] uppercase text-xs md:text-sm mb-2 pl-1">
                             // Our Expertise
                         </span>
-                        <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.1]">
+                        <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.1] mb-2 md:mb-0">
                             Broad Range of <br />
                             <span className="text-[#05A4A7]">
                                 Professional
@@ -149,7 +149,7 @@ const Services = () => {
 
                 {/* Cards Container (Horizontal Scroll) */}
                 <div className="relative group/scroll">
-                    <div className="flex gap-6 overflow-x-auto no-scrollbar pb-10 px-2 mask-linear">
+                    <div className="flex gap-3 md:gap-6 overflow-x-auto no-scrollbar pb-4 md:pb-10 px-2 mask-linear">
                         {services.map((service, index) => (
                             <ServiceCard key={index} service={service} index={index} />
                         ))}

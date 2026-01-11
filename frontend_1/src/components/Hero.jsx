@@ -18,7 +18,7 @@ const Hero = () => {
     ];
 
     return (
-        <div className="bg-background-light dark:bg-background-dark font-body antialiased transition-colors duration-300 min-h-screen flex flex-col relative overflow-hidden">
+        <div className="bg-background-light dark:bg-background-dark font-body antialiased transition-colors duration-300 min-h-0 lg:min-h-screen flex flex-col relative overflow-hidden">
 
             {/* Background Decorative Elements */}
             <div className="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 sm:w-96 sm:h-96 bg-primary/10 rounded-full blur-3xl dark:bg-primary/20 pointer-events-none"></div>
@@ -46,8 +46,37 @@ const Hero = () => {
                                 We help startups, founders, and businesses design, develop, and scale reliable digital products using modern technologies and proven development processes.
                             </p>
 
-                            <div className="flex flex-col sm:flex-row gap-5 pt-4">
-                                <div className="relative group">
+                            {/* MOBILE ONLY: ORBIT (Moved above buttons for mobile) */}
+                            <div className="lg:hidden relative flex flex-col items-center justify-center py-2 w-full overflow-visible">
+                                <div className="scale-100">
+                                    <RevolvingOrbit size="sm" />
+                                </div>
+                                {/* Mobile Stats - Moved down and adjusted */}
+                                <div className="flex items-center gap-2 bg-white dark:bg-slate-900 border border-gray-100 dark:border-slate-800 p-1.5 pr-4 rounded-full shadow-xl z-20 mt-4 ml-36">
+                                    <div className="flex -space-x-2">
+                                        {[
+                                            "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=64&h=64",
+                                            "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=64&h=64",
+                                            "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=64&h=64"
+                                        ].map((src, i) => (
+                                            <div key={i} className="w-6 h-6 rounded-full border-2 border-white dark:border-slate-800 overflow-hidden">
+                                                <img src={src} alt="Client" className="w-full h-full object-cover" />
+                                            </div>
+                                        ))}
+                                    </div>
+                                    <div className="flex flex-col">
+                                        <span className="text-[10px] font-black text-gray-900 dark:text-white">500+ Clients</span>
+                                        <div className="flex items-center gap-1">
+                                            <span className="flex text-yellow-400 text-[8px]">
+                                                {"★★★★★".split("").map((star, i) => <span key={i}>{star}</span>)}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="flex flex-col sm:flex-row gap-4 pt-0 lg:pt-4 w-full sm:w-auto">
+                                <div className="relative group hidden lg:block">
                                     <motion.div
                                         whileHover={{ y: -6, scale: 1.05 }}
                                         whileTap={{ scale: 0.98 }}
@@ -74,7 +103,7 @@ const Hero = () => {
                                     </motion.div>
                                 </div>
 
-                                <div className="relative group">
+                                <div className="relative group w-full sm:w-auto">
                                     <motion.div
                                         whileHover={{ y: -6, scale: 1.05 }}
                                         whileTap={{ scale: 0.98 }}
@@ -88,8 +117,8 @@ const Hero = () => {
                                             />
                                         </div>
 
-                                        <Link to="/projects" className="relative z-10 flex items-center justify-center px-7 py-3 bg-white dark:bg-slate-900 border border-transparent dark:border-white/5 text-gray-800 dark:text-white font-bold rounded-[11px] shadow-xl overflow-hidden group/btn">
-                                            <span className="relative z-10 text-sm uppercase tracking-wider">View Case Studies</span>
+                                        <Link to="/projects" className="relative z-10 flex items-center justify-center px-6 py-2.5 sm:px-7 sm:py-3 bg-white dark:bg-slate-900 border border-transparent dark:border-white/5 text-gray-800 dark:text-white font-bold rounded-[11px] shadow-xl overflow-hidden group/btn w-full sm:w-auto">
+                                            <span className="relative z-10 text-xs sm:text-sm uppercase tracking-wider">View Case Studies</span>
                                         </Link>
                                     </motion.div>
                                 </div>
@@ -100,7 +129,7 @@ const Hero = () => {
                             initial={{ opacity: 0, scale: 0.8 }}
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ duration: 1.5, ease: "easeOut" }}
-                            className="flex items-center justify-center relative scale-50 sm:scale-65 lg:scale-75 xl:scale-90 py-6 lg:py-0"
+                            className="hidden lg:flex items-center justify-center relative scale-50 sm:scale-65 lg:scale-75 xl:scale-90 py-6 lg:py-0"
                         >
                             <RevolvingOrbit size="lg" />
 
@@ -141,18 +170,26 @@ const Hero = () => {
                 </div>
             </main >
 
-            <section className="border-y border-gray-200 dark:border-gray-800 bg-primary/5 dark:bg-primary/10 overflow-hidden py-3 sm:py-4">
+            <section className="border-y border-gray-200 dark:border-gray-800 bg-primary/5 dark:bg-primary/10 overflow-hidden py-1.5 sm:py-4">
                 <div className="flex animate-scroll-fast whitespace-nowrap group">
                     {[...serviceItems, ...serviceItems].map((item, index) => (
-                        <div key={index} className="flex items-center space-x-2 sm:space-x-3 mx-4 sm:mx-8 cursor-pointer hover:scale-110 transition-transform">
-                            <div className="p-2 sm:p-2.5 bg-gray-100 dark:bg-gray-800 rounded-xl">
-                                <span className="material-icons text-gray-500 dark:text-gray-400 text-sm sm:text-lg">{item.icon}</span>
+                        <div key={index} className="flex items-center space-x-1.5 sm:space-x-3 mx-2 sm:mx-8 cursor-pointer hover:scale-110 transition-transform">
+                            <div className="p-1 sm:p-2.5 bg-gray-100 dark:bg-gray-800 rounded-lg sm:rounded-xl">
+                                <span className="material-icons text-gray-500 dark:text-gray-400 text-xs sm:text-lg">{item.icon}</span>
                             </div>
-                            <span className="font-bold text-sm sm:text-base text-gray-700 dark:text-gray-300 uppercase tracking-wider">{item.label}</span>
+                            <span className="font-bold text-[10px] sm:text-base text-gray-700 dark:text-gray-300 uppercase tracking-wider">{item.label}</span>
                         </div>
                     ))}
                 </div>
             </section>
+
+            {/* Mobile Fixed Sticky Button - Full Width */}
+            <div className="lg:hidden fixed bottom-0 left-0 w-full z-50 bg-[#05A4A7] shadow-[0_-4px_10px_rgba(0,0,0,0.1)] border-t border-[#049194]">
+                <Link to="/contact" className="flex items-center justify-center w-full py-3.5 text-white font-black uppercase tracking-wider text-xs active:bg-[#037A7C] transition-colors">
+                    Book Free Consultation
+                    <span className="material-icons ml-2 text-lg">rocket_launch</span>
+                </Link>
+            </div>
 
         </div >
     );
