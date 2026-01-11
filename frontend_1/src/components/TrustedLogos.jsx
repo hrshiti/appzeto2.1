@@ -6,7 +6,7 @@ import bookMyTempoLogo from '../assets/logos/book_my_tempo.jpg';
 import createBharatLogo from '../assets/logos/create_bharat.jpg';
 import dailyHisabLogo from '../assets/logos/daily_hisab.jpg';
 import doctorOnHomeLogo from '../assets/logos/doctor_on_home.jpg';
-import fixflyLogo from '../assets/logos/fixfly.jpg';
+import fixflyLogo from '../assets/logos/fixfly_logo.jpg';
 import rentYatraLogo from '../assets/logos/rent_yatra.jpg';
 import blueRideLogo from '../assets/logos/blue_ride.jpg';
 
