@@ -26,6 +26,7 @@ import './App.css'
 import { AdminAuthProvider, ProtectedAdminRoute } from './admin/context/AdminAuthContext'
 import AdminLayout from './admin/layouts/AdminLayout'
 import AdminLogin from './admin/pages/AdminLogin'
+import AdminSignup from './admin/pages/AdminSignup'
 import AdminDashboard from './admin/pages/AdminDashboard'
 import AdminServices from './admin/pages/AdminServices'
 import AdminProjects from './admin/pages/AdminProjects'
@@ -81,6 +82,7 @@ function App() {
 
             {/* Admin Authentication */}
             <Route path="/admin/login" element={<AdminLogin />} />
+            <Route path="/admin/signup" element={<AdminSignup />} />
 
             {/* Admin Routes (Restricted to ADMIN role only) */}
             <Route path="/admin" element={

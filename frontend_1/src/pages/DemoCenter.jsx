@@ -23,13 +23,13 @@ const DemoCenter = () => {
     const getImgUrl = (path) => {
         if (!path) return '';
         if (path.startsWith('http')) return path;
-        return path.startsWith('/uploads') ? `http://localhost:5000${path}` : path;
+        return path.startsWith('/uploads') ? `${import.meta.env.VITE_BACKEND_URL}${path}` : path;
     };
 
     const getFullUrl = (url) => {
         if (!url) return '';
         if (url.startsWith('http')) return url;
-        return url.startsWith('/uploads') ? `http://localhost:5000${url}` : url;
+        return url.startsWith('/uploads') ? `${import.meta.env.VITE_BACKEND_URL}${url}` : url;
     };
 
     useEffect(() => {

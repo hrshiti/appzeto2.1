@@ -239,7 +239,7 @@ const AdminServices = () => {
                             {currentService.image && (
                                 <div className="w-20 h-20 rounded-lg overflow-hidden border border-slate-200">
                                     <img
-                                        src={`http://localhost:5000${currentService.image}`}
+                                        src={`${import.meta.env.VITE_BACKEND_URL}${currentService.image}`}
                                         alt="Preview"
                                         className="w-full h-full object-cover"
                                         onError={(e) => { e.target.src = 'https://placehold.co/100x100?text=Error'; }}

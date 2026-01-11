@@ -276,7 +276,7 @@ const AdminBlogs = () => {
                         <div className="flex items-center gap-4 p-4 bg-slate-50 border border-slate-200 rounded-xl">
                             {currentBlog.featuredImage && (
                                 <img
-                                    src={currentBlog.featuredImage.startsWith('/uploads') ? `http://localhost:5000${currentBlog.featuredImage}` : currentBlog.featuredImage}
+                                    src={currentBlog.featuredImage.startsWith('/uploads') ? `${import.meta.env.VITE_BACKEND_URL}${currentBlog.featuredImage}` : currentBlog.featuredImage}
                                     className="w-20 h-20 object-cover rounded-lg shadow-sm"
                                     alt="Preview"
                                 />

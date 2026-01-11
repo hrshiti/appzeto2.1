@@ -28,7 +28,7 @@ const ProjectDetail = () => {
         const fetchProject = async () => {
             try {
                 window.scrollTo(0, 0);
-                const { data } = await axios.get(`http://localhost:5000/api/projects/${slug}`);
+                const { data } = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/projects/${slug}`);
                 if (data.success) {
                     setProject(data.data);
                 }

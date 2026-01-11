@@ -10,7 +10,24 @@ const app = express();
 // Middleware
 app.use(express.json()); // Parse JSON bodies
 app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies
-app.use(cors()); // Enable CORS
+const allowedOrigins = [
+    'http://localhost:5173',
+    'http://localhost:5174',
+    process.env.FRONTEND_URL,
+    'https://appzeto2-1.vercel.app'
+].filter(Boolean);
+
+app.use(cors({
+    origin: function (origin, callback) {
+        if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+            callback(null, true);
+        } else {
+            console.log('Blocked by CORS:', origin);
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    credentials: true
+}));
 // app.use(helmet()); 
 app.use(helmet({ crossOriginResourcePolicy: false })); // Allow cross-origin images
 
@@ -55,9 +72,17 @@ app.use('/api/forms', formRoutes);
 app.use('/api/upload', uploadRoutes);
 
 // Error Handling Middleware
-app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).json({ success: false, message: 'Server Error', error: err.message });
+const AppError = require('./utils/AppError');
+const globalErrorHandler = require('./middleware/errorMiddleware');
+
+// ... Routes mounting ...
+
+// Handle Unhandled Routes
+app.all('*', (req, res, next) => {
+    next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
 });
+
+// Global Error Handler
+app.use(globalErrorHandler);
 
 module.exports = app;

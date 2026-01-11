@@ -16,7 +16,7 @@ const Projects = () => {
         const fetchProjects = async () => {
             try {
                 // Fetch from backend
-                const { data } = await axios.get('http://localhost:5000/api/projects');
+                const { data } = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/projects`);
                 // Backend standard response: { success: true, count: N, data: [...] }
                 if (data.success) {
                     setProjects(data.data);

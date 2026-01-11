@@ -51,7 +51,7 @@ const BlogDetail = () => {
                 {/* --- HEADER --- */}
                 <header className="relative h-[60vh] flex items-center justify-center overflow-hidden">
                     <img
-                        src={blog.featuredImage && blog.featuredImage.startsWith('/uploads') ? `http://localhost:5000${blog.featuredImage}` : blog.featuredImage}
+                        src={blog.featuredImage && blog.featuredImage.startsWith('/uploads') ? `${import.meta.env.VITE_BACKEND_URL}${blog.featuredImage}` : blog.featuredImage}
                         className="absolute inset-0 w-full h-full object-cover"
                         alt={blog.title}
                     />
