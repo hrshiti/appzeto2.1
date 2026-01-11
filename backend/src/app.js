@@ -27,8 +27,6 @@ app.get('/', (req, res) => {
 });
 
 // Import Routes
-const authRoutes = require('./routes/authRoutes');
-
 const productRoutes = require('./routes/productRoutes');
 const serviceRoutes = require('./routes/serviceRoutes');
 const projectRoutes = require('./routes/projectRoutes');
