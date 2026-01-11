@@ -6,9 +6,10 @@ import bookMyTempoLogo from '../assets/logos/book_my_tempo.jpg';
 import createBharatLogo from '../assets/logos/create_bharat.jpg';
 import dailyHisabLogo from '../assets/logos/daily_hisab.jpg';
 import doctorOnHomeLogo from '../assets/logos/doctor_on_home.jpg';
-import fixflyLogo from '../assets/logos/fixfly_logo.jpg';
 import rentYatraLogo from '../assets/logos/rent_yatra.jpg';
 import blueRideLogo from '../assets/logos/blue_ride.jpg';
+import projectFoodLogo from '../assets/projects/appzeto-food-1.jpg';
+import projectDevLogo from '../assets/projects/appdeveloment.png';
 
 const HappyClientsBar = () => {
     const clients = [
@@ -19,7 +20,8 @@ const HappyClientsBar = () => {
         { name: "Create Bharat", logo: createBharatLogo },
         { name: "Daily Hisab", logo: dailyHisabLogo },
         { name: "Doctor on Home", logo: doctorOnHomeLogo },
-        { name: "Fixfly", logo: fixflyLogo },
+        { name: "Appzeto Food", logo: projectFoodLogo },
+        { name: "App Development", logo: projectDevLogo },
         { name: "Rent Yatra", logo: rentYatraLogo },
         { name: "Blue Ride", logo: blueRideLogo },
     ];
