@@ -4,7 +4,7 @@ import { Plus, Search, Edit, Trash2, Eye, Filter, Loader2, Image as ImageIcon } 
 import { Link, useNavigate } from 'react-router-dom';
 import { dataService } from '../services/dataService';
 import { useToast } from '../context/ToastContext';
-// import ConfirmationModal from '../components/ui/ConfirmationModal';
+import ConfirmationModal from '../components/ui/ConfirmationModal';
 
 const AdminProjects = () => {
     const navigate = useNavigate();
@@ -178,8 +178,7 @@ const AdminProjects = () => {
             </div>
 
             {/* Delete Modal */}
-            {/* Delete Modal */}
-            {/* <ConfirmationModal
+            <ConfirmationModal
                 isOpen={isDeleteModalOpen}
                 onClose={() => setIsDeleteModalOpen(false)}
                 onConfirm={confirmDelete}
@@ -187,7 +186,7 @@ const AdminProjects = () => {
                 message={`Are you sure you want to delete "${projectToDelete?.title}"? This action cannot be undone.`}
                 confirmText="Delete Project"
                 isDangerous={true}
-            /> */}
+            />
         </div>
     );
 };
