@@ -136,4 +136,18 @@ export const dataService = {
         const response = await api.put(`/forms/${formId}`, data);
         return response.data;
     },
+
+    // --- Media Uploads ---
+    uploadImage: async (formData) => {
+        const response = await api.post('/upload', formData, {
+            headers: { 'Content-Type': 'multipart/form-data' }
+        });
+        return response.data;
+    },
+    uploadVideo: async (formData) => {
+        const response = await api.post('/upload/video', formData, {
+            headers: { 'Content-Type': 'multipart/form-data' }
+        });
+        return response.data;
+    }
 };

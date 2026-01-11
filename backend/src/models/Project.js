@@ -1,114 +1,137 @@
 const mongoose = require('mongoose');
+const slugify = require('slugify');
+
+const featureSchema = new mongoose.Schema({
+    label: { type: String, required: true },
+    icon: { type: String, default: 'CheckCircle' } // Icon name (string) to be mapped on frontend
+});
+
+const statSchema = new mongoose.Schema({
+    label: { type: String, required: true },
+    value: { type: String, required: true }
+});
 
 const testimonialSchema = new mongoose.Schema({
-    text: { type: String, default: '' },
-    author: { type: String, default: '' },
-    role: { type: String, default: '' }
+    text: { type: String },
+    author: { type: String },
+    role: { type: String },
+    avatar: { type: String }
 });
 
 const projectSchema = new mongoose.Schema({
+    // --- Identity ---
     title: {
         type: String,
-        required: [true, 'Please add a project title'],
-        unique: true,
-        trim: true
+        required: [true, 'Project title is required'],
+        trim: true,
+        unique: true
     },
     slug: {
         type: String,
         unique: true
     },
-    subtitle: {
-        type: String,
-        default: ''
-    },
     category: {
-        type: String, // e.g., 'Web App', 'Fintech'
+        type: String, // e.g., Fintech, E-commerce
         required: true
     },
     industry: {
-        type: String,
-        default: ''
+        type: String
     },
-    client: {
-        type: String,
-        default: ''
-    },
-    year: {
-        type: String,
-        default: ''
-    },
-    description: { // Changed from summary to match original structure
-        type: String,
-        default: ''
-    },
-    fullDescription: {
-        type: String,
-        required: [true, 'Please add a full description']
-    },
+
+    // --- Listing Page Data ---
     thumbnail: {
-        type: String, // Main display image
-        required: true
-    },
-    coverImage: { // Added to match original structure
         type: String,
-        default: ''
+        required: [true, 'Thumbnail image is required']
     },
-    images: {
-        type: [String], // Gallery for slideshow
-        default: []
-    },
-    tags: { // Changed from technologies to match original structure
-        type: [String],
-        default: []
-    },
-    challenge: {
+    shortDescription: {
         type: String,
-        default: ''
+        required: true,
+        maxLength: [150, 'Short description cannot exceed 150 characters']
     },
-    solution: {
-        type: String,
-        default: ''
-    },
-    features: {
-        type: [String], // List of core features
-        default: []
-    },
-    results: {
-        type: [String], // e.g., ["1M+ USERS", "40% INCREASE"]
-        default: []
-    },
-    testimonial: {
-        type: testimonialSchema,
-        default: () => ({})
-    },
-    featured: {
+    techTags: [{ // e.g., ["React", "Node", "AWS"]
+        type: String
+    }],
+    isFeatured: {
         type: Boolean,
         default: false
     },
-    active: {
-        type: Boolean,
-        default: true
-    },
-    order: {
+    orderIndex: {
         type: Number,
         default: 0
+    },
+
+    // --- Detail Page: Hero ---
+    hero: {
+        title: String, // Can differ from main title if needed
+        subtitle: String,
+        coverImage: String,
+        videoUrl: String
+    },
+
+    // --- Detail Page: Info Card ---
+    info: {
+        client: String,
+        year: String,
+        duration: String,
+        technologies: [ // Detailed tech stack with icons
+            {
+                name: String,
+                icon: String
+            }
+        ]
+    },
+
+    // --- Detail Page: Overview ---
+    overview: {
+        text: String,
+        mediaUrl: String, // Image or Video URL
+        mediaType: { type: String, enum: ['image', 'video'], default: 'image' }
+    },
+
+    // --- Detail Page: Challenge & Solution ---
+    challenge: {
+        description: String,
+        points: [String]
+    },
+    solution: {
+        description: String,
+        points: [String]
+    },
+
+    // --- Detail Page: Media Showcase ---
+    showcase: {
+        images: [String], // Array of URLs
+        videos: [String] // Array of URLs
+    },
+
+    // --- Detail Page: Features & Stats ---
+    features: [featureSchema],
+    results: [statSchema],
+
+    // --- Detail Page: Testimonial ---
+    testimonial: testimonialSchema,
+
+    // --- Detail Page: CTA ---
+    cta: {
+        title: { type: String, default: "Want a project like this?" },
+        buttonLabel: { type: String, default: "Start a Project" },
+        buttonLink: { type: String, default: "/contact" }
     }
+
 }, {
-    timestamps: true
+    timestamps: true,
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true }
 });
 
-// Create slug from title
-projectSchema.pre('save', async function () {
-    if (this.isModified('title')) {
-        this.slug = this.title
-            .toLowerCase()
-            .replace(/[^\w ]+/g, '')
-            .replace(/ +/g, '-');
+// Auto-generate slug from title before saving
+projectSchema.pre('save', function (next) {
+    if (!this.isModified('title')) {
+        next();
+        return;
     }
-    // Set coverImage to thumbnail if empty
-    if (!this.coverImage) {
-        this.coverImage = this.thumbnail;
-    }
+    this.slug = slugify(this.title, { lower: true, strict: true });
+    next();
 });
 
 module.exports = mongoose.model('Project', projectSchema);

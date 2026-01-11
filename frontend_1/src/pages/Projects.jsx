@@ -1,118 +1,148 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import ScrollWrapper from '../components/ScrollWrapper';
-import { dataService } from '../admin/services/dataService';
+import { ArrowRight, Loader2 } from 'lucide-react';
 
 const Projects = () => {
+    const navigate = useNavigate();
     const [projects, setProjects] = useState([]);
-    const [loading, setLoading] = useState(true);
-
-    const getImgUrl = (path) => {
-        if (!path) return '';
-        if (path.startsWith('http')) return path; // Support Cloudinary/External
-        return path.startsWith('/uploads') ? `http://localhost:5000${path}` : path;
-    };
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         const fetchProjects = async () => {
             try {
-                const data = await dataService.getProjects();
-                setProjects(data || []);
-            } catch (err) {
-                console.error("Error fetching projects:", err);
+                // Fetch from backend
+                const { data } = await axios.get('http://localhost:5000/api/projects');
+                // Backend standard response: { success: true, count: N, data: [...] }
+                if (data.success) {
+                    setProjects(data.data);
+                }
+            } catch (error) {
+                console.error("Error fetching projects:", error);
             } finally {
-                setLoading(false);
+                setIsLoading(false);
             }
         };
         fetchProjects();
     }, []);
 
+    // Staggered animation for grid
+    const container = {
+        hidden: { opacity: 0 },
+        show: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.1
+            }
+        }
+    };
+
+    const item = {
+        hidden: { opacity: 0, y: 30 },
+        show: { opacity: 1, y: 0 }
+    };
+
     return (
         <ScrollWrapper>
-            <div className="bg-white min-h-screen text-gray-900 font-sans">
+            <div className="bg-[#F8FAFC] min-h-screen font-sans text-slate-800 selection:bg-[#05A4A7] selection:text-white overflow-x-hidden">
                 <Navbar />
 
-                {/* Hero Section */}
-                <section className="relative pt-4 md:pt-10 pb-4 md:pb-8 px-5 md:px-20 overflow-hidden text-center md:text-left">
-                    <div className="absolute top-0 right-0 w-[250px] md:w-[500px] h-[250px] md:h-[500px] bg-primary/5 rounded-full blur-[80px] md:blur-[150px] -z-10 animate-pulse" />
-
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6 }}
-                        className="max-w-7xl mx-auto"
-                    >
-                        <h1 className="text-2xl sm:text-4xl md:text-5xl font-extrabold uppercase tracking-tighter leading-[0.9] italic text-gray-900 mb-3 md:mb-6">
-                            Software Development <br />
-                            <span className="text-primary">Case Studies</span>
-                        </h1>
-                        <p className="text-gray-600 text-[11px] md:text-base max-w-lg font-medium tracking-wide leading-relaxed mx-auto md:mx-0 opacity-80">
-                            A showcase of our most ambitious digital transformations. We build high-performance instruments for the future.
-                        </p>
-                    </motion.div>
+                {/* --- 1. LISTING HERO --- */}
+                <section className="relative pt-32 pb-16 px-6 md:px-12 lg:px-20 text-center">
+                    <div className="max-w-4xl mx-auto">
+                        <motion.span
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            className="text-[#05A4A7] font-bold tracking-[0.2em] text-xs uppercase mb-4 block"
+                        >
+                            Our Portfolio
+                        </motion.span>
+                        <motion.h1
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.1 }}
+                            className="text-4xl sm:text-5xl md:text-7xl font-black text-[#012828] tracking-tight mb-6"
+                        >
+                            Real-world solutions we’ve built for <span className="text-[#05A4A7]">businesses.</span>
+                        </motion.h1>
+                        <motion.p
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.2 }}
+                            className="text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed"
+                        >
+                            From enterprise logistics platforms to hyper-local e-commerce apps, explore how we transform complex challenges into elegant digital products.
+                        </motion.p>
+                    </div>
                 </section>
 
-                {/* Projects Grid */}
-                <section className="pb-12 md:pb-24 px-2 md:px-20">
-                    <div className="max-w-7xl mx-auto grid grid-cols-2 lg:grid-cols-3 gap-2 md:gap-8">
-                        {loading ? (
-                            <div className="col-span-full flex justify-center py-20">
-                                <div className="w-10 h-10 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
-                            </div>
-                        ) : projects.length > 0 ? (
-                            projects.map((project, idx) => (
+                {/* --- 2. PROJECTS GRID --- */}
+                <section className="px-6 md:px-12 lg:px-20 pb-24">
+                    {isLoading ? (
+                        <div className="flex justify-center items-center h-64">
+                            <Loader2 className="animate-spin text-[#05A4A7]" size={40} />
+                        </div>
+                    ) : (
+                        <motion.div
+                            variants={container}
+                            initial="hidden"
+                            animate="show"
+                            className="max-w-[1400px] mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 px-4"
+                        >
+                            {projects.map((project) => (
                                 <motion.div
-                                    key={project._id || idx}
-                                    initial={{ opacity: 0, y: 30 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ duration: 0.5, delay: idx * 0.05 }}
-                                    className="group"
+                                    key={project._id || project.id}
+                                    variants={item}
+                                    whileHover={{ y: -5 }}
+                                    className="group bg-white rounded-xl overflow-hidden border border-slate-100 shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer flex flex-col h-full hover:border-[#05A4A7]/30"
+                                    onClick={() => navigate(`/projects/${project.slug}`)}
                                 >
-                                    <Link to={`/projects/${project.slug}`}>
-                                        <div className="relative aspect-[4/5] rounded-[0.8rem] md:rounded-[2rem] overflow-hidden border border-gray-100 bg-gray-50 transition-all duration-500 md:group-hover:border-primary/40 shadow-lg md:group-hover:shadow-2xl">
-                                            {/* Image */}
-                                            <img
-                                                src={getImgUrl(project.thumbnail)}
-                                                alt={project.title}
-                                                className="w-full h-full object-cover md:group-hover:scale-105 transition-all duration-700"
-                                            />
+                                    {/* Image Container */}
+                                    <div className="aspect-[16/10] overflow-hidden relative">
+                                        <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-slate-900/0 transition-colors z-10" />
+                                        <img
+                                            src={project.thumbnail}
+                                            alt={project.title}
+                                            className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
+                                        />
+                                        {/* Category Badge */}
+                                        <div className="absolute top-3 left-3 z-20">
+                                            <span className="bg-white/95 backdrop-blur text-[#012828] text-[10px] font-bold px-2 py-1 rounded shadow-sm uppercase tracking-wide">
+                                                {project.category}
+                                            </span>
+                                        </div>
+                                    </div>
 
-                                            {/* Content */}
-                                            <div className="absolute inset-0 p-3 md:p-8 flex flex-col justify-end bg-black/30 md:bg-transparent md:group-hover:bg-black/40 transition-all duration-500">
-                                                <div className="space-y-1 md:space-y-3">
-                                                    <div className="hidden md:flex flex-wrap gap-1.5 text-white">
-                                                        {project.tags && Array.isArray(project.tags) ? project.tags.slice(0, 2).map((tag, i) => (
-                                                            <span key={i} className="px-2 py-0.5 bg-white/10 backdrop-blur-md rounded-full text-[9px] font-bold uppercase tracking-widest text-white border border-white/20">
-                                                                {tag}
-                                                            </span>
-                                                        )) : null}
-                                                    </div>
-                                                    <h3 className="text-sm md:text-2xl font-black text-white uppercase tracking-tighter leading-tight md:group-hover:text-primary transition-colors">
-                                                        {project.title}
-                                                    </h3>
-                                                    <p className="hidden md:block text-gray-300 text-sm font-medium leading-normal opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0 line-clamp-2">
-                                                        {project.description}
-                                                    </p>
-                                                    <div className="pt-0.5 flex items-center gap-1.5 text-primary">
-                                                        <span className="text-[8px] md:text-[9px] font-black uppercase tracking-widest">Case Study</span>
-                                                        <span className="material-icons text-[10px] md:text-xs md:group-hover:translate-x-1 transition-transform">east</span>
-                                                    </div>
-                                                </div>
+                                    {/* Content */}
+                                    <div className="p-4 flex flex-col flex-1">
+                                        <h3 className="text-lg font-bold text-[#012828] mb-1 group-hover:text-[#05A4A7] transition-colors line-clamp-1">
+                                            {project.title}
+                                        </h3>
+                                        <p className="text-slate-500 text-xs leading-relaxed mb-3 line-clamp-2">
+                                            {project.shortDescription}
+                                        </p>
+
+                                        <div className="mt-auto pt-3 border-t border-slate-100 flex items-center justify-between">
+                                            <div className="flex gap-1.5">
+                                                {project.techTags && project.techTags.slice(0, 2).map((tag, idx) => (
+                                                    <span key={idx} className="bg-slate-50 text-slate-600 text-[9px] font-bold px-1.5 py-0.5 rounded overflow-hidden text-ellipsis whitespace-nowrap max-w-[60px]">
+                                                        {tag}
+                                                    </span>
+                                                ))}
+                                            </div>
+                                            <div className="text-[#05A4A7] group-hover:translate-x-1 transition-transform">
+                                                <ArrowRight size={14} />
                                             </div>
                                         </div>
-                                    </Link>
+                                    </div>
                                 </motion.div>
-                            ))
-                        ) : (
-                            <div className="col-span-full text-center py-20">
-                                <p className="text-slate-400">No projects found. Add some from the Admin Panel.</p>
-                            </div>
-                        )}
-                    </div>
+                            ))}
+                        </motion.div>
+                    )}
                 </section>
 
                 <Footer />

@@ -1,27 +1,21 @@
 const express = require('express');
+const router = express.Router();
 const {
     getProjects,
-    getAdminProjects,
-    getProject,
+    getProjectBySlug,
     createProject,
     updateProject,
     deleteProject
 } = require('../controllers/projectController');
-
-const { protect, authorize } = require('../middleware/authMiddleware');
-
-const router = express.Router();
+const { protect, admin } = require('../middleware/authMiddleware');
 
 // Public Routes
-router.route('/').get(getProjects);
-router.route('/:id').get(getProject);
+router.get('/', getProjects);
+router.get('/:slug', getProjectBySlug);
 
-// Protected Routes (Admin)
-router.use(protect);
-router.use(authorize('ADMIN'));
-
-router.get('/admin/all', getAdminProjects);
-router.route('/').post(createProject);
-router.route('/:id').put(updateProject).delete(deleteProject);
+// Admin Routes (Protected)
+router.post('/', protect, admin, createProject);
+router.put('/:id', protect, admin, updateProject);
+router.delete('/:id', protect, admin, deleteProject);
 
 module.exports = router;

@@ -28,6 +28,7 @@ import AdminLogin from './admin/pages/AdminLogin'
 import AdminDashboard from './admin/pages/AdminDashboard'
 import AdminServices from './admin/pages/AdminServices'
 import AdminProjects from './admin/pages/AdminProjects'
+import ProjectForm from './admin/pages/ProjectForm'
 import AdminBlogs from './admin/pages/AdminBlogs'
 import AdminProducts from './admin/pages/AdminProducts'
 import AdminVideos from './admin/pages/AdminVideos'
@@ -62,8 +63,11 @@ function App() {
             <Route path="/blogs/:slug" element={<BlogDetail />} />
             <Route path="/career" element={<Career />} />
             <Route path="/contact" element={<Contact />} />
+
+            {/* Projects Routing */}
             <Route path="/projects" element={<Projects />} />
             <Route path="/projects/:slug" element={<ProjectDetail />} />
+
             <Route path="/chit-chat" element={<ChitChat />} />
             <Route path="/login" element={<Login />} />
             <Route path="/appzeto-food" element={<ProductShowcase />} />
@@ -87,6 +91,8 @@ function App() {
               <Route path="dashboard" element={<AdminDashboard />} />
               <Route path="services" element={<AdminServices />} />
               <Route path="projects" element={<AdminProjects />} />
+              <Route path="projects/add" element={<ProjectForm />} />
+              <Route path="projects/edit/:id" element={<ProjectForm />} />
               <Route path="blogs" element={<AdminBlogs />} />
               <Route path="products" element={<AdminProducts />} />
               <Route path="videos" element={<AdminVideos />} />

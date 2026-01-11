@@ -6,6 +6,7 @@ import Services from '../components/Services';
 import Reviews from '../components/Reviews';
 import ContactUs from '../components/ContactUs';
 import WhyChooseUs from '../components/WhyChooseUs';
+import AppzetoPartners from '../components/AppzetoPartners';
 import Footer from '../components/Footer';
 import ScrollWrapper from '../components/ScrollWrapper';
 import ScrollReveal from '../components/ScrollReveal';
@@ -61,6 +62,10 @@ const Home = () => {
 
             <ScrollReveal>
                 <WhyChooseUs />
+            </ScrollReveal>
+
+            <ScrollReveal>
+                <AppzetoPartners />
             </ScrollReveal>
 
             <ScrollReveal>

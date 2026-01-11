@@ -1,8 +1,32 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import gsap from 'gsap';
 import { projectsData } from '../data/projectsData';
+
+// --- Typewriter Effect Component ---
+const TypewriterText = ({ text }) => {
+    const [displayText, setDisplayText] = useState('');
+
+    useEffect(() => {
+        setDisplayText(''); // Reset
+        let i = 0;
+        const timer = setInterval(() => {
+            if (i < text.length) {
+                setDisplayText((prev) => prev + text.charAt(i));
+                i++;
+            } else {
+                clearInterval(timer);
+            }
+        }, 50); // Speed of typing
+
+        return () => clearInterval(timer);
+    }, [text]);
+
+    return (
+        <span>{displayText}</span>
+    );
+};
 
 // --- Internal Phone Mockup Component ---
 const PhoneMockup = ({ image, title, isActive }) => {
@@ -26,36 +50,30 @@ const PhoneMockup = ({ image, title, isActive }) => {
                         onError={(e) => { e.target.src = "https://via.placeholder.com/400x800?text=Image+Error"; }}
                     />
 
-                    {/* Overlay for inactive */}
-                    <div className="absolute inset-0 bg-black/40 transition-opacity duration-300 mask-overlay" />
+                    {/* Overlay for inactive - Reduced opacity for better visibility in 'side' views */}
+                    <div className={`absolute inset-0 bg-black/40 transition-opacity duration-300 mask-overlay ${isActive ? 'opacity-0' : 'opacity-20'}`} />
                 </div>
 
                 {/* Glass Glare */}
                 <div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent pointer-events-none z-10" />
             </div>
 
-            {/* Title for Mobile & Desktop - Positioned Below - ONLY VISIBLE IF ACTIVE */}
-            <AnimatePresence>
-                {isActive && (
-                    <motion.div
-                        initial={{ opacity: 0, y: -10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -10 }}
-                        className="absolute -bottom-16 left-1/2 -translate-x-1/2 w-[200px] text-center z-50"
-                    >
-                        <h3 className="text-sm font-bold text-slate-900 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg border border-slate-200 inline-block mx-auto leading-tight whitespace-nowrap">
-                            {title}
-                        </h3>
-                    </motion.div>
-                )}
-            </AnimatePresence>
+            {/* Title for Mobile & Desktop - ALWAYS VISIBLE */}
+            <div className="absolute -bottom-16 left-1/2 -translate-x-1/2 w-[200px] text-center z-50">
+                <h3 className={`
+                    text-sm font-bold bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg border border-slate-200 inline-block mx-auto leading-tight whitespace-nowrap transition-all duration-300
+                    ${isActive ? 'text-slate-900 scale-100 opacity-100' : 'text-slate-500 scale-90 opacity-70'}
+                `}>
+                    {title}
+                </h3>
+            </div>
         </div>
     );
 };
 
 const ProjectShowcase = () => {
+    const navigate = useNavigate();
     const [currentProjectIndex, setCurrentProjectIndex] = useState(0);
-    const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const [isAutoPlaying, setIsAutoPlaying] = useState(true);
 
     // Container ref for GSAP context
@@ -63,60 +81,63 @@ const ProjectShowcase = () => {
     const phonesRef = useRef([]);
 
     // --- Data Helpers ---
-    const activeProject = projectsData[currentProjectIndex];
-
-    // Create a robust list of unique items for rendering
-    const projectImages = useMemo(() => {
-        const rawImages = (activeProject.images && activeProject.images.length > 0)
-            ? activeProject.images
-            : [activeProject.thumbnail || "https://via.placeholder.com/400x800?text=Project"];
-
-        let base = [...rawImages];
-        // Duplicate until we have enough items for smooth wrapping
+    // Create a robust list of unique items for rendering.
+    // We duplicate projects until we have at least 6 items for smooth carousel looping.
+    const carouselProjects = useMemo(() => {
+        let base = [...projectsData];
         while (base.length < 6) {
-            base = [...base, ...base];
+            base = [...base, ...projectsData];
         }
-        return base.slice(0, 8).map((img, i) => ({ img, id: `img-${i}` }));
-    }, [activeProject.id]);
+        // Limit to reasonable number if projectsData is huge, but usually it's small. 
+        // We just need a circular buffer. 
+        // Actually, for GSAP loop logic to work perfectly with calculating "shortest distance" (diff), 
+        // the list length shouldn't be huge, but "enough". 8-10 is safe.
+        // Let's cap at 12 or just leave it if it's not massive.
+        return base.slice(0, 12);
+    }, []);
 
+    const activeProject = carouselProjects[currentProjectIndex];
 
-    // --- Navigation Handlers ---
-    const nextProject = () => {
-        setCurrentProjectIndex((prev) => (prev + 1) % projectsData.length);
-        setCurrentImageIndex(0);
-    };
-
-    // Auto-Rotate Logic 
+    // --- Project Auto-Rotation Logic (2 Seconds) ---
     useEffect(() => {
         let timer;
         if (isAutoPlaying) {
             timer = setInterval(() => {
-                setCurrentImageIndex((prev) => (prev + 1) % projectImages.length);
-            }, 1500);
+                setCurrentProjectIndex((prev) => (prev + 1) % carouselProjects.length);
+            }, 2000);
         }
         return () => clearInterval(timer);
-    }, [isAutoPlaying, projectImages.length]);
+    }, [isAutoPlaying, carouselProjects.length]);
+
+    // --- Navigation Handlers ---
+    const nextProject = () => {
+        setCurrentProjectIndex((prev) => (prev + 1) % carouselProjects.length);
+    };
 
 
     // --- GSAP Animation Engine ---
     useEffect(() => {
         const phones = phonesRef.current;
-        const total = projectImages.length;
+        const total = carouselProjects.length;
 
         phones.forEach((phone, i) => {
             if (!phone) return;
 
-            let diff = (i - currentImageIndex) % total;
-            if (diff <= -total / 2) diff += total;
+            // Calculate distance from current index, handling wrap-around for shortest path
+            let diff = (i - currentProjectIndex) % total;
+            if (diff < -total / 2) diff += total;
             if (diff > total / 2) diff -= total;
 
-            // Updated Config: removed rotateY, standardized scale, adjusted X positions for a flat look
+            // Adjust logic because % in JS can be negative: -1 % 5 = -1. 
+            // We want canonical representation.
+            // Actually the above logic is standard for circular carousel.
+
+            // Configuration Base
             let config = {
                 x: 0,
                 scale: 0.5,
                 opacity: 0,
                 zIndex: 0,
-                // rotateY: 0, // Removed
                 filter: "blur(10px)",
                 duration: 0.5,
                 ease: "power3.inOut"
@@ -124,19 +145,19 @@ const ProjectShowcase = () => {
 
             const overlay = phone.querySelector('.mask-overlay');
 
-            if (diff === 0) { // CENTER
+            if (diff === 0) { // CENTER (Active)
                 config = { ...config, x: 0, scale: 1.1, opacity: 1, zIndex: 30, filter: "blur(0px)" };
                 if (overlay) gsap.to(overlay, { opacity: 0, duration: 0.5 });
-            } else if (diff === 1) { // RIGHT - Increased opacity
-                config = { ...config, x: 220, scale: 0.85, opacity: 1, zIndex: 10, filter: "blur(0px)" }; // Full opacity
-                if (overlay) gsap.to(overlay, { opacity: 0.1, duration: 0.5 }); // Minimal overlay
-            } else if (diff === -1) { // LEFT - Increased opacity
-                config = { ...config, x: -220, scale: 0.85, opacity: 1, zIndex: 10, filter: "blur(0px)" }; // Full opacity 
-                if (overlay) gsap.to(overlay, { opacity: 0.1, duration: 0.5 }); // Minimal overlay
-            } else if (diff === 2) { // FAR RIGHT
-                config = { ...config, x: 400, scale: 0.5, opacity: 0, zIndex: 0 };
-            } else if (diff === -2) { // FAR LEFT
-                config = { ...config, x: -400, scale: 0.5, opacity: 0, zIndex: 0 };
+            } else if (diff === 1 || diff === -(total - 1)) { // RIGHT (Next) - handles wrap
+                config = { ...config, x: 220, scale: 0.85, opacity: 1, zIndex: 10, filter: "blur(0px)" };
+                if (overlay) gsap.to(overlay, { opacity: 0.1, duration: 0.5 });
+            } else if (diff === -1 || diff === (total - 1)) { // LEFT (Prev) - handles wrap
+                config = { ...config, x: -220, scale: 0.85, opacity: 1, zIndex: 10, filter: "blur(0px)" };
+                if (overlay) gsap.to(overlay, { opacity: 0.1, duration: 0.5 });
+            } else if (diff === 2 || diff === -(total - 2)) { // FAR RIGHT
+                config = { ...config, x: 400, scale: 0.6, opacity: 0, zIndex: 0 }; // Fade out
+            } else if (diff === -2 || diff === (total - 2)) { // FAR LEFT
+                config = { ...config, x: -400, scale: 0.6, opacity: 0, zIndex: 0 }; // Fade out
             } else { // HIDDEN
                 config = { ...config, x: 0, scale: 0.2, opacity: 0 };
             }
@@ -144,7 +165,7 @@ const ProjectShowcase = () => {
             gsap.to(phone, config);
         });
 
-    }, [currentImageIndex, projectImages.length, activeProject.id]);
+    }, [currentProjectIndex, carouselProjects.length]); // trigger on index change
 
     return (
         <section className="relative w-full min-h-screen bg-slate-50 overflow-hidden flex items-center py-24">
@@ -161,9 +182,8 @@ const ProjectShowcase = () => {
                 {/* LEFT SIDE: CONTENT */}
                 <div className="flex flex-col items-start space-y-6 order-2 lg:order-1 pt-10 lg:pt-0">
 
-                    {/* 1. Main Static Heading Section - CLEANER TYPOGRAPHY */}
+                    {/* 1. Main Static Heading Section */}
                     <div className="mb-2">
-                        {/* Removed 'Featured Works' eyebrow */}
                         <h1 className="text-5xl md:text-7xl font-bold text-slate-900 leading-tight tracking-tight drop-shadow-sm">
                             Projects <br />
                             <span className="text-transparent bg-clip-text bg-gradient-to-r from-slate-600 to-slate-900">
@@ -175,7 +195,7 @@ const ProjectShowcase = () => {
                     {/* 2. Dynamic Project Details */}
                     <AnimatePresence mode="wait">
                         <motion.div
-                            key={activeProject.id}
+                            key={activeProject.id || currentProjectIndex} // Use index as key fallback if duplicate IDs exist (due to array repeat)
                             initial={{ opacity: 0, x: -20 }}
                             animate={{ opacity: 1, x: 0 }}
                             exit={{ opacity: 0, x: 20 }}
@@ -183,16 +203,16 @@ const ProjectShowcase = () => {
                             className="space-y-6 max-w-lg"
                         >
                             {/* Project Title & Category */}
-                            <div className="space-y-2">
+                            <div className="space-y-2 h-[80px]">
                                 <h3 className="text-3xl md:text-4xl font-semibold text-slate-900 tracking-normal">
-                                    {activeProject.title}
+                                    <TypewriterText text={activeProject.title} />
                                 </h3>
                                 <p className="text-[#05A4A7] font-medium tracking-wide text-sm">
                                     {activeProject.category}
                                 </p>
                             </div>
 
-                            {/* Description - Cleaner, normal weight */}
+                            {/* Description */}
                             <p className="text-slate-600 text-base md:text-lg leading-relaxed font-normal">
                                 {activeProject.description}
                             </p>
@@ -208,9 +228,9 @@ const ProjectShowcase = () => {
 
                             {/* Actions */}
                             <div className="pt-6 flex items-center gap-5">
-                                <Link to={`/projects/${activeProject.slug}`}>
+                                <Link to="/projects">
                                     <button className="px-8 py-3.5 bg-slate-900 text-white font-bold text-sm tracking-wide rounded-full hover:bg-slate-800 transition-all duration-300 flex items-center gap-2 shadow-lg hover:shadow-xl">
-                                        View Case Study
+                                        View All Projects
                                         <span className="material-symbols-outlined text-sm transform -rotate-45">arrow_forward</span>
                                     </button>
                                 </Link>
@@ -227,25 +247,37 @@ const ProjectShowcase = () => {
                     </AnimatePresence>
                 </div>
 
-                {/* RIGHT SIDE: GSAP CAROUSEL (Updated to be FLAT) */}
+                {/* RIGHT SIDE: GSAP CAROUSEL */}
                 <div
                     ref={carouselRef}
                     className="relative h-[600px] w-full flex items-center justify-center order-1 lg:order-2"
                     onMouseEnter={() => setIsAutoPlaying(false)}
                     onMouseLeave={() => setIsAutoPlaying(true)}
                 >
-                    {/* Removed perspective-[1200px] class from container above */}
+                    {carouselProjects.map((project, i) => {
+                        // Determine visual styling based on index relative to active. 
+                        // While GSAP handles position, we pass 'isActive' for static styling helper in PhoneMockup
+                        const isActive = i === currentProjectIndex;
 
-                    {projectImages.map((item, i) => (
-                        <div
-                            key={`${activeProject.id}-img-${i}`}
-                            ref={(el) => (phonesRef.current[i] = el)}
-                            className="absolute origin-center will-change-transform"
-                            style={{ transform: 'scale(0) translateX(0)', opacity: 0 }}
-                        >
-                            <PhoneMockup image={item.img} title={activeProject.title} isActive={i === currentImageIndex} />
-                        </div>
-                    ))}
+                        // Use first image or thumbnail
+                        const displayImage = (project.images && project.images.length > 0) ? project.images[0] : project.thumbnail;
+
+                        return (
+                            <div
+                                key={`proj-card-${i}`} // Unique key for the list position
+                                ref={(el) => (phonesRef.current[i] = el)}
+                                className="absolute origin-center will-change-transform cursor-pointer"
+                                style={{ transform: 'scale(0) translateX(0)', opacity: 0 }}
+                                onClick={() => navigate('/projects')}
+                            >
+                                <PhoneMockup
+                                    image={displayImage}
+                                    title={project.title}
+                                    isActive={isActive}
+                                />
+                            </div>
+                        );
+                    })}
 
                     {/* Decorative Elements */}
                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] pointer-events-none">
