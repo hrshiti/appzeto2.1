@@ -78,7 +78,7 @@ const globalErrorHandler = require('./middleware/errorMiddleware');
 // ... Routes mounting ...
 
 // Handle Unhandled Routes
-app.all('*', (req, res, next) => {
+app.all(/(.*)/, (req, res, next) => {
     next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
 });
 
