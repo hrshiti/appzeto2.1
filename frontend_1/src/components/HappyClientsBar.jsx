@@ -1,7 +1,7 @@
 import React from 'react';
 import aapreecLogo from '../assets/logos/aapreec_logo.jpg';
 import autoRideLogo from '../assets/logos/auto_ride.jpg';
-import beeyouLogo from '../assets/logos/beeyou.jpg';
+import decorryLogo from '../assets/logos/Decorry.jpg';
 import bookMyTempoLogo from '../assets/logos/book_my_tempo.jpg';
 import createBharatLogo from '../assets/logos/create_bharat.jpg';
 import dailyHisabLogo from '../assets/logos/daily_hisab.jpg';
@@ -14,7 +14,7 @@ const HappyClientsBar = () => {
     const clients = [
         { name: "Aapreec", logo: aapreecLogo },
         { name: "AutoRide", logo: autoRideLogo },
-        { name: "Beeyou", logo: beeyouLogo },
+        { name: "Decorry", logo: decorryLogo },
         { name: "Book My Tempo", logo: bookMyTempoLogo },
         { name: "Create Bharat", logo: createBharatLogo },
         { name: "Daily Hisab", logo: dailyHisabLogo },
