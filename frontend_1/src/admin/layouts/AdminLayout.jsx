@@ -41,7 +41,7 @@ const SidebarItem = ({ to, icon: Icon, label, onClick }) => (
 );
 
 const SectionLabel = ({ label }) => (
-    <div className="px-4 py-2 mt-4 mb-1 text-[10px] font-bold uppercase tracking-widest text-slate-500">
+    <div className="px-4 py-2 mt-4 mb-1 text-[10px] font-bold uppercase tracking-widest text-slate-400/80">
         {label}
     </div>
 );
@@ -80,18 +80,8 @@ const AdminLayout = () => {
 
                             <SectionLabel label="Content Management" />
                             <SidebarItem to="/admin/services" icon={Layers} label="Services" />
-// ...
-                            <SidebarItem to="/admin/services" icon={Layers} label="Services" />
                             <SidebarItem to="/admin/projects" icon={Briefcase} label="Projects" />
                             <SidebarItem to="/admin/blogs" icon={FileText} label="Blogs" />
-// ...
-                            // Mobile Section
-                            <SidebarItem to="/admin/services" icon={Layers} label="Services" onClick={() => setIsMobileMenuOpen(false)} />
-                            {/* Removed Projects Link */}
-                            <SidebarItem to="/admin/blogs" icon={FileText} label="Blogs" onClick={() => setIsMobileMenuOpen(false)} />
-// ...
-                            <SidebarItem to="/admin/blogs" icon={FileText} label="Blogs" />
-                            {/* Products Removed as requested */}
                             <SidebarItem to="/admin/videos" icon={Tv} label="Watch Demo" />
 
                             <SectionLabel label="Forms & Leads" />

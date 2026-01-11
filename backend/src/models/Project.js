@@ -125,13 +125,11 @@ const projectSchema = new mongoose.Schema({
 });
 
 // Auto-generate slug from title before saving
-projectSchema.pre('save', function (next) {
-    if (!this.isModified('title')) {
-        next();
-        return;
+// Auto-generate slug from title before saving
+projectSchema.pre('save', async function () {
+    if (this.isModified('title')) {
+        this.slug = slugify(this.title, { lower: true, strict: true });
     }
-    this.slug = slugify(this.title, { lower: true, strict: true });
-    next();
 });
 
 module.exports = mongoose.model('Project', projectSchema);

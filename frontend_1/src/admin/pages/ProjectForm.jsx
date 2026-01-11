@@ -252,13 +252,38 @@ const ProjectForm = () => {
     // Submit
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        // Clean up data before sending: remove empty items
+        const cleanedData = {
+            ...formData,
+            results: formData.results.filter(item => item.label && item.label.trim() !== ''),
+            features: formData.features.filter(item => item.label && item.label.trim() !== ''),
+            techTags: formData.techTags.filter(tag => tag.trim() !== ''),
+            // Clean challenge/solution points
+            challenge: {
+                ...formData.challenge,
+                points: formData.challenge.points.filter(p => p.trim() !== '')
+            },
+            solution: {
+                ...formData.solution,
+                points: formData.solution.points.filter(p => p.trim() !== '')
+            },
+            // Ensure testimonial strings are not null
+            testimonial: {
+                text: formData.testimonial?.text || '',
+                author: formData.testimonial?.author || '',
+                role: formData.testimonial?.role || '',
+                avatar: formData.testimonial?.avatar || ''
+            }
+        };
+
         try {
             setIsSaving(true);
             if (isEditMode) {
-                await dataService.updateProject(id, formData);
+                await dataService.updateProject(id, cleanedData);
                 addToast('Project updated successfully', 'success');
             } else {
-                await dataService.createProject(formData);
+                await dataService.createProject(cleanedData);
                 addToast('Project created successfully', 'success');
             }
             navigate('/admin/projects');
