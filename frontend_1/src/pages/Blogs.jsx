@@ -219,16 +219,13 @@ const Blogs = () => {
                     {/* Desktop View: Staggered Layout */}
                     <div className="hidden md:flex flex-row items-start gap-10">
                         <div className="flex-[1.2] w-full h-[400px] relative rounded-[3rem] overflow-hidden group shadow-2xl">
-                            <img src={achImg1} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000" alt="Awards 1" />
-                            <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all" />
+                            <img src={achImg1} className="w-full h-full object-cover transition-all duration-1000" alt="Awards 1" />
                         </div>
                         <div className="flex-1 w-full h-[300px] mt-24 relative rounded-[3rem] overflow-hidden group shadow-2xl">
-                            <img src={achImg2} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000" alt="Awards 2" />
-                            <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all" />
+                            <img src={achImg2} className="w-full h-full object-cover transition-all duration-1000" alt="Awards 2" />
                         </div>
                         <div className="flex-1 w-full h-[340px] mt-8 relative rounded-[3rem] overflow-hidden group shadow-2xl">
-                            <img src={achImg3} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000" alt="Awards 3" />
-                            <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all" />
+                            <img src={achImg3} className="w-full h-full object-cover transition-all duration-1000" alt="Awards 3" />
                         </div>
                     </div>
                 </section>

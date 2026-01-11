@@ -150,7 +150,7 @@ const WhyChooseUs = () => {
                         <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-6 w-full">
                             <StatCard value={12} suffix="+" label="Years Of Exp" index={0} />
                             <StatCard value={250} suffix="+" label="Happy Clients" index={1} />
-                            <StatCard value={100} suffix="+" label="Success Projects" index={2} />
+                            <StatCard value={2} suffix="k+" label="Success Projects" index={2} />
                         </div>
 
                         {/* 3. Checkmarks Grid */}

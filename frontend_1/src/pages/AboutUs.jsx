@@ -168,7 +168,7 @@ const AboutUs = () => {
                                     transition={{ duration: 0.5, delay: 0.4 }}
                                     className="absolute -bottom-8 -right-8 bg-white p-8 rounded-xl shadow-xl hidden md:block"
                                 >
-                                    <p className="text-4xl font-bold text-primary mb-1">100+</p>
+                                    <p className="text-4xl font-bold text-primary mb-1">2k+</p>
                                     <p className="text-gray-500 font-medium whitespace-nowrap">Successful Projects</p>
                                 </motion.div>
                             </motion.div>

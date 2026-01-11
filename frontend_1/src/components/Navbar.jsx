@@ -57,13 +57,14 @@ const NAV_ITEMS = [
         ]
     },
     {
-        title: "Contact Us",
-        path: "/contact",
-        description: "Get in touch with our global team.",
+        title: "About Us",
+        path: "/about",
+        description: "Discover our story, mission, and the team behind the technology.",
         items: [
-            { label: "Sales Inquiry", link: "/contact#sales" },
-            { label: "Technical Support", link: "/contact#support" },
-            { label: "Office Locations", link: "/about#offices" }
+            { label: "Who We Are", link: "/about#we-are-appzeto" },
+            { label: "Leadership", link: "/about#meet-our-team" },
+            { label: "Global Offices", link: "/about#offices" },
+            { label: "Contact Us", link: "/contact" }
         ]
     }
 ];

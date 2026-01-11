@@ -246,7 +246,13 @@ const RevolvingOrbit = ({ size = "md" }) => {
                     transition={{ duration: 4, repeat: Infinity, repeatType: "mirror" }}
                     className="absolute inset-0 bg-[radial-gradient(circle,rgba(5,164,167,0.1)_0%,transparent_70%)]"
                 />
-                <img src={logo} alt="Appzeto" className="w-12 sm:w-20 md:w-28 relative z-10 brightness-125 drop-shadow-[0_0_15px_rgba(5,164,167,0.5)]" />
+                <motion.div
+                    animate={{ rotateY: 360 }}
+                    transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
+                    className="relative z-10 flex items-center justify-center"
+                >
+                    <img src={logo} alt="Appzeto" className="w-12 sm:w-20 md:w-28 brightness-125 drop-shadow-[0_0_15px_rgba(5,164,167,0.5)]" />
+                </motion.div>
             </div>
 
             {/* BACKGROUND DECORATIVE GLOW */}

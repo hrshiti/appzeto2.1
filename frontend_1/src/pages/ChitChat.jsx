@@ -98,7 +98,7 @@ const ChitChat = () => {
                                                     name="name"
                                                     type="text"
                                                     placeholder="Your Name"
-                                                    className="w-full bg-slate-50/80 border border-slate-100 p-3 rounded-xl focus:border-primary focus:bg-white outline-none transition-all placeholder:text-slate-300 text-sm font-bold italic text-slate-800"
+                                                    className="w-full bg-slate-50/80 border border-slate-200 p-3 rounded-xl focus:border-primary focus:bg-white outline-none transition-all placeholder:text-slate-500 text-sm font-bold text-slate-900"
                                                 />
                                             </div>
                                             <div className="space-y-1">
@@ -108,7 +108,7 @@ const ChitChat = () => {
                                                     name="phone"
                                                     type="tel"
                                                     placeholder="+91 0000..."
-                                                    className="w-full bg-slate-50/80 border border-slate-100 p-3 rounded-xl focus:border-primary focus:bg-white outline-none transition-all placeholder:text-slate-300 text-sm font-bold italic text-slate-800"
+                                                    className="w-full bg-slate-50/80 border border-slate-200 p-3 rounded-xl focus:border-primary focus:bg-white outline-none transition-all placeholder:text-slate-500 text-sm font-bold text-slate-900"
                                                 />
                                             </div>
                                         </div>
@@ -120,7 +120,7 @@ const ChitChat = () => {
                                                 name="email"
                                                 type="email"
                                                 placeholder="you@email.com"
-                                                className="w-full bg-slate-50/80 border border-slate-100 p-3 rounded-xl focus:border-primary focus:bg-white outline-none transition-all placeholder:text-slate-300 text-sm font-bold italic text-slate-800"
+                                                className="w-full bg-slate-50/80 border border-slate-200 p-3 rounded-xl focus:border-primary focus:bg-white outline-none transition-all placeholder:text-slate-500 text-sm font-bold text-slate-900"
                                             />
                                         </div>
 
@@ -130,7 +130,7 @@ const ChitChat = () => {
                                                 <select
                                                     required
                                                     name="reason"
-                                                    className="w-full bg-slate-50/80 border border-slate-100 p-3 rounded-xl focus:border-primary focus:bg-white outline-none transition-all text-sm font-bold italic text-slate-800 appearance-none cursor-pointer"
+                                                    className="w-full bg-slate-50/80 border border-slate-200 p-3 rounded-xl focus:border-primary focus:bg-white outline-none transition-all text-sm font-bold text-slate-900 appearance-none cursor-pointer"
                                                 >
                                                     <option value="" disabled selected>Select reason</option>
                                                     <option value="project">New Project</option>

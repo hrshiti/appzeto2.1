@@ -193,12 +193,12 @@ const About = () => {
                                     </Link>
                                     <div className="flex items-center justify-center sm:justify-start w-full sm:w-auto gap-4 sm:gap-6 text-sm bg-gray-50 dark:bg-white/5 sm:bg-transparent sm:dark:bg-transparent p-3 sm:p-0 rounded-lg sm:rounded-none">
                                         <div className="flex items-center gap-2">
-                                            <span className="font-black text-xl sm:text-2xl text-[#05A4A7] leading-none">5+</span>
+                                            <span className="font-black text-xl sm:text-2xl text-[#05A4A7] leading-none">12+</span>
                                             <span className="text-[#618983] font-medium text-[10px] sm:text-xs uppercase">Years</span>
                                         </div>
                                         <div className="w-px h-8 bg-gray-200 dark:border-gray-700 mx-2"></div>
                                         <div className="flex items-center gap-2">
-                                            <span className="font-black text-xl sm:text-2xl text-[#05A4A7] leading-none">100+</span>
+                                            <span className="font-black text-xl sm:text-2xl text-[#05A4A7] leading-none">2k+</span>
                                             <span className="text-[#618983] font-medium text-[10px] sm:text-xs uppercase">Projects</span>
                                         </div>
                                     </div>

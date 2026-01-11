@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import Navbar from './Navbar';
 import RevolvingOrbit from './RevolvingOrbit';
+import TypewriterText from './TypewriterText';
 
 const Hero = () => {
     const serviceItems = [
@@ -17,10 +18,17 @@ const Hero = () => {
         { icon: 'link', label: 'Blockchain' },
     ];
 
+    // Phrases for the typewriter effect
+    const phrases = [
+        "Powerful Digital Products",
+        "Scalable Digital Products",
+        "High-Impact Digital Products",
+        "Future-Ready Digital Products"
+    ];
+
     return (
         <div className="bg-background-light dark:bg-background-dark font-body antialiased transition-colors duration-300 min-h-0 lg:min-h-screen flex flex-col relative overflow-hidden">
-
-            {/* Background Decorative Elements */}
+            {/* ... (Background elements remain the same) */}
             <div className="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 sm:w-96 sm:h-96 bg-primary/10 rounded-full blur-3xl dark:bg-primary/20 pointer-events-none"></div>
             <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-56 h-56 sm:w-80 sm:h-80 bg-secondary/20 rounded-full blur-3xl dark:bg-secondary/10 pointer-events-none"></div>
 
@@ -37,9 +45,8 @@ const Hero = () => {
                             className="space-y-6 sm:space-y-8"
                         >
                             <h1 className="text-2xl sm:text-3xl lg:text-5xl font-display font-black text-gray-800 dark:text-white leading-[1.2] tracking-tight">
-                                IT Services Company <br className="hidden lg:block" />
-                                <span className="text-primary">Building Scalable</span> <br className="hidden lg:block" />
-                                Web, App & AI Solutions
+                                Helping Businesses Turn Ideas into <br className="hidden lg:block" />
+                                <TypewriterText phrases={phrases} />
                             </h1>
 
                             <p className="hidden sm:block text-sm sm:text-base lg:text-lg text-gray-500 dark:text-gray-400 max-w-lg leading-relaxed font-medium">
@@ -137,7 +144,7 @@ const Hero = () => {
                                 initial={{ opacity: 0, x: 20 }}
                                 animate={{ opacity: 1, x: 0 }}
                                 transition={{ delay: 1, duration: 0.8 }}
-                                className="absolute -bottom-4 right-0 sm:bottom-8 sm:-right-24 flex items-center gap-2 sm:gap-3 bg-white dark:bg-slate-900 border border-gray-100 dark:border-slate-800 p-2 pr-4 sm:p-3 sm:pr-5 rounded-full shadow-2xl z-20"
+                                className="absolute -bottom-12 right-0 sm:-bottom-8 sm:-right-24 flex items-center gap-2 sm:gap-3 bg-white dark:bg-slate-900 border border-gray-100 dark:border-slate-800 p-2 pr-4 sm:p-3 sm:pr-5 rounded-full shadow-2xl z-20"
                             >
                                 <div className="flex -space-x-2 sm:-space-x-3">
                                     {[
@@ -152,7 +159,9 @@ const Hero = () => {
                                     ))}
                                 </div>
                                 <div className="flex flex-col">
-                                    <span className="text-[10px] sm:text-xs font-black text-gray-900 dark:text-white">500+ Happy Clients</span>
+                                    <span className="text-[10px] sm:text-xs font-black text-gray-900 dark:text-white whitespace-nowrap">
+                                        500+ Happy Clients • Proven Results • Transparent Process
+                                    </span>
                                     <div className="flex items-center gap-1">
                                         <span className="flex text-yellow-400 text-[8px] sm:text-[10px]">
                                             {"★★★★★".split("").map((star, i) => <span key={i}>{star}</span>)}
