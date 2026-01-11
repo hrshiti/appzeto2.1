@@ -28,7 +28,7 @@ app.get('/', (req, res) => {
 
 // Import Routes
 const authRoutes = require('./routes/authRoutes');
-const userRoutes = require('./routes/userRoutes');
+// const userRoutes = require('./routes/userRoutes');
 const productRoutes = require('./routes/productRoutes');
 const serviceRoutes = require('./routes/serviceRoutes');
 const projectRoutes = require('./routes/projectRoutes');
@@ -43,7 +43,7 @@ const formRoutes = require('./routes/formRoutes');
 
 // Mount Routes
 app.use('/api/auth', authRoutes);
-app.use('/api/users', userRoutes);
+// app.use('/api/users', userRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/services', serviceRoutes);
 app.use('/api/projects', projectRoutes);
