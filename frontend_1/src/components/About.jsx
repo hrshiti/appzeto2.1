@@ -5,75 +5,39 @@ import { motion } from 'framer-motion';
 import groupImg from '../assets/group_photo.jpeg';
 
 const About = () => {
-    const [charIndex, setCharIndex] = useState(0);
+    // Observer for Animation Trigger
     const [isInView, setIsInView] = useState(false);
-    const paragraphRef = useRef(null);
+    const sectionRef = useRef(null);
 
-    const textSegments = [
-        "We don't just write code; we build the digital infrastructure that powers industry leaders. From ",
-        "AI-driven insights",
-        " to ",
-        "robust web ecosystems",
-        ", TechSolutions IT turns complex challenges into scalable growth."
-    ];
+    // Typing Effect State
+    const [charIndex, setCharIndex] = useState(0);
+    const targetText = "Our team focuses on clean design, strong frontend experiences, and robust backend architecture to turn ideas into powerful digital products.";
 
-    const totalLength = textSegments.reduce((acc, seg) => acc + seg.length, 0);
-
-    // Observer for Top Section (Vision)
     useEffect(() => {
         const observer = new IntersectionObserver(([entry]) => {
             setIsInView(entry.isIntersecting);
-        }, { threshold: 0.3 }); // Trigger when 30% visible
+        }, { threshold: 0.3 });
 
-        if (paragraphRef.current) observer.observe(paragraphRef.current);
+        if (sectionRef.current) observer.observe(sectionRef.current);
         return () => observer.disconnect();
     }, []);
 
-    // Typing Effect Logic
+    // Typing Logic
     useEffect(() => {
         let interval;
-        if (isInView) {
-            // Type forward - SLOWER SPEED (50ms)
+        if (isInView && charIndex < targetText.length) {
             interval = setInterval(() => {
-                setCharIndex(prev => {
-                    if (prev >= totalLength) {
-                        clearInterval(interval);
-                        return prev;
-                    }
-                    return prev + 1;
-                });
-            }, 50);
-        } else {
-            // Type backward (reverse) - SLOWER SPEED (20ms)
-            interval = setInterval(() => {
-                setCharIndex(prev => {
-                    if (prev <= 0) {
-                        clearInterval(interval);
-                        return 0;
-                    }
-                    return prev - 2;
-                });
-            }, 20);
+                setCharIndex((prev) => prev + 1);
+            }, 30); // Typing speed
         }
         return () => clearInterval(interval);
-    }, [isInView, totalLength]);
-
-    const getSlice = (segmentIndex) => {
-        let previousLength = 0;
-        for (let i = 0; i < segmentIndex; i++) previousLength += textSegments[i].length;
-
-        const localIndex = charIndex - previousLength;
-
-        if (localIndex <= 0) return "";
-        if (localIndex >= textSegments[segmentIndex].length) return textSegments[segmentIndex];
-        return textSegments[segmentIndex].slice(0, localIndex);
-    };
+    }, [isInView, charIndex]); // targetText is constant
 
     return (
         <div className="relative z-30 w-full bg-[#f6f8f8] dark:bg-[#012829] text-[#111817] transition-colors duration-200">
             <div className="flex-1">
                 {/* Vision Section */}
-                <section className="relative w-full min-h-0 md:min-h-screen flex items-center justify-center pt-10 pb-2.5 md:py-20 px-4 sm:px-6 md:px-12 lg:px-16 overflow-hidden bg-[#ffffff] dark:bg-[#023638]">
+                <section ref={sectionRef} className="relative w-full min-h-0 md:min-h-screen flex items-center justify-center pt-10 pb-2.5 md:py-20 px-4 sm:px-6 md:px-12 lg:px-16 overflow-hidden bg-[#ffffff] dark:bg-[#023638]">
                     <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#05A4A7]/5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
                     <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-[#EAB308]/5 rounded-full blur-[80px] translate-y-1/3 -translate-x-1/3 pointer-events-none"></div>
                     <div className="max-w-[1280px] mx-auto w-full">
@@ -161,14 +125,19 @@ const About = () => {
                                     <h2 className="text-base sm:text-xl md:text-3xl font-bold text-[#05A4A7] leading-tight">
                                         Engineering the Digital Future.
                                     </h2>
-                                    <p ref={paragraphRef} className="hidden sm:block text-base sm:text-lg lg:text-xl text-[#618983] dark:text-gray-400 leading-relaxed max-w-lg min-h-[5rem]">
-                                        {getSlice(0)}
-                                        <span className="text-[#111817] dark:text-white font-semibold">{getSlice(1)}</span>
-                                        {getSlice(2)}
-                                        <span className="text-[#111817] dark:text-white font-semibold">{getSlice(3)}</span>
-                                        {getSlice(4)}
-                                        <span className="animate-pulse">|</span>
-                                    </p>
+
+                                    <div className="space-y-4 text-base sm:text-lg text-[#618983] dark:text-gray-400 leading-relaxed max-w-lg">
+                                        <p>
+                                            At <span className="text-[#111817] dark:text-white font-semibold">Appzeto</span>, we help startups, founders, and businesses build modern digital products that are scalable, reliable, and easy to use.
+                                        </p>
+                                        <p>
+                                            We specialize in <span className="text-[#111817] dark:text-white font-semibold">web development, mobile app development, AI & machine learning</span>, and custom software solutions designed to solve real business problems and support long-term growth.
+                                        </p>
+                                        <p className="min-h-[3.5rem]">
+                                            {targetText.slice(0, charIndex)}
+                                            <span className="animate-pulse ml-0.5">|</span>
+                                        </p>
+                                    </div>
                                 </div>
                                 <div className="hidden sm:grid grid-cols-2 gap-2 sm:gap-4 border-t border-dashed border-gray-200 dark:border-gray-700 pt-2 sm:pt-6">
                                     <div className="group flex flex-col gap-1 p-2 -ml-2 rounded-lg hover:bg-gray-50 dark:hover:bg-white/5 transition-colors">

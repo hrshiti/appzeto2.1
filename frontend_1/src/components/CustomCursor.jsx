@@ -29,7 +29,8 @@ const CustomCursor = () => {
             // Re-check target in moveCursor for more reliability
             const target = e.target;
             if (target && target.closest("input, textarea, select, label, [contenteditable='true']")) {
-                if (cursorVariant !== "hidden") setCursorVariant("hidden");
+                // Ensure we don't block other variants unless needed, but for inputs we force hidden
+                setCursorVariant("hidden");
             }
         };
 
@@ -85,7 +86,9 @@ const CustomCursor = () => {
             window.removeEventListener("mouseup", handleMouseUp);
             window.removeEventListener("mouseover", handleMouseOver);
         };
-    }, []);
+    }, []); // Empty dependency array means this only runs once, creating closure over initial state. 
+    // This is known behavior here and seems intended to rely on event.target checks mostly. 
+    // Note: cursorVariant inside moveCursor will be stale ("default"), so setCursorVariant("hidden") is always called.
 
     const variants = {
         default: {
@@ -94,6 +97,7 @@ const CustomCursor = () => {
             backgroundColor: "#05A4A7", // Primary teal
             mixBlendMode: "normal",
             border: "1px solid rgba(255,255,255,0)",
+            opacity: 1,
         },
         button: {
             height: 60,
@@ -101,6 +105,7 @@ const CustomCursor = () => {
             backgroundColor: "rgba(5, 164, 167, 0.1)",
             border: "1px solid rgba(5, 164, 167, 0.5)",
             mixBlendMode: "normal",
+            opacity: 1,
         },
         text: {
             height: 100,
@@ -108,11 +113,13 @@ const CustomCursor = () => {
             backgroundColor: "rgba(255, 255, 255, 1)",
             mixBlendMode: "difference",
             border: "none",
+            opacity: 1,
         },
         click: {
             height: 15,
             width: 15,
             backgroundColor: "#05A4A7",
+            opacity: 1,
         },
         hidden: {
             opacity: 0,
@@ -138,10 +145,11 @@ const CustomCursor = () => {
             style={{
                 x: cursorXSpring,
                 y: cursorYSpring,
-                opacity: isVisible ? 1 : 0,
+                // opacity removed from style to allow variants to control it
             }}
             variants={variants}
-            animate={cursorVariant}
+            // Use isVisible state to toggle between 'hidden' variant for initial state and the active cursorVariant
+            animate={isVisible ? cursorVariant : "hidden"}
             transition={{ type: "spring", stiffness: 500, damping: 28 }}
         >
             <motion.span

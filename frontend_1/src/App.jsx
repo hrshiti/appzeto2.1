@@ -19,7 +19,7 @@ import HospitalProductShowcase from './pages/HospitalProductShowcase'
 import ChannelPartnersPage from './pages/ChannelPartnersPage'
 import DemoCenter from './pages/DemoCenter'
 import OfficeDetail from './pages/OfficeDetail'
-import CustomCursor from './components/CustomCursor'
+// Removed CustomCursor import
 import './App.css'
 
 // Admin Imports
@@ -52,7 +52,7 @@ import { ToastProvider } from './admin/context/ToastContext'
 function App() {
   return (
     <>
-      <CustomCursor />
+      {/* Removed CustomCursor component */}
       <ToastProvider>
         <AdminAuthProvider>
           <Routes>
