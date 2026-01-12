@@ -1,7 +1,7 @@
 import React from 'react';
 import aapreecLogo from '../assets/logos/aapreec_logo.jpg';
 import autoRideLogo from '../assets/logos/auto_ride.jpg';
-import beeyouLogo from '../assets/logos/beeyou.jpg';
+import appzetoTaxi from '../assets/logos/Appzeto Taxi.jpg'; // Replaced Beeyou
 import bookMyTempoLogo from '../assets/logos/book_my_tempo.jpg';
 import createBharatLogo from '../assets/logos/create_bharat.jpg';
 import dailyHisabLogo from '../assets/logos/daily_hisab.jpg';
@@ -12,7 +12,7 @@ import blueRideLogo from '../assets/logos/blue_ride.jpg';
 
 const TrustedLogos = () => {
     const logos = [
-        aapreecLogo, autoRideLogo, beeyouLogo, bookMyTempoLogo,
+        aapreecLogo, autoRideLogo, appzetoTaxi, bookMyTempoLogo,
         createBharatLogo, dailyHisabLogo, doctorOnHomeLogo,
         fixflyLogo, rentYatraLogo, blueRideLogo
     ];

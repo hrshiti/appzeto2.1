@@ -124,8 +124,14 @@ const initialFormState = {
     // Challenge & Solution
     challenge: { description: '', points: [] },
     solution: { description: '', points: [] },
-    // Showcase
-    showcase: { images: [], videos: [] }, // arrays of strings
+    // Custom Media Showcase Section
+    mediaShowcase: {
+        mediaUrl: '',
+        mediaType: 'image',
+        items: [] // { label, icon }
+    },
+    // Showcase (Old logic, keeping for data compatibility)
+    showcase: { images: [], videos: [] },
     // Features
     features: [], // { label, icon }
     // Results
@@ -154,7 +160,16 @@ const ProjectForm = () => {
                     setIsLoading(true);
                     const data = await dataService.getProject(id);
                     if (data) {
-                        setFormData(data); // Assuming backend response matches schema structure roughly
+                        // Ensure optional fields exist to avoid null errors
+                        const safeData = {
+                            ...initialFormState, // Defaults
+                            ...data, // Overwrite with server data
+                            mediaShowcase: {
+                                ...initialFormState.mediaShowcase,
+                                ...(data.mediaShowcase || {})
+                            }
+                        };
+                        setFormData(safeData);
                     }
                 } catch (error) {
                     addToast('Failed to load project data', 'error');
@@ -249,6 +264,42 @@ const ProjectForm = () => {
         }));
     };
 
+    // --- Helpers for Media Showcase Items ---
+    const handleShowcaseItemChange = (index, key, value) => {
+        setFormData(prev => {
+            const newItems = [...prev.mediaShowcase.items];
+            newItems[index] = { ...newItems[index], [key]: value };
+            return {
+                ...prev,
+                mediaShowcase: {
+                    ...prev.mediaShowcase,
+                    items: newItems
+                }
+            };
+        });
+    };
+
+    const addShowcaseItem = () => {
+        setFormData(prev => ({
+            ...prev,
+            mediaShowcase: {
+                ...prev.mediaShowcase,
+                items: [...(prev.mediaShowcase.items || []), { label: '', icon: 'CheckCircle' }]
+            }
+        }));
+    };
+
+    const removeShowcaseItem = (index) => {
+        setFormData(prev => ({
+            ...prev,
+            mediaShowcase: {
+                ...prev.mediaShowcase,
+                items: prev.mediaShowcase.items.filter((_, i) => i !== index)
+            }
+        }));
+    };
+
+
     // Submit
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -267,6 +318,10 @@ const ProjectForm = () => {
             solution: {
                 ...formData.solution,
                 points: formData.solution.points.filter(p => p.trim() !== '')
+            },
+            mediaShowcase: {
+                ...formData.mediaShowcase,
+                items: formData.mediaShowcase.items.filter(i => i.label && i.label.trim() !== '')
             },
             // Ensure testimonial strings are not null
             testimonial: {
@@ -453,10 +508,44 @@ const ProjectForm = () => {
                     <textarea className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg h-32"
                         value={formData.overview.text} onChange={e => handleNestedChange('overview', 'text', e.target.value)} />
                 </InputGroup>
+
+                {/* ADDED: Media Type Selection */}
                 <div className="grid md:grid-cols-2 gap-6 mt-4">
-                    <InputGroup label="Overview Media (Image/Video)">
-                        <FileUpload currentUrl={formData.overview.mediaUrl} onUpload={url => handleNestedChange('overview', 'mediaUrl', url)} />
-                    </InputGroup>
+                    <div>
+                        <InputGroup label="Overview Media Type">
+                            <div className="flex gap-4 mb-2">
+                                <label className="flex items-center gap-2 cursor-pointer">
+                                    <input
+                                        type="radio"
+                                        name="mediaType"
+                                        value="image"
+                                        checked={formData.overview.mediaType !== 'video'}
+                                        onChange={() => handleNestedChange('overview', 'mediaType', 'image')}
+                                        className="accent-[#05A4A7]"
+                                    />
+                                    <span className="text-sm font-medium text-slate-700">Image</span>
+                                </label>
+                                <label className="flex items-center gap-2 cursor-pointer">
+                                    <input
+                                        type="radio"
+                                        name="mediaType"
+                                        value="video"
+                                        checked={formData.overview.mediaType === 'video'}
+                                        onChange={() => handleNestedChange('overview', 'mediaType', 'video')}
+                                        className="accent-[#05A4A7]"
+                                    />
+                                    <span className="text-sm font-medium text-slate-700">Video</span>
+                                </label>
+                            </div>
+                        </InputGroup>
+                        <InputGroup label={`Overview ${formData.overview.mediaType === 'video' ? 'Video' : 'Image'}`}>
+                            <FileUpload
+                                currentUrl={formData.overview.mediaUrl}
+                                type={formData.overview.mediaType === 'video' ? 'video' : 'image'}
+                                onUpload={url => handleNestedChange('overview', 'mediaUrl', url)}
+                            />
+                        </InputGroup>
+                    </div>
                 </div>
             </Section>
 
@@ -495,6 +584,98 @@ const ProjectForm = () => {
                             </div>
                         ))}
                         <button type="button" onClick={() => addArrayItem('solution.points')} className="text-xs text-[#05A4A7] font-bold">+ Add Point</button>
+                    </div>
+                </div>
+            </Section>
+
+            {/* G. NEW MEDIA SHOWCASE */}
+            <Section title="Media Showcase">
+                <div className="grid md:grid-cols-2 gap-8">
+                    {/* Left: Media File */}
+                    <div>
+                        <InputGroup label="Showcase Media Type">
+                            <div className="flex gap-4 mb-2">
+                                <label className="flex items-center gap-2 cursor-pointer">
+                                    <input
+                                        type="radio"
+                                        name="showcaseMediaType"
+                                        value="image"
+                                        checked={formData.mediaShowcase.mediaType !== 'video'}
+                                        onChange={() => setFormData(prev => ({
+                                            ...prev,
+                                            mediaShowcase: { ...prev.mediaShowcase, mediaType: 'image' }
+                                        }))}
+                                        className="accent-[#05A4A7]"
+                                    />
+                                    <span className="text-sm font-medium text-slate-700">Image</span>
+                                </label>
+                                <label className="flex items-center gap-2 cursor-pointer">
+                                    <input
+                                        type="radio"
+                                        name="showcaseMediaType"
+                                        value="video"
+                                        checked={formData.mediaShowcase.mediaType === 'video'}
+                                        onChange={() => setFormData(prev => ({
+                                            ...prev,
+                                            mediaShowcase: { ...prev.mediaShowcase, mediaType: 'video' }
+                                        }))}
+                                        className="accent-[#05A4A7]"
+                                    />
+                                    <span className="text-sm font-medium text-slate-700">Video</span>
+                                </label>
+                            </div>
+                        </InputGroup>
+                        <InputGroup label="Showcase Media File">
+                            <FileUpload
+                                currentUrl={formData.mediaShowcase.mediaUrl}
+                                type={formData.mediaShowcase.mediaType}
+                                onUpload={url => setFormData(prev => ({
+                                    ...prev,
+                                    mediaShowcase: { ...prev.mediaShowcase, mediaUrl: url }
+                                }))}
+                            />
+                        </InputGroup>
+                    </div>
+
+                    {/* Right: Features List */}
+                    <div>
+                        <label className="text-sm font-bold text-slate-700 block mb-3">Key Features (Right Side)</label>
+                        <div className="space-y-3">
+                            {formData.mediaShowcase.items.map((item, i) => (
+                                <div key={i} className="p-3 bg-slate-50 border border-slate-200 rounded-lg flex items-center gap-3">
+                                    <div className="flex-1">
+                                        <input
+                                            placeholder="Label (e.g. Real-Time Analytics)"
+                                            className="w-full bg-transparent border-none text-sm font-medium focus:ring-0 px-0"
+                                            value={item.label}
+                                            onChange={e => handleShowcaseItemChange(i, 'label', e.target.value)}
+                                        />
+                                    </div>
+                                    <input
+                                        placeholder="Icon Name (e.g. Activity)"
+                                        className="w-32 bg-white border border-slate-200 rounded px-2 py-1 text-xs"
+                                        value={item.icon}
+                                        onChange={e => handleShowcaseItemChange(i, 'icon', e.target.value)}
+                                    />
+                                    <button
+                                        type="button"
+                                        onClick={() => removeShowcaseItem(i)}
+                                        className="text-slate-400 hover:text-red-500"
+                                    >
+                                        <Trash2 size={16} />
+                                    </button>
+                                </div>
+                            ))}
+                            {formData.mediaShowcase.items.length < 4 && (
+                                <button
+                                    type="button"
+                                    onClick={addShowcaseItem}
+                                    className="w-full py-2 border-2 border-dashed border-slate-200 rounded-lg text-slate-400 text-xs font-bold hover:border-[#05A4A7] hover:text-[#05A4A7] transition-all"
+                                >
+                                    + Add Feature Item
+                                </button>
+                            )}
+                        </div>
                     </div>
                 </div>
             </Section>

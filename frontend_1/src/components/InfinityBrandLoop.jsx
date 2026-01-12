@@ -3,7 +3,7 @@ import React from 'react';
 // Importing ALL logos
 import aapreecLogo from '../assets/logos/aapreec_logo.jpg';
 import autoRideLogo from '../assets/logos/auto_ride.jpg';
-import beeyouLogo from '../assets/logos/beeyou.jpg';
+import appzetoTaxi from '../assets/logos/Appzeto Taxi.jpg'; // Replaced Beeyou
 import bookMyTempoLogo from '../assets/logos/book_my_tempo.jpg';
 import createBharatLogo from '../assets/logos/create_bharat.jpg';
 import dailyHisabLogo from '../assets/logos/daily_hisab.jpg';
@@ -26,7 +26,7 @@ import denishComforts from '../assets/logos/Denish Comforts.jpg';
 import bonfire from '../assets/logos/bonfire.jpg';
 
 const uniqueLogos = [
-    aapreecLogo, autoRideLogo, beeyouLogo, bookMyTempoLogo,
+    aapreecLogo, autoRideLogo, appzetoTaxi, bookMyTempoLogo,
     createBharatLogo, dailyHisabLogo, doctorOnHomeLogo, fixflyLogo,
     rentYatraLogo, blueRideLogo, brnCabs, boonCabs,
     cabReady, chaloSawari, conApp, coolie,

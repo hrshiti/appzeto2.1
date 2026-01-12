@@ -146,7 +146,7 @@ const AdminProjects = () => {
                                             )}
                                         </td>
                                         <td className="px-6 py-4">
-                                            <div className="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                            <div className="flex items-center justify-end gap-2">
                                                 <button
                                                     onClick={() => window.open(`/projects/${project.slug}`, '_blank')}
                                                     className="p-2 text-slate-400 hover:text-[#05A4A7] hover:bg-[#05A4A7]/10 rounded-lg transition-colors"
