@@ -98,7 +98,19 @@ const projectSchema = new mongoose.Schema({
         points: [String]
     },
 
-    // --- Detail Page: Media Showcase ---
+    // --- Detail Page: Media Showcase Section ---
+    mediaShowcase: {
+        mediaUrl: { type: String },
+        mediaType: { type: String, enum: ['image', 'video'], default: 'image' },
+        items: [
+            {
+                label: { type: String },
+                icon: { type: String }
+            }
+        ]
+    },
+
+    // --- Detail Page: Media Showcase (Old - keeping for backward compatibility if needed, or we can just ignore it) ---
     showcase: {
         images: [String], // Array of URLs
         videos: [String] // Array of URLs
@@ -124,7 +136,6 @@ const projectSchema = new mongoose.Schema({
     toObject: { virtuals: true }
 });
 
-// Auto-generate slug from title before saving
 // Auto-generate slug from title before saving
 projectSchema.pre('save', async function () {
     if (this.isModified('title')) {
