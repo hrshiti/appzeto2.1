@@ -1,7 +1,10 @@
 import React, { useEffect, useState, useRef } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
+import { useLocation } from "react-router-dom";
 
 const CustomCursor = () => {
+    const location = useLocation();
+
     // Mouse position state
     const cursorX = useMotionValue(-100);
     const cursorY = useMotionValue(-100);
@@ -92,8 +95,14 @@ const CustomCursor = () => {
         }
     };
 
+    // Don't render on mobile to avoid UX issues
     if (typeof navigator !== 'undefined' && /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-        return null; // Don't render on mobile to avoid UX issues
+        return null;
+    }
+
+    // Disable on Admin and HR Panels
+    if (location.pathname.startsWith('/admin') || location.pathname.startsWith('/hr')) {
+        return null;
     }
 
     return (

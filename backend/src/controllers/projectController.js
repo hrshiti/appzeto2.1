@@ -18,11 +18,22 @@ const getProjects = asyncHandler(async (req, res) => {
     });
 });
 
-// @desc    Get single project by slug
+// @desc    Get single project by slug or ID
 // @route   GET /api/projects/:slug
 // @access  Public
 const getProjectBySlug = asyncHandler(async (req, res) => {
-    const project = await Project.findOne({ slug: req.params.slug });
+    const { slug } = req.params;
+    let project;
+
+    // Check if the parameter resembles a valid MongoDB ObjectId (24 hex characters)
+    if (slug.match(/^[0-9a-fA-F]{24}$/)) {
+        project = await Project.findById(slug);
+    }
+
+    // If no project found by ID (or not a valid ID), try finding by slug
+    if (!project) {
+        project = await Project.findOne({ slug });
+    }
 
     if (!project) {
         res.status(404);
