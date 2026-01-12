@@ -14,73 +14,21 @@ const Career = () => {
     const [isApplying, setIsApplying] = useState(false);
     const [appStatus, setAppStatus] = useState('idle'); // idle, sending, success, error
 
-    // RESTORED STATIC DATA AS PER USER REQUEST
-    const positions = [
-        {
-            id: 1,
-            role: "Frontend Dev",
-            department: "Engineering",
-            type: "Full-time",
-            location: "Remote",
-            description: "Crafting pixel-perfect React interfaces."
-        },
-        {
-            id: 2,
-            role: "Backend Dev",
-            department: "Engineering",
-            type: "Full-time",
-            location: "Remote",
-            description: "Building scalable Node.js architectures."
-        },
-        {
-            id: 3,
-            role: "UI/UX Designer",
-            department: "Product",
-            type: "Full-time",
-            location: "On-site",
-            description: "Designing the next-gen user journeys."
-        },
-        {
-            id: 4,
-            role: "SEO Expert",
-            department: "Marketing",
-            type: "Full-time",
-            location: "On-site",
-            description: "Optimizing visibility and conversion."
-        }
-    ];
-
-    const internships = [
-        {
-            id: "i1",
-            role: "Graphic Design Intern",
-            duration: "3 - 6 Months",
-            type: "Paid",
-            description: "Work on real-world brand identities and digital marketing assets.",
-            icon: "palette"
-        },
-        {
-            id: "i2",
-            role: "Full Stack Web Intern",
-            duration: "6 Months",
-            type: "Paid",
-            description: "Learn and build with the MERN stack with expert mentorship.",
-            icon: "code"
-        },
-        {
-            id: "i3",
-            role: "Content Intern",
-            duration: "3 Months",
-            type: "Paid",
-            description: "Create engaging content for social media and blogs.",
-            icon: "edit"
-        }
-    ];
-
-    const [formFields, setFormFields] = useState(null);
+    const [jobsList, setJobsList] = useState([]);
 
     useEffect(() => {
         window.scrollTo(0, 0);
+
+        // Load Jobs
+        const fetchJobs = async () => {
+            try {
+                const data = await dataService.getJobs();
+                if (data) setJobsList(data);
+            } catch (e) {
+                console.error("Failed to load jobs", e);
+            }
+        };
+        fetchJobs();
 
         // Load Dynamic Form Config
         const loadConfig = async () => {
@@ -96,6 +44,9 @@ const Career = () => {
         loadConfig();
 
     }, []);
+
+    const positions = jobsList.filter(j => j.type !== 'Internship' && j.active);
+    const internships = jobsList.filter(j => j.type === 'Internship' && j.active);
 
     useEffect(() => {
         if (isApplying) {
@@ -252,7 +203,7 @@ const Career = () => {
                     </div>
                 </div>
 
-                {/* --- OPEN POSITIONS (MODERN MINIMAL LIST - FITS IN 100VH) --- */}
+                {/* --- OPEN POSITIONS --- */}
                 <div id="positions" className="lg:h-screen max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 bg-white shadow-sm mt-0 border-b border-slate-100 flex flex-col justify-center overflow-hidden">
                     <div className="flex flex-col md:flex-row justify-between items-end mb-8 md:mb-12 px-4">
                         <div className="text-left">
@@ -263,35 +214,45 @@ const Career = () => {
                     </div>
 
                     <div className="flex flex-col border-t border-slate-100/50">
-                        {positions.map((job) => (
-                            <motion.div
-                                key={job.id}
-                                whileHover={{ backgroundColor: "rgba(241, 252, 136, 0.2)" }}
-                                onClick={() => { setSelectedJob(job.role); setIsApplying(true); }}
-                                className="flex flex-col md:flex-row items-start md:items-center justify-between py-4 md:py-6 px-4 md:px-6 border-b border-slate-100/50 group transition-all duration-300 cursor-pointer"
-                            >
-                                <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-12 flex-1 w-full">
-                                    <span className="text-[9px] md:text-[10px] font-black uppercase tracking-widest text-slate-300 w-24">{job.department}</span>
-                                    <div className="flex flex-col">
-                                        <h3 className="text-lg md:text-xl font-bold text-slate-900 group-hover:text-primary transition-colors uppercase tracking-tight">{job.role}</h3>
-                                        <p className="text-slate-500 text-[10px] md:text-xs mt-0.5">{job.description}</p>
+                        {positions.length === 0 ? (
+                            <div className="py-10 text-center text-slate-400 font-bold uppercase tracking-widest">
+                                No open positions right now. Check back later!
+                            </div>
+                        ) : (
+                            positions.map((job) => (
+                                <motion.div
+                                    key={job._id}
+                                    whileHover={{ backgroundColor: "rgba(241, 252, 136, 0.2)" }}
+                                    onClick={() => { setSelectedJob(job.title); setIsApplying(true); }}
+                                    className="flex flex-col md:flex-row items-start md:items-center justify-between py-4 md:py-6 px-4 md:px-6 border-b border-slate-100/50 group transition-all duration-300 cursor-pointer"
+                                >
+                                    <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-12 flex-1 w-full">
+                                        <span className="text-[9px] md:text-[10px] font-black uppercase tracking-widest text-slate-300 w-24">{job.department || 'General'}</span>
+                                        <div className="flex flex-col max-w-2xl">
+                                            <h3 className="text-lg md:text-xl font-bold text-slate-900 group-hover:text-primary transition-colors uppercase tracking-tight">{job.title}</h3>
+                                            <div
+                                                className="text-slate-500 text-[10px] md:text-xs mt-1.5 [&>ul]:list-disc [&>ul]:pl-4 [&>ol]:list-decimal [&>ol]:pl-4 [&>p]:mb-1 cursor-text"
+                                                onClick={(e) => e.stopPropagation()}
+                                                dangerouslySetInnerHTML={{ __html: job.description }}
+                                            />
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div className="flex items-center justify-between w-full md:w-auto gap-8 mt-4 md:mt-0">
-                                    <div className="hidden lg:flex items-center gap-6 text-[10px] font-bold text-slate-400 uppercase tracking-widest">
-                                        <span className="flex items-center gap-1.5"><span className="material-icons text-sm opacity-50">schedule</span> {job.type}</span>
-                                        <span className="flex items-center gap-1.5"><span className="material-icons text-sm opacity-50">location_on</span> {job.location}</span>
+                                    <div className="flex items-center justify-between w-full md:w-auto gap-8 mt-4 md:mt-0">
+                                        <div className="hidden lg:flex items-center gap-6 text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                                            <span className="flex items-center gap-1.5"><span className="material-icons text-sm opacity-50">schedule</span> {job.type}</span>
+                                            <span className="flex items-center gap-1.5"><span className="material-icons text-sm opacity-50">location_on</span> {job.location || 'Remote'}</span>
+                                        </div>
+                                        <button
+                                            onClick={(e) => { e.stopPropagation(); setSelectedJob(job.title); setIsApplying(true); }}
+                                            className="bg-slate-950 text-white px-6 py-2 md:py-2.5 rounded-full font-bold text-[9px] md:text-[10px] uppercase tracking-widest hover:bg-[#F1FC88] hover:text-slate-900 transition-all flex items-center gap-2 ml-auto md:ml-0"
+                                        >
+                                            Apply <span className="material-icons text-sm">north_east</span>
+                                        </button>
                                     </div>
-                                    <button
-                                        onClick={() => { setSelectedJob(job.role); setIsApplying(true); }}
-                                        className="bg-slate-950 text-white px-6 py-2 md:py-2.5 rounded-full font-bold text-[9px] md:text-[10px] uppercase tracking-widest hover:bg-[#F1FC88] hover:text-slate-900 transition-all flex items-center gap-2 ml-auto md:ml-0"
-                                    >
-                                        Apply <span className="material-icons text-sm">north_east</span>
-                                    </button>
-                                </div>
-                            </motion.div>
-                        ))}
+                                </motion.div>
+                            ))
+                        )}
                     </div>
                 </div>
 
@@ -322,27 +283,33 @@ const Career = () => {
                             </div>
 
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-                                {internships.map((intern) => (
-                                    <div key={intern.id} className="bg-white p-4 md:p-6 rounded-[1.5rem] md:rounded-[2rem] border-4 border-slate-900 shadow-[6px_6px_0px_0px_rgba(15,23,42,1)] md:shadow-[8px_8px_0px_0px_rgba(15,23,42,1)] hover:-translate-y-1 transition-transform group flex flex-col justify-between">
-                                        <div>
-                                            <h4 className="text-lg md:text-xl font-bold text-slate-900 mb-1">{intern.role}</h4>
-                                            <div className="text-primary font-black text-[10px] uppercase tracking-widest mb-2 md:mb-4">{intern.duration} • {intern.type}</div>
-                                            <p className="text-slate-600 font-normal text-xs md:text-sm line-clamp-2 mb-6">{intern.description}</p>
-                                        </div>
-                                        <button
-                                            onClick={() => { setSelectedJob(intern.role); setIsApplying(true); }}
-                                            className="w-full py-2.5 bg-slate-900 text-white rounded-xl font-bold text-[10px] uppercase tracking-widest hover:bg-white hover:text-slate-900 transition-all border-2 border-slate-900"
-                                        >
-                                            Apply Now
-                                        </button>
+                                {internships.length === 0 ? (
+                                    <div className="col-span-3 text-center text-white font-bold uppercase tracking-widest py-10 opacity-70">
+                                        No internship openings at the moment.
                                     </div>
-                                ))}
+                                ) : (
+                                    internships.map((intern) => (
+                                        <div key={intern._id} className="bg-white p-4 md:p-6 rounded-[1.5rem] md:rounded-[2rem] border-4 border-slate-900 shadow-[6px_6px_0px_0px_rgba(15,23,42,1)] md:shadow-[8px_8px_0px_0px_rgba(15,23,42,1)] hover:-translate-y-1 transition-transform group flex flex-col justify-between">
+                                            <div>
+                                                <h4 className="text-lg md:text-xl font-bold text-slate-900 mb-1">{intern.title}</h4>
+                                                <div className="text-primary font-black text-[10px] uppercase tracking-widest mb-2 md:mb-4">{intern.duration || 'Flexible'} • {intern.type}</div>
+                                                <p className="text-slate-600 font-normal text-xs md:text-sm line-clamp-2 mb-6">{stripHtml(intern.description)}</p>
+                                            </div>
+                                            <button
+                                                onClick={() => { setSelectedJob(intern.title); setIsApplying(true); }}
+                                                className="w-full py-2.5 bg-slate-900 text-white rounded-xl font-bold text-[10px] uppercase tracking-widest hover:bg-white hover:text-slate-900 transition-all border-2 border-slate-900"
+                                            >
+                                                Apply Now
+                                            </button>
+                                        </div>
+                                    ))
+                                )}
                             </div>
                         </div>
                     </div>
                 </div>
 
-                {/* --- SCATTERED LIFE AT APPZETO --- */}
+
                 <div id="culture" className="min-h-screen md:h-screen max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-0 flex flex-col justify-center relative overflow-hidden bg-[#f8f9fa]">
                     <div className="flex flex-col items-center mb-12 md:mb-16">
                         <h2 className="text-3xl md:text-4xl font-black text-slate-900 text-center uppercase tracking-tighter">

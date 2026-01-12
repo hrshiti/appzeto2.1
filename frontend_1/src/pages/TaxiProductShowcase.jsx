@@ -7,6 +7,7 @@ import Footer from '../components/Footer';
 import ScrollWrapper from '../components/ScrollWrapper';
 import ContactUs from '../components/ContactUs';
 import ProductReviews from '../components/ProductReviews';
+import InfinityBrandLoop from '../components/InfinityBrandLoop';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -414,6 +415,9 @@ const TaxiProductShowcase = () => {
                         </div>
                     </div>
                 </section>
+
+                {/* --- Infinity Brand Loop --- */}
+                <InfinityBrandLoop />
 
                 {/* --- 3 Icons Section --- */}
                 <section className="py-6 md:py-20">

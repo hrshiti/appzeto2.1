@@ -22,7 +22,7 @@ const HRJobs = () => {
         _id: '',
         title: '',
         department: '',
-        type: 'Full-time',
+        type: 'Full Time',
         location: 'Remote',
         status: 'Open',
         description: '', // HTML
@@ -50,7 +50,7 @@ const HRJobs = () => {
             _id: '',
             title: '',
             department: '',
-            type: 'Full-time',
+            type: 'Full Time',
             location: 'Remote',
             status: 'Open',
             description: '',
@@ -202,8 +202,8 @@ const HRJobs = () => {
                                 onChange={(e) => setCurrentJob({ ...currentJob, type: e.target.value })}
                                 className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:outline-none focus:border-primary"
                             >
-                                <option value="Full-time">Full-time</option>
-                                <option value="Part-time">Part-time</option>
+                                <option value="Full Time">Full Time</option>
+                                <option value="Part Time">Part Time</option>
                                 <option value="Contract">Contract</option>
                                 <option value="Internship">Internship</option>
                             </select>
@@ -242,16 +242,7 @@ const HRJobs = () => {
                         />
                     </div>
 
-                    <div className="pb-12">
-                        <label className="block text-sm font-bold text-slate-700 mb-1">Requirements</label>
-                        <ReactQuill
-                            theme="snow"
-                            value={currentJob.requirements}
-                            onChange={(content) => setCurrentJob({ ...currentJob, requirements: content })}
-                            modules={modules}
-                            className="bg-white rounded-lg"
-                        />
-                    </div>
+
 
                     <div className="pt-4 flex justify-end gap-2 border-t border-slate-100">
                         <button
@@ -269,7 +260,7 @@ const HRJobs = () => {
                         </button>
                     </div>
                 </form>
-            </Modal>
+            </Modal >
         </>
     );
 };

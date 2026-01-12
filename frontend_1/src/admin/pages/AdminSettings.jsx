@@ -70,33 +70,7 @@ const AdminSettings = () => {
         }));
     };
 
-    // --- Office Location Handlers ---
-    const addOffice = () => {
-        setSettings(prev => ({
-            ...prev,
-            offices: [...prev.offices, {
-                id: Date.now(),
-                title: "New Office",
-                address: "",
-                time: "Mon - Fri",
-                active: true
-            }]
-        }));
-    };
 
-    const removeOffice = (id) => {
-        setSettings(prev => ({
-            ...prev,
-            offices: prev.offices.filter(o => o.id !== id && o._id !== id)
-        }));
-    };
-
-    const updateOffice = (id, field, value) => {
-        setSettings(prev => ({
-            ...prev,
-            offices: prev.offices.map(o => (o.id === id || o._id === id) ? { ...o, [field]: value } : o)
-        }));
-    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -233,59 +207,7 @@ const AdminSettings = () => {
                     </div>
                 </div>
 
-                {/* 3. Office Locations */}
-                <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-8">
-                    <div className="flex justify-between items-center border-b border-slate-100 pb-4 mb-6">
-                        <h3 className="text-lg font-bold text-slate-800 flex items-center gap-2">
-                            <MapPin size={20} className="text-primary" /> Office Locations
-                        </h3>
-                        <button type="button" onClick={addOffice} className="text-xs font-bold bg-slate-900 text-white px-3 py-1.5 rounded-lg hover:bg-primary transition-colors flex items-center gap-1">
-                            <Plus size={12} /> Add Location
-                        </button>
-                    </div>
 
-                    <div className="space-y-4">
-                        {settings.offices.map((office, index) => (
-                            <div key={office.id || index} className="flex flex-col md:flex-row gap-4 p-4 rounded-xl bg-slate-50 border border-slate-100 items-start group hover:border-primary/30 transition-colors">
-                                <div className="flex-1 space-y-3 w-full">
-                                    <div className="flex gap-3">
-                                        <input
-                                            type="text"
-                                            value={office.title}
-                                            onChange={(e) => updateOffice(office.id || office._id, 'title', e.target.value)}
-                                            placeholder="Office Title (e.g. HQ)"
-                                            className="flex-1 px-3 py-2 bg-white border border-slate-200 rounded-lg text-sm font-bold focus:outline-none focus:border-primary"
-                                        />
-                                        <input
-                                            type="text"
-                                            value={office.time}
-                                            onChange={(e) => updateOffice(office.id || office._id, 'time', e.target.value)}
-                                            placeholder="Timings (e.g. Mon-Fri)"
-                                            className="w-32 px-3 py-2 bg-white border border-slate-200 rounded-lg text-sm focus:outline-none focus:border-primary"
-                                        />
-                                    </div>
-                                    <input
-                                        type="text"
-                                        value={office.address}
-                                        onChange={(e) => updateOffice(office.id || office._id, 'address', e.target.value)}
-                                        placeholder="Full Address"
-                                        className="w-full px-3 py-2 bg-white border border-slate-200 rounded-lg text-sm focus:outline-none focus:border-primary"
-                                    />
-                                </div>
-                                <button
-                                    type="button"
-                                    onClick={() => removeOffice(office.id || office._id)}
-                                    className="p-2 text-slate-300 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors self-start md:self-center"
-                                >
-                                    <Trash2 size={18} />
-                                </button>
-                            </div>
-                        ))}
-                        {settings.offices.length === 0 && (
-                            <p className="text-center text-slate-400 py-8 italic text-sm">No offices added yet.</p>
-                        )}
-                    </div>
-                </div>
 
             </form>
         </div>

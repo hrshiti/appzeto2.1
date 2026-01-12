@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     Users,
     Briefcase,
@@ -6,6 +6,7 @@ import {
     ArrowUpRight,
     Eye,
 } from 'lucide-react';
+import { dataService } from '../services/dataService';
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -50,166 +51,118 @@ const StatCard = ({ title, value, change, icon: Icon, color, trend }) => (
 );
 
 const AdminDashboard = () => {
+    const [loading, setLoading] = useState(true);
+    const [stats, setStats] = useState({
+        leads: 0,
+        applications: 0,
+        views: 124592, // Static for now
+        global: 18 // Static for now
+    });
+    const [recentLeads, setRecentLeads] = useState([]);
+    const [chartData, setChartData] = useState(null);
 
-    // CHART DATA
-    const trafficData = {
-        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const [leads, applications] = await Promise.all([
+                    dataService.getLeads(),
+                    dataService.getApplications()
+                ]);
+
+                // Update Stats
+                setStats(prev => ({
+                    ...prev,
+                    leads: leads?.length || 0,
+                    applications: applications?.length || 0
+                }));
+
+                // Recent Leads (Sort by Date DESC, Take 5)
+                const sortedLeads = [...(leads || [])]
+                    .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+                    .slice(0, 5);
+                setRecentLeads(sortedLeads);
+
+                // Prepare Chart Data (Leads by Service)
+                const serviceCounts = (leads || []).reduce((acc, lead) => {
+                    // Normalize service name if needed
+                    const svc = lead.service || 'Other';
+                    acc[svc] = (acc[svc] || 0) + 1;
+                    return acc;
+                }, {});
+
+                const labels = Object.keys(serviceCounts);
+                const data = Object.values(serviceCounts);
+
+                // Colors for chart
+                const colors = ['#05A4A7', '#6366f1', '#f59e0b', '#ef4444', '#8b5cf6', '#10b981'];
+
+                setChartData({
+                    labels,
+                    datasets: [{
+                        data,
+                        backgroundColor: colors.slice(0, labels.length),
+                        borderWidth: 0
+                    }]
+                });
+
+                setLoading(false);
+            } catch (error) {
+                console.error("Dashboard data load error:", error);
+                setLoading(false);
+            }
+        };
+        fetchData();
+    }, []);
+
+    // CHART DATA (Static Fallbacks / Dynamic)
+    const sourceData = chartData || {
+        labels: ['No Data'],
         datasets: [
             {
-                label: 'Site Visits',
-                data: [1200, 1900, 3000, 5000, 2400, 3000, 3800],
-                borderColor: '#05A4A7',
-                backgroundColor: 'rgba(5, 164, 167, 0.1)',
-                tension: 0.4,
-                fill: true,
-            },
-        ],
-    };
-
-    const sourceData = {
-        labels: ['Organic', 'Social Media', 'Direct', 'Referral'],
-        datasets: [
-            {
-                data: [35, 25, 20, 20],
-                backgroundColor: ['#05A4A7', '#6366f1', '#f59e0b', '#ef4444'],
+                data: [1],
+                backgroundColor: ['#e2e8f0'],
                 borderWidth: 0,
             },
         ],
     };
 
-    const leadData = {
-        labels: ['Website', 'LinkedIn', 'Referral', 'Events'],
-        datasets: [
-            {
-                label: 'Leads Generated',
-                data: [45, 25, 15, 10],
-                backgroundColor: '#6366f1',
-                borderRadius: 4,
-            }
-        ]
-    };
-
-    const chartOptions = {
-        responsive: true,
-        plugins: {
-            legend: {
-                display: false,
-            },
-            title: {
-                display: false,
-            },
-        },
-        scales: {
-            x: {
-                grid: { display: false },
-                ticks: { font: { size: 10 } }
-            },
-            y: {
-                grid: { color: '#f1f5f9' },
-                ticks: { font: { size: 10 } }
-            }
-        }
-    };
+    if (loading) {
+        return (
+            <div className="flex items-center justify-center h-96">
+                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
+            </div>
+        );
+    }
 
     return (
         <div className="space-y-8">
             {/* Header */}
             <div>
                 <h1 className="text-2xl font-bold text-slate-800">Dashboard Overview</h1>
-                <p className="text-slate-500 mt-1">Analytics and performance metrics.</p>
+                <p className="text-slate-500 mt-1">Real-time analytics and performance metrics.</p>
             </div>
 
             {/* Stats Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <StatCard
-                    title="Total Site Views"
-                    value="124,592"
-                    change="+12.5%"
-                    trend="up"
-                    icon={Eye}
-                    color="bg-blue-500"
-                />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <StatCard
                     title="Job Applications"
-                    value="1,482"
-                    change="+8.2%"
+                    value={stats.applications.toLocaleString()}
+                    change="Total Received"
                     trend="up"
                     icon={Users}
                     color="bg-violet-500"
                 />
                 <StatCard
                     title="Total Leads"
-                    value="156"
-                    change="+24%"
+                    value={stats.leads.toLocaleString()}
+                    change="All Time"
                     trend="up"
                     icon={Briefcase}
                     color="bg-emerald-500"
                 />
-                <StatCard
-                    title="Global Reach"
-                    value="18 Countries"
-                    change="+2"
-                    trend="up"
-                    icon={Globe}
-                    color="bg-orange-500"
-                />
             </div>
 
-            {/* Charts Section */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                {/* Main Graph */}
-                <div className="lg:col-span-2 bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
-                    <h2 className="font-bold text-slate-800 text-lg mb-6">Traffic Overview</h2>
-                    <div className="h-64">
-                        <Line options={chartOptions} data={trafficData} />
-                    </div>
-                </div>
 
-                {/* Sources Pie Chart */}
-                <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
-                    <h2 className="font-bold text-slate-800 text-lg mb-6">Traffic Sources</h2>
-                    <div className="h-48 flex justify-center">
-                        <Doughnut
-                            data={sourceData}
-                            options={{
-                                plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, usePointStyle: true } } }
-                            }}
-                        />
-                    </div>
-                </div>
-            </div>
-
-            {/* Bottom Row */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                {/* Lead Sources Bar */}
-                <div className="lg:col-span-2 bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
-                    <div className="flex justify-between items-center mb-6">
-                        <h2 className="font-bold text-slate-800 text-lg">Lead Generation Channels</h2>
-                    </div>
-                    <div className="h-56">
-                        <Bar options={chartOptions} data={leadData} />
-                    </div>
-                </div>
-
-                {/* Quick Actions */}
-                <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
-                    <h2 className="font-bold text-slate-800 text-lg mb-4">Quick Actions</h2>
-                    <div className="space-y-3">
-                        <button className="w-full text-left px-4 py-3 rounded-xl bg-slate-50 hover:bg-primary/10 hover:text-primary transition-all text-sm font-medium flex items-center justify-between group">
-                            <span>Add New Blog Post</span>
-                            <ArrowUpRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
-                        </button>
-                        <button className="w-full text-left px-4 py-3 rounded-xl bg-slate-50 hover:bg-primary/10 hover:text-primary transition-all text-sm font-medium flex items-center justify-between group">
-                            <span>Review New Leads</span>
-                            <ArrowUpRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
-                        </button>
-                        <button className="w-full text-left px-4 py-3 rounded-xl bg-slate-50 hover:bg-primary/10 hover:text-primary transition-all text-sm font-medium flex items-center justify-between group">
-                            <span>Check Applications</span>
-                            <ArrowUpRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
-                        </button>
-                    </div>
-                </div>
-            </div>
         </div>
     );
 };

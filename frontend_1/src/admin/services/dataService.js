@@ -104,6 +104,7 @@ export const dataService = {
         return response.data.data;
     },
     deleteMessage: async (id) => api.delete(`/contact/messages/${id}`),
+    updateMessage: async (id, data) => api.put(`/contact/messages/${id}`, data),
 
     getLeads: async () => {
         const response = await api.get('/contact/leads');
@@ -119,6 +120,7 @@ export const dataService = {
         return response.data.data;
     },
     deleteApplication: async (id) => api.delete(`/contact/applications/${id}`),
+    updateApplication: async (id, data) => api.put(`/contact/applications/${id}`, data),
 
     submitPartner: async (data) => api.post('/contact/partner', data),
     getPartners: async () => {
