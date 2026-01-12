@@ -48,7 +48,7 @@ const Home = () => {
                 <Services />
             </ScrollReveal>
 
-            <ScrollReveal>
+            <ScrollReveal viewport={{ once: true, amount: 0.1 }}>
                 <ProjectShowcase />
             </ScrollReveal>
 

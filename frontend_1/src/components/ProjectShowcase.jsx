@@ -276,14 +276,7 @@ const ProjectShowcase = () => {
                                 <span className="material-symbols-outlined text-sm transform -rotate-45">arrow_forward</span>
                             </button>
                         </Link>
-
-                        <button
-                            onClick={nextProject}
-                            className="w-10 h-10 md:w-12 md:h-12 rounded-full border border-slate-300 flex items-center justify-center text-slate-900 hover:bg-slate-200 transition-all active:scale-95"
-                            aria-label="Next Project"
-                        >
-                            <span className="material-symbols-outlined text-lg md:text-xl">arrow_forward_ios</span>
-                        </button>
+                        {/* Arrow Button Removed as per request */}
                     </div>
                 </div>
 

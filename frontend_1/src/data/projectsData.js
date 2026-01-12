@@ -1,23 +1,25 @@
-// 1. Import Images from Assets
-import foodAppImg from '../assets/apps/food.png';
-import goAppImg from '../assets/apps/go.png';
-import healthAppImg from '../assets/apps/health.png';
-import shopAppImg from '../assets/apps/shop.png';
-
-// Service Previews (Generic Tech UI) - Kept for reference or secondary use if needed
-// import aiServiceImg from '../assets/ai_ml_service_preview_1767285486518.png';
-// import cloudServiceImg from '../assets/cloud_computing_service_preview_1767285540190.png';
-// import mobileServiceImg from '../assets/mobile_apps_service_preview_1767285521524.png';
-// import uiServiceImg from '../assets/ui_ux_design_service_preview_1767285557945.png';
-// import webServiceImg from '../assets/web_dev_service_preview_1767285503403.png';
-
-// Food Series
+// 1. Import Images from Assets/Projects
+import foodHero from '../assets/projects/appzeto-food-hero.jpg';
 import food1 from '../assets/projects/appzeto-food-1.jpg';
 import food2 from '../assets/projects/appzeto-food-2.jpg';
 import food3 from '../assets/projects/appzeto-food-3.jpg';
 import food4 from '../assets/projects/appzeto-food-4.jpg';
-import foodHero from '../assets/projects/appzeto-food-hero.jpg';
 
+import logis1 from '../assets/projects/taxi user.webp';
+import logis2 from '../assets/projects/taxi app.webp';
+import logis3 from '../assets/projects/travel_tour1.jpg';
+
+import health1 from '../assets/projects/hospital management.jpg';
+import health2 from '../assets/projects/hospital management1.jpg';
+import health3 from '../assets/projects/hospital_management3.jpg';
+
+import ecom1 from '../assets/projects/ecommerce2.webp';
+import ecom2 from '../assets/projects/ecommerce1.jpg';
+import ecom3 from '../assets/projects/ott platform.webp';
+
+import appDev from '../assets/projects/appdeveloment.png';
+import bankingHero from '../assets/projects/hotel booking dashboard2.avif'; // Update: Using dashboard img for banking
+import retailHero from '../assets/projects/software.webp'; // Update: Using software img for retail
 
 export const projectsData = [
     {
@@ -28,13 +30,13 @@ export const projectsData = [
         category: "LOGISTICS",
         description: "A large-scale fleet management system for a global shipping giant, featuring real-time telemetry and AI-driven route optimization.",
         fullDescription: "Fleet Master Pro was developed for one of the world's largest logistics providers to solve the complexity of managing 50,000+ vehicles across multiple continents. The system integrates IoT sensors, GPS tracking, and predictive maintenance schedules into a unified dashboard.",
-        thumbnail: goAppImg,
-        coverImage: goAppImg,
+        thumbnail: logis1,
+        coverImage: logis2,
         images: [
-            shopAppImg,
-            foodHero,
-            food2,
-            shopAppImg
+            logis1,
+            logis2,
+            logis3,
+            logis1
         ],
         tags: ["IoT", "Node.js", "AWS", "React"],
         industry: "Global Logistics",
@@ -68,13 +70,13 @@ export const projectsData = [
         category: "FINTECH",
         description: "Complete digital transformation of a legacy banking institution into a modern, mobile-first financial powerhouse.",
         fullDescription: "Neon Banking represents a complete overhaul of traditional banking. We redesigned the core banking experience from the ground up, focusing on speed, security, and a minimalist UI that makes complex financial tasks intuitive.",
-        thumbnail: shopAppImg,
-        coverImage: shopAppImg,
+        thumbnail: bankingHero,
+        coverImage: bankingHero,
         images: [
-            shopAppImg,
-            healthAppImg,
-            food3,
-            shopAppImg
+            bankingHero,
+            ecom3,
+            logis3,
+            bankingHero
         ],
         tags: ["Fintech", "Mobile App", "Security", "Swift"],
         industry: "Financial Services",
@@ -108,13 +110,13 @@ export const projectsData = [
         category: "HEALTHCARE",
         description: "A centralized Electronic Health Record system connecting 200+ hospitals with real-time patient data sharing.",
         fullDescription: "HealthHub is a nationwide initiative to unify patient records. It allows doctors to access critical medical history instantly, reducing errors and saving lives in emergency situations.",
-        thumbnail: healthAppImg,
-        coverImage: healthAppImg,
+        thumbnail: health1,
+        coverImage: health1,
         images: [
-            healthAppImg,
-            food1,
-            goAppImg,
-            healthAppImg
+            health1,
+            health2,
+            health3,
+            health1
         ],
         tags: ["EHR", "Blockchain", "HIPAA", "React"],
         industry: "Medical / Enterprise",
@@ -148,10 +150,10 @@ export const projectsData = [
         category: "E-COMMERCE",
         description: "A hyper-local grocery delivery app connecting 500+ local organic farms directly to urban consumers.",
         fullDescription: "Fresh Mart revolutionizes how city dwellers shop for food. By cutting out the middlemen and prioritizing local produce, we ensure fresher food and fairer prices for farmers, all accessible via a slick mobile interface.",
-        thumbnail: foodAppImg,
+        thumbnail: foodHero,
         coverImage: foodHero,
         images: [
-            foodAppImg,
+            foodHero,
             food1,
             food2,
             food3,
@@ -172,7 +174,7 @@ export const projectsData = [
         ],
         results: [
             "20% increase in farmer revenue",
-            "35% growth in monthly orders",
+            "35% growth in online revenue",
             "Inventory waste reduced by 40%"
         ],
         testimonial: {
@@ -189,13 +191,13 @@ export const projectsData = [
         category: "E-COMMERCE",
         description: "Omnichannel inventory and sales platform connecting 500 physical stores with a massive online presence.",
         fullDescription: "Retail Revive bridges the gap between physical and digital shopping. It provides a single pool of inventory and unified customer profiles, enabling 'buy online, return in-store' at scale.",
-        thumbnail: shopAppImg,
-        coverImage: shopAppImg,
+        thumbnail: retailHero,
+        coverImage: retailHero,
         images: [
-            shopAppImg,
-            foodHero,
-            food2,
-            shopAppImg
+            retailHero,
+            ecom2,
+            ecom3,
+            retailHero
         ],
         tags: ["Next.js", "GraphQL", "Redis", "ElasticSearch"],
         industry: "Retail / Fashion",
