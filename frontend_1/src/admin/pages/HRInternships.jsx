@@ -190,15 +190,7 @@ const HRInternships = () => {
                         />
                     </div>
 
-                    <div>
-                        <label className="block text-sm font-bold text-slate-700 mb-1">Eligibility Criteria</label>
-                        <textarea
-                            required
-                            value={currentInternship.eligibility}
-                            onChange={(e) => setCurrentInternship({ ...currentInternship, eligibility: e.target.value })}
-                            className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:outline-none focus:border-primary h-20 resize-none"
-                        />
-                    </div>
+
 
                     <div>
                         <label className="block text-sm font-bold text-slate-700 mb-1">Status</label>

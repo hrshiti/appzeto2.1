@@ -44,6 +44,13 @@ exports.deleteMessage = async (req, res) => {
     } catch (e) { res.status(500).json({ success: false, error: e.message }); }
 };
 
+exports.updateMessage = async (req, res) => {
+    try {
+        const message = await Message.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
+        res.status(200).json({ success: true, data: message });
+    } catch (e) { res.status(500).json({ success: false, error: e.message }); }
+};
+
 exports.deleteLead = async (req, res) => {
     try {
         await Lead.findByIdAndDelete(req.params.id);
@@ -77,6 +84,13 @@ exports.deleteApplication = async (req, res) => {
     try {
         await Application.findByIdAndDelete(req.params.id);
         res.status(200).json({ success: true, data: {} });
+    } catch (e) { res.status(500).json({ success: false, error: e.message }); }
+};
+
+exports.updateApplication = async (req, res) => {
+    try {
+        const application = await Application.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
+        res.status(200).json({ success: true, data: application });
     } catch (e) { res.status(500).json({ success: false, error: e.message }); }
 };
 

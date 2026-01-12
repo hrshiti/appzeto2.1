@@ -79,13 +79,13 @@ const AdminLayout = () => {
                             <SidebarItem to="/admin/dashboard" icon={LayoutDashboard} label="Dashboard" />
 
                             <SectionLabel label="Content Management" />
-                            <SidebarItem to="/admin/services" icon={Layers} label="Services" />
+
                             <SidebarItem to="/admin/projects" icon={Briefcase} label="Projects" />
                             <SidebarItem to="/admin/blogs" icon={FileText} label="Blogs" />
-                            <SidebarItem to="/admin/videos" icon={Tv} label="Watch Demo" />
+
 
                             <SectionLabel label="Forms & Leads" />
-                            <SidebarItem to="/admin/leads" icon={Mail} label="Sales Leads" />
+
                             <SidebarItem to="/admin/messages" icon={MessageSquare} label="General Inquiries" />
                             <SidebarItem to="/hr/applications" icon={Users} label="Career Applications" />
 
@@ -107,7 +107,7 @@ const AdminLayout = () => {
                             )}
                             <SidebarItem to="/hr/jobs" icon={Briefcase} label="Job Openings" />
                             <SidebarItem to="/hr/internships" icon={GraduationCap} label="Internships" />
-                            <SidebarItem to="/hr/applications" icon={Users} label="Career Applications" />
+
                         </>
                     )}
                 </div>
@@ -160,14 +160,14 @@ const AdminLayout = () => {
                                 <SidebarItem to="/admin/dashboard" icon={LayoutDashboard} label="Dashboard" onClick={() => setIsMobileMenuOpen(false)} />
 
                                 <SectionLabel label="Content Management" />
-                                <SidebarItem to="/admin/services" icon={Layers} label="Services" onClick={() => setIsMobileMenuOpen(false)} />
+
                                 <SidebarItem to="/admin/projects" icon={Briefcase} label="Projects" onClick={() => setIsMobileMenuOpen(false)} />
                                 <SidebarItem to="/admin/blogs" icon={FileText} label="Blogs" onClick={() => setIsMobileMenuOpen(false)} />
                                 {/* Products Removed */}
-                                <SidebarItem to="/admin/videos" icon={Tv} label="Watch Demo" onClick={() => setIsMobileMenuOpen(false)} />
+
 
                                 <SectionLabel label="Forms & Leads" />
-                                <SidebarItem to="/admin/leads" icon={Mail} label="Sales Leads" onClick={() => setIsMobileMenuOpen(false)} />
+
                                 <SidebarItem to="/admin/messages" icon={MessageSquare} label="General Inquiries" onClick={() => setIsMobileMenuOpen(false)} />
                                 <SidebarItem to="/hr/applications" icon={Users} label="Career Applications" onClick={() => setIsMobileMenuOpen(false)} />
 
@@ -188,7 +188,7 @@ const AdminLayout = () => {
                                 )}
                                 <SidebarItem to="/hr/jobs" icon={Briefcase} label="Job Openings" onClick={() => setIsMobileMenuOpen(false)} />
                                 <SidebarItem to="/hr/internships" icon={GraduationCap} label="Internships" onClick={() => setIsMobileMenuOpen(false)} />
-                                <SidebarItem to="/hr/applications" icon={Users} label="Career Applications" onClick={() => setIsMobileMenuOpen(false)} />
+
                             </>
                         )}
                     </div>
