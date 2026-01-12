@@ -22,13 +22,34 @@ const CustomCursor = () => {
             cursorY.set(e.clientY - 10);
 
             if (!isVisible) setIsVisible(true);
+
+            // Re-check target in moveCursor for more reliability
+            const target = e.target;
+            if (target && target.closest("input, textarea, select, label, [contenteditable='true']")) {
+                if (cursorVariant !== "hidden") setCursorVariant("hidden");
+            }
         };
 
-        const handleMouseDown = () => setCursorVariant("click");
-        const handleMouseUp = () => setCursorVariant("default");
+        const handleMouseDown = () => {
+            // Don't change variant if hidden (e.g. clicking in forms)
+            if (cursorVariant === "hidden") return;
+            setCursorVariant("click");
+        };
+
+        const handleMouseUp = () => {
+            if (cursorVariant === "hidden") return;
+            setCursorVariant("default");
+        };
 
         const handleMouseOver = (e) => {
             const target = e.target;
+
+            // Hide cursor on form elements
+            const isFormField = target.closest("input, textarea, select, label, [contenteditable='true']");
+            if (isFormField) {
+                setCursorVariant("hidden");
+                return;
+            }
 
             // Text cursor trigger
             const textTrigger = target.closest("[data-cursor-text]");
@@ -89,6 +110,12 @@ const CustomCursor = () => {
             height: 15,
             width: 15,
             backgroundColor: "#05A4A7",
+        },
+        hidden: {
+            opacity: 0,
+            scale: 0,
+            visibility: "hidden",
+            transition: { duration: 0.1 }
         }
     };
 

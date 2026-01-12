@@ -158,7 +158,6 @@ const HRJobs = () => {
         <>
             <AdminTable
                 title="Job Openings"
-                subtitle="Manage recruitment and job posts."
                 columns={columns}
                 data={jobs}
                 onAdd={openAddModal}

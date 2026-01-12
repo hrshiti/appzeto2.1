@@ -134,7 +134,6 @@ const AdminProducts = () => {
         <>
             <AdminTable
                 title="Products Management"
-                subtitle="Manage your product catalog."
                 columns={columns}
                 data={products}
                 onAdd={openAddModal}

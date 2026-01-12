@@ -39,6 +39,7 @@ const AdminLeads = () => {
     const [replyMode, setReplyMode] = useState(false); // 'reply', 'note'
     const [inputText, setInputText] = useState('');
     const [filterStatus, setFilterStatus] = useState('All');
+    const [filterType, setFilterType] = useState('All');
 
     // -- Handlers --
 
@@ -60,15 +61,14 @@ const AdminLeads = () => {
         }
     };
 
-    const updateStatus = async (newStatus) => {
-        const updatedLead = { ...selectedLead, status: newStatus };
-        setSelectedLead(updatedLead);
-        setLeads(prev => prev.map(l => l._id === selectedLead._id ? updatedLead : l));
-
+    const handleStatusUpdate = async (id, newStatus) => {
         try {
-            await dataService.updateLead(selectedLead._id, { status: newStatus });
-            addToast(`Status updated to: ${newStatus}`, 'success');
-            addSystemNote(`Status changed to ${newStatus}`);
+            await dataService.updateLead(id, { status: newStatus });
+            setLeads(prev => prev.map(l => l._id === id ? { ...l, status: newStatus } : l));
+            if (selectedLead?._id === id) {
+                setSelectedLead(prev => ({ ...prev, status: newStatus }));
+            }
+            addToast(`Status updated to ${newStatus}`, 'success');
         } catch (err) {
             console.error(err);
             addToast("Failed to update status", "error");
@@ -76,6 +76,7 @@ const AdminLeads = () => {
     };
 
     const addSystemNote = async (text) => {
+        if (!selectedLead) return;
         const timestamp = new Date().toLocaleString();
         const noteEntry = `${text} - ${timestamp}`;
         const updatedNotes = [...(selectedLead.notes || []), noteEntry];
@@ -103,7 +104,6 @@ const AdminLeads = () => {
         setReplyMode(false);
     };
 
-    // -- Helpers --
     const getStatusColor = (status) => {
         switch (status) {
             case 'New': return 'bg-blue-100 text-blue-600';
@@ -115,7 +115,11 @@ const AdminLeads = () => {
         }
     };
 
-    const filteredLeads = filterStatus === 'All' ? leads : leads.filter(l => l.status === filterStatus);
+    const filteredLeads = leads.filter(l => {
+        const matchesStatus = filterStatus === 'All' || l.status === filterStatus;
+        const matchesType = filterType === 'All' || (l.leadType || 'Sales') === filterType;
+        return matchesStatus && matchesType;
+    });
 
     const columns = [
         {
@@ -147,9 +151,20 @@ const AdminLeads = () => {
             header: 'Status',
             accessor: 'status',
             render: (row) => (
-                <span className={`px-2 py-1 rounded text-[10px] font-bold uppercase ${getStatusColor(row.status)}`}>
-                    {row.status}
-                </span>
+                <select
+                    value={row.status}
+                    onChange={(e) => handleStatusUpdate(row._id, e.target.value)}
+                    className={`px-2 py-1 rounded text-[10px] font-bold uppercase outline-none border-none cursor-pointer transition-colors ${row.status === 'New' ? 'bg-blue-100 text-blue-600' :
+                        row.status === 'Contacted' ? 'bg-purple-100 text-purple-600' :
+                            row.status === 'In Negotiation' ? 'bg-amber-100 text-amber-600' :
+                                row.status === 'Converted' ? 'bg-emerald-100 text-emerald-600' :
+                                    'bg-slate-100 text-slate-500'
+                        }`}
+                >
+                    {['New', 'Contacted', 'In Negotiation', 'Converted', 'Lost'].map(s => (
+                        <option key={s} value={s} className="bg-white text-slate-800 font-sans">{s}</option>
+                    ))}
+                </select>
             )
         },
         {
@@ -180,13 +195,8 @@ const AdminLeads = () => {
 
     return (
         <>
-            <div className="flex flex-col md:flex-row md:items-center justify-between mb-8 pb-6 border-b border-slate-200">
-                <div>
-                    <h1 className="text-3xl font-black text-slate-900 tracking-tight">Sales & Project Leads</h1>
-                    <p className="text-slate-500 mt-1">Manage project inquiries from the "Discuss Project" / "Sales Inquiry" modal.</p>
-                </div>
-
-                <div className="flex p-1 bg-white border border-slate-200 rounded-xl mt-4 md:mt-0">
+            <div className="flex justify-between items-center mb-6">
+                <div className="flex p-1 bg-white border border-slate-200 rounded-xl">
                     <button
                         onClick={() => setPageTab('submissions')}
                         className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-bold transition-all ${pageTab === 'submissions' ? 'bg-slate-800 text-white shadow-md' : 'text-slate-500 hover:bg-slate-50'}`}
@@ -237,167 +247,99 @@ const AdminLeads = () => {
                     </div>
 
                     {/* Filter Bar */}
-                    <div className="flex items-center gap-2 mb-6 overflow-x-auto pb-2">
-                        <Filter size={16} className="text-slate-400 mr-2" />
-                        {['All', 'New', 'Contacted', 'In Negotiation', 'Converted', 'Lost'].map(status => (
-                            <button
-                                key={status}
-                                onClick={() => setFilterStatus(status)}
-                                className={`px-3 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-colors ${filterStatus === status
-                                    ? 'bg-slate-800 text-white'
-                                    : 'bg-white border border-slate-200 text-slate-500 hover:border-slate-400'
-                                    }`}
-                            >
-                                {status}
-                            </button>
-                        ))}
+                    <div className="flex flex-col gap-4 mb-6">
+                        <div className="flex items-center gap-2 overflow-x-auto pb-1">
+                            <span className="text-[10px] font-black uppercase text-slate-400 mr-2 flex-none">Type:</span>
+                            {['All', 'Sales', 'Partner'].map(type => (
+                                <button
+                                    key={type}
+                                    onClick={() => setFilterType(type)}
+                                    className={`px-3 py-1 rounded-full text-[10px] font-bold whitespace-nowrap transition-colors ${filterType === type
+                                        ? 'bg-primary text-white'
+                                        : 'bg-white border border-slate-200 text-slate-500 hover:border-slate-400'
+                                        }`}
+                                >
+                                    {type}
+                                </button>
+                            ))}
+                        </div>
+                        <div className="flex items-center gap-2 overflow-x-auto pb-2">
+                            <Filter size={14} className="text-slate-400 mr-2 flex-none" />
+                            {['All', 'New', 'Contacted', 'In Negotiation', 'Converted', 'Lost'].map(status => (
+                                <button
+                                    key={status}
+                                    onClick={() => setFilterStatus(status)}
+                                    className={`px-3 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-colors ${filterStatus === status
+                                        ? 'bg-slate-800 text-white'
+                                        : 'bg-white border border-slate-200 text-slate-500 hover:border-slate-400'
+                                        }`}
+                                >
+                                    {status}
+                                </button>
+                            ))}
+                        </div>
                     </div>
 
                     <AdminTable
                         title="Project Submission Leads"
-                        subtitle="Detailed inquiries from high-intent potential clients."
                         columns={columns}
                         data={filteredLeads}
                         customActions={renderActions}
                     />
 
-                    {/* CRM Details Modal */}
+                    {/* CRM Details Modal - Simplified Data View */}
                     <Modal
                         isOpen={!!selectedLead}
                         onClose={() => setSelectedLead(null)}
                         title="Submission Details"
                     >
                         {selectedLead && (
-                            <div className="flex flex-col h-[70vh]">
-                                {/* Header Section */}
-                                <div className="pb-6 border-b border-slate-100 mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
-                                    <div>
-                                        <h2 className="text-2xl font-bold text-slate-800">{selectedLead.name}</h2>
-                                        <p className="text-slate-500 font-medium">{selectedLead.company}</p>
+                            <div className="space-y-3 max-h-[70vh] overflow-y-auto custom-scrollbar pr-1">
+                                {/* Core Info - Compact Grid */}
+                                <div className="grid grid-cols-2 gap-2">
+                                    <div className="p-3 bg-slate-50 rounded-lg border border-slate-100">
+                                        <p className="text-[9px] font-black uppercase text-slate-400 leading-none mb-1">Full Name</p>
+                                        <p className="font-bold text-slate-800 text-sm">{selectedLead.name}</p>
                                     </div>
-                                    <div className="text-right">
-                                        <span className={`inline-block px-3 py-1 rounded-lg text-xs font-bold uppercase mb-1 ${getStatusColor(selectedLead.status)}`}>
-                                            {selectedLead.status}
-                                        </span>
-                                        <p className="text-sm font-bold text-slate-400">{new Date(selectedLead.createdAt).toLocaleString()}</p>
+                                    <div className="p-3 bg-slate-50 rounded-lg border border-slate-100">
+                                        <p className="text-[9px] font-black uppercase text-slate-400 leading-none mb-1">Company</p>
+                                        <p className="font-bold text-slate-800 text-sm truncate">{selectedLead.company || 'N/A'}</p>
                                     </div>
-                                </div>
-
-                                {/* Pipeline Progress */}
-                                <div className="mb-6 overflow-x-auto">
-                                    <div className="flex bg-slate-100 p-1 rounded-xl min-w-[500px]">
-                                        {['New', 'Contacted', 'In Negotiation', 'Converted', 'Lost'].map((step, idx) => {
-                                            const isCurrent = selectedLead.status === step;
-                                            const isComplete = ['New', 'Contacted', 'In Negotiation', 'Converted', 'Lost'].indexOf(selectedLead.status) > idx;
-
-                                            return (
-                                                <button
-                                                    key={step}
-                                                    onClick={() => updateStatus(step)}
-                                                    className={`flex-1 py-2 text-xs font-bold rounded-lg transition-all ${isCurrent ? 'bg-white shadow text-slate-800' :
-                                                        isComplete ? 'text-slate-400' : 'text-slate-400 opacity-50'
-                                                        }`}
-                                                >
-                                                    {step}
-                                                </button>
-                                            );
-                                        })}
+                                    <div className="p-3 bg-slate-50 rounded-lg border border-slate-100">
+                                        <p className="text-[9px] font-black uppercase text-slate-400 leading-none mb-1">Email</p>
+                                        <p className="font-bold text-slate-800 text-sm break-all">{selectedLead.email}</p>
+                                    </div>
+                                    <div className="p-3 bg-slate-50 rounded-lg border border-slate-100">
+                                        <p className="text-[9px] font-black uppercase text-slate-400 leading-none mb-1">Phone</p>
+                                        <p className="font-bold text-slate-800 text-sm">{selectedLead.phone || 'N/A'}</p>
                                     </div>
                                 </div>
 
-                                {/* Main Interaction Area */}
-                                <div className="flex-1 overflow-y-auto px-1 space-y-6 custom-scrollbar">
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                        <div className="p-4 bg-slate-50/50 border border-slate-100 rounded-xl">
-                                            <h4 className="flex items-center gap-2 text-xs font-bold uppercase text-slate-400 mb-3">
-                                                <Mail size={14} /> Contact Details
-                                            </h4>
-                                            <div className="space-y-2">
-                                                <p className="text-sm font-medium text-slate-700">{selectedLead.email}</p>
-                                                <p className="text-sm font-medium text-slate-700">{selectedLead.phone || 'No phone'}</p>
-                                                <p className="text-xs text-slate-400 mt-2">Budget: {selectedLead.budget || '-'}</p>
-                                            </div>
+                                {/* Project/Service Details - Compact */}
+                                <div className="p-3 bg-slate-50 rounded-lg border border-slate-100">
+                                    <div className="flex justify-between items-center mb-2">
+                                        <div>
+                                            <p className="text-[9px] font-black uppercase text-slate-400 leading-none mb-0.5">Service/Inquiry</p>
+                                            <p className="font-black text-primary text-base leading-tight">{selectedLead.service}</p>
                                         </div>
-                                        <div className="p-4 bg-slate-50/50 border border-slate-100 rounded-xl">
-                                            <h4 className="flex items-center gap-2 text-xs font-bold uppercase text-slate-400 mb-3">
-                                                <MessageSquare size={14} /> Message / Requirement
-                                            </h4>
-                                            <p className="text-sm font-bold text-slate-800 mb-2">{selectedLead.service}</p>
-                                            <p className="text-sm text-slate-600 italic leading-relaxed bg-white p-3 rounded-lg border border-slate-100">
-                                                {selectedLead.message || "No additional message provided."}
-                                            </p>
+                                        <div className="text-right">
+                                            <p className="text-[9px] font-black uppercase text-slate-400 leading-none mb-0.5">Budget</p>
+                                            <p className="font-bold text-slate-800 text-sm">{selectedLead.budget || 'N/A'}</p>
                                         </div>
                                     </div>
 
-                                    <div>
-                                        <h4 className="flex items-center gap-2 text-xs font-bold uppercase text-slate-400 mb-3">
-                                            <Clock size={14} /> Activity & Notes
-                                        </h4>
-                                        <div className="space-y-3 pl-4 border-l-2 border-slate-100">
-                                            {(!selectedLead.notes || selectedLead.notes.length === 0) ? (
-                                                <p className="text-sm text-slate-400">No notes yet.</p>
-                                            ) : (
-                                                selectedLead.notes.map((note, idx) => (
-                                                    <div key={idx} className="relative">
-                                                        <div className="absolute -left-[21px] top-1.5 w-3 h-3 rounded-full bg-slate-200 border-2 border-white"></div>
-                                                        <p className="text-sm text-slate-600 bg-white p-2 rounded-lg border border-slate-50">{note}</p>
-                                                    </div>
-                                                ))
-                                            )}
+                                    <div className="mt-2 pt-2 border-t border-slate-200/60">
+                                        <p className="text-[9px] font-black uppercase text-slate-400 leading-none mb-1.5">Message</p>
+                                        <div className="bg-white p-2.5 rounded-md border border-slate-100 text-xs text-slate-600 leading-relaxed whitespace-pre-wrap italic shadow-sm">
+                                            {selectedLead.message || "No additional details provided."}
                                         </div>
                                     </div>
                                 </div>
 
-                                <div className="pt-4 mt-4 border-t border-slate-100">
-                                    {replyMode ? (
-                                        <form onSubmit={handleActionSubmit} className="space-y-3">
-                                            <div className="flex items-center justify-between">
-                                                <label className="text-sm font-bold text-slate-700">
-                                                    {replyMode === 'reply' ? `Emailing ${selectedLead.name}` : 'Adding Internal Note'}
-                                                </label>
-                                                <button
-                                                    type="button"
-                                                    onClick={() => setReplyMode(false)}
-                                                    className="text-xs text-slate-400 hover:text-slate-600 font-bold"
-                                                >
-                                                    CANCEL
-                                                </button>
-                                            </div>
-                                            <textarea
-                                                rows="3"
-                                                required
-                                                value={inputText}
-                                                onChange={(e) => setInputText(e.target.value)}
-                                                className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:outline-none focus:border-primary text-sm"
-                                                placeholder={replyMode === 'reply' ? "Write your email message..." : "Add observation or call notes..."}
-                                                autoFocus
-                                            />
-                                            <div className="flex justify-end">
-                                                <button
-                                                    type="submit"
-                                                    className="bg-primary hover:bg-[#048a8d] text-white px-6 py-2 rounded-xl font-bold text-sm shadow-lg shadow-primary/20"
-                                                >
-                                                    {replyMode === 'reply' ? 'Send Email' : 'Save Note'}
-                                                </button>
-                                            </div>
-                                        </form>
-                                    ) : (
-                                        <div className="flex gap-2 justify-end">
-                                            <button
-                                                onClick={() => setReplyMode('note')}
-                                                className="px-4 py-3 bg-slate-50 hover:bg-slate-100 text-slate-600 font-bold rounded-xl text-sm flex-1"
-                                            >
-                                                + Add Note
-                                            </button>
-                                            <button
-                                                onClick={() => setReplyMode('reply')}
-                                                className="px-4 py-3 bg-primary hover:bg-[#048a8d] text-white font-bold rounded-xl text-sm flex-[2] shadow-lg shadow-primary/20 flex items-center justify-center gap-2"
-                                            >
-                                                <Mail size={16} />
-                                                Reply to Lead
-                                            </button>
-                                        </div>
-                                    )}
+                                {/* Metadata - Very Compact */}
+                                <div className="flex justify-between items-center text-[8px] font-bold text-slate-400 uppercase tracking-widest px-1">
+                                    <span>Date: {new Date(selectedLead.createdAt).toLocaleString()}</span>
+                                    <span>#{selectedLead._id?.substring(0, 8)}</span>
                                 </div>
                             </div>
                         )}

@@ -104,7 +104,8 @@ function App() {
               <Route path="messages" element={<AdminMessages />} />
               <Route path="users" element={<AdminUsers />} />
               <Route path="settings" element={<AdminSettings />} />
-              <Route path="team" element={<AdminTeam />} />
+              <Route path="settings" element={<AdminSettings />} />
+              {/* Team Removed */}
               <Route path="partners" element={<AdminPartners />} />
             </Route>
 

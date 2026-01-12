@@ -306,8 +306,7 @@ const ProjectForm = () => {
                         <ArrowLeft size={20} className="text-slate-600" />
                     </button>
                     <div>
-                        <h1 className="text-2xl font-bold text-slate-800">{isEditMode ? 'Edit Project' : 'Create New Project'}</h1>
-                        <p className="text-slate-500 text-sm">Fill in the details below</p>
+                        <h1 className="text-lg font-bold text-[#012829]">{isEditMode ? 'Edit Project' : 'Create New Project'}</h1>
                     </div>
                 </div>
                 <div className="flex gap-3">

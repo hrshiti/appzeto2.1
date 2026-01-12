@@ -199,7 +199,6 @@ const AdminBlogs = () => {
         <>
             <AdminTable
                 title="Blog Management"
-                subtitle="Create, edit, and publish blog content."
                 columns={columns}
                 data={blogs}
                 onAdd={openAddModal}

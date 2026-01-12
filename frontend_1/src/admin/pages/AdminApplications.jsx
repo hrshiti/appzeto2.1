@@ -124,7 +124,6 @@ const AdminApplications = () => {
         <>
             <AdminTable
                 title="Career Applications"
-                subtitle="Job and Internship applications."
                 columns={columns}
                 data={getFilteredApplications()}
                 customActions={renderActions}

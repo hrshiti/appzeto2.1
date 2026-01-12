@@ -185,7 +185,6 @@ const AdminServices = () => {
         <>
             <AdminTable
                 title="Services Management"
-                subtitle="Manage website service offerings."
                 columns={columns}
                 data={services}
                 onAdd={openAddModal}

@@ -74,7 +74,6 @@ const AdminPartners = () => {
         <>
             <AdminTable
                 title="Channel Partners"
-                subtitle="Applications and inquiries from the 'Channel Partner' page form."
                 columns={columns}
                 data={partners}
                 customActions={renderActions}

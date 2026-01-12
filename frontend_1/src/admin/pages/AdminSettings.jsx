@@ -87,8 +87,7 @@ const AdminSettings = () => {
         <div className="max-w-5xl mx-auto space-y-8 pb-10">
             <div className="flex justify-between items-end">
                 <div>
-                    <h1 className="text-3xl font-bold text-slate-800 tracking-tight">System Configuration</h1>
-                    <p className="text-slate-500 mt-2 text-sm font-medium">Manage global website settings, contacts, and locations.</p>
+                    <h1 className="text-lg font-bold text-[#012829]">System Configuration</h1>
                 </div>
                 <button
                     onClick={handleSubmit}

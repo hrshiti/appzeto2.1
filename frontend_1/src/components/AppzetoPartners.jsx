@@ -13,23 +13,23 @@ const Pin = ({ label, top, left, labelPosition, color = "#05A4A7", delay }) => {
 
     switch (labelPosition) {
         case 'right':
-            labelStyle = { left: '100%', top: '50%', transform: 'translateY(-50%) ml-8' };
-            lineContainerStyle = { left: '50%', top: '50%', width: '60px', height: '2px', transform: 'translateY(-50%)' };
+            labelStyle = { left: '100%', top: '50%', transform: 'translateY(-50%)' };
+            lineContainerStyle = { left: '30%', top: '50%', width: window.innerWidth < 768 ? '30px' : '60px', height: '2px', transform: 'translateY(-50%)' };
             lineStyle = { width: '100%', height: '100%', borderTop: `2px dotted ${color}` };
             break;
         case 'left':
-            labelStyle = { right: '100%', top: '50%', transform: 'translateY(-50%) mr-8' };
-            lineContainerStyle = { right: '50%', top: '50%', width: '60px', height: '2px', transform: 'translateY(-50%)' };
+            labelStyle = { right: '100%', top: '50%', transform: 'translateY(-50%)' };
+            lineContainerStyle = { right: '30%', top: '50%', width: window.innerWidth < 768 ? '30px' : '60px', height: '2px', transform: 'translateY(-50%)' };
             lineStyle = { width: '100%', height: '100%', borderTop: `2px dotted ${color}` };
             break;
         case 'top':
-            labelStyle = { bottom: '100%', left: '50%', transform: 'translateX(-50%) mb-8' };
-            lineContainerStyle = { bottom: '50%', left: '50%', height: '60px', width: '2px', transform: 'translateX(-50%)' };
+            labelStyle = { bottom: '100%', left: '50%', transform: 'translateX(-50%)' };
+            lineContainerStyle = { bottom: '30%', left: '50%', height: window.innerWidth < 768 ? '30px' : '60px', width: '2px', transform: 'translateX(-50%)' };
             lineStyle = { width: '100%', height: '100%', borderLeft: `2px dotted ${color}` };
             break;
         case 'bottom':
-            labelStyle = { top: '100%', left: '50%', transform: 'translateX(-50%) mt-8' };
-            lineContainerStyle = { top: '50%', left: '50%', height: '60px', width: '2px', transform: 'translateX(-50%)' };
+            labelStyle = { top: '100%', left: '50%', transform: 'translateX(-50%)' };
+            lineContainerStyle = { top: '30%', left: '50%', height: window.innerWidth < 768 ? '30px' : '60px', width: '2px', transform: 'translateX(-50%)' };
             lineStyle = { width: '100%', height: '100%', borderLeft: `2px dotted ${color}` };
             break;
         default:
@@ -72,13 +72,13 @@ const Pin = ({ label, top, left, labelPosition, color = "#05A4A7", delay }) => {
 
                 {/* Label */}
                 <motion.div
-                    className="absolute bg-[#012828] text-white px-4 py-2 rounded shadow-lg whitespace-nowrap z-20"
+                    className="absolute bg-[#012828] text-white px-2 py-1 md:px-4 md:py-2 rounded md:rounded-lg shadow-lg whitespace-nowrap z-20"
                     style={labelStyle}
                     initial={{ opacity: 0, [labelPosition === 'left' || labelPosition === 'right' ? 'x' : 'y']: labelPosition === 'left' ? 20 : -20 }}
                     whileInView={{ opacity: 1, x: 0, y: 0 }}
                     transition={{ duration: 0.4, delay: delay + 0.6 }}
                 >
-                    <span className="font-bold text-sm tracking-wide">{label}</span>
+                    <span className="font-bold text-[8px] md:text-sm tracking-wide">{label}</span>
                 </motion.div>
             </div>
         </motion.div>
@@ -87,8 +87,8 @@ const Pin = ({ label, top, left, labelPosition, color = "#05A4A7", delay }) => {
 
 const PartnerStat = ({ number, text }) => (
     <div className="flex flex-col">
-        <h4 className="text-4xl lg:text-5xl font-black text-[#012828]">{number}</h4>
-        <p className="text-gray-600 font-medium mt-1">{text}</p>
+        <h4 className="text-3xl lg:text-5xl font-black text-[#012828]">{number}</h4>
+        <p className="text-xs md:text-gray-600 md:font-medium mt-0.5 md:mt-1">{text}</p>
     </div>
 );
 
@@ -103,16 +103,16 @@ const AppzetoPartners = () => {
     ];
 
     return (
-        <section className="w-full py-20 bg-gray-50 overflow-hidden relative">
+        <section className="w-full py-10 md:py-20 bg-gray-50 overflow-hidden relative">
             <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20">
-                <div className="grid lg:grid-cols-2 gap-16 items-center">
+                <div className="grid lg:grid-cols-2 gap-10 md:gap-16 items-center">
 
                     {/* Left Column: Content */}
                     <motion.div
                         initial={{ opacity: 0, x: -50 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.8 }}
-                        className="space-y-8"
+                        className="space-y-4 md:space-y-8"
                     >
                         {/* Heading Section */}
                         <div>
@@ -120,9 +120,9 @@ const AppzetoPartners = () => {
                                 initial={{ opacity: 0, x: -30 }}
                                 whileInView={{ opacity: 1, x: 0 }}
                                 transition={{ duration: 0.6 }}
-                                className="flex items-center gap-3 mb-6 text-[#05A4A7] font-black uppercase tracking-[0.4em] text-xs"
+                                className="flex items-center gap-3 mb-4 md:mb-6 text-[#05A4A7] font-black uppercase tracking-[0.4em] text-[10px] md:text-xs"
                             >
-                                <span className="h-[2px] w-10 bg-[#05A4A7]"></span>
+                                <span className="h-[1px] md:h-[2px] w-8 md:w-10 bg-[#05A4A7]"></span>
                                 Global Network
                             </motion.div>
 
@@ -130,7 +130,7 @@ const AppzetoPartners = () => {
                                 initial={{ opacity: 0, y: 40 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.8, ease: "easeOut" }}
-                                className="text-6xl md:text-7xl lg:text-[100px] font-black text-[#012828] leading-[0.85] tracking-tighter uppercase"
+                                className="text-3xl md:text-7xl lg:text-[100px] font-black text-[#012828] leading-[0.9] md:leading-[0.85] tracking-tighter uppercase"
                             >
                                 APPZETO <br />
                                 <motion.span
@@ -153,13 +153,13 @@ const AppzetoPartners = () => {
                             </motion.h2>
                         </div>
 
-                        <div className="w-20 h-1 bg-gray-300"></div>
+                        <div className="w-12 md:w-20 h-0.5 md:h-1 bg-gray-300"></div>
 
-                        <p className="text-lg text-gray-600 leading-relaxed max-w-lg">
+                        <p className="text-sm md:text-lg text-gray-600 leading-relaxed max-w-lg">
                             Our extensive partner network spans across the nation, ensuring that Appzeto's innovative solutions are accessible everywhere. From bustling metros to emerging tech hubs, we are present where you need us.
                         </p>
 
-                        <div className="grid grid-cols-2 gap-8 pt-6">
+                        <div className="grid grid-cols-2 gap-3 md:gap-8 pt-2 md:pt-6">
                             <PartnerStat number="50+" text="Major Cities" />
                             <PartnerStat number="200+" text="Enterprise Partners" />
                             <PartnerStat number="15k+" text="Active Users" />
@@ -168,7 +168,7 @@ const AppzetoPartners = () => {
                     </motion.div>
 
                     {/* Right Column: Map */}
-                    <div className="relative w-full h-[500px] md:h-[600px] flex items-center justify-center">
+                    <div className="relative w-full h-[350px] md:h-[600px] flex items-center justify-center">
                         <motion.img
                             src={mapImage}
                             alt="India Map"

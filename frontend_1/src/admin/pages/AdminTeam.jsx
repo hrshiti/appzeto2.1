@@ -94,7 +94,6 @@ const AdminTeam = () => {
         <>
             <AdminTable
                 title="Team Management"
-                subtitle="Manage your internal team profiles."
                 columns={columns}
                 data={members}
                 onAdd={openAddModal}

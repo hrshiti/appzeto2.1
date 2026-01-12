@@ -24,8 +24,7 @@ const HRDashboard = () => {
             {/* Header */}
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div>
-                    <h1 className="text-2xl font-bold text-slate-800">Recruitment Dashboard</h1>
-                    <p className="text-slate-500 mt-1">Manage jobs, applications, and talent pipeline.</p>
+                    <h1 className="text-lg font-bold text-[#012829]">Recruitment Dashboard</h1>
                 </div>
                 <button className="bg-primary hover:bg-[#048a8d] text-white px-5 py-3 rounded-xl font-bold text-sm flex items-center gap-2 transition-all shadow-lg shadow-primary/20">
                     <Plus size={18} />

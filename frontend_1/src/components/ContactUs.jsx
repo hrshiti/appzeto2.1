@@ -595,44 +595,51 @@ const ContactUs = ({ isHomePage = false }) => {
                             initial={{ scale: 0.9, y: 20, opacity: 0 }}
                             animate={{ scale: 1, y: 0, opacity: 1 }}
                             exit={{ scale: 0.9, y: 20, opacity: 0 }}
-                            className="bg-white w-full max-w-2xl rounded-[1.5rem] md:rounded-[2.5rem] p-6 md:p-10 relative shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)] border border-slate-100 overflow-hidden my-4 md:my-0"
+                            className="bg-white w-full max-w-xl rounded-[1.2rem] md:rounded-[2rem] p-4 md:p-8 relative shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)] border border-slate-100 overflow-hidden my-4 md:my-0"
                         >
                             {/* Decorative Background for Modal */}
-                            <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+                            <div className="absolute top-0 right-0 w-24 h-24 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
 
-                            <div className="flex justify-between items-start mb-6 md:mb-8">
+                            <div className="flex justify-between items-start mb-4 md:mb-6">
                                 <div>
-                                    <p className="text-primary font-black tracking-[0.4em] uppercase text-[9px] md:text-[10px] mb-1 md:mb-2">Lead Genesis</p>
-                                    <h2 className="text-2xl md:text-4xl font-black text-slate-900 tracking-tighter uppercase leading-none">Sales Inquiry</h2>
+                                    <p className="text-primary font-black tracking-[0.4em] uppercase text-[8px] md:text-[9px] mb-0.5 md:mb-1">Lead Genesis</p>
+                                    <h2 className="text-xl md:text-3xl font-black text-slate-900 tracking-tighter uppercase leading-none">Sales Inquiry</h2>
                                 </div>
                                 <button
                                     onClick={() => setIsSalesOpen(false)}
-                                    className="w-8 h-8 md:w-12 md:h-12 rounded-full bg-slate-50 flex items-center justify-center text-slate-400 hover:bg-slate-900 hover:text-white transition-all shadow-sm"
+                                    className="w-7 h-7 md:w-10 md:h-10 rounded-full bg-slate-50 flex items-center justify-center text-slate-400 hover:bg-slate-900 hover:text-white transition-all shadow-sm"
                                 >
-                                    <span className="material-icons text-sm md:text-xl">close</span>
+                                    <span className="material-icons text-xs md:text-lg">close</span>
                                 </button>
                             </div>
 
-                            <form className="space-y-3 md:space-y-6" onSubmit={handleLeadSubmit}>
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-6">
-                                    <div className="space-y-1 md:space-y-2">
-                                        <label className="text-[8px] md:text-[10px] font-black uppercase text-slate-400 tracking-widest ml-1 md:ml-2">Full Name</label>
-                                        <input required name="name" type="text" placeholder="John Doe" className="w-full px-4 py-2.5 md:py-4 bg-slate-50 border-2 border-slate-100 rounded-xl md:rounded-2xl focus:border-primary focus:bg-white outline-none transition-all text-[11px] md:text-sm font-bold placeholder:text-slate-300" />
+                            <form className="space-y-2 md:space-y-4" onSubmit={handleLeadSubmit}>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4">
+                                    <div className="space-y-0.5 md:space-y-1">
+                                        <label className="text-[7px] md:text-[9px] font-black uppercase text-slate-400 tracking-widest ml-1 md:ml-2">Full Name</label>
+                                        <input required name="name" type="text" placeholder="John Doe" className="w-full px-3 py-2 md:py-3.5 bg-slate-50 border-2 border-slate-100 rounded-lg md:rounded-xl focus:border-primary focus:bg-white outline-none transition-all text-[10px] md:text-sm font-bold placeholder:text-slate-300" />
                                     </div>
-                                    <div className="space-y-1 md:space-y-2">
-                                        <label className="text-[8px] md:text-[10px] font-black uppercase text-slate-400 tracking-widest ml-1 md:ml-2">Company Name</label>
-                                        <input required name="company" type="text" placeholder="Appzeto Inc." className="w-full px-4 py-2.5 md:py-4 bg-slate-50 border-2 border-slate-100 rounded-xl md:rounded-2xl focus:border-primary focus:bg-white outline-none transition-all text-[11px] md:text-sm font-bold placeholder:text-slate-300" />
+                                    <div className="space-y-0.5 md:space-y-1">
+                                        <label className="text-[7px] md:text-[9px] font-black uppercase text-slate-400 tracking-widest ml-1 md:ml-2">Company Name</label>
+                                        <input required name="company" type="text" placeholder="Appzeto Inc." className="w-full px-3 py-2 md:py-3.5 bg-slate-50 border-2 border-slate-100 rounded-lg md:rounded-xl focus:border-primary focus:bg-white outline-none transition-all text-[10px] md:text-sm font-bold placeholder:text-slate-300" />
                                     </div>
                                 </div>
 
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-6">
-                                    <div className="space-y-1 md:space-y-2">
-                                        <label className="text-[8px] md:text-[10px] font-black uppercase text-slate-400 tracking-widest ml-1 md:ml-2">Work Email</label>
-                                        <input required name="email" type="email" placeholder="john@company.com" className="w-full px-4 py-2.5 md:py-4 bg-slate-50 border-2 border-slate-100 rounded-xl md:rounded-2xl focus:border-primary focus:bg-white outline-none transition-all text-[11px] md:text-sm font-bold placeholder:text-slate-300" />
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4">
+                                    <div className="space-y-0.5 md:space-y-1">
+                                        <label className="text-[7px] md:text-[9px] font-black uppercase text-slate-400 tracking-widest ml-1 md:ml-2">Work Email</label>
+                                        <input required name="email" type="email" placeholder="john@company.com" className="w-full px-3 py-2 md:py-3.5 bg-slate-50 border-2 border-slate-100 rounded-lg md:rounded-xl focus:border-primary focus:bg-white outline-none transition-all text-[10px] md:text-sm font-bold placeholder:text-slate-300" />
                                     </div>
-                                    <div className="space-y-1 md:space-y-2">
-                                        <label className="text-[8px] md:text-[10px] font-black uppercase text-slate-400 tracking-widest ml-1 md:ml-2">Project Type</label>
-                                        <select required name="service" defaultValue="" className="w-full px-4 py-2.5 md:py-4 bg-slate-50 border-2 border-slate-100 rounded-xl md:rounded-2xl focus:border-primary focus:bg-white outline-none transition-all text-[11px] md:text-sm font-bold appearance-none cursor-pointer">
+                                    <div className="space-y-0.5 md:space-y-1">
+                                        <label className="text-[7px] md:text-[9px] font-black uppercase text-slate-400 tracking-widest ml-1 md:ml-2">Phone Number</label>
+                                        <input required name="phone" type="tel" placeholder="+91 ..." className="w-full px-3 py-2 md:py-3.5 bg-slate-50 border-2 border-slate-100 rounded-lg md:rounded-xl focus:border-primary focus:bg-white outline-none transition-all text-[10px] md:text-sm font-bold placeholder:text-slate-300" />
+                                    </div>
+                                </div>
+
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4">
+                                    <div className="space-y-0.5 md:space-y-1">
+                                        <label className="text-[7px] md:text-[9px] font-black uppercase text-slate-400 tracking-widest ml-1 md:ml-2">Project Type</label>
+                                        <select required name="service" defaultValue="" className="w-full px-3 py-2 md:py-3.5 bg-slate-50 border-2 border-slate-100 rounded-lg md:rounded-xl focus:border-primary focus:bg-white outline-none transition-all text-[10px] md:text-sm font-bold appearance-none cursor-pointer">
                                             <option value="" disabled>Select service</option>
                                             <option value="web">Web Ecosystem</option>
                                             <option value="mobile">Mobile App</option>
@@ -640,23 +647,27 @@ const ContactUs = ({ isHomePage = false }) => {
                                             <option value="enterprise">Enterprise Infra</option>
                                         </select>
                                     </div>
+                                    <div className="space-y-0.5 md:space-y-1">
+                                        <label className="text-[7px] md:text-[9px] font-black uppercase text-slate-400 tracking-widest ml-1 md:ml-2">Estimated Budget</label>
+                                        <select required name="budget" defaultValue="" className="w-full px-3 py-2 md:py-3.5 bg-slate-50 border-2 border-slate-100 rounded-lg md:rounded-xl focus:border-primary focus:bg-white outline-none transition-all text-[10px] md:text-sm font-bold appearance-none cursor-pointer">
+                                            <option value="" disabled>Select budget range</option>
+                                            <option value="5-10k">$5k - $10k</option>
+                                            <option value="10-25k">$10k - $25k</option>
+                                            <option value="25-50k">$25k - $50k</option>
+                                            <option value="50k+">$50k+</option>
+                                        </select>
+                                    </div>
                                 </div>
 
-                                <div className="space-y-1 md:space-y-2">
-                                    <label className="text-[8px] md:text-[10px] font-black uppercase text-slate-400 tracking-widest ml-1 md:ml-2">Estimated Budget</label>
-                                    <select required name="budget" defaultValue="" className="w-full px-4 py-2.5 md:py-4 bg-slate-50 border-2 border-slate-100 rounded-xl md:rounded-2xl focus:border-primary focus:bg-white outline-none transition-all text-[11px] md:text-sm font-bold appearance-none cursor-pointer">
-                                        <option value="" disabled>Select budget range</option>
-                                        <option value="5-10k">$5k - $10k</option>
-                                        <option value="10-25k">$10k - $25k</option>
-                                        <option value="25-50k">$25k - $50k</option>
-                                        <option value="50k+">$50k+</option>
-                                    </select>
+                                <div className="space-y-0.5 md:space-y-1">
+                                    <label className="text-[7px] md:text-[9px] font-black uppercase text-slate-400 tracking-widest ml-1 md:ml-2">Message / Requirement</label>
+                                    <textarea name="message" rows="2" placeholder="Tell us about your project..." className="w-full px-3 py-2 md:py-3 bg-slate-50 border-2 border-slate-100 rounded-lg md:rounded-xl focus:border-primary focus:bg-white outline-none transition-all text-[10px] md:text-sm font-bold placeholder:text-slate-300 resize-none"></textarea>
                                 </div>
 
-                                <button type="submit" className="w-full py-3.5 md:py-5 bg-slate-950 text-white rounded-xl md:rounded-[1.5rem] font-black uppercase tracking-[0.3em] text-[10px] md:text-xs hover:bg-primary transition-all shadow-xl shadow-slate-200 mt-2">
+                                <button type="submit" className="w-full py-3 md:py-4 bg-slate-950 text-white rounded-lg md:rounded-2xl font-black uppercase tracking-[0.3em] text-[9px] md:text-[11px] hover:bg-primary transition-all shadow-xl shadow-slate-200 mt-1">
                                     Initiate Discussion
                                 </button>
-                                <p className="text-center text-[8px] md:text-[10px] text-slate-400 font-bold uppercase tracking-widest mt-4">Average response time: &lt; 24 Hours</p>
+                                <p className="text-center text-[7px] md:text-[9px] text-slate-400 font-bold uppercase tracking-widest mt-2 md:mt-3">Average response time: &lt; 24 Hours</p>
                             </form>
                         </motion.div>
                     </motion.div>

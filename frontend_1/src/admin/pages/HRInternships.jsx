@@ -132,7 +132,6 @@ const HRInternships = () => {
         <>
             <AdminTable
                 title="Internships Management"
-                subtitle="Manage internship programs."
                 columns={columns}
                 data={internships}
                 onAdd={openAddModal}

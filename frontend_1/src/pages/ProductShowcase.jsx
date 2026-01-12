@@ -335,7 +335,7 @@ const HowItWorks = () => {
                             }}
                             className="text-[#EF7F1A]"
                         >
-                            <span className="material-symbols-outlined text-3xl transform -scale-x-100">two_wheeler</span>
+                            <span className="material-symbols-outlined text-3xl">two_wheeler</span>
                         </div>
                         <style>{`
                             @keyframes bikeLoop {
@@ -397,16 +397,7 @@ const HowItWorks = () => {
 
                     {/* 4. Deliveryman (Bottom Center) */}
                     <div className="absolute bottom-[20px] left-1/2 -translate-x-1/2 flex flex-col items-center z-10 pt-10">
-                        {/* Visual Placeholder: Scooter */}
-                        <motion.div
-                            initial={{ x: -100, opacity: 0 }} animate={inView ? { x: 0, opacity: 1 } : {}} transition={{ duration: 0.8, delay: 1.4 }}
-                            className="w-32 h-32 flex items-center justify-center relative z-20"
-                        >
-                            <span className="material-symbols-outlined text-8xl text-[#EF7F1A]">two_wheeler</span>
-                            <div className="absolute top-2 right-2 w-10 h-10 bg-yellow-400 rounded-lg flex items-center justify-center shadow-md">
-                                <span className="material-symbols-outlined text-white">inventory_2</span>
-                            </div>
-                        </motion.div>
+                        <div className="w-32 h-16 pointer-events-none"></div>
                         <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ delay: 1.6 }} className="text-center mt-2 w-[300px]">
                             <h3 className="text-gray-900 font-bold mb-1">4. Deliveryman receives food</h3>
                             <p className="text-sm text-gray-500">from restaurant and out for delivery</p>
@@ -422,7 +413,6 @@ const HowItWorks = () => {
                         <p className="text-sm text-gray-500">from deliveryman</p>
                         <div className="mt-2 text-[#EF7F1A] material-symbols-outlined text-2xl">check_circle</div>
                     </motion.div>
-
                 </div>
 
                 {/* Mobile Fallback (Grid Layout) */}

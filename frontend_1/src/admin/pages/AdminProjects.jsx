@@ -65,8 +65,7 @@ const AdminProjects = () => {
             {/* Header */}
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                 <div>
-                    <h1 className="text-3xl font-bold text-slate-800">Projects</h1>
-                    <p className="text-slate-500 mt-1">Manage your portfolio case studies</p>
+                    <h1 className="text-lg font-bold text-[#012829]">Projects</h1>
                 </div>
                 <Link to="/admin/projects/add">
                     <button className="flex items-center gap-2 bg-[#05A4A7] text-white px-5 py-2.5 rounded-xl font-bold font-sans hover:bg-[#048a8d] transition-colors shadow-lg shadow-[#05A4A7]/20 active:scale-95">
@@ -110,12 +109,12 @@ const AdminProjects = () => {
                     <div className="overflow-x-auto">
                         <table className="w-full text-left border-collapse">
                             <thead>
-                                <tr className="bg-slate-50 border-b border-slate-100 text-xs uppercase text-slate-500 font-bold tracking-wider">
-                                    <th className="px-6 py-4">Thumbnail</th>
-                                    <th className="px-6 py-4">Project Info</th>
-                                    <th className="px-6 py-4">Category</th>
-                                    <th className="px-6 py-4 text-center">Featured</th>
-                                    <th className="px-6 py-4 text-right">Actions</th>
+                                <tr className="bg-[#012829] text-[10px] uppercase text-slate-200 font-bold tracking-widest">
+                                    <th className="px-6 py-3">Thumbnail</th>
+                                    <th className="px-6 py-3">Project Info</th>
+                                    <th className="px-6 py-3">Category</th>
+                                    <th className="px-6 py-3 text-center">Featured</th>
+                                    <th className="px-6 py-3 text-right">Actions</th>
                                 </tr>
                             </thead>
                             <tbody className="divide-y divide-slate-100 text-sm">

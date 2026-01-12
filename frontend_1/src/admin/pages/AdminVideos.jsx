@@ -110,7 +110,6 @@ const AdminVideos = () => {
         <>
             <AdminTable
                 title="Watch Demo Management"
-                subtitle="Manage video content and demos."
                 columns={columns}
                 data={videos}
                 onAdd={openAddModal}

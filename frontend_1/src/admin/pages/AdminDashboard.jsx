@@ -138,8 +138,7 @@ const AdminDashboard = () => {
         <div className="space-y-8">
             {/* Header */}
             <div>
-                <h1 className="text-2xl font-bold text-slate-800">Dashboard Overview</h1>
-                <p className="text-slate-500 mt-1">Real-time analytics and performance metrics.</p>
+                <h1 className="text-lg font-bold text-[#012829]">Dashboard Overview</h1>
             </div>
 
             {/* Stats Grid */}

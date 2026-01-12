@@ -193,16 +193,19 @@ const Navbar = () => {
 
     const handleLinkClick = (path) => {
         setIsMobileMenuOpen(false);
-        if (path && window.location.pathname === path) {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-        if (path && path.includes('#')) {
-            const id = path.split('#')[1];
-            if (window.location.pathname === path.split('#')[0]) {
+        if (!path) return;
+
+        if (window.location.pathname === path.split('#')[0]) {
+            if (path.includes('#')) {
+                const id = path.split('#')[1];
                 setTimeout(() => {
                     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
                 }, 300);
+            } else {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             }
+        } else {
+            navigate(path);
         }
     };
 
@@ -212,7 +215,7 @@ const Navbar = () => {
 
     return (
         <>
-            <nav className="sticky top-0 z-50 w-full bg-white/95 dark:bg-[#023638]/95 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 transition-colors duration-300">
+            <nav className="sticky top-0 z-50 w-full bg-white/95 dark:bg-[#023638]/95 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 transition-all duration-300 pt-[env(safe-area-inset-top)]">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between items-center h-20">
                         {/* Logo */}
@@ -358,14 +361,16 @@ const Navbar = () => {
                             <div className="absolute bottom-[-10%] left-[-10%] w-[400px] h-[400px] bg-secondary/10 rounded-full blur-[100px] pointer-events-none" />
 
                             {/* Mobile Header with Close Button */}
-                            <div className="flex-shrink-0 h-20 px-4 sm:px-6 flex items-center justify-between border-b border-gray-200/50 dark:border-gray-700/50 relative z-20 bg-white/50 dark:bg-black/20 backdrop-blur-md">
-                                <img alt="Appzeto Logo" className="h-8 w-auto" src={logo} />
-                                <button
-                                    className="w-10 h-10 rounded-full bg-gray-100 dark:bg-white/10 flex items-center justify-center text-gray-600 dark:text-white"
-                                    onClick={() => setIsMobileMenuOpen(false)}
-                                >
-                                    <span className="material-symbols-outlined">close</span>
-                                </button>
+                            <div className="flex-shrink-0 pt-[env(safe-area-inset-top)] border-b border-gray-200/50 dark:border-gray-700/50 relative z-20 bg-white/50 dark:bg-black/20 backdrop-blur-md">
+                                <div className="h-20 px-4 sm:px-6 flex items-center justify-between">
+                                    <img alt="Appzeto Logo" className="h-8 w-auto" src={logo} />
+                                    <button
+                                        className="w-10 h-10 rounded-full bg-gray-100 dark:bg-white/10 flex items-center justify-center text-gray-600 dark:text-white"
+                                        onClick={() => setIsMobileMenuOpen(false)}
+                                    >
+                                        <span className="material-symbols-outlined">close</span>
+                                    </button>
+                                </div>
                             </div>
 
                             {/* Mobile Navigation List */}

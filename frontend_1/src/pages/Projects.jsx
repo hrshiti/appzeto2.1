@@ -52,12 +52,12 @@ const Projects = () => {
                 <Navbar />
 
                 {/* --- 1. LISTING HERO --- */}
-                <section className="relative pt-32 pb-16 px-6 md:px-12 lg:px-20 text-center">
+                <section className="relative pt-6 md:pt-10 pb-2 md:pb-8 px-4 md:px-12 lg:px-20 text-center">
                     <div className="max-w-4xl mx-auto">
                         <motion.span
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
-                            className="text-[#05A4A7] font-bold tracking-[0.2em] text-xs uppercase mb-4 block"
+                            className="text-[#05A4A7] font-bold tracking-[0.2em] text-[8px] md:text-xs uppercase mb-0.5 md:mb-2 block"
                         >
                             Our Portfolio
                         </motion.span>
@@ -65,7 +65,7 @@ const Projects = () => {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.1 }}
-                            className="text-4xl sm:text-5xl md:text-7xl font-black text-[#012828] tracking-tight mb-6"
+                            className="text-xl sm:text-4xl md:text-5xl font-black text-[#012828] tracking-tight mb-1 md:mb-3"
                         >
                             Real-world solutions we’ve built for <span className="text-[#05A4A7]">businesses.</span>
                         </motion.h1>
@@ -73,7 +73,7 @@ const Projects = () => {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.2 }}
-                            className="text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed"
+                            className="text-xs md:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed px-4"
                         >
                             From enterprise logistics platforms to hyper-local e-commerce apps, explore how we transform complex challenges into elegant digital products.
                         </motion.p>
@@ -91,7 +91,7 @@ const Projects = () => {
                             variants={container}
                             initial="hidden"
                             animate="show"
-                            className="max-w-[1400px] mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 px-4"
+                            className="max-w-[1400px] mx-auto grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6 px-1 md:px-4"
                         >
                             {projects.map((project) => (
                                 <motion.div
@@ -110,32 +110,32 @@ const Projects = () => {
                                             className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
                                         />
                                         {/* Category Badge */}
-                                        <div className="absolute top-3 left-3 z-20">
-                                            <span className="bg-white/95 backdrop-blur text-[#012828] text-[10px] font-bold px-2 py-1 rounded shadow-sm uppercase tracking-wide">
+                                        <div className="absolute top-2 left-2 z-20">
+                                            <span className="bg-white/95 backdrop-blur text-[#012828] text-[8px] md:text-[10px] font-bold px-1.5 py-0.5 rounded shadow-sm uppercase tracking-wide">
                                                 {project.category}
                                             </span>
                                         </div>
                                     </div>
 
                                     {/* Content */}
-                                    <div className="p-4 flex flex-col flex-1">
-                                        <h3 className="text-lg font-bold text-[#012828] mb-1 group-hover:text-[#05A4A7] transition-colors line-clamp-1">
+                                    <div className="p-2 md:p-4 flex flex-col flex-1">
+                                        <h3 className="text-sm md:text-lg font-bold text-[#012828] mb-0.5 md:mb-1 group-hover:text-[#05A4A7] transition-colors line-clamp-1">
                                             {project.title}
                                         </h3>
-                                        <p className="text-slate-500 text-xs leading-relaxed mb-3 line-clamp-2">
+                                        <p className="text-slate-500 text-[10px] md:text-xs leading-relaxed mb-2 md:mb-3 line-clamp-2">
                                             {project.shortDescription}
                                         </p>
 
-                                        <div className="mt-auto pt-3 border-t border-slate-100 flex items-center justify-between">
-                                            <div className="flex gap-1.5">
-                                                {project.techTags && project.techTags.slice(0, 2).map((tag, idx) => (
-                                                    <span key={idx} className="bg-slate-50 text-slate-600 text-[9px] font-bold px-1.5 py-0.5 rounded overflow-hidden text-ellipsis whitespace-nowrap max-w-[60px]">
+                                        <div className="mt-auto pt-2 md:pt-3 border-t border-slate-100 flex items-center justify-between">
+                                            <div className="flex gap-1 md:gap-1.5 overflow-hidden">
+                                                {project.techTags && project.techTags.slice(0, window.innerWidth < 768 ? 1 : 2).map((tag, idx) => (
+                                                    <span key={idx} className="bg-slate-50 text-slate-600 text-[8px] md:text-[9px] font-bold px-1 md:px-1.5 py-0.5 rounded overflow-hidden text-ellipsis whitespace-nowrap max-w-[50px] md:max-w-[60px]">
                                                         {tag}
                                                     </span>
                                                 ))}
                                             </div>
                                             <div className="text-[#05A4A7] group-hover:translate-x-1 transition-transform">
-                                                <ArrowRight size={14} />
+                                                <ArrowRight size={window.innerWidth < 768 ? 12 : 14} />
                                             </div>
                                         </div>
                                     </div>

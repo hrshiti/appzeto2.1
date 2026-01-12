@@ -32,13 +32,13 @@ const StatCard = ({ value, suffix, label, index }) => {
             whileInView={{ opacity: 1, y: 0 }}
             whileHover={{ y: -10, transition: { duration: 0.3 } }}
             transition={{ duration: 0.5, delay: index * 0.15 }}
-            className="bg-white/95 backdrop-blur-xl p-3 md:p-6 rounded-2xl shadow-xl flex flex-col items-center justify-center text-center border border-white/20 w-full min-w-0 md:min-w-[180px] group hover:shadow-2xl hover:border-[#05A4A7]/30 transition-all duration-300"
+            className="bg-white/95 backdrop-blur-xl p-2.5 md:p-6 rounded-xl md:rounded-2xl shadow-xl flex flex-col items-center justify-center text-center border border-white/20 w-full min-w-0 md:min-w-[180px] group hover:shadow-2xl hover:border-[#05A4A7]/30 transition-all duration-300"
         >
             <div className="flex items-baseline md:mb-1 group-hover:scale-105 transition-transform duration-300">
-                <span ref={numberRef} className="text-2xl md:text-4xl font-black text-[#012828] tracking-tighter">0</span>
-                <span className="text-lg md:text-2xl font-black text-[#05A4A7] ml-0.5">{suffix}</span>
+                <span ref={numberRef} className="text-xl md:text-4xl font-black text-[#012828] tracking-tighter">0</span>
+                <span className="text-sm md:text-2xl font-black text-[#05A4A7] ml-0.5">{suffix}</span>
             </div>
-            <span className="text-[9px] md:text-[10px] font-black text-[#012828]/60 uppercase tracking-widest leading-tight mt-1">
+            <span className="text-[8px] md:text-[10px] font-black text-[#012828]/60 uppercase tracking-widest leading-tight mt-0.5">
                 {label}
             </span>
         </motion.div>
@@ -54,7 +54,7 @@ const WhyChooseUs = () => {
     ];
 
     return (
-        <section className="relative w-full py-6 md:py-20 min-h-0 md:min-h-[550px] flex items-center overflow-hidden font-sans bg-[#012828]">
+        <section className="relative w-full py-10 md:py-20 min-h-0 md:min-h-[550px] flex items-center overflow-hidden font-sans bg-[#012828]">
             {/* Background Layer */}
             <div
                 className="absolute inset-0 z-0 pointer-events-none"
@@ -90,7 +90,7 @@ const WhyChooseUs = () => {
                             initial={{ opacity: 0, y: 40 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8, ease: "easeOut" }}
-                            className="text-3xl md:text-8xl lg:text-[110px] font-black text-white leading-none md:leading-[0.8] tracking-tighter uppercase mb-2 md:mb-6"
+                            className="text-4xl md:text-8xl lg:text-[110px] font-black text-white leading-[0.9] md:leading-[0.8] tracking-tighter uppercase mb-2 md:mb-6"
                         >
                             WHY <br />
                             <motion.span
@@ -141,7 +141,7 @@ const WhyChooseUs = () => {
                             initial={{ opacity: 0, x: 30 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             transition={{ duration: 0.8 }}
-                            className="text-white text-2xl md:text-3xl font-bold leading-snug max-w-2xl"
+                            className="text-white text-lg md:text-3xl font-bold leading-snug max-w-2xl"
                         >
                             Your strategic technology partner for building resilient, scalable, and secure digital ecosystems.
                         </motion.p>
@@ -154,7 +154,7 @@ const WhyChooseUs = () => {
                         </div>
 
                         {/* 3. Checkmarks Grid */}
-                        <div className="grid grid-cols-2 gap-y-5 md:gap-y-6 gap-x-6 md:gap-x-8 pt-6 md:pt-6 border-t border-white/10 w-full">
+                        <div className="grid grid-cols-2 gap-y-4 md:gap-y-6 gap-x-4 md:gap-x-8 pt-4 md:pt-6 border-t border-white/10 w-full">
                             {points.map((point, i) => (
                                 <motion.div
                                     key={i}
@@ -162,12 +162,12 @@ const WhyChooseUs = () => {
                                     whileInView={{ opacity: 1, y: 0 }}
                                     whileHover={{ x: 5 }}
                                     transition={{ duration: 0.4, delay: 0.6 + i * 0.1 }}
-                                    className="flex items-center gap-4 group cursor-default"
+                                    className="flex items-center gap-2 md:gap-4 group cursor-default"
                                 >
-                                    <div className="w-8 h-8 rounded-full bg-[#05A4A7]/20 flex items-center justify-center border border-[#05A4A7] group-hover:bg-[#05A4A7] transition-colors duration-300">
-                                        <span className="material-icons text-[#05A4A7] text-[14px] font-black group-hover:text-white transition-colors duration-300">done</span>
+                                    <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-[#05A4A7]/20 flex items-center justify-center border border-[#05A4A7] group-hover:bg-[#05A4A7] transition-colors duration-300 flex-none">
+                                        <span className="material-icons text-[#05A4A7] text-[10px] md:text-[14px] font-black group-hover:text-white transition-colors duration-300">done</span>
                                     </div>
-                                    <span className="text-white/90 font-bold text-sm tracking-widest uppercase group-hover:text-[#05A4A7] transition-colors duration-300">{point}</span>
+                                    <span className="text-white/90 font-bold text-[10px] md:text-sm tracking-widest uppercase group-hover:text-[#05A4A7] transition-colors duration-300">{point}</span>
                                 </motion.div>
                             ))}
                         </div>

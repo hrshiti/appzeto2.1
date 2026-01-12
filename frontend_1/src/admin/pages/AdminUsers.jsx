@@ -83,7 +83,6 @@ const AdminUsers = () => {
         <>
             <AdminTable
                 title="Admin Users"
-                subtitle="Manage internal users and role access."
                 columns={columns}
                 data={users}
                 onAdd={() => setIsModalOpen(true)}
