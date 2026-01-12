@@ -189,32 +189,49 @@ const ProjectDetail = () => {
 
                         </div>
 
-                        {/* Right Image (Laptop Mockup) */}
+                        {/* Right Image (Laptop Mockup - CSS 3D Styled) */}
                         <motion.div
-                            initial={{ opacity: 0, x: 60 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ duration: 0.8, delay: 0.3, ease: "backOut" }}
-                            className="lg:col-span-7 flex justify-center items-center relative order-1 lg:order-2"
+                            initial={{ opacity: 0, x: 60, rotateY: -20, rotateX: 10 }}
+                            animate={{ opacity: 1, x: 0, rotateY: -12, rotateX: 6 }}
+                            transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
+                            className="lg:col-span-7 flex justify-center items-center relative order-1 lg:order-2 perspective-1000"
+                            style={{
+                                perspective: "1500px",
+                                transformStyle: "preserve-3d"
+                            }}
                         >
-                            <div className="relative w-full max-w-[800px]">
-                                {/* Laptop Frame - High Quality PNG */}
-                                <div className="relative z-20 pointer-events-none">
-                                    <img
-                                        src="https://pngimg.com/uploads/macbook/macbook_PNG8.png"
-                                        alt="MacBook Pro"
-                                        className="w-full h-auto drop-shadow-2xl"
-                                    />
+                            <div className="relative w-full max-w-[700px] transform-gpu transition-all duration-500 hover:rotate-y-[-5deg] hover:rotate-x-[5deg]">
+                                {/* Laptop Body (White Minimalist) */}
+                                <div className="relative bg-white rounded-[1.5rem] md:rounded-[2.5rem] p-3 md:p-4 shadow-[0_30px_60px_-12px_rgba(0,0,0,0.25)] border-[1px] border-slate-100 ring-1 ring-black/5">
+
+                                    {/* Screen Bezel (Thin Black) */}
+                                    <div className="relative bg-black rounded-[1rem] md:rounded-[2rem] overflow-hidden aspect-[16/10] shadow-inner ring-1 ring-black/20">
+                                        {/* Camera Notch Area (Subtle) */}
+                                        <div className="absolute top-2 md:top-4 left-1/2 -translate-x-1/2 w-20 h-4 bg-black rounded-b-xl z-20 flex justify-center">
+                                            <div className="w-1.5 h-1.5 bg-[#1a1a1a] rounded-full mt-1.5 ring-1 ring-white/10" />
+                                        </div>
+
+                                        {/* Screen Content */}
+                                        <div className="w-full h-full bg-slate-900 border-[6px] md:border-[10px] border-black relative group overflow-hidden">
+                                            <img
+                                                src={hero?.coverImage || "https://images.unsplash.com/photo-1551288049-bebda4e38f71"}
+                                                alt="Project Screen"
+                                                className="w-full h-full object-cover scale-100 group-hover:scale-105 transition-transform duration-700"
+                                            />
+
+                                            {/* Screen Glare & Reflection */}
+                                            <div className="absolute inset-0 bg-gradient-to-tr from-white/10 via-transparent to-transparent opacity-40 mix-blend-overlay pointer-events-none" />
+                                            <div className="absolute -inset-full top-0 block h-full w-1/2 -skew-x-12 bg-gradient-to-r from-transparent to-white opacity-10 group-hover:animate-shine" />
+                                        </div>
+                                    </div>
+
+                                    {/* Bottom Reflection/Depth Indicator */}
+                                    <div className="absolute bottom-0 left-8 right-8 h-px bg-slate-200/50" />
                                 </div>
 
-                                {/* Screen Content - Absolute positioning tuned for macbook_PNG8.png */}
-                                <div className="absolute top-[6.5%] left-[10.8%] w-[78.4%] h-[82%] bg-black z-10 overflow-hidden">
-                                    <img
-                                        src={hero?.coverImage || "https://images.unsplash.com/photo-1551288049-bebda4e38f71"}
-                                        alt="Project Screen"
-                                        className="w-full h-full object-cover"
-                                    />
-                                    {/* Screen Glare/Reflection */}
-                                    <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-white/10 pointer-events-none mix-blend-overlay" />
+                                {/* Laptop Base (Bottom Half - Perspective Hint) */}
+                                <div className="absolute -bottom-3 md:-bottom-5 left-4 md:left-8 right-4 md:right-8 h-4 md:h-6 bg-[#f1f5f9] rounded-b-2xl md:rounded-b-3xl shadow-2xl -z-10 border-t border-slate-200/50 flex items-center justify-center">
+                                    <div className="w-1/3 h-1 md:h-1.5 bg-slate-200/50 rounded-full mt-1" />
                                 </div>
                             </div>
                         </motion.div>
