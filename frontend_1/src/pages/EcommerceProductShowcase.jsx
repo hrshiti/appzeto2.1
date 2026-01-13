@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -187,10 +188,10 @@ const EcommerceProductShowcase = () => {
                             </h1>
                             <p className="text-[#4338CA] text-sm md:text-lg leading-relaxed font-medium">Create immersive shopping experiences that convert visitors into loyal customers.</p>
                             <div className="relative max-w-sm pt-4 mx-auto lg:mx-0">
-                                <button className="w-full pl-6 pr-4 py-4 rounded-full bg-[#1E1B4B] text-white shadow-xl shadow-indigo-200 flex items-center justify-between font-bold hover:scale-105 transition-all group">
+                                <Link to="/contact" className="w-full pl-6 pr-4 py-4 rounded-full bg-[#1E1B4B] text-white shadow-xl shadow-indigo-200 flex items-center justify-between font-bold hover:scale-105 transition-all group">
                                     <span className="text-sm md:text-base">Launch Your Store</span>
                                     <div className="bg-[#4F46E5] text-white p-1.5 md:p-2 rounded-full"><span className="material-symbols-outlined text-base md:text-lg group-hover:rotate-45 transition-transform">arrow_forward</span></div>
-                                </button>
+                                </Link>
                             </div>
                         </div>
 
@@ -209,7 +210,7 @@ const EcommerceProductShowcase = () => {
                 {/* --- 3 Icons Section --- */}
                 <section className="py-8 md:py-20">
                     <div className="max-w-7xl mx-auto px-6 text-center">
-                        <p className="text-xs md:text-base font-black text-[#6366F1] uppercase tracking-widest mb-6 md:mb-10">Complete Commerce Solution</p>
+                        <p className="text-xs md:text-base font-black text-[#6366F1] uppercase tracking-widest mb-6 md:mb-10">Complete Ecommerce Solution</p>
                         <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-8">
                             {[
                                 { title: "Global Reach", desc: "Multi-currency and multi-language support built-in.", icon: "public", color: "bg-indigo-50 text-[#4F46E5]" },
@@ -308,7 +309,7 @@ const EcommerceProductShowcase = () => {
                 <section className="py-12 md:py-20 bg-[#1E1B4B] relative overflow-hidden text-white">
                     <div className="max-w-7xl mx-auto px-6 text-center relative z-10">
                         <h2 className="text-3xl md:text-6xl font-black mb-6 md:mb-8">Ready to Scale?</h2>
-                        <button className="px-8 md:px-10 py-4 md:py-5 bg-[#4F46E5] text-white font-black rounded-full text-base md:text-lg shadow-xl hover:scale-105 transition-all outline outline-4 outline-[#4F46E5]/30">Start Free Trial</button>
+                        <Link to="/contact" className="px-8 md:px-10 py-4 md:py-5 bg-[#4F46E5] text-white font-black rounded-full text-base md:text-lg shadow-xl hover:scale-105 transition-all outline outline-4 outline-[#4F46E5]/30 inline-block">Start Free Trial</Link>
                     </div>
                 </section>
 
