@@ -24,7 +24,12 @@ const Footer = () => {
                     setSettings(prev => ({
                         ...prev,
                         ...loadedSettings,
-                        social: { ...prev.social, ...(loadedSettings.social || {}) }
+                        social: {
+                            linkedin: loadedSettings.social?.linkedin || prev.social.linkedin,
+                            instagram: loadedSettings.social?.instagram || prev.social.instagram,
+                            twitter: loadedSettings.social?.twitter || prev.social.twitter,
+                            github: loadedSettings.social?.github || prev.social.github
+                        }
                     }));
                 }
             } catch (err) {

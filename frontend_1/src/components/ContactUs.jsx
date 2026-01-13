@@ -106,8 +106,13 @@ const ContactUs = ({ isHomePage = false }) => {
                     setSettings(prev => ({
                         ...prev,
                         ...loadedSettings,
-                        // Ensure social is merged correctly if partial
-                        social: { ...prev.social, ...(loadedSettings.social || {}) },
+                        // Ensure social is merged correctly if partial, prioritizing defaults if API returns empty
+                        social: {
+                            linkedin: loadedSettings.social?.linkedin || prev.social.linkedin,
+                            instagram: loadedSettings.social?.instagram || prev.social.instagram,
+                            twitter: loadedSettings.social?.twitter || prev.social.twitter,
+                            github: loadedSettings.social?.github || prev.social.github
+                        },
                         // Ensure offices map correctly if structure differs, but generally it's same
                         offices: loadedSettings.offices && loadedSettings.offices.length > 0 ? loadedSettings.offices : prev.offices
                     }));
