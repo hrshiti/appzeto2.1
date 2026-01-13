@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -26,6 +27,8 @@ const ProductShowcase = () => {
     // Array of images to cycle through
     const images = [heroImage, carouselImage1, carouselImage2, carouselImage3];
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
+    const [showDemoVideo, setShowDemoVideo] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -75,11 +78,11 @@ const ProductShowcase = () => {
                             viewport={{ once: false }}
                             className="flex flex-wrap items-center gap-4"
                         >
-                            <button className="h-12 md:h-14 px-6 md:px-8 rounded-full bg-gradient-to-r from-[#EF7F1A] to-[#F59E0B] text-white font-bold text-base md:text-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 flex items-center gap-2">
+                            <button onClick={() => navigate('/contact')} className="h-12 md:h-14 px-6 md:px-8 rounded-full bg-gradient-to-r from-[#EF7F1A] to-[#F59E0B] text-white font-bold text-base md:text-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 flex items-center gap-2">
                                 Buy Now
                                 <span className="material-symbols-outlined font-bold text-sm md:text-base">arrow_forward</span>
                             </button>
-                            <button className="h-12 md:h-14 px-6 md:px-8 rounded-full bg-white border-2 border-gray-200 text-gray-700 font-bold text-base md:text-lg hover:border-[#EF7F1A] hover:text-[#EF7F1A] transition-all duration-300 flex items-center gap-2">
+                            <button onClick={() => setShowDemoVideo(true)} className="h-12 md:h-14 px-6 md:px-8 rounded-full bg-white border-2 border-gray-200 text-gray-700 font-bold text-base md:text-lg hover:border-[#EF7F1A] hover:text-[#EF7F1A] transition-all duration-300 flex items-center gap-2">
                                 View Demo
                                 <span className="material-symbols-outlined text-sm md:text-base">play_arrow</span>
                             </button>
@@ -253,6 +256,28 @@ const ProductShowcase = () => {
             <ScrollReveal>
                 <Footer />
             </ScrollReveal>
+            {/* Video Modal */}
+            {showDemoVideo && (
+                <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4" onClick={() => setShowDemoVideo(false)}>
+                    <div className="relative w-full max-w-5xl aspect-video bg-black rounded-2xl overflow-hidden shadow-2xl" onClick={e => e.stopPropagation()}>
+                        <button
+                            onClick={() => setShowDemoVideo(false)}
+                            className="absolute top-4 right-4 text-white bg-black/20 hover:bg-black/40 rounded-full p-2 transition-colors z-10"
+                        >
+                            <span className="material-symbols-outlined text-2xl">close</span>
+                        </button>
+                        <iframe
+                            width="100%"
+                            height="100%"
+                            src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1"
+                            title="Product Demo"
+                            frameBorder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                        ></iframe>
+                    </div>
+                </div>
+            )}
         </ScrollWrapper>
     );
 };

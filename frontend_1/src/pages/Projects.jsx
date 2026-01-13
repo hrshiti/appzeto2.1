@@ -48,8 +48,8 @@ const Projects = () => {
 
     return (
         <ScrollWrapper>
+            <Navbar />
             <div className="bg-[#F8FAFC] min-h-screen font-sans text-slate-800 selection:bg-[#05A4A7] selection:text-white overflow-x-hidden">
-                <Navbar />
 
                 {/* --- 1. LISTING HERO --- */}
                 <section className="relative pt-6 md:pt-10 pb-2 md:pb-8 px-4 md:px-12 lg:px-20 text-center">
