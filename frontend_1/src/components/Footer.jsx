@@ -35,7 +35,7 @@ const Footer = () => {
     }, []);
 
     return (
-        <footer className="bg-[#012829] text-white pt-10 md:pt-20 pb-6 md:pb-8 px-6 md:px-12 relative z-20 border-t border-white/5 font-sans overflow-hidden">
+        <footer className="bg-[#012829] text-white pt-10 md:pt-20 pb-24 md:pb-8 px-6 md:px-12 relative z-20 border-t border-white/5 font-sans overflow-hidden">
             {/* Decorative Elements */}
             <div className="absolute top-0 right-0 w-96 h-96 bg-[#05A4A7]/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
 
@@ -212,12 +212,13 @@ const Footer = () => {
                     </div>
                 </div>
 
-                <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-6">
-                    <p className="text-gray-500 text-xs font-medium text-center md:text-left">
-                        © {new Date().getFullYear()} APPZETO INFRASTRUCTURE SOLUTIONS. ALL RIGHTS RESERVED.
+                <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4 md:gap-6">
+                    <p className="text-gray-500 text-xs font-medium text-center md:text-left tracking-wide">
+                        © {new Date().getFullYear()} Appzeto. All rights reserved.
                     </p>
-                    <div className="flex gap-6">
-                        {/* Optional bottom links if desired by user, though included in Resources now. Keeping concise. */}
+                    <div className="flex gap-4 md:gap-6">
+                        <Link to="/privacy-policy" className="text-gray-500 hover:text-[#05A4A7] text-xs font-medium transition-colors">Privacy Policy</Link>
+                        <Link to="/terms" className="text-gray-500 hover:text-[#05A4A7] text-xs font-medium transition-colors">Terms of Service</Link>
                     </div>
                 </div>
             </div>

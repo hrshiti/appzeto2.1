@@ -343,8 +343,7 @@ const Navbar = () => {
                     </div>
                 </div>
             </nav>
-            {/* Spacer to compensate for fixed navbar */}
-            <div className="h-20" aria-hidden="true" />
+
 
             {/* Mobile Menu Overlay - Portal to Body for Reliability */}
             {createPortal(
