@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -358,16 +359,18 @@ const TaxiProductShowcase = () => {
 
                             {/* Search Input Simulation */}
                             <div className="relative max-w-sm pt-4 mx-auto lg:mx-0">
-                                <input
-                                    type="text"
-                                    placeholder="Enter pickup location"
-                                    className="w-full pl-10 pr-4 py-3 md:py-4 rounded-full bg-white shadow-[0_20px_60px_-10px_rgba(0,0,0,0.1)] border-none outline-none text-gray-600 font-bold focus:ring-4 focus:ring-[#00F2FE]/20 transition-all text-xs md:text-base"
-                                    readOnly
-                                />
-                                <span className="material-symbols-outlined absolute left-4 top-[50%] -translate-y-1/2 text-[#00F2FE] text-lg md:text-xl">search</span>
-                                <button className="absolute right-2 top-[50%] -translate-y-1/2 bg-[#00F2FE] p-1.5 md:p-2 rounded-full shadow-lg hover:scale-110 hover:shadow-xl transition-all">
-                                    <span className="material-symbols-outlined text-white text-base md:text-lg">arrow_forward</span>
-                                </button>
+                                <div className="flex items-center w-full pl-4 pr-2 py-2 rounded-full bg-white shadow-[0_20px_60px_-10px_rgba(0,0,0,0.1)] transition-all">
+                                    <span className="material-symbols-outlined text-[#00F2FE] text-lg md:text-xl shrink-0">search</span>
+                                    <input
+                                        type="text"
+                                        placeholder="Enter pickup location"
+                                        className="w-full px-3 py-2 bg-transparent border-none outline-none text-gray-600 font-bold placeholder-gray-400 text-xs md:text-base"
+                                        readOnly
+                                    />
+                                    <button className="shrink-0 bg-[#00F2FE] p-2 rounded-full shadow-lg hover:scale-110 hover:shadow-xl transition-all flex items-center justify-center">
+                                        <span className="material-symbols-outlined text-white text-base md:text-lg">arrow_forward</span>
+                                    </button>
+                                </div>
                             </div>
                         </div>
 
@@ -498,12 +501,7 @@ const TaxiProductShowcase = () => {
                                     </li>
                                 ))}
                             </ul>
-                            <div className="pt-4">
-                                <button className="w-full sm:w-auto px-8 md:px-10 py-3 md:py-4 bg-[#082F30] text-[#00F2FE] rounded-full font-black text-base md:text-lg shadow-xl hover:shadow-2xl hover:scale-105 transition-all flex items-center justify-center gap-3 group">
-                                    Explore Rider Features
-                                    <span className="material-symbols-outlined text-xl md:text-2xl group-hover:translate-x-1 transition-transform">arrow_forward</span>
-                                </button>
-                            </div>
+
                         </div>
                     </div>
                 </section>
@@ -645,7 +643,7 @@ const TaxiProductShowcase = () => {
                                 Launch your own taxi business with our white-label solution. Customizable source code included.
                             </p>
                             <div className="flex justify-center lg:justify-start">
-                                <button className="px-8 md:px-10 py-4 md:py-5 bg-white text-[#FF0844] font-black rounded-xl md:rounded-2xl shadow-xl hover:shadow-2xl hover:scale-105 transition-all text-base md:text-lg">Contact Sales</button>
+                                <Link to="/contact" className="px-8 md:px-10 py-4 md:py-5 bg-white text-[#FF0844] font-black rounded-xl md:rounded-2xl shadow-xl hover:shadow-2xl hover:scale-105 transition-all text-base md:text-lg">Contact Sales</Link>
                             </div>
                         </div>
                         <div className="relative h-[300px] md:h-[500px] flex items-center justify-center scale-75 md:scale-100">

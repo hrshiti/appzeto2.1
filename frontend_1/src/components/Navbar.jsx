@@ -31,7 +31,7 @@ const NAV_ITEMS = [
             { label: "Food Delivery", link: "/appzeto-food" },
             { label: "Taxi Booking", link: "/appzeto-taxi" },
             { label: "E-commerce", link: "/appzeto-ecommerce" },
-            { label: "Hospital Mgmt", link: "/appzeto-hospital" }
+            { label: "Hospital Management", link: "/appzeto-hospital" }
         ]
     },
     {

@@ -156,7 +156,7 @@ const ProjectDetail = () => {
                                 </p>
 
                                 <div className="flex gap-4 justify-center lg:justify-start">
-                                    <Link to="/contact#contact-form" className="px-8 py-3.5 bg-[#05A4A7] text-white font-bold rounded-lg shadow-lg hover:bg-[#048a8d] hover:-translate-y-1 transition-all text-sm flex items-center gap-2 group">
+                                    <Link to="/chit-chat#chitchat-form" className="px-8 py-3.5 bg-[#05A4A7] text-white font-bold rounded-lg shadow-lg hover:bg-[#048a8d] hover:-translate-y-1 transition-all text-sm flex items-center gap-2 group">
                                         <LucideIcons.Play size={16} className="fill-white group-hover:scale-110 transition-transform" />
                                         Start a Project
                                     </Link>
@@ -350,7 +350,7 @@ const ProjectDetail = () => {
                                         <div className="font-bold text-white text-base">{testimonial.author}</div>
                                         <div className="text-[#05A4A7] text-xs font-medium uppercase">{testimonial.role}</div>
                                     </div>
-                                    <Link to="/contact#contact-form" className="inline-flex items-center gap-3 px-6 py-3.5 bg-white text-[#012828] font-bold rounded-lg hover:scale-105 transition-transform text-sm">
+                                    <Link to="/chit-chat#chitchat-form" className="inline-flex items-center gap-3 px-6 py-3.5 bg-white text-[#012828] font-bold rounded-lg hover:scale-105 transition-transform text-sm">
                                         <LucideIcons.MessageSquare size={18} /> Let's Discuss Your Project
                                     </Link>
                                 </div>

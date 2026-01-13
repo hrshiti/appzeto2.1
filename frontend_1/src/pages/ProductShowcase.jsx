@@ -47,7 +47,7 @@ const ProductShowcase = () => {
         <ScrollWrapper>
             <Navbar />
             <div className="min-h-screen w-full bg-white relative overflow-hidden font-sans selection:bg-[#EF7F1A] selection:text-white">
-                <div className="max-w-[1400px] mx-auto min-h-screen px-4 md:px-10 lg:px-20 py-4 md:py-20 lg:py-0 flex flex-col lg:flex-row items-center relative z-10">
+                <div className="max-w-[1400px] mx-auto min-h-screen px-4 md:px-10 lg:px-20 pt-20 pb-8 md:pt-24 md:pb-20 lg:pt-[59px] lg:pb-20 flex flex-col lg:flex-row items-center relative z-10">
 
                     {/* Left Content */}
                     <div className="w-full lg:w-1/2 flex flex-col gap-4 md:gap-10 pt-2 md:pt-10 lg:pt-0 z-20">
@@ -169,7 +169,7 @@ const ProductShowcase = () => {
                 </div>
 
                 {/* What Comes With Section */}
-                <div className="min-h-screen w-full py-8 md:py-20 bg-gray-50 relative z-20 overflow-hidden flex flex-col justify-center">
+                <div className="min-h-screen w-full pt-8 pb-40 md:pt-20 md:pb-48 bg-gray-50 relative z-20 overflow-x-hidden flex flex-col justify-center">
                     <div className="max-w-[1400px] mx-auto px-4 md:px-10 text-center mb-6 lg:mb-16">
                         <motion.h2
                             initial={{ opacity: 0, y: 20 }}

@@ -4,11 +4,11 @@ import { Link } from 'react-router-dom';
 import logo from '../assets/logo.png';
 
 // Importing specific product logos
-import ecommerceLogo from '../assets/logos/Appzeto Ecommerce.jpg';
-import foodLogo from '../assets/logos/Appzeto Food.jpg';
-import multiVendorLogo from '../assets/logos/Appzeto Multi Vendor.jpg';
-import quickCommerceLogo from '../assets/logos/Appzeto Quick Commerce.jpg';
-import taxiLogo from '../assets/logos/Appzeto Taxi.jpg';
+import ecommerceLogo from '../assets/logos/AppzetoEcommerce.jpg';
+import foodLogo from '../assets/logos/AppzetoFood.jpg';
+import multiVendorLogo from '../assets/logos/AppzetoMultiVendor.jpg';
+import quickCommerceLogo from '../assets/logos/AppzetoQuickCommerce.jpg';
+import taxiLogo from '../assets/logos/AppzetoTaxi.jpg';
 
 const projects = [
     {
@@ -33,7 +33,7 @@ const projects = [
         description: "Marketplace platform.",
         image: multiVendorLogo,
         color: "#8B5CF6",
-        link: "/appzeto-ecommerce"
+        link: "/appzeto-multivendor"
     },
     {
         id: "quick-commerce",
@@ -41,7 +41,7 @@ const projects = [
         description: "Hyper-local delivery.",
         image: quickCommerceLogo,
         color: "#F59E0B",
-        link: "/appzeto-taxi"
+        link: "/appzeto-quick-commerce"
     },
     {
         id: "taxi",
