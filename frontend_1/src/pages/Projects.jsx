@@ -41,7 +41,7 @@ const Projects = () => {
             <div className="bg-[#F8FAFC] min-h-screen font-sans text-slate-800 selection:bg-[#2563EB] selection:text-white overflow-x-hidden">
 
                 {/* --- HERO SECTION --- */}
-                <div className="relative w-full h-[250px] md:h-[350px] flex flex-col items-center justify-center text-center px-4 overflow-visible">
+                <div className="relative w-full min-h-[350px] md:min-h-0 h-auto md:h-[350px] pt-24 md:pt-0 flex flex-col items-center justify-center text-center px-4 overflow-visible">
                     {/* Background Image with Blue Tint */}
                     <div className="absolute inset-0 z-0">
                         <img
@@ -83,7 +83,7 @@ const Projects = () => {
                 </div>
 
                 {/* --- PROJECTS GRID --- */}
-                <section className="pt-16 pb-16 px-4 md:px-8 lg:px-12 max-w-[1400px] mx-auto min-h-[50vh]">
+                <section className="pt-12 pb-8 md:pt-16 md:pb-16 px-4 md:px-8 lg:px-12 max-w-[1400px] mx-auto min-h-[50vh]">
                     {isLoading ? (
                         <div className="flex justify-center items-center h-64">
                             <Loader2 className="animate-spin text-[#1D4ED8]" size={40} />
@@ -92,7 +92,7 @@ const Projects = () => {
                         <motion.div
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
-                            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+                            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6"
                         >
                             {filteredProjects.map((project) => (
                                 <div key={project._id || project.id} className="bg-white rounded-2xl overflow-hidden shadow-[0_20px_40px_rgb(0,0,0,0.1)] border border-slate-100 group flex flex-col transition-all duration-300">
@@ -112,11 +112,11 @@ const Projects = () => {
                                         </div>
                                     </div>
                                     {/* Content */}
-                                    <div className="p-4 flex flex-col flex-1 text-left relative">
-                                        <h3 className="text-lg font-bold text-slate-900 mb-1 group-hover:text-[#1D4ED8] transition-colors">{project.title}</h3>
+                                    <div className="p-3 md:p-4 flex flex-col flex-1 text-left relative">
+                                        <h3 className="text-base md:text-lg font-bold text-slate-900 mb-1 group-hover:text-[#1D4ED8] transition-colors">{project.title}</h3>
                                         <p className="text-slate-500 text-xs leading-relaxed mb-3 line-clamp-3">{project.shortDescription}</p>
 
-                                        <div className="mt-auto pt-3 border-t border-slate-50 flex items-center justify-between">
+                                        <div className="mt-auto pt-2 md:pt-3 border-t border-slate-50 flex items-center justify-between">
                                             <div className="flex flex-col">
                                                 <span className="text-[9px] text-slate-400 font-bold uppercase tracking-wider mb-0.5">Built With</span>
                                                 <span className="text-[10px] font-semibold text-slate-700">
