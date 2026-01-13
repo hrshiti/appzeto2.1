@@ -1,9 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import mapImage from '../assets/india_map_bg.png';
 
 const Pin = ({ label, top, left, labelPosition, color = "#05A4A7", delay }) => {
     // Determine label and line styles based on position
+    let effectivePosition = labelPosition;
+    if (window.innerWidth < 768 && labelPosition === 'left') {
+        effectivePosition = 'right';
+    }
+
     let labelStyle = {};
     let lineStyle = {};
     let lineContainerStyle = {};
@@ -11,7 +16,7 @@ const Pin = ({ label, top, left, labelPosition, color = "#05A4A7", delay }) => {
     // Base adjustments for the line to emanate from the dot
     const dotSize = 12;
 
-    switch (labelPosition) {
+    switch (effectivePosition) {
         case 'right':
             labelStyle = { left: '100%', top: '50%', transform: 'translateY(-50%)' };
             lineContainerStyle = { left: '30%', top: '50%', width: window.innerWidth < 768 ? '30px' : '60px', height: '2px', transform: 'translateY(-50%)' };
@@ -74,7 +79,7 @@ const Pin = ({ label, top, left, labelPosition, color = "#05A4A7", delay }) => {
                 <motion.div
                     className="absolute bg-[#012828] text-white px-2 py-1 md:px-4 md:py-2 rounded md:rounded-lg shadow-lg whitespace-nowrap z-20"
                     style={labelStyle}
-                    initial={{ opacity: 0, [labelPosition === 'left' || labelPosition === 'right' ? 'x' : 'y']: labelPosition === 'left' ? 20 : -20 }}
+                    initial={{ opacity: 0, [effectivePosition === 'left' || effectivePosition === 'right' ? 'x' : 'y']: effectivePosition === 'left' ? 20 : -20 }}
                     whileInView={{ opacity: 1, x: 0, y: 0 }}
                     transition={{ duration: 0.4, delay: delay + 0.6 }}
                 >
@@ -93,8 +98,23 @@ const PartnerStat = ({ number, text }) => (
 );
 
 const AppzetoPartners = () => {
-    const [isExpanded, setIsExpanded] = useState(false);
-    const locations = [
+    const [isMobile, setIsMobile] = React.useState(false);
+
+    React.useEffect(() => {
+        const check = () => setIsMobile(window.innerWidth < 768);
+        check();
+        window.addEventListener('resize', check);
+        return () => window.removeEventListener('resize', check);
+    }, []);
+
+    const locations = isMobile ? [
+        { label: "Noida - Tech City", top: "25%", left: "42%", position: "right", color: "#00AEEF", delay: 0.2 },
+        { label: "Indore - Growth Hub", top: "45%", left: "28%", position: "top", color: "#FF6D00", delay: 0.4 },
+        { label: "Mumbai - Finance Core", top: "62%", left: "15%", position: "right", color: "#FF4081", delay: 0.6 },
+        { label: "Pune - IT Zone", top: "70%", left: "25%", position: "bottom", color: "#7C4DFF", delay: 0.7 },
+        { label: "Hyderabad - Cyber Park", top: "65%", left: "48%", position: "top", color: "#64DD17", delay: 0.8 },
+        { label: "Bangalore - Startup Valley", top: "85%", left: "38%", position: "right", color: "#2962FF", delay: 1.0 },
+    ] : [
         { label: "Noida - Tech City", top: "29%", left: "32%", position: "right", color: "#00AEEF", delay: 0.2 },
         { label: "Indore - Growth Hub", top: "50%", left: "28%", position: "left", color: "#FF6D00", delay: 0.4 },
         { label: "Mumbai - Finance Core", top: "64%", left: "18%", position: "left", color: "#FF4081", delay: 0.6 },

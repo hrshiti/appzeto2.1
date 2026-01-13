@@ -77,7 +77,7 @@ const ChitChat = () => {
                             </div>
 
                             {/* Right Side: High-Contrast Form Overlay - COMPACT & CLEAN */}
-                            <div className="flex items-center justify-center p-4 lg:p-8 h-full">
+                            <div id="chitchat-form" className="flex items-center justify-center p-4 lg:p-8 h-full scroll-mt-48">
                                 <motion.div
                                     initial={{ opacity: 0, scale: 0.95 }}
                                     animate={{ opacity: 1, scale: 1 }}

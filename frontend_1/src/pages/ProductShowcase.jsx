@@ -47,7 +47,7 @@ const ProductShowcase = () => {
         <ScrollWrapper>
             <Navbar />
             <div className="min-h-screen w-full bg-white relative overflow-hidden font-sans selection:bg-[#EF7F1A] selection:text-white">
-                <div className="max-w-[1400px] mx-auto min-h-screen px-4 md:px-10 lg:px-20 py-4 md:py-20 lg:py-0 flex flex-col lg:flex-row items-center relative z-10">
+                <div className="max-w-[1400px] mx-auto min-h-screen px-4 md:px-10 lg:px-20 pt-20 pb-8 md:pt-24 md:pb-20 lg:pt-[59px] lg:pb-20 flex flex-col lg:flex-row items-center relative z-10">
 
                     {/* Left Content */}
                     <div className="w-full lg:w-1/2 flex flex-col gap-4 md:gap-10 pt-2 md:pt-10 lg:pt-0 z-20">
@@ -169,7 +169,7 @@ const ProductShowcase = () => {
                 </div>
 
                 {/* What Comes With Section */}
-                <div className="min-h-screen w-full py-8 md:py-20 bg-gray-50 relative z-20 overflow-hidden flex flex-col justify-center">
+                <div className="min-h-screen w-full pt-8 pb-40 md:pt-20 md:pb-48 bg-gray-50 relative z-20 overflow-x-hidden flex flex-col justify-center">
                     <div className="max-w-[1400px] mx-auto px-4 md:px-10 text-center mb-6 lg:mb-16">
                         <motion.h2
                             initial={{ opacity: 0, y: 20 }}
@@ -192,44 +192,117 @@ const ProductShowcase = () => {
                     </div>
 
                     {/* Device Cluster Container - Reference Image Layout */}
-                    <div className="relative w-full max-w-[1200px] mx-auto h-[350px] md:h-[550px] flex justify-center items-center scale-[0.45] xs:scale-[0.6] md:scale-100 origin-top mt-10">
+                    {/* Device Cluster Container - Reference Image Layout */}
+                    <div className="relative w-full max-w-[1400px] mx-auto overflow-visible mt-4 md:mt-10">
+                        {/* Desktop Clustered Layout - Keep as is but with slightly better scaling for small monitors */}
+                        <div className="hidden md:flex relative h-[550px] justify-center items-center scale-90 lg:scale-100 origin-center">
+                            {/* 1. Websites (Monitor - Back Center) */}
+                            <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ duration: 0.6 }} className="absolute top-[40px] left-1/2 -translate-x-1/2 w-[360px] z-10 group">
+                                <FeatureLabel title="Websites" subtitle="Responsive Web App" icon="language" position="top" offset="-top-24" />
+                                <MockupFrame type="monitor" images={images} duration={2500} />
+                            </motion.div>
 
-                        {/* 1. Websites (Monitor - Back Center) */}
-                        <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ duration: 0.6 }} className="absolute top-[40px] left-1/2 -translate-x-1/2 w-[360px] z-10 group">
-                            <FeatureLabel title="Websites" subtitle="Responsive Web App" icon="language" position="top" offset="-top-24" />
-                            <MockupFrame type="monitor" images={images} duration={2500} />
-                        </motion.div>
+                            {/* 2. Admin Panel (Laptop - Front Left) */}
+                            <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.6, delay: 0.2 }} className="absolute bottom-[80px] left-[calc(50%-340px)] w-[280px] z-20 group">
+                                <FeatureLabel title="Admin Panel" subtitle="Full Business Control" icon="admin_panel_settings" position="top" offset="-top-20 -left-10" />
+                                <MockupFrame type="laptop" images={images} duration={2200} imageIndexOffset={1} />
+                            </motion.div>
 
-                        {/* 2. Admin Panel (Laptop - Front Left) */}
-                        <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.6, delay: 0.2 }} className="absolute bottom-[80px] left-[calc(50%-340px)] w-[280px] z-20 group">
-                            <FeatureLabel title="Admin Panel" subtitle="Full Business Control" icon="admin_panel_settings" position="top" offset="-top-20 -left-10" />
-                            <MockupFrame type="laptop" images={images} duration={2200} imageIndexOffset={1} />
-                        </motion.div>
+                            {/* 3. Restaurant Panel (Laptop - Front Right) */}
+                            <motion.div initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.6, delay: 0.2 }} className="absolute bottom-[80px] right-[calc(50%-340px)] w-[280px] z-20 group">
+                                <FeatureLabel title="Restaurant Panel" subtitle="Manage Orders & Menu" icon="storefront" position="top" offset="-top-20 -right-10" />
+                                <MockupFrame type="laptop" images={images} duration={2800} imageIndexOffset={2} />
+                            </motion.div>
 
-                        {/* 3. Restaurant Panel (Laptop - Front Right) */}
-                        <motion.div initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.6, delay: 0.2 }} className="absolute bottom-[80px] right-[calc(50%-340px)] w-[280px] z-20 group">
-                            <FeatureLabel title="Restaurant Panel" subtitle="Manage Orders & Menu" icon="storefront" position="top" offset="-top-20 -right-10" />
-                            <MockupFrame type="laptop" images={images} duration={2800} imageIndexOffset={2} />
-                        </motion.div>
+                            {/* 4. Delivery App (Phone - Far Left) */}
+                            <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.6, delay: 0.3 }} className="absolute bottom-[60px] left-[calc(50%-450px)] w-[80px] z-30 group">
+                                <FeatureLabel title="Delivery App" subtitle="Real-time Tracking" icon="local_shipping" position="bottom" offset="-bottom-24" />
+                                <MockupFrame type="phone" images={images} duration={1800} imageIndexOffset={3} />
+                            </motion.div>
 
-                        {/* 4. Delivery App (Phone - Far Left) */}
-                        <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.6, delay: 0.3 }} className="absolute bottom-[60px] left-[calc(50%-450px)] w-[80px] z-30 group">
-                            <FeatureLabel title="Delivery App" subtitle="Real-time Tracking" icon="local_shipping" position="bottom" offset="-bottom-24" />
-                            <MockupFrame type="phone" images={images} duration={1800} imageIndexOffset={3} />
-                        </motion.div>
+                            {/* 5. Restaurant App (Phone - Far Right) */}
+                            <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.6, delay: 0.3 }} className="absolute bottom-[60px] right-[calc(50%-450px)] w-[80px] z-30 group">
+                                <FeatureLabel title="Restaurant App" subtitle="Kitchen Dashboard" icon="restaurant" position="bottom" offset="-bottom-24" />
+                                <MockupFrame type="phone" images={images} duration={2100} imageIndexOffset={2} />
+                            </motion.div>
 
-                        {/* 5. Restaurant App (Phone - Far Right) */}
-                        <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.6, delay: 0.3 }} className="absolute bottom-[60px] right-[calc(50%-450px)] w-[80px] z-30 group">
-                            <FeatureLabel title="Restaurant App" subtitle="Kitchen Dashboard" icon="restaurant" position="bottom" offset="-bottom-24" />
-                            <MockupFrame type="phone" images={images} duration={2100} imageIndexOffset={2} />
-                        </motion.div>
+                            {/* 6. Customer App (Phone - Front Center) */}
+                            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.4 }} className="absolute -bottom-[20px] left-1/2 -translate-x-1/2 w-[90px] z-40 group">
+                                <FeatureLabel title="Customer App" subtitle="Seamless Ordering" icon="smartphone" position="bottom" offset="-bottom-24" />
+                                <MockupFrame type="phone" images={images} duration={1500} imageIndexOffset={0} />
+                            </motion.div>
+                        </div>
 
-                        {/* 6. Customer App (Phone - Front Center) */}
-                        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.4 }} className="absolute -bottom-[20px] left-1/2 -translate-x-1/2 w-[90px] z-40 group">
-                            <FeatureLabel title="Customer App" subtitle="Seamless Ordering" icon="smartphone" position="bottom" offset="-bottom-24" />
-                            <MockupFrame type="phone" images={images} duration={1500} imageIndexOffset={0} />
-                        </motion.div>
+                        {/* Mobile Compact Grid Layout (Cleaner for UX) */}
+                        <div className="md:hidden flex flex-col gap-6 px-4 mb-10">
+                            {/* Websites Card */}
+                            <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100/50">
+                                <div className="flex items-center gap-4 mb-6">
+                                    <div className="w-10 h-10 rounded-lg bg-[#EF7F1A]/10 flex items-center justify-center text-[#EF7F1A]">
+                                        <span className="material-symbols-outlined">language</span>
+                                    </div>
+                                    <div className="text-left">
+                                        <h3 className="font-bold text-gray-900 text-sm leading-tight">Websites</h3>
+                                        <p className="text-[10px] text-gray-500 uppercase tracking-wide font-medium">Responsive Web App</p>
+                                    </div>
+                                </div>
+                                <div className="w-full scale-90 origin-top mb-[-30px]">
+                                    <MockupFrame type="monitor" images={images} duration={2500} />
+                                </div>
+                            </div>
 
+                            {/* Laptops Grid */}
+                            <div className="grid grid-cols-2 gap-4">
+                                <div className="bg-white rounded-2xl p-4 shadow-sm border border-gray-100/50 flex flex-col items-center">
+                                    <div className="flex items-center gap-2 mb-4 w-full">
+                                        <span className="material-symbols-outlined text-[#EF7F1A] text-lg">admin_panel_settings</span>
+                                        <h3 className="font-bold text-gray-900 text-[10px] whitespace-nowrap">Admin Panel</h3>
+                                    </div>
+                                    <div className="scale-[0.55] origin-top mb-[-60px]">
+                                        <MockupFrame type="laptop" images={images} duration={2200} imageIndexOffset={1} />
+                                    </div>
+                                </div>
+                                <div className="bg-white rounded-2xl p-4 shadow-sm border border-gray-100/50 flex flex-col items-center">
+                                    <div className="flex items-center gap-2 mb-4 w-full">
+                                        <span className="material-symbols-outlined text-[#EF7F1A] text-lg">storefront</span>
+                                        <h3 className="font-bold text-gray-900 text-[10px] whitespace-nowrap">Rest. Panel</h3>
+                                    </div>
+                                    <div className="scale-[0.55] origin-top mb-[-60px]">
+                                        <MockupFrame type="laptop" images={images} duration={2800} imageIndexOffset={2} />
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Phones Grid */}
+                            <div className="bg-gradient-to-b from-white to-gray-50 rounded-2xl p-6 shadow-sm border border-gray-100/50">
+                                <div className="flex justify-between items-center mb-8">
+                                    <h3 className="font-bold text-gray-900 text-xs uppercase tracking-widest text-[#EF7F1A]">App Ecosystem</h3>
+                                    <div className="flex -space-x-2">
+                                        {[1, 2, 3].map(i => <div key={i} className="w-5 h-5 rounded-full border border-white bg-[#EF7F1A]/20"></div>)}
+                                    </div>
+                                </div>
+                                <div className="flex justify-around items-end gap-2">
+                                    <div className="flex flex-col items-center gap-2">
+                                        <div className="scale-90 origin-bottom">
+                                            <MockupFrame type="phone" images={images} duration={1800} imageIndexOffset={3} />
+                                        </div>
+                                        <span className="text-[9px] font-bold text-gray-400 uppercase">Delivery</span>
+                                    </div>
+                                    <div className="flex flex-col items-center gap-2">
+                                        <div className="scale-110 origin-bottom">
+                                            <MockupFrame type="phone" images={images} duration={1500} imageIndexOffset={0} />
+                                        </div>
+                                        <span className="text-[10px] font-black text-gray-900 uppercase">Customer</span>
+                                    </div>
+                                    <div className="flex flex-col items-center gap-2">
+                                        <div className="scale-90 origin-bottom">
+                                            <MockupFrame type="phone" images={images} duration={2100} imageIndexOffset={2} />
+                                        </div>
+                                        <span className="text-[9px] font-bold text-gray-400 uppercase">Restaurant</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -693,7 +766,7 @@ const MockupFrame = ({ type, images, duration, imageIndexOffset = 0 }) => {
 
     if (type === 'monitor') {
         return (
-            <div className="relative mx-auto group transform transition-transform duration-500 hover:scale-[1.02]" style={{ width: '360px' }}>
+            <div className="relative mx-auto group transform transition-transform duration-500 hover:scale-[1.02] w-full max-w-[360px]">
                 {/* Monitor Screen */}
                 <div className="relative bg-[#1a1a1a] rounded-[10px] p-[6px] shadow-2xl border border-[#2a2a2a] w-full aspect-[16/9] z-20">
                     <div className="bg-black rounded-[4px] overflow-hidden w-full h-full relative">
@@ -722,7 +795,7 @@ const MockupFrame = ({ type, images, duration, imageIndexOffset = 0 }) => {
 
     if (type === 'laptop') {
         return (
-            <div className="relative mx-auto group transform transition-transform duration-500 hover:scale-[1.02]" style={{ perspective: '2000px', width: '280px' }}>
+            <div className="relative mx-auto group transform transition-transform duration-500 hover:scale-[1.02] w-full max-w-[280px]" style={{ perspective: '2000px' }}>
                 {/* Laptop Lid */}
                 <div className="relative bg-[#1a1a1a] rounded-t-[12px] rounded-b-[4px] p-[5px] shadow-xl border border-[#2a2a2a] w-full aspect-[16/10] z-20 origin-bottom transition-transform duration-500" style={{ transform: 'rotateX(2deg)' }}>
                     {/* Screen Content */}

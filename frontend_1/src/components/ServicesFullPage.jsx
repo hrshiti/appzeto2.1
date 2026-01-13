@@ -11,6 +11,8 @@ import webImg from '../assets/web_dev_service_preview_1767285503403.png';
 import mobileImg from '../assets/mobile_apps_service_preview_1767285521524.png';
 import cloudImg from '../assets/cloud_computing_service_preview_1767285540190.png';
 import uiuxImg from '../assets/ui_ux_design_service_preview_1767285557945.png';
+import logo from '../assets/logo.png';
+import reactLogo from '../assets/react.svg';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -208,21 +210,21 @@ const ServicesFullPage = () => {
                             transition={{ duration: 0.5, delay: 0.2 }}
                             className="relative z-20 w-24 h-24 bg-white/90 backdrop-blur-xl rounded-2xl shadow-[0_0_40px_rgba(5,164,167,0.2)] flex items-center justify-center border border-white"
                         >
-                            <img src="/src/assets/logo.png" alt="Appzeto" className="w-[80%] h-[80%] object-contain" />
+                            <img src={logo} alt="Appzeto" className="w-[80%] h-[80%] object-contain" />
                         </motion.div>
 
                         {/* Orbit 1 (Inner) */}
                         <div className="absolute w-[65%] h-[65%] rounded-full border border-[#05A4A7]/20 animate-[spin_20s_linear_infinite]">
                             {/* React */}
                             <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-14 h-14 bg-white rounded-full shadow-lg p-3 flex items-center justify-center animate-[spin_20s_linear_infinite_reverse] group cursor-pointer">
-                                <img src="/src/assets/react.svg" alt="React" className="w-full h-full object-contain animate-[spin_10s_linear_infinite]" />
+                                <img src={reactLogo} alt="React" className="w-full h-full object-contain animate-[spin_10s_linear_infinite]" />
                                 <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-[10px] font-bold px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
                                     React JS
                                 </div>
                             </div>
                             {/* Node/Server */}
                             <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-14 h-14 bg-white rounded-full shadow-lg p-3 flex items-center justify-center animate-[spin_20s_linear_infinite_reverse] group cursor-pointer">
-                                <span className="material-symbols-outlined text-3xl text-green-600">dns</span>
+                                <span className="material-icons text-3xl text-green-600">dns</span>
                                 <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-[10px] font-bold px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
                                     Backend
                                 </div>
@@ -233,14 +235,14 @@ const ServicesFullPage = () => {
                         <div className="absolute w-[90%] h-[90%] rounded-full border border-slate-200 animate-[spin_30s_linear_infinite_reverse]">
                             {/* Mobile */}
                             <div className="absolute top-1/2 right-0 translate-x-1/2 -translate-y-1/2 w-16 h-16 bg-white rounded-full shadow-lg p-3.5 flex items-center justify-center animate-[spin_30s_linear_infinite] group cursor-pointer">
-                                <span className="material-symbols-outlined text-3xl text-blue-500">smartphone</span>
+                                <span className="material-icons text-3xl text-blue-500">smartphone</span>
                                 <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-[10px] font-bold px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
                                     Mobile Apps
                                 </div>
                             </div>
                             {/* Cloud */}
                             <div className="absolute top-1/2 left-0 -translate-x-1/2 -translate-y-1/2 w-16 h-16 bg-white rounded-full shadow-lg p-3.5 flex items-center justify-center animate-[spin_30s_linear_infinite] group cursor-pointer">
-                                <span className="material-symbols-outlined text-3xl text-sky-500">cloud</span>
+                                <span className="material-icons text-3xl text-sky-500">cloud</span>
                                 <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-[10px] font-bold px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
                                     Cloud Infra
                                 </div>
@@ -421,9 +423,9 @@ const ServicesFullPage = () => {
                         Whether you need a complete digital transformation or a specific technical solution, our team is ready to engineer your success.
                     </p>
                     <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6">
-                        <button className="px-8 py-3.5 sm:px-10 sm:py-5 bg-[#05A4A7] text-white font-bold rounded-lg shadow-[0_0_30px_rgba(5,164,167,0.4)] hover:scale-105 transition-transform text-sm sm:text-base">
+                        <Link to="/chit-chat#chitchat-form" className="px-8 py-3.5 sm:px-10 sm:py-5 bg-[#05A4A7] text-white font-bold rounded-lg shadow-[0_0_30px_rgba(5,164,167,0.4)] hover:scale-105 transition-transform text-sm sm:text-base inline-block">
                             Start Your Project
-                        </button>
+                        </Link>
                     </div>
                 </div>
             </section>

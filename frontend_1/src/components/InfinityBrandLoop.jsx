@@ -3,7 +3,7 @@ import React from 'react';
 // Importing ALL logos
 import aapreecLogo from '../assets/logos/aapreec_logo.jpg';
 import autoRideLogo from '../assets/logos/auto_ride.jpg';
-import appzetoTaxi from '../assets/logos/Appzeto Taxi.jpg'; // Replaced Beeyou
+import appzetoTaxi from '../assets/logos/AppzetoTaxi.jpg'; // Replaced Beeyou
 import bookMyTempoLogo from '../assets/logos/book_my_tempo.jpg';
 import createBharatLogo from '../assets/logos/create_bharat.jpg';
 import dailyHisabLogo from '../assets/logos/daily_hisab.jpg';

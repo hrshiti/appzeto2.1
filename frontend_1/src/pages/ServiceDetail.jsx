@@ -205,7 +205,7 @@ const ServiceDetail = () => {
                                 <p className="text-slate-400 text-xs md:text-sm leading-relaxed mb-6 md:mb-8 italic">
                                     Let's discuss your project and build something legendary together.
                                 </p>
-                                <Link to="/contact" className="w-full bg-white text-[#0f172a] py-3 md:py-4 rounded-xl md:rounded-2xl font-bold uppercase text-[9px] md:text-[10px] tracking-[0.2em] flex items-center justify-center gap-4 hover:bg-primary hover:text-white transition-all">
+                                <Link to="/contact#contact-form" className="w-full bg-white text-[#0f172a] py-3 md:py-4 rounded-xl md:rounded-2xl font-bold uppercase text-[9px] md:text-[10px] tracking-[0.2em] flex items-center justify-center gap-4 hover:bg-primary hover:text-white transition-all">
                                     Contact Us <span className="material-icons text-base md:text-lg">near_me</span>
                                 </Link>
                             </div>
