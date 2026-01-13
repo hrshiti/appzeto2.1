@@ -447,9 +447,6 @@ const ProjectForm = () => {
                     <InputGroup label="Hero Cover Image">
                         <FileUpload currentUrl={formData.hero.coverImage} onUpload={url => handleNestedChange('hero', 'coverImage', url)} />
                     </InputGroup>
-                    <InputGroup label="Hero Video (Optional)">
-                        <FileUpload currentUrl={formData.hero.videoUrl} type="video" onUpload={url => handleNestedChange('hero', 'videoUrl', url)} />
-                    </InputGroup>
                 </div>
             </Section>
 
@@ -593,45 +590,13 @@ const ProjectForm = () => {
                 <div className="grid md:grid-cols-2 gap-8">
                     {/* Left: Media File */}
                     <div>
-                        <InputGroup label="Showcase Media Type">
-                            <div className="flex gap-4 mb-2">
-                                <label className="flex items-center gap-2 cursor-pointer">
-                                    <input
-                                        type="radio"
-                                        name="showcaseMediaType"
-                                        value="image"
-                                        checked={formData.mediaShowcase.mediaType !== 'video'}
-                                        onChange={() => setFormData(prev => ({
-                                            ...prev,
-                                            mediaShowcase: { ...prev.mediaShowcase, mediaType: 'image' }
-                                        }))}
-                                        className="accent-[#05A4A7]"
-                                    />
-                                    <span className="text-sm font-medium text-slate-700">Image</span>
-                                </label>
-                                <label className="flex items-center gap-2 cursor-pointer">
-                                    <input
-                                        type="radio"
-                                        name="showcaseMediaType"
-                                        value="video"
-                                        checked={formData.mediaShowcase.mediaType === 'video'}
-                                        onChange={() => setFormData(prev => ({
-                                            ...prev,
-                                            mediaShowcase: { ...prev.mediaShowcase, mediaType: 'video' }
-                                        }))}
-                                        className="accent-[#05A4A7]"
-                                    />
-                                    <span className="text-sm font-medium text-slate-700">Video</span>
-                                </label>
-                            </div>
-                        </InputGroup>
-                        <InputGroup label="Showcase Media File">
+                        <InputGroup label="Showcase Image">
                             <FileUpload
                                 currentUrl={formData.mediaShowcase.mediaUrl}
-                                type={formData.mediaShowcase.mediaType}
+                                type="image"
                                 onUpload={url => setFormData(prev => ({
                                     ...prev,
-                                    mediaShowcase: { ...prev.mediaShowcase, mediaUrl: url }
+                                    mediaShowcase: { ...prev.mediaShowcase, mediaUrl: url, mediaType: 'image' }
                                 }))}
                             />
                         </InputGroup>
