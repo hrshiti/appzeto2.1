@@ -74,59 +74,54 @@ const ProjectDetail = () => {
             <Navbar />
             <div className="bg-[#F8FAFC] font-sans text-slate-800 selection:bg-[#05A4A7] selection:text-white">
 
-                {/* --- 1. HERO SECTION (3-Column Layout: Info Card | Text | Image) --- */}
-                <section className="relative pt-32 pb-16 px-6 md:px-12 lg:px-20 overflow-hidden min-h-[85vh] flex items-center">
+                {/* --- 1. HERO SECTION (Redesigned: Compact & Pixel Perfect) --- */}
+                <section className="relative pt-4 pb-0 lg:pt-8 lg:pb-0 px-6 md:px-12 lg:px-16 overflow-hidden min-h-fit lg:min-h-[500px] flex items-center bg-slate-50">
                     {/* Background Decor */}
-                    <div className="absolute top-0 left-0 w-full h-[800px] bg-gradient-to-b from-white via-slate-50/50 to-transparent -z-10" />
-                    <div className="absolute top-[-200px] right-[-100px] w-[800px] h-[800px] bg-[#05A4A7]/5 blur-[120px] rounded-full -z-10 opacity-60" />
+                    <div className="absolute inset-0 w-full h-full bg-slate-50 lg:bg-gradient-to-r lg:from-slate-100/50 lg:via-white lg:to-slate-50/50 -z-20" />
+                    {/* Soft blurred circle behind text/laptop */}
+                    <div className="absolute top-[10%] right-[-5%] w-[600px] h-[600px] bg-[#05A4A7]/10 blur-[100px] rounded-full -z-10 opacity-60 pointer-events-none" />
 
-                    <div className="max-w-[1500px] mx-auto w-full relative z-10">
-                        {/* Back Button positioned top-left */}
-                        <div className="mb-8">
-                            <Link to="/projects" className="inline-flex items-center gap-2 text-slate-500 hover:text-[#05A4A7] transition-colors font-bold text-xs uppercase tracking-widest group">
-                                <span className="p-2 bg-white rounded-full shadow-sm group-hover:shadow-md transition-all border border-slate-100">
-                                    <LucideIcons.ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
-                                </span>
-                                Back to Projects
-                            </Link>
-                        </div>
+                    {/* Back Button (Absolute Top Left) */}
+                    <div className="absolute top-6 left-6 lg:left-12 z-20">
+                        <Link to="/projects" className="inline-flex items-center gap-2 text-slate-400 hover:text-[#05A4A7] transition-colors font-semibold text-[11px] uppercase tracking-wider">
+                            <LucideIcons.ArrowLeft size={14} />
+                            Back
+                        </Link>
+                    </div>
 
-                        <div className="grid lg:grid-cols-12 gap-8 items-center">
+                    <div className="max-w-[1300px] mx-auto w-full relative z-10">
+                        <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
 
-                            {/* COLUMN 1: Project Info Card (Left) */}
+                            {/* COLUMN 1: Project Info Card (Floating Left) */}
                             <motion.div
-                                initial={{ opacity: 0, x: -30 }}
+                                initial={{ opacity: 0, x: -20 }}
                                 animate={{ opacity: 1, x: 0 }}
-                                transition={{ duration: 0.6 }}
+                                transition={{ duration: 0.5, ease: "easeOut" }}
                                 className="lg:col-span-3 order-2 lg:order-1"
                             >
-                                <div className="bg-white rounded-xl shadow-xl shadow-slate-200/60 p-6 border border-slate-100/80 backdrop-blur-sm relative overflow-hidden group hover:-translate-y-1 transition-transform duration-300 w-full max-w-sm mx-auto lg:mx-0">
-                                    <div className="absolute top-0 left-0 w-1 h-full bg-[#05A4A7]" />
-                                    <h3 className="font-bold text-lg text-slate-800 mb-6 flex items-center gap-2">
+                                <div className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-[0_20px_40px_-10px_rgba(0,0,0,0.08)] border border-white p-6 relative group hover:-translate-y-1 transition-transform duration-300 w-full max-w-sm mx-auto lg:mx-0">
+                                    <h3 className="font-bold text-lg text-slate-800 mb-5 pb-3 border-b border-slate-100">
                                         Project Info
                                     </h3>
                                     <div className="space-y-4">
-                                        <div>
-                                            <h4 className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Client</h4>
-                                            <p className="font-semibold text-slate-700 text-sm">{info?.client || 'Confidential'}</p>
+                                        <div className="flex flex-col">
+                                            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-0.5">Client</span>
+                                            <span className="font-medium text-slate-700 text-sm">{info?.client || 'Confidential'}</span>
                                         </div>
-                                        <div className="w-full h-px bg-slate-50" />
-                                        <div>
-                                            <h4 className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Year</h4>
-                                            <p className="font-semibold text-slate-700 text-sm">{info?.year || '2023'}</p>
+                                        <div className="flex flex-col">
+                                            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-0.5">Year</span>
+                                            <span className="font-medium text-slate-700 text-sm">{info?.year || '2023'}</span>
                                         </div>
-                                        <div className="w-full h-px bg-slate-50" />
-                                        <div>
-                                            <h4 className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Duration</h4>
-                                            <p className="font-semibold text-slate-700 text-sm">{info?.duration || 'Ongoing'}</p>
+                                        <div className="flex flex-col">
+                                            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-0.5">Duration</span>
+                                            <span className="font-medium text-slate-700 text-sm">{info?.duration || 'Ongoing'}</span>
                                         </div>
-                                        <div className="w-full h-px bg-slate-50" />
-                                        <div>
-                                            <h4 className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Technologies</h4>
+                                        <div className="pt-2">
+                                            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-2">Technologies</span>
                                             <div className="flex flex-wrap gap-2">
                                                 {techs.map((tech, i) => (
-                                                    <div key={i} className="flex items-center gap-1.5 px-2 py-1 bg-slate-50 text-slate-700 rounded-md text-[11px] font-bold uppercase tracking-wide border border-slate-100">
-                                                        <DynamicIcon name={tech.icon} size={14} className="text-[#05A4A7]" />
+                                                    <div key={i} className="flex items-center gap-2 px-3 py-1.5 bg-slate-50 text-slate-600 rounded-lg border border-slate-200 text-xs font-semibold hover:border-[#05A4A7] hover:text-[#05A4A7] transition-colors">
+                                                        <DynamicIcon name={tech.icon} size={14} />
                                                         <span>{tech.name}</span>
                                                     </div>
                                                 ))}
@@ -136,57 +131,77 @@ const ProjectDetail = () => {
                                 </div>
                             </motion.div>
 
-                            {/* COLUMN 2: Main Text Content (Center) */}
+                            {/* COLUMN 2: Main Text Content (Center-Left) */}
                             <motion.div
-                                initial={{ opacity: 0, y: 30 }}
+                                initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.6, delay: 0.2 }}
-                                className="lg:col-span-4 flex flex-col justify-center order-1 lg:order-2 text-center lg:text-left mb-8 lg:mb-0"
+                                transition={{ duration: 0.5, delay: 0.15, ease: "easeOut" }}
+                                className="lg:col-span-5 flex flex-col items-center lg:items-start text-center lg:text-left order-1 lg:order-2"
                             >
-                                <div className="text-xs font-bold text-[#05A4A7] tracking-[0.2em] uppercase mb-3 text-center lg:text-left">
-                                    {category} <span className="text-slate-300 px-2">|</span> {project.industry}
+                                <div className="text-[11px] font-bold text-slate-500 tracking-[0.2em] uppercase mb-3">
+                                    {category} <span className="text-slate-300 px-1">|</span> {project.industry}
                                 </div>
 
-                                <h1 className="text-4xl md:text-5xl font-black text-[#012828] leading-[1.1] mb-6 tracking-tight text-center lg:text-left">
+                                <h1 className="text-4xl lg:text-[42px] font-black text-[#012828] leading-[1.1] mb-5 tracking-tight">
                                     {hero?.title || title}
                                 </h1>
 
-                                <p className="text-base text-slate-600 mb-8 leading-relaxed max-w-md mx-auto lg:mx-0 text-center lg:text-left">
-                                    {hero?.subtitle || shortDescription || "A innovative solution tailored to specific business needs."}
-                                </p>
+                                <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
+                                    {/* Existing Subtitle */}
+                                    <p className="text-[15px] text-slate-500 mb-8 leading-relaxed max-w-md lg:max-w-none w-full">
+                                        {hero?.subtitle || shortDescription || "A cutting-edge platform for seamless transactions."}
+                                    </p>
 
-                                <div className="flex gap-4 justify-center lg:justify-start">
-                                    <Link to="/chit-chat#chitchat-form" className="px-8 py-3.5 bg-[#05A4A7] text-white font-bold rounded-lg shadow-lg hover:bg-[#048a8d] hover:-translate-y-1 transition-all text-sm flex items-center gap-2 group">
-                                        <LucideIcons.Play size={16} className="fill-white group-hover:scale-110 transition-transform" />
-                                        Start a Project
-                                    </Link>
+                                    {/* Conditional Visit Webpage Button */}
+                                    {hero?.liveUrl && hero?.showLiveLink && (
+                                        <a
+                                            href={hero.liveUrl}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="inline-flex items-center gap-2 px-6 py-3 bg-[#05A4A7] text-white rounded-full font-bold shadow-lg shadow-teal-500/20 hover:-translate-y-1 hover:shadow-teal-500/40 transition-all text-sm group mb-8"
+                                        >
+                                            <span>Visit Webpage</span>
+                                            <LucideIcons.ExternalLink size={16} className="group-hover:rotate-45 transition-transform" />
+                                        </a>
+                                    )}
                                 </div>
+
+                                <Link
+                                    to="/chit-chat#chitchat-form"
+                                    className="px-8 py-3 bg-gradient-to-r from-[#05A4A7] to-[#048a8d] text-white font-bold rounded shadow-lg shadow-[#05A4A7]/25 hover:shadow-xl hover:shadow-[#05A4A7]/30 hover:-translate-y-0.5 transition-all text-sm flex items-center gap-2"
+                                >
+                                    <LucideIcons.Play fill="currentColor" size={12} />
+                                    <span>Start a Project</span>
+                                </Link>
                             </motion.div>
 
-                            {/* COLUMN 3: Laptop Image (Right) */}
+                            {/* COLUMN 3: Vertical Phone Image (Right - Angled) */}
                             <motion.div
-                                initial={{ opacity: 0, x: 40, scale: 0.95 }}
-                                animate={{ opacity: 1, x: 0, scale: 1 }}
-                                transition={{ duration: 0.8, delay: 0.4 }}
-                                className="lg:col-span-5 relative order-3 lg:order-3"
+                                initial={{ opacity: 0, x: 30 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
+                                className="lg:col-span-4 relative order-3 lg:order-3 w-full flex justify-center lg:justify-end"
                             >
-                                <div className="relative w-full aspect-[16/10] max-w-[600px] mx-auto lg:ml-auto">
-                                    {/* Laptop Frame */}
-                                    <img
-                                        src={laptopLayout}
-                                        alt="Laptop Layout"
-                                        className="w-full h-full object-contain relative z-20 drop-shadow-2xl"
-                                    />
-                                    {/* Screen Content */}
-                                    <div className="absolute top-[11%] left-[13%] w-[74%] h-[78%] bg-black z-30 overflow-hidden rounded-[2px] lg:rounded-md flex items-center justify-center">
-                                        <img
-                                            src={hero?.coverImage || "https://images.unsplash.com/photo-1551288049-bebda4e38f71"}
-                                            alt="Project Screen"
-                                            className="w-full h-full object-contain"
-                                        />
-                                        {/* Glare */}
-                                        <div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent opacity-30 pointer-events-none" />
+                                <div className="relative w-[260px] md:w-[280px] mx-auto lg:mr-0 perspective-1000">
+                                    {/* Transforming the container to give it a slight pop */}
+                                    <div className="relative z-10 transform transition-transform duration-500 hover:scale-[1.02] lg:rotate-y-[-12deg] lg:rotate-x-[2deg] preserve-3d">
+                                        {/* iPhone Frame Container */}
+                                        <div className="relative aspect-[9/16] bg-black rounded-[2.5rem] border-[6px] border-slate-800 shadow-2xl overflow-hidden ring-1 ring-slate-400/20">
+                                            {/* Notch */}
+                                            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-6 bg-black rounded-b-xl z-20" />
+
+                                            {/* Screen Content */}
+                                            <div className="w-full h-full bg-slate-800">
+                                                <img
+                                                    src={hero?.coverImage || "https://images.unsplash.com/photo-1551288049-bebda4e38f71"}
+                                                    alt="Project Screen"
+                                                    className="w-full h-full object-cover"
+                                                />
+                                            </div>
+                                        </div>
                                     </div>
+                                    {/* Decorative blurred blob behind phone */}
+                                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[120%] bg-teal-500/20 blur-[60px] rounded-full -z-10" />
                                 </div>
                             </motion.div>
 
@@ -194,82 +209,149 @@ const ProjectDetail = () => {
                     </div>
                 </section>
 
-                {/* --- 2. OVERVIEW (Reduced Padding) --- */}
-                <section className="py-12 px-6 md:px-12 lg:px-20 bg-white relative">
-                    <div className="max-w-[1400px] mx-auto w-full grid lg:grid-cols-2 gap-12 items-center">
-                        <motion.div
-                            initial={{ opacity: 0, x: -30 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            className="order-2 lg:order-1"
-                        >
-                            <div className="w-10 h-1 bg-[#05A4A7] mb-4" />
-                            <h2 className="text-2xl md:text-3xl font-bold text-[#012828] mb-4">Project Overview</h2>
-                            <div className="space-y-4 text-base md:text-lg text-slate-600 leading-relaxed">
-                                <p className="font-medium text-slate-800">{overview?.text?.split('.')[0]}.</p>
-                                <p>{overview?.text?.substring(overview?.text?.indexOf('.') + 1)}</p>
-                            </div>
-                        </motion.div>
+                {/* --- 2. OVERVIEW (Redesigned: Clean, Compact & Aligned) --- */}
+                <section className="pt-16 md:pt-0 pb-16 px-6 md:px-12 lg:px-20 bg-white relative">
+                    <div className="max-w-[1300px] mx-auto w-full">
+                        {/* Title Section - Top Left aligned */}
+                        <div className="mb-8 pl-1">
+                            <h2 className="text-2xl md:text-3xl font-bold text-[#012828] tracking-tight">Project Overview</h2>
+                        </div>
 
+                        <div className="grid lg:grid-cols-12 gap-10 items-center">
+                            {/* Media (Left) - Portrait iPhone Placeholder */}
+                            <motion.div
+                                initial={{ opacity: 0, scale: 0.98 }}
+                                whileInView={{ opacity: 1, scale: 1 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.5 }}
+                                className="lg:col-span-7 flex justify-center"
+                            >
+                                {/* Portrait iPhone Frame */}
+                                <div className="relative w-full max-w-[300px] aspect-[9/19] bg-black rounded-[2.5rem] border-[8px] border-slate-900 shadow-2xl overflow-hidden ring-4 ring-slate-200/50">
+                                    {/* Notch (Top for portrait) */}
+                                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-6 bg-black rounded-b-xl z-20" />
+
+                                    {/* Screen Content */}
+                                    <div className="w-full h-full bg-slate-900 relative overflow-hidden rounded-[2rem]">
+                                        {(overview?.mediaType === 'video' || overview?.mediaUrl?.match(/\.(mp4|webm|ogg)$/i)) ? (
+                                            <video
+                                                src={overview?.mediaUrl}
+                                                className="w-full h-full object-cover"
+                                                controls
+                                                playsInline
+                                                controlsList="nofullscreen"
+                                                disablePictureInPicture
+                                            />
+                                        ) : (
+                                            <>
+                                                <img
+                                                    src={overview?.mediaUrl || "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2426&q=80"}
+                                                    alt="Project Overview"
+                                                    className="w-full h-full object-cover"
+                                                />
+                                            </>
+                                        )}
+                                    </div>
+                                </div>
+                            </motion.div>
+
+                            {/* Text Content (Right) - Centered vertically */}
+                            <motion.div
+                                initial={{ opacity: 0, x: 20 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.5, delay: 0.2 }}
+                                className="lg:col-span-5 flex flex-col justify-center"
+                            >
+                                <div className="space-y-6">
+                                    <p className="text-[15px] md:text-base text-slate-600 leading-relaxed text-justify">
+                                        <span className="font-semibold text-slate-800">
+                                            {overview?.text?.split('.')[0] ? overview.text.split('.')[0] + '.' : "We developed a secure and robust platform."}
+                                        </span>
+                                        <span className="block mt-3">
+                                            {overview?.text?.substring(overview?.text?.indexOf('.') + 1) || "Our goal was to create an intuitive and scalable solution tailored to the specific needs of the sector, ensuring fast and reliable online transactions for all users."}
+                                        </span>
+                                    </p>
+
+                                    <div className="w-full h-px bg-slate-100" />
+                                </div>
+                            </motion.div>
+                        </div>
+                    </div>
+                </section>
+
+                {/* --- 3. CHALLENGE & SOLUTION (Redesigned: Picture Perfect) --- */}
+                <section className="py-20 px-6 md:px-12 lg:px-20 bg-slate-900 relative overflow-hidden">
+                    {/* Background Noise/Texture */}
+                    <div className="absolute inset-0 opacity-[0.4] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] blend-overlay pointer-events-none" />
+                    {/* Subtle glow effects */}
+                    <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-blue-500/10 blur-[120px] rounded-full pointer-events-none" />
+                    <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-teal-500/10 blur-[120px] rounded-full pointer-events-none" />
+
+                    <div className="max-w-[1300px] mx-auto w-full grid md:grid-cols-2 gap-8 relative z-10">
+                        {/* 1. The Challenge Card */}
                         <motion.div
-                            initial={{ opacity: 0, scale: 0.95 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            className="order-1 lg:order-2 relative rounded-xl overflow-hidden shadow-xl aspect-video group"
+                            transition={{ duration: 0.5 }}
+                            className="bg-slate-800/40 backdrop-blur-md border border-white/5 rounded-xl p-8 shadow-2xl relative overflow-hidden group hover:border-white/10 transition-colors"
                         >
-                            {overview?.mediaType === 'video' ? (
-                                <video src={overview?.mediaUrl} className="w-full h-full object-cover" controls playsInline />
-                            ) : (
-                                <img src={overview?.mediaUrl} alt="Overview" className="w-full h-full object-cover" />
+                            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+
+                            <h3 className="text-xl font-bold text-white mb-4">The Challenge</h3>
+                            <div className="w-full h-px bg-white/10 mb-6" />
+
+                            {/* Description from backend */}
+                            {challenge?.description && (
+                                <p className="text-slate-300 text-[15px] leading-relaxed mb-6 font-medium opacity-90">
+                                    {challenge.description}
+                                </p>
                             )}
-                        </motion.div>
-                    </div>
-                </section>
 
-                {/* --- 3. CHALLENGE & SOLUTION (Reduced Padding) --- */}
-                <section className="py-12 px-6 md:px-12 lg:px-20 bg-[#001E1F] relative">
-                    <div className="absolute inset-0 opacity-[0.03] bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
-                    <div className="max-w-[1400px] mx-auto w-full grid md:grid-cols-2 gap-6 relative z-10">
-                        {/* Challenge */}
-                        <motion.div
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            className="bg-white/5 backdrop-blur border border-white/10 p-6 md:p-10 rounded-2xl"
-                        >
-                            <div className="flex items-center gap-3 mb-4 text-white border-b border-white/10 pb-3">
-                                <LucideIcons.ShieldCheck size={28} className="text-red-400" />
-                                <h3 className="text-xl md:text-2xl font-bold">The Challenge</h3>
-                            </div>
-                            <p className="text-slate-300 mb-6 leading-relaxed text-sm md:text-base">{challenge?.description}</p>
-                            <ul className="space-y-2.5">
+                            <ul className="space-y-4">
                                 {challenge?.points?.map((pt, i) => (
-                                    <li key={i} className="flex items-start gap-3 text-slate-300 text-sm">
-                                        <LucideIcons.XCircle size={16} className="text-red-400 mt-0.5 flex-none" />
-                                        <span>{pt}</span>
+                                    <li key={i} className="flex items-start gap-3.5">
+                                        {/* Blue Check Icon */}
+                                        <div className="mt-1 flex-shrink-0">
+                                            <LucideIcons.Check size={18} className="text-cyan-400 font-bold" strokeWidth={3} />
+                                        </div>
+                                        <span className="text-slate-300 text-[15px] leading-relaxed font-medium">{pt}</span>
                                     </li>
                                 ))}
                             </ul>
                         </motion.div>
 
-                        {/* Solution */}
+                        {/* 2. The Solution Card */}
                         <motion.div
-                            initial={{ opacity: 0, y: 30 }}
+                            initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            transition={{ delay: 0.2 }}
-                            className="bg-gradient-to-br from-[#05A4A7] to-[#026466] p-6 md:p-10 rounded-2xl shadow-xl"
+                            transition={{ duration: 0.5, delay: 0.1 }}
+                            className="bg-[#048a8d] rounded-xl p-8 shadow-2xl relative overflow-hidden group hover:brightness-105 transition-all outline outline-1 outline-[#048a8d]/50"
                         >
-                            <div className="flex items-center gap-3 mb-4 text-white border-b border-white/20 pb-3">
-                                <LucideIcons.Zap size={28} className="text-yellow-300" />
-                                <h3 className="text-xl md:text-2xl font-bold">The Solution</h3>
-                            </div>
-                            <p className="text-white/90 mb-6 leading-relaxed text-sm md:text-base">{solution?.description}</p>
-                            <ul className="space-y-2.5">
+                            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-teal-500/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+
+                            <h3 className="text-xl font-bold text-white mb-4">The Solution</h3>
+                            <div className="w-full h-px bg-white/10 mb-6" />
+
+                            {/* Description from backend */}
+                            {solution?.description && (
+                                <p className="text-slate-300 text-[15px] leading-relaxed mb-6 font-medium opacity-90">
+                                    {solution.description}
+                                </p>
+                            )}
+
+                            <ul className="space-y-4">
                                 {solution?.points?.map((pt, i) => (
-                                    <li key={i} className="flex items-start gap-3 text-white text-sm">
-                                        <LucideIcons.CheckCircle2 size={16} className="text-white mt-0.5 flex-none" />
-                                        <span>{pt}</span>
+                                    <li key={i} className="flex items-start gap-3.5">
+                                        {/* Green Filled Checkbox Icon */}
+                                        <div className="mt-0.5 flex-shrink-0">
+                                            <div className="w-5 h-5 bg-teal-500 rounded-[4px] flex items-center justify-center shadow-lg shadow-teal-500/20">
+                                                <LucideIcons.Check size={14} className="text-white" strokeWidth={3} />
+                                            </div>
+                                        </div>
+                                        <span className="text-slate-200 text-[15px] leading-relaxed font-medium">{pt}</span>
                                     </li>
                                 ))}
                             </ul>
@@ -277,85 +359,177 @@ const ProjectDetail = () => {
                     </div>
                 </section>
 
-                {/* --- 4. MEDIA SHOWCASE (Reduced Padding) --- */}
-                {mediaShowcase && (mediaShowcase.mediaUrl || (mediaShowcase.items && mediaShowcase.items.length > 0)) && (
-                    <section className="py-12 px-6 md:px-12 lg:px-20 bg-slate-50">
-                        <div className="max-w-[1400px] mx-auto w-full">
-                            <div className="text-center mb-10">
-                                <h2 className="text-2xl md:text-3xl font-bold text-[#012828]">Media & Features</h2>
-                                <div className="w-12 h-1 bg-[#05A4A7] mx-auto mt-3 rounded-full" />
-                            </div>
+                {/* --- 4. MEDIA SHOWCASE (Redesigned: Pixel Perfect) --- */}
+                <section className="py-8 px-6 md:px-12 lg:px-20 bg-slate-50 relative">
+                    <div className="max-w-[1300px] mx-auto w-full">
+                        {/* Title Section - Top Left aligned */}
+                        <div className="mb-6 pl-1">
+                            <h2 className="text-2xl md:text-3xl font-bold text-[#012828] tracking-tight">Media Showcase</h2>
+                        </div>
 
-                            <div className="grid lg:grid-cols-2 gap-10 items-center">
-                                {/* Media */}
-                                <motion.div
-                                    initial={{ opacity: 0, x: -30 }}
-                                    whileInView={{ opacity: 1, x: 0 }}
-                                    viewport={{ once: true }}
-                                    className="aspect-[4/3] rounded-xl overflow-hidden shadow-xl ring-4 ring-white bg-white"
-                                >
-                                    {mediaShowcase.mediaType === 'video' ? (
-                                        <video src={mediaShowcase.mediaUrl} className="w-full h-full object-cover" controls />
-                                    ) : (
-                                        <img src={mediaShowcase.mediaUrl} alt="Showcase" className="w-full h-full object-cover" />
-                                    )}
-                                </motion.div>
+                        <div className="grid lg:grid-cols-2 gap-6 items-center">
+                            {/* Left Column: Vertical Media (iPhone Mockup) */}
+                            <motion.div
+                                initial={{ opacity: 0, scale: 0.98 }}
+                                whileInView={{ opacity: 1, scale: 1 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.5 }}
+                                className="flex justify-center"
+                            >
+                                {/* iPhone Frame Container */}
+                                <div className="relative w-[280px] md:w-[320px] aspect-[9/16] bg-black rounded-[3rem] border-[8px] border-slate-900 shadow-2xl overflow-hidden ring-4 ring-slate-200/50">
+                                    {/* Notch */}
+                                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-7 bg-black rounded-b-2xl z-20" />
 
-                                {/* Features Grid */}
-                                <div className="grid sm:grid-cols-2 gap-4">
-                                    {mediaShowcase.items?.map((item, i) => (
+                                    {/* Screen Content */}
+                                    <div className="w-full h-full bg-slate-800 relative">
+                                        {(mediaShowcase?.mediaType === 'video' || (mediaShowcase?.mediaUrl && mediaShowcase.mediaUrl.match(/\.(mp4|webm|ogg)$/i))) ? (
+                                            <video
+                                                src={mediaShowcase.mediaUrl}
+                                                className="w-full h-full object-cover"
+                                                controls
+                                                playsInline
+                                                controlsList="nofullscreen"
+                                                disablePictureInPicture
+                                            // muted // Optional: mute by default for autoplay
+                                            />
+                                        ) : (
+                                            <img
+                                                src={mediaShowcase.mobileMediaUrl || mediaShowcase.mediaUrl || "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80"}
+                                                alt="Mobile Showcase"
+                                                className="w-full h-full object-cover"
+                                            />
+                                        )}
+
+                                        {/* Play Button Overlay (only for video if controls aren't enough, but native controls are better for mobile view usually. Keeping a subtle indicator if paused could be nice, but standard video tag works) */}
+                                        {/* Using native controls for better UX within the frame */}
+                                    </div>
+                                </div>
+                            </motion.div>
+
+                            {/* Right Column: Feature Buttons (Stacked) */}
+                            <motion.div
+                                initial={{ opacity: 0, x: 20 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.5, delay: 0.2 }}
+                                className="flex flex-col gap-4 justify-center"
+                            >
+                                {/* Transforming the grid items into stacked pills as per reference */}
+                                <div className="grid grid-cols-1 gap-4">
+                                    {mediaShowcase.items?.slice(0, 4).map((item, i) => (
                                         <motion.div
                                             key={i}
-                                            initial={{ opacity: 0, y: 20 }}
-                                            whileInView={{ opacity: 1, y: 0 }}
-                                            transition={{ delay: i * 0.1 }}
-                                            viewport={{ once: true }}
-                                            className="p-5 bg-white border border-slate-100 rounded-lg shadow-md hover:border-[#05A4A7]/30 transition-all group"
+                                            whileHover={{ scale: 1.02 }}
+                                            className="flex items-center gap-4 p-4 md:p-5 bg-gradient-to-r from-slate-800 to-slate-900 rounded-lg shadow-lg border border-slate-700/50 group cursor-default"
                                         >
-                                            <div className="w-9 h-9 bg-[#05A4A7]/10 rounded-lg flex items-center justify-center mb-3 group-hover:bg-[#05A4A7] transition-colors">
-                                                <DynamicIcon name={item.icon} className="text-[#05A4A7] group-hover:text-white transition-colors" size={18} />
+                                            <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-teal-500 to-emerald-600 flex items-center justify-center shadow-lg flex-shrink-0 group-hover:from-teal-400 group-hover:to-emerald-500 transition-all">
+                                                <DynamicIcon name={item.icon} className="text-white" size={24} />
                                             </div>
-                                            <h4 className="font-bold text-slate-800 text-sm md:text-base">{item.label}</h4>
+                                            <div className="flex-1">
+                                                <h4 className="text-lg font-bold text-white tracking-wide">{item.label}</h4>
+                                                {/* Optional: Add subtitle if available in data, or static for design */}
+                                                {/* <p className="text-xs text-slate-400 font-medium uppercase tracking-wider">Features</p> */}
+                                            </div>
+                                            <div className="h-full w-px bg-slate-700/50 mx-2 hidden sm:block" />
+                                            <div className="text-slate-500 hidden sm:block">
+                                                <LucideIcons.ArrowRight size={18} className="group-hover:text-teal-400 group-hover:translate-x-1 transition-all" />
+                                            </div>
                                         </motion.div>
                                     ))}
+
+                                    {/* Fallback if no items, show static ones to match design */}
+                                    {(!mediaShowcase?.items || mediaShowcase.items.length === 0) && (
+                                        <>
+                                            <div className="flex items-center gap-4 p-5 bg-gradient-to-r from-slate-800 to-slate-900 rounded-lg shadow-lg border border-slate-700/50">
+                                                <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-teal-500 to-emerald-600 flex items-center justify-center shadow-lg"><LucideIcons.ShieldCheck className="text-white" size={24} /></div>
+                                                <h4 className="text-lg font-bold text-white">Secure Payments</h4>
+                                            </div>
+                                            <div className="flex items-center gap-4 p-5 bg-gradient-to-r from-slate-800 to-slate-900 rounded-lg shadow-lg border border-slate-700/50">
+                                                <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center shadow-lg"><LucideIcons.BarChart3 className="text-white" size={24} /></div>
+                                                <h4 className="text-lg font-bold text-white">Real-Time Analytics</h4>
+                                            </div>
+                                        </>
+                                    )}
                                 </div>
-                            </div>
+                            </motion.div>
                         </div>
-                    </section>
-                )}
+                    </div>
+                </section>
+
 
                 {/* --- 5. RESULTS & TESTIMONIALS (Reduced Padding) --- */}
-                <section className="py-16 px-6 md:px-12 lg:px-20 bg-white">
-                    <div className="max-w-[1400px] mx-auto w-full">
-                        {/* Results */}
-                        <div className="mb-14">
-                            <h3 className="text-xl md:text-2xl font-bold text-center text-[#012828] mb-8">Impact Summary</h3>
-                            <div className="grid grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
-                                {results?.map((res, i) => (
-                                    <div key={i} className="text-center p-4 border-r border-slate-100 last:border-0">
-                                        <div className="text-3xl md:text-4xl font-black text-[#05A4A7] mb-1">{res.value}</div>
-                                        <div className="text-xs font-bold text-slate-500 uppercase tracking-widest">{res.label}</div>
+                {/* --- 5. RESULTS & IMPACT (Redesigned: Pixel Perfect) --- */}
+                <section className="py-12 px-6 md:px-12 lg:px-20 bg-white border-t border-slate-100">
+                    <div className="max-w-[1100px] mx-auto w-full">
+
+                        {/* Header: Title Centered */}
+                        <div className="text-center mb-8">
+                            <h3 className="text-2xl md:text-3xl font-bold text-[#012828] mb-3">Results & Impact</h3>
+                            <div className="w-16 h-1 bg-gradient-to-r from-[#05A4A7] to-[#048a8d] rounded-full mx-auto" />
+                        </div>
+
+                        {/* Key Results Grid (Max 3) */}
+                        {results && results.length > 0 && (
+                            <div className="flex flex-col md:flex-row justify-center items-center gap-8 md:gap-16 mb-10 max-w-4xl mx-auto">
+                                {results.slice(0, 3).map((res, i) => (
+                                    <div key={i} className="text-center p-2 w-full md:w-auto">
+                                        <div className="text-5xl md:text-6xl font-black text-[#012828] mb-2 tracking-tight leading-none">{res.value}</div>
+                                        <div className="text-sm md:text-base font-extrabold text-[#05A4A7] uppercase tracking-wider">{res.label}</div>
                                     </div>
                                 ))}
                             </div>
-                        </div>
-
-                        {/* Testimonial & CTA */}
-                        {testimonial && (
-                            <div className="bg-[#012828] rounded-[2rem] p-8 md:p-12 relative overflow-hidden text-center shadow-2xl">
-                                <LucideIcons.Quote size={60} className="text-white/5 absolute top-6 left-6 rotate-180" />
-                                <div className="relative z-10 max-w-3xl mx-auto">
-                                    <p className="text-xl md:text-2xl font-serif text-white leading-tight mb-6">"{testimonial.text}"</p>
-                                    <div className="mb-8">
-                                        <div className="font-bold text-white text-base">{testimonial.author}</div>
-                                        <div className="text-[#05A4A7] text-xs font-medium uppercase">{testimonial.role}</div>
-                                    </div>
-                                    <Link to="/chit-chat#chitchat-form" className="inline-flex items-center gap-3 px-6 py-3.5 bg-white text-[#012828] font-bold rounded-lg hover:scale-105 transition-transform text-sm">
-                                        <LucideIcons.MessageSquare size={18} /> Let's Discuss Your Project
-                                    </Link>
-                                </div>
-                            </div>
                         )}
+
+                        {/* Testimonial Card */}
+                        {testimonial && (
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                className="relative w-full bg-slate-900 rounded-lg overflow-hidden shadow-2xl mb-10 group"
+                            >
+                                {/* Background Texture (Dots) */}
+                                <div className="absolute inset-0 opacity-[0.15] bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:16px_16px]" />
+                                <div className="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/90 to-transparent z-10" />
+
+                                <div className="relative z-20 p-6 md:p-8 text-center max-w-3xl mx-auto">
+                                    <LucideIcons.Quote size={32} className="text-[#05A4A7] mb-3 opacity-80 inline-block" />
+                                    <p className="text-lg md:text-xl font-medium text-white leading-relaxed mb-5 font-sans tracking-wide">
+                                        "{testimonial.text}"
+                                    </p>
+                                    <div>
+                                        <h4 className="text-base font-bold text-white mb-0.5">{testimonial.author}</h4>
+                                        <p className="text-xs text-slate-400 uppercase tracking-widest font-semibold">{testimonial.role}</p>
+                                    </div>
+                                </div>
+                            </motion.div>
+                        )}
+
+                        {/* CTA Section */}
+                        <div className="text-center">
+                            <h3 className="text-xl md:text-2xl font-medium text-slate-700 mb-6">Want a project like this for your business?</h3>
+
+                            <div className="flex flex-col sm:flex-row items-center justify-center gap-5">
+                                {/* Start Project Button */}
+                                <Link
+                                    to="/chit-chat#chitchat-form"
+                                    className="w-full sm:w-auto px-8 py-3.5 bg-gradient-to-b from-[#05A4A7] to-[#037F82] text-white font-bold rounded shadow-[0_4px_0_#025e61] hover:translate-y-[2px] hover:shadow-[0_2px_0_#025e61] active:translate-y-[4px] active:shadow-none transition-all flex items-center justify-center gap-2 group"
+                                >
+                                    <LucideIcons.Mail size={18} className="group-hover:rotate-12 transition-transform" />
+                                    <span>Start a Project</span>
+                                </Link>
+
+                                {/* Contact Us Button */}
+                                <Link
+                                    to="/contact"
+                                    className="w-full sm:w-auto px-8 py-3.5 bg-[#012828] text-white font-bold rounded shadow-[0_4px_0_#001515] hover:translate-y-[2px] hover:shadow-[0_2px_0_#001515] active:translate-y-[4px] active:shadow-none transition-all flex items-center justify-center gap-2 group"
+                                >
+                                    <LucideIcons.Phone size={18} className="group-hover:rotate-12 transition-transform" />
+                                    <span>Contact Us</span>
+                                </Link>
+                            </div>
+                        </div>
                     </div>
                 </section>
 

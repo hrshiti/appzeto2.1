@@ -9,6 +9,16 @@ import Footer from '../components/Footer';
 import ScrollReveal from '../components/ScrollReveal';
 import ScrollWrapper from '../components/ScrollWrapper';
 import ProductReviews from '../components/ProductReviews';
+import InfinityBrandLoop from '../components/InfinityBrandLoop';
+
+import foodLogo1 from '../assets/logos/AppzetoFood.jpg';
+import foodLogo2 from '../assets/logos/Appzeto Food Delivery.jpg';
+import foodLogo3 from '../assets/logos/Appzeto food Restaurant.jpg';
+import foodLogo4 from '../assets/logos/aapreec_logo.jpg';
+import foodLogo5 from '../assets/logos/beeyou_logo.jpg';
+import foodLogo6 from '../assets/logos/bonfire.jpg';
+import foodLogo7 from '../assets/logos/Apsara Stores.jpg';
+import foodLogo8 from '../assets/logos/Chandni NX.jpg';
 
 import heroImage from '../assets/projects/appzeto-food-hero.jpg';
 import floatingImage1 from '../assets/projects/appzeto-food-1.jpg';
@@ -26,6 +36,17 @@ const ProductShowcase = () => {
 
     // Array of images to cycle through
     const images = [heroImage, carouselImage1, carouselImage2, carouselImage3];
+
+    const foodLogos = [
+        { src: foodLogo1, name: "Appzeto Food" },
+        { src: foodLogo2, name: "Food Delivery" },
+        { src: foodLogo3, name: "Restaurant" },
+        { src: foodLogo4, name: "Aapreec" },
+        { src: foodLogo5, name: "BeeYou" },
+        { src: foodLogo6, name: "Bonfire" },
+        { src: foodLogo7, name: "Apsara" },
+        { src: foodLogo8, name: "Chandni" },
+    ];
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const [showDemoVideo, setShowDemoVideo] = useState(false);
     const navigate = useNavigate();
@@ -76,13 +97,13 @@ const ProductShowcase = () => {
                             whileInView={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8, delay: 0.2 }}
                             viewport={{ once: false }}
-                            className="flex items-center gap-2 md:gap-4 w-full"
+                            className="flex flex-wrap items-center gap-4"
                         >
-                            <button onClick={() => navigate('/contact')} className="flex-1 h-12 md:h-14 px-2 md:px-8 rounded-full bg-gradient-to-r from-[#EF7F1A] to-[#F59E0B] text-white font-bold text-sm md:text-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 flex items-center justify-center gap-1 md:gap-2 whitespace-nowrap">
+                            <button onClick={() => navigate('/contact')} className="h-12 md:h-14 px-6 md:px-8 rounded-full bg-gradient-to-r from-[#EF7F1A] to-[#F59E0B] text-white font-bold text-base md:text-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 flex items-center gap-2">
                                 Buy Now
                                 <span className="material-symbols-outlined font-bold text-sm md:text-base">arrow_forward</span>
                             </button>
-                            <button onClick={() => setShowDemoVideo(true)} className="flex-1 h-12 md:h-14 px-2 md:px-8 rounded-full bg-white border-2 border-gray-200 text-gray-700 font-bold text-sm md:text-lg hover:border-[#EF7F1A] hover:text-[#EF7F1A] transition-all duration-300 flex items-center justify-center gap-1 md:gap-2 whitespace-nowrap">
+                            <button onClick={() => setShowDemoVideo(true)} className="h-12 md:h-14 px-6 md:px-8 rounded-full bg-white border-2 border-gray-200 text-gray-700 font-bold text-base md:text-lg hover:border-[#EF7F1A] hover:text-[#EF7F1A] transition-all duration-300 flex items-center gap-2">
                                 View Demo
                                 <span className="material-symbols-outlined text-sm md:text-base">play_arrow</span>
                             </button>
@@ -96,16 +117,16 @@ const ProductShowcase = () => {
                             className="flex items-center gap-4 mt-2 md:mt-4 opacity-80"
                         >
                             <div className="flex -space-x-3">
-                                <img src={floatingImage1} alt="User" className="w-8 h-8 md:w-10 md:h-10 rounded-full border-2 border-white object-cover" />
-                                <img src={floatingImage2} alt="User" className="w-8 h-8 md:w-10 md:h-10 rounded-full border-2 border-white object-cover" />
-                                <img src={carouselImage1} alt="User" className="w-8 h-8 md:w-10 md:h-10 rounded-full border-2 border-white object-cover" />
+                                <img src={foodLogo1} alt="Logo 1" className="w-8 h-8 md:w-10 md:h-10 rounded-full border-2 border-white object-cover" />
+                                <img src={foodLogo2} alt="Logo 2" className="w-8 h-8 md:w-10 md:h-10 rounded-full border-2 border-white object-cover" />
+                                <img src={foodLogo3} alt="Logo 3" className="w-8 h-8 md:w-10 md:h-10 rounded-full border-2 border-white object-cover" />
                             </div>
                             <p className="text-xs md:text-sm text-gray-500 font-medium">Trusted by 500+ Businesses</p>
                         </motion.div>
                     </div>
 
                     {/* Right Content / Hero Graphics */}
-                    <div className="w-full lg:w-1/2 relative mt-20 lg:mt-0 h-[40vh] md:h-[50vh] lg:h-screen flex items-center justify-center">
+                    <div className="w-full lg:w-1/2 relative mt-8 lg:mt-0 h-[40vh] md:h-[50vh] lg:h-screen flex items-center justify-center">
                         {/* Orange Blob Background */}
                         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[140%] bg-[#EF7F1A] rounded-[40%] rotate-12 lg:translate-x-[20%] opacity-100 z-0"></div>
                         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[160%] h-[160%] bg-[#EF7F1A]/10 rounded-[45%] -rotate-6 lg:translate-x-[20%] z-[-1]"></div>
@@ -169,7 +190,7 @@ const ProductShowcase = () => {
                 </div>
 
                 {/* What Comes With Section */}
-                <div className="w-full pt-8 pb-10 md:min-h-screen md:pt-20 md:pb-48 bg-gray-50 relative z-20 overflow-x-hidden flex flex-col justify-center">
+                <div className="min-h-screen w-full pt-8 pb-40 md:pt-20 md:pb-48 bg-gray-50 relative z-20 overflow-x-hidden flex flex-col justify-center">
                     <div className="max-w-[1400px] mx-auto px-4 md:px-10 text-center mb-6 lg:mb-16">
                         <motion.h2
                             initial={{ opacity: 0, y: 20 }}
@@ -252,22 +273,22 @@ const ProductShowcase = () => {
                             </div>
 
                             {/* Laptops Grid */}
-                            <div className="grid grid-cols-2 gap-3">
-                                <div className="bg-white rounded-2xl p-2 pb-4 shadow-sm border border-gray-100/50 flex flex-col items-center overflow-hidden">
-                                    <div className="flex items-center justify-center gap-1 mb-2 w-full">
-                                        <span className="material-symbols-outlined text-[#EF7F1A] text-base">admin_panel_settings</span>
-                                        <h3 className="font-bold text-gray-900 text-[9px] whitespace-normal text-center leading-tight">Admin Panel</h3>
+                            <div className="grid grid-cols-2 gap-4">
+                                <div className="bg-white rounded-2xl p-4 shadow-sm border border-gray-100/50 flex flex-col items-center">
+                                    <div className="flex items-center gap-2 mb-4 w-full">
+                                        <span className="material-symbols-outlined text-[#EF7F1A] text-lg">admin_panel_settings</span>
+                                        <h3 className="font-bold text-gray-900 text-[10px] whitespace-nowrap">Admin Panel</h3>
                                     </div>
-                                    <div className="scale-[0.55] origin-top mb-[-20px]">
+                                    <div className="scale-[0.55] origin-top mb-[-60px]">
                                         <MockupFrame type="laptop" images={images} duration={2200} imageIndexOffset={1} />
                                     </div>
                                 </div>
-                                <div className="bg-white rounded-2xl p-2 pb-4 shadow-sm border border-gray-100/50 flex flex-col items-center overflow-hidden">
-                                    <div className="flex items-center justify-center gap-1 mb-2 w-full">
-                                        <span className="material-symbols-outlined text-[#EF7F1A] text-base">storefront</span>
-                                        <h3 className="font-bold text-gray-900 text-[9px] whitespace-normal text-center leading-tight">Rest. Panel</h3>
+                                <div className="bg-white rounded-2xl p-4 shadow-sm border border-gray-100/50 flex flex-col items-center">
+                                    <div className="flex items-center gap-2 mb-4 w-full">
+                                        <span className="material-symbols-outlined text-[#EF7F1A] text-lg">storefront</span>
+                                        <h3 className="font-bold text-gray-900 text-[10px] whitespace-nowrap">Rest. Panel</h3>
                                     </div>
-                                    <div className="scale-[0.55] origin-top mb-[-20px]">
+                                    <div className="scale-[0.55] origin-top mb-[-60px]">
                                         <MockupFrame type="laptop" images={images} duration={2800} imageIndexOffset={2} />
                                     </div>
                                 </div>
@@ -277,7 +298,9 @@ const ProductShowcase = () => {
                             <div className="bg-gradient-to-b from-white to-gray-50 rounded-2xl p-6 shadow-sm border border-gray-100/50">
                                 <div className="flex justify-between items-center mb-8">
                                     <h3 className="font-bold text-gray-900 text-xs uppercase tracking-widest text-[#EF7F1A]">App Ecosystem</h3>
-                                    {/* Circles Removed */}
+                                    <div className="flex -space-x-2">
+                                        {[1, 2, 3].map(i => <div key={i} className="w-5 h-5 rounded-full border border-white bg-[#EF7F1A]/20"></div>)}
+                                    </div>
                                 </div>
                                 <div className="flex justify-around items-end gap-2">
                                     <div className="flex flex-col items-center gap-2">
@@ -303,6 +326,9 @@ const ProductShowcase = () => {
                         </div>
                     </div>
                 </div>
+
+                {/* --- Infinity Brand Loop --- */}
+                <InfinityBrandLoop logos={foodLogos} title="Powering Top Food Chains & Cloud Kitchens" />
 
                 {/* How It Works Section */}
                 <HowItWorks />
@@ -357,16 +383,7 @@ const ProductShowcase = () => {
 const HowItWorks = () => {
     const [activeTab, setActiveTab] = useState('restaurant');
     const containerRef = useRef(null);
-    const mobileListRef = useRef(null);
     const inView = useInView(containerRef, { once: false, margin: "-100px" });
-
-    // Mobile Bike Animation
-    const { scrollYProgress: mobileScroll } = useScroll({
-        target: mobileListRef,
-        offset: ["start center", "end center"]
-    });
-
-    const bikeTop = useTransform(mobileScroll, [0, 1], ["0%", "95%"]);
 
     return (
         <div ref={containerRef} className="w-full pt-6 md:pt-20 pb-6 bg-white relative z-20 overflow-hidden">
@@ -411,7 +428,7 @@ const HowItWorks = () => {
                     <svg className="absolute inset-0 w-full h-full z-0 pointer-events-none" style={{ overflow: 'visible' }}>
                         {/* Path: Step 1 -> Up/Right -> 2 -> Down -> 3 -> Left -> 4 -> Left/Up -> 5 */}
                         <motion.path
-                            d="M 280 200 C 280 100, 400 50, 600 50 L 850 50 L 850 150 M 850 350 L 850 450 L 600 450 L 500 450 M 350 450 L 280 450 L 280 350"
+                            d="M 280 200 C 280 100, 400 50, 600 50 L 850 50 L 850 150 L 850 350 L 850 450 L 565 530 L 280 450 L 280 200 Z"
                             fill="none"
                             stroke="#EF7F1A"
                             strokeWidth="2"
@@ -423,7 +440,7 @@ const HowItWorks = () => {
                         {/* Arrow Heads */}
                         <motion.path d="M 845 140 L 850 150 L 855 140" fill="none" stroke="#EF7F1A" strokeWidth="2" initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ delay: 1 }} />
                         <motion.path d="M 845 360 L 850 350 L 855 360" fill="none" stroke="#EF7F1A" strokeWidth="2" initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ delay: 1.5 }} />
-                        <motion.path d="M 360 445 L 350 450 L 360 455" fill="none" stroke="#EF7F1A" strokeWidth="2" initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ delay: 2 }} />
+                        <motion.path d="M 360 467 L 350 470 L 360 477" fill="none" stroke="#EF7F1A" strokeWidth="2" initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ delay: 2 }} />
                         <motion.path d="M 275 360 L 280 350 L 285 360" fill="none" stroke="#EF7F1A" strokeWidth="2" initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ delay: 2.2 }} />
                     </svg>
 
@@ -434,7 +451,7 @@ const HowItWorks = () => {
                                 width: '40px',
                                 height: '40px',
                                 position: 'absolute',
-                                offsetPath: "path('M 280 200 C 280 100, 400 50, 600 50 L 850 50 L 850 150 L 850 350 L 850 450 L 600 450 L 500 450 L 350 450 L 280 450 L 280 350 L 280 200 Z')",
+                                offsetPath: "path('M 280 200 C 280 100, 400 50, 600 50 L 850 50 L 850 150 L 850 350 L 850 450 L 565 530 L 280 450 L 280 200 Z')",
                                 offsetRotate: 'auto',
                                 animation: 'bikeLoop 10s linear infinite',
                             }}
@@ -520,47 +537,16 @@ const HowItWorks = () => {
                     </motion.div>
                 </div>
 
-                {/* Mobile Scroll Animation Layout */}
-                <div ref={mobileListRef} className="md:hidden relative pl-6 flex flex-col gap-8 pb-10 mt-[-20px]">
-                    {/* Vertical Line */}
-                    <div className="absolute left-2 top-0 bottom-0 w-0.5 bg-gray-200" />
-                    {/* Moving Bike on Scroll */}
-                    <motion.div
-                        style={{ top: bikeTop }}
-                        className="absolute left-[-11px] w-8 h-8 z-10 flex items-center justify-center"
-                    >
-                        <span className="material-symbols-outlined text-2xl text-[#EF7F1A] rotate-90 drop-shadow-sm">two_wheeler</span>
-                    </motion.div>
-
-                    {{
-                        restaurant: [
-                            "Customer places order via App/Web",
-                            "Restaurant accepts & prepares",
-                            "Food handover to deliveryman",
-                            "Deliveryman out for delivery",
-                            "Customer receives order"
-                        ],
-                        deliveryman: [
-                            "Deliveryman receives new order alert",
-                            "Accepts order & navigates to restaurant",
-                            "Verifies & picks up food package",
-                            "Starts delivery to customer location",
-                            "Hands over food & completes order"
-                        ]
-                    }[activeTab].map((text, index) => (
-                        <motion.div
-                            initial={{ opacity: 0, x: 20 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            transition={{ delay: index * 0.1 }}
-                            key={`${activeTab}-${index}`}
-                            className="bg-white p-4 rounded-xl shadow-sm border border-gray-100 relative z-0"
-                        >
-                            <div className="absolute -left-[34px] top-1/2 -translate-y-1/2 w-4 h-4 bg-[#EF7F1A] rounded-full ring-4 ring-white"></div>
-                            <h3 className="font-bold text-gray-900 text-sm">Step {index + 1}</h3>
-                            <p className="text-xs text-gray-500 mt-1">
-                                {text}
-                            </p>
-                        </motion.div>
+                {/* Mobile Fallback (Grid Layout) */}
+                <div className="md:hidden flex flex-col gap-8">
+                    {[1, 2, 3, 4, 5].map((item) => (
+                        <div key={item} className="flex items-center gap-4 bg-gray-50 p-4 rounded-xl">
+                            <div className="w-10 h-10 bg-[#EF7F1A] rounded-full flex items-center justify-center text-white font-bold">{item}</div>
+                            <div>
+                                <h3 className="font-bold text-gray-900">Step {item}</h3>
+                                <p className="text-sm text-gray-500">Description of step {item}</p>
+                            </div>
+                        </div>
                     ))}
                 </div>
             </div>
@@ -995,7 +981,7 @@ const ModernInteractiveFeatures = () => {
                     {/* Scrollable Area */}
                     <div
                         ref={scrollRef}
-                        className="flex overflow-x-auto gap-4 md:gap-8 pb-1 md:pb-10 px-4 hide-scrollbar snap-x snap-mandatory"
+                        className="flex overflow-x-auto gap-3 md:gap-8 pb-4 md:pb-10 px-4 hide-scrollbar snap-x snap-mandatory"
                         style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
                     >
                         {features.map((feature, index) => (
@@ -1021,7 +1007,7 @@ const ModernInteractiveFeatures = () => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={inView ? { opacity: 1, y: 0 } : {}}
                     transition={{ delay: 0.8 }}
-                    className="flex justify-center mt-4 md:mt-10"
+                    className="flex justify-center mt-6 md:mt-10"
                 >
                     <button className="bg-gradient-to-r from-[#EF7F1A] to-[#F59E0B] text-white px-8 md:px-10 py-3 md:py-4 rounded-full font-bold shadow-lg hover:shadow-xl hover:scale-105 transition-all flex items-center gap-2 text-sm md:text-base">
                         More Features
