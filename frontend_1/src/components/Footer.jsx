@@ -78,7 +78,7 @@ const Footer = () => {
                         </div>
                     </div>
 
-                    {/* Column 2: Services & Solutions */}
+                    {/* Column 2: Services & Solutions & Resources */}
                     <div className="flex flex-col gap-8 md:gap-10">
                         <div>
                             <h4 className="text-white font-bold mb-4 md:mb-6 uppercase tracking-wider text-xs border-l-2 border-[#05A4A7] pl-3">Services</h4>
@@ -97,9 +97,17 @@ const Footer = () => {
                                 </Link></li>
                             </ul>
                         </div>
+                        <div>
+                            <h4 className="text-white font-bold mb-4 md:mb-6 uppercase tracking-wider text-xs border-l-2 border-[#05A4A7] pl-3">Resources</h4>
+                            <ul className="space-y-3">
+                                <li><Link to="/contact#contact-form" className="text-gray-400 hover:text-[#05A4A7] transition-colors text-sm font-medium flex items-center gap-2 group">
+                                    <span className="w-1 h-1 rounded-full bg-white/20 group-hover:bg-[#05A4A7] transition-colors"></span> Support
+                                </Link></li>
+                            </ul>
+                        </div>
                     </div>
 
-                    {/* Column 3: Company & Resources */}
+                    {/* Column 3: Company */}
                     <div className="flex flex-col gap-8 md:gap-10">
                         <div>
                             <h4 className="text-white font-bold mb-4 md:mb-6 uppercase tracking-wider text-xs border-l-2 border-[#05A4A7] pl-3">Company</h4>
@@ -116,16 +124,8 @@ const Footer = () => {
                                 <li><Link to="/blogs" className="text-gray-400 hover:text-[#05A4A7] transition-colors text-sm font-medium flex items-center gap-2 group">
                                     <span className="w-1 h-1 rounded-full bg-white/20 group-hover:bg-[#05A4A7] transition-colors"></span> Blog / Insights
                                 </Link></li>
-                                <li><Link to="/contact" className="text-gray-400 hover:text-[#05A4A7] transition-colors text-sm font-medium flex items-center gap-2 group">
+                                <li><Link to="/contact#contact-form" className="text-gray-400 hover:text-[#05A4A7] transition-colors text-sm font-medium flex items-center gap-2 group">
                                     <span className="w-1 h-1 rounded-full bg-white/20 group-hover:bg-[#05A4A7] transition-colors"></span> Contact Us
-                                </Link></li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h4 className="text-white font-bold mb-4 md:mb-6 uppercase tracking-wider text-xs border-l-2 border-[#05A4A7] pl-3">Resources</h4>
-                            <ul className="space-y-3">
-                                <li><Link to="/contact" className="text-gray-400 hover:text-[#05A4A7] transition-colors text-sm font-medium flex items-center gap-2 group">
-                                    <span className="w-1 h-1 rounded-full bg-white/20 group-hover:bg-[#05A4A7] transition-colors"></span> Support
                                 </Link></li>
                             </ul>
                         </div>

@@ -64,7 +64,7 @@ const NAV_ITEMS = [
             { label: "Who We Are", link: "/about#we-are-appzeto" },
             { label: "Leadership", link: "/about#meet-our-team" },
             { label: "Global Offices", link: "/about#offices" },
-            { label: "Contact Us", link: "/contact" }
+            { label: "Contact Us", link: "/contact#contact-form" }
         ]
     }
 ];
@@ -186,7 +186,7 @@ const Navbar = () => {
         setIsMobileMenuOpen(false);
         setIsBlasting(true);
         setTimeout(() => {
-            navigate('/chit-chat');
+            navigate('/chit-chat#chitchat-form');
             setIsBlasting(false);
         }, 500);
     };
@@ -309,7 +309,7 @@ const Navbar = () => {
 
                                     <Link
                                         className="relative z-10 flex items-center justify-center px-6 py-2 bg-gradient-to-r from-[#05A4A7] to-[#037A7C] text-white font-black rounded-[10px] overflow-hidden whitespace-nowrap"
-                                        to="/chit-chat"
+                                        to="/chit-chat#chitchat-form"
                                         onClick={handleChitChat}
                                     >
                                         Let's Chit Chat
@@ -461,11 +461,11 @@ const Navbar = () => {
                                     </div>
 
                                     <Link
-                                        to="/chit-chat"
+                                        to="/chit-chat#chitchat-form"
                                         className="w-full flex items-center justify-center gap-3 bg-gradient-to-r from-[#05A4A7] to-[#037A7C] py-4 rounded-[10px] text-white font-black uppercase tracking-wide relative z-10"
                                         onClick={(e) => {
                                             e.preventDefault();
-                                            handleLinkClick();
+                                            handleLinkClick("/chit-chat#chitchat-form");
                                             handleChitChat(e);
                                         }}
                                     >

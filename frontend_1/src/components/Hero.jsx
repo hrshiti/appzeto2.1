@@ -97,7 +97,7 @@ const Hero = () => {
                                             />
                                         </div>
 
-                                        <Link to="/contact" className="relative z-10 flex items-center justify-center px-7 py-3 bg-gradient-to-br from-[#05A4A7] to-[#037A7C] text-white font-black rounded-[11px] overflow-hidden group/btn">
+                                        <Link to="/contact#contact-form" className="relative z-10 flex items-center justify-center px-7 py-3 bg-gradient-to-br from-[#05A4A7] to-[#037A7C] text-white font-black rounded-[11px] overflow-hidden group/btn">
                                             <span className="relative z-10 text-sm uppercase tracking-wider">Book Free Consultation</span>
                                             <motion.span
                                                 className="relative z-10 material-icons ml-2 text-xl"

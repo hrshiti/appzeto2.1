@@ -356,7 +356,7 @@ const Career = () => {
                         <p className="text-slate-800 text-sm md:text-xl font-bold mb-8 md:mb-10 opacity-70">
                             Not sure which role fits you best? Our team is happy to help you find your path.
                         </p>
-                        <Link to="/chit-chat" className="bg-slate-950 text-white px-8 md:px-12 py-4 md:py-5 rounded-full font-black uppercase tracking-widest hover:scale-110 transition-transform shadow-2xl flex items-center gap-3 mx-auto max-w-fit text-xs md:text-base">
+                        <Link to="/chit-chat#chitchat-form" className="bg-slate-950 text-white px-8 md:px-12 py-4 md:py-5 rounded-full font-black uppercase tracking-widest hover:scale-110 transition-transform shadow-2xl flex items-center gap-3 mx-auto max-w-fit text-xs md:text-base">
                             Ping Us Now <span className="material-icons">chat</span>
                         </Link>
                     </div>
