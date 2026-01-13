@@ -15,6 +15,7 @@ const Career = () => {
     const [appStatus, setAppStatus] = useState('idle'); // idle, sending, success, error
 
     const [jobsList, setJobsList] = useState([]);
+    const [formFields, setFormFields] = useState(null);
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -66,6 +67,7 @@ const Career = () => {
             img: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1000&auto=format&fit=crop",
             rotation: -4,
             yOffset: 0,
+            date: "12 Oct"
         },
         {
             id: 2,
@@ -73,6 +75,7 @@ const Career = () => {
             img: "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1000&auto=format&fit=crop",
             rotation: 3,
             yOffset: 60,
+            date: "05 Nov"
         },
         {
             id: 3,
@@ -80,6 +83,7 @@ const Career = () => {
             img: "https://images.unsplash.com/photo-1561070791-2526d30994b5?q=80&w=1000&auto=format&fit=crop",
             rotation: -2,
             yOffset: -20,
+            date: "20 Dec"
         },
         {
             id: 4,
@@ -87,6 +91,7 @@ const Career = () => {
             img: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=1000&auto=format&fit=crop",
             rotation: 5,
             yOffset: 80,
+            date: "15 Jan"
         },
         {
             id: 5,
@@ -94,6 +99,7 @@ const Career = () => {
             img: "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1000&auto=format&fit=crop",
             rotation: -3,
             yOffset: 30,
+            date: "02 Feb"
         },
         {
             id: 6,
@@ -101,6 +107,7 @@ const Career = () => {
             img: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1000&auto=format&fit=crop",
             rotation: 4,
             yOffset: -10,
+            date: "14 Feb"
         },
         {
             id: 7,
@@ -108,6 +115,7 @@ const Career = () => {
             img: "https://images.unsplash.com/photo-1528605248644-14dd04022da1?q=80&w=1000&auto=format&fit=crop",
             rotation: -5,
             yOffset: 70,
+            date: "10 Mar"
         },
         {
             id: 8,
@@ -115,6 +123,7 @@ const Career = () => {
             img: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=1000&auto=format&fit=crop",
             rotation: 2,
             yOffset: -30,
+            date: "22 Mar"
         }
     ];
 
@@ -132,9 +141,9 @@ const Career = () => {
                 <Navbar />
 
                 {/* --- HERO SECTION --- */}
-                <div className="relative pt-10 md:pt-16 pb-12 md:pb-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto overflow-visible">
+                <div className="relative pt-24 md:pt-16 pb-8 md:pb-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto overflow-visible">
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 items-center">
-                        <div className="lg:col-span-7 space-y-6 md:space-y-8 z-10">
+                        <div className="lg:col-span-7 space-y-4 md:space-y-8 z-10">
                             <motion.div
                                 initial={{ x: -50, opacity: 0 }}
                                 animate={{ x: 0, opacity: 1 }}
@@ -204,8 +213,8 @@ const Career = () => {
                 </div>
 
                 {/* --- OPEN POSITIONS --- */}
-                <div id="positions" className="lg:h-screen max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 bg-white shadow-sm mt-0 border-b border-slate-100 flex flex-col justify-center overflow-hidden">
-                    <div className="flex flex-col md:flex-row justify-between items-end mb-8 md:mb-12 px-4">
+                <div id="positions" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-16 bg-white shadow-sm mt-0 border-b border-slate-100 flex flex-col overflow-hidden">
+                    <div className="flex flex-col md:flex-row justify-between items-end mb-6 md:mb-10 px-4">
                         <div className="text-left">
                             <p className="text-primary font-bold uppercase tracking-widest text-[10px] mb-2 text-slate-400">Join the squad</p>
                             <h2 className="text-3xl md:text-5xl font-bold text-slate-900 tracking-tighter uppercase">Wanna Join Us?</h2>
@@ -257,29 +266,28 @@ const Career = () => {
                 </div>
 
                 {/* --- INTERNSHIP --- */}
-                <div id="internship" className="bg-primary py-10 mt-0 border-t-[6px] border-slate-900">
+                <div id="internship" className="bg-primary py-6 md:py-10 mt-0 border-t-[6px] border-slate-900">
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
                         <div className="absolute top-0 right-10 rotate-12 opacity-10 pointer-events-none text-[#F1FC88]">
                             <span className="material-icons text-[150px] md:text-[250px]">school</span>
                         </div>
 
-                        <div className="relative z-10 flex flex-col gap-8 md:gap-12">
-                            <div className="flex flex-col md:flex-row justify-between items-end gap-6 md:gap-8">
-                                <div className="text-left">
-                                    <h2 className="text-3xl md:text-5xl font-black text-white mb-2 md:mb-4 leading-[0.8] uppercase tracking-tighter">
+                        <div className="relative z-10 flex flex-col gap-4 md:gap-12">
+                            <div className="flex flex-row justify-between items-end gap-2 md:gap-8">
+                                <div className="text-left flex-1 min-w-0">
+                                    <h2 className="text-xl md:text-5xl font-black text-white mb-2 md:mb-4 leading-[0.9] uppercase tracking-tighter">
                                         START AS <br />
-                                        <span className="text-slate-900 underline decoration-slate-900 underline-offset-8">A ROOKIE.</span>
+                                        <span className="text-slate-900 underline decoration-slate-900 underline-offset-4 md:underline-offset-8">A ROOKIE.</span>
                                     </h2>
-                                    <p className="text-white font-bold text-sm md:text-lg opacity-90 italic uppercase">
-                                        Internships with serious impact and zero coffee runs.
+                                    <p className="text-white font-bold text-[10px] md:text-lg opacity-90 italic uppercase leading-tight">
+                                        Internships with serious impact.
                                     </p>
                                 </div>
-                                <button
-                                    onClick={() => { setSelectedJob("General Internship"); setIsApplying(true); }}
-                                    className="px-6 py-2.5 md:px-8 md:py-3 bg-[#F1FC88] text-slate-900 font-bold rounded-xl md:rounded-2xl uppercase tracking-widest text-[10px] md:text-xs hover:bg-white transition-all border-4 border-slate-900 shadow-[4px_4px_0px_0px_rgba(0,0,0,0.2)] md:shadow-[6px_6px_0px_0px_rgba(0,0,0,0.2)]"
+                                <div
+                                    className="px-3 py-2 md:px-8 md:py-3 bg-[#F1FC88] text-slate-900 font-bold rounded-lg md:rounded-2xl uppercase tracking-widest text-[9px] md:text-xs border-2 md:border-4 border-slate-900 shadow-[3px_3px_0px_0px_rgba(0,0,0,0.2)] md:shadow-[6px_6px_0px_0px_rgba(0,0,0,0.2)] cursor-default shrink-0 whitespace-nowrap mb-1"
                                 >
                                     Grab Your Spot
-                                </button>
+                                </div>
                             </div>
 
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
@@ -310,14 +318,14 @@ const Career = () => {
                 </div>
 
 
-                <div id="culture" className="min-h-screen md:h-screen max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-0 flex flex-col justify-center relative overflow-hidden bg-[#f8f9fa]">
-                    <div className="flex flex-col items-center mb-12 md:mb-16">
+                <div id="culture" className="min-h-screen md:h-screen max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-0 flex flex-col justify-center relative overflow-hidden bg-[#f8f9fa]">
+                    <div className="flex flex-col items-center mb-6 md:mb-16">
                         <h2 className="text-3xl md:text-4xl font-black text-slate-900 text-center uppercase tracking-tighter">
                             LIFE AT <span className="bg-[#F1FC88] text-slate-900 px-4 py-1 rounded-lg inline-block -rotate-2 scale-90">APPZETO</span>
                         </h2>
                     </div>
 
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-y-12 md:gap-y-16 gap-x-6 md:gap-x-10 relative px-2">
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-y-8 md:gap-y-16 gap-x-6 md:gap-x-10 relative px-2">
                         {cultureItems.map((item, idx) => (
                             <motion.div
                                 key={item.id}
@@ -341,14 +349,16 @@ const Career = () => {
                                         <h3 className="text-[8px] md:text-[11px] font-black text-slate-400 uppercase tracking-widest">{item.title}</h3>
                                     </div>
                                 </div>
-                                <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-10 md:w-16 h-4 md:h-5 bg-[#F1FC88]/70 backdrop-blur-sm -rotate-2 group-hover:bg-[#F1FC88] transition-colors z-20" />
+                                <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-14 md:w-20 h-5 md:h-6 bg-[#F1FC88]/90 backdrop-blur-sm -rotate-2 group-hover:bg-[#F1FC88] transition-colors z-20 flex items-center justify-center shadow-sm">
+                                    <span className="text-[8px] md:text-[10px] font-black text-slate-900 tracking-widest uppercase">{item.date}</span>
+                                </div>
                             </motion.div>
                         ))}
                     </div>
                 </div>
 
                 {/* --- CHIT CHAT CALL TO ACTION --- */}
-                <div className="bg-[#F1FC88] py-12 md:py-20 border-y-[6px] border-slate-950">
+                <div className="bg-[#F1FC88] py-8 md:py-20 border-y-[6px] border-slate-950">
                     <div className="max-w-4xl mx-auto px-4 text-center">
                         <h2 className="text-3xl md:text-6xl font-black text-slate-900 mb-6 md:mb-8 uppercase tracking-tighter italic">
                             Still Confused? <br /> Let's Chit Chat!
@@ -508,7 +518,7 @@ const Career = () => {
                     color: transparent;
                 }
             `}</style>
-        </ScrollWrapper>
+        </ScrollWrapper >
     );
 };
 

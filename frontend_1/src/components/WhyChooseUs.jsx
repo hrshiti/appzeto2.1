@@ -151,6 +151,11 @@ const WhyChooseUs = () => {
                             <StatCard value={12} suffix="+" label="Years Of Exp" index={0} />
                             <StatCard value={250} suffix="+" label="Happy Clients" index={1} />
                             <StatCard value={2} suffix="k+" label="Success Projects" index={2} />
+
+                            {/* Mobile Only 4th Card to balance the grid */}
+                            <div className="block md:hidden w-full">
+                                <StatCard value={98} suffix="%" label="Client Retention" index={3} />
+                            </div>
                         </div>
 
                         {/* 3. Checkmarks Grid */}

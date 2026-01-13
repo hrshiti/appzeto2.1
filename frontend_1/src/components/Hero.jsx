@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import Navbar from './Navbar';
@@ -26,6 +26,22 @@ const Hero = () => {
         "Future-Ready Digital Products"
     ];
 
+    const [showFixedButton, setShowFixedButton] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            // Show button after scrolling past 100vh (approx 1 section)
+            if (window.scrollY > window.innerHeight) {
+                setShowFixedButton(true);
+            } else {
+                setShowFixedButton(false);
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
     return (
         <div className="bg-background-light dark:bg-background-dark font-body antialiased transition-colors duration-300 min-h-0 lg:min-h-screen flex flex-col relative overflow-hidden">
             {/* ... (Background elements remain the same) */}
@@ -35,14 +51,14 @@ const Hero = () => {
             <Navbar />
 
             <main className="flex-grow flex flex-col relative">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-0 sm:pb-10 lg:pt-10 lg:pb-10 w-full relative z-10">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-0 sm:pb-10 lg:pt-10 lg:pb-10 w-full relative z-10">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
                         <motion.div
                             initial={{ x: -70, opacity: 0 }}
                             whileInView={{ x: 0, opacity: 1 }}
                             viewport={{ once: false, amount: 0.2 }}
                             transition={{ duration: 1.8, ease: [0.22, 1, 0.36, 1] }}
-                            className="space-y-6 sm:space-y-8"
+                            className="space-y-4 sm:space-y-8"
                         >
                             <h1 className="text-2xl sm:text-3xl lg:text-5xl font-display font-black text-gray-800 dark:text-white leading-[1.2] tracking-tight">
                                 Helping Businesses Turn Ideas into <br className="hidden lg:block" />
@@ -54,7 +70,7 @@ const Hero = () => {
                             </p>
 
                             {/* MOBILE ONLY: ORBIT (Moved above buttons for mobile) */}
-                            <div className="lg:hidden relative flex flex-col items-center justify-center py-2 w-full overflow-visible">
+                            <div className="lg:hidden relative flex flex-col items-center justify-center py-0 pt-2 pb-2 w-full overflow-visible">
                                 <div className="scale-100">
                                     <RevolvingOrbit size="sm" />
                                 </div>
@@ -114,17 +130,17 @@ const Hero = () => {
                                     <motion.div
                                         whileHover={{ y: -6, scale: 1.05 }}
                                         whileTap={{ scale: 0.98 }}
-                                        className="relative p-[2px] rounded-xl overflow-hidden bg-white/10"
+                                        className="relative p-[2px] rounded-xl overflow-hidden bg-white/10 mb-2 sm:mb-0"
                                     >
                                         <div className="absolute inset-0 z-0">
                                             <motion.div
                                                 animate={{ rotate: [360, 0] }}
-                                                transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-                                                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600%] h-[600%] bg-[conic-gradient(from_0deg,transparent_0deg,transparent_340deg,#3B82F6_355deg,#3B82F6_360deg)] opacity-100 blur-[1px]"
+                                                transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                                                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200%] h-[200%] bg-[conic-gradient(from_0deg,transparent_0deg,transparent_340deg,#ffffff_360deg)] opacity-100"
                                             />
                                         </div>
 
-                                        <Link to="/projects" className="relative z-10 flex items-center justify-center px-6 py-2.5 sm:px-7 sm:py-3 bg-white dark:bg-slate-900 border border-transparent dark:border-white/5 text-gray-800 dark:text-white font-bold rounded-[11px] shadow-xl overflow-hidden group/btn w-full sm:w-auto">
+                                        <Link to="/projects" className="relative z-10 flex items-center justify-center px-6 py-2.5 sm:px-7 sm:py-3 bg-black sm:bg-gray-100 dark:bg-slate-800 border border-transparent dark:border-white/5 text-white sm:text-gray-800 dark:text-white font-bold rounded-[11px] shadow-xl overflow-hidden group/btn w-full sm:w-auto mt-0 sm:mt-0">
                                             <span className="relative z-10 text-xs sm:text-sm uppercase tracking-wider">View Case Studies</span>
                                         </Link>
                                     </motion.div>
@@ -193,7 +209,8 @@ const Hero = () => {
             </section>
 
             {/* Mobile Fixed Sticky Button - Full Width */}
-            <div className="lg:hidden fixed bottom-0 left-0 w-full z-50 bg-[#05A4A7] shadow-[0_-4px_10px_rgba(0,0,0,0.1)] border-t border-[#049194]">
+            {/* Mobile Fixed Sticky Button - Full Width */}
+            <div className={`lg:hidden fixed bottom-0 left-0 w-full z-50 bg-[#05A4A7] shadow-[0_-4px_10px_rgba(0,0,0,0.1)] border-t border-[#049194] transition-transform duration-300 ${showFixedButton ? 'translate-y-0' : 'translate-y-full'}`}>
                 <Link to="/contact" className="flex items-center justify-center w-full py-3.5 text-white font-black uppercase tracking-wider text-xs active:bg-[#037A7C] transition-colors">
                     Book Free Consultation
                     <span className="material-icons ml-2 text-lg">rocket_launch</span>

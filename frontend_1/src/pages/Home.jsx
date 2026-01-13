@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Hero from '../components/Hero';
 
 import About from '../components/About';
@@ -11,31 +11,15 @@ import Footer from '../components/Footer';
 import ScrollWrapper from '../components/ScrollWrapper';
 import ScrollReveal from '../components/ScrollReveal';
 import Process from '../components/Process';
-import EntrySplash from '../components/EntrySplash';
+
 import ProjectShowcase from '../components/ProjectShowcase';
 import HappyClientsBar from '../components/HappyClientsBar';
 
-let hasShownSplashInSession = false;
-
 const Home = () => {
-    const [showSplash, setShowSplash] = useState(!hasShownSplashInSession);
-
-    useEffect(() => {
-        if (showSplash) {
-            const timer = setTimeout(() => {
-                setShowSplash(false);
-                hasShownSplashInSession = true;
-            }, 3000);
-
-            return () => clearTimeout(timer);
-        } else {
-            hasShownSplashInSession = true;
-        }
-    }, [showSplash]);
 
     return (
         <ScrollWrapper>
-            <EntrySplash isVisible={showSplash} />
+
 
             <Hero />
 

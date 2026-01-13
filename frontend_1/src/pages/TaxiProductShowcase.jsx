@@ -252,9 +252,9 @@ const TaxiProductShowcase = () => {
                     opacity: 1, x: 0, duration: 1,
                     scrollTrigger: {
                         trigger: userSectionRef.current,
-                        start: "top 70%",
-                        end: "bottom 70%",
-                        toggleActions: "play reverse play reverse", // Animates in on scroll down, out on scroll up
+                        start: "top 85%",
+                        end: "top 40%",
+                        toggleActions: "play reverse play reverse",
                         scrub: 1
                     }
                 }
@@ -265,8 +265,8 @@ const TaxiProductShowcase = () => {
                     opacity: 1, x: 0, duration: 1,
                     scrollTrigger: {
                         trigger: userSectionRef.current,
-                        start: "top 70%",
-                        end: "bottom 70%",
+                        start: "top 85%",
+                        end: "top 40%",
                         toggleActions: "play reverse play reverse",
                         scrub: 1
                     }
@@ -280,8 +280,8 @@ const TaxiProductShowcase = () => {
                     opacity: 1, scale: 1, duration: 1,
                     scrollTrigger: {
                         trigger: driverSectionRef.current,
-                        start: "top 70%",
-                        end: "bottom 70%",
+                        start: "top 85%",
+                        end: "top 40%",
                         toggleActions: "play reverse play reverse",
                         scrub: 1
                     }
@@ -293,8 +293,8 @@ const TaxiProductShowcase = () => {
                     opacity: 1, y: 0, duration: 1,
                     scrollTrigger: {
                         trigger: driverSectionRef.current,
-                        start: "top 70%",
-                        end: "bottom 70%",
+                        start: "top 85%",
+                        end: "top 40%",
                         toggleActions: "play reverse play reverse",
                         scrub: 1
                     }
@@ -308,8 +308,8 @@ const TaxiProductShowcase = () => {
                     opacity: 1, rotateY: -10, duration: 1,
                     scrollTrigger: {
                         trigger: adminSectionRef.current,
-                        start: "top 70%",
-                        end: "bottom 70%",
+                        start: "top 85%",
+                        end: "top 40%",
                         toggleActions: "play reverse play reverse",
                         scrub: 1
                     }
@@ -321,8 +321,8 @@ const TaxiProductShowcase = () => {
                     opacity: 1, x: 0, duration: 1,
                     scrollTrigger: {
                         trigger: adminSectionRef.current,
-                        start: "top 70%",
-                        end: "bottom 70%",
+                        start: "top 85%",
+                        end: "top 40%",
                         toggleActions: "play reverse play reverse",
                         scrub: 1
                     }
@@ -340,7 +340,7 @@ const TaxiProductShowcase = () => {
                 <Navbar />
 
                 {/* --- Hero Section --- */}
-                <section className="relative min-h-0 md:h-screen flex items-center pt-6 md:pt-0 overflow-hidden">
+                <section className="relative min-h-0 md:h-screen flex items-center pt-28 md:pt-0 overflow-hidden">
                     {/* Background Blobs (Like screenshot) */}
                     <div className="absolute top-0 right-0 w-[80%] md:w-[60%] h-[120%] bg-[#fefce8] rounded-bl-full -z-10 translate-x-1/3 -translate-y-20"></div>
                     <motion.div style={{ y: heroBlobY }} className="absolute top-[5%] md:top-[10%] right-[3%] md:right-[5%] w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-[#00F2FE]/10 rounded-full blur-3xl -z-10"></motion.div>
@@ -423,14 +423,15 @@ const TaxiProductShowcase = () => {
                 <InfinityBrandLoop />
 
                 {/* --- 3 Icons Section --- */}
-                <section className="py-6 md:py-20">
+                <section className="py-4 md:py-20">
                     <div className="max-w-7xl mx-auto px-4 md:px-6 text-center">
-                        <p className="text-[10px] md:text-base font-black text-gray-400 uppercase tracking-widest mb-4 md:mb-10">All-in-one Mobility to grow your business</p>
-                        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-12">
+                        <p className="text-[10px] md:text-base font-black text-gray-400 uppercase tracking-widest mb-2 md:mb-10">All-in-one Mobility to grow your business</p>
+                        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-12">
                             {[
                                 { title: "Real-time Tracking", desc: "Know exactly where your ride is at all times.", icon: "location_on", color: "bg-blue-100 text-blue-600" },
                                 { title: "Fastest Pickup", desc: "Our smart algorithm finds the nearest driver instantly.", icon: "electric_bolt", color: "bg-yellow-100 text-yellow-600" },
-                                { title: "Secure Payments", desc: "Cashless, hassle-free and secure transactions.", icon: "account_balance_wallet", color: "bg-green-100 text-green-600" }
+                                { title: "Secure Payments", desc: "Cashless, hassle-free and secure transactions.", icon: "account_balance_wallet", color: "bg-green-100 text-green-600" },
+                                { title: "Schedule Rides", desc: "Book rides in advance for planned trips.", icon: "calendar_month", color: "bg-purple-100 text-purple-600" }
                             ].map((item, i) => (
                                 <motion.div
                                     key={i}
@@ -551,7 +552,7 @@ const TaxiProductShowcase = () => {
                 </section>
 
                 {/* --- SECTION 3: ADMIN PANEL --- */}
-                <section ref={adminSectionRef} className="pt-12 pb-4 md:py-24 overflow-hidden relative bg-gray-50">
+                <section ref={adminSectionRef} className="py-6 md:py-24 overflow-hidden relative bg-gray-50">
                     <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-24 items-center">
                         {/* Visual */}
                         <div className="visual relative flex justify-center perspective-1000 scale-90 md:scale-100">
@@ -595,9 +596,9 @@ const TaxiProductShowcase = () => {
                                 ))}
                             </div>
                             <div className="pt-4">
-                                <button className="text-[#082F30] font-black text-base md:text-lg border-b-4 border-[#00F2FE] pb-1 hover:text-[#00F2FE] transition-colors">
+                                <Link to="/contact" className="text-[#082F30] font-black text-base md:text-lg border-b-4 border-[#00F2FE] pb-1 hover:text-[#00F2FE] transition-colors">
                                     Request Admin Demo
-                                </button>
+                                </Link>
                             </div>
                         </div>
                     </div>

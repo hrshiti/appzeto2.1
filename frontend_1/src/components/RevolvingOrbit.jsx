@@ -37,7 +37,7 @@ const projects = [
     },
     {
         id: "quick-commerce",
-        title: "Appzeto Quick Commerce",
+        title: "Appzeto Quick Ecommerce",
         description: "Hyper-local delivery.",
         image: quickCommerceLogo,
         color: "#F59E0B",

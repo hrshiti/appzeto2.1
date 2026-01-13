@@ -30,7 +30,7 @@ const NAV_ITEMS = [
         items: [
             { label: "Food Delivery", link: "/appzeto-food" },
             { label: "Taxi Booking", link: "/appzeto-taxi" },
-            { label: "E-commerce", link: "/appzeto-ecommerce" },
+            { label: "Ecommerce", link: "/appzeto-ecommerce" },
             { label: "Hospital Management", link: "/appzeto-hospital" }
         ]
     },
@@ -215,13 +215,13 @@ const Navbar = () => {
 
     return (
         <>
-            <nav className="sticky top-0 z-50 w-full bg-white/95 dark:bg-[#023638]/95 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 transition-all duration-300 pt-[env(safe-area-inset-top)]">
+            <nav className="fixed top-0 z-50 w-full bg-transparent md:bg-white/95 md:dark:bg-[#023638]/95 backdrop-blur-md border-b border-transparent md:border-gray-200 md:dark:border-gray-800 transition-all duration-300 pt-[env(safe-area-inset-top)]">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between items-center h-20">
                         {/* Logo */}
                         <div className="flex-shrink-0 flex items-center relative group/logo isolate z-[70]">
                             <Link to="/" className="relative z-10 block" onClick={() => handleLinkClick("/")}>
-                                <img alt="Appzeto Logo" className="h-10 w-auto" src={logo} />
+                                <img alt="Appzeto Logo" className="h-7 md:h-10 w-auto" src={logo} />
                             </Link>
                         </div>
 
@@ -252,13 +252,7 @@ const Navbar = () => {
                                                         <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
                                                             {navItem.description}
                                                         </p>
-                                                        <Link
-                                                            to={navItem.path || "#"}
-                                                            className="inline-flex items-center mt-4 text-sm font-semibold text-primary hover:text-teal-600"
-                                                            onClick={() => handleLinkClick(navItem.path)}
-                                                        >
-                                                            View Details <span className="material-symbols-outlined text-sm ml-1">arrow_forward</span>
-                                                        </Link>
+
                                                     </div>
                                                     <div className="w-3/4 pl-8">
                                                         <div className="grid grid-cols-2 gap-y-4 gap-x-8">
@@ -319,9 +313,15 @@ const Navbar = () => {
                         </div>
 
                         {/* Mobile Menu Button - PREMIUM Animated Icon */}
-                        <div className="md:hidden flex items-center z-[70]">
+                        <div className="md:hidden flex items-center z-[70] gap-3">
+                            <Link
+                                to="/contact"
+                                className="px-3 py-1.5 bg-primary/10 text-primary text-xs font-bold rounded-full border border-primary/20"
+                            >
+                                Inquiry
+                            </Link>
                             <button
-                                className="text-gray-900 dark:text-white hover:text-primary focus:outline-none p-2 relative w-12 h-12 flex items-center justify-center rounded-full bg-gray-100 dark:bg-white/10"
+                                className="text-gray-900 dark:text-white hover:text-primary focus:outline-none p-1.5 relative w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 dark:bg-white/10"
                                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                             >
                                 <div className="flex flex-col justify-center items-center w-6 h-6 gap-[5px]">
@@ -344,6 +344,7 @@ const Navbar = () => {
                 </div>
             </nav>
 
+
             {/* Mobile Menu Overlay - Portal to Body for Reliability */}
             {createPortal(
                 <AnimatePresence>
@@ -354,7 +355,7 @@ const Navbar = () => {
                             animate="animate"
                             exit="exit"
                             className="fixed inset-0 z-[9999] bg-[#f6f8f8] dark:bg-[#012829] flex flex-col md:hidden overflow-hidden"
-                            style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh' }}
+                            style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100dvh' }}
                         >
                             {/* Background Accent */}
                             <div className="absolute top-[-20%] right-[-20%] w-[500px] h-[500px] bg-primary/10 rounded-full blur-[100px] pointer-events-none" />
@@ -374,29 +375,29 @@ const Navbar = () => {
                             </div>
 
                             {/* Mobile Navigation List */}
-                            <motion.div className="flex-1 overflow-y-auto px-6 py-4 space-y-4 relative z-10 custom-scrollbar">
+                            <motion.div className="flex-1 overflow-y-auto px-6 py-2 space-y-2 relative z-10 custom-scrollbar">
                                 {dynamicItems.map((item, index) => (
-                                    <motion.div key={index} variants={mobileLinkVars} className="border-b border-gray-200/50 dark:border-gray-700/50 last:border-0 pb-4">
+                                    <motion.div key={index} variants={mobileLinkVars} className="border-b border-gray-200/50 dark:border-gray-700/50 last:border-0 pb-2">
                                         <div
                                             className="flex items-center justify-between py-2 cursor-pointer group"
                                             onClick={() => item.items.length > 0 ? toggleMobileSubmenu(index) : handleLinkClick(item.path)}
                                         >
                                             <div className="flex flex-col">
-                                                <span className={`text-2xl font-serif font-medium transition-colors ${activeMobileSubmenu === index || location.pathname === item.path ? 'text-primary italic' : 'text-gray-800 dark:text-gray-100 group-hover:text-primary'}`}>
+                                                <span className={`text-lg font-sans font-bold transition-colors ${activeMobileSubmenu === index || location.pathname === item.path ? 'text-primary' : 'text-gray-800 dark:text-gray-100 group-hover:text-primary'}`}>
                                                     {item.title}
                                                 </span>
                                                 {activeMobileSubmenu === index && (
                                                     <motion.p
                                                         initial={{ opacity: 0, y: -5 }}
                                                         animate={{ opacity: 1, y: 0 }}
-                                                        className="text-xs text-gray-500 mt-1 dark:text-gray-400"
+                                                        className="text-xs text-gray-500 mt-0.5 dark:text-gray-400"
                                                     >
                                                         {item.description}
                                                     </motion.p>
                                                 )}
                                             </div>
                                             {item.items.length > 0 && (
-                                                <div className={`w-8 h-8 rounded-full border border-gray-200 dark:border-gray-700 flex items-center justify-center transition-all duration-300 ${activeMobileSubmenu === index ? 'bg-primary border-primary text-white rotate-180' : 'text-gray-400 group-hover:border-primary group-hover:text-primary'}`}>
+                                                <div className={`w-7 h-7 rounded-full border border-gray-200 dark:border-gray-700 flex items-center justify-center transition-all duration-300 ${activeMobileSubmenu === index ? 'bg-primary border-primary text-white rotate-180' : 'text-gray-400 group-hover:border-primary group-hover:text-primary'}`}>
                                                     <span className="material-symbols-outlined text-sm">expand_more</span>
                                                 </div>
                                             )}
@@ -408,7 +409,7 @@ const Navbar = () => {
                                                     initial={{ height: 0, opacity: 0 }}
                                                     animate={{ height: "auto", opacity: 1 }}
                                                     exit={{ height: 0, opacity: 0 }}
-                                                    className="overflow-hidden pl-4 mt-4 space-y-2 border-l-2 border-primary/20"
+                                                    className="overflow-hidden pl-4 mt-2 space-y-1 border-l-2 border-primary/20"
                                                 >
                                                     {item.items.map((subItem, subIndex) => (
                                                         <motion.div
@@ -419,20 +420,20 @@ const Navbar = () => {
                                                         >
                                                             <Link
                                                                 to={subItem.link}
-                                                                className="block py-2 text-base font-medium text-gray-600 dark:text-gray-300 hover:text-primary transition-all flex items-center gap-2"
+                                                                className="block py-1.5 text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-primary transition-all flex items-center gap-2"
                                                                 onClick={() => handleLinkClick(subItem.link)}
                                                             >
-                                                                <span className="w-1.5 h-1.5 bg-primary rounded-full opacity-50" />
+                                                                <span className="w-1 h-1 bg-primary rounded-full opacity-50" />
                                                                 {subItem.label}
                                                             </Link>
                                                         </motion.div>
                                                     ))}
                                                     <Link
                                                         to={item.path}
-                                                        className="block py-3 mt-2 text-sm font-bold text-primary flex items-center gap-2 uppercase tracking-wide"
+                                                        className="block py-2 mt-1 text-xs font-bold text-primary flex items-center gap-2 uppercase tracking-wide"
                                                         onClick={() => handleLinkClick(item.path)}
                                                     >
-                                                        Explore All {item.title} <span className="material-symbols-outlined text-xs">arrow_forward</span>
+                                                        Explore All {item.title} <span className="material-symbols-outlined text-[10px]">arrow_forward</span>
                                                     </Link>
                                                 </motion.div>
                                             )}
@@ -444,7 +445,7 @@ const Navbar = () => {
                             {/* Mobile Footer Area */}
                             <motion.div
                                 variants={mobileLinkVars}
-                                className="p-6 border-t border-gray-100 dark:border-gray-800 bg-white/50 dark:bg-black/20 backdrop-blur-lg mt-auto relative z-20"
+                                className="p-4 border-t border-gray-100 dark:border-gray-800 bg-white/50 dark:bg-black/20 backdrop-blur-lg mt-auto relative z-20"
                             >
                                 <motion.div
                                     whileHover={{ scale: 1.02 }}
@@ -462,7 +463,7 @@ const Navbar = () => {
 
                                     <Link
                                         to="/chit-chat#chitchat-form"
-                                        className="w-full flex items-center justify-center gap-3 bg-gradient-to-r from-[#05A4A7] to-[#037A7C] py-4 rounded-[10px] text-white font-black uppercase tracking-wide relative z-10"
+                                        className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-[#05A4A7] to-[#037A7C] py-3 rounded-[10px] text-white font-black uppercase tracking-wide relative z-10 text-sm"
                                         onClick={(e) => {
                                             e.preventDefault();
                                             handleLinkClick("/chit-chat#chitchat-form");
@@ -470,7 +471,7 @@ const Navbar = () => {
                                         }}
                                     >
                                         Let's Chit Chat
-                                        <span className="material-symbols-outlined">chat</span>
+                                        <span className="material-symbols-outlined text-lg">chat</span>
                                     </Link>
                                 </motion.div>
                             </motion.div>

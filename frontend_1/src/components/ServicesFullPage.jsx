@@ -89,9 +89,52 @@ const staticServices = [
     }
 ];
 
+// Helper Component for Flip Image
+const FlipImage = ({ src, alt, className, imgClassName, borderRadius = "rounded-lg" }) => {
+    const [isFlipped, setIsFlipped] = useState(false);
+
+    return (
+        <div
+            className={`relative cursor-pointer group/flip ${className}`}
+            onClick={() => setIsFlipped(!isFlipped)}
+            style={{ perspective: '1000px' }}
+        >
+            <motion.div
+                initial={false}
+                animate={{ rotateY: isFlipped ? 180 : 0 }}
+                transition={{ duration: 0.6, type: 'spring', stiffness: 260, damping: 20 }}
+                className="relative w-full h-full"
+                style={{ transformStyle: 'preserve-3d' }}
+            >
+                {/* Front Face */}
+                <div className={`absolute inset-0 w-full h-full backface-hidden overflow-hidden ${borderRadius}`} style={{ backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden' }}>
+                    <img src={src} alt={alt} className={imgClassName} />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent pointer-events-none"></div>
+                </div>
+
+                {/* Back Face */}
+                <div
+                    className={`absolute inset-0 w-full h-full backface-hidden bg-white flex items-center justify-center overflow-hidden border border-slate-100 ${borderRadius}`}
+                    style={{ backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
+                >
+                    {/* Fill Animation */}
+                    <motion.div
+                        initial={{ width: '0%' }}
+                        animate={{ width: isFlipped ? '100%' : '0%' }}
+                        transition={{ duration: 0.5, delay: 0.2, ease: "easeInOut" }}
+                        className="absolute inset-y-0 left-0 bg-[#05A4A7] z-0"
+                    />
+                    <img src={logo} alt="Appzeto" className="w-[60%] h-auto object-contain relative z-10 drop-shadow-md bg-white/80 p-4 rounded-xl backdrop-blur-sm" />
+                </div>
+            </motion.div>
+        </div>
+    );
+};
+
 const ServicesFullPage = () => {
     const containerRef = useRef(null);
     const [activeSection, setActiveSection] = useState(staticServices[0].slug);
+    const [isExpanded, setIsExpanded] = useState(false);
     const services = staticServices; // Use static data directly
 
     // Smooth Scroll Setup
@@ -160,11 +203,11 @@ const ServicesFullPage = () => {
         <div ref={containerRef} className="w-full bg-[#FAFAFA] text-slate-900 font-sans selection:bg-[#05A4A7] selection:text-white">
 
             {/* HERO SECTION */}
-            <section className="relative w-full h-auto min-h-[80vh] md:h-[90vh] flex items-center justify-center px-4 sm:px-6 md:px-12 lg:px-24 overflow-hidden bg-gradient-to-br from-slate-50 to-slate-100 py-12 md:py-0">
+            <section className="relative w-full h-auto min-h-[50vh] md:h-[90vh] flex items-center justify-center px-4 sm:px-6 md:px-12 lg:px-24 overflow-hidden bg-gradient-to-br from-slate-50 to-slate-100 py-0 pt-24 md:pt-0">
                 {/* Abstract Decor */}
                 <div className="absolute top-0 right-0 w-[80vw] sm:w-[50vw] h-[80vw] sm:h-[50vw] bg-[#05A4A7]/5 rounded-full blur-[80px] sm:blur-[120px] -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
 
-                <div className="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-20 items-center z-10">
+                <div className="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-12 lg:gap-20 items-center z-10">
                     <motion.div
                         initial={{ opacity: 0, y: 50 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -182,9 +225,15 @@ const ServicesFullPage = () => {
                             Engineering <br />
                             <span className="text-[#05A4A7]">Digital Excellence</span>
                         </h1>
-                        <p className="text-sm sm:text-lg text-slate-600 leading-relaxed max-w-lg mb-6 sm:mb-8 mx-auto lg:mx-0">
+                        <p className={`text-sm sm:text-lg text-slate-600 leading-relaxed max-w-lg mb-2 sm:mb-6 mx-auto lg:mx-0 ${isExpanded ? '' : 'line-clamp-2'}`}>
                             We transform businesses through scalable web architectures, intelligent AI solutions, and robust DevOps pipelines. Future-proof your technology stack today with Appzeto's expertise.
                         </p>
+                        <button
+                            onClick={() => setIsExpanded(!isExpanded)}
+                            className="text-[#05A4A7] text-xs font-bold mb-4 sm:mb-8 hover:underline focus:outline-none block mx-auto lg:mx-0"
+                        >
+                            {isExpanded ? 'Read Less' : 'Read More'}
+                        </button>
                         <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
                             <motion.button
                                 whileHover={{ scale: 1.05 }}
@@ -265,7 +314,7 @@ const ServicesFullPage = () => {
 
 
             {/* MAIN CONTENT SPLIT */}
-            <div className="max-w-[1440px] mx-auto w-full px-4 sm:px-6 md:px-12 lg:px-24 py-8 md:py-20 lg:py-32 flex flex-col lg:flex-row gap-8 lg:gap-24 relative">
+            <div className="max-w-[1440px] mx-auto w-full px-4 sm:px-6 md:px-12 lg:px-24 py-4 md:py-20 lg:py-32 flex flex-col lg:flex-row gap-8 lg:gap-24 relative">
 
                 {/* LEFT SIDEBAR (Sticky) */}
                 <div className="hidden lg:block w-64 shrink-0 relative">
@@ -296,7 +345,7 @@ const ServicesFullPage = () => {
                 </div>
 
                 {/* RIGHT CONTENT */}
-                <div className="flex-1 w-full space-y-16 md:space-y-32">
+                <div className="flex-1 w-full space-y-8 md:space-y-32">
 
                     {services.map((service) => {
                         const layout = service.layoutType || 'web';
@@ -331,26 +380,25 @@ const ServicesFullPage = () => {
                                                     <div className="text-[10px] text-gray-500 ml-4">{service.visualFilename || 'ServicePreview.png'}</div>
                                                 </div>
                                                 {displayImage ? (
-                                                    <div className="relative w-full h-full overflow-hidden rounded-lg">
-                                                        <img
-                                                            src={displayImage}
-                                                            alt={service.title}
-                                                            className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500"
-                                                        />
-                                                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                                                    </div>
+                                                    <FlipImage
+                                                        src={displayImage}
+                                                        alt={service.title}
+                                                        className="w-full h-full"
+                                                        imgClassName="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500"
+                                                        borderRadius="rounded-lg"
+                                                    />
                                                 ) : (
                                                     renderCodeSnippet(service)
                                                 )}
                                             </div>
-                                            <div className="space-y-3 sm:space-y-4">
+                                            <div className="grid grid-cols-2 gap-3 sm:flex sm:flex-col sm:gap-4">
                                                 {Array.isArray(service.features) && service.features.map((feature, idx) => (
-                                                    <motion.div key={idx} className="p-4 sm:p-6 bg-white border border-slate-100 rounded-xl shadow-sm flex items-start gap-4">
-                                                        <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-blue-50 flex items-center justify-center shrink-0`}>
-                                                            <span className={`material-symbols-outlined text-base sm:text-xl text-blue-500`}>check</span>
+                                                    <motion.div key={idx} className="p-3 sm:p-6 bg-white border border-slate-100 rounded-xl shadow-sm flex items-center sm:items-start gap-3 sm:gap-4">
+                                                        <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-blue-50 flex items-center justify-center shrink-0`}>
+                                                            <span className={`material-symbols-outlined text-sm sm:text-xl text-blue-500`}>check</span>
                                                         </div>
                                                         <div>
-                                                            <h4 className="font-bold text-slate-800 text-xs sm:text-sm mb-1">{feature}</h4>
+                                                            <h4 className="font-bold text-slate-800 text-[10px] sm:text-sm mb-0 sm:mb-1 leading-tight">{feature}</h4>
                                                         </div>
                                                     </motion.div>
                                                 ))}
@@ -360,17 +408,17 @@ const ServicesFullPage = () => {
 
                                     {/* APP LAYOUT */}
                                     {layout === 'app' && (
-                                        <div className="w-full bg-[#0D1F23] rounded-[1.5rem] sm:rounded-[2rem] p-6 sm:p-8 md:p-12 text-white relative overflow-hidden">
-                                            <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 relative z-10">
+                                        <div className="w-full bg-[#0D1F23] rounded-[1.5rem] sm:rounded-[2rem] p-4 sm:p-8 md:p-12 text-white relative overflow-hidden">
+                                            <div className="flex flex-col lg:flex-row gap-5 lg:gap-12 relative z-10">
                                                 <div className="flex-1 space-y-6 sm:space-y-8 pt-0 sm:pt-6">
                                                     <div className="prose prose-invert max-w-none text-slate-400 text-sm" dangerouslySetInnerHTML={{ __html: service.fullDescription }}></div>
-                                                    <ul className="space-y-3 sm:space-y-4">
+                                                    <ul className="grid grid-cols-2 gap-x-2 gap-y-3 sm:flex sm:flex-col sm:gap-4">
                                                         {Array.isArray(service.features) && service.features.map((item, i) => (
-                                                            <li key={i} className="flex items-center gap-3">
-                                                                <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-[#05A4A7] flex items-center justify-center text-black">
-                                                                    <span className="material-symbols-outlined text-xs sm:text-sm font-bold">check</span>
+                                                            <li key={i} className="flex items-center gap-2 sm:gap-3">
+                                                                <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-[#05A4A7] flex items-center justify-center text-black shrink-0">
+                                                                    <span className="material-symbols-outlined text-[10px] sm:text-sm font-bold">check</span>
                                                                 </div>
-                                                                <span className="font-semibold text-xs sm:text-sm text-slate-200">{item}</span>
+                                                                <span className="font-semibold text-[10px] sm:text-sm text-slate-200 leading-tight">{item}</span>
                                                             </li>
                                                         ))}
                                                     </ul>
@@ -378,11 +426,12 @@ const ServicesFullPage = () => {
                                                 <div className="flex-1 relative flex justify-center items-center">
                                                     <div className="relative group">
                                                         <div className="absolute -inset-1 bg-gradient-to-r from-[#05A4A7] to-emerald-500 rounded-[2.5rem] blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
-                                                        <img
+                                                        <FlipImage
                                                             src={displayImage || "https://assets.codepen.io/t-1/mobile-frame-png.png"}
-                                                            width="220"
                                                             alt={service.title}
-                                                            className="relative z-10 rounded-[2rem] object-cover h-[440px] w-[220px]"
+                                                            className="relative z-10 h-[440px] w-[220px]"
+                                                            imgClassName="w-full h-full object-cover"
+                                                            borderRadius="rounded-[2rem]"
                                                         />
                                                     </div>
                                                 </div>
@@ -392,13 +441,13 @@ const ServicesFullPage = () => {
 
                                     {/* GENERIC / OTHER LAYOUTS */}
                                     {layout === 'generic' && (
-                                        <div className="bg-white rounded-2xl p-6 sm:p-10 shadow-sm border border-slate-100">
+                                        <div className="bg-white rounded-2xl p-4 sm:p-10 shadow-sm border border-slate-100">
                                             <div className="prose prose-slate max-w-none mb-8" dangerouslySetInnerHTML={{ __html: service.fullDescription || service.shortDescription }}></div>
-                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                            <div className="grid grid-cols-2 md:grid-cols-2 gap-3 sm:gap-4">
                                                 {Array.isArray(service.features) && service.features.map((feature, idx) => (
-                                                    <section key={idx} className="flex items-center gap-3 p-3 bg-slate-50 rounded-lg">
-                                                        <span className="material-symbols-outlined text-[#05A4A7]">check_circle</span>
-                                                        <span className="text-sm font-medium text-slate-700">{feature}</span>
+                                                    <section key={idx} className="flex items-center gap-2 sm:gap-3 p-2 sm:p-3 bg-slate-50 rounded-lg">
+                                                        <span className="material-symbols-outlined text-[#05A4A7] text-base sm:text-2xl">check_circle</span>
+                                                        <span className="text-[10px] sm:text-sm font-medium text-slate-700 leading-tight">{feature}</span>
                                                     </section>
                                                 ))}
                                             </div>
@@ -414,7 +463,7 @@ const ServicesFullPage = () => {
             </div>
 
             {/* CTA FOOTER */}
-            <section className="bg-[#021818] text-white py-12 sm:py-24 px-4 sm:px-6 relative overflow-hidden">
+            <section className="bg-[#021818] text-white py-8 sm:py-24 px-4 sm:px-6 relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-[500px] sm:w-[800px] h-[500px] sm:h-[800px] bg-[#05A4A7]/10 rounded-full blur-[100px] sm:blur-[150px] pointer-events-none"></div>
 
                 <div className="max-w-4xl mx-auto text-center relative z-10">

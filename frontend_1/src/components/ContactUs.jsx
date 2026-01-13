@@ -67,14 +67,14 @@ const ContactUs = ({ isHomePage = false }) => {
 
     // Dynamic Settings
     const [settings, setSettings] = useState({
-        contactPhone: '',
-        contactEmail: '',
-        contactAddress: '',
+        contactPhone: '+917691810506',
+        contactEmail: 'appzeto@gmail.com',
+        contactAddress: 'Office No 501, Princess center, 5th Floor, New Palasia, Indore, Madhya Pradesh 452001',
         social: {
-            linkedin: '',
-            instagram: '',
-            twitter: '',
-            github: ''
+            linkedin: 'https://linkedin.com/company/appzeto',
+            instagram: 'https://instagram.com/appzeto',
+            twitter: 'https://twitter.com/appzeto',
+            github: 'https://github.com/appzeto'
         },
         offices: []
     });
@@ -106,8 +106,13 @@ const ContactUs = ({ isHomePage = false }) => {
                     setSettings(prev => ({
                         ...prev,
                         ...loadedSettings,
-                        // Ensure social is merged correctly if partial
-                        social: { ...prev.social, ...(loadedSettings.social || {}) },
+                        // Ensure social is merged correctly if partial, prioritizing defaults if API returns empty
+                        social: {
+                            linkedin: loadedSettings.social?.linkedin || prev.social.linkedin,
+                            instagram: loadedSettings.social?.instagram || prev.social.instagram,
+                            twitter: loadedSettings.social?.twitter || prev.social.twitter,
+                            github: loadedSettings.social?.github || prev.social.github
+                        },
                         // Ensure offices map correctly if structure differs, but generally it's same
                         offices: loadedSettings.offices && loadedSettings.offices.length > 0 ? loadedSettings.offices : prev.offices
                     }));
@@ -192,7 +197,7 @@ const ContactUs = ({ isHomePage = false }) => {
         <section className={`bg-white font-sans overflow-x-hidden pt-0`}>
             {!isHomePage && (
                 <>
-                    <div className="relative h-[35vh] md:h-[85vh] flex items-center justify-center overflow-hidden">
+                    <div className="relative min-h-[450px] md:min-h-0 h-auto md:h-[85vh] flex items-center justify-center overflow-hidden pt-24 md:pt-0">
                         <div className="absolute inset-0">
                             <img
                                 src="https://images.unsplash.com/photo-1497215728101-856f4ea42174?q=80&w=2340&auto=format&fit=crop"
@@ -206,7 +211,7 @@ const ContactUs = ({ isHomePage = false }) => {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: false }}
                             transition={{ duration: 1 }}
-                            className="relative text-center z-10 px-4 -mt-10 md:-mt-32 lg:-mt-40"
+                            className="relative text-center z-10 px-4 mt-4 md:-mt-32 lg:-mt-40"
                         >
                             <h1 className="text-3xl md:text-4xl lg:text-5xl font-black text-white uppercase tracking-tighter drop-shadow-2xl">
                                 Contact Appzeto for <br />
