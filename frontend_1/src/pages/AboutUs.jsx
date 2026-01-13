@@ -50,7 +50,7 @@ const AboutUs = () => {
                 {/* Navigation - Duplicated/Adapted from Hero.jsx for consistency but can be refactored */}
                 <Navbar />
 
-                <header className="relative w-full h-[40vh] md:h-[60vh] flex items-center justify-center bg-gray-900 overflow-hidden">
+                <header className="relative w-full min-h-[450px] md:min-h-0 h-auto md:h-[60vh] flex items-center justify-center bg-gray-900 overflow-hidden pt-24 md:pt-0">
                     <motion.div
                         initial={{ scale: 1.1, opacity: 0 }}
                         animate={{ scale: 1, opacity: 0.6 }}

@@ -192,7 +192,7 @@ const ContactUs = ({ isHomePage = false }) => {
         <section className={`bg-white font-sans overflow-x-hidden pt-0`}>
             {!isHomePage && (
                 <>
-                    <div className="relative h-[35vh] md:h-[85vh] flex items-center justify-center overflow-hidden">
+                    <div className="relative min-h-[450px] md:min-h-0 h-auto md:h-[85vh] flex items-center justify-center overflow-hidden pt-24 md:pt-0">
                         <div className="absolute inset-0">
                             <img
                                 src="https://images.unsplash.com/photo-1497215728101-856f4ea42174?q=80&w=2340&auto=format&fit=crop"
@@ -206,7 +206,7 @@ const ContactUs = ({ isHomePage = false }) => {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: false }}
                             transition={{ duration: 1 }}
-                            className="relative text-center z-10 px-4 -mt-10 md:-mt-32 lg:-mt-40"
+                            className="relative text-center z-10 px-4 mt-4 md:-mt-32 lg:-mt-40"
                         >
                             <h1 className="text-3xl md:text-4xl lg:text-5xl font-black text-white uppercase tracking-tighter drop-shadow-2xl">
                                 Contact Appzeto for <br />

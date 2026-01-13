@@ -156,11 +156,11 @@ const EcommerceProductShowcase = () => {
                 if (!ref.current) return;
                 gsap.fromTo(ref.current.querySelector('.visual'),
                     { opacity: 0, x: xVal || 0, y: yVal || 0, rotateY: rotateVal || 0 },
-                    { opacity: 1, x: 0, y: 0, rotateY: 0, duration: 1, scrollTrigger: { trigger: ref.current, start: "top 70%", end: "bottom 70%", toggleActions: "play reverse play reverse", scrub: 1 } }
+                    { opacity: 1, x: 0, y: 0, rotateY: 0, duration: 1, scrollTrigger: { trigger: ref.current, start: "top 85%", end: "top 40%", toggleActions: "play reverse play reverse", scrub: 1 } }
                 );
                 gsap.fromTo(ref.current.querySelector('.content'),
                     { opacity: 0, x: xVal ? -xVal : 0, y: yVal ? -yVal : 0 },
-                    { opacity: 1, x: 0, y: 0, duration: 1, scrollTrigger: { trigger: ref.current, start: "top 70%", end: "bottom 70%", toggleActions: "play reverse play reverse", scrub: 1 } }
+                    { opacity: 1, x: 0, y: 0, duration: 1, scrollTrigger: { trigger: ref.current, start: "top 85%", end: "top 40%", toggleActions: "play reverse play reverse", scrub: 1 } }
                 );
             };
             animateSection(userSectionRef, -100, 0, 0);
@@ -176,7 +176,7 @@ const EcommerceProductShowcase = () => {
                 <Navbar />
 
                 {/* --- Hero Section --- */}
-                <section className="relative min-h-0 md:h-screen flex items-center pt-12 md:pt-0 overflow-hidden">
+                <section className="relative min-h-0 md:h-screen flex items-center pt-24 md:pt-0 overflow-hidden">
                     <div className="absolute top-0 right-0 w-[60%] h-[120%] bg-[#EEF2FF] rounded-bl-full -z-10 translate-x-1/3 -translate-y-20"></div>
                     <motion.div style={{ y: heroBlobY }} className="absolute md:top-[10%] md:right-[5%] w-[500px] h-[500px] bg-[#4F46E5]/10 rounded-full blur-3xl -z-10"></motion.div>
 
@@ -188,9 +188,9 @@ const EcommerceProductShowcase = () => {
                             </h1>
                             <p className="text-[#4338CA] text-sm md:text-lg leading-relaxed font-medium">Create immersive shopping experiences that convert visitors into loyal customers.</p>
                             <div className="relative max-w-sm pt-4 mx-auto lg:mx-0">
-                                <Link to="/contact" className="w-full pl-6 pr-4 py-4 rounded-full bg-[#1E1B4B] text-white shadow-xl shadow-indigo-200 flex items-center justify-between font-bold hover:scale-105 transition-all group">
-                                    <span className="text-sm md:text-base">Launch Your Store</span>
-                                    <div className="bg-[#4F46E5] text-white p-1.5 md:p-2 rounded-full"><span className="material-symbols-outlined text-base md:text-lg group-hover:rotate-45 transition-transform">arrow_forward</span></div>
+                                <Link to="/contact" className="w-full pl-6 pr-2 py-2 rounded-full bg-[#1E1B4B] text-white shadow-xl shadow-indigo-200 flex items-center justify-between font-bold hover:scale-105 transition-all group">
+                                    <span className="text-sm md:text-base ml-2">Launch Your Store</span>
+                                    <div className="bg-[#4F46E5] text-white w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center shrink-0"><span className="material-symbols-outlined text-xl md:text-2xl group-hover:rotate-45 transition-transform">arrow_forward</span></div>
                                 </Link>
                             </div>
                         </div>
@@ -208,14 +208,15 @@ const EcommerceProductShowcase = () => {
                 </section>
 
                 {/* --- 3 Icons Section --- */}
-                <section className="py-8 md:py-20">
+                <section className="py-4 md:py-20">
                     <div className="max-w-7xl mx-auto px-6 text-center">
-                        <p className="text-xs md:text-base font-black text-[#6366F1] uppercase tracking-widest mb-6 md:mb-10">Complete Ecommerce Solution</p>
-                        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-8">
+                        <p className="text-xs md:text-base font-black text-[#6366F1] uppercase tracking-widest mb-4 md:mb-10">Complete Ecommerce Solution</p>
+                        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
                             {[
                                 { title: "Global Reach", desc: "Multi-currency and multi-language support built-in.", icon: "public", color: "bg-indigo-50 text-[#4F46E5]" },
                                 { title: "AI Powered", desc: "Smart recommendations to boost average order value.", icon: "psychology", color: "bg-indigo-50 text-[#4F46E5]" },
-                                { title: "Secure Checkout", desc: "Enterprise-grade security for peace of mind.", icon: "lock", color: "bg-indigo-50 text-[#4F46E5]" }
+                                { title: "Secure Checkout", desc: "Enterprise-grade security for peace of mind.", icon: "lock", color: "bg-indigo-50 text-[#4F46E5]" },
+                                { title: "SEO Optimized", desc: "Rank higher on search engines automatically.", icon: "manage_search", color: "bg-indigo-50 text-[#4F46E5]" }
                             ].map((item, i) => (
                                 <motion.div key={i} initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.2, duration: 0.6 }} viewport={{ once: true }} className="flex flex-col items-center group cursor-pointer">
                                     <div className={`w-12 h-12 md:w-20 md:h-20 rounded-xl md:rounded-[2rem] ${item.color} flex items-center justify-center mb-3 md:mb-5 shadow-md group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300`}>
@@ -230,7 +231,7 @@ const EcommerceProductShowcase = () => {
                 </section>
 
                 {/* --- SECTION 1: USER APP --- */}
-                <section ref={userSectionRef} className="py-8 md:py-16 overflow-hidden relative">
+                <section ref={userSectionRef} className="py-6 md:py-16 overflow-hidden relative">
                     <div className="absolute top-0 right-0 w-full lg:w-1/2 h-full bg-[#EEF2FF] lg:-skew-x-12 lg:translate-x-[20%] -z-10"></div>
                     <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-24 items-center">
                         <div className="visual relative flex justify-center scale-[0.85] md:scale-100">
@@ -257,7 +258,7 @@ const EcommerceProductShowcase = () => {
                 </section>
 
                 {/* --- SECTION 2: SELLER APP --- */}
-                <section ref={driverSectionRef} className="py-8 md:py-16 overflow-hidden bg-[#1E1B4B] text-white relative">
+                <section ref={driverSectionRef} className="py-6 md:py-16 overflow-hidden bg-[#1E1B4B] text-white relative">
                     <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-24 items-center">
                         <div className="content space-y-3 order-2 lg:order-1 text-center lg:text-left">
                             <div>
@@ -282,7 +283,7 @@ const EcommerceProductShowcase = () => {
                 </section>
 
                 {/* --- SECTION 3: ADMIN PANEL --- */}
-                <section ref={adminSectionRef} className="py-8 md:py-16 overflow-hidden relative bg-[#F5F3FF]">
+                <section ref={adminSectionRef} className="py-6 md:py-16 overflow-hidden relative bg-[#F5F3FF]">
                     <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-24 items-center">
                         <div className="visual relative flex justify-center perspective-1000 scale-90 md:scale-100">
                             <div className="relative z-10 w-full max-w-xl aspect-[16/10] shadow-2xl rounded-xl md:rounded-2xl overflow-hidden border-[8px] md:border-[12px] border-white bg-white lg:rotate-y-12 shadow-indigo-900/10"><AdminDashboard /></div>
@@ -306,7 +307,7 @@ const EcommerceProductShowcase = () => {
                 </section>
 
                 {/* --- CTA --- */}
-                <section className="py-12 md:py-20 bg-[#1E1B4B] relative overflow-hidden text-white">
+                <section className="py-8 md:py-20 bg-[#1E1B4B] relative overflow-hidden text-white">
                     <div className="max-w-7xl mx-auto px-6 text-center relative z-10">
                         <h2 className="text-3xl md:text-6xl font-black mb-6 md:mb-8">Ready to Scale?</h2>
                         <Link to="/contact" className="px-8 md:px-10 py-4 md:py-5 bg-[#4F46E5] text-white font-black rounded-full text-base md:text-lg shadow-xl hover:scale-105 transition-all outline outline-4 outline-[#4F46E5]/30 inline-block">Start Free Trial</Link>

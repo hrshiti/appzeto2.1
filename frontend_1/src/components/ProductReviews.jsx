@@ -58,7 +58,7 @@ const ProductReviews = ({ color = "#EF7F1A" }) => {
                     </motion.h2>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+                <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-8">
                     {reviews.map((review, idx) => (
                         <motion.div
                             key={review.id}
@@ -66,39 +66,41 @@ const ProductReviews = ({ color = "#EF7F1A" }) => {
                             whileInView={{ opacity: 1, y: 0 }}
                             transition={{ delay: idx * 0.1 }}
                             whileHover={{ y: -10 }}
-                            className="bg-white p-8 rounded-[2rem] border border-gray-100 shadow-xl shadow-gray-200/50 hover:border-gray-200 transition-all group"
+                            className="bg-white p-3 md:p-8 rounded-xl md:rounded-[2rem] border border-gray-100 shadow-xl shadow-gray-200/50 hover:border-gray-200 transition-all group flex flex-col justify-between"
                         >
-                            <div className="flex items-center gap-4 mb-6">
-                                <img
-                                    src={review.img}
-                                    alt={review.name}
-                                    className="w-12 h-12 rounded-full object-cover border-2 border-white shadow-md"
-                                />
-                                <div>
-                                    <h4 className="font-bold text-gray-900 text-sm">{review.name}</h4>
-                                    <p className="text-[10px] font-bold uppercase tracking-wider text-gray-400">{review.role}</p>
+                            <div>
+                                <div className="flex items-center gap-2 md:gap-4 mb-3 md:mb-6">
+                                    <img
+                                        src={review.img}
+                                        alt={review.name}
+                                        className="w-8 h-8 md:w-12 md:h-12 rounded-full object-cover border-2 border-white shadow-md"
+                                    />
+                                    <div>
+                                        <h4 className="font-bold text-gray-900 text-xs md:text-sm leading-tight">{review.name}</h4>
+                                        <p className="text-[8px] md:text-[10px] font-bold uppercase tracking-wider text-gray-400">{review.role}</p>
+                                    </div>
                                 </div>
+
+                                <div className="flex gap-0.5 md:gap-1 mb-2 md:mb-4">
+                                    {[...Array(5)].map((_, i) => (
+                                        <span
+                                            key={i}
+                                            className={`material-symbols-outlined text-[10px] md:text-sm ${i < review.stars ? '' : 'opacity-20'}`}
+                                            style={{ color: i < review.stars ? color : '#ccc' }}
+                                        >
+                                            star
+                                        </span>
+                                    ))}
+                                </div>
+
+                                <p className="text-gray-600 text-[10px] md:text-sm leading-relaxed italic line-clamp-4 md:line-clamp-none">
+                                    "{review.text}"
+                                </p>
                             </div>
 
-                            <div className="flex gap-1 mb-4">
-                                {[...Array(5)].map((_, i) => (
-                                    <span
-                                        key={i}
-                                        className={`material-symbols-outlined text-sm ${i < review.stars ? '' : 'opacity-20'}`}
-                                        style={{ color: i < review.stars ? color : '#ccc' }}
-                                    >
-                                        star
-                                    </span>
-                                ))}
-                            </div>
-
-                            <p className="text-gray-600 text-sm leading-relaxed italic">
-                                "{review.text}"
-                            </p>
-
-                            <div className="mt-6 pt-6 border-t border-gray-50 flex justify-between items-center opacity-0 group-hover:opacity-100 transition-opacity">
-                                <span className="text-[10px] font-bold uppercase tracking-widest text-gray-300">Verified Client</span>
-                                <span className="material-symbols-outlined text-sm text-gray-200">verified</span>
+                            <div className="mt-3 md:mt-6 pt-3 md:pt-6 border-t border-gray-50 flex justify-between items-center opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity">
+                                <span className="text-[8px] md:text-[10px] font-bold uppercase tracking-widest text-gray-300 whitespace-nowrap">Verified</span>
+                                <span className="material-symbols-outlined text-xs md:text-sm text-gray-200">verified</span>
                             </div>
                         </motion.div>
                     ))}

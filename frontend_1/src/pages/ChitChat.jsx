@@ -41,7 +41,7 @@ const ChitChat = () => {
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
-                        className="w-full relative min-h-[700px] lg:h-[85vh] flex items-stretch overflow-hidden"
+                        className="w-full relative min-h-auto md:min-h-[700px] lg:h-[85vh] flex items-stretch overflow-hidden pt-24 md:pt-0"
                     >
                         {/* Background Image Layer - Full Width */}
                         <div className="absolute inset-0 z-0">
@@ -82,15 +82,15 @@ const ChitChat = () => {
                                     initial={{ opacity: 0, scale: 0.95 }}
                                     animate={{ opacity: 1, scale: 1 }}
                                     transition={{ delay: 0.2 }}
-                                    className="bg-white/95 backdrop-blur-3xl rounded-[2.5rem] p-8 md:p-10 w-full max-w-xl shadow-[0_40px_80px_rgba(0,0,0,0.15)] border border-white/50"
+                                    className="bg-white/95 backdrop-blur-3xl rounded-[2.5rem] p-5 md:p-10 w-full max-w-xl shadow-[0_40px_80px_rgba(0,0,0,0.15)] border border-white/50"
                                 >
                                     <div className="mb-6 text-center lg:text-left">
                                         <h2 className="text-3xl font-black text-slate-900 uppercase italic tracking-tight">Drop us a Line</h2>
                                         <p className="text-slate-500 text-[10px] mt-1 font-bold uppercase tracking-widest inline-block bg-slate-100 px-3 py-1 rounded-full">Response in 2 hours</p>
                                     </div>
 
-                                    <form onSubmit={handleSend} className="space-y-4">
-                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <form onSubmit={handleSend} className="space-y-2 md:space-y-4">
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4">
                                             <div className="space-y-1">
                                                 <label className="text-[9px] font-black uppercase tracking-[0.2em] text-slate-400 ml-3">Full Name</label>
                                                 <input
@@ -98,7 +98,7 @@ const ChitChat = () => {
                                                     name="name"
                                                     type="text"
                                                     placeholder="Your Name"
-                                                    className="w-full bg-slate-50/80 border border-slate-200 p-3 rounded-xl focus:border-primary focus:bg-white outline-none transition-all placeholder:text-slate-500 text-sm font-bold text-slate-900"
+                                                    className="w-full bg-slate-50/80 border border-slate-200 p-2.5 md:p-3 rounded-xl focus:border-primary focus:bg-white outline-none transition-all placeholder:text-slate-500 text-sm font-bold text-slate-900"
                                                 />
                                             </div>
                                             <div className="space-y-1">
@@ -108,7 +108,7 @@ const ChitChat = () => {
                                                     name="phone"
                                                     type="tel"
                                                     placeholder="+91 0000..."
-                                                    className="w-full bg-slate-50/80 border border-slate-200 p-3 rounded-xl focus:border-primary focus:bg-white outline-none transition-all placeholder:text-slate-500 text-sm font-bold text-slate-900"
+                                                    className="w-full bg-slate-50/80 border border-slate-200 p-2.5 md:p-3 rounded-xl focus:border-primary focus:bg-white outline-none transition-all placeholder:text-slate-500 text-sm font-bold text-slate-900"
                                                 />
                                             </div>
                                         </div>
@@ -120,7 +120,7 @@ const ChitChat = () => {
                                                 name="email"
                                                 type="email"
                                                 placeholder="you@email.com"
-                                                className="w-full bg-slate-50/80 border border-slate-200 p-3 rounded-xl focus:border-primary focus:bg-white outline-none transition-all placeholder:text-slate-500 text-sm font-bold text-slate-900"
+                                                className="w-full bg-slate-50/80 border border-slate-200 p-2.5 md:p-3 rounded-xl focus:border-primary focus:bg-white outline-none transition-all placeholder:text-slate-500 text-sm font-bold text-slate-900"
                                             />
                                         </div>
 
@@ -130,7 +130,7 @@ const ChitChat = () => {
                                                 <select
                                                     required
                                                     name="reason"
-                                                    className="w-full bg-slate-50/80 border border-slate-200 p-3 rounded-xl focus:border-primary focus:bg-white outline-none transition-all text-sm font-bold text-slate-900 appearance-none cursor-pointer"
+                                                    className="w-full bg-slate-50/80 border border-slate-200 p-2.5 md:p-3 rounded-xl focus:border-primary focus:bg-white outline-none transition-all text-sm font-bold text-slate-900 appearance-none cursor-pointer"
                                                 >
                                                     <option value="" disabled selected>Select reason</option>
                                                     <option value="project">New Project</option>
@@ -149,7 +149,7 @@ const ChitChat = () => {
                                                 name="message"
                                                 rows="2"
                                                 placeholder="How can we help?"
-                                                className="w-full bg-slate-50/80 border border-slate-100 p-3 rounded-xl focus:border-primary focus:bg-white outline-none transition-all placeholder:text-slate-300 text-sm font-bold italic text-slate-800 resize-none"
+                                                className="w-full bg-slate-50/80 border border-slate-100 p-2.5 md:p-3 rounded-xl focus:border-primary focus:bg-white outline-none transition-all placeholder:text-slate-300 text-sm font-bold italic text-slate-800 resize-none"
                                             />
                                         </div>
 
