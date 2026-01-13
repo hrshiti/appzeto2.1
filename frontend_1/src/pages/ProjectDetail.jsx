@@ -71,8 +71,8 @@ const ProjectDetail = () => {
 
     return (
         <ScrollWrapper>
+            <Navbar />
             <div className="bg-[#F8FAFC] font-sans text-slate-800 selection:bg-[#05A4A7] selection:text-white">
-                <Navbar />
 
                 {/* --- 1. HERO SECTION (3-Column Layout: Info Card | Text | Image) --- */}
                 <section className="relative pt-32 pb-16 px-6 md:px-12 lg:px-20 overflow-hidden min-h-[85vh] flex items-center">
