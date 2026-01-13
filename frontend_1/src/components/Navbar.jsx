@@ -30,7 +30,7 @@ const NAV_ITEMS = [
         items: [
             { label: "Food Delivery", link: "/appzeto-food" },
             { label: "Taxi Booking", link: "/appzeto-taxi" },
-            { label: "E-commerce", link: "/appzeto-ecommerce" },
+            { label: "Ecommerce", link: "/appzeto-ecommerce" },
             { label: "Hospital Management", link: "/appzeto-hospital" }
         ]
     },
@@ -215,7 +215,7 @@ const Navbar = () => {
 
     return (
         <>
-            <nav className="sticky top-0 z-50 w-full bg-white/95 dark:bg-[#023638]/95 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 transition-all duration-300 pt-[env(safe-area-inset-top)]">
+            <nav className="fixed top-0 z-50 w-full bg-white/95 dark:bg-[#023638]/95 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 transition-all duration-300 pt-[env(safe-area-inset-top)]">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between items-center h-20">
                         {/* Logo */}
@@ -252,13 +252,7 @@ const Navbar = () => {
                                                         <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
                                                             {navItem.description}
                                                         </p>
-                                                        <Link
-                                                            to={navItem.path || "#"}
-                                                            className="inline-flex items-center mt-4 text-sm font-semibold text-primary hover:text-teal-600"
-                                                            onClick={() => handleLinkClick(navItem.path)}
-                                                        >
-                                                            View Details <span className="material-symbols-outlined text-sm ml-1">arrow_forward</span>
-                                                        </Link>
+
                                                     </div>
                                                     <div className="w-3/4 pl-8">
                                                         <div className="grid grid-cols-2 gap-y-4 gap-x-8">
@@ -343,6 +337,8 @@ const Navbar = () => {
                     </div>
                 </div>
             </nav>
+            {/* Spacer to compensate for fixed navbar */}
+            <div className="h-20" aria-hidden="true" />
 
             {/* Mobile Menu Overlay - Portal to Body for Reliability */}
             {createPortal(

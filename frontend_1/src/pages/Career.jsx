@@ -15,6 +15,7 @@ const Career = () => {
     const [appStatus, setAppStatus] = useState('idle'); // idle, sending, success, error
 
     const [jobsList, setJobsList] = useState([]);
+    const [formFields, setFormFields] = useState(null);
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -204,8 +205,8 @@ const Career = () => {
                 </div>
 
                 {/* --- OPEN POSITIONS --- */}
-                <div id="positions" className="lg:h-screen max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 bg-white shadow-sm mt-0 border-b border-slate-100 flex flex-col justify-center overflow-hidden">
-                    <div className="flex flex-col md:flex-row justify-between items-end mb-8 md:mb-12 px-4">
+                <div id="positions" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-16 bg-white shadow-sm mt-0 border-b border-slate-100 flex flex-col overflow-hidden">
+                    <div className="flex flex-col md:flex-row justify-between items-end mb-6 md:mb-10 px-4">
                         <div className="text-left">
                             <p className="text-primary font-bold uppercase tracking-widest text-[10px] mb-2 text-slate-400">Join the squad</p>
                             <h2 className="text-3xl md:text-5xl font-bold text-slate-900 tracking-tighter uppercase">Wanna Join Us?</h2>
@@ -274,12 +275,11 @@ const Career = () => {
                                         Internships with serious impact and zero coffee runs.
                                     </p>
                                 </div>
-                                <button
-                                    onClick={() => { setSelectedJob("General Internship"); setIsApplying(true); }}
-                                    className="px-6 py-2.5 md:px-8 md:py-3 bg-[#F1FC88] text-slate-900 font-bold rounded-xl md:rounded-2xl uppercase tracking-widest text-[10px] md:text-xs hover:bg-white transition-all border-4 border-slate-900 shadow-[4px_4px_0px_0px_rgba(0,0,0,0.2)] md:shadow-[6px_6px_0px_0px_rgba(0,0,0,0.2)]"
+                                <div
+                                    className="px-6 py-2.5 md:px-8 md:py-3 bg-[#F1FC88] text-slate-900 font-bold rounded-xl md:rounded-2xl uppercase tracking-widest text-[10px] md:text-xs border-4 border-slate-900 shadow-[4px_4px_0px_0px_rgba(0,0,0,0.2)] md:shadow-[6px_6px_0px_0px_rgba(0,0,0,0.2)] cursor-default"
                                 >
                                     Grab Your Spot
-                                </button>
+                                </div>
                             </div>
 
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">

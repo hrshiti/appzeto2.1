@@ -90,7 +90,7 @@ const projects = [
         id: "shop",
         title: "Appzeto Shop",
         slug: "appzeto-pay",
-        subtitle: "Future Commerce",
+        subtitle: "Future Ecommerce",
         description: "AR-enabled shopping experience.",
         icon: "shopping_bag",
         color: "#4F46E5",

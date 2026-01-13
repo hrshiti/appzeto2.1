@@ -116,7 +116,7 @@ const AboutUs = () => {
                             <div className="pt-4 md:pt-6">
                                 <p className="text-[10px] md:text-xs font-bold text-primary uppercase tracking-[0.2em] mb-3">LEADERSHIP</p>
                                 <div className="flex flex-col items-start">
-                                    <h4 className="text-xl md:text-2xl font-bold text-gray-900 mb-1">Alex Morgan</h4>
+                                    <h4 className="text-xl md:text-2xl font-bold text-gray-900 mb-1">Sumit Jaiswal</h4>
                                     <p className="text-xs md:text-sm text-gray-500 font-medium">Founder & Chief Executive Officer</p>
                                 </div>
                             </div>
@@ -135,7 +135,7 @@ const AboutUs = () => {
                                     className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 hover:scale-105"
                                 />
                                 <div className="absolute bottom-0 left-0 w-full p-4 md:p-6 bg-gradient-to-t from-black/80 to-transparent">
-                                    <p className="text-white text-lg md:text-xl font-bold">Alex Morgan</p>
+                                    <p className="text-white text-lg md:text-xl font-bold">Sumit Jaiswal</p>
                                     <p className="text-primary text-xs md:text-sm font-medium">Founder & CEO</p>
                                 </div>
                             </div>
