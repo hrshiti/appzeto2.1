@@ -14,43 +14,43 @@ const Reviews = () => {
     const testimonials = [
         {
             id: 1,
-            name: "Victoria Linton",
-            role: "CEO, TechFlow",
-            text: "Appzeto transformed our digital presence. Their team's attention to detail and commitment to quality is unmatched. The final product exceeded our expectations in every way.",
+            name: "Rahul Sharma",
+            role: "CEO, TechFlow India",
+            text: "Appzeto transformed our digital presence. Their team's attention to detail and commitment to quality is unmatched. The final product exceeded our expectations.",
             stars: 5,
-            img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80"
+            img: "https://images.unsplash.com/photo-1566492031773-4f4e44671857?auto=format&fit=crop&w=100&q=80"
         },
         {
             id: 2,
-            name: "Dmitri Woodhouse",
+            name: "Priya Malhotra",
             role: "Founder, StartupX",
             text: "Working with Appzeto was a game-changer. They understood our vision perfectly and delivered a scalable solution that helped us secure our Series A funding.",
             stars: 5,
-            img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80"
+            img: "https://images.unsplash.com/photo-1548142813-c348350df52b?auto=format&fit=crop&w=100&q=80"
         },
         {
             id: 3,
-            name: "Fanny Dean",
+            name: "Vikram Singh",
             role: "Marketing Director, Studio G",
             text: "The UI/UX design provided by Appzeto is simply world-class. Our user engagement metrics have skyrocketed since the launch. Highly recommended!",
             stars: 5,
-            img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80"
+            img: "https://images.unsplash.com/photo-1531891437562-4301cf35b7e4?auto=format&fit=crop&w=100&q=80"
         },
         {
             id: 4,
-            name: "Hindley Micawber",
-            role: "CTO, FutureNet",
+            name: "Anjali Gupta",
+            role: "CTO, FutureNet Systems",
             text: "Technical expertise at its finest. They tackled complex challenges with ease and delivered a robust, high-performance application on time and within budget.",
             stars: 5,
-            img: "https://images.unsplash.com/photo-1544725176-7c40e5a71c5e?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80"
+            img: "https://images.unsplash.com/photo-1588514332924-a36c6a8f15cc?auto=format&fit=crop&w=100&q=80"
         },
         {
             id: 5,
-            name: "Nelly Vane",
+            name: "Arjun Mehta",
             role: "Product Owner, CreativeSol",
             text: "A true partner in development. Their proactive communication and agile methodology made the entire process smooth and transparent. We love our new app!",
             stars: 4,
-            img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80"
+            img: "https://images.unsplash.com/photo-1506277886164-e25aa3f4ef7f?auto=format&fit=crop&w=100&q=80"
         }
     ];
 
@@ -220,12 +220,12 @@ const Reviews = () => {
 
                                         {/* Profile */}
                                         <div className="flex items-center space-x-3 mt-auto">
-                                            <div className="relative">
+                                            <div className="relative shrink-0 w-12 h-12">
                                                 <div className="absolute inset-0 bg-primary/30 rounded-full blur-md"></div>
                                                 <img
                                                     src={item.img}
                                                     alt={item.name}
-                                                    className="w-10 h-10 rounded-full object-cover relative z-10 border border-white/20"
+                                                    className="w-full h-full rounded-full object-cover relative z-10 border-2 border-white/20"
                                                 />
                                             </div>
                                             <div>

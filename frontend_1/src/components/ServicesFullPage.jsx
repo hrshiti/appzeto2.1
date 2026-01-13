@@ -27,7 +27,7 @@ const staticServices = [
         shortDescription: "We build high-performance websites and web applications ensuring scalability, speed, and SEO optimization.",
         fullDescription: "As a leading web development company, we build scalable, secure, and fast web applications tailored to your business needs. Our expertise includes frontend development with React, backend systems with Node.js, and full-stack solutions that drive growth for startups and enterprises.",
         features: ["Custom React Development", "Next.js SSR & SSG", "Responsive Design", "API Integration"],
-        image: webImg,
+        image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80",
         visualFilename: "WebDevPreview.png"
     },
     {

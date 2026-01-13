@@ -5,35 +5,35 @@ const ProductReviews = ({ color = "#EF7F1A" }) => {
     const reviews = [
         {
             id: 1,
-            name: "Sarah Jenkins",
+            name: "Nisha Verma",
             role: "Restaurant Owner",
             text: "The Appzeto Food solution completely changed how we handle peek hours. The interface is intuitive and the support is top-notch.",
-            stars: 5,
-            img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=100&h=100"
-        },
-        {
-            id: 2,
-            name: "Michael Chen",
-            role: "Entrepreneur",
-            text: "Launching our grocery delivery app was seamless. The code is clean and highly scalable. Best investment we've made this year.",
-            stars: 5,
-            img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=100&h=100"
-        },
-        {
-            id: 3,
-            name: "Emily Rodriguez",
-            role: "Product Manager",
-            text: "The multi-vendor features are incredible. It handles complex commissions and real-time tracking with ease. Highly recommended!",
             stars: 5,
             img: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=100&h=100"
         },
         {
+            id: 2,
+            name: "Rohan Das",
+            role: "Entrepreneur",
+            text: "Launching our grocery delivery app was seamless. The code is clean and highly scalable. Best investment we've made this year.",
+            stars: 5,
+            img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=100&h=100"
+        },
+        {
+            id: 3,
+            name: "Priya Singh",
+            role: "Product Manager",
+            text: "The multi-vendor features are incredible. It handles complex commissions and real-time tracking with ease. Highly recommended!",
+            stars: 5,
+            img: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=100&h=100"
+        },
+        {
             id: 4,
-            name: "David Smith",
+            name: "Amit Patel",
             role: "Fleet Owner",
             text: "The delivery app is very stable. Drivers find it easy to use, and the real-time distance calculation is remarkably accurate.",
             stars: 4,
-            img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=100&h=100"
+            img: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=100&h=100"
         }
     ];
 
