@@ -67,14 +67,14 @@ const ContactUs = ({ isHomePage = false }) => {
 
     // Dynamic Settings
     const [settings, setSettings] = useState({
-        contactPhone: '',
-        contactEmail: '',
-        contactAddress: '',
+        contactPhone: '+917691810506',
+        contactEmail: 'appzeto@gmail.com',
+        contactAddress: 'Office No 501, Princess center, 5th Floor, New Palasia, Indore, Madhya Pradesh 452001',
         social: {
-            linkedin: '',
-            instagram: '',
-            twitter: '',
-            github: ''
+            linkedin: 'https://linkedin.com/company/appzeto',
+            instagram: 'https://instagram.com/appzeto',
+            twitter: 'https://twitter.com/appzeto',
+            github: 'https://github.com/appzeto'
         },
         offices: []
     });

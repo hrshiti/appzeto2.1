@@ -1,10 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
+import logo from '../assets/logo.png';
 
 const Reviews = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 768);
     const [isPaused, setIsPaused] = useState(false);
+    const [isTransitioning, setIsTransitioning] = useState(true);
+    const carouselRef = useRef(null);
+    const [touchStart, setTouchStart] = useState(null);
+    const [touchEnd, setTouchEnd] = useState(null);
 
     const testimonials = [
         {
@@ -57,29 +62,72 @@ const Reviews = () => {
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
+    const extendedTestimonials = [...testimonials, ...testimonials.slice(0, 3)];
+
     useEffect(() => {
         if (!isPaused) {
             const timer = setInterval(() => {
                 nextSlide();
-            }, 5000);
+            }, 3000); // Faster auto-scroll
             return () => clearInterval(timer);
         }
     }, [currentIndex, isPaused, isDesktop]);
 
+    const handleTransitionEnd = () => {
+        if (currentIndex >= testimonials.length) {
+            setIsTransitioning(false);
+            setCurrentIndex(0);
+        }
+    };
+
+    // Restore transition after snap-back
+    useEffect(() => {
+        if (!isTransitioning) {
+            requestAnimationFrame(() => {
+                // Force reflow
+                const _ = carouselRef.current?.offsetHeight;
+                setIsTransitioning(true);
+            });
+        }
+    }, [isTransitioning]);
+
     const nextSlide = () => {
-        setCurrentIndex((prevIndex) =>
-            prevIndex === testimonials.length - 1 ? 0 : prevIndex + 1
-        );
+        if (currentIndex >= testimonials.length) return; // Prevent double clicks during reset
+        setCurrentIndex((prev) => prev + 1);
     };
 
     const prevSlide = () => {
-        setCurrentIndex((prevIndex) =>
-            prevIndex === 0 ? testimonials.length - 1 : prevIndex - 1
-        );
+        if (currentIndex <= 0) {
+            setIsTransitioning(false);
+            setCurrentIndex(testimonials.length - 1);
+            return;
+        }
+        setCurrentIndex((prev) => prev - 1);
     };
 
     const goToSlide = (index) => {
         setCurrentIndex(index);
+    };
+
+    // Touch Handlers for Mobile Swipe
+    const minSwipeDistance = 50;
+
+    const onTouchStart = (e) => {
+        setTouchEnd(null);
+        setTouchStart(e.targetTouches[0].clientX);
+        setIsPaused(true);
+    };
+
+    const onTouchMove = (e) => setTouchEnd(e.targetTouches[0].clientX);
+
+    const onTouchEnd = () => {
+        if (!touchStart || !touchEnd) return;
+        const distance = touchStart - touchEnd;
+        const isLeftSwipe = distance > minSwipeDistance;
+        const isRightSwipe = distance < -minSwipeDistance;
+        if (isLeftSwipe) nextSlide();
+        if (isRightSwipe) prevSlide();
+        setIsPaused(false);
     };
 
     return (
@@ -129,16 +177,23 @@ const Reviews = () => {
                     onMouseLeave={() => setIsPaused(false)}
                 >
                     {/* Items Wrapper */}
-                    <div className="overflow-hidden px-2 -mx-2 py-4">
+                    <div
+                        className="overflow-hidden px-2 -mx-2 py-4"
+                        onTouchStart={onTouchStart}
+                        onTouchMove={onTouchMove}
+                        onTouchEnd={onTouchEnd}
+                    >
                         <motion.div
-                            className="flex transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]"
+                            ref={carouselRef}
+                            className={`flex ${isTransitioning ? 'transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]' : ''}`}
+                            onTransitionEnd={handleTransitionEnd}
                             style={{
                                 transform: `translateX(-${currentIndex * (isDesktop ? 33.333 : 50)}%)`
                             }}
                         >
-                            {testimonials.map((item) => (
+                            {extendedTestimonials.map((item, index) => (
                                 <div
-                                    key={item.id}
+                                    key={`${item.id}-${index}`}
                                     className="w-1/2 md:w-1/3 flex-shrink-0 px-2 md:px-3"
                                 >
                                     <div className="h-full bg-white/5 backdrop-blur-xl border border-white/10 rounded-[1rem] md:rounded-[1.5rem] p-4 md:p-8 hover:bg-white/10 transition-colors duration-300 group shadow-lg relative overflow-hidden">
@@ -146,11 +201,9 @@ const Reviews = () => {
                                         {/* Glow Effect on Hover */}
                                         <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
 
-                                        {/* Quote Icon */}
-                                        <div className="absolute top-3 right-3 md:top-6 md:right-6 text-primary/20 transform rotate-12">
-                                            <svg width="20" height="20" className="md:w-8 md:h-8" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M14.017 21L14.017 18C14.017 16.8906 14.3219 15.9375 14.9316 15.1406C15.5414 14.3438 16.3262 13.9141 17.2861 13.8516C17.0781 13.25 17.0254 12.6797 17.1289 12.1406C17.3828 10.9609 18.0664 10.0547 19.1797 9.42188C19.7422 9.10938 20.375 8.95312 21.0781 8.95312V9.04688C20.6953 9.42188 20.4766 9.875 20.4219 10.4062C20.4219 11.0234 20.6582 11.5391 21.1309 11.9531C21.6035 12.3672 22.1523 12.5742 22.7773 12.5742C23.6367 12.5742 24.3164 12.2812 24.8164 11.6953C25.3164 11.1094 25.5664 10.4062 25.5664 9.58594C25.5664 8.52344 25.1016 7.57031 24.1719 6.72656C23.2383 5.88281 21.8203 5.46094 19.918 5.46094C17.2422 5.46094 15.2227 6.45312 13.8594 8.4375C13.0625 9.58594 12.6016 11.0859 12.4766 12.9375L12.4219 14.25L12.4766 21H14.017ZM0.59375 21L0.59375 18C0.59375 16.8906 0.898438 15.9375 1.50813 15.1406C2.11719 14.3438 2.90234 13.9141 3.8623 13.8516C3.6543 13.25 3.60156 12.6797 3.70508 12.1406C3.95898 10.9609 4.64258 10.0547 5.75586 9.42188C6.31836 9.10938 6.95117 8.95312 7.6543 8.95312V9.04688C7.27148 9.42188 7.05273 9.875 6.99805 10.4062C6.99805 11.0234 7.23438 11.5391 7.70703 11.9531C8.17969 12.3672 8.72852 12.5742 9.35352 12.5742C10.2129 12.5742 10.8926 12.2812 11.3926 11.6953C11.8926 11.1094 12.1426 10.4062 12.1426 9.58594C12.1426 8.52344 11.6777 7.57031 10.748 6.72656C9.81445 5.88281 8.39648 5.46094 6.49414 5.46094C3.81836 5.46094 1.79883 6.45312 0.435547 8.4375C-0.361328 9.58594 -0.822266 11.0859 -0.947266 12.9375L-1.00195 14.25L-0.947266 21H0.59375Z" />
-                                            </svg>
+                                        {/* Appzeto Logo Icon (Replaced Leaf/Quote Icon) */}
+                                        <div className="absolute top-3 right-3 md:top-6 md:right-6 transform rotate-12">
+                                            <img src={logo} alt="Appzeto" className="w-6 h-6 md:w-10 md:h-10 object-contain" />
                                         </div>
 
                                         {/* Stars */}

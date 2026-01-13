@@ -12,20 +12,31 @@ const TypewriterText = ({ phrases }) => {
         return () => clearInterval(interval);
     }, [phrases]);
 
+    // Use the longest phrase to reserve space and prevent layout shifts
+    const longestPhrase = phrases.reduce((a, b) => a.length > b.length ? a : b, "");
+
     return (
-        <span className="relative inline-block w-full">
-            <AnimatePresence mode="wait">
-                <motion.span
-                    key={index}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
-                    transition={{ duration: 0.5 }}
-                    className="block text-primary"
-                >
-                    {phrases[index]}
-                </motion.span>
-            </AnimatePresence>
+        <span className="inline-grid w-full">
+            {/* Invisible spacer to maintaining consistent dimensions */}
+            <span aria-hidden="true" className="opacity-0 pointer-events-none col-start-1 row-start-1 pb-1">
+                {longestPhrase}
+            </span>
+
+            {/* Animated Text Layer */}
+            <div className="col-start-1 row-start-1 z-10 w-full">
+                <AnimatePresence mode="wait">
+                    <motion.span
+                        key={index}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -20 }}
+                        transition={{ duration: 0.5 }}
+                        className="block text-primary"
+                    >
+                        {phrases[index]}
+                    </motion.span>
+                </AnimatePresence>
+            </div>
         </span>
     );
 };

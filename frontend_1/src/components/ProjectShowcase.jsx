@@ -205,12 +205,32 @@ const ProjectShowcase = () => {
 
                     {/* 1. Main Static Heading Section */}
                     <div className="mb-4 md:mb-8 text-left w-full">
-                        <h1 className="text-3xl sm:text-4xl md:text-7xl font-bold text-slate-900 leading-tight tracking-tight drop-shadow-sm">
-                            Projects <br />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-slate-600 to-slate-900">
+                        <h1 className="text-3xl sm:text-4xl md:text-7xl font-bold text-slate-900 leading-tight tracking-tight drop-shadow-sm flex flex-col md:block items-center md:items-start text-center md:text-left">
+                            <span className="md:inline">Projects </span>
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-slate-600 to-slate-900 md:ml-2">
                                 We Created
                             </span>
                         </h1>
+                    </div>
+
+                    {/* MOBILE ONLY: CATEGORY FILTER ROW */}
+                    <div className="lg:hidden w-full overflow-x-auto pb-2 mb-6 no-scrollbar w-full">
+                        <div className="flex gap-3 w-max px-0">
+                            {["All", "CRM Solution", "Food Delivery", "Service App", "Taxi Booking", "Ecommerce"].map((cat, i) => (
+                                <button
+                                    key={i}
+                                    onClick={() => navigate('/projects')}
+                                    className={`
+                                        whitespace-nowrap px-5 py-2.5 rounded-full text-[11px] font-bold tracking-wide shadow-sm border transition-all duration-300
+                                        ${i === 0
+                                            ? 'bg-slate-900 text-white border-slate-900 shadow-md'
+                                            : 'bg-white text-slate-600 border-slate-200 hover:border-[#05A4A7] hover:text-[#05A4A7]'}
+                                    `}
+                                >
+                                    {cat.toUpperCase()}
+                                </button>
+                            ))}
+                        </div>
                     </div>
 
 
@@ -269,7 +289,7 @@ const ProjectShowcase = () => {
                     </AnimatePresence>
 
                     {/* Static Actions - Outside Animation */}
-                    <div className="pt-6 md:pt-6 flex items-center gap-4 md:gap-5">
+                    <div className="w-full pt-6 md:pt-6 flex items-center justify-center md:justify-start gap-4 md:gap-5">
                         <Link to="/projects">
                             <button className="px-6 md:px-8 py-3 bg-slate-900 text-white font-bold text-xs md:text-sm tracking-wide rounded-full hover:bg-slate-800 transition-all duration-300 flex items-center gap-2 shadow-lg hover:shadow-xl">
                                 View All Projects

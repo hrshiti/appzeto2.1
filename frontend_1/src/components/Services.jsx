@@ -68,10 +68,10 @@ const ServiceCard = ({ service, index }) => {
     return (
         <Link to={`/services/${service.slug}`} className="block h-full">
             <motion.div
-                initial={{ opacity: 0, x: 50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.15 }}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.1 }}
+                transition={{ duration: 0.3 }}
                 className="group relative flex-shrink-0 w-[160px] md:w-[280px] h-[260px] md:h-[420px] bg-[#062929] rounded-2xl overflow-hidden shadow-xl border border-transparent transition-all duration-500 hover:-translate-y-2"
             >
                 {/* 1. Background Image (Base Layer) */}
