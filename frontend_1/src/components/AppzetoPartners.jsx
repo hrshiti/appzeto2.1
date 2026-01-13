@@ -99,6 +99,7 @@ const PartnerStat = ({ number, text }) => (
 
 const AppzetoPartners = () => {
     const [isMobile, setIsMobile] = React.useState(false);
+    const [isExpanded, setIsExpanded] = React.useState(false);
 
     React.useEffect(() => {
         const check = () => setIsMobile(window.innerWidth < 768);
