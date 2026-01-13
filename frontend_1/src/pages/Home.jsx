@@ -6,6 +6,7 @@ import Services from '../components/Services';
 import Reviews from '../components/Reviews';
 import ContactUs from '../components/ContactUs';
 import WhyChooseUs from '../components/WhyChooseUs';
+import ProductOrbitSection from '../components/ProductOrbitSection';
 import AppzetoPartners from '../components/AppzetoPartners';
 import Footer from '../components/Footer';
 import ScrollWrapper from '../components/ScrollWrapper';
@@ -24,9 +25,7 @@ const Home = () => {
             <Hero />
 
 
-            <ScrollReveal>
-                <About />
-            </ScrollReveal>
+
 
             <ScrollReveal>
                 <Services />
@@ -34,6 +33,10 @@ const Home = () => {
 
             <ScrollReveal viewport={{ once: true, amount: 0.1 }}>
                 <ProjectShowcase />
+            </ScrollReveal>
+
+            <ScrollReveal>
+                <About />
             </ScrollReveal>
 
             <ScrollReveal>
@@ -46,6 +49,10 @@ const Home = () => {
 
             <ScrollReveal>
                 <WhyChooseUs />
+            </ScrollReveal>
+
+            <ScrollReveal>
+                <ProductOrbitSection />
             </ScrollReveal>
 
             <ScrollReveal>

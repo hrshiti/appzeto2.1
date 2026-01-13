@@ -119,7 +119,7 @@ const About = () => {
                             >
                                 <div className="flex flex-col gap-1 sm:gap-6">
                                     <div className="mb-1 sm:mb-4">
-                                        <h1 className="text-xl sm:text-3xl md:text-4xl font-black tracking-tight text-slate-900 dark:text-white uppercase">
+                                        <h1 className="text-xl sm:text-3xl md:text-4xl font-black tracking-tight text-slate-900 dark:text-white uppercase text-center sm:text-left">
                                             Who We Are
                                         </h1>
                                     </div>

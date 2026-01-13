@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import Navbar from './Navbar';
-import RevolvingOrbit from './RevolvingOrbit';
+import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import TypewriterText from './TypewriterText';
 
 const Hero = () => {
@@ -43,7 +43,7 @@ const Hero = () => {
     }, []);
 
     return (
-        <div className="bg-background-light dark:bg-background-dark font-body antialiased transition-colors duration-300 min-h-0 lg:min-h-screen flex flex-col relative overflow-hidden">
+        <div className="bg-background-light dark:bg-background-dark font-body antialiased transition-colors duration-300 min-h-screen flex flex-col relative overflow-hidden">
             {/* ... (Background elements remain the same) */}
             <div className="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 sm:w-96 sm:h-96 bg-primary/10 rounded-full blur-3xl dark:bg-primary/20 pointer-events-none"></div>
             <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-56 h-56 sm:w-80 sm:h-80 bg-secondary/20 rounded-full blur-3xl dark:bg-secondary/10 pointer-events-none"></div>
@@ -51,16 +51,22 @@ const Hero = () => {
             <Navbar />
 
             <main className="flex-grow flex flex-col relative">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-0 sm:pb-10 lg:pt-10 lg:pb-10 w-full relative z-10">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-0 sm:pb-10 lg:pt-10 lg:pb-10 w-full relative z-10 flex-grow flex flex-col justify-center">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center flex-grow">
                         <motion.div
                             initial={{ x: -70, opacity: 0 }}
                             whileInView={{ x: 0, opacity: 1 }}
                             viewport={{ once: false, amount: 0.2 }}
                             transition={{ duration: 1.8, ease: [0.22, 1, 0.36, 1] }}
-                            className="space-y-4 sm:space-y-8"
+                            className="space-y-4 sm:space-y-8 flex flex-col justify-center h-full"
                         >
-                            <h1 className="text-2xl sm:text-3xl lg:text-5xl font-display font-black text-gray-800 dark:text-white leading-[1.2] tracking-tight">
+                            {/* Mobile Heading */}
+                            <h1 className="lg:hidden text-4xl font-black text-gray-900 dark:text-white leading-[1.1] text-center mb-1">
+                                Building Your <span className="text-[#05A4A7]">Digital Future.</span>
+                            </h1>
+
+                            {/* Desktop Heading */}
+                            <h1 className="hidden lg:block text-2xl sm:text-3xl lg:text-5xl font-display font-black text-gray-800 dark:text-white leading-[1.2] tracking-tight">
                                 Helping Businesses Turn Ideas into <br className="hidden lg:block" />
                                 <TypewriterText phrases={phrases} />
                             </h1>
@@ -69,13 +75,19 @@ const Hero = () => {
                                 We help startups, founders, and businesses design, develop, and scale reliable digital products using modern technologies and proven development processes.
                             </p>
 
-                            {/* MOBILE ONLY: ORBIT (Moved above buttons for mobile) */}
-                            <div className="lg:hidden relative flex flex-col items-center justify-center py-0 pt-2 pb-2 w-full overflow-visible">
-                                <div className="scale-100">
-                                    <RevolvingOrbit size="sm" />
+                            <div className="lg:hidden relative flex flex-col items-center justify-center py-0 w-full overflow-visible -my-2 flex-grow">
+                                <div className="w-full max-w-[340px] aspect-square">
+                                    <DotLottieReact
+                                        src="https://lottie.host/f5edc29d-7c20-49be-9b54-7c07fa26f2c6/wKHzGrk2QZ.lottie"
+                                        loop
+                                        autoplay
+                                    />
                                 </div>
+                                <p className="text-gray-500 dark:text-gray-400 text-sm font-medium text-center -mt-4 mb-4">
+                                    Innovating today for a smarter tomorrow.
+                                </p>
                                 {/* Mobile Stats - Moved down and adjusted */}
-                                <div className="flex items-center gap-2 bg-white dark:bg-slate-900 border border-gray-100 dark:border-slate-800 p-1.5 pr-4 rounded-full shadow-xl z-20 mt-4 ml-36">
+                                <div className="flex items-center gap-2 bg-white dark:bg-slate-900 border border-gray-100 dark:border-slate-800 p-1.5 pr-4 rounded-full shadow-xl z-20 self-end mr-6 mb-4">
                                     <div className="flex -space-x-2">
                                         {[
                                             "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=64&h=64",
@@ -98,7 +110,7 @@ const Hero = () => {
                                 </div>
                             </div>
 
-                            <div className="flex flex-col sm:flex-row gap-4 pt-0 lg:pt-4 w-full sm:w-auto">
+                            <div className="flex flex-col sm:flex-row gap-4 pt-0 lg:pt-4 w-full sm:w-auto mt-auto pb-8">
                                 <div className="relative group hidden lg:block">
                                     <motion.div
                                         whileHover={{ y: -6, scale: 1.05 }}
@@ -114,7 +126,7 @@ const Hero = () => {
                                         </div>
 
                                         <Link to="/contact#contact-form" className="relative z-10 flex items-center justify-center px-7 py-3 bg-gradient-to-br from-[#05A4A7] to-[#037A7C] text-white font-black rounded-[11px] overflow-hidden group/btn">
-                                            <span className="relative z-10 text-sm uppercase tracking-wider">Book Free Consultation</span>
+                                            <span className="relative z-10 text-sm uppercase tracking-wider">Start Your Success Story</span>
                                             <motion.span
                                                 className="relative z-10 material-icons ml-2 text-xl"
                                                 animate={{ x: [0, 5, 0] }}
@@ -152,9 +164,16 @@ const Hero = () => {
                             initial={{ opacity: 0, scale: 0.8 }}
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ duration: 1.5, ease: "easeOut" }}
-                            className="hidden lg:flex items-center justify-center relative scale-50 sm:scale-65 lg:scale-75 xl:scale-90 py-6 lg:py-0"
+                            className="hidden lg:flex items-center justify-center relative py-6 lg:py-0 w-full h-full"
                         >
-                            <RevolvingOrbit size="lg" />
+                            <div className="relative w-full max-w-[600px] aspect-square">
+                                <DotLottieReact
+                                    src="https://lottie.host/f5edc29d-7c20-49be-9b54-7c07fa26f2c6/wKHzGrk2QZ.lottie"
+                                    loop
+                                    autoplay
+                                    className="w-full h-full object-contain"
+                                />
+                            </div>
 
                             <motion.div
                                 initial={{ opacity: 0, x: 20 }}
