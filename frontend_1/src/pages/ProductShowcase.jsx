@@ -9,10 +9,16 @@ import Footer from '../components/Footer';
 import ScrollReveal from '../components/ScrollReveal';
 import ScrollWrapper from '../components/ScrollWrapper';
 import ProductReviews from '../components/ProductReviews';
+import InfinityBrandLoop from '../components/InfinityBrandLoop';
 
 import foodLogo1 from '../assets/logos/AppzetoFood.jpg';
 import foodLogo2 from '../assets/logos/Appzeto Food Delivery.jpg';
 import foodLogo3 from '../assets/logos/Appzeto food Restaurant.jpg';
+import foodLogo4 from '../assets/logos/aapreec_logo.jpg';
+import foodLogo5 from '../assets/logos/beeyou_logo.jpg';
+import foodLogo6 from '../assets/logos/bonfire.jpg';
+import foodLogo7 from '../assets/logos/Apsara Stores.jpg';
+import foodLogo8 from '../assets/logos/Chandni NX.jpg';
 
 import heroImage from '../assets/projects/appzeto-food-hero.jpg';
 import floatingImage1 from '../assets/projects/appzeto-food-1.jpg';
@@ -30,6 +36,17 @@ const ProductShowcase = () => {
 
     // Array of images to cycle through
     const images = [heroImage, carouselImage1, carouselImage2, carouselImage3];
+
+    const foodLogos = [
+        { src: foodLogo1, name: "Appzeto Food" },
+        { src: foodLogo2, name: "Food Delivery" },
+        { src: foodLogo3, name: "Restaurant" },
+        { src: foodLogo4, name: "Aapreec" },
+        { src: foodLogo5, name: "BeeYou" },
+        { src: foodLogo6, name: "Bonfire" },
+        { src: foodLogo7, name: "Apsara" },
+        { src: foodLogo8, name: "Chandni" },
+    ];
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const [showDemoVideo, setShowDemoVideo] = useState(false);
     const navigate = useNavigate();
@@ -309,6 +326,9 @@ const ProductShowcase = () => {
                         </div>
                     </div>
                 </div>
+
+                {/* --- Infinity Brand Loop --- */}
+                <InfinityBrandLoop logos={foodLogos} title="Powering Top Food Chains & Cloud Kitchens" />
 
                 {/* How It Works Section */}
                 <HowItWorks />

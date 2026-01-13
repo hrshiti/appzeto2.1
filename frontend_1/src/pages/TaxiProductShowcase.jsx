@@ -10,6 +10,18 @@ import ContactUs from '../components/ContactUs';
 import ProductReviews from '../components/ProductReviews';
 import InfinityBrandLoop from '../components/InfinityBrandLoop';
 
+// Taxi Logos
+import taxiLogo1 from '../assets/logos/AppzetoTaxi.jpg';
+import taxiLogo2 from '../assets/logos/BRN Cabs.jpg';
+import taxiLogo3 from '../assets/logos/Boon Cabs.jpg';
+import taxiLogo4 from '../assets/logos/Cab Ready.jpg';
+import taxiLogo5 from '../assets/logos/Chalo Sawari.jpg';
+import taxiLogo6 from '../assets/logos/Dhairya Cab.jpg';
+import taxiLogo7 from '../assets/logos/auto_ride.jpg';
+import taxiLogo8 from '../assets/logos/blue_ride.jpg';
+import taxiLogo9 from '../assets/logos/book_my_tempo.jpg';
+import taxiLogo10 from '../assets/logos/rent_yatra.jpg';
+
 gsap.registerPlugin(ScrollTrigger);
 
 // --- Reusable Mock Components for Phone Screens ---
@@ -223,6 +235,18 @@ const AdminDashboard = () => (
 
 
 const TaxiProductShowcase = () => {
+    const taxiLogos = [
+        { src: taxiLogo1, name: "Appzeto Taxi" },
+        { src: taxiLogo2, name: "BRN Cabs" },
+        { src: taxiLogo3, name: "Boon Cabs" },
+        { src: taxiLogo4, name: "Cab Ready" },
+        { src: taxiLogo5, name: "Chalo Sawari" },
+        { src: taxiLogo6, name: "Dhairya Cab" },
+        { src: taxiLogo7, name: "Auto Ride" },
+        { src: taxiLogo8, name: "Blue Ride" },
+        { src: taxiLogo9, name: "Book My Tempo" },
+        { src: taxiLogo10, name: "Rent Yatra" },
+    ];
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
@@ -420,7 +444,7 @@ const TaxiProductShowcase = () => {
                 </section>
 
                 {/* --- Infinity Brand Loop --- */}
-                <InfinityBrandLoop />
+                <InfinityBrandLoop logos={taxiLogos} title="Trusted by Leading Taxi Networks" />
 
                 {/* --- 3 Icons Section --- */}
                 <section className="py-4 md:py-20">
