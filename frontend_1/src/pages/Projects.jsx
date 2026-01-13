@@ -95,7 +95,7 @@ const Projects = () => {
                             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
                         >
                             {filteredProjects.map((project) => (
-                                <div key={project._id || project.id} className="bg-white rounded-2xl overflow-hidden border border-slate-100 group flex flex-col hover:-translate-y-1 transition-all duration-300">
+                                <div key={project._id || project.id} className="bg-white rounded-2xl overflow-hidden shadow-[0_20px_40px_rgb(0,0,0,0.1)] border border-slate-100 group flex flex-col transition-all duration-300">
                                     {/* Thumbnail */}
                                     <div className="h-40 overflow-hidden bg-slate-50 relative group">
                                         <div className="absolute inset-0 bg-blue-900/0 group-hover:bg-blue-900/10 transition-colors duration-300 z-10" />
@@ -126,7 +126,7 @@ const Projects = () => {
 
                                             <button
                                                 onClick={() => navigate(`/projects/${project.slug}`)}
-                                                className="w-8 h-8 rounded-full bg-[#F3F4F6] text-[#1D4ED8] flex items-center justify-center group-hover:bg-[#1D4ED8] group-hover:text-white transition-all duration-300"
+                                                className="w-8 h-8 rounded-full bg-[#1D4ED8] text-white flex items-center justify-center hover:bg-blue-800 transition-all duration-300"
                                             >
                                                 <ArrowRight size={14} />
                                             </button>
