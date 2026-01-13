@@ -10,6 +10,10 @@ import ScrollReveal from '../components/ScrollReveal';
 import ScrollWrapper from '../components/ScrollWrapper';
 import ProductReviews from '../components/ProductReviews';
 
+import foodLogo1 from '../assets/logos/AppzetoFood.jpg';
+import foodLogo2 from '../assets/logos/Appzeto Food Delivery.jpg';
+import foodLogo3 from '../assets/logos/Appzeto food Restaurant.jpg';
+
 import heroImage from '../assets/projects/appzeto-food-hero.jpg';
 import floatingImage1 from '../assets/projects/appzeto-food-1.jpg';
 import floatingImage2 from '../assets/projects/appzeto-food-2.jpg';
@@ -96,9 +100,9 @@ const ProductShowcase = () => {
                             className="flex items-center gap-4 mt-2 md:mt-4 opacity-80"
                         >
                             <div className="flex -space-x-3">
-                                <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-gray-200 border-2 border-white"></div>
-                                <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-gray-300 border-2 border-white"></div>
-                                <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-gray-400 border-2 border-white"></div>
+                                <img src={foodLogo1} alt="Logo 1" className="w-8 h-8 md:w-10 md:h-10 rounded-full border-2 border-white object-cover" />
+                                <img src={foodLogo2} alt="Logo 2" className="w-8 h-8 md:w-10 md:h-10 rounded-full border-2 border-white object-cover" />
+                                <img src={foodLogo3} alt="Logo 3" className="w-8 h-8 md:w-10 md:h-10 rounded-full border-2 border-white object-cover" />
                             </div>
                             <p className="text-xs md:text-sm text-gray-500 font-medium">Trusted by 500+ Businesses</p>
                         </motion.div>
@@ -404,7 +408,7 @@ const HowItWorks = () => {
                     <svg className="absolute inset-0 w-full h-full z-0 pointer-events-none" style={{ overflow: 'visible' }}>
                         {/* Path: Step 1 -> Up/Right -> 2 -> Down -> 3 -> Left -> 4 -> Left/Up -> 5 */}
                         <motion.path
-                            d="M 280 200 C 280 100, 400 50, 600 50 L 850 50 L 850 150 M 850 350 L 850 450 L 600 450 L 500 450 M 350 450 L 280 450 L 280 350"
+                            d="M 280 200 C 280 100, 400 50, 600 50 L 850 50 L 850 150 L 850 350 L 850 450 L 565 530 L 280 450 L 280 200 Z"
                             fill="none"
                             stroke="#EF7F1A"
                             strokeWidth="2"
@@ -416,7 +420,7 @@ const HowItWorks = () => {
                         {/* Arrow Heads */}
                         <motion.path d="M 845 140 L 850 150 L 855 140" fill="none" stroke="#EF7F1A" strokeWidth="2" initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ delay: 1 }} />
                         <motion.path d="M 845 360 L 850 350 L 855 360" fill="none" stroke="#EF7F1A" strokeWidth="2" initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ delay: 1.5 }} />
-                        <motion.path d="M 360 445 L 350 450 L 360 455" fill="none" stroke="#EF7F1A" strokeWidth="2" initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ delay: 2 }} />
+                        <motion.path d="M 360 467 L 350 470 L 360 477" fill="none" stroke="#EF7F1A" strokeWidth="2" initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ delay: 2 }} />
                         <motion.path d="M 275 360 L 280 350 L 285 360" fill="none" stroke="#EF7F1A" strokeWidth="2" initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ delay: 2.2 }} />
                     </svg>
 
@@ -427,7 +431,7 @@ const HowItWorks = () => {
                                 width: '40px',
                                 height: '40px',
                                 position: 'absolute',
-                                offsetPath: "path('M 280 200 C 280 100, 400 50, 600 50 L 850 50 L 850 150 L 850 350 L 850 450 L 600 450 L 500 450 L 350 450 L 280 450 L 280 350 L 280 200 Z')",
+                                offsetPath: "path('M 280 200 C 280 100, 400 50, 600 50 L 850 50 L 850 150 L 850 350 L 850 450 L 565 530 L 280 450 L 280 200 Z')",
                                 offsetRotate: 'auto',
                                 animation: 'bikeLoop 10s linear infinite',
                             }}
