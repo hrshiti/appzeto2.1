@@ -12,6 +12,7 @@ const About = () => {
     // Typing Effect State
     const [charIndex, setCharIndex] = useState(0);
     const targetText = "Our team focuses on clean design, strong frontend experiences, and robust backend architecture to turn ideas into powerful digital products.";
+    const [showFullText, setShowFullText] = useState(false); // Mobile text toggle state
 
     useEffect(() => {
         const observer = new IntersectionObserver(([entry]) => {
@@ -126,17 +127,34 @@ const About = () => {
                                         Engineering the Digital Future.
                                     </h2>
 
-                                    <div className="space-y-4 text-base sm:text-lg text-[#618983] dark:text-gray-400 leading-relaxed max-w-lg">
-                                        <p>
-                                            At <span className="text-[#111817] dark:text-white font-semibold">Appzeto</span>, we help startups, founders, and businesses build modern digital products that are scalable, reliable, and easy to use.
-                                        </p>
-                                        <p>
-                                            We specialize in <span className="text-[#111817] dark:text-white font-semibold">web development, mobile app development, AI & machine learning</span>, and custom software solutions designed to solve real business problems and support long-term growth.
-                                        </p>
-                                        <p className="min-h-[3.5rem]">
-                                            {targetText.slice(0, charIndex)}
-                                            <span className="animate-pulse ml-0.5">|</span>
-                                        </p>
+                                    <div className="space-y-4 text-base sm:text-lg text-[#618983] dark:text-gray-400 leading-relaxed max-w-lg relative">
+                                        {/* Mobile: Partial Text / Desktop: Full Text */}
+                                        <div className={`${!showFullText ? 'max-h-[5.5rem] overflow-hidden sm:max-h-none sm:overflow-visible' : ''} transition-all duration-300 relative`}>
+                                            <p className="mb-4">
+                                                At <span className="text-[#111817] dark:text-white font-semibold">Appzeto</span>, we help startups, founders, and businesses build modern digital products that are scalable, reliable, and easy to use.
+                                            </p>
+                                            <p>
+                                                We specialize in <span className="text-[#111817] dark:text-white font-semibold">web development, mobile app development, AI & machine learning</span>, and custom software solutions designed to solve real business problems and support long-term growth.
+                                            </p>
+                                            <p className="min-h-[3.5rem] mt-4">
+                                                {targetText.slice(0, charIndex)}
+                                                <span className="animate-pulse ml-0.5">|</span>
+                                            </p>
+
+                                            {/* Gradient Fade for Mobile when collapsed */}
+                                            {!showFullText && (
+                                                <div className="absolute bottom-0 left-0 w-full h-12 bg-gradient-to-t from-[#ffffff] dark:from-[#023638] to-transparent sm:hidden"></div>
+                                            )}
+                                        </div>
+
+                                        {/* Mobile Toggle Button */}
+                                        <button
+                                            onClick={() => setShowFullText(!showFullText)}
+                                            className="sm:hidden text-[#05A4A7] text-sm font-bold flex items-center gap-1 mt-1 focus:outline-none"
+                                        >
+                                            {showFullText ? 'Read Less' : 'Read More'}
+                                            <span className={`material-symbols-outlined text-sm transition-transform duration-300 ${showFullText ? 'rotate-180' : ''}`}>expand_more</span>
+                                        </button>
                                     </div>
                                 </div>
                                 <div className="hidden sm:grid grid-cols-2 gap-2 sm:gap-4 border-t border-dashed border-gray-200 dark:border-gray-700 pt-2 sm:pt-6">

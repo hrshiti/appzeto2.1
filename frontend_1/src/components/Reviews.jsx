@@ -5,6 +5,10 @@ const Reviews = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 768);
     const [isPaused, setIsPaused] = useState(false);
+    const [isTransitioning, setIsTransitioning] = useState(true);
+    const carouselRef = useRef(null);
+    const [touchStart, setTouchStart] = useState(null);
+    const [touchEnd, setTouchEnd] = useState(null);
 
     const testimonials = [
         {
@@ -57,29 +61,72 @@ const Reviews = () => {
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
+    const extendedTestimonials = [...testimonials, ...testimonials.slice(0, 3)];
+
     useEffect(() => {
         if (!isPaused) {
             const timer = setInterval(() => {
                 nextSlide();
-            }, 5000);
+            }, 3000); // Faster auto-scroll
             return () => clearInterval(timer);
         }
     }, [currentIndex, isPaused, isDesktop]);
 
+    const handleTransitionEnd = () => {
+        if (currentIndex >= testimonials.length) {
+            setIsTransitioning(false);
+            setCurrentIndex(0);
+        }
+    };
+
+    // Restore transition after snap-back
+    useEffect(() => {
+        if (!isTransitioning) {
+            requestAnimationFrame(() => {
+                // Force reflow
+                const _ = carouselRef.current?.offsetHeight;
+                setIsTransitioning(true);
+            });
+        }
+    }, [isTransitioning]);
+
     const nextSlide = () => {
-        setCurrentIndex((prevIndex) =>
-            prevIndex === testimonials.length - 1 ? 0 : prevIndex + 1
-        );
+        if (currentIndex >= testimonials.length) return; // Prevent double clicks during reset
+        setCurrentIndex((prev) => prev + 1);
     };
 
     const prevSlide = () => {
-        setCurrentIndex((prevIndex) =>
-            prevIndex === 0 ? testimonials.length - 1 : prevIndex - 1
-        );
+        if (currentIndex <= 0) {
+            setIsTransitioning(false);
+            setCurrentIndex(testimonials.length - 1);
+            return;
+        }
+        setCurrentIndex((prev) => prev - 1);
     };
 
     const goToSlide = (index) => {
         setCurrentIndex(index);
+    };
+
+    // Touch Handlers for Mobile Swipe
+    const minSwipeDistance = 50;
+
+    const onTouchStart = (e) => {
+        setTouchEnd(null);
+        setTouchStart(e.targetTouches[0].clientX);
+        setIsPaused(true);
+    };
+
+    const onTouchMove = (e) => setTouchEnd(e.targetTouches[0].clientX);
+
+    const onTouchEnd = () => {
+        if (!touchStart || !touchEnd) return;
+        const distance = touchStart - touchEnd;
+        const isLeftSwipe = distance > minSwipeDistance;
+        const isRightSwipe = distance < -minSwipeDistance;
+        if (isLeftSwipe) nextSlide();
+        if (isRightSwipe) prevSlide();
+        setIsPaused(false);
     };
 
     return (
@@ -129,16 +176,23 @@ const Reviews = () => {
                     onMouseLeave={() => setIsPaused(false)}
                 >
                     {/* Items Wrapper */}
-                    <div className="overflow-hidden px-2 -mx-2 py-4">
+                    <div
+                        className="overflow-hidden px-2 -mx-2 py-4"
+                        onTouchStart={onTouchStart}
+                        onTouchMove={onTouchMove}
+                        onTouchEnd={onTouchEnd}
+                    >
                         <motion.div
-                            className="flex transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]"
+                            ref={carouselRef}
+                            className={`flex ${isTransitioning ? 'transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]' : ''}`}
+                            onTransitionEnd={handleTransitionEnd}
                             style={{
                                 transform: `translateX(-${currentIndex * (isDesktop ? 33.333 : 50)}%)`
                             }}
                         >
-                            {testimonials.map((item) => (
+                            {extendedTestimonials.map((item, index) => (
                                 <div
-                                    key={item.id}
+                                    key={`${item.id}-${index}`}
                                     className="w-1/2 md:w-1/3 flex-shrink-0 px-2 md:px-3"
                                 >
                                     <div className="h-full bg-white/5 backdrop-blur-xl border border-white/10 rounded-[1rem] md:rounded-[1.5rem] p-4 md:p-8 hover:bg-white/10 transition-colors duration-300 group shadow-lg relative overflow-hidden">

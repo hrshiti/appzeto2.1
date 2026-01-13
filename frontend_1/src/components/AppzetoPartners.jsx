@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import mapImage from '../assets/india_map_bg.png';
 
@@ -93,6 +93,7 @@ const PartnerStat = ({ number, text }) => (
 );
 
 const AppzetoPartners = () => {
+    const [isExpanded, setIsExpanded] = useState(false);
     const locations = [
         { label: "Noida - Tech City", top: "29%", left: "32%", position: "right", color: "#00AEEF", delay: 0.2 },
         { label: "Indore - Growth Hub", top: "50%", left: "28%", position: "left", color: "#FF6D00", delay: 0.4 },
@@ -155,9 +156,17 @@ const AppzetoPartners = () => {
 
                         <div className="w-12 md:w-20 h-0.5 md:h-1 bg-gray-300"></div>
 
-                        <p className="text-sm md:text-lg text-gray-600 leading-relaxed max-w-lg">
-                            Our extensive partner network spans across the nation, ensuring that Appzeto's innovative solutions are accessible everywhere. From bustling metros to emerging tech hubs, we are present where you need us.
-                        </p>
+                        <div className="relative">
+                            <p className={`text-sm md:text-lg text-gray-600 leading-relaxed max-w-lg transition-all duration-300 ${!isExpanded ? 'line-clamp-2 md:line-clamp-none' : ''}`}>
+                                Our extensive partner network spans across the nation, ensuring that Appzeto's innovative solutions are accessible everywhere. From bustling metros to emerging tech hubs, we are present where you need us.
+                            </p>
+                            <button
+                                onClick={() => setIsExpanded(!isExpanded)}
+                                className="md:hidden mt-2 text-[#05A4A7] text-xs font-bold hover:underline focus:outline-none"
+                            >
+                                {isExpanded ? 'Read Less' : 'Read More'}
+                            </button>
+                        </div>
 
                         <div className="grid grid-cols-2 gap-3 md:gap-8 pt-2 md:pt-6">
                             <PartnerStat number="50+" text="Major Cities" />
