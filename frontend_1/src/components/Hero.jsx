@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import Navbar from './Navbar';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
@@ -27,6 +27,8 @@ const Hero = () => {
     ];
 
     const [showFixedButton, setShowFixedButton] = useState(false);
+    const [isNavigating, setIsNavigating] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -61,7 +63,7 @@ const Hero = () => {
                             className="space-y-4 sm:space-y-8 flex flex-col justify-center h-full"
                         >
                             {/* Mobile Heading */}
-                            <h1 className="lg:hidden text-4xl font-black text-gray-900 dark:text-white leading-[1.1] text-center mb-1">
+                            <h1 className="lg:hidden text-4xl font-black text-gray-900 dark:text-white leading-[1.1] text-center mb-0 z-20 relative">
                                 Building Your <span className="text-[#05A4A7]">Digital Future.</span>
                             </h1>
 
@@ -75,19 +77,16 @@ const Hero = () => {
                                 We help startups, founders, and businesses design, develop, and scale reliable digital products using modern technologies and proven development processes.
                             </p>
 
-                            <div className="lg:hidden relative flex flex-col items-center justify-center py-0 w-full overflow-visible -my-2 flex-grow">
-                                <div className="w-full max-w-[340px] aspect-square">
+                            <div className="lg:hidden relative flex flex-col items-center justify-center py-0 w-full overflow-visible -mt-8 -mb-4 flex-grow z-10">
+                                <div className="w-full max-w-[420px] aspect-square scale-110">
                                     <DotLottieReact
                                         src="https://lottie.host/f5edc29d-7c20-49be-9b54-7c07fa26f2c6/wKHzGrk2QZ.lottie"
                                         loop
                                         autoplay
                                     />
                                 </div>
-                                <p className="text-gray-500 dark:text-gray-400 text-sm font-medium text-center -mt-4 mb-4">
-                                    Innovating today for a smarter tomorrow.
-                                </p>
-                                {/* Mobile Stats - Moved down and adjusted */}
-                                <div className="flex items-center gap-2 bg-white dark:bg-slate-900 border border-gray-100 dark:border-slate-800 p-1.5 pr-4 rounded-full shadow-xl z-20 self-end mr-6 mb-4">
+                                {/* Mobile Stats - Moved below image, above paragraph */}
+                                <div className="flex items-center gap-2 bg-white dark:bg-slate-900 border border-gray-100 dark:border-slate-800 p-1.5 pr-4 rounded-full shadow-xl z-20 mb-4 -mt-8">
                                     <div className="flex -space-x-2">
                                         {[
                                             "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=64&h=64",
@@ -108,10 +107,13 @@ const Hero = () => {
                                         </div>
                                     </div>
                                 </div>
+                                <p className="text-gray-500 dark:text-gray-400 text-sm font-medium text-center mb-4">
+                                    Innovating today for a smarter tomorrow.
+                                </p>
                             </div>
 
                             <div className="flex flex-col sm:flex-row gap-4 pt-0 lg:pt-4 w-full sm:w-auto mt-auto pb-8">
-                                <div className="relative group hidden lg:block">
+                                <div className="relative group w-full sm:w-auto">
                                     <motion.div
                                         whileHover={{ y: -6, scale: 1.05 }}
                                         whileTap={{ scale: 0.98 }}
@@ -125,16 +127,39 @@ const Hero = () => {
                                             />
                                         </div>
 
-                                        <Link to="/contact#contact-form" className="relative z-10 flex items-center justify-center px-7 py-3 bg-gradient-to-br from-[#05A4A7] to-[#037A7C] text-white font-black rounded-[11px] overflow-hidden group/btn">
-                                            <span className="relative z-10 text-sm uppercase tracking-wider">Start Your Success Story</span>
-                                            <motion.span
-                                                className="relative z-10 material-icons ml-2 text-xl"
-                                                animate={{ x: [0, 5, 0] }}
-                                                transition={{ duration: 1, repeat: Infinity }}
-                                            >
-                                                rocket_launch
-                                            </motion.span>
-                                        </Link>
+                                        <button
+                                            onClick={(e) => {
+                                                e.preventDefault();
+                                                setIsNavigating(true);
+                                                setTimeout(() => {
+                                                    navigate('/contact');
+                                                }, 2000);
+                                            }}
+                                            className="relative z-10 flex items-center justify-center px-7 py-3 bg-gradient-to-br from-[#05A4A7] to-[#037A7C] text-white font-black rounded-[11px] overflow-hidden group/btn w-full sm:w-auto cursor-pointer"
+                                        >
+                                            {!isNavigating ? (
+                                                <>
+                                                    <span className="relative z-10 text-sm uppercase tracking-wider">Launch Your Dream</span>
+                                                    <motion.span
+                                                        className="relative z-10 material-icons ml-2 text-xl"
+                                                        animate={{ x: [0, 5, 0] }}
+                                                        transition={{ duration: 1, repeat: Infinity }}
+                                                    >
+                                                        rocket_launch
+                                                    </motion.span>
+                                                </>
+                                            ) : (
+                                                <div className="absolute inset-0 flex items-center justify-center bg-white z-20">
+                                                    <div className="w-20 h-20">
+                                                        <DotLottieReact
+                                                            src="https://lottie.host/f5edc29d-7c20-49be-9b54-7c07fa26f2c6/wKHzGrk2QZ.lottie" // Using Rocket animation as placeholder for Cat animation
+                                                            loop
+                                                            autoplay
+                                                        />
+                                                    </div>
+                                                </div>
+                                            )}
+                                        </button>
                                     </motion.div>
                                 </div>
 
@@ -152,8 +177,8 @@ const Hero = () => {
                                             />
                                         </div>
 
-                                        <Link to="/projects" className="relative z-10 flex items-center justify-center px-6 py-2.5 sm:px-7 sm:py-3 bg-black sm:bg-gray-100 dark:bg-slate-800 border border-transparent dark:border-white/5 text-white sm:text-gray-800 dark:text-white font-bold rounded-[11px] shadow-xl overflow-hidden group/btn w-full sm:w-auto mt-0 sm:mt-0">
-                                            <span className="relative z-10 text-xs sm:text-sm uppercase tracking-wider">View Case Studies</span>
+                                        <Link to="/projects" className="relative z-10 flex items-center justify-center px-6 py-4 sm:px-7 sm:py-3 bg-gray-900 hover:bg-black sm:bg-gray-100 dark:bg-slate-800 border-2 border-transparent dark:border-white/5 text-white sm:text-gray-800 dark:text-white font-black rounded-[11px] shadow-[0_10px_30px_rgba(0,0,0,0.2)] hover:shadow-xl overflow-hidden group/btn w-full sm:w-auto mt-0 sm:mt-0 transition-all duration-300">
+                                            <span className="relative z-10 text-sm sm:text-sm uppercase tracking-wider font-black">View Case Studies</span>
                                         </Link>
                                     </motion.div>
                                 </div>

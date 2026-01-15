@@ -38,7 +38,7 @@ const ProductOrbitSection = () => {
                 </motion.p>
             </div>
 
-            <div className="flex justify-center items-center relative z-10 py-0 md:py-10 scale-[0.6] sm:scale-75 md:scale-90 lg:scale-100 origin-center -mt-12 md:mt-0">
+            <div className="flex justify-center items-center relative z-10 py-0 md:py-10 scale-[0.6] sm:scale-75 md:scale-90 lg:scale-100 origin-center -mt-12 -mb-24 md:mt-0 md:mb-0">
                 <RevolvingOrbit size="lg" />
             </div>
         </section>
