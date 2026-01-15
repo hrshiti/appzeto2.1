@@ -53,7 +53,7 @@ const Hero = () => {
             <Navbar />
 
             <main className="flex-grow flex flex-col relative">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-0 sm:pb-10 lg:pt-10 lg:pb-10 w-full relative z-10 flex-grow flex flex-col justify-center">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-0 sm:pb-10 lg:pt-32 lg:pb-10 w-full relative z-10 flex-grow flex flex-col justify-center">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center flex-grow">
                         <motion.div
                             initial={{ x: -70, opacity: 0 }}
@@ -191,7 +191,7 @@ const Hero = () => {
                             transition={{ duration: 1.5, ease: "easeOut" }}
                             className="hidden lg:flex items-center justify-center relative py-6 lg:py-0 w-full h-full"
                         >
-                            <div className="relative w-full max-w-[600px] aspect-square">
+                            <div className="relative w-full max-w-[800px] aspect-square scale-110">
                                 <DotLottieReact
                                     src="https://lottie.host/f5edc29d-7c20-49be-9b54-7c07fa26f2c6/wKHzGrk2QZ.lottie"
                                     loop

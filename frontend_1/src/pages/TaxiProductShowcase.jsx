@@ -364,7 +364,7 @@ const TaxiProductShowcase = () => {
                 <Navbar />
 
                 {/* --- Hero Section --- */}
-                <section className="relative min-h-0 md:h-screen flex items-center pt-28 md:pt-0 overflow-hidden">
+                <section className="relative min-h-screen flex items-center pt-28 md:pt-32 overflow-hidden">
                     {/* Background Blobs (Like screenshot) */}
                     <div className="absolute top-0 right-0 w-[80%] md:w-[60%] h-[120%] bg-[#fefce8] rounded-bl-full -z-10 translate-x-1/3 -translate-y-20"></div>
                     <motion.div style={{ y: heroBlobY }} className="absolute top-[5%] md:top-[10%] right-[3%] md:right-[5%] w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-[#00F2FE]/10 rounded-full blur-3xl -z-10"></motion.div>

@@ -176,7 +176,7 @@ const EcommerceProductShowcase = () => {
                 <Navbar />
 
                 {/* --- Hero Section --- */}
-                <section className="relative min-h-0 md:h-screen flex items-center pt-24 md:pt-0 overflow-hidden">
+                <section className="relative min-h-screen flex items-center pt-24 md:pt-32 overflow-hidden">
                     <div className="absolute top-0 right-0 w-[60%] h-[120%] bg-[#EEF2FF] rounded-bl-full -z-10 translate-x-1/3 -translate-y-20"></div>
                     <motion.div style={{ y: heroBlobY }} className="absolute md:top-[10%] md:right-[5%] w-[500px] h-[500px] bg-[#4F46E5]/10 rounded-full blur-3xl -z-10"></motion.div>
 

@@ -141,7 +141,7 @@ const Career = () => {
                 <Navbar />
 
                 {/* --- HERO SECTION --- */}
-                <div className="relative pt-24 md:pt-16 pb-8 md:pb-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto overflow-visible">
+                <div className="relative pt-24 md:pt-32 pb-8 md:pb-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto overflow-visible">
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 items-center">
                         <div className="lg:col-span-7 space-y-4 md:space-y-8 z-10">
                             <motion.div
