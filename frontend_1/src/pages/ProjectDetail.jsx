@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { useRef } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
 import Navbar from '../components/Navbar';
@@ -69,20 +70,55 @@ const ProjectDetail = () => {
         return <IconComponent className={className} size={size} />;
     };
 
+    // --- SUB-COMPONENT: Word Level Scroll Reveal ---
+    const Word = ({ children, progress, range }) => {
+        const opacity = useTransform(progress, range, [0.2, 1]);
+        return (
+            <span className="relative inline-block mr-1.5 align-top">
+                <motion.span style={{ opacity }}>
+                    {children}
+                </motion.span>
+            </span>
+        );
+    };
+
+    const ParagraphReveal = ({ text }) => {
+        const container = useRef(null);
+        const { scrollYProgress } = useScroll({
+            target: container,
+            offset: ["start 0.8", "start 0.3"]
+        });
+
+        const words = (text || "").split(" ");
+        return (
+            <p ref={container} className="flex flex-wrap text-xl md:text-2xl lg:text-3xl font-medium leading-[1.4] text-slate-900 tracking-tight">
+                {words.map((word, i) => {
+                    const start = i / words.length;
+                    const end = start + (1 / words.length);
+                    return (
+                        <Word key={i} progress={scrollYProgress} range={[start, end]}>
+                            {word}
+                        </Word>
+                    );
+                })}
+            </p>
+        );
+    };
+
     return (
         <ScrollWrapper>
             <Navbar />
             <div className="bg-[#F8FAFC] font-sans text-slate-800 selection:bg-[#05A4A7] selection:text-white">
 
                 {/* --- 1. HERO SECTION (Redesigned: Compact & Pixel Perfect) --- */}
-                <section className="relative pt-4 pb-0 lg:pt-8 lg:pb-0 px-6 md:px-12 lg:px-16 overflow-hidden min-h-fit lg:min-h-[500px] flex items-center bg-slate-50">
+                <section className="relative pt-28 pb-0 lg:pt-36 lg:pb-0 px-6 md:px-12 lg:px-16 overflow-hidden min-h-fit lg:min-h-[500px] flex items-center bg-slate-50">
                     {/* Background Decor */}
                     <div className="absolute inset-0 w-full h-full bg-slate-50 lg:bg-gradient-to-r lg:from-slate-100/50 lg:via-white lg:to-slate-50/50 -z-20" />
                     {/* Soft blurred circle behind text/laptop */}
                     <div className="absolute top-[10%] right-[-5%] w-[600px] h-[600px] bg-[#05A4A7]/10 blur-[100px] rounded-full -z-10 opacity-60 pointer-events-none" />
 
                     {/* Back Button (Absolute Top Left) */}
-                    <div className="absolute top-6 left-6 lg:left-12 z-20">
+                    <div className="absolute top-24 lg:top-24 left-6 lg:left-12 z-20">
                         <Link to="/projects" className="inline-flex items-center gap-2 text-slate-400 hover:text-[#05A4A7] transition-colors font-semibold text-[11px] uppercase tracking-wider">
                             <LucideIcons.ArrowLeft size={14} />
                             Back
@@ -210,10 +246,10 @@ const ProjectDetail = () => {
                 </section>
 
                 {/* --- 2. OVERVIEW (Redesigned: Clean, Compact & Aligned) --- */}
-                <section className="pt-16 md:pt-0 pb-16 px-6 md:px-12 lg:px-20 bg-white relative">
+                <section className="pt-16 md:pt-24 pb-24 md:pb-32 px-6 md:px-12 lg:px-20 bg-white relative">
                     <div className="max-w-[1300px] mx-auto w-full">
                         {/* Title Section - Top Left aligned */}
-                        <div className="mb-8 pl-1">
+                        <div className="mb-12 pl-1">
                             <h2 className="text-2xl md:text-3xl font-bold text-[#012828] tracking-tight">Project Overview</h2>
                         </div>
 
@@ -227,7 +263,7 @@ const ProjectDetail = () => {
                                 className="lg:col-span-7 flex justify-center"
                             >
                                 {/* Portrait iPhone Frame */}
-                                <div className="relative w-full max-w-[300px] aspect-[9/19] bg-black rounded-[2.5rem] border-[8px] border-slate-900 shadow-2xl overflow-hidden ring-4 ring-slate-200/50">
+                                <div className="relative w-full max-w-[300px] aspect-[9/18.5] bg-black rounded-[2.5rem] border-[8px] border-slate-900 shadow-2xl overflow-hidden ring-4 ring-slate-200/50">
                                     {/* Notch (Top for portrait) */}
                                     <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-6 bg-black rounded-b-xl z-20" />
 
@@ -255,27 +291,17 @@ const ProjectDetail = () => {
                                 </div>
                             </motion.div>
 
-                            {/* Text Content (Right) - Centered vertically */}
-                            <motion.div
-                                initial={{ opacity: 0, x: 20 }}
-                                whileInView={{ opacity: 1, x: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.5, delay: 0.2 }}
-                                className="lg:col-span-5 flex flex-col justify-center"
-                            >
-                                <div className="space-y-6">
-                                    <p className="text-[15px] md:text-base text-slate-600 leading-relaxed text-justify">
-                                        <span className="font-semibold text-slate-800">
-                                            {overview?.text?.split('.')[0] ? overview.text.split('.')[0] + '.' : "We developed a secure and robust platform."}
-                                        </span>
-                                        <span className="block mt-3">
-                                            {overview?.text?.substring(overview?.text?.indexOf('.') + 1) || "Our goal was to create an intuitive and scalable solution tailored to the specific needs of the sector, ensuring fast and reliable online transactions for all users."}
-                                        </span>
-                                    </p>
+                            <div className="lg:col-span-5 flex flex-col justify-center">
+                                <div className="space-y-8">
+                                    <div className="overflow-hidden">
+                                        <ParagraphReveal
+                                            text={overview?.text || "We developed a secure and robust platform. Our goal was to create an intuitive and scalable solution tailored to the specific needs of the sector, ensuring fast and reliable online transactions for all users."}
+                                        />
+                                    </div>
 
-                                    <div className="w-full h-px bg-slate-100" />
+                                    <div className="w-24 h-1.5 bg-[#05A4A7] rounded-full" />
                                 </div>
-                            </motion.div>
+                            </div>
                         </div>
                     </div>
                 </section>
