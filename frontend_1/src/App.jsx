@@ -20,6 +20,7 @@ import HospitalProductShowcase from './pages/HospitalProductShowcase'
 import ChannelPartnersPage from './pages/ChannelPartnersPage'
 import DemoCenter from './pages/DemoCenter'
 import OfficeDetail from './pages/OfficeDetail'
+import PrivacyPolicy from './pages/PrivacyPolicy'
 // Removed CustomCursor import
 import './App.css'
 
@@ -83,6 +84,7 @@ function App() {
             <Route path="/channel-partners" element={<ChannelPartnersPage />} />
             <Route path="/demo" element={<DemoCenter />} />
             <Route path="/offices/:slug" element={<OfficeDetail />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
 
             {/* Admin Authentication */}
             <Route path="/admin/login" element={<AdminLogin />} />
