@@ -41,15 +41,15 @@ const Projects = () => {
             <div className="bg-[#F8FAFC] min-h-screen font-sans text-slate-800 selection:bg-[#2563EB] selection:text-white overflow-x-hidden">
 
                 {/* --- HERO SECTION --- */}
-                <div className="relative w-full min-h-[350px] md:min-h-0 h-auto md:h-[350px] pt-24 md:pt-0 flex flex-col items-center justify-center text-center px-4 overflow-visible">
+                <div className="relative w-full min-h-[250px] md:min-h-0 h-auto md:h-[350px] pt-20 md:pt-0 flex flex-col items-center justify-center text-center px-4 overflow-visible">
                     {/* Background Image with Blue Tint */}
                     <div className="absolute inset-0 z-0">
                         <img
-                            src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?q=80&w=2613&auto=format&fit=crop"
-                            alt="City Background"
+                            src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=2670&auto=format&fit=crop"
+                            alt="Project Dashboard Background"
                             className="w-full h-full object-cover"
                         />
-                        <div className="absolute inset-0 bg-blue-900/40 mix-blend-multiply" />
+                        <div className="absolute inset-0 bg-blue-900/60 mix-blend-multiply" />
                     </div>
 
                     <div className="relative z-10 max-w-4xl mx-auto pt-4 md:pt-10">

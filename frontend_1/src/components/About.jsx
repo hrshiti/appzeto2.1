@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
-import groupImg from '../assets/group_photo.jpeg';
+import groupImg from '../assets/teamimage2.jpeg';
 
 const About = () => {
     // Observer for Animation Trigger

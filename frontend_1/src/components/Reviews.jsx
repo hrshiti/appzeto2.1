@@ -202,9 +202,7 @@ const Reviews = () => {
                                         <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
 
                                         {/* Appzeto Logo Icon (Replaced Leaf/Quote Icon) */}
-                                        <div className="absolute top-3 right-3 md:top-6 md:right-6 transform rotate-12">
-                                            <img src={logo} alt="Appzeto" className="w-6 h-6 md:w-10 md:h-10 object-contain" />
-                                        </div>
+                                        {/* Appzeto Logo Icon Removed */}
 
                                         {/* Stars */}
                                         <div className="flex space-x-1 mb-2 md:mb-4">

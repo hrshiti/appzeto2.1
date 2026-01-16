@@ -3,7 +3,10 @@ import { Link } from 'react-router-dom';
 import logo from '../assets/logo.png';
 import Navbar from '../components/Navbar';
 import AboutSections from '../components/AboutSections';
-import ceoImage from '../assets/ceo.jpeg';
+import ceoImage from '../assets/ceo new image.jpeg';
+import teamImg1 from '../assets/tech team image.jpeg';
+import teamImg2 from '../assets/teamimage2.jpeg';
+import teamImg3 from '../assets/team3image.jpeg';
 import ContactUs from '../components/ContactUs';
 import Footer from '../components/Footer';
 import ScrollReveal from '../components/ScrollReveal';
@@ -132,7 +135,7 @@ const AboutUs = () => {
                                 <img
                                     src={ceoImage}
                                     alt="CEO"
-                                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 hover:scale-105"
+                                    className="w-full h-full object-cover transition-all duration-700 hover:scale-105"
                                 />
                                 <div className="absolute bottom-0 left-0 w-full p-4 md:p-6 bg-gradient-to-t from-black/80 to-transparent">
                                     <p className="text-white text-lg md:text-xl font-bold">Sumit Jaiswal</p>
@@ -301,9 +304,9 @@ const AboutUs = () => {
                                 className="flex gap-4 w-max"
                             >
                                 {[
-                                    { name: "David Chen", role: "Lead Developer", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1974&auto=format&fit=crop", special: false },
-                                    { name: "Sarah Johnson", role: "Project Manager", img: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1976&auto=format&fit=crop", special: true },
-                                    { name: "Michael Ross", role: "AI Specialist", img: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=1974&auto=format&fit=crop", special: false }
+                                    { name: "Development Team", role: "Engineering Excellence", img: teamImg1, special: false },
+                                    { name: "Leadership Team", role: "Strategy & Vision", img: teamImg2, special: true },
+                                    { name: "Product Team", role: "Innovation & Design", img: teamImg3, special: false }
                                 ].map((member, i) => (
                                     <motion.div
                                         key={i}
@@ -344,9 +347,9 @@ const AboutUs = () => {
                                 className="grid md:grid-cols-3 gap-8"
                             >
                                 {[
-                                    { name: "David Chen", role: "Lead Developer", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1974&auto=format&fit=crop", special: false },
-                                    { name: "Sarah Johnson", role: "Project Manager", img: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1976&auto=format&fit=crop", special: true },
-                                    { name: "Michael Ross", role: "AI Specialist", img: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=1974&auto=format&fit=crop", special: false }
+                                    { name: "Development Team", role: "Engineering Excellence", img: teamImg1, special: false },
+                                    { name: "Leadership Team", role: "Strategy & Vision", img: teamImg2, special: true },
+                                    { name: "Product Team", role: "Innovation & Design", img: teamImg3, special: false }
                                 ].map((member, i) => (
                                     <motion.div
                                         key={i}

@@ -73,13 +73,14 @@ const Process = () => {
     const mobileRocketRef = useRef(null);
 
     useLayoutEffect(() => {
-        const ctx = gsap.context(() => {
+        let ctx = gsap.context(() => {
+            // DESKTOP ANIMATION
             if (pathRef.current && rocketRef.current) {
                 const pathLength = pathRef.current.getTotalLength();
-                // Set initial line state (hidden)
+                // Reset/Set initial state
                 gsap.set(pathRef.current, { strokeDasharray: pathLength, strokeDashoffset: pathLength });
 
-                // Create a proxy object to animate progress from 0 to 1
+                // Proxy object for progress
                 const progressObj = { value: 0 };
 
                 gsap.to(progressObj, {
@@ -87,9 +88,10 @@ const Process = () => {
                     ease: "none",
                     scrollTrigger: {
                         trigger: containerRef.current,
-                        start: "top 70%", // Starts early
-                        end: "bottom 40%", // Finishes while Goal is clearly visible
-                        scrub: 1,
+                        start: "top 80%",   // Start when section top is at 80% viewport
+                        end: "bottom 20%",  // End when section bottom is at 20% viewport (longer scroll distance)
+                        scrub: 0.5,         // Smooth scrubbing
+                        invalidateOnRefresh: true, // Recalculate on resize
                     },
                     onUpdate: () => {
                         // 1. Update Line Drawing
@@ -98,23 +100,19 @@ const Process = () => {
 
                         // 2. Update Rocket Position
                         const point = pathRef.current.getPointAtLength(drawLength);
-                        // Get points slightly behind and ahead to calculate smooth rotation
-                        const nextPoint = pathRef.current.getPointAtLength(Math.min(drawLength + 1, pathLength));
+                        // Look ahead for rotation
+                        const nextPoint = pathRef.current.getPointAtLength(Math.min(drawLength + 2, pathLength));
 
-                        // Calculate angle based on trajectory
                         let angle = 0;
                         if (nextPoint && point) {
                             angle = Math.atan2(nextPoint.y - point.y, nextPoint.x - point.x) * (180 / Math.PI);
                         }
 
-                        // Convert SVG coordinates to percentages relative to container
-                        const xPercent = (point.x / 900) * 100;
-                        const yPercent = (point.y / 600) * 100;
-
+                        // Update DOM
                         gsap.set(rocketRef.current, {
-                            left: `${xPercent}%`,
-                            top: `${yPercent}%`,
-                            rotation: angle + 45, // Adjusted to match the rocket icon's default orientation
+                            left: (point.x / 900) * 100 + "%",
+                            top: (point.y / 600) * 100 + "%",
+                            rotation: angle + 45,
                             force3D: true
                         });
                     }
@@ -126,9 +124,10 @@ const Process = () => {
                 const tl = gsap.timeline({
                     scrollTrigger: {
                         trigger: mobileWrapperRef.current,
-                        start: "top 60%",
-                        end: "bottom 60%",
-                        scrub: 1
+                        start: "top 75%",
+                        end: "bottom 25%",
+                        scrub: 0.5,
+                        invalidateOnRefresh: true,
                     }
                 });
 
@@ -136,8 +135,9 @@ const Process = () => {
                     .to(mobileRocketRef.current, { top: "100%", ease: "none" }, 0);
             }
 
-        }, containerRef);
-        return () => ctx.revert();
+        }, containerRef); // Scope to container
+
+        return () => ctx.revert(); // Cleanup
     }, []);
 
     return (

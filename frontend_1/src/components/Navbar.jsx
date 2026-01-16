@@ -66,6 +66,12 @@ const NAV_ITEMS = [
             { label: "Global Offices", link: "/about#offices" },
             { label: "Contact Us", link: "/contact#contact-form" }
         ]
+    },
+    {
+        title: "Ecommerce",
+        path: "/ecommerce",
+        description: "Buy premium ready-made apps and solutions.",
+        items: []
     }
 ];
 
@@ -217,64 +223,7 @@ const Navbar = () => {
         <>
             <nav className="fixed top-0 z-50 w-full bg-transparent md:bg-white/95 md:dark:bg-[#023638]/95 backdrop-blur-md border-b border-transparent md:border-gray-200 md:dark:border-gray-800 transition-all duration-300 pt-[env(safe-area-inset-top)]">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-                    {/* Background Rocket Animation - Behind Content */}
-                    <div className="absolute top-0 left-0 w-full h-full pointer-events-none overflow-hidden z-0">
-                        <motion.div
-                            animate={{
-                                x: ["5%", "90%", "5%"],
-                                y: [25, 20, 25], // Slight bob
-                                rotate: [45, 45, -135, -135, 45] // Rotate when turning. 0->50% is moving right (45deg), 50%->100% is moving left (-135deg)
-                            }}
-                            transition={{
-                                duration: 15,
-                                repeat: Infinity,
-                                ease: "linear",
-                                times: [0, 0.45, 0.5, 0.95, 1] // Timing to snap-turn or smooth turn
-                            }}
-                            className="absolute top-2 left-0 flex items-center justify-center w-12 h-12"
-                        >
-                            {/* Fire Trail - Rotated to match new rocket angles. 
-                                Rocket moving Right (45deg): Tail is at -135deg relative.
-                                Rocket moving Left (-135deg): Tail is at +45deg relative (180 offset).
-                                We need the fire to always be 'behind'.
-                                If we just attach it to rocket, it rotates with it. 
-                                Rocket nose is top-right at 45deg? Standard SVG is pointing top-left or left?
-                            */}
-                            {/* Let's assume Standard SVG points Top-Left (-45deg approx). 
-                                -135 rotation -> points Left. 
-                                45 rotation -> points Right.
-                                So Fire should be at +180deg from nose.
-                                If Rocket Div rotates, Fire Div inside rotates with it.
-                                We just need Fire at the 'back' of the rocket SVG.
-                            */}
 
-                            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 w-full h-full flex items-center justify-center" style={{ transform: 'rotate(135deg) translate(-20px, 0)' }}>
-                                {/* Adjusted fire position to be behind. 135deg puts it at bottom-right relative to center if 0 is right. */}
-                                {/* Actually, let's just place it manually relative to SVG */}
-                            </div>
-
-                            {/* Helper Container for Fire to ensure it sticks to tail */}
-                            <div className="absolute inset-0 flex items-center justify-center -z-10" style={{ transform: 'translateX(-20px) rotate(-45deg)' }}>
-                                {/* Simple Fire Trail */}
-                                <div className="w-16 h-4 bg-gradient-to-l from-orange-500 to-transparent rounded-full blur-sm opacity-80 animate-pulse"></div>
-                            </div>
-
-                            <svg
-                                viewBox="0 0 512 512"
-                                className="w-10 h-10 drop-shadow-md"
-                                xmlns="http://www.w3.org/2000/svg"
-                                style={{ transform: 'rotate(90deg)' }} // Adjust base rotation if needed to point right at 0deg
-                            >
-                                {/* Simplified Rocket Body - High Quality */}
-                                <g transform="rotate(-45 256 256)">
-                                    <path d="M377 210c-17-7-38-9-58-4s-37 18-48 34l-95 143c-6 9-5 21 2 28s20 8 28 2l143-95c16-11 29-28 34-48s3-41-4-58zm-79 38l-9.3 14c-4.9 7.3-15.1 8.9-22.1 3.5s-8.1-14.7-2.7-21.7L273 229c17-10 37-12 57-12 4 0 7 0 11 1 5 1 10 3 15 5-2 5-3 10-5 15-1 4-1 7-1 11z" fill="#E2E8F0" />
-                                    <path d="M192 416c-11 17-9 39 5 53s36 16 53 5l29-19-39-39-48 0zm-27-27l-56 0c-17 0-33-9-41-24s-8-32 3-45L122 248l39 39 19-39-16-64c-3-11-13-19-25-19s-21 8-24 19L97 274c-1 3-5 5-8 3s-5-5-3-8l18-90c4-19 22-31 41-29s34 16 34 35l14 57 21-32 29 29-14 30c-5-9-15-13-25-10s-16 12-14 22l11 49-36 0z" fill="#F87171" />
-                                    {/* Window */}
-                                    <circle cx="330" cy="180" r="20" fill="#3B82F6" />
-                                </g>
-                            </svg>
-                        </motion.div>
-                    </div>
 
                     <div className="flex justify-between items-center h-20 relative z-10">
                         {/* Logo */}
@@ -377,7 +326,7 @@ const Navbar = () => {
                                 to="/contact"
                                 className="px-3 py-1.5 bg-primary/10 text-primary text-xs font-bold rounded-full border border-primary/20"
                             >
-                                Inquiry
+                                Pitch Your Idea
                             </Link>
                             <button
                                 className="text-gray-900 dark:text-white hover:text-primary focus:outline-none p-1.5 relative w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 dark:bg-white/10"

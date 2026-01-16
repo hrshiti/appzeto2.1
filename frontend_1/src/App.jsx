@@ -15,6 +15,7 @@ import ProjectDetail from './pages/ProjectDetail'
 
 import TaxiProductShowcase from './pages/TaxiProductShowcase'
 import EcommerceProductShowcase from './pages/EcommerceProductShowcase'
+import Ecommerce from './pages/Ecommerce'
 import HospitalProductShowcase from './pages/HospitalProductShowcase'
 import ChannelPartnersPage from './pages/ChannelPartnersPage'
 import DemoCenter from './pages/DemoCenter'
@@ -76,6 +77,7 @@ function App() {
             <Route path="/appzeto-taxi" element={<TaxiProductShowcase />} />
             <Route path="/appzeto-ecommerce" element={<EcommerceProductShowcase />} />
             <Route path="/appzeto-hospital" element={<HospitalProductShowcase />} />
+            <Route path="/ecommerce" element={<Ecommerce />} />
             <Route path="/channel-partners" element={<ChannelPartnersPage />} />
             <Route path="/demo" element={<DemoCenter />} />
             <Route path="/offices/:slug" element={<OfficeDetail />} />

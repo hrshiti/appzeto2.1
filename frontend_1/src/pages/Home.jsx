@@ -51,9 +51,9 @@ const Home = () => {
                 <WhyChooseUs />
             </ScrollReveal>
 
-            <ScrollReveal>
+            {/*             <ScrollReveal>
                 <ProductOrbitSection />
-            </ScrollReveal>
+            </ScrollReveal> */}
 
             <ScrollReveal>
                 <AppzetoPartners />

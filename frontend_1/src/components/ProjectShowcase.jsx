@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
 import gsap from 'gsap';
+import axios from 'axios';
 import { projectsData } from '../data/projectsData';
 
 // --- Typewriter Effect Component ---
@@ -173,16 +174,48 @@ const ProjectShowcase = () => {
     const navigate = useNavigate();
     const [currentProjectIndex, setCurrentProjectIndex] = useState(0);
 
-    // --- Data Helpers ---
-    const carouselProjects = useMemo(() => {
-        let base = [...projectsData];
-        while (base.length < 6) {
-            base = [...base, ...projectsData];
-        }
-        return base.slice(0, 12);
+    const [apiProjects, setApiProjects] = useState([]);
+
+    // Fetch Projects from API
+    useEffect(() => {
+        const fetchProjects = async () => {
+            try {
+                const { data } = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/projects`);
+                if (data.success && data.data.length > 0) {
+                    setApiProjects(data.data);
+                } else {
+                    // Fallback to static data if API returns empty
+                    setApiProjects(projectsData);
+                }
+            } catch (error) {
+                console.error("Failed to fetch showcase projects, using fallback", error);
+                setApiProjects(projectsData);
+            }
+        };
+        fetchProjects();
     }, []);
 
+    // --- Data Helpers ---
+    const carouselProjects = useMemo(() => {
+        const sourceData = apiProjects.length > 0 ? apiProjects : [];
+        if (sourceData.length === 0) return [];
+
+        // Duplicate to ensure at least 6 items for smooth carousel if few items
+        let base = [...sourceData];
+        while (base.length < 6) {
+            base = [...base, ...sourceData];
+        }
+        return base.slice(0, 12);
+    }, [apiProjects]);
+
+    // Guard against empty data
+    if (carouselProjects.length === 0) {
+        return null; // Or return a loading skeleton
+    }
+
     const activeProject = carouselProjects[currentProjectIndex];
+
+    if (!activeProject) return null; // Should not happen with fallback
 
     const nextProject = () => {
         setCurrentProjectIndex((prev) => (prev + 1) % carouselProjects.length);

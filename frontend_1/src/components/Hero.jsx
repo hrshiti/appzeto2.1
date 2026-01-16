@@ -191,7 +191,7 @@ const Hero = () => {
                             transition={{ duration: 1.5, ease: "easeOut" }}
                             className="hidden lg:flex items-center justify-center relative py-6 lg:py-0 w-full h-full"
                         >
-                            <div className="relative w-full max-w-[800px] aspect-square scale-110">
+                            <div className="relative w-full max-w-[800px] aspect-square scale-125 md:scale-150">
                                 <DotLottieReact
                                     src="https://lottie.host/f5edc29d-7c20-49be-9b54-7c07fa26f2c6/wKHzGrk2QZ.lottie"
                                     loop
