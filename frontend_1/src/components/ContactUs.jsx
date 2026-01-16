@@ -288,13 +288,23 @@ const ContactUs = ({ isHomePage = false }) => {
                                     {
                                         icon: "call",
                                         label: "Phone",
-                                        info: settings.contactPhone,
+                                        info: (
+                                            <div className="flex flex-col">
+                                                <span>{settings.contactPhone}</span>
+                                                <span className="mt-1">+91 6375095971</span>
+                                            </div>
+                                        ),
                                         className: "text-blue-600 bg-blue-50 border-blue-100 group-hover:bg-blue-600 group-hover:border-blue-600 group-hover:text-white"
                                     },
                                     {
                                         icon: "alternate_email",
                                         label: "Email",
-                                        info: settings.contactEmail,
+                                        info: (
+                                            <div className="flex flex-col">
+                                                <span>{settings.contactEmail}</span>
+                                                <span className="mt-1">support@appzeto.com</span>
+                                            </div>
+                                        ),
                                         className: "text-orange-600 bg-orange-50 border-orange-100 group-hover:bg-orange-600 group-hover:border-orange-600 group-hover:text-white"
                                     },
                                     {
