@@ -3,10 +3,9 @@ import { Link } from 'react-router-dom';
 import logo from '../assets/logo.png';
 import Navbar from '../components/Navbar';
 import AboutSections from '../components/AboutSections';
-import ceoImage from '../assets/ceo new image.jpeg';
-import teamImg1 from '../assets/tech team image.jpeg';
-import teamImg2 from '../assets/teamimage2.jpeg';
-import teamImg3 from '../assets/team3image.jpeg';
+import dev1 from '../assets/developers.jpeg';
+import dev2 from '../assets/developers3.jpeg';
+import dev3 from '../assets/developers4.jpeg';
 import ContactUs from '../components/ContactUs';
 import Footer from '../components/Footer';
 import ScrollReveal from '../components/ScrollReveal';
@@ -117,10 +116,10 @@ const AboutUs = () => {
                             </div>
 
                             <div className="pt-4 md:pt-6">
-                                <p className="text-[10px] md:text-xs font-bold text-primary uppercase tracking-[0.2em] mb-3">LEADERSHIP</p>
+                                <p className="text-[10px] md:text-xs font-bold text-primary uppercase tracking-[0.2em] mb-3">OUR TEAM</p>
                                 <div className="flex flex-col items-start">
-                                    <h4 className="text-xl md:text-2xl font-bold text-gray-900 mb-1">Sumit Jaiswal</h4>
-                                    <p className="text-xs md:text-sm text-gray-500 font-medium">Founder & Chief Executive Officer</p>
+                                    <h4 className="text-xl md:text-2xl font-bold text-gray-900 mb-1">Building The Future</h4>
+                                    <p className="text-xs md:text-sm text-gray-500 font-medium">A dedicated team of developers, designers, and innovators.</p>
                                 </div>
                             </div>
                         </motion.div>
@@ -133,13 +132,13 @@ const AboutUs = () => {
                         >
                             <div className="aspect-[4/5] sm:aspect-[3/4] bg-gray-200 rounded-lg overflow-hidden relative group max-h-[350px] sm:max-h-none mx-auto w-full max-w-[280px] sm:max-w-none shadow-2xl">
                                 <img
-                                    src={ceoImage}
-                                    alt="CEO"
+                                    src={dev1}
+                                    alt="Appzeto Team"
                                     className="w-full h-full object-cover transition-all duration-700 hover:scale-105"
                                 />
                                 <div className="absolute bottom-0 left-0 w-full p-4 md:p-6 bg-gradient-to-t from-black/80 to-transparent">
-                                    <p className="text-white text-lg md:text-xl font-bold">Sumit Jaiswal</p>
-                                    <p className="text-primary text-xs md:text-sm font-medium">Founder & CEO</p>
+                                    <p className="text-white text-lg md:text-xl font-bold">Appzeto Team</p>
+                                    <p className="text-primary text-xs md:text-sm font-medium">Innovating Together</p>
                                 </div>
                             </div>
                         </motion.div>
@@ -224,7 +223,7 @@ const AboutUs = () => {
                 {/* New Middle Section */}
                 <AboutSections />
 
-                <section id="offices" className="py-8 md:py-16 bg-gray-50 overflow-hidden scroll-mt-20">
+                <section id="offices" className="py-8 md:py-16 bg-gray-50 overflow-hidden scroll-mt-20 hidden">
                     <div className="max-w-7xl mx-auto px-4 md:px-10">
                         <motion.div
                             {...fadeInUp}
@@ -304,9 +303,9 @@ const AboutUs = () => {
                                 className="flex gap-4 w-max"
                             >
                                 {[
-                                    { name: "Development Team", role: "Engineering Excellence", img: teamImg1, special: false },
-                                    { name: "Leadership Team", role: "Strategy & Vision", img: teamImg2, special: true },
-                                    { name: "Product Team", role: "Innovation & Design", img: teamImg3, special: false }
+                                    { name: "Development Team", role: "Engineering Excellence", img: dev1, special: false },
+                                    { name: "Leadership Team", role: "Strategy & Vision", img: dev2, special: true },
+                                    { name: "Product Team", role: "Innovation & Design", img: dev3, special: false }
                                 ].map((member, i) => (
                                     <motion.div
                                         key={i}
@@ -347,9 +346,9 @@ const AboutUs = () => {
                                 className="grid md:grid-cols-3 gap-8"
                             >
                                 {[
-                                    { name: "Development Team", role: "Engineering Excellence", img: teamImg1, special: false },
-                                    { name: "Leadership Team", role: "Strategy & Vision", img: teamImg2, special: true },
-                                    { name: "Product Team", role: "Innovation & Design", img: teamImg3, special: false }
+                                    { name: "Development Team", role: "Engineering Excellence", img: dev1, special: false },
+                                    { name: "Leadership Team", role: "Strategy & Vision", img: dev2, special: true },
+                                    { name: "Product Team", role: "Innovation & Design", img: dev3, special: false }
                                 ].map((member, i) => (
                                     <motion.div
                                         key={i}

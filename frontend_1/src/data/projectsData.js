@@ -15,91 +15,97 @@ import health3 from '../assets/projects/hospital_management3.jpg';
 
 import ecom1 from '../assets/projects/ecommerce2.webp';
 import ecom2 from '../assets/projects/ecommerce1.jpg';
+import ecomNew from '../assets/projects/ecommerce.jpeg';
 import ecom3 from '../assets/projects/ott platform.webp';
 
 import appDev from '../assets/projects/appdeveloment.png';
 import bankingHero from '../assets/projects/hotel booking dashboard2.avif'; // Update: Using dashboard img for banking
 import retailHero from '../assets/projects/software.webp'; // Update: Using software img for retail
 
+// New Imports
+import cabbieoImg from '../assets/projects/Cabbieo/WhatsApp Image 2026-01-13 at 3.16.50 PM.jpeg';
+import decorryImg from '../assets/projects/decory/hero-image.jpg';
+import ourDealsImg from '../assets/projects/our-deals/WhatsApp Image 2026-01-13 at 3.16.50 PM.jpeg';
+import healthApp from '../assets/apps/health.png';
+import shopApp from '../assets/apps/shop.png';
+
 export const projectsData = [
     {
-        id: "fleet-master",
-        title: "FLEET MASTER PRO",
-        slug: "fleet-master-pro",
-        subtitle: "Enterprise Logistics Ecosystem",
-        category: "LOGISTICS",
-        description: "A large-scale fleet management system for a global shipping giant, featuring real-time telemetry and AI-driven route optimization.",
-        fullDescription: "Fleet Master Pro was developed for one of the world's largest logistics providers to solve the complexity of managing 50,000+ vehicles across multiple continents. The system integrates IoT sensors, GPS tracking, and predictive maintenance schedules into a unified dashboard.",
-        thumbnail: logis1,
-        coverImage: logis2,
+        id: "cabbieo",
+        title: "Cabbieo",
+        slug: "cabbieo-taxi",
+        subtitle: "Next-Gen Ride Booking",
+        category: "TAXI BOOKING",
+        description: "A premium ride-booking platform offering seamless user experiences, real-time tracking, and efficient driver dispatching.",
+        fullDescription: "Cabbieo redefines urban mobility with a user-centric design and robust backend. From instant bookings to scheduled rides, it handles complex logistics with ease, ensuring passengers get to their destinations safely and on time.",
+        thumbnail: cabbieoImg,
+        coverImage: cabbieoImg,
         images: [
+            cabbieoImg,
             logis1,
-            logis2,
-            logis3,
-            logis1
+            logis2
         ],
-        tags: ["IoT", "Node.js", "AWS", "React"],
-        industry: "Global Logistics",
-        client: "TransWorld Shipping",
-        year: "2023",
-        challenge: "Managing massive data streams from IoT sensors while maintaining sub-second latency for dispatchers across different time zones.",
-        solution: "A serverless microservices architecture on AWS using Kinesis for stream processing and a highly optimized React dashboard for visualization.",
+        tags: ["Mobile App", "Maps", "Real-time", "Taxi"],
+        industry: "Transportation",
+        client: "Cabbieo Inc.",
+        year: "2024",
+        challenge: "Creating a highly responsive dispatch algorithm to minimize wait times during peak hours.",
+        solution: "Implemented an intelligent dispatch system using WebSocket for real-time driver-passenger matching.",
         features: [
-            "Real-time IoT Telemetry",
-            "Predictive Maintenance AI",
-            "Dynamic Dispatching System",
-            "Automated Compliance Filing",
-            "Cross-Border Customs Integration"
+            "Live Tracking",
+            "Secure Payments",
+            "Ride Scheduling",
+            "Driver Ratings",
+            "In-App Chat"
         ],
         results: [
-            "22% reduction in fuel costs",
-            "18% increase in delivery speed",
-            "99.9% system availability"
+            "40% faster pickup times",
+            "High user retention rate",
+            "Seamless payment integration"
         ],
         testimonial: {
-            text: "The efficiency gains we've seen since deploying Fleet Master Pro are staggering. It's not just a tool; it's the backbone of our global operations.",
-            author: "Marcus Thorne",
-            role: "Director of Logistics, TransWorld"
+            text: "Cabbieo has transformed our taxi operations. The app is intuitive and the dispatch system is flawless.",
+            author: "Operations Manager",
+            role: "Cabbieo"
         }
     },
     {
-        id: "neon-bank",
-        title: "NEON BANKING",
-        slug: "neon-banking-ui",
-        subtitle: "Digital Banking Revolution",
-        category: "FINTECH",
-        description: "Complete digital transformation of a legacy banking institution into a modern, mobile-first financial powerhouse.",
-        fullDescription: "Neon Banking represents a complete overhaul of traditional banking. We redesigned the core banking experience from the ground up, focusing on speed, security, and a minimalist UI that makes complex financial tasks intuitive.",
-        thumbnail: bankingHero,
-        coverImage: bankingHero,
+        id: "decorry",
+        title: "Decorry",
+        slug: "decorry-interior",
+        subtitle: "Modern Interior Design",
+        category: "E-COMMERCE",
+        description: "An immersive e-commerce platform for premium home decor, featuring AR visualization and curated collections.",
+        fullDescription: "Decorry brings the showroom experience to your screen. With high-quality visuals and an easy-to-navigate interface, customers can discover and purchase unique furniture and decor items to transform their living spaces.",
+        thumbnail: decorryImg,
+        coverImage: decorryImg,
         images: [
-            bankingHero,
-            ecom3,
-            logis3,
-            bankingHero
+            decorryImg,
+            ecom1,
+            ecom2
         ],
-        tags: ["Fintech", "Mobile App", "Security", "Swift"],
-        industry: "Financial Services",
-        client: "Neon Financial Group",
+        tags: ["E-commerce", "Interior Design", "Web App", "UI/UX"],
+        industry: "Retail / Home Decor",
+        client: "Decorry Studio",
         year: "2024",
-        challenge: "Migrating 2 million users from a 20-year-old mainframe system to a modern cloud-native architecture without a second of downtime.",
-        solution: "We implemented a dual-run strategy with a custom synchronization layer that allowed for a phased migration over six months.",
+        challenge: "Showcasing high-fidelity textures and product details without compromising site performance.",
+        solution: "Utilized advanced image optimization and lazy loading techniques alongside a high-performance frontend framework.",
         features: [
-            "Biometric Multi-Sig Security",
-            "Instant Cross-Border FX",
-            "AI Spending Insights",
-            "Crypto-Asset Wallet",
-            "Smart Savings Goals"
+            "360-degree Product View",
+            "AR Room Placement",
+            "Curated Lookbooks",
+            "Secure Checkout",
+            "Wishlist & Collections"
         ],
         results: [
-            "300% increase in mobile engagement",
-            "50% reduction in support calls",
-            "Top-rated banking app in 2024"
+            "Increased average order value",
+            "Significant reduction in returns",
+            "Award-winning UI design"
         ],
         testimonial: {
-            text: "Appzeto redefined our digital identity. The UI is breathtaking, and the migration was handled with surgical precision. Highly recommended.",
-            author: "Elena Rodriguez",
-            role: "CEO, Neon Financial Group"
+            text: "Our online sales skyrocketed after launching the new platform. Customers love the visual experience.",
+            author: "Sarah Jenkins",
+            role: "Founder, Decorry"
         }
     },
     {
@@ -110,13 +116,12 @@ export const projectsData = [
         category: "HEALTHCARE",
         description: "A centralized Electronic Health Record system connecting 200+ hospitals with real-time patient data sharing.",
         fullDescription: "HealthHub is a nationwide initiative to unify patient records. It allows doctors to access critical medical history instantly, reducing errors and saving lives in emergency situations.",
-        thumbnail: health1,
-        coverImage: health1,
+        thumbnail: food2,
+        coverImage: food2,
         images: [
-            health1,
+            food2,
             health2,
-            health3,
-            health1
+            health3
         ],
         tags: ["EHR", "Blockchain", "HIPAA", "React"],
         industry: "Medical / Enterprise",
@@ -143,44 +148,42 @@ export const projectsData = [
         }
     },
     {
-        id: "fresh-mart",
-        title: "FRESH MART APP",
-        slug: "fresh-mart-delivery",
-        subtitle: "Groceries in Minutes",
+        id: "our-deals",
+        title: "Our Deals",
+        slug: "our-deals-app",
+        subtitle: "Best Local Offers",
         category: "E-COMMERCE",
-        description: "A hyper-local grocery delivery app connecting 500+ local organic farms directly to urban consumers.",
-        fullDescription: "Fresh Mart revolutionizes how city dwellers shop for food. By cutting out the middlemen and prioritizing local produce, we ensure fresher food and fairer prices for farmers, all accessible via a slick mobile interface.",
-        thumbnail: foodHero,
-        coverImage: foodHero,
+        description: "A hyper-local deals discovery app connecting users with the best discounts and offers closer to them.",
+        fullDescription: "Our Deals aggregates exclusive offers from local businesses, restaurants, and service providers. It empowers small businesses to reach relevant customers while helping users save money on their daily purchases.",
+        thumbnail: ourDealsImg,
+        coverImage: ourDealsImg,
         images: [
-            foodHero,
-            food1,
-            food2,
+            ourDealsImg,
             food3,
             food4
         ],
-        tags: ["Next.js", "React Native", "Firebase", "Stripe"],
-        industry: "Retail / Food Tech",
-        client: "Fresh Mart Inc.",
+        tags: ["Deals", "Mobile App", "Location-based", "Marketing"],
+        industry: "Retail / Marketing",
+        client: "Our Deals Ltd.",
         year: "2024",
-        challenge: "Syncing real-time inventory from hundreds of small, non-digital farm vendors.",
-        solution: "A vendor-side 'Lite' app that allows farmers to update stock with a single tap, syncing instantly to the consumer platform.",
+        challenge: "Ensuring real-time accuracy of limited-time offers and location-based notifications.",
+        solution: "Built a geofencing engine that triggers notifications when users are near a participating store with active deals.",
         features: [
-            "Farm-to-Table Tracking",
-            "Live Delivery GPS",
-            "AI Recipe Suggestions",
-            "Subscription Boxes",
-            "Vendor Direct Chat"
+            "Location-based Alerts",
+            "QR Redistemption",
+            "Vendor Dashboard",
+            "Personalized Feed",
+            "Social Sharing"
         ],
         results: [
-            "20% increase in farmer revenue",
-            "35% growth in online revenue",
-            "Inventory waste reduced by 40%"
+            "High daily active users",
+            "Increased foot traffic for partners",
+            "Successful regional launch"
         ],
         testimonial: {
-            text: "This app didn't just help our business; it saved our farm. The direct connection to customers is exactly what the industry needed.",
-            author: "Sophia Laurent",
-            role: "Founder, Green Valley Farms"
+            text: "Our Deals helped us bring in new customers during our slow hours. It's a fantastic tool for local marketing.",
+            author: "Local Business Owner",
+            role: "Partner"
         }
     },
     {
@@ -191,13 +194,12 @@ export const projectsData = [
         category: "E-COMMERCE",
         description: "Omnichannel inventory and sales platform connecting 500 physical stores with a massive online presence.",
         fullDescription: "Retail Revive bridges the gap between physical and digital shopping. It provides a single pool of inventory and unified customer profiles, enabling 'buy online, return in-store' at scale.",
-        thumbnail: retailHero,
-        coverImage: retailHero,
+        thumbnail: ecomNew,
+        coverImage: ecomNew,
         images: [
-            retailHero,
+            ecomNew,
             ecom2,
-            ecom3,
-            retailHero
+            shopApp
         ],
         tags: ["Next.js", "GraphQL", "Redis", "ElasticSearch"],
         industry: "Retail / Fashion",

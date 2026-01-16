@@ -158,7 +158,8 @@ const Footer = () => {
                                     </div>
                                     <div>
                                         <p className="text-[10px] text-gray-500 uppercase font-black tracking-wide">Email</p>
-                                        <a href={`mailto:${settings.contactEmail}`} className="text-sm font-bold text-white group-hover:text-[#05A4A7] transition-colors">{settings.contactEmail}</a>
+                                        <a href={`mailto:${settings.contactEmail}`} className="text-sm font-bold text-white group-hover:text-[#05A4A7] transition-colors block">{settings.contactEmail}</a>
+                                        <a href="mailto:support@appzeto.com" className="text-sm font-bold text-white group-hover:text-[#05A4A7] transition-colors block mt-1">support@appzeto.com</a>
                                     </div>
                                 </div>
 
@@ -168,7 +169,8 @@ const Footer = () => {
                                     </div>
                                     <div>
                                         <p className="text-[10px] text-gray-500 uppercase font-black tracking-wide">Phone</p>
-                                        <a href={`tel:${settings.contactPhone.replace(/\D/g, '')}`} className="text-sm font-bold text-white group-hover:text-[#05A4A7] transition-colors">{settings.contactPhone}</a>
+                                        <a href={`tel:${settings.contactPhone.replace(/\D/g, '')}`} className="text-sm font-bold text-white group-hover:text-[#05A4A7] transition-colors block">{settings.contactPhone}</a>
+                                        <a href="tel:6375095971" className="text-sm font-bold text-white group-hover:text-[#05A4A7] transition-colors block mt-1">+91 6375095971</a>
                                     </div>
                                 </div>
 

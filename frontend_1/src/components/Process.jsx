@@ -88,10 +88,10 @@ const Process = () => {
                     ease: "none",
                     scrollTrigger: {
                         trigger: containerRef.current,
-                        start: "top 80%",   // Start when section top is at 80% viewport
-                        end: "bottom 20%",  // End when section bottom is at 20% viewport (longer scroll distance)
-                        scrub: 0.5,         // Smooth scrubbing
-                        invalidateOnRefresh: true, // Recalculate on resize
+                        start: "top center",   // Rocket starts when section hits center
+                        end: "bottom center",  // Rocket ends when section leaves center
+                        scrub: 0.5,            // Tighter syncing
+                        invalidateOnRefresh: true,
                     },
                     onUpdate: () => {
                         // 1. Update Line Drawing
@@ -124,8 +124,8 @@ const Process = () => {
                 const tl = gsap.timeline({
                     scrollTrigger: {
                         trigger: mobileWrapperRef.current,
-                        start: "top 75%",
-                        end: "bottom 25%",
+                        start: "top center",
+                        end: "bottom center",
                         scrub: 0.5,
                         invalidateOnRefresh: true,
                     }

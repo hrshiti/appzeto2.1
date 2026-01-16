@@ -30,7 +30,7 @@ const HappyClientsBar = () => {
         <section className="relative border-y border-emerald-900 bg-emerald-950 py-4 overflow-hidden">
             {/* PREMIUM WATERMARK OVERLAY */}
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
-                <span className="text-white font-black uppercase tracking-[0.3em] text-4xl sm:text-7xl lg:text-8xl opacity-[0.12] select-none">
+                <span className="text-white font-black uppercase tracking-[0.3em] text-4xl sm:text-7xl lg:text-8xl opacity-[0.12] select-none whitespace-nowrap">
                     HAPPY CLIENTS
                 </span>
             </div>

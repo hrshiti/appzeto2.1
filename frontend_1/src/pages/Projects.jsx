@@ -58,7 +58,7 @@ const Projects = () => {
                             Real-world solutions we’ve built for startups, businesses, and enterprises.
                         </p>
                         <div className="w-16 md:w-24 h-0.5 bg-blue-300/50 mx-auto my-2 md:my-4" />
-                        <p className="text-blue-100 text-xs md:text-sm font-light max-w-2xl mx-auto leading-relaxed">
+                        <p className="hidden md:block text-blue-100 text-xs md:text-sm font-light max-w-2xl mx-auto leading-relaxed">
                             We design, develop, and test powerful digital products that solve real business problems.
                         </p>
                     </div>

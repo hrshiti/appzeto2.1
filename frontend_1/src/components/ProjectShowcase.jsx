@@ -35,7 +35,7 @@ const PhoneMockup = ({ image, title, isActive }) => {
         <div className="relative group flex flex-col items-center">
             <div className={`
                 relative rounded-[0.8rem] sm:rounded-[1.5rem] md:rounded-[2rem] border-[2px] md:border-[4px] border-black bg-black overflow-hidden shadow-2xl
-                w-[80px] sm:w-[140px] md:w-[200px] aspect-[9/18] ring-1 ring-gray-800/50
+                w-[160px] sm:w-[160px] md:w-[220px] aspect-[9/18] ring-1 ring-gray-800/50
             `}>
                 {/* Phone Bezel/Camera - Black Style */}
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/3 h-3 md:h-4 bg-black rounded-b-lg z-20 flex justify-center items-center shadow-sm border-b border-x border-gray-800">
@@ -62,7 +62,7 @@ const PhoneMockup = ({ image, title, isActive }) => {
             {/* Title for Mobile & Desktop - ALWAYS VISIBLE */}
             <div className="absolute -bottom-8 md:-bottom-16 left-1/2 -translate-x-1/2 w-[200px] text-center z-50">
                 <h3 className={`
-                    text-[10px] sm:text-sm font-bold bg-white/90 backdrop-blur-sm px-3 py-1 sm:px-4 sm:py-2 rounded-full shadow-lg border border-slate-200 inline-block mx-auto leading-tight whitespace-nowrap transition-all duration-300
+                    text-sm sm:text-sm font-bold bg-white/90 backdrop-blur-sm px-3 py-1 sm:px-4 sm:py-2 rounded-full shadow-lg border border-slate-200 inline-block mx-auto leading-tight whitespace-nowrap transition-all duration-300
                     ${isActive ? 'text-slate-900 scale-100 opacity-100' : 'text-slate-500 scale-90 opacity-70'}
                 `}>
                     {title}
@@ -113,16 +113,16 @@ const ProjectCarousel = ({ projects, currentIndex, setCurrentIndex, navigate }) 
             const overlay = phone.querySelector('.mask-overlay');
 
             if (diff === 0) { // CENTER
-                config = { ...config, x: 0, scale: 1.1, opacity: 1, zIndex: 30, filter: "blur(0px)" };
+                config = { ...config, x: 0, scale: 1.0, opacity: 1, zIndex: 30, filter: "blur(0px)" };
                 if (overlay) gsap.to(overlay, { opacity: 0, duration: 0.5 });
             } else if (diff === 1 || diff === -(total - 1)) { // RIGHT
-                config = { ...config, x: 100, scale: 0.75, opacity: 1, zIndex: 10, filter: "blur(0px)" }; // Increased spacing, no blur
+                config = { ...config, x: 160, scale: 0.85, opacity: 1, zIndex: 10, filter: "blur(0px)" }; // Keep distinct for slider feel, wider spacing
 
                 if (window.innerWidth >= 1024) { config.x = 220; config.scale = 0.85; config.filter = "blur(0px)"; }
 
                 if (overlay) gsap.to(overlay, { opacity: 0.1, duration: 0.5 });
             } else if (diff === -1 || diff === (total - 1)) { // LEFT
-                config = { ...config, x: -100, scale: 0.75, opacity: 1, zIndex: 10, filter: "blur(0px)" };
+                config = { ...config, x: -160, scale: 0.85, opacity: 1, zIndex: 10, filter: "blur(0px)" };
                 if (window.innerWidth >= 1024) { config.x = -220; config.scale = 0.85; config.filter = "blur(0px)"; }
 
                 if (overlay) gsap.to(overlay, { opacity: 0.1, duration: 0.5 });
@@ -238,10 +238,10 @@ const ProjectShowcase = () => {
 
                     {/* 1. Main Static Heading Section */}
                     <div className="mb-4 md:mb-8 text-left w-full">
-                        <h1 className="text-3xl sm:text-4xl md:text-7xl font-bold text-slate-900 leading-tight tracking-tight drop-shadow-sm flex flex-col md:block items-center md:items-start text-center md:text-left">
-                            <span className="md:inline">Projects </span>
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-slate-600 to-slate-900 md:ml-2">
-                                We Created
+                        <h1 className="text-3xl sm:text-4xl md:text-7xl font-bold text-slate-900 leading-tight tracking-tight drop-shadow-sm flex flex-row items-center justify-center md:justify-start text-center md:text-left whitespace-nowrap gap-2">
+                            <span>Appzeto</span>
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-slate-600 to-slate-900">
+                                Project
                             </span>
                         </h1>
                     </div>
@@ -275,7 +275,7 @@ const ProjectShowcase = () => {
                             animate={{ opacity: 1, x: 0 }}
                             exit={{ opacity: 0, x: -50 }}
                             transition={{ duration: 0.5, ease: "easeInOut" }}
-                            className="space-y-1 md:space-y-2 mb-6 md:mb-6 w-full"
+                            className="hidden lg:block space-y-1 md:space-y-2 mb-6 md:mb-6 w-full"
                         >
                             <h3 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-slate-900 tracking-normal">
                                 <TypewriterText text={activeProject.title} />
@@ -286,8 +286,8 @@ const ProjectShowcase = () => {
                         </motion.div>
                     </AnimatePresence>
 
-                    {/* 3. MOBILE ONLY CAROUSEL (Between Title and Description) */}
-                    <div className="w-full h-[200px] mb-12 lg:hidden">
+                    {/* 3. MOBILE ONLY CAROUSEL (Between Title and Description) - Increased Height */}
+                    <div className="w-full h-[400px] mb-2 lg:hidden flex items-center justify-center">
                         <ProjectCarousel
                             projects={carouselProjects}
                             currentIndex={currentProjectIndex}
@@ -304,7 +304,7 @@ const ProjectShowcase = () => {
                             animate={{ opacity: 1, x: 0 }}
                             exit={{ opacity: 0, x: -50 }}
                             transition={{ duration: 0.5, delay: 0.1, ease: "easeInOut" }}
-                            className="space-y-3 md:space-y-6 max-w-lg"
+                            className="hidden lg:block space-y-3 md:space-y-6 max-w-lg"
                         >
                             <p className="text-slate-600 text-xs sm:text-base md:text-lg leading-relaxed font-normal">
                                 {activeProject.description}
@@ -322,7 +322,7 @@ const ProjectShowcase = () => {
                     </AnimatePresence>
 
                     {/* Static Actions - Outside Animation */}
-                    <div className="w-full pt-6 md:pt-6 flex items-center justify-center md:justify-start gap-4 md:gap-5">
+                    <div className="w-full pt-2 md:pt-6 flex items-center justify-center md:justify-start gap-4 md:gap-5">
                         <Link to="/projects">
                             <button className="px-6 md:px-8 py-3 bg-slate-900 text-white font-bold text-xs md:text-sm tracking-wide rounded-full hover:bg-slate-800 transition-all duration-300 flex items-center gap-2 shadow-lg hover:shadow-xl">
                                 View All Projects

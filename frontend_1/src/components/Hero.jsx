@@ -63,8 +63,9 @@ const Hero = () => {
                             className="space-y-4 sm:space-y-8 flex flex-col justify-center h-full"
                         >
                             {/* Mobile Heading */}
-                            <h1 className="lg:hidden text-4xl font-black text-gray-900 dark:text-white leading-[1.1] text-center mb-0 z-20 relative">
-                                Building Your <span className="text-[#05A4A7]">Digital Future.</span>
+                            <h1 className="lg:hidden flex flex-col items-center font-black text-gray-900 dark:text-white leading-tight text-center mb-0 z-20 relative">
+                                <span className="text-5xl">Building Your</span>
+                                <span className="text-3xl text-[#05A4A7] mt-1">Digital Future</span>
                             </h1>
 
                             {/* Desktop Heading */}
@@ -130,35 +131,18 @@ const Hero = () => {
                                         <button
                                             onClick={(e) => {
                                                 e.preventDefault();
-                                                setIsNavigating(true);
-                                                setTimeout(() => {
-                                                    navigate('/contact');
-                                                }, 2000);
+                                                navigate('/contact#contact-form');
                                             }}
                                             className="relative z-10 flex items-center justify-center px-7 py-3 bg-gradient-to-br from-[#05A4A7] to-[#037A7C] text-white font-black rounded-[11px] overflow-hidden group/btn w-full sm:w-auto cursor-pointer"
                                         >
-                                            {!isNavigating ? (
-                                                <>
-                                                    <span className="relative z-10 text-sm uppercase tracking-wider">Launch Your Dream</span>
-                                                    <motion.span
-                                                        className="relative z-10 material-icons ml-2 text-xl"
-                                                        animate={{ x: [0, 5, 0] }}
-                                                        transition={{ duration: 1, repeat: Infinity }}
-                                                    >
-                                                        rocket_launch
-                                                    </motion.span>
-                                                </>
-                                            ) : (
-                                                <div className="absolute inset-0 flex items-center justify-center bg-white z-20">
-                                                    <div className="w-20 h-20">
-                                                        <DotLottieReact
-                                                            src="https://lottie.host/f5edc29d-7c20-49be-9b54-7c07fa26f2c6/wKHzGrk2QZ.lottie" // Using Rocket animation as placeholder for Cat animation
-                                                            loop
-                                                            autoplay
-                                                        />
-                                                    </div>
-                                                </div>
-                                            )}
+                                            <span className="relative z-10 text-sm uppercase tracking-wider">Launch Your Dream</span>
+                                            <motion.span
+                                                className="relative z-10 material-icons ml-2 text-xl"
+                                                animate={{ x: [0, 5, 0] }}
+                                                transition={{ duration: 1, repeat: Infinity }}
+                                            >
+                                                rocket_launch
+                                            </motion.span>
                                         </button>
                                     </motion.div>
                                 </div>
@@ -255,7 +239,7 @@ const Hero = () => {
             {/* Mobile Fixed Sticky Button - Full Width */}
             {/* Mobile Fixed Sticky Button - Full Width */}
             <div className={`lg:hidden fixed bottom-0 left-0 w-full z-50 bg-[#05A4A7] shadow-[0_-4px_10px_rgba(0,0,0,0.1)] border-t border-[#049194] transition-transform duration-300 ${showFixedButton ? 'translate-y-0' : 'translate-y-full'}`}>
-                <Link to="/contact" className="flex items-center justify-center w-full py-3.5 text-white font-black uppercase tracking-wider text-xs active:bg-[#037A7C] transition-colors">
+                <Link to="/contact#contact-form" className="flex items-center justify-center w-full py-3.5 text-white font-black uppercase tracking-wider text-xs active:bg-[#037A7C] transition-colors">
                     Book Free Consultation
                     <span className="material-icons ml-2 text-lg">rocket_launch</span>
                 </Link>

@@ -60,12 +60,7 @@ const NAV_ITEMS = [
         title: "About Us",
         path: "/about",
         description: "Discover our story, mission, and the team behind the technology.",
-        items: [
-            { label: "Who We Are", link: "/about#we-are-appzeto" },
-            { label: "Leadership", link: "/about#meet-our-team" },
-            { label: "Global Offices", link: "/about#offices" },
-            { label: "Contact Us", link: "/contact#contact-form" }
-        ]
+        items: []
     },
     {
         title: "Ecommerce",
@@ -323,13 +318,14 @@ const Navbar = () => {
                         {/* Mobile Menu Button - PREMIUM Animated Icon */}
                         <div className="md:hidden flex items-center z-[70] gap-3">
                             <Link
-                                to="/contact"
+                                to="/contact#contact-form"
+                                onClick={() => handleLinkClick("/contact#contact-form")}
                                 className="px-3 py-1.5 bg-primary/10 text-primary text-xs font-bold rounded-full border border-primary/20"
                             >
                                 Pitch Your Idea
                             </Link>
                             <button
-                                className="text-gray-900 dark:text-white hover:text-primary focus:outline-none p-1.5 relative w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 dark:bg-white/10"
+                                className="text-gray-900 dark:text-white hover:text-primary focus:outline-none p-1.5 relative w-9 h-9 flex items-center justify-center rounded-full bg-white dark:bg-slate-900 shadow-md border border-gray-200 dark:border-gray-700"
                                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                             >
                                 <div className="flex flex-col justify-center items-center w-6 h-6 gap-[5px]">
