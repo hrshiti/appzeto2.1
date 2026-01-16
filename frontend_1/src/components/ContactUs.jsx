@@ -106,6 +106,7 @@ const ContactUs = ({ isHomePage = false }) => {
                     setSettings(prev => ({
                         ...prev,
                         ...loadedSettings,
+                        contactAddress: 'Office No 501, Princess center, 5th Floor, New Palasia, Indore, Madhya Pradesh 452001',
                         // Ensure social is merged correctly if partial, prioritizing defaults if API returns empty
                         social: {
                             linkedin: loadedSettings.social?.linkedin || prev.social.linkedin,

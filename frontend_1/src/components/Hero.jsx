@@ -60,7 +60,7 @@ const Hero = () => {
                             whileInView={{ x: 0, opacity: 1 }}
                             viewport={{ once: false, amount: 0.2 }}
                             transition={{ duration: 1.8, ease: [0.22, 1, 0.36, 1] }}
-                            className="space-y-4 sm:space-y-8 flex flex-col justify-center h-full"
+                            className="space-y-2 sm:space-y-4 flex flex-col justify-center h-full"
                         >
                             {/* Mobile Heading */}
                             <h1 className="lg:hidden flex flex-col items-center font-black text-gray-900 dark:text-white leading-tight text-center mb-0 z-20 relative">
@@ -75,7 +75,7 @@ const Hero = () => {
                             </h1>
 
                             <p className="hidden sm:block text-sm sm:text-base lg:text-lg text-gray-500 dark:text-gray-400 max-w-lg leading-relaxed font-medium">
-                                We help startups, founders, and businesses design, develop, and scale reliable digital products using modern technologies and proven development processes.
+                                We empower ambitious startups, visionary founders, and established enterprises to design, develop, and scale robust digital products. By leveraging cutting-edge technologies and adhering to proven, agile development methodologies, we transform complex ideas into high-performance, user-centric solutions that drive growth and deliver measurable results in today's competitive digital landscape.
                             </p>
 
                             <div className="lg:hidden relative flex flex-col items-center justify-center py-0 w-full overflow-visible -mt-8 -mb-4 flex-grow z-10">
@@ -113,7 +113,7 @@ const Hero = () => {
                                 </p>
                             </div>
 
-                            <div className="flex flex-col sm:flex-row gap-4 pt-0 lg:pt-4 w-full sm:w-auto mt-auto pb-8">
+                            <div className="flex flex-col sm:flex-row gap-4 pt-0 lg:pt-2 w-full sm:w-auto mt-auto pb-8">
                                 <div className="relative group w-full sm:w-auto">
                                     <motion.div
                                         whileHover={{ y: -6, scale: 1.05 }}
