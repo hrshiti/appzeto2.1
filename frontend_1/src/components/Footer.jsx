@@ -223,9 +223,10 @@ const Footer = () => {
                     <p className="text-gray-500 text-xs font-medium text-center md:text-left tracking-wide">
                         © {new Date().getFullYear()} Appzeto. All rights reserved.
                     </p>
-                    <div className="flex gap-4 md:gap-6">
-                        <Link to="/privacy-policy" className="text-gray-500 hover:text-[#05A4A7] text-xs font-medium transition-colors">Privacy Policy</Link>
-                        <Link to="/terms" className="text-gray-500 hover:text-[#05A4A7] text-xs font-medium transition-colors">Terms of Service</Link>
+                    <div className="flex flex-wrap justify-center md:justify-end gap-x-6 gap-y-2">
+                        <Link to="/privacy-policy#privacy" className="text-gray-500 hover:text-[#05A4A7] text-xs font-medium transition-colors">Privacy Policy</Link>
+                        <Link to="/privacy-policy#refund" className="text-gray-500 hover:text-[#05A4A7] text-xs font-medium transition-colors">Refund & Return</Link>
+                        <Link to="/privacy-policy#cancellation" className="text-gray-500 hover:text-[#05A4A7] text-xs font-medium transition-colors">Cancellation Policy</Link>
                     </div>
                 </div>
             </div>
