@@ -15,6 +15,7 @@ const createAdmin = async () => {
         // Check if exists
         let user = await User.findOne({ email });
 
+    
         if (user) {
             user.password = password;
             user.role = 'ADMIN';
