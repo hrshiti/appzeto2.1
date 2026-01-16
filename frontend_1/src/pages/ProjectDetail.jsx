@@ -111,7 +111,7 @@ const ProjectDetail = () => {
             <div className="bg-[#F8FAFC] font-sans text-slate-800 selection:bg-[#05A4A7] selection:text-white">
 
                 {/* --- 1. HERO SECTION (Redesigned: Compact & Pixel Perfect) --- */}
-                <section className="relative pt-28 pb-0 lg:pt-36 lg:pb-0 px-6 md:px-12 lg:px-16 overflow-hidden min-h-fit lg:min-h-[500px] flex items-center bg-slate-50">
+                <section className="relative pt-24 pb-0 lg:pt-36 lg:pb-0 px-4 md:px-12 lg:px-16 overflow-hidden min-h-fit lg:min-h-[500px] flex items-center bg-slate-50">
                     {/* Background Decor */}
                     <div className="absolute inset-0 w-full h-full bg-slate-50 lg:bg-gradient-to-r lg:from-slate-100/50 lg:via-white lg:to-slate-50/50 -z-20" />
                     {/* Soft blurred circle behind text/laptop */}
@@ -136,10 +136,10 @@ const ProjectDetail = () => {
                                 className="lg:col-span-3 order-2 lg:order-1"
                             >
                                 <div className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-[0_20px_40px_-10px_rgba(0,0,0,0.08)] border border-white p-6 relative group hover:-translate-y-1 transition-transform duration-300 w-full max-w-sm mx-auto lg:mx-0">
-                                    <h3 className="font-bold text-lg text-slate-800 mb-5 pb-3 border-b border-slate-100">
+                                    <h3 className="font-bold text-lg text-slate-800 mb-3 md:mb-5 pb-2 md:pb-3 border-b border-slate-100">
                                         Project Info
                                     </h3>
-                                    <div className="space-y-4">
+                                    <div className="grid grid-cols-2 md:grid-cols-1 gap-4 md:gap-0 md:space-y-4">
                                         <div className="flex flex-col">
                                             <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-0.5">Client</span>
                                             <span className="font-medium text-slate-700 text-sm">{info?.client || 'Confidential'}</span>
@@ -152,7 +152,7 @@ const ProjectDetail = () => {
                                             <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-0.5">Duration</span>
                                             <span className="font-medium text-slate-700 text-sm">{info?.duration || 'Ongoing'}</span>
                                         </div>
-                                        <div className="pt-2">
+                                        <div className="pt-0 md:pt-2 col-span-2 md:col-span-1">
                                             <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-2">Technologies</span>
                                             <div className="flex flex-wrap gap-2">
                                                 {techs.map((tech, i) => (
@@ -178,7 +178,7 @@ const ProjectDetail = () => {
                                     {category} <span className="text-slate-300 px-1">|</span> {project.industry}
                                 </div>
 
-                                <h1 className="text-4xl lg:text-[42px] font-black text-[#012828] leading-[1.1] mb-5 tracking-tight">
+                                <h1 className="text-3xl lg:text-[42px] font-black text-[#012828] leading-[1.1] mb-3 md:mb-5 tracking-tight">
                                     {hero?.title || title}
                                 </h1>
 
@@ -216,9 +216,9 @@ const ProjectDetail = () => {
                                 initial={{ opacity: 0, x: 30 }}
                                 animate={{ opacity: 1, x: 0 }}
                                 transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
-                                className="lg:col-span-4 relative order-3 lg:order-3 w-full flex justify-center lg:justify-end"
+                                className="lg:col-span-4 relative order-3 lg:order-3 w-full flex justify-center lg:justify-end mt-8 lg:mt-0"
                             >
-                                <div className="relative w-[260px] md:w-[280px] mx-auto lg:mr-0 perspective-1000">
+                                <div className="relative w-[220px] md:w-[280px] mx-auto lg:mr-0 perspective-1000">
                                     {/* Transforming the container to give it a slight pop */}
                                     <div className="relative z-10 transform transition-transform duration-500 hover:scale-[1.02] lg:rotate-y-[-12deg] lg:rotate-x-[2deg] preserve-3d">
                                         {/* iPhone Frame Container */}
@@ -246,10 +246,10 @@ const ProjectDetail = () => {
                 </section>
 
                 {/* --- 2. OVERVIEW (Redesigned: Clean, Compact & Aligned) --- */}
-                <section className="pt-16 md:pt-24 pb-24 md:pb-32 px-6 md:px-12 lg:px-20 bg-white relative">
+                <section className="pt-10 md:pt-24 pb-12 md:pb-32 px-4 md:px-12 lg:px-20 bg-white relative">
                     <div className="max-w-[1300px] mx-auto w-full">
                         {/* Title Section - Top Left aligned */}
-                        <div className="mb-12 pl-1">
+                        <div className="mb-6 md:mb-12 pl-1">
                             <h2 className="text-2xl md:text-3xl font-bold text-[#012828] tracking-tight">Project Overview</h2>
                         </div>
 
@@ -307,7 +307,7 @@ const ProjectDetail = () => {
                 </section>
 
                 {/* --- 3. CHALLENGE & SOLUTION (Redesigned: Picture Perfect) --- */}
-                <section className="py-20 px-6 md:px-12 lg:px-20 bg-slate-900 relative overflow-hidden">
+                <section className="py-10 md:py-20 px-4 md:px-12 lg:px-20 bg-slate-900 relative overflow-hidden">
                     {/* Background Noise/Texture */}
                     <div className="absolute inset-0 opacity-[0.4] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] blend-overlay pointer-events-none" />
                     {/* Subtle glow effects */}
@@ -321,7 +321,7 @@ const ProjectDetail = () => {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.5 }}
-                            className="bg-slate-800/40 backdrop-blur-md border border-white/5 rounded-xl p-8 shadow-2xl relative overflow-hidden group hover:border-white/10 transition-colors"
+                            className="bg-slate-800/40 backdrop-blur-md border border-white/5 rounded-xl p-5 md:p-8 shadow-2xl relative overflow-hidden group hover:border-white/10 transition-colors"
                         >
                             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
 
@@ -354,7 +354,7 @@ const ProjectDetail = () => {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.5, delay: 0.1 }}
-                            className="bg-[#048a8d] rounded-xl p-8 shadow-2xl relative overflow-hidden group hover:brightness-105 transition-all outline outline-1 outline-[#048a8d]/50"
+                            className="bg-[#048a8d] rounded-xl p-5 md:p-8 shadow-2xl relative overflow-hidden group hover:brightness-105 transition-all outline outline-1 outline-[#048a8d]/50"
                         >
                             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-teal-500/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
 
@@ -386,7 +386,7 @@ const ProjectDetail = () => {
                 </section>
 
                 {/* --- 4. MEDIA SHOWCASE (Redesigned: Pixel Perfect) --- */}
-                <section className="py-8 px-6 md:px-12 lg:px-20 bg-slate-50 relative">
+                <section className="py-8 px-4 md:px-12 lg:px-20 bg-slate-50 relative">
                     <div className="max-w-[1300px] mx-auto w-full">
                         {/* Title Section - Top Left aligned */}
                         <div className="mb-6 pl-1">
@@ -442,18 +442,18 @@ const ProjectDetail = () => {
                                 className="flex flex-col gap-4 justify-center"
                             >
                                 {/* Transforming the grid items into stacked pills as per reference */}
-                                <div className="grid grid-cols-1 gap-4">
+                                <div className="grid grid-cols-2 md:grid-cols-1 gap-3 md:gap-4">
                                     {mediaShowcase.items?.slice(0, 4).map((item, i) => (
                                         <motion.div
                                             key={i}
                                             whileHover={{ scale: 1.02 }}
-                                            className="flex items-center gap-4 p-4 md:p-5 bg-gradient-to-r from-slate-800 to-slate-900 rounded-lg shadow-lg border border-slate-700/50 group cursor-default"
+                                            className="flex flex-col md:flex-row items-start md:items-center gap-3 md:gap-4 p-4 md:p-5 bg-gradient-to-r from-slate-800 to-slate-900 rounded-lg shadow-lg border border-slate-700/50 group cursor-default"
                                         >
                                             <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-teal-500 to-emerald-600 flex items-center justify-center shadow-lg flex-shrink-0 group-hover:from-teal-400 group-hover:to-emerald-500 transition-all">
                                                 <DynamicIcon name={item.icon} className="text-white" size={24} />
                                             </div>
                                             <div className="flex-1">
-                                                <h4 className="text-lg font-bold text-white tracking-wide">{item.label}</h4>
+                                                <h4 className="text-sm md:text-lg font-bold text-white tracking-wide leading-tight">{item.label}</h4>
                                                 {/* Optional: Add subtitle if available in data, or static for design */}
                                                 {/* <p className="text-xs text-slate-400 font-medium uppercase tracking-wider">Features</p> */}
                                             </div>
@@ -486,7 +486,7 @@ const ProjectDetail = () => {
 
                 {/* --- 5. RESULTS & TESTIMONIALS (Reduced Padding) --- */}
                 {/* --- 5. RESULTS & IMPACT (Redesigned: Pixel Perfect) --- */}
-                <section className="py-12 px-6 md:px-12 lg:px-20 bg-white border-t border-slate-100">
+                <section className="py-8 md:py-12 px-4 md:px-12 lg:px-20 bg-white border-t border-slate-100">
                     <div className="max-w-[1100px] mx-auto w-full">
 
                         {/* Header: Title Centered */}
