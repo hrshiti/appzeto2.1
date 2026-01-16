@@ -24,6 +24,7 @@ const Footer = () => {
                     setSettings(prev => ({
                         ...prev,
                         ...loadedSettings,
+                        contactAddress: 'Office No 501, Princess center, 5th Floor, New Palasia, Indore, Madhya Pradesh 452001',
                         social: {
                             linkedin: loadedSettings.social?.linkedin || prev.social.linkedin,
                             instagram: loadedSettings.social?.instagram || prev.social.instagram,
