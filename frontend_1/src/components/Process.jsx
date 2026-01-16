@@ -90,7 +90,7 @@ const Process = () => {
                         trigger: containerRef.current,
                         start: "top center",   // Rocket starts when section hits center
                         end: "bottom center",  // Rocket ends when section leaves center
-                        scrub: 0.5,            // Tighter syncing
+                        scrub: 1.5,            // Tighter syncing
                         invalidateOnRefresh: true,
                     },
                     onUpdate: () => {
@@ -176,7 +176,7 @@ const Process = () => {
                            Row 3 Y: 500 (Gap = 220px)
                         */}
                         <path
-                            d="M 100 60 L 800 60 Q 900 60 900 170 Q 900 280 800 280 L 100 280 Q 20 280 20 390 Q 20 500 100 500 L 350 500"
+                            d="M 100 60 L 800 60 L 800 280 L 100 280 L 100 500 L 350 500"
                             fill="none"
                             stroke="#ffffff"
                             strokeOpacity="0.1"
@@ -184,7 +184,7 @@ const Process = () => {
                         />
                         <path
                             ref={pathRef}
-                            d="M 100 60 L 800 60 Q 900 60 900 170 Q 900 280 800 280 L 100 280 Q 20 280 20 390 Q 20 500 100 500 L 350 500"
+                            d="M 100 60 L 800 60 L 800 280 L 100 280 L 100 500 L 350 500"
                             fill="none"
                             stroke="#05A4A7"
                             strokeWidth="4"
@@ -203,15 +203,14 @@ const Process = () => {
                     {steps.map((step, index) => (
                         <motion.div
                             key={index}
-                            initial={{ opacity: 0, scale: 0.8 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
+                            initial={{ opacity: 0, scale: 0.8, x: "-50%", y: "-50%" }}
+                            whileInView={{ opacity: 1, scale: 1, x: "-50%", y: "-50%" }}
                             viewport={{ margin: "-50px" }}
                             transition={{ duration: 0.4, delay: index * 0.1 }}
-                            className="absolute flex flex-col items-center group"
+                            className="absolute flex flex-col items-center group z-40"
                             style={{
                                 left: `${(step.pos.left / 900) * 100}%`,
                                 top: `${(step.pos.top / 600) * 100}%`,
-                                transform: 'translate(-50%, -50%)',
                                 width: '220px'
                             }}
                         >

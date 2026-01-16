@@ -38,7 +38,7 @@ const Projects = () => {
     return (
         <ScrollWrapper>
             <Navbar />
-            <div className="bg-[#F8FAFC] min-h-screen font-sans text-slate-800 selection:bg-[#2563EB] selection:text-white overflow-x-hidden">
+            <div className="bg-[#F8FAFC] min-h-screen font-sans text-slate-800 selection:bg-[#05A4A7] selection:text-white overflow-x-hidden">
 
                 {/* --- HERO SECTION --- */}
                 <div className="relative w-full min-h-[250px] md:min-h-0 h-auto md:h-[350px] pt-20 md:pt-0 flex flex-col items-center justify-center text-center px-4 overflow-visible">
@@ -49,16 +49,16 @@ const Projects = () => {
                             alt="Project Dashboard Background"
                             className="w-full h-full object-cover"
                         />
-                        <div className="absolute inset-0 bg-blue-900/60 mix-blend-multiply" />
+                        <div className="absolute inset-0 bg-[#05A4A7]/60 mix-blend-multiply" />
                     </div>
 
                     <div className="relative z-10 max-w-4xl mx-auto pt-4 md:pt-10">
                         <h1 className="text-3xl md:text-5xl font-bold text-white mb-2 md:mb-4">Our Work</h1>
-                        <p className="text-blue-50 text-sm md:text-lg font-medium mb-1 md:mb-2 leading-tight">
+                        <p className="text-teal-50 text-sm md:text-lg font-medium mb-1 md:mb-2 leading-tight">
                             Real-world solutions we’ve built for startups, businesses, and enterprises.
                         </p>
-                        <div className="w-16 md:w-24 h-0.5 bg-blue-300/50 mx-auto my-2 md:my-4" />
-                        <p className="hidden md:block text-blue-100 text-xs md:text-sm font-light max-w-2xl mx-auto leading-relaxed">
+                        <div className="w-16 md:w-24 h-0.5 bg-[#05A4A7]/50 mx-auto my-2 md:my-4" />
+                        <p className="hidden md:block text-teal-100 text-xs md:text-sm font-light max-w-2xl mx-auto leading-relaxed">
                             We design, develop, and test powerful digital products that solve real business problems.
                         </p>
                     </div>
@@ -71,7 +71,7 @@ const Projects = () => {
                                     key={filter}
                                     onClick={() => setActiveFilter(filter)}
                                     className={`px-3 md:px-5 py-1.5 md:py-2 rounded-full text-[10px] md:text-xs font-semibold transition-all duration-300 ${activeFilter === filter
-                                        ? 'bg-[#1D4ED8] text-white'
+                                        ? 'bg-[#05A4A7] text-white'
                                         : 'bg-transparent text-slate-600 hover:bg-slate-50'
                                         }`}
                                 >
@@ -86,7 +86,7 @@ const Projects = () => {
                 <section className="pt-12 pb-8 md:pt-16 md:pb-16 px-4 md:px-8 lg:px-12 max-w-[1400px] mx-auto min-h-[50vh]">
                     {isLoading ? (
                         <div className="flex justify-center items-center h-64">
-                            <Loader2 className="animate-spin text-[#1D4ED8]" size={40} />
+                            <Loader2 className="animate-spin text-[#05A4A7]" size={40} />
                         </div>
                     ) : (
                         <motion.div
@@ -98,7 +98,7 @@ const Projects = () => {
                                 <div key={project._id || project.id} className="bg-white rounded-2xl overflow-hidden shadow-[0_20px_40px_rgb(0,0,0,0.1)] border border-slate-100 group flex flex-col transition-all duration-300">
                                     {/* Thumbnail */}
                                     <div className="h-40 overflow-hidden bg-slate-50 relative group">
-                                        <div className="absolute inset-0 bg-blue-900/0 group-hover:bg-blue-900/10 transition-colors duration-300 z-10" />
+                                        <div className="absolute inset-0 bg-[#05A4A7]/0 group-hover:bg-[#05A4A7]/10 transition-colors duration-300 z-10" />
                                         <img
                                             src={project.thumbnail}
                                             alt={project.title}
@@ -113,7 +113,7 @@ const Projects = () => {
                                     </div>
                                     {/* Content */}
                                     <div className="p-3 md:p-4 flex flex-col flex-1 text-left relative">
-                                        <h3 className="text-base md:text-lg font-bold text-slate-900 mb-1 group-hover:text-[#1D4ED8] transition-colors">{project.title}</h3>
+                                        <h3 className="text-base md:text-lg font-bold text-slate-900 mb-1 group-hover:text-[#05A4A7] transition-colors">{project.title}</h3>
                                         <p className="text-slate-500 text-xs leading-relaxed mb-3 line-clamp-3">{project.shortDescription}</p>
 
                                         <div className="mt-auto pt-2 md:pt-3 border-t border-slate-50 flex items-center justify-between">
@@ -126,7 +126,7 @@ const Projects = () => {
 
                                             <button
                                                 onClick={() => navigate(`/projects/${project.slug}`)}
-                                                className="w-8 h-8 rounded-full bg-[#1D4ED8] text-white flex items-center justify-center hover:bg-blue-800 transition-all duration-300"
+                                                className="w-8 h-8 rounded-full bg-[#05A4A7] text-white flex items-center justify-center hover:bg-[#037A7C] transition-all duration-300"
                                             >
                                                 <ArrowRight size={14} />
                                             </button>
@@ -152,14 +152,14 @@ const Projects = () => {
 
                     <div className="relative z-10 max-w-3xl mx-auto">
                         <h2 className="text-2xl md:text-3xl font-bold text-slate-800 mb-2">Have a project in mind?</h2>
-                        <p className="text-xl md:text-2xl text-[#1D4ED8] font-bold italic mb-8">
-                            Let’s build something <span className="underline decoration-[#1D4ED8]">great together.</span>
+                        <p className="text-xl md:text-2xl text-[#05A4A7] font-bold italic mb-8">
+                            Let’s build something <span className="underline decoration-[#05A4A7]">great together.</span>
                         </p>
 
                         <div className="flex flex-col sm:flex-row justify-center gap-4">
                             <button
                                 onClick={() => navigate('/contact')}
-                                className="px-8 py-3 bg-[#1D4ED8] text-white font-bold rounded hover:bg-blue-800 transition-colors flex items-center justify-center gap-2"
+                                className="px-8 py-3 bg-[#05A4A7] text-white font-bold rounded hover:bg-[#037A7C] transition-colors flex items-center justify-center gap-2"
                             >
                                 Request a Quote <ArrowRight size={16} />
                             </button>
