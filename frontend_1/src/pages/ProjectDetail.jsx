@@ -111,19 +111,13 @@ const ProjectDetail = () => {
             <div className="bg-[#F8FAFC] font-sans text-slate-800 selection:bg-[#05A4A7] selection:text-white">
 
                 {/* --- 1. HERO SECTION (Redesigned: Compact & Pixel Perfect) --- */}
-                <section className="relative pt-24 pb-0 lg:pt-36 lg:pb-0 px-4 md:px-12 lg:px-16 overflow-hidden min-h-fit lg:min-h-[500px] flex items-center bg-slate-50">
+                <section className="relative pt-20 pb-0 lg:pt-36 lg:pb-0 px-3 md:px-12 lg:px-16 overflow-hidden min-h-fit lg:min-h-[500px] flex items-center bg-slate-50">
                     {/* Background Decor */}
                     <div className="absolute inset-0 w-full h-full bg-slate-50 lg:bg-gradient-to-r lg:from-slate-100/50 lg:via-white lg:to-slate-50/50 -z-20" />
                     {/* Soft blurred circle behind text/laptop */}
                     <div className="absolute top-[10%] right-[-5%] w-[600px] h-[600px] bg-[#05A4A7]/10 blur-[100px] rounded-full -z-10 opacity-60 pointer-events-none" />
 
-                    {/* Back Button (Absolute Top Left) */}
-                    <div className="absolute top-24 lg:top-24 left-6 lg:left-12 z-20">
-                        <Link to="/projects" className="inline-flex items-center gap-2 text-slate-400 hover:text-[#05A4A7] transition-colors font-semibold text-[11px] uppercase tracking-wider">
-                            <LucideIcons.ArrowLeft size={14} />
-                            Back
-                        </Link>
-                    </div>
+
 
                     <div className="max-w-[1300px] mx-auto w-full relative z-10">
                         <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
@@ -246,7 +240,7 @@ const ProjectDetail = () => {
                 </section>
 
                 {/* --- 2. OVERVIEW (Redesigned: Clean, Compact & Aligned) --- */}
-                <section className="pt-10 md:pt-24 pb-12 md:pb-32 px-4 md:px-12 lg:px-20 bg-white relative">
+                <section className="pt-8 md:pt-24 pb-8 md:pb-32 px-3 md:px-12 lg:px-20 bg-white relative">
                     <div className="max-w-[1300px] mx-auto w-full">
                         {/* Title Section - Top Left aligned */}
                         <div className="mb-6 md:mb-12 pl-1">
@@ -307,42 +301,42 @@ const ProjectDetail = () => {
                 </section>
 
                 {/* --- 3. CHALLENGE & SOLUTION (Redesigned: Picture Perfect) --- */}
-                <section className="py-10 md:py-20 px-4 md:px-12 lg:px-20 bg-slate-900 relative overflow-hidden">
+                <section className="py-6 md:py-20 px-3 md:px-12 lg:px-20 bg-slate-900 relative overflow-hidden">
                     {/* Background Noise/Texture */}
                     <div className="absolute inset-0 opacity-[0.4] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] blend-overlay pointer-events-none" />
                     {/* Subtle glow effects */}
                     <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-blue-500/10 blur-[120px] rounded-full pointer-events-none" />
                     <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-teal-500/10 blur-[120px] rounded-full pointer-events-none" />
 
-                    <div className="max-w-[1300px] mx-auto w-full grid md:grid-cols-2 gap-8 relative z-10">
+                    <div className="max-w-[1300px] mx-auto w-full grid grid-cols-2 gap-3 md:gap-8 relative z-10">
                         {/* 1. The Challenge Card */}
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.5 }}
-                            className="bg-slate-800/40 backdrop-blur-md border border-white/5 rounded-xl p-5 md:p-8 shadow-2xl relative overflow-hidden group hover:border-white/10 transition-colors"
+                            className="bg-slate-800/40 backdrop-blur-md border border-white/5 rounded-xl p-3 md:p-8 shadow-2xl relative overflow-hidden group hover:border-white/10 transition-colors"
                         >
                             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
 
-                            <h3 className="text-xl font-bold text-white mb-4">The Challenge</h3>
-                            <div className="w-full h-px bg-white/10 mb-6" />
+                            <h3 className="text-sm md:text-xl font-bold text-white mb-2 md:mb-4">The Challenge</h3>
+                            <div className="w-full h-px bg-white/10 mb-3 md:mb-6" />
 
                             {/* Description from backend */}
                             {challenge?.description && (
-                                <p className="text-slate-300 text-[15px] leading-relaxed mb-6 font-medium opacity-90">
+                                <p className="text-slate-300 text-[10px] md:text-[15px] leading-relaxed mb-3 md:mb-6 font-medium opacity-90 line-clamp-4">
                                     {challenge.description}
                                 </p>
                             )}
 
-                            <ul className="space-y-4">
+                            <ul className="space-y-2 md:space-y-4">
                                 {challenge?.points?.map((pt, i) => (
-                                    <li key={i} className="flex items-start gap-3.5">
+                                    <li key={i} className="flex items-start gap-2 md:gap-3.5">
                                         {/* Blue Check Icon */}
-                                        <div className="mt-1 flex-shrink-0">
-                                            <LucideIcons.Check size={18} className="text-cyan-400 font-bold" strokeWidth={3} />
+                                        <div className="mt-0.5 md:mt-1 flex-shrink-0">
+                                            <LucideIcons.Check className="text-cyan-400 font-bold w-3 h-3 md:w-[18px] md:h-[18px]" strokeWidth={3} />
                                         </div>
-                                        <span className="text-slate-300 text-[15px] leading-relaxed font-medium">{pt}</span>
+                                        <span className="text-slate-300 text-[10px] md:text-[15px] leading-tight md:leading-relaxed font-medium">{pt}</span>
                                     </li>
                                 ))}
                             </ul>
@@ -354,30 +348,30 @@ const ProjectDetail = () => {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.5, delay: 0.1 }}
-                            className="bg-[#048a8d] rounded-xl p-5 md:p-8 shadow-2xl relative overflow-hidden group hover:brightness-105 transition-all outline outline-1 outline-[#048a8d]/50"
+                            className="bg-[#048a8d] rounded-xl p-3 md:p-8 shadow-2xl relative overflow-hidden group hover:brightness-105 transition-all outline outline-1 outline-[#048a8d]/50"
                         >
                             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-teal-500/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
 
-                            <h3 className="text-xl font-bold text-white mb-4">The Solution</h3>
-                            <div className="w-full h-px bg-white/10 mb-6" />
+                            <h3 className="text-sm md:text-xl font-bold text-white mb-2 md:mb-4">The Solution</h3>
+                            <div className="w-full h-px bg-white/10 mb-3 md:mb-6" />
 
                             {/* Description from backend */}
                             {solution?.description && (
-                                <p className="text-slate-300 text-[15px] leading-relaxed mb-6 font-medium opacity-90">
+                                <p className="text-slate-300 text-[10px] md:text-[15px] leading-relaxed mb-3 md:mb-6 font-medium opacity-90 line-clamp-4">
                                     {solution.description}
                                 </p>
                             )}
 
-                            <ul className="space-y-4">
+                            <ul className="space-y-2 md:space-y-4">
                                 {solution?.points?.map((pt, i) => (
-                                    <li key={i} className="flex items-start gap-3.5">
+                                    <li key={i} className="flex items-start gap-2 md:gap-3.5">
                                         {/* Green Filled Checkbox Icon */}
-                                        <div className="mt-0.5 flex-shrink-0">
-                                            <div className="w-5 h-5 bg-teal-500 rounded-[4px] flex items-center justify-center shadow-lg shadow-teal-500/20">
-                                                <LucideIcons.Check size={14} className="text-white" strokeWidth={3} />
+                                        <div className="mt-0.5 md:mt-0.5 flex-shrink-0">
+                                            <div className="w-3 h-3 md:w-5 md:h-5 bg-teal-500 rounded-[3px] md:rounded-[4px] flex items-center justify-center shadow-lg shadow-teal-500/20">
+                                                <LucideIcons.Check className="text-white w-2 h-2 md:w-[14px] md:h-[14px]" strokeWidth={3} />
                                             </div>
                                         </div>
-                                        <span className="text-slate-200 text-[15px] leading-relaxed font-medium">{pt}</span>
+                                        <span className="text-slate-200 text-[10px] md:text-[15px] leading-tight md:leading-relaxed font-medium">{pt}</span>
                                     </li>
                                 ))}
                             </ul>
@@ -497,11 +491,11 @@ const ProjectDetail = () => {
 
                         {/* Key Results Grid (Max 3) */}
                         {results && results.length > 0 && (
-                            <div className="flex flex-col md:flex-row justify-center items-center gap-8 md:gap-16 mb-10 max-w-4xl mx-auto">
+                            <div className="flex flex-row justify-around md:justify-center items-center gap-2 md:gap-16 mb-6 md:mb-10 max-w-4xl mx-auto px-2">
                                 {results.slice(0, 3).map((res, i) => (
-                                    <div key={i} className="text-center p-2 w-full md:w-auto">
-                                        <div className="text-5xl md:text-6xl font-black text-[#012828] mb-2 tracking-tight leading-none">{res.value}</div>
-                                        <div className="text-sm md:text-base font-extrabold text-[#05A4A7] uppercase tracking-wider">{res.label}</div>
+                                    <div key={i} className="text-center p-1 w-auto">
+                                        <div className="text-2xl md:text-6xl font-black text-[#012828] mb-1 md:mb-2 tracking-tight leading-none">{res.value}</div>
+                                        <div className="text-[9px] md:text-base font-extrabold text-[#05A4A7] uppercase tracking-wider leading-tight">{res.label}</div>
                                     </div>
                                 ))}
                             </div>
