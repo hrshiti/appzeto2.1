@@ -36,7 +36,11 @@ const globalSettingSchema = new mongoose.Schema({
         address: String,
         time: String,
         active: { type: Boolean, default: true }
-    }]
+    }],
+    pricing: {
+        oneTimePrice: { type: Number, default: 49999 },
+        monthlyEmiPrice: { type: Number, default: 4999 }
+    }
 }, {
     timestamps: true
 });

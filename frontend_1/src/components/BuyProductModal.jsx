@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, CheckCircle, CreditCard, CalendarClock } from 'lucide-react';
 import { createPortal } from 'react-dom';
@@ -11,8 +11,32 @@ const BuyProductModal = ({ isOpen, onClose, productTitle }) => {
         phone: '',
         paymentMode: 'one-time' // 'one-time' | 'emi'
     });
+    const [prices, setPrices] = useState({
+        oneTimePrice: 0,
+        monthlyEmiPrice: 0
+    });
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
+
+    useEffect(() => {
+        if (isOpen) {
+            fetchPrices();
+        }
+    }, [isOpen]);
+
+    const fetchPrices = async () => {
+        try {
+            const res = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/settings`);
+            if (res.data.success && res.data.data.pricing) {
+                setPrices({
+                    oneTimePrice: res.data.data.pricing.oneTimePrice,
+                    monthlyEmiPrice: res.data.data.pricing.monthlyEmiPrice
+                });
+            }
+        } catch (error) {
+            console.error("Failed to fetch product prices", error);
+        }
+    };
 
     if (!isOpen) return null;
 
@@ -28,19 +52,79 @@ const BuyProductModal = ({ isOpen, onClose, productTitle }) => {
         e.preventDefault();
         setIsSubmitting(true);
 
-        // Simulating API Call
         try {
-            // Replace with actual API endpoint if available, e.g., /api/orders/inquiry
-            await new Promise(resolve => setTimeout(resolve, 1500));
-            console.log("Purchase Inquiry:", { product: productTitle, ...formData });
-            setIsSuccess(true);
-            setTimeout(() => {
-                setIsSuccess(false);
-                onClose();
-                setFormData({ name: '', email: '', phone: '', paymentMode: 'one-time' });
-            }, 3000);
+            // Calculate Amount based on selection
+            const amount = formData.paymentMode === 'one-time' ? prices.oneTimePrice : prices.monthlyEmiPrice;
+
+            if (!amount || amount <= 0) {
+                alert("Invalid pricing configuration. Please contact support.");
+                return;
+            }
+
+            // 1. Create Order
+            const orderUrl = `${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/payments/create-order`;
+            console.log("Creating Order for:", productTitle, "Amount:", amount);
+            const { data } = await axios.post(orderUrl, {
+                ...formData,
+                amount: amount,
+                paymentPlan: formData.paymentMode,
+                productName: productTitle || 'Custom Product'
+            });
+
+            if (!data.success) {
+                throw new Error('Order creation failed');
+            }
+
+            const { order } = data;
+
+            // 2. Open Razorpay
+            const options = {
+                key: import.meta.env.VITE_RAZORPAY_KEY_ID,
+                amount: order.amount,
+                currency: order.currency,
+                name: "Appzeto",
+                description: `Payment for ${productTitle} (${formData.paymentMode === 'one-time' ? 'One Time' : 'EMI'})`,
+                order_id: order.id,
+                handler: async function (response) {
+                    try {
+                        const verifyUrl = `${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/payments/verify`;
+                        const verifyRes = await axios.post(verifyUrl, {
+                            razorpay_order_id: response.razorpay_order_id,
+                            razorpay_payment_id: response.razorpay_payment_id,
+                            razorpay_signature: response.razorpay_signature
+                        });
+
+                        if (verifyRes.data.success) {
+                            setIsSuccess(true);
+                            setTimeout(() => {
+                                setIsSuccess(false);
+                                onClose();
+                                setFormData({ name: '', email: '', phone: '', paymentMode: 'one-time' });
+                            }, 3000);
+                        } else {
+                            alert("Payment Verification Failed");
+                        }
+                    } catch (error) {
+                        console.error(error);
+                        alert("Payment Processing Error");
+                    }
+                },
+                prefill: {
+                    name: formData.name,
+                    email: formData.email,
+                    contact: formData.phone
+                },
+                theme: {
+                    color: "#1D4ED8"
+                }
+            };
+
+            const rzp1 = new window.Razorpay(options);
+            rzp1.open();
+
         } catch (error) {
             console.error("Submission failed", error);
+            alert("Failed to initiate payment. Please try again.");
         } finally {
             setIsSubmitting(false);
         }
@@ -90,7 +174,7 @@ const BuyProductModal = ({ isOpen, onClose, productTitle }) => {
                                     </div>
                                     <h3 className="text-2xl font-bold text-slate-800 mb-2">Request Received!</h3>
                                     <p className="text-slate-600 max-w-xs mx-auto">
-                                        Thank you for your interest. Our sales team will contact you shortly to finalize your purchase plan.
+                                        Thank you for your interest. Our sales team will contact you shortly.
                                     </p>
                                 </div>
                             ) : (
@@ -144,25 +228,33 @@ const BuyProductModal = ({ isOpen, onClose, productTitle }) => {
                                             {/* One Time */}
                                             <div
                                                 onClick={() => handlePaymentModeChange('one-time')}
-                                                className={`cursor-pointer border-2 rounded-xl p-4 flex flex-col items-center justify-center text-center transition-all duration-200 hover:shadow-md ${formData.paymentMode === 'one-time' ? 'border-[#1D4ED8] bg-blue-50/50' : 'border-slate-200 bg-white'}`}
+                                                className={`cursor-pointer border-2 rounded-xl p-4 flex flex-col items-center justify-center text-center transition-all duration-200 hover:shadow-md ${formData.paymentMode === 'one-time' ? 'border-[#1D4ED8] bg-blue-50/50 relative overflow-hidden' : 'border-slate-200 bg-white'}`}
                                             >
+                                                {formData.paymentMode === 'one-time' && (
+                                                    <div className="absolute top-0 right-0 bg-[#1D4ED8] text-white text-[10px] font-bold px-2 py-0.5 rounded-bl-lg">SELECTED</div>
+                                                )}
                                                 <div className={`w-10 h-10 rounded-full flex items-center justify-center mb-2 ${formData.paymentMode === 'one-time' ? 'bg-[#1D4ED8] text-white' : 'bg-slate-100 text-slate-500'}`}>
                                                     <CreditCard size={20} />
                                                 </div>
                                                 <span className={`font-bold text-sm ${formData.paymentMode === 'one-time' ? 'text-[#1D4ED8]' : 'text-slate-700'}`}>One-Time Payment</span>
-                                                <span className="text-xs text-slate-500 mt-1">Best Value</span>
+                                                <div className="text-lg font-black text-slate-800 mt-1">₹{prices.oneTimePrice.toLocaleString()}</div>
+                                                <span className="text-xs text-slate-500">Best Value</span>
                                             </div>
 
                                             {/* EMI */}
                                             <div
                                                 onClick={() => handlePaymentModeChange('emi')}
-                                                className={`cursor-pointer border-2 rounded-xl p-4 flex flex-col items-center justify-center text-center transition-all duration-200 hover:shadow-md ${formData.paymentMode === 'emi' ? 'border-[#1D4ED8] bg-blue-50/50' : 'border-slate-200 bg-white'}`}
+                                                className={`cursor-pointer border-2 rounded-xl p-4 flex flex-col items-center justify-center text-center transition-all duration-200 hover:shadow-md ${formData.paymentMode === 'emi' ? 'border-[#1D4ED8] bg-blue-50/50 relative overflow-hidden' : 'border-slate-200 bg-white'}`}
                                             >
+                                                {formData.paymentMode === 'emi' && (
+                                                    <div className="absolute top-0 right-0 bg-[#1D4ED8] text-white text-[10px] font-bold px-2 py-0.5 rounded-bl-lg">SELECTED</div>
+                                                )}
                                                 <div className={`w-10 h-10 rounded-full flex items-center justify-center mb-2 ${formData.paymentMode === 'emi' ? 'bg-[#1D4ED8] text-white' : 'bg-slate-100 text-slate-500'}`}>
                                                     <CalendarClock size={20} />
                                                 </div>
                                                 <span className={`font-bold text-sm ${formData.paymentMode === 'emi' ? 'text-[#1D4ED8]' : 'text-slate-700'}`}>Monthly EMI</span>
-                                                <span className="text-xs text-slate-500 mt-1">Flexible Plans</span>
+                                                <div className="text-lg font-black text-slate-800 mt-1">₹{prices.monthlyEmiPrice.toLocaleString()}</div>
+                                                <span className="text-xs text-slate-500">Flexible Plans</span>
                                             </div>
                                         </div>
                                     </div>
@@ -174,10 +266,10 @@ const BuyProductModal = ({ isOpen, onClose, productTitle }) => {
                                         className="w-full mt-4 bg-[#1D4ED8] hover:bg-blue-800 text-white font-bold py-4 rounded-xl shadow-lg shadow-blue-500/20 active:scale-[0.98] transition-all disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                                     >
                                         {isSubmitting ? (
-                                            <>Processing...</>
+                                            <>Processing Payment...</>
                                         ) : (
                                             <>
-                                                Proceed to Buy <span className="material-symbols-outlined text-sm">arrow_forward</span>
+                                                Proceed to Pay <span className="material-symbols-outlined text-sm">arrow_forward</span>
                                             </>
                                         )}
                                     </button>

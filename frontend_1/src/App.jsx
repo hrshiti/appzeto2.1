@@ -47,6 +47,8 @@ import AdminSettings from './admin/pages/AdminSettings'
 import AdminTeam from './admin/pages/AdminTeam'
 import AdminPartners from './admin/pages/AdminPartners'
 import AdminApplications from './admin/pages/AdminApplications'
+import AdminPayments from './admin/pages/AdminPayments'
+import AdminOrders from './admin/pages/AdminOrders'
 
 import { ToastProvider } from './admin/context/ToastContext'
 
@@ -109,6 +111,8 @@ function App() {
               <Route path="settings" element={<AdminSettings />} />
               {/* Team Removed */}
               <Route path="partners" element={<AdminPartners />} />
+              <Route path="payments" element={<AdminPayments />} />
+              <Route path="orders" element={<AdminOrders />} />
             </Route>
 
             {/* HR Routes (Accessible by HR and ADMIN) */}

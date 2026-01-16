@@ -4,6 +4,7 @@ import { useAdminAuth } from '../context/AdminAuthContext';
 import {
     LayoutDashboard,
     Briefcase,
+    CreditCard,
     FileText,
     Users,
     Settings,
@@ -101,6 +102,8 @@ const AdminLayout = () => {
                             <SidebarItem to="/admin/projects" icon={Briefcase} label="Projects" />
                             <SidebarItem to="/admin/blogs" icon={FileText} label="Blogs" />
                             <SidebarItem to="/admin/messages" icon={MessageSquare} label="Inquiries" />
+                            <SidebarItem to="/admin/orders" icon={CreditCard} label="Transactions" />
+                            <SidebarItem to="/admin/payments" icon={Settings} label="Payment Config" />
                             <SidebarItem to="/admin/leads" icon={Handshake} label="Sales Leads" />
                             <SidebarItem to="/hr/applications" icon={Users} label="Applications" />
                             <SidebarItem to="/admin/users" icon={UserPlus} label="Admin Users" />

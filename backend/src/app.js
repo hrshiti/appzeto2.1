@@ -55,6 +55,7 @@ const jobRoutes = require('./routes/jobRoutes');
 const contactRoutes = require('./routes/contactRoutes');
 const uploadRoutes = require('./routes/uploadRoutes');
 const formRoutes = require('./routes/formRoutes');
+const paymentRoutes = require('./routes/paymentRoutes');
 
 
 // Mount Routes
@@ -69,6 +70,7 @@ app.use('/api/videos', videoRoutes);
 app.use('/api/jobs', jobRoutes);
 app.use('/api/contact', contactRoutes);
 app.use('/api/forms', formRoutes);
+app.use('/api/payments', paymentRoutes);
 app.use('/api/upload', uploadRoutes);
 
 // Error Handling Middleware
