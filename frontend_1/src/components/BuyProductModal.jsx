@@ -26,7 +26,7 @@ const BuyProductModal = ({ isOpen, onClose, productTitle }) => {
 
     const fetchPrices = async () => {
         try {
-            const res = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/settings`);
+            const res = await axios.get(`${import.meta.env.VITE_API_URL || 'https://api.appzeto.com'}/api/settings`);
             if (res.data.success && res.data.data.pricing) {
                 setPrices({
                     oneTimePrice: res.data.data.pricing.oneTimePrice,
