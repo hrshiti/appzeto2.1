@@ -72,7 +72,7 @@ const ServiceCard = ({ service, index }) => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.1 }}
                 transition={{ duration: 0.3 }}
-                className="group relative flex-shrink-0 w-[160px] md:w-[280px] h-[260px] md:h-[420px] bg-[#062929] rounded-2xl overflow-hidden shadow-xl border border-transparent transition-all duration-500 hover:-translate-y-2"
+                className="group relative flex-shrink-0 w-[160px] md:w-[225px] h-[260px] md:h-[380px] bg-[#062929] rounded-2xl overflow-hidden shadow-xl border border-transparent transition-all duration-500 hover:-translate-y-2"
             >
                 {/* 1. Background Image (Base Layer) */}
                 <div className="absolute inset-0 z-0 h-full w-full">
@@ -85,32 +85,37 @@ const ServiceCard = ({ service, index }) => {
                     <div className="absolute inset-0 bg-[#062929]/90 mix-blend-multiply"></div>
                 </div>
 
-                {/* 2. White Hover Overlay (Fills from Bottom) */}
-                <div className="absolute bottom-0 left-0 right-0 h-0 bg-white z-10 group-hover:h-full transition-all duration-500 ease-in-out"></div>
+                {/* 2. Brand Teal Hover Overlay (Fills from Bottom) */}
+                <div className="absolute bottom-0 left-0 right-0 h-0 bg-[#05A4A7] z-10 group-hover:h-full transition-all duration-500 ease-in-out rounded-2xl"></div>
 
                 {/* 3. Content */}
                 <div className="relative z-20 flex flex-col h-full p-3 md:p-8">
                     {/* Header: Number Only */}
                     <div className="flex justify-end items-start mb-1 md:mb-2">
-                        <span className="text-3xl md:text-6xl font-bold text-white/50 group-hover:text-slate-200 transition-colors duration-300 leading-none select-none">
-                            {service.id}
-                        </span>
+                        <div className="relative h-10 md:h-20 w-full flex justify-end">
+                            <span className="absolute top-0 right-0 text-4xl md:text-7xl font-bold text-white/50 group-hover:opacity-0 transition-opacity duration-300 leading-none select-none">
+                                {service.id}
+                            </span>
+                            <span className="absolute -top-1 -right-1 md:-top-2 md:-right-2 material-icons text-5xl md:text-8xl text-[#05A4A7] opacity-0 group-hover:opacity-100 group-hover:text-white transition-all duration-300 leading-none select-none transform scale-90 group-hover:scale-100">
+                                {service.icon}
+                            </span>
+                        </div>
                     </div>
 
                     <div className="mt-auto">
-                        <h3 className="text-sm md:text-2xl font-bold text-white mb-1 md:mb-2 group-hover:text-slate-900 transition-colors duration-300 relative inline-block leading-tight">
+                        <h3 className="text-sm md:text-2xl font-bold text-white mb-1 md:mb-2 group-hover:text-white transition-colors duration-300 relative inline-block leading-tight">
                             {service.title}
                         </h3>
 
-                        <p className="text-slate-200 text-[10px] md:text-sm mb-2 md:mb-4 line-clamp-2 md:line-clamp-3 group-hover:text-slate-500 transition-colors duration-300 leading-relaxed font-medium">
+                        <p className="text-slate-200 text-[10px] md:text-sm mb-2 md:mb-4 line-clamp-2 md:line-clamp-3 group-hover:text-white/90 transition-colors duration-300 leading-relaxed font-medium">
                             {service.description}
                         </p>
 
                         <ul className="space-y-1 md:space-y-2">
                             {service.features.slice(0, 3).map((feature, i) => (
-                                <li key={i} className="flex items-center gap-1.5 md:gap-2.5 text-white/90 group-hover:text-slate-600 transition-colors duration-300">
-                                    <div className="w-3 h-3 md:w-4 md:h-4 rounded-full bg-[#05A4A7] group-hover:bg-[#05A4A7]/10 flex items-center justify-center flex-shrink-0 transition-colors">
-                                        <span className="material-icons text-white group-hover:text-[#05A4A7] text-[6px] md:text-[8px] font-bold">check</span>
+                                <li key={i} className="flex items-center gap-1.5 md:gap-2.5 text-white/90 group-hover:text-white transition-colors duration-300">
+                                    <div className="w-3 h-3 md:w-6 md:h-6 rounded-full bg-[#05A4A7] group-hover:bg-white flex items-center justify-center flex-shrink-0 transition-colors">
+                                        <span className="material-icons text-white group-hover:text-[#05A4A7] text-[6px] md:text-[10px] font-bold">check</span>
                                     </div>
                                     <span className="text-[9px] md:text-xs font-semibold truncate">{feature}</span>
                                 </li>
@@ -126,11 +131,11 @@ const ServiceCard = ({ service, index }) => {
 const Services = () => {
     return (
         <section className="bg-[#062929] min-h-0 lg:h-screen lg:min-h-[750px] flex flex-col justify-center pt-8 pb-8 md:py-10 overflow-hidden font-sans relative">
-            <div className="container mx-auto px-4 md:px-8 w-full max-w-[1500px]">
+            <div className="max-w-7xl mx-auto px-6 md:px-12 w-full">
                 {/* Header Section */}
                 <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-8 md:mb-10 gap-4 sm:gap-6">
                     <div className="max-w-3xl py-2 md:py-0">
-                        <span className="block text-[#05A4A7] font-bold tracking-[0.2em] uppercase text-xs md:text-sm mb-2 pl-1">
+                        <span className="block text-[#05A4A7] font-bold tracking-[0.2em] uppercase text-xs md:text-sm mb-2">
                             // Our Expertise
                         </span>
                         <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.1] mb-2 md:mb-0">
@@ -149,7 +154,7 @@ const Services = () => {
 
                 {/* Cards Container (Horizontal Scroll) */}
                 <div className="relative group/scroll">
-                    <div className="flex gap-3 md:gap-6 overflow-x-auto no-scrollbar pb-4 md:pb-10 px-2 mask-linear">
+                    <div className="flex gap-3 md:gap-4 overflow-x-auto no-scrollbar pb-4 md:pb-10 px-0 mask-linear">
                         {services.map((service, index) => (
                             <ServiceCard key={index} service={service} index={index} />
                         ))}

@@ -32,7 +32,7 @@ const StatCard = ({ value, suffix, label, index }) => {
             whileInView={{ opacity: 1, y: 0 }}
             whileHover={{ y: -10, transition: { duration: 0.3 } }}
             transition={{ duration: 0.5, delay: index * 0.15 }}
-            className="bg-white/95 backdrop-blur-xl p-2.5 md:p-6 rounded-xl md:rounded-2xl shadow-xl flex flex-col items-center justify-center text-center border border-white/20 w-full min-w-0 md:min-w-[180px] group hover:shadow-2xl hover:border-[#05A4A7]/30 transition-all duration-300"
+            className="bg-white/95 backdrop-blur-xl p-2.5 md:p-5 rounded-xl md:rounded-2xl shadow-xl flex flex-col items-center justify-center text-center border border-white/20 w-full min-w-0 md:min-w-[140px] group hover:shadow-2xl hover:border-[#05A4A7]/30 transition-all duration-300"
         >
             <div className="flex items-baseline md:mb-1 group-hover:scale-105 transition-transform duration-300">
                 <span ref={numberRef} className="text-xl md:text-4xl font-black text-[#012828] tracking-tighter">0</span>
@@ -67,10 +67,10 @@ const WhyChooseUs = () => {
                 }}
             />
 
-            <div className="relative z-10 w-full max-w-[1600px] mx-auto px-4 md:px-12 lg:px-24">
-                <div className="grid lg:grid-cols-12 gap-2 lg:gap-24 items-start">
+            <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
+                <div className="grid lg:grid-cols-12 gap-8 lg:gap-20 items-start">
 
-                    {/* LEFT SIDE: Heading (Takes ~40% width) */}
+                    {/* LEFT SIDE: Heading (Takes ~5 cols) */}
                     <div className="lg:col-span-5 flex flex-col justify-center h-full pt-4 lg:pt-0">
                         <motion.div
                             whileInView={{ opacity: 1, x: 0 }}
@@ -90,7 +90,7 @@ const WhyChooseUs = () => {
                             initial={{ opacity: 0, y: 40 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8, ease: "easeOut" }}
-                            className="text-4xl md:text-8xl lg:text-[110px] font-black text-white leading-[0.9] md:leading-[0.8] tracking-tighter uppercase mb-2 md:mb-6"
+                            className="text-3xl md:text-5xl lg:text-6xl font-black text-white leading-none tracking-tight uppercase mb-2 md:mb-6"
                         >
                             WHY <br />
                             <motion.span
@@ -133,8 +133,8 @@ const WhyChooseUs = () => {
                         </motion.div>
                     </div>
 
-                    {/* RIGHT SIDE: Detailed Content & Stats (Takes ~60% width) */}
-                    <div className="lg:col-span-7 flex flex-col justify-center gap-8 md:gap-10 h-full lg:pt-16">
+                    {/* RIGHT SIDE: Detailed Content & Stats (Takes ~6 cols - Compact) */}
+                    <div className="lg:col-span-6 lg:col-end-13 flex flex-col justify-center gap-8 md:gap-10 h-full lg:pt-16">
 
                         {/* 1. Main Tagline/Description */}
                         <motion.p
@@ -147,7 +147,7 @@ const WhyChooseUs = () => {
                         </motion.p>
 
                         {/* 2. Stats Grid */}
-                        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-6 w-full">
+                        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-5 w-full">
                             <StatCard value={12} suffix="+" label="Years Of Exp" index={0} />
                             <StatCard value={250} suffix="+" label="Happy Clients" index={1} />
                             <StatCard value={2} suffix="k+" label="Success Projects" index={2} />

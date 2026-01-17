@@ -2,6 +2,49 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import logo from '../assets/logo.png';
 
+const testimonials = [
+    {
+        id: 1,
+        name: "Rahul Sharma",
+        role: "CEO, TechFlow India",
+        text: "Appzeto transformed our digital presence. Their team's attention to detail and commitment to quality is unmatched. The final product exceeded our expectations.",
+        stars: 5,
+        img: "https://images.unsplash.com/photo-1566492031773-4f4e44671857?auto=format&fit=crop&w=100&q=80"
+    },
+    {
+        id: 2,
+        name: "Priya Malhotra",
+        role: "Founder, StartupX",
+        text: "Working with Appzeto was a game-changer. They understood our vision perfectly and delivered a scalable solution that helped us secure our Series A funding.",
+        stars: 5,
+        img: "https://images.unsplash.com/photo-1548142813-c348350df52b?auto=format&fit=crop&w=100&q=80"
+    },
+    {
+        id: 3,
+        name: "Vikram Singh",
+        role: "Marketing Director, Studio G",
+        text: "The UI/UX design provided by Appzeto is simply world-class. Our user engagement metrics have skyrocketed since the launch. Highly recommended!",
+        stars: 5,
+        img: "https://images.unsplash.com/photo-1531891437562-4301cf35b7e4?auto=format&fit=crop&w=100&q=80"
+    },
+    {
+        id: 4,
+        name: "Anjali Gupta",
+        role: "CTO, FutureNet Systems",
+        text: "Technical expertise at its finest. They tackled complex challenges with ease and delivered a robust, high-performance application on time and within budget.",
+        stars: 5,
+        img: "https://images.unsplash.com/photo-1588514332924-a36c6a8f15cc?auto=format&fit=crop&w=100&q=80"
+    },
+    {
+        id: 5,
+        name: "Arjun Mehta",
+        role: "Product Owner, CreativeSol",
+        text: "A true partner in development. Their proactive communication and agile methodology made the entire process smooth and transparent. We love our new app!",
+        stars: 4,
+        img: "https://images.unsplash.com/photo-1506277886164-e25aa3f4ef7f?auto=format&fit=crop&w=100&q=80"
+    }
+];
+
 const Reviews = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 768);
@@ -10,49 +53,6 @@ const Reviews = () => {
     const carouselRef = useRef(null);
     const [touchStart, setTouchStart] = useState(null);
     const [touchEnd, setTouchEnd] = useState(null);
-
-    const testimonials = [
-        {
-            id: 1,
-            name: "Rahul Sharma",
-            role: "CEO, TechFlow India",
-            text: "Appzeto transformed our digital presence. Their team's attention to detail and commitment to quality is unmatched. The final product exceeded our expectations.",
-            stars: 5,
-            img: "https://images.unsplash.com/photo-1566492031773-4f4e44671857?auto=format&fit=crop&w=100&q=80"
-        },
-        {
-            id: 2,
-            name: "Priya Malhotra",
-            role: "Founder, StartupX",
-            text: "Working with Appzeto was a game-changer. They understood our vision perfectly and delivered a scalable solution that helped us secure our Series A funding.",
-            stars: 5,
-            img: "https://images.unsplash.com/photo-1548142813-c348350df52b?auto=format&fit=crop&w=100&q=80"
-        },
-        {
-            id: 3,
-            name: "Vikram Singh",
-            role: "Marketing Director, Studio G",
-            text: "The UI/UX design provided by Appzeto is simply world-class. Our user engagement metrics have skyrocketed since the launch. Highly recommended!",
-            stars: 5,
-            img: "https://images.unsplash.com/photo-1531891437562-4301cf35b7e4?auto=format&fit=crop&w=100&q=80"
-        },
-        {
-            id: 4,
-            name: "Anjali Gupta",
-            role: "CTO, FutureNet Systems",
-            text: "Technical expertise at its finest. They tackled complex challenges with ease and delivered a robust, high-performance application on time and within budget.",
-            stars: 5,
-            img: "https://images.unsplash.com/photo-1588514332924-a36c6a8f15cc?auto=format&fit=crop&w=100&q=80"
-        },
-        {
-            id: 5,
-            name: "Arjun Mehta",
-            role: "Product Owner, CreativeSol",
-            text: "A true partner in development. Their proactive communication and agile methodology made the entire process smooth and transparent. We love our new app!",
-            stars: 4,
-            img: "https://images.unsplash.com/photo-1506277886164-e25aa3f4ef7f?auto=format&fit=crop&w=100&q=80"
-        }
-    ];
 
     useEffect(() => {
         const handleResize = () => {
@@ -138,9 +138,9 @@ const Reviews = () => {
                 <div className="absolute bottom-[-20%] right-[-10%] w-[400px] h-[400px] bg-purple-500/20 rounded-full blur-[80px] opacity-40 mix-blend-screen"></div>
             </div>
 
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+            <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10 w-full">
                 {/* Header */}
-                <div className="text-center mb-8 md:mb-10">
+                <div className="text-left mb-8 md:mb-10">
                     <motion.span
                         initial={{ opacity: 0, y: 10 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -164,7 +164,7 @@ const Reviews = () => {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.5, delay: 0.2 }}
-                        className="text-gray-400 text-sm md:text-base max-w-2xl mx-auto leading-relaxed"
+                        className="text-gray-400 text-sm md:text-base max-w-2xl leading-relaxed"
                     >
                         We help startups and businesses design, develop, and scale reliable digital products using modern technologies.
                     </motion.p>
@@ -178,12 +178,12 @@ const Reviews = () => {
                 >
                     {/* Items Wrapper */}
                     <div
-                        className="overflow-hidden px-2 -mx-2 py-4"
+                        className="overflow-hidden px-2 -mx-2 md:px-3 md:-mx-3 py-4"
                         onTouchStart={onTouchStart}
                         onTouchMove={onTouchMove}
                         onTouchEnd={onTouchEnd}
                     >
-                        <motion.div
+                        <div
                             ref={carouselRef}
                             className={`flex ${isTransitioning ? 'transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]' : ''}`}
                             onTransitionEnd={handleTransitionEnd}
@@ -196,13 +196,8 @@ const Reviews = () => {
                                     key={`${item.id}-${index}`}
                                     className="w-1/2 md:w-1/3 flex-shrink-0 px-2 md:px-3"
                                 >
-                                    <div className="h-full bg-white/5 backdrop-blur-xl border border-white/10 rounded-[1rem] md:rounded-[1.5rem] p-4 md:p-8 hover:bg-white/10 transition-colors duration-300 group shadow-lg relative overflow-hidden">
+                                    <div className="h-full bg-white/5 backdrop-blur-xl rounded-[1rem] md:rounded-[1.5rem] p-4 md:p-8 shadow-lg">
 
-                                        {/* Glow Effect on Hover */}
-                                        <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
-
-                                        {/* Appzeto Logo Icon (Replaced Leaf/Quote Icon) */}
-                                        {/* Appzeto Logo Icon Removed */}
 
                                         {/* Stars */}
                                         <div className="flex space-x-1 mb-2 md:mb-4">
@@ -234,16 +229,16 @@ const Reviews = () => {
                                     </div>
                                 </div>
                             ))}
-                        </motion.div>
+                        </div>
                     </div>
 
                     {/* Navigation Controls */}
                     <div className="flex justify-center items-center space-x-4 mt-8">
                         <button
                             onClick={prevSlide}
-                            className="p-2 rounded-full bg-white/5 border border-white/10 hover:bg-primary hover:text-white hover:border-primary text-white transition-all duration-300 group"
+                            className="p-2 rounded-full bg-white/5 border border-white/10 text-white"
                         >
-                            <span className="material-icons text-sm group-hover:-translate-x-1 transition-transform">arrow_back</span>
+                            <span className="material-icons text-sm">arrow_back</span>
                         </button>
 
                         {/* Pagination Dots */}
@@ -254,7 +249,7 @@ const Reviews = () => {
                                     onClick={() => goToSlide(index)}
                                     className={`h-1.5 rounded-full transition-all duration-300 ${index === currentIndex
                                         ? 'w-6 bg-primary'
-                                        : 'w-1.5 bg-white/20 hover:bg-white/40'
+                                        : 'w-1.5 bg-white/20'
                                         }`}
                                 />
                             ))}
@@ -262,9 +257,9 @@ const Reviews = () => {
 
                         <button
                             onClick={nextSlide}
-                            className="p-2 rounded-full bg-white/5 border border-white/10 hover:bg-primary hover:text-white hover:border-primary text-white transition-all duration-300 group"
+                            className="p-2 rounded-full bg-white/5 border border-white/10 text-white"
                         >
-                            <span className="material-icons text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                            <span className="material-icons text-sm">arrow_forward</span>
                         </button>
                     </div>
                 </div>

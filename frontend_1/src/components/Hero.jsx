@@ -53,17 +53,17 @@ const Hero = () => {
             <Navbar />
 
             <main className="flex-grow flex flex-col relative">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-0 sm:pb-10 lg:pt-32 lg:pb-10 w-full relative z-10 flex-grow flex flex-col justify-center">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center flex-grow">
+                <div className="max-w-7xl mx-auto px-6 md:px-12 pt-24 pb-0 sm:pb-10 lg:pt-32 lg:pb-10 w-full relative z-10 flex-grow flex flex-col justify-center">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center lg:items-start flex-grow">
                         <motion.div
                             initial={{ x: -70, opacity: 0 }}
                             whileInView={{ x: 0, opacity: 1 }}
                             viewport={{ once: false, amount: 0.2 }}
                             transition={{ duration: 1.8, ease: [0.22, 1, 0.36, 1] }}
-                            className="space-y-2 sm:space-y-4 flex flex-col justify-center h-full"
+                            className="space-y-2 sm:space-y-4 flex flex-col justify-center lg:justify-start h-full"
                         >
                             {/* Mobile Heading */}
-                            <h1 className="lg:hidden flex flex-col items-center font-black text-gray-900 dark:text-white leading-tight text-center mb-0 z-20 relative">
+                            <h1 className="lg:hidden flex flex-col items-start font-black text-gray-900 dark:text-white leading-tight text-left mb-0 z-20 relative">
                                 <span className="text-5xl">Building Your</span>
                                 <span className="text-3xl text-[#05A4A7] mt-1">Digital Future</span>
                             </h1>
@@ -173,7 +173,7 @@ const Hero = () => {
                             initial={{ opacity: 0, scale: 0.8 }}
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ duration: 1.5, ease: "easeOut" }}
-                            className="hidden lg:flex items-center justify-center relative py-6 lg:py-0 w-full h-full"
+                            className="hidden lg:flex items-center lg:items-start justify-center relative py-6 lg:py-0 w-full h-full"
                         >
                             <div className="relative w-full max-w-[800px] aspect-square scale-125 md:scale-150">
                                 <DotLottieReact
@@ -223,14 +223,14 @@ const Hero = () => {
                 </div>
             </main >
 
-            <section className="border-y border-gray-200 dark:border-gray-800 bg-primary/5 dark:bg-primary/10 overflow-hidden py-1.5 sm:py-4">
-                <div className="flex animate-scroll-fast whitespace-nowrap group">
+            <section className="border-y border-gray-200 dark:border-gray-800 bg-primary/5 dark:bg-primary/10 overflow-hidden py-1.5 sm:py-4 hover:bg-[#023638] transition-colors duration-300 group/ticker">
+                <div className="flex animate-scroll-fast whitespace-nowrap hover:[animation-play-state:paused]">
                     {[...serviceItems, ...serviceItems].map((item, index) => (
-                        <div key={index} className="flex items-center space-x-1.5 sm:space-x-3 mx-2 sm:mx-8 cursor-pointer hover:scale-110 transition-transform">
-                            <div className="p-1 sm:p-2.5 bg-gray-100 dark:bg-gray-800 rounded-lg sm:rounded-xl">
-                                <span className="material-icons text-gray-500 dark:text-gray-400 text-xs sm:text-lg">{item.icon}</span>
+                        <div key={index} className="mx-2 sm:mx-4">
+                            <div className="flex items-center space-x-2 sm:space-x-3 px-3 py-1.5 sm:px-5 sm:py-2.5 bg-gray-100 dark:bg-white/5 rounded-xl transition-all duration-300 group-hover/ticker:bg-white/10">
+                                <span className="material-icons text-gray-500 dark:text-gray-400 group-hover/ticker:text-white text-sm sm:text-xl transition-colors duration-300">{item.icon}</span>
+                                <span className="font-bold text-[10px] sm:text-sm text-gray-700 dark:text-gray-300 uppercase tracking-wider group-hover/ticker:text-white transition-colors duration-300">{item.label}</span>
                             </div>
-                            <span className="font-bold text-[10px] sm:text-base text-gray-700 dark:text-gray-300 uppercase tracking-wider">{item.label}</span>
                         </div>
                     ))}
                 </div>

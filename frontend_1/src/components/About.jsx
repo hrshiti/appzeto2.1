@@ -38,10 +38,10 @@ const About = () => {
         <div className="relative z-30 w-full bg-[#f6f8f8] dark:bg-[#012829] text-[#111817] transition-colors duration-200">
             <div className="flex-1">
                 {/* Vision Section */}
-                <section ref={sectionRef} className="relative w-full min-h-0 md:min-h-screen flex items-center justify-center pt-10 pb-2.5 md:py-20 px-4 sm:px-6 md:px-12 lg:px-16 overflow-hidden bg-[#ffffff] dark:bg-[#023638]">
+                <section ref={sectionRef} className="relative w-full min-h-0 md:min-h-screen flex items-center justify-center pt-10 pb-2.5 md:py-20 overflow-hidden bg-[#ffffff] dark:bg-[#023638]">
                     <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#05A4A7]/5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
                     <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-[#EAB308]/5 rounded-full blur-[80px] translate-y-1/3 -translate-x-1/3 pointer-events-none"></div>
-                    <div className="max-w-[1280px] mx-auto w-full">
+                    <div className="max-w-7xl mx-auto w-full px-6 md:px-12">
                         <div className="flex flex-col-reverse lg:grid lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-24 items-center h-full">
                             <motion.div
                                 initial={{ opacity: 0, x: -100 }}
@@ -64,7 +64,7 @@ const About = () => {
                                     </div>
                                 </div>
                                 <div className="absolute -top-4 -right-2 md:-right-6 right-0 bg-[#ffffff] dark:bg-[#023638] p-2 sm:p-4 pr-3 sm:pr-6 rounded-lg shadow-[0_8px_30px_rgb(0,0,0,0.12)] border-r-2 sm:border-r-4 border-[#05A4A7] flex flex-row-reverse items-center gap-2 sm:gap-4 hover:-translate-y-1 transition-transform duration-300 scale-90 sm:scale-100 origin-top-right z-30">
-                                    <div className="bg-[#05A4A7]/10 p-1.5 sm:p-2 rounded-full text-[#05A4A7]">
+                                    <div className="bg-[#05A4A7]/10 p-1.5 sm:p-2 rounded-full text-[#05A4A7] bg-white dark:bg-[#023638]">
                                         <span className="material-symbols-outlined text-base sm:text-2xl">verified</span>
                                     </div>
                                     <div className="text-right">
@@ -72,15 +72,15 @@ const About = () => {
                                         <p className="text-base sm:text-xl font-black text-[#111817] dark:text-white">98%</p>
                                     </div>
                                 </div>
-                                <div className="absolute -left-4 top-1/2 -translate-y-1/2 hidden lg:flex flex-col gap-3">
-                                    <div className="w-12 h-12 bg-white dark:bg-[#023638] rounded-full shadow-lg flex items-center justify-center text-[#EAB308] border border-gray-100 dark:border-gray-700 hover:scale-110 transition-transform cursor-default z-20" title="Python/AI">
-                                        <span className="material-symbols-outlined">smart_toy</span>
+                                <div className="absolute -left-3 md:-left-5 top-1/2 -translate-y-1/2 hidden lg:flex flex-col gap-3 z-30">
+                                    <div className="w-12 h-12 bg-white dark:bg-[#023638] rounded-full shadow-lg flex items-center justify-center text-[#EAB308] border border-gray-100 dark:border-gray-700 hover:scale-110 transition-transform cursor-default" title="Python/AI">
+                                        <span className="material-symbols-outlined text-xl">smart_toy</span>
                                     </div>
-                                    <div className="w-12 h-12 bg-white dark:bg-[#023638] rounded-full shadow-lg flex items-center justify-center text-[#05A4A7] border border-gray-100 dark:border-gray-700 hover:scale-110 transition-transform cursor-default z-20" title="React/Web">
-                                        <span className="material-symbols-outlined">code</span>
+                                    <div className="w-12 h-12 bg-white dark:bg-[#023638] rounded-full shadow-lg flex items-center justify-center text-[#05A4A7] border border-gray-100 dark:border-gray-700 hover:scale-110 transition-transform cursor-default" title="React/Web">
+                                        <span className="material-symbols-outlined text-xl">code</span>
                                     </div>
-                                    <div className="w-12 h-12 bg-white dark:bg-[#023638] rounded-full shadow-lg flex items-center justify-center text-indigo-500 border border-gray-100 dark:border-gray-700 hover:scale-110 transition-transform cursor-default z-20" title="Cloud">
-                                        <span className="material-symbols-outlined">cloud</span>
+                                    <div className="w-12 h-12 bg-white dark:bg-[#023638] rounded-full shadow-lg flex items-center justify-center text-indigo-500 border border-gray-100 dark:border-gray-700 hover:scale-110 transition-transform cursor-default" title="Cloud">
+                                        <span className="material-symbols-outlined text-xl">cloud</span>
                                     </div>
                                 </div>
 
@@ -118,14 +118,14 @@ const About = () => {
                                 className="relative z-10 w-full flex flex-col gap-2 sm:gap-5"
                             >
                                 <div className="flex flex-col gap-1 sm:gap-6">
-                                    <div className="mb-1 sm:mb-4">
-                                        <h1 className="text-xl sm:text-3xl md:text-4xl font-black tracking-tight text-slate-900 dark:text-white uppercase text-center sm:text-left">
+                                    <h2 className="text-lg md:text-xl font-bold text-[#05A4A7] leading-tight">
+                                        Engineering the Digital Future.
+                                    </h2>
+                                    <div className="mb-2 sm:mb-4">
+                                        <h1 className="text-3xl md:text-5xl lg:text-6xl font-black tracking-tight text-slate-900 dark:text-white uppercase text-center sm:text-left leading-none">
                                             Who We Are
                                         </h1>
                                     </div>
-                                    <h2 className="text-base sm:text-xl md:text-3xl font-bold text-[#05A4A7] leading-tight">
-                                        Engineering the Digital Future.
-                                    </h2>
 
                                     <div className="space-y-4 text-base sm:text-lg text-[#618983] dark:text-gray-400 leading-relaxed max-w-lg relative">
                                         {/* Mobile: Partial Text / Desktop: Full Text */}
@@ -138,7 +138,7 @@ const About = () => {
                                             </p>
                                             <p className="min-h-[3.5rem] mt-4">
                                                 {targetText.slice(0, charIndex)}
-                                                <span className="animate-pulse ml-0.5">|</span>
+                                                <span className="ml-0.5">|</span>
                                             </p>
 
                                             {/* Gradient Fade for Mobile when collapsed */}
