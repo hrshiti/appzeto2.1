@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, CheckCircle, CreditCard, CalendarClock } from 'lucide-react';
 import { createPortal } from 'react-dom';
-import axios from 'axios';
+import { dataService } from '../admin/services/dataService';
 
 const BuyProductModal = ({ isOpen, onClose, productTitle }) => {
     const [formData, setFormData] = useState({
@@ -26,11 +26,11 @@ const BuyProductModal = ({ isOpen, onClose, productTitle }) => {
 
     const fetchPrices = async () => {
         try {
-            const res = await axios.get(`${import.meta.env.VITE_API_URL || 'https://api.appzeto.com'}/api/settings`);
-            if (res.data.success && res.data.data.pricing) {
+            const settings = await dataService.getSettings();
+            if (settings && settings.pricing) {
                 setPrices({
-                    oneTimePrice: res.data.data.pricing.oneTimePrice,
-                    monthlyEmiPrice: res.data.data.pricing.monthlyEmiPrice
+                    oneTimePrice: settings.pricing.oneTimePrice,
+                    monthlyEmiPrice: settings.pricing.monthlyEmiPrice
                 });
             }
         } catch (error) {
@@ -62,9 +62,8 @@ const BuyProductModal = ({ isOpen, onClose, productTitle }) => {
             }
 
             // 1. Create Order
-            const orderUrl = `${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/payments/create-order`;
             console.log("Creating Order for:", productTitle, "Amount:", amount);
-            const { data } = await axios.post(orderUrl, {
+            const { data } = await dataService.createPaymentOrder({
                 ...formData,
                 amount: amount,
                 paymentPlan: formData.paymentMode,
@@ -87,13 +86,13 @@ const BuyProductModal = ({ isOpen, onClose, productTitle }) => {
                 order_id: order.id,
                 handler: async function (response) {
                     try {
-                        const verifyUrl = `${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/payments/verify`;
-                        const verifyRes = await axios.post(verifyUrl, {
+                        const verifyRes = await dataService.verifyPayment({
                             razorpay_order_id: response.razorpay_order_id,
                             razorpay_payment_id: response.razorpay_payment_id,
                             razorpay_signature: response.razorpay_signature
                         });
 
+                        // Accessing data from axios response
                         if (verifyRes.data.success) {
                             setIsSuccess(true);
                             setTimeout(() => {

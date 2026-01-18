@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import mapImage from '../assets/india_map_bg.png';
+import { dataService } from '../admin/services/dataService';
 
 const Pin = ({ label, top, left, labelPosition, color = "#05A4A7", delay }) => {
     // Determine label and line styles based on position
@@ -132,10 +133,10 @@ const AppzetoPartners = () => {
                 <div className="absolute top-0 right-6 md:right-12 z-30">
                     <button
                         onClick={() => setIsModalOpen(true)}
-                        className="group relative inline-flex items-center gap-2 px-6 py-3 bg-[#05A4A7] text-white font-bold rounded-full overflow-hidden transition-all duration-300 hover:scale-105 shadow-[0_0_20px_rgba(5,164,167,0.5)] hover:shadow-[0_0_30px_rgba(5,164,167,0.8)]"
+                        className="group relative inline-flex items-center gap-1.5 md:gap-2 px-3 py-2 md:px-6 md:py-3 bg-[#05A4A7] text-white font-bold rounded-full overflow-hidden transition-all duration-300 hover:scale-105 shadow-[0_0_20px_rgba(5,164,167,0.5)] hover:shadow-[0_0_30px_rgba(5,164,167,0.8)]"
                     >
-                        <span className="relative z-10 font-bold uppercase tracking-wider text-xs md:text-sm">Join as a Partner</span>
-                        <span className="material-symbols-outlined relative z-10 text-lg animate-arrow-bounce">arrow_forward</span>
+                        <span className="relative z-10 font-bold uppercase tracking-wider text-[10px] md:text-sm">Join as a Partner</span>
+                        <span className="material-symbols-outlined relative z-10 text-sm md:text-lg animate-arrow-bounce">arrow_forward</span>
 
                         {/* Pulse Ring */}
                         <span className="absolute inset-0 rounded-full ring-2 ring-white/30 group-hover:ring-4 group-hover:ring-white/50 transition-all duration-500 animate-pulse"></span>
@@ -317,25 +318,14 @@ const PartnerForm = ({ onClose }) => {
         setStatus('loading');
 
         try {
-            const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
-            const response = await fetch(`${API_URL}/api/contact/partner`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(formData)
-            });
+            await dataService.submitPartner(formData);
 
-            if (response.ok) {
-                setStatus('success');
-                setTimeout(() => {
-                    onClose();
-                    setStatus('idle');
-                    setFormData({ companyName: '', contactPerson: '', email: '', phone: '', businessType: '', message: '' });
-                }, 2000);
-            } else {
-                setStatus('error');
-            }
+            setStatus('success');
+            setTimeout(() => {
+                onClose();
+                setStatus('idle');
+                setFormData({ companyName: '', contactPerson: '', email: '', phone: '', businessType: '', message: '' });
+            }, 2000);
         } catch (error) {
             console.error(error);
             setStatus('error');

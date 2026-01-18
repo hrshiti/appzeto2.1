@@ -139,6 +139,10 @@ export const dataService = {
         return response.data;
     },
 
+    // --- Payments ---
+    createPaymentOrder: async (data) => api.post('/payments/create-order', data),
+    verifyPayment: async (data) => api.post('/payments/verify', data),
+
     // --- Media Uploads ---
     uploadImage: async (formData) => {
         const response = await api.post('/upload', formData, {
