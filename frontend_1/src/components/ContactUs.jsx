@@ -224,7 +224,7 @@ const ContactUs = ({ isHomePage = false }) => {
                         </motion.div>
                     </div>
 
-                    <div className="max-w-[1300px] mx-auto px-4 md:px-10 lg:px-24 relative -mt-16 md:-mt-48 lg:-mt-56 z-20">
+                    <div className="max-w-7xl mx-auto px-6 md:px-12 relative -mt-16 md:-mt-48 lg:-mt-56 z-20">
                         {/* --- TOP INQUIRY CARDS (Scroll Animation) --- */}
                         <motion.div
                             initial={{ opacity: 0, y: 50 }}
@@ -495,7 +495,7 @@ const ContactUs = ({ isHomePage = false }) => {
 
             {
                 !isHomePage && (
-                    <div className={`max-w-[1700px] mx-auto px-4 sm:px-10 lg:px-24 py-10 md:py-20`}>
+                    <div className={`max-w-7xl mx-auto px-6 md:px-12 py-10 md:py-20`}>
                         {/* --- VISIT OFFICES (Scroll Animation) --- */}
                         <motion.div
                             id="locations"

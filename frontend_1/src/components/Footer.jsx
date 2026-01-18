@@ -41,11 +41,11 @@ const Footer = () => {
     }, []);
 
     return (
-        <footer className="bg-[#012829] text-white pt-10 md:pt-20 pb-24 md:pb-8 px-6 md:px-12 relative z-20 border-t border-white/5 font-sans overflow-hidden">
+        <footer className="bg-[#012829] text-white pt-10 md:pt-20 pb-24 md:pb-8 relative z-20 border-t border-white/5 font-sans overflow-hidden">
             {/* Decorative Elements */}
             <div className="absolute top-0 right-0 w-96 h-96 bg-[#05A4A7]/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
 
-            <div className="max-w-7xl mx-auto relative z-10">
+            <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-10 lg:gap-8 mb-10 md:mb-16">
                     {/* Column 1: Brand & Social */}
                     <div className="col-span-2 lg:col-span-1 space-y-6">

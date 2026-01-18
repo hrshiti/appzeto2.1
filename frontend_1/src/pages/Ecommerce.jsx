@@ -7,13 +7,19 @@ import ScrollWrapper from '../components/ScrollWrapper';
 import BuyProductModal from '../components/BuyProductModal';
 import { ArrowRight, ShoppingBag, Truck, Car, ShoppingCart, Activity } from 'lucide-react';
 
+// Import Assets
+import foodHero from '../assets/projects/appzeto-food-hero.jpg';
+import taxiHero from '../assets/projects/taxi user.webp';
+import ecommerceHero from '../assets/projects/ecommerce.jpeg';
+import hospitalHero from '../assets/projects/hospital management.jpg';
+
 // Static Data for the 4 Core Products
 const PRODUCTS = [
     {
         id: 'food',
         title: 'Food Delivery Solution',
         description: 'A complete UberEats clone with Customer App, Restaurant App, Driver App, and Admin Dashboard. Ready to launch.',
-        thumbnail: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?q=80&w=2000&auto=format&fit=crop', // Replace with actual asset if available
+        thumbnail: foodHero,
         category: 'On-Demand',
         slug: 'appzeto-food',
         icon: <Truck size={20} className="text-orange-500" />
@@ -22,7 +28,7 @@ const PRODUCTS = [
         id: 'taxi',
         title: 'Taxi Booking Solution',
         description: 'Full-featured ride-booking solution like Uber. Includes Passenger App, Driver App, and Dispatch Panel.',
-        thumbnail: 'https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?q=80&w=2000&auto=format&fit=crop',
+        thumbnail: taxiHero,
         category: 'Transport',
         slug: 'appzeto-taxi',
         icon: <Car size={20} className="text-yellow-500" />
@@ -31,7 +37,7 @@ const PRODUCTS = [
         id: 'ecommerce',
         title: 'Multi-Vendor Ecommerce',
         description: 'Scalable marketplace solution like Amazon/Flipkart. Supports unlimited vendors, products, and categories.',
-        thumbnail: 'https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?auto=format&fit=crop&q=80&w=2000',
+        thumbnail: ecommerceHero,
         category: 'Retail',
         slug: 'appzeto-ecommerce',
         icon: <ShoppingCart size={20} className="text-blue-500" />
@@ -40,7 +46,7 @@ const PRODUCTS = [
         id: 'hospital',
         title: 'Hospital Management',
         description: 'Comprehensive HMS for clinics and hospitals. Manage patients, doctors, appointments, and billing efficiently.',
-        thumbnail: 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?q=80&w=2000&auto=format&fit=crop',
+        thumbnail: hospitalHero,
         category: 'Healthcare',
         slug: 'appzeto-hospital',
         icon: <Activity size={20} className="text-red-500" />

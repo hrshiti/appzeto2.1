@@ -105,6 +105,7 @@ const AdminLayout = () => {
                             <SidebarItem to="/admin/orders" icon={CreditCard} label="Transactions" />
                             <SidebarItem to="/admin/payments" icon={Settings} label="Payment Config" />
                             <SidebarItem to="/admin/leads" icon={Handshake} label="Sales Leads" />
+                            <SidebarItem to="/admin/partners" icon={Handshake} label="Partners" />
                             <SidebarItem to="/hr/applications" icon={Users} label="Applications" />
                             <SidebarItem to="/admin/users" icon={UserPlus} label="Admin Users" />
                             <SidebarItem to="/admin/settings" icon={Settings} label="Settings" />

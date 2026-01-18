@@ -52,7 +52,7 @@ const Pin = ({ label, top, left, labelPosition, color = "#05A4A7", delay }) => {
             {/* The Dot */}
             <div className="relative flex items-center justify-center">
                 <div
-                    className={`w-3 h-3 rounded-full z-20 shadow-md`}
+                    className={`w-3 h-3 rounded-full z-20`}
                     style={{ backgroundColor: color }}
                 />
                 <div
@@ -77,7 +77,7 @@ const Pin = ({ label, top, left, labelPosition, color = "#05A4A7", delay }) => {
 
                 {/* Label */}
                 <motion.div
-                    className="absolute bg-[#012828] text-white px-2 py-1 md:px-4 md:py-2 rounded md:rounded-lg shadow-lg whitespace-nowrap z-20"
+                    className="absolute bg-[#012828] text-white px-2 py-1 md:px-4 md:py-2 rounded md:rounded-lg whitespace-nowrap z-20"
                     style={labelStyle}
                     initial={{ opacity: 0, [effectivePosition === 'left' || effectivePosition === 'right' ? 'x' : 'y']: effectivePosition === 'left' ? 20 : -20 }}
                     whileInView={{ opacity: 1, x: 0, y: 0 }}
@@ -100,6 +100,7 @@ const PartnerStat = ({ number, text }) => (
 const AppzetoPartners = () => {
     const [isMobile, setIsMobile] = React.useState(false);
     const [isExpanded, setIsExpanded] = React.useState(false);
+    const [isModalOpen, setIsModalOpen] = React.useState(false);
 
     React.useEffect(() => {
         const check = () => setIsMobile(window.innerWidth < 768);
@@ -125,8 +126,25 @@ const AppzetoPartners = () => {
     ];
 
     return (
-        <section className="w-full py-10 md:py-20 bg-gray-50 overflow-hidden relative">
-            <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20">
+        <section className="w-full py-10 md:py-20 bg-white overflow-hidden relative">
+            <div className="max-w-7xl mx-auto px-6 md:px-12 relative">
+                {/* Floating CTA Button */}
+                <div className="absolute top-0 right-6 md:right-12 z-30">
+                    <button
+                        onClick={() => setIsModalOpen(true)}
+                        className="group relative inline-flex items-center gap-2 px-6 py-3 bg-[#05A4A7] text-white font-bold rounded-full overflow-hidden transition-all duration-300 hover:scale-105 shadow-[0_0_20px_rgba(5,164,167,0.5)] hover:shadow-[0_0_30px_rgba(5,164,167,0.8)]"
+                    >
+                        <span className="relative z-10 font-bold uppercase tracking-wider text-xs md:text-sm">Join as a Partner</span>
+                        <span className="material-symbols-outlined relative z-10 text-lg animate-arrow-bounce">arrow_forward</span>
+
+                        {/* Pulse Ring */}
+                        <span className="absolute inset-0 rounded-full ring-2 ring-white/30 group-hover:ring-4 group-hover:ring-white/50 transition-all duration-500 animate-pulse"></span>
+
+                        {/* Shimmer Effect */}
+                        <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></span>
+                    </button>
+                </div>
+
                 <div className="grid lg:grid-cols-2 gap-10 md:gap-16 items-center">
 
                     {/* Left Column: Content */}
@@ -152,7 +170,7 @@ const AppzetoPartners = () => {
                                 initial={{ opacity: 0, y: 40 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.8, ease: "easeOut" }}
-                                className="text-3xl md:text-7xl lg:text-[100px] font-black text-[#012828] leading-[0.9] md:leading-[0.85] tracking-tighter uppercase"
+                                className="text-3xl md:text-5xl lg:text-6xl font-black text-[#012828] leading-none tracking-tight uppercase"
                             >
                                 APPZETO <br />
                                 <motion.span
@@ -187,6 +205,8 @@ const AppzetoPartners = () => {
                             >
                                 {isExpanded ? 'Read Less' : 'Read More'}
                             </button>
+
+
                         </div>
 
                         <div className="grid grid-cols-2 gap-3 md:gap-8 pt-2 md:pt-6">
@@ -237,8 +257,200 @@ const AppzetoPartners = () => {
                         -webkit-text-stroke: 1px #012828;
                     }
                 }
+                @keyframes arrowBounceX {
+                    0%, 100% { transform: translateX(0); }
+                    50% { transform: translateX(5px); }
+                }
+                .animate-arrow-bounce {
+                    animation: arrowBounceX 1.5s infinite ease-in-out;
+                }
             ` }} />
+
+            {/* PARTNER FORM MODAL */}
+            {isModalOpen && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.9 }}
+                        className="bg-white rounded-2xl shadow-2xl w-full max-w-lg overflow-hidden relative"
+                    >
+                        {/* Modal Header */}
+                        <div className="bg-[#012828] p-6 text-white flex justify-between items-center">
+                            <div>
+                                <h3 className="text-xl font-bold">Become a Partner</h3>
+                                <p className="text-white/60 text-xs mt-1">Join the Appzeto Network</p>
+                            </div>
+                            <button onClick={() => setIsModalOpen(false)} className="text-white/70 hover:text-white">
+                                <span className="material-symbols-outlined">close</span>
+                            </button>
+                        </div>
+
+                        {/* Modal Body */}
+                        <div className="p-6">
+                            <PartnerForm onClose={() => setIsModalOpen(false)} />
+                        </div>
+                    </motion.div>
+                </div>
+            )}
         </section>
+    );
+};
+
+const PartnerForm = ({ onClose }) => {
+    const [formData, setFormData] = React.useState({
+        companyName: '',
+        contactPerson: '',
+        email: '',
+        phone: '',
+        businessType: '',
+        message: ''
+    });
+    const [status, setStatus] = React.useState('idle'); // idle, loading, success, error
+
+    const handleChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setStatus('loading');
+
+        try {
+            const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+            const response = await fetch(`${API_URL}/api/contact/partner`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            });
+
+            if (response.ok) {
+                setStatus('success');
+                setTimeout(() => {
+                    onClose();
+                    setStatus('idle');
+                    setFormData({ companyName: '', contactPerson: '', email: '', phone: '', businessType: '', message: '' });
+                }, 2000);
+            } else {
+                setStatus('error');
+            }
+        } catch (error) {
+            console.error(error);
+            setStatus('error');
+        }
+    };
+
+    if (status === 'success') {
+        return (
+            <div className="flex flex-col items-center justify-center py-8 text-center">
+                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4">
+                    <span className="material-symbols-outlined text-green-600 text-3xl">check</span>
+                </div>
+                <h4 className="text-xl font-bold text-slate-800">Application Submitted!</h4>
+                <p className="text-slate-500 mt-2 text-sm">Our team will review your details and get back to you shortly.</p>
+            </div>
+        );
+    }
+
+    return (
+        <form onSubmit={handleSubmit} className="space-y-4">
+            <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-1">
+                    <label className="text-xs font-bold text-slate-700 uppercase">Company Name</label>
+                    <input
+                        type="text"
+                        name="companyName"
+                        required
+                        value={formData.companyName}
+                        onChange={handleChange}
+                        className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:outline-none focus:border-[#05A4A7] text-sm"
+                        placeholder="Tech Solutions Ltd."
+                    />
+                </div>
+                <div className="space-y-1">
+                    <label className="text-xs font-bold text-slate-700 uppercase">Contact Person</label>
+                    <input
+                        type="text"
+                        name="contactPerson"
+                        required
+                        value={formData.contactPerson}
+                        onChange={handleChange}
+                        className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:outline-none focus:border-[#05A4A7] text-sm"
+                        placeholder="John Doe"
+                    />
+                </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-1">
+                    <label className="text-xs font-bold text-slate-700 uppercase">Email</label>
+                    <input
+                        type="email"
+                        name="email"
+                        required
+                        value={formData.email}
+                        onChange={handleChange}
+                        className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:outline-none focus:border-[#05A4A7] text-sm"
+                        placeholder="john@example.com"
+                    />
+                </div>
+                <div className="space-y-1">
+                    <label className="text-xs font-bold text-slate-700 uppercase">Phone</label>
+                    <input
+                        type="tel"
+                        name="phone"
+                        required
+                        value={formData.phone}
+                        onChange={handleChange}
+                        className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:outline-none focus:border-[#05A4A7] text-sm"
+                        placeholder="+91 98765 43210"
+                    />
+                </div>
+            </div>
+
+            <div className="space-y-1">
+                <label className="text-xs font-bold text-slate-700 uppercase">Business Type</label>
+                <select
+                    name="businessType"
+                    value={formData.businessType}
+                    onChange={handleChange}
+                    className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:outline-none focus:border-[#05A4A7] text-sm bg-white"
+                >
+                    <option value="">Select Type...</option>
+                    <option value="Consultancy">Consultancy</option>
+                    <option value="Development Agency">Development Agency</option>
+                    <option value="Freelancer">Freelancer</option>
+                    <option value="Enterprise">Enterprise</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+
+            <div className="space-y-1">
+                <label className="text-xs font-bold text-slate-700 uppercase">Message (Optional)</label>
+                <textarea
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    rows="3"
+                    className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:outline-none focus:border-[#05A4A7] text-sm resize-none"
+                    placeholder="Tell us about yourself..."
+                ></textarea>
+            </div>
+
+            {status === 'error' && (
+                <p className="text-red-500 text-xs text-center">Something went wrong. Please try again.</p>
+            )}
+
+            <button
+                type="submit"
+                disabled={status === 'loading'}
+                className="w-full py-3 bg-[#012828] text-white font-bold rounded-lg hover:bg-[#023638] transition-colors disabled:opacity-70 disabled:cursor-not-allowed"
+            >
+                {status === 'loading' ? 'Submitting...' : 'Submit Application'}
+            </button>
+        </form>
     );
 };
 

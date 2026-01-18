@@ -147,13 +147,13 @@ const Process = () => {
                 style={{ backgroundImage: 'radial-gradient(#fff 1px, transparent 1px)', backgroundSize: '30px 30px' }}>
             </div>
 
-            <div className="max-w-[1200px] mx-auto px-4 w-full relative z-10 h-full flex flex-col justify-center items-center">
+            <div className="max-w-7xl mx-auto px-6 md:px-12 w-full relative z-10 h-full flex flex-col justify-center items-start">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: false }}
                     transition={{ duration: 0.6 }}
-                    className="text-center mb-6 md:mb-12 flex-shrink-0 w-full max-w-4xl mx-auto"
+                    className="text-left mb-6 md:mb-12 flex-shrink-0 w-full max-w-4xl"
                 >
                     <span className="bg-white border border-slate-200 text-slate-900 px-4 py-1 rounded-full text-xs font-bold uppercase tracking-wider shadow-sm mb-3 inline-block">
                         Workflow
@@ -161,14 +161,14 @@ const Process = () => {
                     <h2 className="text-3xl md:text-5xl font-black text-white tracking-tight mb-2">
                         How We Work
                     </h2>
-                    <p className="text-gray-400 max-w-xl mx-auto text-sm md:text-base">
+                    <p className="text-gray-400 max-w-xl text-sm md:text-base mt-6 mb-16">
                         Simple steps to take your idea from concept to reality.
                     </p>
                 </motion.div>
 
                 {/* DESKTOP COMPACT LAYOUT */}
-                <div className="hidden lg:block relative h-[600px] w-full max-w-[900px] mx-auto flex-grow-0">
-                    <svg className="absolute inset-0 w-full h-full pointer-events-none overflow-visible" viewBox="0 0 900 600">
+                <div className="hidden lg:block relative h-[600px] w-full mx-auto flex-grow-0">
+                    <svg className="absolute inset-0 w-full h-full pointer-events-none overflow-visible" viewBox="0 0 900 600" preserveAspectRatio="none">
                         {/* 
                            Compact Layout:
                            Row 1 Y: 60

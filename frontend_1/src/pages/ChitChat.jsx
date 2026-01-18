@@ -41,7 +41,7 @@ const ChitChat = () => {
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
-                        className="w-full relative min-h-auto md:min-h-[700px] lg:h-[85vh] flex items-stretch overflow-hidden pt-24 md:pt-0"
+                        className="w-full relative min-h-auto md:min-h-[700px] lg:min-h-[85vh] flex items-stretch pt-28 md:pt-24 pb-24"
                     >
                         {/* Background Image Layer - Full Width */}
                         <div className="absolute inset-0 z-0">
