@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import Navbar from './Navbar';
-import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+import HeroAnimation from './HeroAnimation';
 import TypewriterText from './TypewriterText';
 
 const Hero = () => {
@@ -62,10 +62,14 @@ const Hero = () => {
                             transition={{ duration: 1.8, ease: [0.22, 1, 0.36, 1] }}
                             className="space-y-2 sm:space-y-4 flex flex-col justify-center h-full"
                         >
-                            {/* Mobile Heading */}
-                            <h1 className="lg:hidden flex flex-col items-center font-black text-gray-900 dark:text-white leading-tight text-center mb-0 z-20 relative">
-                                <span className="text-5xl">Building Your</span>
-                                <span className="text-3xl text-[#05A4A7] mt-1">Digital Future</span>
+                            {/* Mobile Heading - Optimized for Responsiveness */}
+                            <h1 className="lg:hidden flex flex-col items-center justify-center font-black text-gray-900 dark:text-white text-center mb-0 z-20 relative w-full max-w-[95vw] mx-auto">
+                                <span className="block w-full text-[clamp(2.5rem,11vw,4rem)] leading-[1.1] tracking-tight whitespace-nowrap">
+                                    Building Your
+                                </span>
+                                <span className="block w-full text-[clamp(2.2rem,9vw,3.5rem)] leading-[1.1] text-[#05A4A7] mt-1 tracking-tight whitespace-nowrap">
+                                    Digital Future
+                                </span>
                             </h1>
 
                             {/* Desktop Heading */}
@@ -80,10 +84,9 @@ const Hero = () => {
 
                             <div className="lg:hidden relative flex flex-col items-center justify-center py-0 w-full overflow-visible -mt-8 -mb-4 flex-grow z-10">
                                 <div className="w-full max-w-[420px] aspect-square scale-110">
-                                    <DotLottieReact
+                                    <HeroAnimation
                                         src="https://lottie.host/f5edc29d-7c20-49be-9b54-7c07fa26f2c6/wKHzGrk2QZ.lottie"
-                                        loop
-                                        autoplay
+                                        className="w-full h-full"
                                     />
                                 </div>
                                 {/* Mobile Stats - Moved below image, above paragraph */}
@@ -176,10 +179,8 @@ const Hero = () => {
                             className="hidden lg:flex items-center justify-center relative py-6 lg:py-0 w-full h-full"
                         >
                             <div className="relative w-full max-w-[800px] aspect-square scale-125 md:scale-150">
-                                <DotLottieReact
+                                <HeroAnimation
                                     src="https://lottie.host/f5edc29d-7c20-49be-9b54-7c07fa26f2c6/wKHzGrk2QZ.lottie"
-                                    loop
-                                    autoplay
                                     className="w-full h-full object-contain"
                                 />
                             </div>
