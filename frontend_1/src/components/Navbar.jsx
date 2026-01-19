@@ -224,7 +224,7 @@ const Navbar = () => {
                         {/* Logo */}
                         <div className="flex-shrink-0 flex items-center relative group/logo isolate z-[70]">
                             <Link to="/" className="relative z-10 block" onClick={() => handleLinkClick("/")}>
-                                <img alt="Appzeto Logo" className="h-7 md:h-10 w-auto" src={logo} />
+                                <img alt="Appzeto Logo" className="h-9 md:h-[50px] w-auto" src={logo} />
                             </Link>
                         </div>
 
@@ -368,7 +368,7 @@ const Navbar = () => {
                             {/* Mobile Header with Close Button */}
                             <div className="flex-shrink-0 pt-[env(safe-area-inset-top)] border-b border-gray-200/50 dark:border-gray-700/50 relative z-20 bg-white/50 dark:bg-black/20 backdrop-blur-md">
                                 <div className="h-20 px-4 sm:px-6 flex items-center justify-between">
-                                    <img alt="Appzeto Logo" className="h-8 w-auto" src={logo} />
+                                    <img alt="Appzeto Logo" className="h-10 w-auto" src={logo} />
                                     <button
                                         className="w-10 h-10 rounded-full bg-gray-100 dark:bg-white/10 flex items-center justify-center text-gray-600 dark:text-white"
                                         onClick={() => setIsMobileMenuOpen(false)}

@@ -50,7 +50,7 @@ const Footer = () => {
                     {/* Column 1: Brand & Social */}
                     <div className="col-span-2 lg:col-span-1 space-y-6">
                         <Link to="/" className="block w-fit">
-                            <img src={logo} alt="Appzeto Logo" className="h-8 md:h-10 w-auto opacity-90 hover:opacity-100 transition-opacity" />
+                            <img src={logo} alt="Appzeto Logo" className="h-10 md:h-[50px] w-auto opacity-90 hover:opacity-100 transition-opacity" />
                         </Link>
                         <p className="text-gray-400 text-sm leading-relaxed max-w-sm">
                             Empowering enterprises with next-gen digital solutions. We specialize in bespoke web architecture, mobile ecosystems, and AI-driven automation to transform visionary ideas into scalable reality.
@@ -170,7 +170,7 @@ const Footer = () => {
                                     </div>
                                     <div>
                                         <p className="text-[10px] text-gray-500 uppercase font-black tracking-wide">Phone</p>
-                                        <a href={`tel:${settings.contactPhone.replace(/\D/g, '')}`} className="text-sm font-bold text-white group-hover:text-[#05A4A7] transition-colors block">{settings.contactPhone}</a>
+                                        <a href="tel:917691810506" className="text-sm font-bold text-white group-hover:text-[#05A4A7] transition-colors block">+91 7691810506</a>
                                         <a href="tel:6375095971" className="text-sm font-bold text-white group-hover:text-[#05A4A7] transition-colors block mt-1">+91 6375095971</a>
                                     </div>
                                 </div>

@@ -291,7 +291,7 @@ const ContactUs = ({ isHomePage = false }) => {
                                         label: "Phone",
                                         info: (
                                             <div className="flex flex-col">
-                                                <span>{settings.contactPhone}</span>
+                                                <span>+91 7691810506</span>
                                                 <span className="mt-1">+91 6375095971</span>
                                             </div>
                                         ),
