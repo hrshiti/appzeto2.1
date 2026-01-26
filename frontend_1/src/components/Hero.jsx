@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import Navbar from './Navbar';
 import HeroAnimation from './HeroAnimation';
+import RevolvingOrbit from './RevolvingOrbit';
 import TypewriterText from './TypewriterText';
 
 const Hero = () => {
@@ -52,9 +53,9 @@ const Hero = () => {
 
             <Navbar />
 
-            <main className="flex-grow flex flex-col relative">
-                <div className="max-w-7xl mx-auto px-6 md:px-12 pt-24 pb-0 sm:pb-10 lg:pt-32 lg:pb-10 w-full relative z-10 flex-grow flex flex-col justify-center">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center lg:items-start flex-grow">
+            <main className="flex-grow flex flex-col relative h-[calc(100vh-60px)]">
+                <div className="max-w-7xl mx-auto px-4 md:px-12 pt-20 pb-0 sm:pb-10 lg:pt-32 lg:pb-10 w-full relative z-10 flex-grow flex flex-col justify-center">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 lg:gap-16 items-center lg:items-start flex-grow h-full">
                         <motion.div
                             initial={{ x: -70, opacity: 0 }}
                             whileInView={{ x: 0, opacity: 1 }}
@@ -64,10 +65,10 @@ const Hero = () => {
                         >
                             {/* Mobile Heading - Optimized for Responsiveness */}
                             <h1 className="lg:hidden flex flex-col items-center justify-center font-black text-gray-900 dark:text-white text-center mb-0 z-20 relative w-full">
-                                <span className="block w-full text-[clamp(2.5rem,11vw,4rem)] leading-[1.1] tracking-tight whitespace-nowrap">
+                                <span className="block w-full text-[clamp(2.8rem,12vw,4rem)] leading-[1.1] tracking-tight whitespace-nowrap">
                                     Building Your
                                 </span>
-                                <span className="block w-full text-[clamp(2.2rem,9vw,3.5rem)] leading-[1.1] text-[#05A4A7] mt-1 tracking-tight whitespace-nowrap">
+                                <span className="block w-full text-[clamp(2.5rem,11vw,3.5rem)] leading-[1.1] text-[#05A4A7] mt-1 tracking-tight whitespace-nowrap">
                                     Digital Future
                                 </span>
                             </h1>
@@ -83,15 +84,12 @@ const Hero = () => {
                                 We empower ambitious startups, visionary founders, and established enterprises to design, develop, and scale robust digital products. By leveraging cutting-edge technologies and adhering to proven, agile development methodologies, we transform complex ideas into high-performance, user-centric solutions that drive growth and deliver measurable results in today's competitive digital landscape.
                             </p>
 
-                            <div className="lg:hidden relative flex flex-col items-center justify-center py-0 w-full overflow-visible -mt-8 -mb-4 flex-grow z-10">
-                                <div className="w-full max-w-[420px] aspect-square scale-110">
-                                    <HeroAnimation
-                                        src="https://lottie.host/f5edc29d-7c20-49be-9b54-7c07fa26f2c6/wKHzGrk2QZ.lottie"
-                                        className="w-full h-full"
-                                    />
+                            <div className="lg:hidden relative flex flex-col items-center justify-center py-0 w-full overflow-visible mt-0 mb-2 flex-grow z-10">
+                                <div className="w-[220px] h-[220px] sm:w-[320px] sm:h-[320px]">
+                                    <RevolvingOrbit size="lg" />
                                 </div>
                                 {/* Mobile Stats - Moved below image, above paragraph */}
-                                <div className="flex items-center gap-2 bg-white dark:bg-slate-900 border border-gray-100 dark:border-slate-800 p-1.5 pr-4 rounded-full shadow-xl z-20 mb-4 -mt-8">
+                                <div className="flex items-center gap-2 bg-white dark:bg-slate-900 border border-gray-100 dark:border-slate-800 p-1.5 pr-4 rounded-full shadow-xl z-20 mb-2 mt-2 scale-90">
                                     <div className="flex -space-x-2">
                                         {[
                                             "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=64&h=64",
@@ -112,12 +110,12 @@ const Hero = () => {
                                         </div>
                                     </div>
                                 </div>
-                                <p className="text-gray-500 dark:text-gray-400 text-sm font-medium text-center mb-4">
+                                <p className="text-gray-500 dark:text-gray-400 text-xs font-medium text-center mb-2 px-6 leading-tight">
                                     Innovating today for a smarter tomorrow.
                                 </p>
                             </div>
 
-                            <div className="flex flex-col sm:flex-row gap-4 pt-0 lg:pt-2 w-full sm:w-auto mt-auto pb-8">
+                            <div className="flex flex-col sm:flex-row gap-2 pt-0 lg:pt-2 w-full sm:w-auto mt-auto pb-4">
                                 <div className="relative group w-full sm:w-auto">
                                     <motion.div
                                         whileHover={{ y: -6, scale: 1.05 }}
@@ -139,7 +137,7 @@ const Hero = () => {
                                             }}
                                             className="relative z-10 flex items-center justify-center px-7 py-3 bg-gradient-to-br from-[#05A4A7] to-[#037A7C] text-white font-black rounded-[11px] overflow-hidden group/btn w-full sm:w-auto cursor-pointer"
                                         >
-                                            <span className="relative z-10 text-sm uppercase tracking-wider">Launch Your Dream</span>
+                                            <span className="relative z-10 text-xs sm:text-sm uppercase tracking-wider">Launch Your Dream</span>
                                             <motion.span
                                                 className="relative z-10 material-icons ml-2 text-xl"
                                                 animate={{ x: [0, 5, 0] }}
@@ -165,8 +163,8 @@ const Hero = () => {
                                             />
                                         </div>
 
-                                        <Link to="/projects" className="relative z-10 flex items-center justify-center px-6 py-4 sm:px-7 sm:py-3 bg-gray-900 hover:bg-black sm:bg-gray-100 dark:bg-slate-800 border-2 border-transparent dark:border-white/5 text-white sm:text-gray-800 dark:text-white font-black rounded-[11px] shadow-[0_10px_30px_rgba(0,0,0,0.2)] hover:shadow-xl overflow-hidden group/btn w-full sm:w-auto mt-0 sm:mt-0 transition-all duration-300">
-                                            <span className="relative z-10 text-sm sm:text-sm uppercase tracking-wider font-black">View Case Studies</span>
+                                        <Link to="/projects" className="relative z-10 flex items-center justify-center px-6 py-3 sm:px-7 sm:py-3 bg-gray-900 hover:bg-black sm:bg-gray-100 dark:bg-slate-800 border-2 border-transparent dark:border-white/5 text-white sm:text-gray-800 dark:text-white font-black rounded-[11px] shadow-[0_10px_30px_rgba(0,0,0,0.2)] hover:shadow-xl overflow-hidden group/btn w-full sm:w-auto mt-0 sm:mt-0 transition-all duration-300">
+                                            <span className="relative z-10 text-xs sm:text-sm uppercase tracking-wider font-black">View Case Studies</span>
                                         </Link>
                                     </motion.div>
                                 </div>
@@ -177,13 +175,10 @@ const Hero = () => {
                             initial={{ opacity: 0, scale: 0.8 }}
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ duration: 1.5, ease: "easeOut" }}
-                            className="hidden lg:flex items-center lg:items-start justify-center relative py-6 lg:py-0 w-full h-full"
+                            className="hidden lg:flex items-center lg:items-center justify-center relative py-6 lg:py-0 w-full h-full"
                         >
-                            <div className="relative w-full max-w-[800px] aspect-square scale-125 md:scale-150">
-                                <HeroAnimation
-                                    src="https://lottie.host/f5edc29d-7c20-49be-9b54-7c07fa26f2c6/wKHzGrk2QZ.lottie"
-                                    className="w-full h-full object-contain"
-                                />
+                            <div className="relative w-full max-w-[600px] aspect-square">
+                                <RevolvingOrbit size="lg" />
                             </div>
 
                             <motion.div
