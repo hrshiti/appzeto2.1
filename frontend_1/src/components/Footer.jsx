@@ -121,7 +121,7 @@ const Footer = () => {
                                 <li><Link to="/about" className="text-gray-400 hover:text-[#05A4A7] transition-colors text-sm font-medium flex items-center gap-2 group">
                                     <span className="w-1 h-1 rounded-full bg-white/20 group-hover:bg-[#05A4A7] transition-colors"></span> About Us
                                 </Link></li>
-                                <li><Link to="/career" className="text-gray-400 hover:text-[#05A4A7] transition-colors text-sm font-medium flex items-center gap-2 group">
+                                <li><Link to="/apply-now" className="text-gray-400 hover:text-[#05A4A7] transition-colors text-sm font-medium flex items-center gap-2 group">
                                     <span className="w-1 h-1 rounded-full bg-white/20 group-hover:bg-[#05A4A7] transition-colors"></span> Careers
                                 </Link></li>
                                 <li><Link to="/projects" className="text-gray-400 hover:text-[#05A4A7] transition-colors text-sm font-medium flex items-center gap-2 group">

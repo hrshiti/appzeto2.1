@@ -63,14 +63,16 @@ function App() {
             {/* Public Routes */}
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<AboutUs />} />
+            <Route path="/team" element={<AboutUs />} />
             <Route path="/services" element={<Services />} />
             <Route path="/services/:slug" element={<ServiceDetail />} />
             <Route path="/blogs" element={<Blogs />} />
             <Route path="/blogs/:slug" element={<BlogDetail />} />
-            <Route path="/career" element={<Career />} />
+            <Route path="/apply-now" element={<Career />} />
             <Route path="/contact" element={<Contact />} />
 
             {/* Projects Routing */}
+            <Route path="/project/design-n-you" element={<ProductShowcase />} />
             <Route path="/projects" element={<Projects />} />
             <Route path="/projects/:slug" element={<ProjectDetail />} />
 

@@ -48,12 +48,12 @@ const NAV_ITEMS = [
     },
     {
         title: "Careers",
-        path: "/career",
+        path: "/apply-now",
         description: "Join our team of innovators and creators.",
         items: [
-            { label: "Open Positions", link: "/career#positions" },
-            { label: "Life at Appzeto", link: "/career#culture" },
-            { label: "Internships", link: "/career#internship" }
+            { label: "Open Positions", link: "/apply-now#positions" },
+            { label: "Life at Appzeto", link: "/apply-now#culture" },
+            { label: "Internships", link: "/apply-now#internship" }
         ]
     },
     {
