@@ -53,9 +53,9 @@ const Hero = () => {
 
             <Navbar />
 
-            <main className="flex-grow flex flex-col relative h-[calc(100vh-60px)]">
-                <div className="max-w-7xl mx-auto px-4 md:px-12 pt-20 pb-0 sm:pb-10 lg:pt-32 lg:pb-10 w-full relative z-10 flex-grow flex flex-col justify-center">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 lg:gap-16 items-center lg:items-start flex-grow h-full">
+            <main className="flex-grow flex flex-col relative h-[calc(100vh-60px)] lg:h-auto lg:min-h-[calc(100vh-80px)]">
+                <div className="max-w-7xl mx-auto px-4 md:px-12 pt-20 pb-0 sm:pb-10 lg:pt-28 lg:pb-12 w-full relative z-10 flex-grow flex flex-col justify-center">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 lg:gap-16 items-center flex-grow h-full">
                         <motion.div
                             initial={{ x: -70, opacity: 0 }}
                             whileInView={{ x: 0, opacity: 1 }}
@@ -185,7 +185,7 @@ const Hero = () => {
                                 initial={{ opacity: 0, x: 20 }}
                                 animate={{ opacity: 1, x: 0 }}
                                 transition={{ delay: 1, duration: 0.8 }}
-                                className="absolute -bottom-12 right-0 sm:-bottom-8 sm:-right-24 flex items-center gap-2 sm:gap-3 bg-white dark:bg-slate-900 border border-gray-100 dark:border-slate-800 p-2 pr-4 sm:p-3 sm:pr-5 rounded-full shadow-2xl z-20"
+                                className="absolute -bottom-12 right-0 sm:-bottom-8 sm:-right-24 lg:right-0 lg:-bottom-8 flex items-center gap-2 sm:gap-3 bg-white dark:bg-slate-900 border border-gray-100 dark:border-slate-800 p-2 pr-4 sm:p-3 sm:pr-5 rounded-full shadow-2xl z-20"
                             >
                                 <div className="flex -space-x-2 sm:-space-x-3">
                                     {[

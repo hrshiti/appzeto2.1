@@ -203,7 +203,7 @@ const ServicesFullPage = () => {
         <div ref={containerRef} className="w-full bg-[#FAFAFA] text-slate-900 font-sans selection:bg-[#05A4A7] selection:text-white">
 
             {/* HERO SECTION */}
-            <section className="relative w-full h-auto min-h-[50vh] md:h-[90vh] flex items-center justify-center px-4 sm:px-6 md:px-12 lg:px-24 overflow-hidden bg-gradient-to-br from-slate-50 to-slate-100 py-0 pt-24 md:pt-0">
+            <section className="relative w-full h-auto min-h-[50vh] lg:min-h-[calc(100vh-80px)] flex items-center justify-center px-4 sm:px-6 md:px-12 lg:px-24 overflow-hidden bg-gradient-to-br from-slate-50 to-slate-100 pt-24 pb-10 lg:pt-32 lg:pb-12">
                 {/* Abstract Decor */}
                 <div className="absolute top-0 right-0 w-[80vw] sm:w-[50vw] h-[80vw] sm:h-[50vw] bg-[#05A4A7]/5 rounded-full blur-[80px] sm:blur-[120px] -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
 
