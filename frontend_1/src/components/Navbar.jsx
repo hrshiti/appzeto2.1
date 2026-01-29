@@ -231,10 +231,10 @@ const Navbar = () => {
                         {/* Desktop Menu */}
                         <div className="hidden md:flex items-center h-full">
                             {dynamicItems.map((navItem, index) => (
-                                <div key={index} className="group static h-full flex items-center px-4">
+                                <div key={index} className="group static h-full flex items-center px-2 lg:px-4">
                                     <Link
                                         to={navItem.path || "#"}
-                                        className="flex items-center space-x-1 text-gray-600 dark:text-gray-300 group-hover:text-primary dark:group-hover:text-primary font-medium transition-colors focus:outline-none h-full border-b-2 border-transparent group-hover:border-primary"
+                                        className="flex items-center space-x-1 text-gray-600 dark:text-gray-300 group-hover:text-primary dark:group-hover:text-primary font-medium transition-colors focus:outline-none h-full border-b-2 border-transparent group-hover:border-primary whitespace-nowrap"
                                         onClick={(e) => {
                                             if (navItem.path && window.location.pathname === navItem.path) {
                                                 e.preventDefault();
