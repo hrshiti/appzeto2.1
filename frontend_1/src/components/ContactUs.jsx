@@ -359,7 +359,11 @@ const ContactUs = ({ isHomePage = false }) => {
 
                         {/* Right: Contact Form */}
                         <div id="contact-form" className="flex flex-col justify-center bg-primary/[0.03] p-8 md:p-12 lg:p-16 border-l border-primary/5 scroll-mt-48">
-                            <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-slate-900 mb-6 md:mb-10 tracking-tighter uppercase">Message</h2>
+                            <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-slate-900 mb-2 md:mb-4 tracking-tighter uppercase">Message</h2>
+                            <div className="text-xs md:text-sm text-slate-500 mb-6 md:mb-10 border-b border-primary/10 pb-4">
+                                <p><strong className="text-slate-700">Company Name:</strong> BUDGETADDAA E-COMMERCE SERVICES PRIVATE LIMITED</p>
+                                <p><strong className="text-slate-700">Brand Name:</strong> Appzeto</p>
+                            </div>
                             <form onSubmit={handleSend} className="space-y-4 md:space-y-6 lg:space-y-10">
                                 {settings.formFields ? (
                                     <>

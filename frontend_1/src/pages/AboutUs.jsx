@@ -113,6 +113,10 @@ const AboutUs = () => {
                                 <p className="text-gray-600 leading-relaxed text-xs sm:text-base hidden sm:block">
                                     Our philosophy is simple: we don't just build software; we engineer ecosystems. Reliability, scalability, and user-centric design are at the core of everything we create.
                                 </p>
+                                <div className="text-gray-500 text-xs sm:text-sm mt-4 border-l-2 border-primary pl-4">
+                                    <p><strong className="text-gray-700">Company Name:</strong> BUDGETADDAA E-COMMERCE SERVICES PRIVATE LIMITED</p>
+                                    <p><strong className="text-gray-700">Brand Name:</strong> Appzeto</p>
+                                </div>
                             </div>
 
                             <div className="pt-4 md:pt-6">

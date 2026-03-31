@@ -55,6 +55,10 @@ const Footer = () => {
                         <p className="text-gray-400 text-sm leading-relaxed max-w-sm">
                             Empowering enterprises with next-gen digital solutions. We specialize in bespoke web architecture, mobile ecosystems, and AI-driven automation to transform visionary ideas into scalable reality.
                         </p>
+                        <div className="text-gray-400 text-sm leading-relaxed max-w-sm mt-3 border-t border-white/10 pt-3">
+                            <p><strong className="text-gray-300">Company Name:</strong> BUDGETADDAA E-COMMERCE SERVICES PRIVATE LIMITED</p>
+                            <p><strong className="text-gray-300">Brand Name:</strong> Appzeto</p>
+                        </div>
 
                         <div className="flex items-center gap-4">
                             {/* LinkedIn */}
@@ -193,7 +197,7 @@ const Footer = () => {
 
                 <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4 md:gap-6">
                     <p className="text-gray-500 text-xs font-medium text-center md:text-left tracking-wide">
-                        © {new Date().getFullYear()} Appzeto. All rights reserved.
+                        © {new Date().getFullYear()} BUDGETADDAA E-COMMERCE SERVICES PRIVATE LIMITED (Appzeto). All rights reserved.
                     </p>
                     <div className="flex flex-wrap justify-center md:justify-end gap-x-6 gap-y-2">
                         <Link to="/privacy-policy#privacy" className="text-gray-500 hover:text-[#05A4A7] text-xs font-medium transition-colors">Privacy Policy</Link>
