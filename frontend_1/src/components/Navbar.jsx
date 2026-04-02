@@ -30,7 +30,6 @@ const NAV_ITEMS = [
         items: [
             { label: "Food Delivery", link: "/appzeto-food" },
             { label: "Taxi Booking", link: "/appzeto-taxi" },
-            { label: "Ecommerce", link: "/appzeto-ecommerce" },
             { label: "Hospital Management", link: "/appzeto-hospital" }
         ]
     },
@@ -62,12 +61,7 @@ const NAV_ITEMS = [
         description: "Discover our story, mission, and the team behind the technology.",
         items: []
     },
-    {
-        title: "Ecommerce",
-        path: "/ecommerce",
-        description: "Buy premium ready-made apps and solutions.",
-        items: []
-    }
+
 ];
 
 // -- Animations --

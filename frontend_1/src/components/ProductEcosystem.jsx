@@ -86,17 +86,7 @@ const projects = [
         link: "/appzeto-food",
         UI: FoodAppUI
     },
-    {
-        id: "shop",
-        title: "Appzeto Shop",
-        slug: "appzeto-pay",
-        subtitle: "Future Ecommerce",
-        description: "AR-enabled shopping experience.",
-        icon: "shopping_bag",
-        color: "#4F46E5",
-        link: "/appzeto-ecommerce",
-        UI: EcommerceUI
-    },
+
     {
         id: "care",
         title: "Appzeto Health",
