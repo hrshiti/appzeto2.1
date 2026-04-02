@@ -249,7 +249,7 @@ const ProjectShowcase = () => {
                     {/* MOBILE ONLY: CATEGORY FILTER ROW */}
                     <div className="lg:hidden w-full overflow-x-auto pb-2 mb-6 no-scrollbar w-full">
                         <div className="flex gap-3 w-max px-0">
-                            {["All", "CRM Solution", "Food Delivery", "Service App", "Taxi Booking", "Ecommerce"].map((cat, i) => (
+                            {["All", "CRM Solution", "Food Delivery", "Service App", "Taxi Booking"].map((cat, i) => (
                                 <button
                                     key={i}
                                     onClick={() => navigate('/projects')}

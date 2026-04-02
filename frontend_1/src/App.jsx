@@ -80,9 +80,9 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/appzeto-food" element={<ProductShowcase />} />
             <Route path="/appzeto-taxi" element={<TaxiProductShowcase />} />
-            <Route path="/appzeto-ecommerce" element={<EcommerceProductShowcase />} />
+            {/* <Route path="/appzeto-ecommerce" element={<EcommerceProductShowcase />} /> */}
             <Route path="/appzeto-hospital" element={<HospitalProductShowcase />} />
-            <Route path="/ecommerce" element={<Ecommerce />} />
+            {/* <Route path="/ecommerce" element={<Ecommerce />} /> */}
             <Route path="/channel-partners" element={<ChannelPartnersPage />} />
             <Route path="/demo" element={<DemoCenter />} />
             <Route path="/offices/:slug" element={<OfficeDetail />} />

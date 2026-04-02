@@ -11,14 +11,7 @@ import quickCommerceLogo from '../assets/logos/AppzetoQuickCommerce.jpg';
 import taxiLogo from '../assets/logos/AppzetoTaxi.jpg';
 
 const projects = [
-    {
-        id: "ecommerce",
-        title: "Appzeto Ecommerce",
-        description: "Complete online store solution.",
-        image: ecommerceLogo,
-        color: "#4F46E5",
-        link: "/appzeto-ecommerce"
-    },
+
     {
         id: "food",
         title: "Appzeto Food",
