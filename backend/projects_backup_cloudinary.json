@@ -1,0 +1,380 @@
+[
+  {
+    "hero": {
+      "title": "AppzetoFood",
+      "subtitle": "AppzetoFood",
+      "coverImage": "https://res.cloudinary.com/dzbmscin0/image/upload/v1768201292/appzeto/image-1768201295518.webp",
+      "videoUrl": ""
+    },
+    "info": {
+      "client": "Arvind chaudary",
+      "year": "2026",
+      "duration": "4 weeks",
+      "technologies": [
+        {
+          "name": "React",
+          "icon": "Code",
+          "_id": "69649da4bb837368ba7f6a61",
+          "id": "69649da4bb837368ba7f6a61"
+        },
+        {
+          "name": "Node js",
+          "icon": "Code",
+          "_id": "69649da4bb837368ba7f6a62",
+          "id": "69649da4bb837368ba7f6a62"
+        },
+        {
+          "name": "Javascript",
+          "icon": "Code",
+          "_id": "69649da4bb837368ba7f6a63",
+          "id": "69649da4bb837368ba7f6a63"
+        },
+        {
+          "name": "Mongodb",
+          "icon": "Code",
+          "_id": "69649da4bb837368ba7f6a64",
+          "id": "69649da4bb837368ba7f6a64"
+        }
+      ]
+    },
+    "overview": {
+      "text": "We built a full-scale food delivery platform allowing users to order food from nearby restaurants with real-time tracking and secure payments.",
+      "mediaUrl": "https://res.cloudinary.com/dzbmscin0/image/upload/v1768201448/appzeto/image-1768201451201.jpg",
+      "mediaType": "image"
+    },
+    "challenge": {
+      "description": "",
+      "points": [
+        "Delayed order processing",
+        " Poor user experience",
+        "No real-time delivery tracking"
+      ]
+    },
+    "solution": {
+      "description": "",
+      "points": [
+        "Optimized backend for faster order handling",
+        "Live order & delivery tracking",
+        "Smooth and intuitive UI"
+      ]
+    },
+    "mediaShowcase": {
+      "mediaType": "image",
+      "items": []
+    },
+    "showcase": {
+      "images": [],
+      "videos": []
+    },
+    "cta": {
+      "title": "Want a project like this?",
+      "buttonLabel": "Start a Project",
+      "buttonLink": "/contact"
+    },
+    "_id": "69649da4bb837368ba7f6a60",
+    "title": "AppzetoFood",
+    "slug": "appzetofood",
+    "category": "FoodTech",
+    "industry": "FoodTech",
+    "thumbnail": "https://res.cloudinary.com/dzbmscin0/image/upload/v1768201238/appzeto/image-1768201240703.jpg",
+    "shortDescription": "We built a full-scale food delivery platform allowing users to order food from nearby restaurants with real-time tracking and secure payments.",
+    "techTags": [
+      "React",
+      "Node.js",
+      "MongoDB",
+      "Firebase"
+    ],
+    "isFeatured": true,
+    "orderIndex": 0,
+    "features": [],
+    "results": [
+      {
+        "label": "Growth",
+        "value": "100%",
+        "_id": "69649da4bb837368ba7f6a65"
+      },
+      {
+        "label": "Users",
+        "value": "2k+",
+        "_id": "69649da4bb837368ba7f6a66"
+      }
+    ],
+    "testimonial": {
+      "text": "“Appzeto helped us launch a smooth and reliable food delivery experience.”",
+      "author": "Arvind chaudary",
+      "role": "– Product Manager",
+      "avatar": "",
+      "_id": "69649da4bb837368ba7f6a67"
+    },
+    "createdAt": "2026-01-12T07:07:16.137Z",
+    "updatedAt": "2026-01-12T07:07:16.137Z",
+    "__v": 0,
+    "id": "69649da4bb837368ba7f6a60"
+  },
+  {
+    "hero": {
+      "title": "AppzetoTaxi",
+      "subtitle": "AppzetoTaxi",
+      "coverImage": "https://res.cloudinary.com/dzbmscin0/image/upload/v1768203095/appzeto/image-1768203099424.webp",
+      "videoUrl": ""
+    },
+    "info": {
+      "client": "Sanjeev sukhla",
+      "year": "2025",
+      "duration": "4 weeks",
+      "technologies": [
+        {
+          "name": "React",
+          "icon": "Code",
+          "_id": "6964a5f3bb837368ba7f6aff",
+          "id": "6964a5f3bb837368ba7f6aff"
+        },
+        {
+          "name": "Nodejs",
+          "icon": "Code",
+          "_id": "6964a5f3bb837368ba7f6b00",
+          "id": "6964a5f3bb837368ba7f6b00"
+        },
+        {
+          "name": "Javascript",
+          "icon": "Code",
+          "_id": "6964a5f3bb837368ba7f6b01",
+          "id": "6964a5f3bb837368ba7f6b01"
+        },
+        {
+          "name": "Mongodb",
+          "icon": "Code",
+          "_id": "6964a5f3bb837368ba7f6b02",
+          "id": "6964a5f3bb837368ba7f6b02"
+        }
+      ]
+    },
+    "overview": {
+      "text": "This project focused on building a reliable and scalable food delivery ecosystem. Users can browse restaurants, explore menus, place orders, and track deliveries in real time. Restaurants get a dedicated dashboard to manage orders and menus, while delivery partners receive optimized routes and order notifications. The system was built with performance, scalability, and user convenience as top priorities.",
+      "mediaUrl": "https://res.cloudinary.com/dzbmscin0/image/upload/v1768203278/appzeto/image-1768203282401.webp",
+      "mediaType": "image"
+    },
+    "challenge": {
+      "description": "",
+      "points": [
+        "Rider-user matching delays",
+        " GPS accuracy issues",
+        "Payment reliability"
+      ]
+    },
+    "solution": {
+      "description": "",
+      "points": [
+        "Real-time location sync",
+        "Smart rider allocation logic",
+        "Secure wallet & payments"
+      ]
+    },
+    "mediaShowcase": {
+      "mediaType": "image",
+      "items": []
+    },
+    "showcase": {
+      "images": [],
+      "videos": []
+    },
+    "cta": {
+      "title": "Want a project like this?",
+      "buttonLabel": "Start a Project",
+      "buttonLink": "/contact"
+    },
+    "_id": "6964a5f3bb837368ba7f6afe",
+    "title": "AppzetoTaxi",
+    "slug": "appzetotaxi",
+    "category": "Transportation",
+    "industry": "Transportation",
+    "thumbnail": "https://res.cloudinary.com/dzbmscin0/image/upload/v1768202903/appzeto/image-1768202907392.webp",
+    "shortDescription": "We built a bike taxi booking application similar to Rapido, designed for fast ride booking, real-time rider matching, and live GPS tracking.",
+    "techTags": [
+      "Flutter",
+      "Node.js",
+      "Google Maps API"
+    ],
+    "isFeatured": true,
+    "orderIndex": 0,
+    "features": [],
+    "results": [
+      {
+        "label": "Growth",
+        "value": "200%",
+        "_id": "6964a5f3bb837368ba7f6b03"
+      },
+      {
+        "label": "users",
+        "value": "25k+",
+        "_id": "6964a5f3bb837368ba7f6b04"
+      },
+      {
+        "label": "ride booking",
+        "value": "60% faster",
+        "_id": "6964a5f3bb837368ba7f6b05"
+      }
+    ],
+    "testimonial": {
+      "text": "“The app performance and UX exceeded expectations.”",
+      "author": "Sanjeev sukhla",
+      "role": "Product Mnaager",
+      "avatar": "",
+      "_id": "6964bf53e202a6e85741c3b0"
+    },
+    "createdAt": "2026-01-12T07:42:43.341Z",
+    "updatedAt": "2026-01-12T09:30:59.615Z",
+    "__v": 0,
+    "id": "6964a5f3bb837368ba7f6afe"
+  },
+  {
+    "hero": {
+      "title": "Inplay ott",
+      "subtitle": "Inplay",
+      "coverImage": "https://res.cloudinary.com/dzbmscin0/image/upload/v1768210387/appzeto/image-1768210390376.webp",
+      "videoUrl": "https://res.cloudinary.com/dzbmscin0/video/upload/v1768210435/appzeto/video-1768210424862.mp4"
+    },
+    "info": {
+      "client": "Sameer auja",
+      "year": "2025",
+      "duration": "1 Month",
+      "technologies": [
+        {
+          "name": "React",
+          "icon": "Code",
+          "_id": "6964c112e202a6e85741c3be",
+          "id": "6964c112e202a6e85741c3be"
+        },
+        {
+          "name": "Node js",
+          "icon": "Code",
+          "_id": "6964c112e202a6e85741c3bf",
+          "id": "6964c112e202a6e85741c3bf"
+        },
+        {
+          "name": "Javascript",
+          "icon": "Code",
+          "_id": "6964c112e202a6e85741c3c0",
+          "id": "6964c112e202a6e85741c3c0"
+        },
+        {
+          "name": "Express",
+          "icon": "Code",
+          "_id": "6964c112e202a6e85741c3c1",
+          "id": "6964c112e202a6e85741c3c1"
+        },
+        {
+          "name": "Mongodb",
+          "icon": "Code",
+          "_id": "6964c112e202a6e85741c3c2",
+          "id": "6964c112e202a6e85741c3c2"
+        }
+      ]
+    },
+    "overview": {
+      "text": "This OTT platform enables users to browse content, subscribe to plans, and stream videos across devices without interruptions. Advanced cloud infrastructure and CDN support were implemented to ensure fast loading and buffer-free playback. Content creators and admins can manage videos, categories, and user subscriptions through a powerful backend dashboard.",
+      "mediaUrl": "https://res.cloudinary.com/dzbmscin0/video/upload/v1768211566/appzeto/image-1768211513384.mp4",
+      "mediaType": "video"
+    },
+    "challenge": {
+      "description": "",
+      "points": [
+        "Streaming lag",
+        "High server load",
+        "Content security"
+      ]
+    },
+    "solution": {
+      "description": "",
+      "points": [
+        "CDN-based streaming",
+        "Scalable cloud infrastructure",
+        "DRM protection"
+      ]
+    },
+    "mediaShowcase": {
+      "mediaUrl": "https://res.cloudinary.com/dzbmscin0/video/upload/v1768214985/appzeto/video-1768214954985.mp4",
+      "mediaType": "video",
+      "items": [
+        {
+          "label": "secure payments",
+          "icon": "CheckCircle",
+          "_id": "6964d20a9e48b922846d1300",
+          "id": "6964d20a9e48b922846d1300"
+        },
+        {
+          "label": "Real time Analytics",
+          "icon": "CheckCircle",
+          "_id": "6964d20a9e48b922846d1301",
+          "id": "6964d20a9e48b922846d1301"
+        },
+        {
+          "label": "User Management",
+          "icon": "CheckCircle",
+          "_id": "6964d20a9e48b922846d1302",
+          "id": "6964d20a9e48b922846d1302"
+        },
+        {
+          "label": "API Iintegration",
+          "icon": "CheckCircle",
+          "_id": "6964d20a9e48b922846d1303",
+          "id": "6964d20a9e48b922846d1303"
+        }
+      ]
+    },
+    "showcase": {
+      "images": [],
+      "videos": []
+    },
+    "cta": {
+      "title": "Want a project like this?",
+      "buttonLabel": "Start a Project",
+      "buttonLink": "/contact"
+    },
+    "_id": "6964c112e202a6e85741c3bd",
+    "title": "Inplay",
+    "slug": "inplay",
+    "category": "Media & Entertainment",
+    "industry": "Media & Entertainment",
+    "thumbnail": "https://res.cloudinary.com/dzbmscin0/image/upload/v1768210315/appzeto/image-1768210318381.webp",
+    "shortDescription": "We developed a modern OTT streaming platform that supports high-quality video streaming, subscription management, and multi-device access.",
+    "techTags": [
+      "React",
+      "Nodejs",
+      "Javascript",
+      "Mongodb",
+      "Express"
+    ],
+    "isFeatured": true,
+    "orderIndex": 0,
+    "features": [],
+    "results": [
+      {
+        "label": "Growth",
+        "value": "250%",
+        "_id": "6964c112e202a6e85741c3c3"
+      },
+      {
+        "label": "USERS",
+        "value": "25k+",
+        "_id": "6964c112e202a6e85741c3c4"
+      },
+      {
+        "label": "Watch time",
+        "value": "3x increase",
+        "_id": "6964c112e202a6e85741c3c5"
+      }
+    ],
+    "testimonial": {
+      "text": "“A smooth streaming experience built perfectly.”",
+      "author": "Sameer auja",
+      "role": "ceo",
+      "avatar": "",
+      "_id": "6964d20a9e48b922846d1307"
+    },
+    "createdAt": "2026-01-12T09:38:26.236Z",
+    "updatedAt": "2026-01-12T10:50:49.981Z",
+    "__v": 0,
+    "id": "6964c112e202a6e85741c3bd"
+  }
+]
