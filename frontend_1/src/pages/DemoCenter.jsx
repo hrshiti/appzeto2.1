@@ -4,6 +4,7 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import ScrollWrapper from '../components/ScrollWrapper';
 import { dataService } from '../admin/services/dataService';
+import { getMediaUrl } from '../utils/getMediaUrl';
 
 const DemoCenter = () => {
     const HERO_VIDEO = {
@@ -20,17 +21,9 @@ const DemoCenter = () => {
     const [mainDemo, setMainDemo] = useState(HERO_VIDEO);
     const [loading, setLoading] = useState(true);
 
-    const getImgUrl = (path) => {
-        if (!path) return '';
-        if (path.startsWith('http')) return path;
-        return path.startsWith('/uploads') ? `${import.meta.env.VITE_BACKEND_URL}${path}` : path;
-    };
+    const getImgUrl = (path) => getMediaUrl(path);
 
-    const getFullUrl = (url) => {
-        if (!url) return '';
-        if (url.startsWith('http')) return url;
-        return url.startsWith('/uploads') ? `${import.meta.env.VITE_BACKEND_URL}${url}` : url;
-    };
+    const getFullUrl = (url) => getMediaUrl(url);
 
     useEffect(() => {
         const fetchVideos = async () => {

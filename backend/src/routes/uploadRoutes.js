@@ -1,6 +1,6 @@
 const express = require('express');
 const multer = require('multer');
-const { storage } = require('../config/cloudinary');
+const { storage } = require('../config/storage');
 const router = express.Router();
 
 const upload = multer({
@@ -19,8 +19,8 @@ router.post('/', (req, res, next) => {
             return res.status(400).send({ message: 'No file uploaded' });
         }
         res.send({
-            message: 'File Uploaded to Cloudinary',
-            url: req.file.path
+            message: 'File Uploaded to Server',
+            url: `/uploads/${req.file.filename}`
         });
     });
 });
@@ -28,15 +28,15 @@ router.post('/', (req, res, next) => {
 router.post('/video', (req, res, next) => {
     upload.single('video')(req, res, (err) => {
         if (err) {
-            console.error('Cloudinary Video Upload Error:', err);
+            console.error('Server Video Upload Error:', err);
             return res.status(400).json({ message: 'Video Upload Failed', error: err.message });
         }
         if (!req.file) {
             return res.status(400).send({ message: 'No file uploaded' });
         }
         res.send({
-            message: 'Video Uploaded to Cloudinary',
-            url: req.file.path
+            message: 'Video Uploaded to Server',
+            url: `/uploads/${req.file.filename}`
         });
     });
 });

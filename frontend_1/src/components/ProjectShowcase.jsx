@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import gsap from 'gsap';
 import axios from 'axios';
 import { projectsData } from '../data/projectsData';
+import { getMediaUrl } from '../utils/getMediaUrl';
 
 // --- Typewriter Effect Component ---
 const TypewriterText = ({ text }) => {
@@ -155,7 +156,7 @@ const ProjectCarousel = ({ projects, currentIndex, setCurrentIndex, navigate }) 
                         onClick={() => navigate('/projects')}
                     >
                         <PhoneMockup
-                            image={displayImage}
+                            image={getMediaUrl(displayImage)}
                             title={project.title}
                             isActive={isActive}
                         />

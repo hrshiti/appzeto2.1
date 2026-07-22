@@ -8,6 +8,7 @@ import Footer from '../components/Footer';
 import ScrollWrapper from '../components/ScrollWrapper';
 import laptopLayout from '../assets/laptoplayout.png';
 import * as LucideIcons from 'lucide-react';
+import { getMediaUrl } from '../utils/getMediaUrl';
 
 const ProjectDetail = () => {
     const { slug } = useParams();
@@ -223,7 +224,7 @@ const ProjectDetail = () => {
                                             {/* Screen Content */}
                                             <div className="w-full h-full bg-slate-800">
                                                 <img
-                                                    src={hero?.coverImage || "https://images.unsplash.com/photo-1551288049-bebda4e38f71"}
+                                                    src={getMediaUrl(hero?.coverImage) || "https://images.unsplash.com/photo-1551288049-bebda4e38f71"}
                                                     alt="Project Screen"
                                                     className="w-full h-full object-cover"
                                                 />
@@ -265,7 +266,7 @@ const ProjectDetail = () => {
                                     <div className="w-full h-full bg-slate-900 relative overflow-hidden rounded-[2rem]">
                                         {(overview?.mediaType === 'video' || overview?.mediaUrl?.match(/\.(mp4|webm|ogg)$/i)) ? (
                                             <video
-                                                src={overview?.mediaUrl}
+                                                src={getMediaUrl(overview?.mediaUrl)}
                                                 className="w-full h-full object-cover"
                                                 controls
                                                 playsInline
@@ -275,7 +276,7 @@ const ProjectDetail = () => {
                                         ) : (
                                             <>
                                                 <img
-                                                    src={overview?.mediaUrl || "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2426&q=80"}
+                                                    src={getMediaUrl(overview?.mediaUrl) || "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2426&q=80"}
                                                     alt="Project Overview"
                                                     className="w-full h-full object-cover"
                                                 />
@@ -405,7 +406,7 @@ const ProjectDetail = () => {
                                     <div className="w-full h-full bg-slate-800 relative">
                                         {(mediaShowcase?.mediaType === 'video' || (mediaShowcase?.mediaUrl && mediaShowcase.mediaUrl.match(/\.(mp4|webm|ogg)$/i))) ? (
                                             <video
-                                                src={mediaShowcase.mediaUrl}
+                                                src={getMediaUrl(mediaShowcase.mediaUrl)}
                                                 className="w-full h-full object-cover"
                                                 controls
                                                 playsInline
@@ -415,7 +416,7 @@ const ProjectDetail = () => {
                                             />
                                         ) : (
                                             <img
-                                                src={mediaShowcase.mobileMediaUrl || mediaShowcase.mediaUrl || "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80"}
+                                                src={getMediaUrl(mediaShowcase.mobileMediaUrl || mediaShowcase.mediaUrl) || "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80"}
                                                 alt="Mobile Showcase"
                                                 className="w-full h-full object-cover"
                                             />

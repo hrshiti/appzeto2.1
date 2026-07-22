@@ -8,6 +8,7 @@ import 'react-quill/dist/quill.snow.css';
 import '../styles/editor.css';
 import { dataService } from '../services/dataService';
 import api from '../services/api';
+import { getMediaUrl } from '../../utils/getMediaUrl';
 
 const AdminServices = () => {
     const { addToast } = useToast();
@@ -238,7 +239,7 @@ const AdminServices = () => {
                             {currentService.image && (
                                 <div className="w-20 h-20 rounded-lg overflow-hidden border border-slate-200">
                                     <img
-                                        src={`${import.meta.env.VITE_BACKEND_URL}${currentService.image}`}
+                                        src={getMediaUrl(currentService.image)}
                                         alt="Preview"
                                         className="w-full h-full object-cover"
                                         onError={(e) => { e.target.src = 'https://placehold.co/100x100?text=Error'; }}

@@ -8,6 +8,7 @@ import 'react-quill/dist/quill.snow.css';
 import '../styles/editor.css';
 import { dataService } from '../services/dataService';
 import api from '../services/api';
+import { getMediaUrl } from '../../utils/getMediaUrl';
 
 const AdminBlogs = () => {
     const { addToast } = useToast();
@@ -275,7 +276,7 @@ const AdminBlogs = () => {
                         <div className="flex items-center gap-4 p-4 bg-slate-50 border border-slate-200 rounded-xl">
                             {currentBlog.featuredImage && (
                                 <img
-                                    src={currentBlog.featuredImage.startsWith('/uploads') ? `${import.meta.env.VITE_BACKEND_URL}${currentBlog.featuredImage}` : currentBlog.featuredImage}
+                                    src={getMediaUrl(currentBlog.featuredImage)}
                                     className="w-20 h-20 object-cover rounded-lg shadow-sm"
                                     alt="Preview"
                                 />

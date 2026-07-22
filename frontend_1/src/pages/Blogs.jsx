@@ -13,6 +13,7 @@ import achImg1 from '../assets/acheivement1.jpeg';
 import achImg2 from '../assets/achievement2.jpeg';
 import achImg3 from '../assets/achievement3.jpg';
 import { Link } from 'react-router-dom';
+import { getMediaUrl } from '../utils/getMediaUrl';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -112,7 +113,7 @@ const Blogs = () => {
                                 <div className="w-full md:w-1/2 h-[300px] md:h-full overflow-hidden relative group p-4 md:p-10">
                                     <div className="w-full h-full rounded-[2rem] overflow-hidden shadow-2xl relative">
                                         <img
-                                            src={post.featuredImage && post.featuredImage.startsWith('/uploads') ? `${import.meta.env.VITE_BACKEND_URL}${post.featuredImage}` : (post.featuredImage || bonfireImg)}
+                                            src={getMediaUrl(post.featuredImage) || bonfireImg}
                                             className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
                                             alt={post.title}
                                         />

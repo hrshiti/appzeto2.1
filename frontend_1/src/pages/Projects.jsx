@@ -6,6 +6,7 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import ScrollWrapper from '../components/ScrollWrapper';
 import { ArrowRight, Loader2 } from 'lucide-react';
+import { getMediaUrl } from '../utils/getMediaUrl';
 
 const Projects = () => {
     const navigate = useNavigate();
@@ -100,7 +101,7 @@ const Projects = () => {
                                     <div className="h-40 overflow-hidden bg-slate-50 relative group">
                                         <div className="absolute inset-0 bg-[#05A4A7]/0 group-hover:bg-[#05A4A7]/10 transition-colors duration-300 z-10" />
                                         <img
-                                            src={project.thumbnail}
+                                            src={getMediaUrl(project.thumbnail)}
                                             alt={project.title}
                                             className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
                                         />

@@ -4,6 +4,7 @@ import { Save, ArrowLeft, Image as ImageIcon, Plus, Trash2, Code, Video, Link as
 import { useNavigate, useParams } from 'react-router-dom';
 import { dataService } from '../services/dataService';
 import { useToast } from '../context/ToastContext';
+import { getMediaUrl } from '../../utils/getMediaUrl';
 
 // --- Reusable Components for Form ---
 
@@ -68,9 +69,9 @@ const FileUpload = ({ label, onUpload, currentUrl, type = "image" }) => {
             ) : currentUrl ? (
                 <div className="relative h-40 w-full rounded-lg overflow-hidden bg-slate-100">
                     {type === "video" ? (
-                        <video src={currentUrl} className="w-full h-full object-cover" controls muted />
+                        <video src={getMediaUrl(currentUrl)} className="w-full h-full object-cover" controls muted />
                     ) : (
-                        <img src={currentUrl} alt="Preview" className="w-full h-full object-cover" />
+                        <img src={getMediaUrl(currentUrl)} alt="Preview" className="w-full h-full object-cover" />
                     )}
                     <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                         <span className="text-white font-medium text-sm flex items-center gap-2">

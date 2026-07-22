@@ -5,6 +5,7 @@ import { useToast } from '../context/ToastContext';
 import { Edit, Trash2, Video } from 'lucide-react';
 import { dataService } from '../services/dataService';
 import api from '../services/api';
+import { getMediaUrl } from '../../utils/getMediaUrl';
 
 const AdminVideos = () => {
     const { addToast } = useToast();
@@ -198,7 +199,7 @@ const AdminVideos = () => {
                             {currentVideo.thumbnail && (
                                 <div className="relative w-20 h-20 rounded-lg overflow-hidden border border-slate-200">
                                     <img
-                                        src={currentVideo.thumbnail.startsWith('/uploads') ? `${import.meta.env.VITE_BACKEND_URL}${currentVideo.thumbnail}` : currentVideo.thumbnail}
+                                        src={getMediaUrl(currentVideo.thumbnail)}
                                         className="w-full h-full object-cover"
                                         alt="Preview"
                                     />
